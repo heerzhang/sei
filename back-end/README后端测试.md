@@ -721,4 +721,4 @@ Hibernate中HQL函数汇总及其说明			https://blog.csdn.net/chenhuade85/arti
 SQL之case when then用法    https://www.cnblogs.com/Richardzhu/p/3571670.html
 CASE =expitem? 、放在where里条件可以， 放在select可行可以加alias，;  alias实际只用于2地方 order by和having; where里不能用。
 
-
+看看
