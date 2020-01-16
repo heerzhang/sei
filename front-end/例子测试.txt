@@ -223,4 +223,24 @@ const TemplateView: React.RefForwardingComponent<InternalItemHandResult,Template
 
 不安全的证书，浏览器提示它是是不安全的。https: 暂时降级成http: 以后再说。https://www.zhuyuntao.cn/webpack-dev-server%E5%BC%80%E5%90%AFhttps%E8%AE%BF%E9%97%AE
 
+Access to fetch at 'http://localhost:8673/graphql' from origin 'http://localhost:3765' has been blocked by CORS policy: Response to preflight request doesn't pass access control
+ check: No 'Access-Control-Allow-Origin' header is present on the requested resource. If an opaque response serves your needs, set the request's mode to 'no-cors' to
+ fetch the resource with CORS disabled.
+2  GlobalState.tsx:49 刚GlobalStateQuery经过undefined进行中false
+   GlobalState.tsx:50 Uncaught Error: 用户验证Error: Network error: Failed to fetch
+
+
+宇宙奇点App入= Object ApolloClient
+GlobalState.tsx:49 刚GlobalStateQuery经过undefined进行中true
+TopRouter.tsx:170 PageRouters入= null loading= true
+Branding.tsx:31 进入Branding功能页面=undefined
+react-dom.development.js:12357 Warning: componentWillMount has been renamed, and is not recommended for use. See https://fb.me/react-unsafe-component-lifecycles for details.
+
+* Move code with side effects to componentDidMount, and set initial state in the constructor.
+* Rename componentWillMount to UNSAFE_componentWillMount to suppress this warning in non-strict mode. In React 17.x, only the UNSAFE_ name will work. To rename all deprecated lifecycles to their new names, you can run `npx react-codemod rename-unsafe-lifecycles` in your project source folder.
+
+Please update the following components: SideEffect(NullComponent)
+printWarning @ react-dom.development.js:12357
+GlobalState.tsx:49 刚GlobalStateQuery经过{"auth":"{}"}进行中false
+GlobalState.tsx:59 以GlobalState1从后端获得={} user= null
 

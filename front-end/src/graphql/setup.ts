@@ -6,11 +6,11 @@ import { ApolloLink,  split, concat ,empty } from 'apollo-link';
 import { onError } from 'apollo-link-error';
 //import { getOperationAST,OperationDefinitionNode } from 'graphql';
 import { OperationDefinitionNode } from 'graphql';
-import { WebSocketLink } from 'apollo-link-ws';
-import { SubscriptionClient } from 'subscriptions-transport-ws';
+//import { WebSocketLink } from 'apollo-link-ws';
+//import { SubscriptionClient } from 'subscriptions-transport-ws';
 import { getMainDefinition } from 'apollo-utilities';
 
-import session from '../utils/session';
+//import session from '../utils/session';
 import helpers from '../utils/helpers';
 
 
