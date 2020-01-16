@@ -191,7 +191,7 @@ export const AntCheck: React.FunctionComponent<AntCheckProps> = ({
 
   return (
       <Check label={label}
-             checked={ (sup? inp&&inp[sup]&&inp[sup][item]  :  inp&&inp[item]) || defaultChecked }
+             checked={ (sup?  inp?.[sup]?.[item]  :  inp?.[item] ) || defaultChecked }
              onChange={e => {
                    setInp( (sup&& inp&&{ ...inp,  [sup]: { ...inp[sup],  [item]  :   !( inp[sup]  &&  inp[sup][item] )   }    } )
                            ||  (sup&& { [sup]: { [item] :  !defaultChecked }  } )

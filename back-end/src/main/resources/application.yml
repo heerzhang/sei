@@ -2,8 +2,12 @@ sei:
   filter:
     #开启CORS后的对等前端的地址，同源策略，多个域的如何配置？
     origin:
-      list[0]: https://localhost:3765
-      list[1]: http://localhost:3000
+      list[0]: https://27.151.117.65:3765
+      list[1]: http://27.151.117.65:3765
+      list[2]: https://localhost:3765
+      list[3]: http://localhost:3765
+      list[4]: https://192.168.171.3:3765
+      list[5]: http://192.168.171.3:3765
     maxage: 3600
   visibility:
     #role: USER

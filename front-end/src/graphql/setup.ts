@@ -2,7 +2,7 @@ import { ApolloClient } from 'apollo-client';
 import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 //import { ApolloLink, from, split, concat } from 'apollo-link';
-import { ApolloLink,  split, concat } from 'apollo-link';
+import { ApolloLink,  split, concat ,empty } from 'apollo-link';
 import { onError } from 'apollo-link-error';
 //import { getOperationAST,OperationDefinitionNode } from 'graphql';
 import { OperationDefinitionNode } from 'graphql';
@@ -29,8 +29,9 @@ const authMiddleware = new ApolloLink((operation: any, forward: any) => {
 //去掉了authorization: `Bearer heh23432432432bb` 直接通过cookie的名字token的键值对送给服务器。虽然后端也支持前一种模式。
 //authorization: `Bearer ${session.get()}` || null
 
-
+//ApolloClient连接的ws://  wss://， 后端graphQL服务还没有支持它：订阅功能;，先关掉。
 //const wsClient = new SubscriptionClient(`${process.env.WS_URL}/graphql`, {
+/*
 const wsClient = new SubscriptionClient(`ws://localhost:3000/graphql`, {
   connectionParams: {
     authorization: `Bearer ${session.get()}` || null
@@ -38,8 +39,9 @@ const wsClient = new SubscriptionClient(`ws://localhost:3000/graphql`, {
   //reconnect: true   不支持ws
   reconnect: false
 });
-
-const wsLink = new WebSocketLink(wsClient);
+*/
+//const wsLink = new WebSocketLink(wsClient);       后端还不支持
+const wsLink = empty();         //空的链接。
 
 const logoutLink = onError((e: any) => {
     const { networkError, graphQLErrors } = e;
