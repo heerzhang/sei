@@ -1,0 +1,213 @@
+手册Spring     http://spring.io/projects/spring-boot
+  参数？ 必须带token才行，graphiQL做不了；
+   { "name": "ji","lastName": "去",
+    "avatar": "https://spectrum.imgix.net/communities/102b08e1-f26e-4cda-b252-03258776bc14/react.png.0.1901592707012414?w=256&h=256&expires=1540944000000&ixlib=js-1.2.0&s=71a5e3cc9ca1ce29ed1daa3d48de2ebc"
+	}
+buildTask(devs: ID!, dep: String!, date: String!) : Task!
+ buildReport(isp: ID!,no: String!,path: String!) : Report!
+    buildReport(isp: ID!,no: String!,path: String!) : Report!
+http://localhost:7789/1/12
+@OneToMany frontend/components/write/editor.component.js
+@ManyToMany import MY_IMAGE from '../write/editor.component.js';
+Store error: the application attempted to write an object with no provided id but the store already contains an id of
+
+newSchema
+com.oembedler.moon.graphql.boot.GraphQLJavaToolsAutoConfiguration
+com.oembedler.moon.graphql.boot.GraphQLWebAutoConfiguration
+
+    @ConditionalOnMissingBean({GraphQLSchema.class, GraphQLSchemaProvider.class})
+    public GraphQLSchema graphQLSchema(SchemaParser schemaParser) {
+    GraphQLSchema.public Builder fieldVisibility(GraphqlFieldVisibility fieldVisibility) {
+
+    @Bean
+    @ConditionalOnMissingBean
+    public GraphQLSchemaProvider graphQLSchemaProvider(GraphQLSchema schema) {
+        return new DefaultGraphQLSchemaProvider(schema);
+    }
+
+    public class DefaultGraphQLSchemaProvider implements GraphQLSchemaProvider {
+
+     public Builder fieldVisibility(GraphqlFieldVisibility fieldVisibility) {
+
+https://www.jianshu.com/p/00a542001a3a
+#注释Directives指令#  字段前面的描述description  #
+字段(带参数个数)；
+@directive 模型定义文件 ：自定义服务端的功能标记
+
+
+在调用getAuthorities()的上层堆栈中：
+tools{Kotlin语言}：DataFetchingEnvironment.source 直接定位当前对象id和参数。
+graphql-java-tools-5.2.0-sources.jar!/com/coxautodev/graphql/tools/MethodFieldResolver.kt:
+
+
+
+Directives可以用在 Client Side  Executable Directive 也可以用於 Server Side 的Type System Directive (Schema Directive)
+為 Schema 添加新功能，例如參數檢查、簡單計算、權限檢查、錯誤處理等等。
+
+
+enum集合 union input_object{命名参数组合容器} scalar标量没下级属性的；
+
+DIRECTIVE @authr(defaultRoles: String="Admin") on FIELD_DEFINITION
+graphQL语法,Resolver中的DataFetcher方法的优先级高于DataClass中的方法。   https://segmentfault.com/a/1190000014829295
+和java类里的field不同的是，GraphQL的field都是可以有参数的，因此有参数的field也可以理解成java中有特定类型返回值的方法=字段等同函数。
+类型扩展(extend): 在schema中，可以使用extend给任意类型（包括interface/union）增加字段；这看似自找麻烦的机制实际上有很大用处，可以把高权限
+角色的特定字段使用extend写在另外的schema文件中，运行时可合并解析，不同角色的用户使用不同的schema。通过加法来控制类型系统的可见性，避免内省机制过度暴露。
+接口函数执行时刻不能扩展类型，Type system definitions and extensions are not executable, and are not considered during execution.
+用JPA和Hibernate进行批量处理的最佳方式　　https://www.cnblogs.com/IcanFixIt/p/7042977.html
+JPA读优化；JPA缓存參与，复杂缓存因素考虑，BLOB或者CLOB类型，@JoinFetch注解　　https://www.cnblogs.com/lcchuguo/p/5327738.html
+@Lob
+@Column(name = "IMAGEDATA")
+@Basic(fetch = FetchType.LAZY)
+private byte[] imageData
+// Hibernate
+@BatchSize
+只获取第101条到第200条这个区间的数据
+Query q = em.createNamedQuery("selectAll");
+query.setFirstResult(101);
+query.setMaxResults(100);
+JPA性能调优会需要特别注意　　https://blog.csdn.net/cloud_ll/article/details/50176393
+JPA效率优化NameEntityGraph是JPA2.1的新特性　　https://blog.csdn.net/dalangzhonghangxing/article/details/56680629
+@MapKeyEnumerated(ORDINAL)
+查询缓存缓存的也仅仅是对象的id    https://blog.csdn.net/sh_c1991/article/details/52485785
+示例：　https://www.bookstack.cn/read/essential-javaee/docs-jpa-jpa-entity-graph.md
+EntityGraph<EmailMessage> eg = em.getEntityGraph("previewEmailEntityGraph");
+List<EmailMessage> messages = em.createNamedQuery("findAllEmailMessages")
+        .setParameter("mailbox", "inbox")
+        .setHint("javax.persistence.loadgraph", eg)
+        .getResultList();
+JPA 2.1 引入的 CriteriaUpdate CriteriaBuilder，@NamedStoredProcedureQuery；　　https://www.jianshu.com/p/28a9c15024a6
+
+PersistenceProvider fromEntityManager(EntityManager em) {｝
+
+void setStatisticsEnabled(boolean b);
+
+Spring hibernate 性能统计
+http://www.itkeyword.com/doc/6133305303046962300/how-do-i-access-hibernate-statistics-from-an-entitymanager
+集成了Spring框架，没有hibernate.cfg.xml配置文件  https://blog.csdn.net/yh_zeng2/article/details/74612460
+get()直接发出sql、load()用的时候发出sql，fetch=“join” ；将load改成get的方式来得到该对象； https://blog.csdn.net/weixin_40247263/article/details/80355862
+
+annotate your resolver classes with @Transactional. @Transactional(readOnly = true) ；  https://stackoverflow.com/questions/48037601/lazyinitializationexception-with-graphql-spring
+
+spring中的懒加载与事务--排坑记录OpenEntityManagerInViewInterceptor　　https://blog.csdn.net/u013815546/article/details/73637759
+https://github.com/graphql-java-kickstart/graphql-spring-boot
+无论在单向还是双向,须save关系维护端才会建立关联关系,附带外键索引;   https://blog.csdn.net/zyljjf/article/details/80401340
+@Temporal(TemporalType.DATE)
+stream收集器的使用 统计+分组：  https://blog.csdn.net/liudongdong0909/article/details/77429875   https://blog.csdn.net/lby0307/article/details/79965318
+SpringBoot2 jpa二级缓冲配置  https://blog.csdn.net/yhflyl/article/details/81511380
+高并发场景+数据库量不是很大+对数据一致性的要求不是绝对严格的业务场合=可采用Redis分布式缓存。 ehcache（本地缓存）：数据一致性最差。Redis性能不如ehcache;
+Ehcache3.3集成与2.x差大的 xml版本配置 https://blog.csdn.net/Gentlemike/article/details/80403967  https://blog.csdn.net/u012562943/article/details/78450629
+堆外（OffHeapStore）存储：被称为BigMemory，只在企业版本的Ehcache中提供，它的速度大约比堆内存储慢一个数量级。
+设置缓存的大小  https://blog.csdn.net/xintingandzhouyang/article/details/81432695   https://blog.csdn.net/rickiyeat/article/details/78343362
+FullGC40次/天到10天一次的优化过程 -Xmx512m 最大堆内存，按需配；   https://blog.csdn.net/cml_blog/article/details/81057966
+3个缓存区时间级别4分钟 15分钟 60分钟
+YML;缩进时不允许使用Tab键，只允许使用空格;缩进的空格数目不重要，只要相同层级的元素左侧对齐即可。 http://www.ruanyifeng.com/blog/2016/07/yaml.html?f=tt
+
+域模型越复杂效率越低！解决方式ManyToOne/OneToOne都用lazy,当用lazy对象时left join fetch 之。　https://blog.csdn.net/dm_vincent/article/details/53444490
+JPA性能优化　和Hibernate查询配置小技巧setHint　@NamedQuery　　　https://blog.csdn.net/qq_42882671/article/details/82462094
+javax.persistence.cache.storeMode (CacheStoreMode –  REFRESH)
+javax.persistence.cache.retrieveMode (CacheRetrieveMode – BYPASS)
+join fetch可以一次SQL取出所有要用的对象，而不会出现N+1问题，性能提升。query.setFirstResult(101);　　https://blog.csdn.net/cloud_ll/article/details/50176393
+查询缓存中以键值对的方式存储的，key键为查询的条件语句　用查询缓存配合二级缓存。　https://www.cnblogs.com/huangcongcong/p/4717332.html
+缓存适用于在项目中存在大量查询的情况，否则是没必要适用的。用缓存反而性能会降低，要保持缓存和数据库同步,update/add/delete性能降低。
+在开发高并发量，高性能的网站应用系统时，缓存Cache起到了非常重要的作用。   Cache标注include=non-lazy表示只缓存非lazy的数据
+Hibernate二级缓存的全局配置collection_cache 双向关联中Owning方变化自动将缓存中关联的集合剔除   https://blog.csdn.net/taiyangdao/article/details/52052015
+ehcache模式nonstrict-read-write刷新是不及时=超时时间,read-write变化时缓存都会发生刷新;哪一层次的缓存  https://www.cnblogs.com/firejava/p/6256788.html
+
+缓存ehcache的简单使用    https://blog.csdn.net/jiangyu1013/article/details/79151155
+hibernate不同于缓存JCache JSR-107   https://blog.csdn.net/boonya/article/details/54632129
+若hibernate目标实体变动频繁，每个变化都会导致query变动，Query缓存实际使用效果就不好=少用为妙；.setHint( "org.hibernate.cacheable", "true")。
+hibernate5  技术手册   https://docs.jboss.org/hibernate/stable/orm/userguide/html_single/Hibernate_User_Guide.html#caching
+缓存可保护数据库的读风暴；缓存使用ehcache详细解读   https://blog.csdn.net/u014209975/article/details/53320395/
+（１） mutation 依照ID找要这么干
+        emSei.setProperty(JPA_SHARED_CACHE_RETRIEVE_MODE, CacheRetrieveMode.BYPASS);
+        emSei.setProperty(JPA_SHARED_CACHE_STORE_MODE, CacheStoreMode.REFRESH);
+        emSei.find(EQP.class,id)或eQPRepository.findById(id)或eQPRepository.getOne(id)
+      都可获取最新数据库数据；
+      加了@version能防第二类更新丢失; 冲突提示OptimisticLockException: Row was updated or deleted by another transaction
+ （２）
+  @Transactional｛    不加那2条也会正常的。
+	EQP eQP = eQPRepository.findByCod(cod);  直接从数据库查不走cache；且不怕findByCod被注解@QueryHints(HINT_CACHEABLE,"true") ；
+	｝
+（３）
+	若用findAll();且若findAll被注解CACHEABLE；
+	加了这2条都可获取最新数据库数据；       emSei.setProperty(JPA_SHARED_CACHE_RETRIEVE_MODE, CacheRetrieveMode.BYPASS);
+                          emSei.setProperty(JPA_SHARED_CACHE_STORE_MODE, CacheStoreMode.REFRESH);
+     加了@version能防第二类更新丢失;
+（４）
+	若用CriteriaSpecification，就算findAll(#Specification,)被注解上CACHEABLE,
+        　必须加这2行，否则可能无法获取最新DB数据，可能不被认定为必须做DB更新。
+    加@version防第二类更新丢失 保存冲突HHH000346: Error during managed flush [Row was updated or deleted by another transaction；
+ （5）emSei.createQuery("select DISTINCT e from EQP e where id=xx", EQP.class)
+        不加那2条，也会直接从数据库查不走cache；
+     emSei.createQuery("FROM EQP", EQP.class).getResultList()没法使用缓存的。
+
+!!就算不用cache加上@Transactional(isolation = Isolation.SERIALIZABLE)，实际Oracle测试结果还是会覆盖数据库其它事务新更新数据，造成第二类更新丢失。
+@Transactional(propagation = Propagation.REQUIRES_NEW, isolation = Isolation.SERIALIZABLE)
+em.createQuery().setLockMode(LockModeType.PESSIMISTIC_WRITE) 使用悲观锁能防止第二类更新丢失，但锁住记录导致并发性能低下。
+当事务隔离级别为最高的串行化时，读写数据都会锁住整张表！！！　https://www.cnblogs.com/huanongying/p/7021555.html
+幻读和不可重复读都是读取了另一条已经提交的事务（这点就脏读不同），所不同的是不可重复读查询的都是同一个数据项，而幻读针对的是一批数据整体（比如数据的记录数/新插入）。
+在可能出现这种问题的场合Red Committed。可以在应用程序中采用悲观锁或乐观锁来避免这类问题Hibernate悲观锁。  https://www.cnblogs.com/ningheshutong/p/8126471.html
+JPA实战悲观锁和乐观锁@Version注解　@Lock(value = LockModeType.PESSIMISTIC_WRITE)　；　　https://segmentfault.com/a/1190000017410662?utm_source=tag-newest
+
+测试表明光光靠@Transactional(propagation = Propagation.REQUIRES_NEW, isolation = Isolation.SERIALIZABLE)是没法防止第二类更新丢失的。
+采用悲观锁emSei.find( EQP.class, id, LockModeType.PESSIMISTIC_WRITE,Collections.singletonMap( "javax.persistence.lock.timeout",15000) )可防止更新丢失；
+持久化层搞的乐观锁也能防止第二类更新丢失，但其他系统对同一数据库操作须考虑version+1的同时commit才能保障严格安全。而悲观锁在数据库那层做并发性能损失太大。
+悲观锁在数据库层做并发性能损失大；emSei.find( EQP.class,id,LockModeType.PESSIMISTIC_WRITE,Collections.singletonMap("javax.persistence.lock.timeout",15000) );
+共享锁和排它锁X是悲观锁的不同的实现，它俩都属于悲观锁的范畴；只读也要锁的。    https://www.cnblogs.com/nickup/p/9804020.html
+每个事务都先创建一个新Session实例，使用Session后关闭；一个Hibernate Session实例只可由一个线程使用，它不是http中所说的session，一般把HttpSession对象称为用户会话。
+Hibernate二级缓存的四种级别Read-Write可以获得Cache 上事务的 repeatable read 隔离级别    https://wangbt5191-hotmail-com.iteye.com/blog/1711129
+
+#二级缓存关闭启用的2个总开关, use_second_level_cache只能关闭实体 却关不了集合字段而且管不了查询； 2个都关就全部没缓存。
+关联表上加索引 @Index; 数据表空间与索引表空间分开。   https://blog.csdn.net/zmx729618/article/details/77743264
+jpa注解索引, 直接在数据库中创建索引      https://blog.csdn.net/qq_35873847/article/details/78624855
+Predicate conjunction()条件与，没有时返回true；还有disjunction条件或，没有时返回false；  　 https://www.cnblogs.com/xingqi/p/3929386.html
+Hibernate可以直接在代码中定义查询视图，也叫临时实体类，　   https://blog.csdn.net/wang124454731/article/details/54139528
+
+JPA特性 @Embedded自定义的复合属性修饰性类{同一个表的}，比如坐标(x,y),地址(省/市/区/街道/几号)。　@Embeddable　　　https://blog.csdn.net/luckyzhoustar/article/details/47207005
+将单个实体模型映射到成了多张表，要这么修饰@SecondaryTable(name="", pkJoinColumns=@PrimaryKeyJoinColumn(name="person_id"))　@Column(table="person_detail", name=)
+Criteria 中 DATEDIFF 函数的使用    https://www.cnblogs.com/wu726/p/9359724.html
+
+设计predicate过滤
+区分  set noteixests集合里头不存在这样的，必须用SubQuery做，;      set有关联聚合，
+子查询--无关联的，，，使用场景？？如何Join; 分开区别？？
+集合字段Not Exist特殊！上层节点treeNode.=SetNoExists　
+特例！ispMen.#SetSize像函数的子语句简化版本 {自动转化成count(id)子语句关联上级isp0_.id=ispmen5_.ISP_ID，无需要明确指出SubSelect}
+集合isEmpty也会底层自动转化成not (exists (select子语句并且关联上级，不需要手动写代码；
+子字符串2定位 locate{像函数}；日期DIFF(sx-ref)；
+#StrLen #StrLen, #lower,#upper ；函数型修饰标签。
+.#SetMax,.#SetMin其实关联select max()  用subQuery{不是exists,而是select单个数值型的并加(select..)>=N比较用的}; 子语句代替了叶子中的取值／范围对？？
+.#SetSum, .#SetAvg      ? N<=(select..);  M In (select..); 子语句甚至嵌入属性表达式的作为单个因数。
+集合-》挑选一条null?->属性1 IN/NOT(Select from)
+SetNoExists{ 挑选一条null?->属性1 IN/NOT(Select from)    };
+不是集合的关联对象级联也有 IN/NOT(Select from)
+集合-》挑选一条null?->属性1(a,b..) IN/NOT(Select ＴＯＰ 3 (a,b..) ID/names from 带Join 原集合｛join父｝ order by ISP.Time desc)　排序前3条；
+｛任意不是集合的｝集合-》挑选一条null?->属性1 IN/NOT(Select top3 ID/names from 无关联新语句 order by ISP.Time desc)
+数值型表达式?{像函数像属性+*}?-对集合某个记录的字段放这里没有意义除非是集合聚合函数。
+但是子查询不支持输出多列字段来做比较条件的。
+some=any/all子查询用于和x进行比较的，不能用于判断SetNoExists; some/all后面子语句不能和null比较;
+substring(isp0_.nextIspDate, 1, 4)=?
+属性--常量'标题||'函数？　ｓｅｌｅｃｔ 'sdsf', concat(A,'ccv');
+子查询有Group BY聚合count/ having过滤。
+无关联子查询Root都不是本体模型，属性名字叫化相对最近的子查询:(from DEV where date= & task.dep=#2.X.a)，支持父辈查询属性字段直接; #2.往前追溯前两嵌套父辈。
+#1.A.b 子语句引用前面嵌套的模型语句的属性做predicate表达式等, #2往前找２级subquery。
+Subquery<T> distinct(boolean distinct);
+
+JPA的Subquery<T>只能输出一个字段的东西，或者是一个已经定义好的类实体对象也可以的，就是不能动态组合多个字段来输出。 select(Expression<T> expression);
+泛型 转 expressions.add( (Expression) cb.literal(" limit 11 ") );
+后端服务器的CA证书生成：　keytool -genkey -alias SeiYewu -keyalg RSA -keystore  F:/SeiYewu.keystore
+
+采用同样的一个后端做登录验证的话，就算前端是多个不同的前端服务器，那么浏览器只需要登录验证一次，两个前端就都能访问，客户端要采用同厂家浏览器。
+[业务领域模型] 设备1/检验n 1/报告n；
+新设备生成； 生成检验任务生成任务单吧buildTask(devs: $community,dep: $dep,date: $date)
+	/派工给检验员{buildISP}；。
+//先有派出TASK，后来才会生成ISP；
+device/157/task/23/  {？？1个任务有多个设备Dev； }
+//先有EQP,后来规划TASK了(1个task多设备)，最后才为某task和某EQP去生成中间态的ISP的={一次活动};
+task/ 1：n Dev;		{单1个任务有多个设备。}{一个任务单Task可能包含了多个的ISP检验记录。}
+//任务Task是宏管理上的识别目标，进度管理意义上的对象，工作量成果管理范畴。
+isp/{单个ISP检验为了特定单个EQP{广义设备号/管道气瓶}和特定单个TASK而生成的。/单个检验记录规属于某一个TASK底下的某次;}
+//中间态的ISP{一次活动}= =工作流程进度细化和分解目的用途，报告管理的依托。
+report/123/isp/ 1：n DEV。 {[一次活动ISP]一次ISP可以出多个Report}；
+
+graphQL的数据类型：BigInteger是比ID还要长的数字，ID个数支持920亿亿的ID或是19个数字长度。
+

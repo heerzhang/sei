@@ -1,0 +1,113 @@
+package org.fjsei.yewu.resolver.sei.original;
+
+import com.coxautodev.graphql.tools.GraphQLMutationResolver;
+import org.fjsei.yewu.entity.sei.*;
+import org.fjsei.yewu.entity.sei.inspect.ISP;
+import org.fjsei.yewu.entity.sei.inspect.ISPRepository;
+import org.fjsei.yewu.entity.sei.inspect.Task;
+import org.fjsei.yewu.entity.sei.inspect.TaskRepository;
+import org.fjsei.yewu.entity.sei.original.OriginalRecord;
+import org.fjsei.yewu.entity.sei.original.OriginalRecordRepository;
+import org.fjsei.yewu.exception.BookNotFoundException;
+import org.fjsei.yewu.security.JwtTokenUtil;
+import org.fjsei.yewu.service.security.JwtUserDetailsService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+
+
+@Component
+public class ReportMgrMutation implements GraphQLMutationResolver {
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @Autowired
+    private JwtUserDetailsService jwtUserDetailsService;
+    @Autowired
+    private EQPRepository eQPRepository;
+    @Autowired
+    private ISPRepository iSPRepository;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private TaskRepository taskRepository;
+    @Autowired
+    private ReportRepository reportRepository;
+    @Autowired
+    private UnitRepository unitRepository;
+    @Autowired
+    private PositionRepository positionRepository;
+    @Autowired
+    private AuthorityRepository authorityRepository;
+    @Autowired
+    private OriginalRecordRepository originalRecordRepository;
+    @Autowired
+    private FileRepository fileRepository;
+
+
+    @PersistenceContext(unitName = "entityManagerFactorySei")
+    private EntityManager emSei;                //EntityManager相当于hibernate.Session：
+
+    @Autowired
+    private final JwtTokenUtil jwtTokenUtil=new JwtTokenUtil();
+
+    @Transactional
+    public OriginalRecord newOriginalRecord(String modeltype, String modelversion, Long ispId, String data) {
+        if(!emSei.isJoinedToTransaction())      emSei.joinTransaction();
+
+        ISP isp = iSPRepository.findById(ispId).orElse(null);
+        if(isp == null)     throw new BookNotFoundException("没有该ISP", ispId);
+
+        OriginalRecord originalRecord = new OriginalRecord(modeltype,modelversion,isp,data);
+        /*
+        Set<User> ispMen= new HashSet<User>();
+        //  ispMens.stream().forEach(item ->
+        ispMen.add(user);
+        isp.setIspMen(ispMen);
+
+        */
+        originalRecordRepository.save(originalRecord);
+        return originalRecord;
+    }
+
+    @Transactional
+    public OriginalRecord modifyOriginalRecordFiles(Long id,  List<Long> fileIDs) {
+        if(!emSei.isJoinedToTransaction())      emSei.joinTransaction();
+        OriginalRecord originalRecord= originalRecordRepository.findById(id).orElse(null);
+        if(originalRecord == null)     throw new BookNotFoundException("没有该原始记录", id);
+        fileIDs.stream().forEach(item -> {
+            File file=fileRepository.findById(item).orElse(null);
+            file.getUrl();
+        });
+        originalRecord.setFiles(null);
+
+        originalRecordRepository.save(originalRecord);
+        return originalRecord;
+    }
+    @Transactional
+    public OriginalRecord modifyOriginalRecordData(Long id,int operationType,String data, String deduction) {
+        if(!emSei.isJoinedToTransaction())      emSei.joinTransaction();
+        OriginalRecord originalRecord= originalRecordRepository.findById(id).orElse(null);
+        if(originalRecord == null)     throw new BookNotFoundException("没有该原始记录", id);
+        if(1==operationType)
+            originalRecord.setData(data);
+        else if(2==operationType){
+            //权限验证
+            originalRecord.setDeduction(deduction);
+        }
+        originalRecordRepository.save(originalRecord);
+        return originalRecord;
+    }
+
+}

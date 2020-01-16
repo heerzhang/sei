@@ -1,0 +1,20 @@
+type Position{
+    id:ID!
+    address: String!
+    area: String
+    lng: String
+    lat: String
+    building: String
+    eqps: [EQP]
+}
+
+
+extend type Query {
+    findAllPositions: [Position]!
+    countPositionEQP(id: ID ):Long
+}
+
+extend type Mutation {
+    newPosition(address: String!, building: String, area: String, lng: String, lat: String) : Position!
+}
+

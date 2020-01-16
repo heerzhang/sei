@@ -1,0 +1,551 @@
+JPA通用接口
+//标记名字 旧的。
+//case 用法1;
+{
+  "offset": 0,
+  "first": 22,
+  "orderBy": "",
+  "asc": true ,
+  "filter": {
+    "cod": "309",
+		"oid": "a"
+  },
+  "where": {
+
+			 "a": {
+        "o": "EXI",
+        "l": {
+          "sub": {
+            "e":{
+              "cwt":[
+                {
+                  "b":{
+                    "a":{
+                      "s":"conclusion",
+                      "o":"EQ",
+                      "v":"haha"
+                    }
+
+                  },
+                  "t":{
+                    "sv":"057"
+                  }
+                },
+                {
+                  "t":{
+                    "sv":"dfg"
+                  }
+                }
+              ]
+            },
+          "from":"ISP",
+          "where":{
+            "lj":"AND",
+            "a":{
+              "o":"EQ",
+              "s":"checkMen",
+              "r":{
+                "s":"ispMen.#1"
+              }
+            }
+          },
+          "grp":[
+            {
+              "s":"nextIspDate"
+            },
+            {
+              "s":"conclusion"
+            }
+          ]
+          }
+      }
+      }
+   }
+
+}
+
+/////case bool
+{
+  "offset": 0,
+  "first": 22,
+  "orderBy": "",
+  "asc": true ,
+  "filter": {
+    "cod": "309",
+		"oid": "a"
+  },
+  "where": {
+
+			 "a": {
+        "o": "EXI",
+        "l": {
+          "sub": {
+            "e":{
+              "cwt":[
+                {
+                  "b":{
+                    "lj": "AND",
+                    "a": {
+                      "s":"conclusion",
+                      "o":"EQ",
+                      "v":"haha"
+                    }
+
+                  },
+                  "t":{
+                    "sv":"sdf22"
+                  }
+                },
+                {
+                  "t":{
+                    "sv":"dcccfg"
+                  }
+                }
+              ]
+            },
+          "from":"ISP",
+          "where":{
+            "lj":"AND",
+            "a":{
+              "o":"EQ",
+              "s":"checkMen",
+              "r":{
+                "s":"ispMen.#1"
+              }
+            }
+          },
+          "grp":[
+            {
+              "s":"nextIspDate"
+            },
+            {
+              "s":"conclusion"
+            }
+          ]
+          }
+      }
+      }
+   }
+
+}
+
+///全表
+{
+  "offset": 0,
+  "first": 22,
+  "orderBy": "",
+  "asc": true ,
+  "filter": {
+    "cod": "309",
+		"oid": "a"
+  },
+  "where": {
+    "a": {
+      "l": {
+        "sub": {
+
+          "from": "Book",
+          "where": {
+             "a": {
+              "s": "title",
+              "o": "EQ",
+              "r": {
+                 "sv": "liu"
+              }
+
+            }
+          }
+
+        }
+      },
+          "o":"EQ"
+    }
+
+
+   }
+
+}
+
+///日期函数
+{
+  "offset": 0,
+  "first": 22,
+  "orderBy": "",
+  "asc": true ,
+  "filter": {
+    "cod": "309",
+		"oid": "a"
+  },
+  "where": {
+    "a": {
+
+      "o":"GE",
+      "l":{
+        "y": "addDate",
+         "s": "nextIspDate",
+        "dv": 3.1
+      },
+      "dtv":  "2109-03-19"
+
+      }
+
+
+   }
+
+}
+//新标记名；
+//复合逻辑
+{
+  "offset": 0,
+  "first": 22,
+  "orderBy": "",
+  "asc": true ,
+  "filter": {
+    "cod": "309",
+		"oid": "a"
+  },
+  "where": {
+    "lj": "OR",
+    "as":[
+
+     {
+
+      "o":"LT",
+      "l":{
+        "y": "currentDate",
+         "s": "nextIspDate",
+        "dv": 3.1
+      },
+      "dt":  "2019-03-19"
+
+    },
+      {
+
+      "o":"GE",
+      "l":{
+        "y": "currentDate",
+         "s": "nextIspDate",
+        "dv": 3.1
+      },
+      "dt":  "2119-03-19"
+
+      }
+			,
+      {
+
+      "o":"GE",
+      "l":{
+         "s": "conclusion"
+      },
+      "sv":  "2119-03-19"
+
+      }
+    ]
+   }
+
+}
+
+//组合逻辑
+{
+  "offset": 0,
+  "first": 22,
+  "orderBy": "",
+  "asc": true ,
+  "filter": {
+    "cod": "309",
+		"oid": "a"
+  },
+  "where": {
+    "lj": "NOT",
+    "w":{
+      "lj": "AND",
+      "as":[
+
+       {
+
+        "o":"LT",
+        "l":{
+          "y": "currentDate",
+           "s": "nextIspDate",
+          "dv": 3.1
+        },
+        "dt":  "2019-03-19"
+
+      }
+        ,
+        {
+
+        "o":"GE",
+        "l":{
+           "s": "conclusion"
+        },
+        "sv":  "2119-03-19"
+
+        },
+        {
+
+        "o":"GE",
+        "l":{
+          "y": "currentDate",
+           "s": "nextIspDate",
+          "dv": 3.1
+        },
+        "dt":  "2119-03-19"
+
+        }
+
+      ]
+
+    }
+   }
+}
+
+//逻辑树 not or
+{
+  "offset": 0,
+  "first": 22,
+  "orderBy": "",
+  "asc": true ,
+  "filter": {
+    "cod": "309",
+		"oid": "a"
+  },
+  "where": {
+
+    "w":{
+      "lj": "AND",
+      "ws":[
+
+         {
+          "lj":"NOT",
+          "a":{
+            "o":"LT",
+            "l":{
+              "y": "currentDate",
+               "s": "nextIspDate",
+              "dv": 3.1
+            },
+            "dt":  "2019-03-19"
+          }
+        },
+        {
+          "lj":"NOT",
+          "as":[ {
+
+              "o":"GE",
+              "l":{
+                 "s": "conclusion"
+              },
+              "sv":  "2119-03-19"
+
+          },
+
+             {
+              "o":"GE",
+              "l":{
+                "y": "currentDate",
+                 "s": "nextIspDate",
+                "dv": 3.1
+              },
+              "dt":  "2119-03-19"
+
+            }
+          ]
+        }
+
+
+      ]
+
+    }
+   }
+}
+
+//简单的
+{
+  "offset": 0,
+  "first": 22,
+  "orderBy": "",
+  "asc": true ,
+  "filter": {
+    "cod": "309",
+		"oid": "a"
+  },
+  "where": {
+
+    "w":{
+      "lj": "AND",
+      "ws":[
+
+         {
+          "lj":"OR",
+          "a":{
+            "o":"GE",
+            "s": "nextIspDate",
+            "dt": "1492-01-02"
+
+          }
+        },
+        {
+          "lj":"OR",
+          "a": {
+
+              "o":"GE",
+              "l":{
+                 "s": "conclusion"
+              },
+              "sv":  "2119-03-19"
+
+          }
+        }
+
+
+      ]
+
+    }
+   }
+}
+
+//复杂级联的
+{
+  "offset": 0,
+  "first": 22,
+  "orderBy": "",
+  "asc": true ,
+  "filter": {
+    "cod": "309",
+		"oid": "a"
+  },
+  "where": {
+    "a": {
+      "l": {
+        "sub": {
+					"s": "isps.ispMen.username",
+          "from": "Task",
+          "where": {
+             "a": {
+              "s": "task.devs.pos.address.#1",
+              "o": "LT",
+              "r": {
+                 "sv": "herzwwhang"
+              }
+
+            }
+          }
+
+        }
+      },
+      "o":"EQ",
+      "sv": "svd"
+    }
+
+   }
+}
+
+//自反
+{
+  "offset": 0,
+  "first": 22,
+  "orderBy": "",
+  "asc": true ,
+  "filter": {
+    "cod": "309",
+		"oid": "a"
+  },
+  "where": {
+    "a": {
+      "l": {
+        "sub": {
+					"s": "isps.ispMen.username",
+          "from": "Task",
+          "where": {
+            "lj": "DSELF",
+            "sup": {
+
+             "as":[
+                {
+                  "s": "checkMen.username.#2",
+                  "o": "EQ",
+                  "sv": "herzwwhang"
+                },
+                 {
+                  "s": "id.#2",
+                  "o": "EQ",
+                  "r":{
+                    "s": "isps.id"
+                  }
+                 }
+              ]
+            	}
+          }
+
+        }
+      },
+      "o":"EXI",
+      "sv": "sv2d"
+    }
+
+   }
+}
+
+//子query过程 IN;
+{
+  "offset": 0,
+  "first": 22,
+  "orderBy": "",
+  "asc": true ,
+  "filter": {
+    "cod": "309",
+		"oid": "a"
+  },
+  "where": {
+    "a": {
+      "r": {
+
+        "sub": {
+					"s": "isps.ispMen.username",
+          "from": "Task",
+          "where": {
+            "lj": "OR",
+             "as":[
+                {
+                  "s": "checkMen.username.#1",
+                  "o": "EQ",
+                  "sv": "herang"
+                },
+                 {
+                  "s": "id.#1",
+                  "o": "EQ",
+                  "r":{
+                    "s": "isps.id"
+                  }
+                 },
+                 {
+                  "l": {
+                    "y": "subOut"
+                  },
+                  "o": "EQ",
+                  "r":{
+                    "s": "fee"
+                  }
+                 }
+              ]
+
+          }
+
+        }
+      },
+      "o":"IN",
+      "s": "checkMen.username"
+    }
+
+   }
+}
+
+
+
+
+
+
+
+
+

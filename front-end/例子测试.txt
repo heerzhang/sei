@@ -1,0 +1,223 @@
+/** @jsx jsx */
+let filtercomp={ id:Parameters.id };
+const [filter, setFilter] = React.useState(filtercomp);
+const {loading, error, items, loadMore } =useLookReports(filter);
+console.log("zhai内部1看FollowingRecipes items=", items );
+let     mycss=Parameters.padding+' 0 6px';
+renderReturn(
+  <div>
+ <div>
+    <div  css={{padding:"6px 0"}}>出现下列情况之一时，悬挂钢丝绳和补偿钢丝绳应当报废：<br/>
+      ①出现笼状畸变、绳股挤出、扭结、部分压扁、弯折；<br/>②一个捻距内出现的断丝数大于下表列出的数值时：
+    </div>
+
+    <Table　css={{borderCollapse:'collapse'}}>
+    <TableRow css={{height:`${Parameters.padding}`}}>
+      <CCell rowSpan={2}>断丝的形式</CCell>
+      <CCell colSpan={3}>钢丝绳的类型
+      </CCell>
+    </TableRow>
+      <TableRow css={{height:`${Parameters.id}px`}}>
+        <CCell>6×19</CCell>
+        <CCell>{Parameters.id}</CCell>
+        <CCell>9×19</CCell>
+      </TableRow>
+    <TableRow>
+      <CCell>均布在外层绳股上</CCell>
+      <CCell>24</CCell><CCell>30</CCell><CCell>34</CCell>
+    </TableRow>
+    <TableRow>
+      <CCell>集中在一或者{items&&items[0].upLoadDate}两根外层绳股上</CCell>
+      <CCell>24</CCell><CCell>30</CCell><CCell>34</CCell>
+    </TableRow>
+    <TableRow>
+      <CCell>一根外绳股上相邻的断丝</CCell>
+      <CCell>4</CCell><CCell>4</CCell><CCell>4</CCell>
+    </TableRow>
+    <TableRow>
+      <CCell>股谷（缝）断丝 </CCell>
+      {
+      items? ( items.map(hit => {
+                const myurl ='/inspect/'+hit.id;
+                return (
+                      <CCell>
+                        <Link to={myurl} >
+                          {hit.no}
+                        </Link>
+                      </CCell>
+                    );
+                    } ) )
+                    :
+           (<React.Fragment>
+            <CCell>2</CCell> <CCell>3</CCell> <CCell>6</CCell>
+           </React.Fragment>)
+      }
+
+    </TableRow>
+    <TableRow>
+      <Cell colSpan={4}>注：上述断丝数参考长度为一个捻距，约为6d（d表示钢丝绳
+        的公称直径，mm）</Cell>
+    </TableRow>
+  </Table>
+    <div css={{padding:`${Parameters.padding} 0 7px`}}>
+    "③钢丝绳直径小于其公称直径{Parameters.id}的90%；<br/>"+
+    "④钢丝绳严重锈蚀，铁锈填满绳股间隙。【{Parameters.name}】<br/>
+    采用其他类型悬挂装置的，悬挂装置的磨损、变形等不得超过制造单位设定的报废指标
+    </div>
+  </div>
+  </div>
+)
+
+页面性能测试， 添加：
+        <div css={{ display: 'flex', justifyContent: 'space-between',flexWrap: 'wrap'}}>
+          {
+            Array.from(new Array(1500)).map( (a,i)=>
+              <AntCheck label={`其它${i}`} inp={inp} setInp={setInp} sup={'tool'} item={`other${i}`}/>
+            )
+          }
+        </div>
+
+针对chrome网页性能测试:
+420002个    return '车夫杠杆'   		C时间=1.4s/0.8s;
+420002	  <span>车夫杠杆</span> 		C时间=4.8s/2.6s;
+420002	  <div>车夫杠杆</div>  			C时间=5.8s/4.0s;
+420002	  <h5>车夫杠杆</h5>  				C时间=5.8s/3.3s;
+420002	  <p>车夫杠杆</p> 					C时间=6.1s/3.2s;
+420002	   return <input value='车夫杠杆'/> 					C时间=36s/x;浏览器崩溃。
+42002个	   return <input value='车夫杠杆'/> 					C时间=3300ms/800ms;
+42002个	   <div>车夫杠杆</div> 					C时间=600ms/250ms;
+42002个	   return '车夫杠杆'						C时间=187ms/?ms;
+42002个	   <Text variant="h6">车夫杠杆</Text>				C时间=10200ms/550ms;  家时=7060ms/210ms;
+[emotion]
+42002个	          { return <h6>车夫杠杆</h6>}				时间=ms/ms;  	家时=360ms/170ms;
+		css`直接加在h6<> : 					时间=5800ms/3800ms; 家时=4470ms/2900ms;
+42002个
+  若直接上循化+无组件调用 <h6/span>车夫杠杆		 				C时间=590ms/241ms;
+  [web标签性能损失]
+	若直接上循化+没有tag<> { return '车夫杠杆'}					C时间=181ms/?ms;
+		+简化成 <h6 css={ css` ：： 							C时间=8600ms/490ms;
+		[js`Css`损失emotion情况]
+    +去掉 css={   用原始的 <h6    ：：				C时间=1843ms/284ms;
+    	- -+ react直接上样式<h6 style={{fontSize: '1em', ...7}}			C时间=3379ms/317ms；
+    	- -+ react直接上 +组件<h6 style={{fontFamily...8	webkit无		C时间=4000ms/560ms;
+    	- -+ react直接上+无样式附加 +组件 <h6 >		  	  	C时间=1976ms/276ms;
+    	- -+ react直接上+无样式附加 +组件 <h6 css={css`空` >			C时间=2653ms/314ms;
+    	- -+ 没有@jsx +组件 <h6 css={{标准的h6-style 实际无效的！>		C时间=2124ms/258ms;
+    	- -+ @jsx jsx +组件 <h6  css={{标准的h6-style...7>					C时间=8507ms/520ms;
+    	- -+ @jsx jsx +组件 <h6  css={{fontFamily...10 				C时间=8996ms/510ms;
+    emotion文件头必须加/** @jsx jsx */ import {jsx} from "@emotion/core";
+    - + 		MText	React.FunctionComponent<MTextProps>						C时间=1827ms/266ms;
+    - + MText	function(props) <MText variant="h6">车夫杠杆: 	C时间=2047ms/265ms;
+    - + MText	function(props) <MText>车夫杠杆 								C时间=1891ms/268ms;
+    - + var MText = (props) => {  return<MText>车夫杠杆</MText> 	C时间=1727ms/289ms;
+    [React性能损失]
+    -+无组件调用+变量替换var MText = <h6>车夫杠杆</h6>;	=>MText 			C时间=511ms/172ms;
+[styled-components]
+42002个
+		@kiwicom组件+Collapse	<Text>车夫杠杆</Text>	<p ?  C时间=10500ms；全14.6s；家时=全10.2s；
+		不用@kiwicom组件直接styled.h6`样式..14	 		  C时间=全10.8s；
+		不用@kiwicom组件直接styled.h6`` 无样式;				C时间=全9.6s；！！
+		[估计styled-components带来损耗]
+		- + 		MText	React.FunctionComponent<MTextProps>				C时间=全6.1s；
+		- + var MText = (props) => {  return<MText>车夫杠杆</MText> 		C时间=全6.3s；
+		[React性能损失]
+		-无组件调用+变量替换var MText = <p>车夫杠杆</p> =>MText;				C时间=全4.3s；
+		-无组件调用+变量替换var MText = <h6>车夫杠杆</h6> =>MText;				C时间=全4.4s；
+		[web标签性能损失]
+		-纯文字 +var MText = '车夫杠杆'	 =>MText;								时间=全2.3s；
+		不用@kiwicom组件直接 styled.h6` 样式..14							C时间=7200ms；
+		不用@kiwicom组件直接 styled.h6` 样式..3							C时间=6000ms；
+		-去掉 styled +不用组件,直接return <h6>车夫杠杆</h6> 			C时间=2400ms；
+420002
+	Collapse+去掉 styled +不用组件,直接return <h6>车夫杠杆</h6> 			C时间=14s；
+	去掉Collapse+去掉 styled +不用组件,直接return <h6>车夫杠杆</h6>		C时间=全20s；家时=全15.2s；
+	Collapse +直接return '车夫杠杆' ;						家时=全6s；
+	直接return '车夫杠杆' ;								家时=全4.83s；		导致浏览器歇菜?
+42002个
+	去掉Collapse+去掉 styled +不用组件,直接return <h6>车夫杠杆</h6>		C时间=全3s；家时=全1.8s；
+42002个
+	去掉Collapse+不用@kiwicom组件直接 styled.h6` 样式..14			时间=3510ms；全8s；家时={css} 全7s；
+	Collapse+不用@kiwicom组件直接 styled.h6` 样式..14			时间=5000ms；全11s； 家时=全7.9s；
+	Collapse+不用@kiwicom组件直接 styled.h6``· 无样式							;家时=全6.1s；
+	Collapse+不用组件,直接return <h6>车夫杠杆</h6>						;家时=全3.15s；
+多组件pk少组件？Collapse+@kiwicom+嵌套*<Text>底下字循环；
+				多组件 50000 *2 					=全16.8s；；家时=全11.84s；
+				少组件 500*200 						=全3.2s；家时=全2.85s;
+[emotion]
+42002个>>
+		  -SText + <h6 css={{ ...7；	 + /viewAll		=全12s；可操作30s。
+			-SText + <h6 css={{ ...11；	 + /viewAll		=全11.9s；可操作21/33s。
+			-SText + <h6 css={{ ...11；/viewAll ；  =单下拉点=全10.3s； All拉起可操作14s。
+			原Text组件 /viewAll 		 =全13.6s；可操作,37s可自如滚。 All拉起=7s文字切换/13.5s正常。
+			原Text组件 /viewAll  		=单下拉点=全10.6s； All拉起可操作7s文字切换/13.5s正常。
+			-MText: React.FunctionComponent=> <h6无样式； 	 =单下拉点=全3.7s；
+			-var MText = <h6>车夫杠杆</h6>; 只剩<>			=单下拉点=全1.8s；
+142002个>>
+			-var MText = <h6>车夫杠杆</h6>; 只剩<>			=单下拉点=全5.5s；42002个换算=1.627s；
+			-输出文本，{ return '车夫杠杆'}	;						=单下拉点=全1.6s；42002个换算=0.473s；
+多组件pk少组件？〉〉
+				多组件 50000 *2 					=全14.4s； All拉起可操作19s。
+							--+ /viewAll		=全17s；可操作50s/60s可自如滚。
+				少组件 500*200 						=全1.8s； /viewAll可操作3.9s可自如滚。
+
+
+
+https://localhost:3765/original/viewAll
+路由来的捕获followPath=
+'react-router-dom'
+
+
+ref必须显而易见的，否则编译告警。用对象{ref1,}不行。用数组[ref1，]可行。
+    对象方式return {ref1,ref2,ref3,ref4,ref5,ref6,ref7,ref8};
+  不能直接依赖refs      必须单独的依赖 refs.ref1,refs.ref2,refs.ref3,refs.ref4,refs.ref5,refs.ref6,refs.ref7,refs.ref8。。
+  用数组，refs】不行，不加上却会编译警告、运行可正点。
+,refs[0],refs[1],refs[2],refs[3],refs[4],refs[5],refs[6],refs[7]]编译警告
+
+const TemplateView: React.RefForwardingComponent<InternalItemHandResult,TemplateViewProps>=
+  React.forwardRef((
+    { inp,   showAll = false  },  ref
+  ) => {
+    const [,,itBinds]= useValues();
+    //const itBinds=useProjectListAs({count: projectList.length});
+    const ref1=React.useRef<InternalItemHandResult>(null);
+    const ref2=React.useRef<InternalItemHandResult>(null);
+    const ref3=React.useRef<InternalItemHandResult>(null);
+    const ref4=React.useRef<InternalItemHandResult>(null);
+    const ref5=React.useRef<InternalItemHandResult>(null);
+    const ref6=React.useRef<InternalItemHandResult>(null);
+    const ref7=React.useRef<InternalItemHandResult>(null);
+    const ref8=React.useRef<InternalItemHandResult>(null);
+
+    const outCome=mergeSubitemRefs( ...[ref1,ref2,ref3,ref4,ref5,ref6,ref7,ref8] );
+    React.useImperativeHandle( ref,() => ({ inp: outCome }), [outCome] );
+
+    console.log("TemplateView hehe outCome =", outCome, );
+    //使用React.useMemo(() =>,[])作用惊人，保存4次render变成2次了。
+    const recordList= React.useMemo(() =>
+      <React.Fragment>
+        <InternalItem1 ref={ref1} key={1} par={inp} show={showAll}/>
+        <InternalItem7 ref={ref2} key={2} par={inp} show={showAll}/>
+        <InternalItem8 ref={ref3} key={3} par={inp} show={showAll}/>
+        <InternalItem12 ref={ref4} key={4} par={inp} show={showAll}/>
+        <InternalItem27 ref={ref5} key={5} par={inp} show={showAll}/>
+        <InternalItem31 ref={ref6} key={6} par={inp} show={showAll}/>
+        <InternalItem37 ref={ref7} key={7} par={inp} show={showAll}/>
+        <InternalItem50 ref={ref8} key={8} par={inp} show={showAll}/>
+      </React.Fragment>
+      ,[inp, showAll]);
+
+    return (
+      <React.Fragment>
+        {recordList}
+      </React.Fragment>
+    );
+  } );
+
+//{inp,showAll=false,children},ref逗號之前的原型 P&{ children?: ReactNode };最後ref對應<T>InternalItemHandResult。<P>對應TemplateViewProps;;
+const TemplateView: React.RefForwardingComponent<InternalItemHandResult,TemplateViewProps>=
+  React.forwardRef((
+     {inp, showAll=false, children},   ref
+  ) => {
+     }
+///forwardRef的使用來自原型(props: PropsWithChildren<P>, ref: Ref<T>): ReactElement | null;   P對應InternalItemProps； 最後= P & { children?: ReactNode };
+

@@ -1,0 +1,233 @@
+/** @jsx jsx */
+import { jsx, css, Global } from "@emotion/core";
+import * as React from "react";
+import {
+  Toolbar,
+  Navbar,
+  useTheme,
+  IconButton,
+  Button,
+  Tabs,
+  Tab,
+  Layer,
+  TabPanel,
+  MenuList,
+  MenuItem,
+  Tooltip,
+  ResponsivePopover,
+  IconChevronDown,
+  IconPlus,
+  DarkMode,
+  LightMode,
+  Pager, Container, Text, Link as StyledLink, Alert, InputGroup, Input, LayerLoading
+} from "customize-easy-ui-component";
+import { RecipeList } from "./RecipeList";
+//import { useFollowRequests } from "./hooks/with-follow-request-count";
+import { FollowersList } from "./FollowersList";
+import { FollowingList } from "./FollowingList";
+import { useSession,  useSignOut } from "./auth";
+import { Compose } from "./Compose";
+import { Recipe } from "./Recipe";
+//import { useTransition, animated } from "react-spring";
+import { SearchBox } from "./SearchBox";
+import { Link, useRoute,  Switch, Route, useRouter, Router, LocationHook } from "wouter";
+import useLocation from "wouter/use-location";
+//import { Link, navigate } from "@reach/router";
+import { useMedia } from "use-media";
+import { Layout } from "./Layout";
+import { Branding } from "./Branding";
+import { Login, LoginProps } from "./LoginPane";
+import {Helmet} from "react-helmet";
+import queryString from "query-string";
+import { MainLeftPart } from "./MainLeftPart";
+import { ThirdRoot } from "./ThirdRoot";
+import { IspDetail } from "./inspect/IspDetail";
+
+//逻辑包裹{&&()}直接逻辑嵌套　 和 　路由器嵌套方式的组件显示测试；
+//对两层　甚至　三层的　路由　嵌套测试。
+
+export interface MainProps {
+  path?: string;
+  id?: string;
+}
+//queryString参数引入，破坏了封装原则，特别注意要讲明白参数用途。
+export const TestRoot: React.FunctionComponent<MainProps> = ({path}) => {
+  const theme = useTheme();
+  const {user,} = useSession();
+  const [query, setQuery] = React.useState("");
+  const [activeTab, setActiveTab] = React.useState(0);
+
+  const { value: followRequests } ={value: null};  　// useFollowRequests();
+  //这里isLarge所代表的屏幕尺寸必须和底下的更多元素的[theme.mediaQueries.]控制保持一致性，否则页面会重叠。　md: >="768px"
+  //isLarge在屏幕大小动态调整时，将会重新render整个页面。
+  const isLarge = useMedia({ minWidth: "768px" });
+  //const [, params] = useRoute(`${path}/:recipe*`);
+  //数字匹配 <Route path="/users/:id(\d+)" />}  ; [matchedOK, params] = useRoute(`${path}/:isp/:recipe*`);
+  //多个路径参数一起解析的；:recipe*　带*号表示剩下的部分都算入recipe变量，当然recipe可能在这层次不用它，放在下层次路由去用它。
+  //无法做纯数字匹配？  '/seeok/fjsei/:newsId(\\d+)/:newsTitle'   ;  '/seeok/fjsei/:isp(\\d+)'
+  //可支持可选项 useRoute('/seeok/fjsei/:bar?')  ?表示省略可行的;
+  const [matchedOK, params] = useRoute('/seeok/fjsei/:isp/:recipe*');
+  const showingRecipe = matchedOK && params.recipe;
+  //捕获URL #之前 ?后面的参数表,公用组件的就可使用参数，后面嵌套路由的各个组件内部也能用它。
+  const qs = queryString.parse(window.location.search);
+  //qs.id 可能多个id 就要根据typeof qs.id去判定。
+  console.log("参数路由匹配=",matchedOK,"?是",window.location.search,"#是",window.location.hash,";match id=",qs.id);
+  //  const showingRecipe = props["*"];   　　 //"这个是问号前的除已预定义部分的剩余路径lo/gins/ds？
+  console.log("参数路由匹配１=",matchedOK,";match type=",typeof qs.id);
+  // i'm disabling this for now, since it was running really poorly. unsure
+  // whats up here.
+
+  // const transitions = useTransition(false, recipeId => null, {
+  //   from: { opacity: 0, transform: "scale(0.95)" },
+  //   enter: { opacity: 1, transform: "scale(1)" },
+  //   leave: { opacity: 0, transform: "scale(1.1)" },
+  //   immediate: !isLarge
+  // });
+
+  //截取URL; 这里nowPath是　https://localhost:3765　后面的，　?号之前的那一部分。
+  const [nowPath, setLocation] = useLocation(); 　//取得路由钩子。
+  const router = useRouter();
+  console.log("进入TestRoot页面 params=",params,";showingRecipe="+showingRecipe,"路径="+nowPath,"path=",path);
+
+
+  //控制界面的关键！：  showingRecipe=显示具体单项的菜谱的ID或者'new'; ==控制右部分界面显示。
+  //注意小屏场合：ＵＲＬ的参数recipe*，带上ID就说明，迫使renderList=false必须　隐藏掉；　否则界面会重叠。
+  const renderList = isLarge || !showingRecipe;  　//大屏或者小屏但是没有显示具体单项的菜谱的场合。
+
+  function onLogoutDo() {
+    setLocation("/login",  false );
+    //navigate("/login" , { replace: true });
+  }
+  const { userList, submitfunc:signOut, error:errLogin, logging,setLogging } = useSignOut(onLogoutDo);
+
+  return (
+    <Layout>
+      <div
+        css={css`
+          display: flex;
+          box-sizing: border-box;
+        `}
+      >
+
+        { renderList && <MainLeftPart path={path}/>}
+
+        {//右中部内容主体部分，可能在超大屏幕下，感觉这部分视图尺寸也太小了。
+        //实际情况：在小屏场合，左半边内容被后面的右中文档流后面的界面部分给屏蔽遮盖掉了。
+      }
+      {showingRecipe && (
+        <div
+          css={{  //上层的div控制大的界面布局方向感。
+            display: "block",
+            position: "relative",
+            flex: 1,      　//对布局影响最大的人竟然是它！最最关键的！。
+            [theme.mediaQueries.md]: {
+              display: "flex",    　//这里的flex没表现出太大影响力度。
+              justifyContent: "center"
+            }
+          }}
+        >
+
+          <div
+            css={{    //下一层的div在上层div基础上面更进一步调整感觉。
+              display: "block",
+              position: "absolute",
+              width: "100%",        //内容占用宽度
+              boxSizing: "border-box",
+              [theme.mediaQueries.md]: {
+                display: "flex",
+                justifyContent: "center",     //相对于父辈div继续调整感觉。
+                alignItems: "center",
+                padding: theme.spaces.lg,
+            //    minHeight: "100vh",
+                paddingLeft: "calc(330px + 3rem)"
+              },
+              [theme.mediaQueries.xl]: {
+                paddingRight: theme.spaces.xl,
+                paddingLeft: "calc(400px + 6rem)"
+              }
+            }}
+          >
+            <Layer
+              elevation="xl"
+              //组件id! 缺少key导致：遇到小屏幕轮转显示正常，大屏整个显示模式却必须手动刷新才能切换内容。
+              key={showingRecipe}
+              css={{
+                borderRadius: 0,
+                position: "relative",
+                boxShadow: "none",
+                width: "100%",
+                [theme.mediaQueries.md]: {
+                  marginTop: "auto",
+                  height: "auto",
+              //    overflow: "hidden",
+                  boxSizing: "border-box",
+                  marginBottom: "auto",
+                  width: "100%",
+                  maxWidth: "1700px",
+                  borderRadius: theme.radii.lg,
+                  boxShadow: theme.shadows.xl
+                }
+              }}
+            >
+
+            <MainContent path={path}/>
+
+      </Layer>
+      </div>
+
+      </div>
+      )}
+
+      </div>
+    </Layout>
+  );
+};
+
+
+
+//这里path是嵌套路由的基础路径。
+interface MainContentProps {
+  path?:string
+  id?: string;
+}
+//嵌套路由的基本相对路径是通过path参数注入的，上级组件负责从上层次路由来设置path。
+//顶级一层路由是path="/seeok/fjsei/:rest*" 　　这里对照替换/:rest*部分的ＵＲＬ路由。
+function MainContent({ path,id }: MainContentProps) {
+  const [location, setLocation] = useLocation();
+  //内嵌的路由，URL必须包括首先有父组件路由的根目录部分。
+  //首先父辈组件必须首先满足路由URL的正常可显示要求，会显示公共的部分界面，然后才是嵌套的子路由的专属部分的界面区域。
+  //不能再有 <Route path={`${path}/likeit`} component={Branding} />
+  return (
+      <Switch>
+        <Route path={`${path}/likeit`}>
+          {params => <Branding />}
+        </Route>
+        <Route path={`${path}/company/form/:rest*`}>
+          <ThirdRoot path={`${path}/company/form`} />
+        </Route>
+        <Route path={`${path}/company`}>
+          {params => <Login />}
+        </Route>
+
+        <Route path={`${path}/:isp/:recipe*`}>  {() => <Branding />}    </Route>
+        <Route path="/:rest*">
+          <p>没有该URL：{location}匹配的在第二层
+          <h1>没有该URL匹配的视图内容</h1>
+          当前基础路由路径={path}</p>
+        </Route>
+      </Switch>
+  );
+}
+
+
+//是在WaitingComponent(lazy(() => import("需要的")));
+export default TestRoot;
+
+
+
+//弹性布局=Flex布局：语法篇;   http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html?utm_source=tuicool
+//主页面的菜谱页面搜索，把输入字符串直接注入到<RecipeList query={query} />
+//内嵌路由 二层路由,<Route path="/testroot/  后续没有路径参数的,<Switch>之后就是最基础界面了,不会路由到:rest*,也就是预期正常的;
+//捕获URL?后面的url传递参数方法,实际和路由没有半点关系，？之前的才算路由功能部分。
+//嵌套路由，目的用于组件复用，布局也复用的，公用部分是第一层被路由后的组件，而差异部分对应第二层次的路由目标组件；大路由＋小路由的双层路由器模式。
+

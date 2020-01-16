@@ -1,0 +1,48 @@
+Manifest-Version: 1.0
+Class-Path: jaxb-api-2.3.0.jar reflectasm-1.11.3.jar graphql-java-9.2.
+ jar jboss-logging-3.3.2.Final.jar logback-classic-1.2.3.jar snakeyaml
+ -1.19.jar log4j-api-2.10.0.jar spring-jcl-5.0.9.RELEASE.jar spring-da
+ ta-commons-2.0.10.RELEASE.jar jackson-module-kotlin-2.9.6.jar spring-
+ boot-starter-tomcat-2.0.5.RELEASE.jar spring-hateoas-0.25.0.RELEASE.j
+ ar spring-boot-starter-web-2.0.5.RELEASE.jar java-dataloader-2.0.2.ja
+ r validation-api-2.0.1.Final.jar kotlin-stdlib-common-1.2.51.jar evo-
+ inflector-1.2.2.jar spring-boot-2.0.5.RELEASE.jar atomikos-util-4.0.6
+ .jar spring-websocket-5.0.9.RELEASE.jar jackson-annotations-2.9.0.jar
+  spring-data-rest-core-3.0.10.RELEASE.jar jackson-datatype-jsr310-2.9
+ .6.jar asm-5.0.4.jar antlr-2.7.7.jar transactions-jdbc-4.0.6.jar spri
+ ng-jdbc-5.0.9.RELEASE.jar transactions-jms-4.0.6.jar jackson-core-2.9
+ .6.jar kotlin-reflect-1.2.51.jar spring-core-5.0.9.RELEASE.jar graphq
+ l-java-tools-5.2.0.jar spring-boot-starter-2.0.5.RELEASE.jar javax.se
+ rvlet-api-3.1.0.jar jackson-datatype-jdk8-2.9.6.jar graphiql-spring-b
+ oot-starter-5.0.2.jar annotations-13.0.jar spring-boot-starter-jta-at
+ omikos-2.0.5.RELEASE.jar spring-expression-5.0.9.RELEASE.jar commons-
+ text-1.1.jar HikariCP-2.7.9.jar spring-boot-configuration-processor-2
+ .0.5.RELEASE.jar spring-aspects-5.0.9.RELEASE.jar javax.annotation-ap
+ i-1.3.2.jar spring-web-5.0.9.RELEASE.jar reactive-streams-1.0.2.jar s
+ pring-messaging-5.0.9.RELEASE.jar classmate-1.3.4.jar tomcat-embed-co
+ re-8.5.34.jar h2-1.4.193.jar spring-boot-starter-websocket-2.0.5.RELE
+ ASE.jar graphql-java-servlet-6.1.2.jar jackson-databind-2.9.6.jar jav
+ ax.transaction-api-1.2.jar tomcat-embed-el-8.5.34.jar guava-21.0.jar 
+ hibernate-commons-annotations-5.0.1.Final.jar hibernate-core-5.2.17.F
+ inal.jar javax.websocket-api-1.1.jar spring-boot-devtools-2.0.5.RELEA
+ SE.jar spring-boot-starter-json-2.0.5.RELEASE.jar graphql-spring-boot
+ -autoconfigure-5.0.2.jar jul-to-slf4j-1.7.25.jar commons-io-2.6.jar t
+ ransactions-jta-4.0.6.jar tomcat-embed-websocket-8.5.34.jar log4j-to-
+ slf4j-2.10.0.jar spring-webmvc-5.0.9.RELEASE.jar logback-core-1.2.3.j
+ ar transactions-api-4.0.6.jar jandex-2.0.3.Final.jar kotlin-stdlib-1.
+ 2.51.jar antlr4-runtime-4.7.1.jar hibernate-validator-6.0.12.Final.ja
+ r dom4j-1.6.1.jar spring-data-jpa-2.0.10.RELEASE.jar spring-beans-5.0
+ .9.RELEASE.jar graphql-spring-boot-starter-5.0.2.jar spring-tx-5.0.9.
+ RELEASE.jar spring-boot-starter-aop-2.0.5.RELEASE.jar transactions-4.
+ 0.6.jar spring-plugin-core-1.2.0.RELEASE.jar spring-context-5.0.9.REL
+ EASE.jar spring-orm-5.0.9.RELEASE.jar aspectjweaver-1.8.13.jar slf4j-
+ api-1.7.25.jar spring-boot-autoconfigure-2.0.5.RELEASE.jar graphiql-s
+ pring-boot-autoconfigure-5.0.2.jar hibernate-jpa-2.1-api-1.0.2.Final.
+ jar spring-boot-starter-data-rest-2.0.5.RELEASE.jar spring-boot-start
+ er-data-jpa-2.0.5.RELEASE.jar spring-boot-starter-jdbc-2.0.5.RELEASE.
+ jar javassist-3.22.0-GA.jar jackson-module-parameter-names-2.9.6.jar 
+ commons-lang3-3.7.jar spring-aop-5.0.9.RELEASE.jar spring-boot-starte
+ r-logging-2.0.5.RELEASE.jar ojdbc6-11.2.0.3.jar spring-data-rest-webm
+ vc-3.0.10.RELEASE.jar
+Main-Class: org.fjsei.yewu.PingtaiApplication
+

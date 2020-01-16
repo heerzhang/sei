@@ -1,0 +1,5 @@
+{
+  "EL-DJ" : "./elevator/PeriodicalInspection",
+  "EL-JJ" : "./elevator/SupervisionInspection"
+}
+

@@ -1,0 +1,23 @@
+type OriginalRecord{
+    id: ID!
+    modeltype: String!
+    modelversion: String!
+    lastModify: String
+    state: String
+    data: String
+    deduction: String
+    isp: ISP!
+    files: [File]
+}
+
+extend type Query {
+    #输入复合对象必须是基本数据类型或其嵌套，不能直接挪用java的类声明对象。
+    getOriginalRecord(id:ID!): OriginalRecord
+}
+
+extend type Mutation {
+    newOriginalRecord(modeltype: String!, modelversion: String!, isp: ID!, data: String) : OriginalRecord
+    modifyOriginalRecordData(id: ID!,operationType:Int!,data: String,deduction: String) : OriginalRecord
+    modifyOriginalRecordFiles(id: ID!, fileIDs: [ID]!) : OriginalRecord
+}
+

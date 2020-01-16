@@ -1,0 +1,324 @@
+/** @jsx jsx */
+import { jsx, css, SerializedStyles } from "@emotion/core";
+import * as React from "react";
+import {
+  useTheme,
+  Text,
+  Button,
+  IconChevronUp,
+  IconChevronDown,
+  Select, Layer, Check, Collapse, useCollapse
+} from "customize-easy-ui-component";
+import PropTypes from "prop-types";
+//import { useUid } from "customize-easy-ui-component/esm/Hooks/use-uid";
+import { Dispatch, SetStateAction } from "react";
+//import isEqual from "lodash.isequal";
+import { MutableRefObject } from "react";
+import { Ref } from "react";
+//import { useUid } from "customize-easy-ui-component/src/Hooks/use-uid";
+
+
+export interface InspectRecordHeadColumnProps {
+  level: string;
+  bigLabel: string;
+  label: string;
+  tinyLabel?: string;
+  children: React.ReactNode;
+}
+//检验项目的开头几个列的布局
+export const InspectRecordHeadColumn: React.FunctionComponent<InspectRecordHeadColumnProps> = ({
+                                                                       label,
+                                                                       children,
+                                                                       level,
+                                                                       bigLabel,
+                                                                        tinyLabel,
+                                                                       ...other
+                                                                     }) => {
+
+  return (
+    <React.Fragment>
+      <div css={{ display: 'flex', justifyContent: 'space-between'}}>
+          <Text  variant="h6"> 检验类别 {level}  </Text>
+          <Text  variant="h6"> 检验项目与内容及其要求 </Text>
+      </div>
+
+      <Text  variant="h6"　css={{ textAlign: 'center' }}>
+          <Text  variant="subtitle"　>
+            {bigLabel}
+          </Text>
+          <Text  variant="body"　>
+            {label}
+          </Text>
+       </Text>
+
+        <Text className="Collapse__text" variant="subtitle">
+          {
+            tinyLabel?  tinyLabel : null
+          }
+          <hr/>
+
+          {children}
+
+        </Text>
+
+        <Text  variant="h4"　>
+          查验结果
+        </Text>
+    </React.Fragment>
+  );
+};
+
+
+InspectRecordHeadColumn.propTypes = {
+  level: PropTypes.string.isRequired,
+  bigLabel: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  tinyLabel: PropTypes.string,
+  children: PropTypes.node
+};
+
+
+//React.useMemo(() =><RenderLoad/>, []); 用它加速显示组件是针对已经在当前界面显示或display：none的才管用;
+
+export interface InspectRecordTitleProps {
+  //control参数实际是 useCollapse(show,true) 返回值。
+  //底下的?号是必不可少的。
+  control:  {　show?:boolean , buttonProps?: any , collapseProps?:{id:string,　show:boolean} 　};　
+  label: string;
+  children: React.ReactNode;
+}
+//原始记录的列表项，很像菜单列表标题；　　包装成一个组件，以便　修改和复用。
+export const InspectRecordTitle: React.FunctionComponent<InspectRecordTitleProps> = ({
+                                                                                 control,
+                                                                                 label,
+                                                                                 children,
+                                                                                 ...other
+                                                                              }) => {
+  const theme = useTheme();
+
+  return (
+    <Layer elevation={"sm"}     css={{ padding: '0.25rem' }}>
+      <div>
+          <Button
+            variant="ghost"
+            intent="primary"
+            iconAfter={control.show  ? <IconChevronUp /> : <IconChevronDown />}
+            {...control.buttonProps}
+          >
+            {<Text variant="h5" css={{color: control.show ? theme.colors.palette.red.base:undefined}}>{label}</Text>}
+          </Button>
+
+          <Collapse {...control.collapseProps}   noAnimated>
+              {children}
+             <div css={{textAlign: 'right',padding:'0.2rem'}}>
+              <Button
+                variant="ghost"
+                intent="primary"
+                iconAfter={control.show  ? <IconChevronUp /> : <IconChevronDown />}
+                {...control.buttonProps}
+              >
+                {control.show ? "收起" : "更多"}
+              </Button>
+             </div>
+          </Collapse>
+      </div>
+    </Layer>
+  );
+};
+
+InspectRecordTitle.propTypes = {
+  label: PropTypes.string.isRequired,
+  children: PropTypes.node,
+  control: PropTypes.shape({
+      show: PropTypes.bool.isRequired,
+      buttonProps: PropTypes.any.isRequired,
+      collapseProps: PropTypes.any.isRequired,
+  }).isRequired,　
+};
+
+export interface SelectHookforkProps
+  extends React.SelectHTMLAttributes<HTMLSelectElement> {
+  topDivStyle?: SerializedStyles;
+}
+//太多重复了，自定义成一个新组件。
+export const SelectHookfork: React.FunctionComponent<SelectHookforkProps> = ({
+                                                                 value,
+                                                                 onChange,
+                                                                 topDivStyle,
+                                                               ...other
+                                                             }) => {
+  return (
+    <Select inputSize="md" css={{minWidth:'140px',fontSize:'2rem',padding:'0 1rem'}} divStyle={css`max-width:240px;`}
+            value={value}  onChange={onChange}  topDivStyle={topDivStyle}
+    >
+        <option></option>
+        <option>／</option>
+        <option>√</option>
+        <option>×</option>
+    </Select>
+  );
+};
+
+
+export interface AntCheckProps
+            extends React.InputHTMLAttributes<HTMLInputElement> {
+  label: string;
+  topDivStyle?: SerializedStyles;
+  defaultChecked?: boolean,
+  //外部传递来的状态宿主，点击改变inp。
+  inp: any,
+  setInp: Dispatch<SetStateAction<any>>,
+  //子项目名字
+  item: string;
+  //父项目名字，若sup为空，item直接挂到inp底下第一层属性，否则嵌套在sup底下，支持2两层楼属性。
+  sup?: string;
+}
+//用来简化重复的部分，就像是一个语法糖。
+export const AntCheck: React.FunctionComponent<AntCheckProps> = ({
+              label,
+              id,
+              topDivStyle,
+              defaultChecked=false,
+              inp,
+              setInp,
+              sup,
+              item,
+              ...other
+}) => {
+
+  //inp属性inp['witnessConfirm']=false可直接改，但做 inp['tool']['vernierCaliper'] = !(inp['tool']['vernierCaliper'])就不生效？!!
+  //     defaultChecked={ defaultChecked  } err but not both). Decide between using a controlled or uncontrolled input element
+
+  return (
+      <Check label={label}
+             checked={ (sup? inp&&inp[sup]&&inp[sup][item]  :  inp&&inp[item]) || defaultChecked }
+             onChange={e => {
+                   setInp( (sup&& inp&&{ ...inp,  [sup]: { ...inp[sup],  [item]  :   !( inp[sup]  &&  inp[sup][item] )   }    } )
+                           ||  (sup&& { [sup]: { [item] :  !defaultChecked }  } )
+                           ||  (inp&&{ ...inp,   [item]  :  ! inp[item] } )
+                           ||  { [item]  :  !defaultChecked }   )
+                 }  }
+             topDivStyle={topDivStyle}
+      />
+  );
+};
+
+interface IndentationLayTextProps  {
+  title?: string | React.ReactNode;
+  id?: string;
+  children?: React.ReactNode;
+  component?: React.ElementType<any>;
+}
+//子元素缩进排版。
+export const IndentationLayText: React.FunctionComponent<IndentationLayTextProps> = ({
+                 children,
+                 title,
+                 id,
+                 component :Component= "div",
+                 ...other
+               }) => {
+  const theme = useTheme();
+  return (
+    <Component
+      className="Indentation"
+      css={{
+      }}
+      {...other}
+    >
+      <Text
+        className="Indentation__title"
+        id={id}
+        css={{ margin: 0 }}
+        variant="h6"
+      >
+        {title}
+      </Text>
+      <div css={{ paddingLeft: '1rem',
+            [theme.mediaQueries.sm]: {
+              paddingLeft: '0.5rem'
+            },
+            [theme.mediaQueries.lg]: {
+              paddingLeft: '2rem'
+            }
+           }}>
+        {children}
+      </div>
+    </Component>
+  );
+};
+
+
+//par代表整体原后端数据，itemVal是当前条目的截取部分数据。
+//把par 直接保存到了useRef做成的 那个不可变previousState当中。
+//总的show按钮各分区项目show的控制，以单一个逻辑变量无法完全正确操纵！必须传递然后合并成独立一个show逻辑。
+export interface ItemControlProps {
+  ref: React.Ref<any>;
+  //  show: boolean;
+  //par: any;   改成回调模式，上级深度控制下级，去除组件参数，避免多头受控，可能死循环。   par={},
+  //接受par输入的过滤器，回调 过滤有用数据。
+  filter: (par: any) => {};
+}
+//后端数据没有变化的，前端输入正在导致记录变化的，要维持以正在交互的输入为准，等待保存给后端。
+//par被上级组件利用回调钩子模式接管控制后，就不能在这里多头设置，否则死循环。
+export　function useItemControlAs({
+                             ref=null,
+                             filter=null }
+                          : ItemControlProps
+) {
+  const eos =useCollapse(false,true);
+  const [inp, setInp] = React.useState(null);
+  //用回调钩子setShow来替换；原先的show参数下传配合在useCollapse内部useEffect(() [defaultShow] 做修正方式。
+  //回调钩子的模式。在上层父组件去统一调用本函数的，这里仅仅生成函数的代码但还未执行。
+  const onParChange = React.useCallback(function (par) {
+    //console.log("onParChange 执行 par=", par, "itemVal=" ,filter(par));
+    setInp(filter(par));
+  }, [filter]);
+
+  React.useImperativeHandle( ref,() => ({ inp ,setShow:eos.setShow, onParChange}), [inp, onParChange,eos.setShow] );
+    //不直接用import { usePrevious } from "./Hooks/previous" 减少render次数。
+  return {eos, setInp, inp};
+}
+
+
+
+//各个检验单项子组件暴露给父组件的接口数据。
+export interface InternalItemHandResult {
+  inp: any;
+}
+//各个检验单项
+export interface InternalItemProps  extends React.HTMLAttributes<HTMLDivElement>{
+  //par?: any;        //父组件往子组件传数据
+  //show?: boolean;
+  ref?: any;
+}
+//动态载入的模板组件, 所有参数都必须？可选的，否则报错。
+export interface TemplateViewProps {
+  inp?: any;
+  showAll?: boolean;
+  ref?: any;
+}
+
+
+//Hook编译报错，不允许直接套数组()=> 回调函数模式创建；需要包裹一层Component()规避检查。
+//若本组件没有重新加载，{count}数组长度变化，会导致ｈｏｏｋ报错。  重命名也逃不掉报错。
+//count=下拉组件亦即独立展示项目个数；
+//HOOK机制要求，useXXX() 次数与顺序都不允许变化。HOOK报错。
+export function useProjectListAs({count}) {
+  const array= new Array(count).fill(null);
+  function WrappedComp(i: number) {
+        return React.useRef<InternalItemHandResult>(null);
+  };
+  return React.useRef<MutableRefObject<InternalItemHandResult>[] | null>(array.map((i) => WrappedComp(i) ) );
+}
+
+//自定义Ｈｏｏｋ的 例子。
+/*const useValues = () => {
+  const [values, setValues] = React.useState({  });
+  const itBinds=useProjectListAs({count: 8});
+  const updateData = React.useCallback(
+    (nextData) => {    },    [values],
+  );
+  return [values, updateData, itBinds];
+};
+*/
+

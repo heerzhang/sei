@@ -1,0 +1,198 @@
+cssInJs比较：   性能差不多都较慢；　emotion必须文件头/** @jsx jsx */ 　import { jsx, css } from "@emotion/core";　可以css={}直接用。
+        styled-components只需import styled, { css } from "styled-components"; 但是css``必须套在styled里面用。emotion更加灵活直白。
+有些底层错误告警太难消除，每一步都得注意新出现的警告的性质，提前准备。
+重新合并，背景是\前端\emotion\julienne-master ,hook新技术是\No-next\Example-React-App-master
+graphQL新的用法：  F:\前端\emotion\next-apollo-example-master
+
+删除firebase相关//
+没有模块注入，也会报出TypeScript error: Type '    .  TS2322 怪
+
+0717-1:
+    http://localhost:3000/login报错index.js:1437 The pseudo class ":first-child" is potentially unsafe when doing server-side rendering. Try changing it to ":first-of-type".
+    这是firebase/auth带来的；
+
+暂时不要ErrorBoundary；
+ onChange={e => setQuery(e.target.value)}
+暂时不要lazy(=>)动态加载；
+　　延迟加载	const ExampleRoute = lazy(() => import("./ExampleRoute/ExampleRoute"));
+
+Algolia Search - 使用Javascript实现前端实时搜索 https://blog.csdn.net/lgyaxx/article/details/70666835
+云服务algoliasearch 14天试用期Application ID  密码
+    24MA89MM0B /b5c447937aaaa54e1655398da969a635 /f1649cd62bd0a5a86ac31382f4f0cc8f
+谷歌云firebase/上传文件 https://firebasestorage.googleapis.com/v0/b/my-storage-bucket/o?name=images%2FutQ35yspu
+0731-3:
+    去除云搜索algoliasearch的部分，代替为本地服务端查询。
+08/27-3:
+    准备融合旧版D:\home\seiFE。
+
+<WritePaper dangerouslySetInnerHTML={{ __html: md.render(props.content) }} />　用innerHTM会导致XSS攻击；　https://www.freebuf.com/articles/web/185654.html
+验证码：防止脚本冒充用户提交危险操作。
+setState的异步性；　　　https://blog.csdn.net/xuchaobei123/article/details/73433901
+package.json都可以这样　 "dependencies": {
+                 "shade": "git+https://github.com/mobify/shade.git#1.1.1",           }
+            这peerDependencies是配合devDependencies才用到的；另外大部分可不放在dependencies。
+注意yarn.lock文件不能删，重新做yarn.lock慢，关键会丢失可能中间保存了配置，再编译会报错。
+
+版本冲突，暂时锁定  "react-spring": "9.0.0-beta.31", 引用了非正式的发行版本。
+ 解决办法： 直接在node_modules里面覆盖掉sancho替换，旧版本基础引用模块，欺骗开发工具；缺点：可能会被自动恢复。
+ 新办法：     D:\home\sancho>yarn link
+      run `yarn link "sancho"`  ;yarn unlink "sancho" ; yarn install --force;
+ 带来新问题：sancho把"react-gesture-responder": 放在"dependencies":{中；导致我得再次注入这react-gesture-responder包。
+ 　　　　Invalid hook call. ．．　3. You might have more than one copy of React in the same app
+     这个react react-dom @types/prop-types　@types/react　-dom都应该放在 "devDependencies": { ，并且指定"peerDependencies": {。
+     通过npm拉入第三方模块时，可能加载多个React副本问题。使用 npm ls react  可能有助于阐明。
+
+打印机场景：不能使用滚动条的，否则打印显示全部内容，只能事先敲定显示适合尺寸的。因此，想打印就不要用滚动条！！
+问题是若页面为了打印机优化，可能小屏幕的场景无法正常看？。<Table>不限定尺寸适合屏幕场景但对打印文书场景不适合，因为尺寸会随意变化。
+
+Git用法：先要提交commit然后先fetch ，再merge origin/master，有冲突解决冲突，最后再从1开始;没有冲突commit git push origin master推送到远程仓库。
+向npm网站发布自己的npm包：  /工程根目录/npm  publish；实际内部去执行prepublishOnly；
+npm whoami
+Node.js environment服务端的，和客户端/浏览器端的js相对立的称呼。
+页面代码存数据库的缺点：tsx移植到jsx，import注入，参数注入，` $变量要改写；{boolean} 要改成 {`${boolean}`}
+　运行速度损失，代码管理更麻烦，源代码搜索失效了。　优点：源代码看起来简洁需要路由页面规模小了，大量代码藏数据库。
+export var breakpoints = {
+     缺省**:         <               　单元素就占一行；
+    md: "768px",      >= 映射是"@media (min-width: " + points.md + ")",；　>=　紧凑对折的两页面；
+    lg: "992px",        >=      大对半版面＋四周间隙的。
+    xl: "1200px"        >=      大对半页面+两边预留或留白的。
+};
+
+非结构化数据=word文档、ppt, Excel, *.log文件,XML等。 json半结构化数据非结构化数据； DB字段查询或关联统计/字段间复杂关联。
+一半结构化的想法：部分需要做结构化DB存储的后端搜索或关联感兴趣字段，和其它不需要做结构化存储的后端不是很感兴趣的其它虚拟字段。
+若仅为了统计用途实际上还可以采用半结构化数据抽取模式/倒腾库转移。若是字段关联需要就必须单独一列。若是搜索查询索引加快为目的最好是结构化存储。
+一条报告记录的非结构化部分还可以进一步划分、前端录入的、后端生成的?,前端计算但不采信的、转移到审核人手中(可信任的前端客户)的/前端计算并采信的。
+可信任的前端客户，不可采信的前端业务(只是提醒作用的前端计算)。
+报告生成属于可信任的前端客户才能承担的责任。
+首先划清字段填充域那些是SQL结构化的，那些是json打包存储，那些是分离文件存储。json内部要避免嵌套对象/范式化{很像是多表关联}/很复杂带约束有关系的。
+前端为主负责json内部数据解析，后端仅仅特殊用途才需要了解json内部的解析模型，一般情形后端被动地把json看做是整体的一个字段；
+最好规定数据模型版本号以便于双方代码协调管理，json数据模型的唯一性识别标识(哪一个用途的模板的)。类型+版本｛文档化配套｝。职责前移到前端。
+eslint了，不需要加 @babel了。
+组件内部标签传递样式<InputGroup  labelStyle={css`margin: 1rem 2rem;`} > 或者 <InputGroup  labelStyle={css({ padding: "1rem 2rem" })} >
+
+ISP= 1->N  OriginalRecord;
+OriginalRecord  OriginalRecordRepository
+, type, date, ISP, valid, data, expdata, files[],
+
+
+异步   useEffect(() => {
+          (async () => {
+             await fetchSomething();
+          })();
+    }, []); 替换 原生js的promise实现异步请求方式。
+<checkbox>和<radio">支持defaultChecked;  <select>支持defaultValue；
+checkbox和radio支持 checked;  <option>组件支持selected；preventDefault会停止浏览器在视觉上更新输入，即使checked的值已经改变。
+注意Check   onChange  e.target.value全都是on?
+不可忽略的弹出框  <MenuItem onPress={() => alert("Hello 1")}>阻塞式 用原生的。
+    <display: 'none', 会预加载组件的｛就算底下是Suspense(lazy的子组件也是要预加载｝页面每个render都会运行到。
+    { 逻辑隐藏 show&& ( <div  ) }  是后加载内容的，同路由类似。
+    <Suspense (lazy(()=>import("./ "))) 第一次点击起作用而随后却无效。
+注意<div display: 'flex' 将会导致打印场景它的子元素文字会被切割成2页；打印需特别处理？ 严格要求的打印和flex冲突。
+FunctionComponent<()函数调用次数多对性能有影响，布局计算影响性能。html含大量的Div会影响性能，毫无修饰的文本急速呈现。
+平台测试： Chrome浏览器  Firefox浏览器  Webkit内核UC U3浏览器。
+<ListItem  component={Title} to="/" > 直接替换组件，属性to无需预定义。 ({ component: Component = "div",  ...other}) =>{} React.ReactType<any>;
+表格<ExpandingRow  content={close=> { return ( 适合大宽度屏幕去编辑。 {React.Children.count(children)} content: (close: () => void) => ReactNode
+js规定undefined == null是真，undefined === null是假的；非字符串一类原子性对象不能用===直接比较。undefined（没初始化）null（目前没值）
+就算按钮函数改成路由模式做，浏览器警告也无法消除的，也无法提升用户体验。    onPress={() => {
+      Promise.resolve().then( ()=>setShow(!show) );     按钮更新是滞后的。转嫁到其他时间超长告警。
+      //'mouseup' handler took 396ms时间比起这里时间要长很多。因为副作用处理的时间竟然也算在它头上，而附带更新浪费时间太大。
+    }  }
+easy-ui-component>Link,  这里Link等同于基础的<a><a/>，会跳转重新刷新页面；
+组件优化const child2 = useMemo(() => <Child2 b={b} />, [b]); 若是嵌在同一个函数直接用，即使参数不在依赖[]之内，也是可以即刻更新的。
+<RouterLink路由解决不了性能或点击延迟的告警问题； 除非强制刷新URL才会基本没看见性能上的警告。
+组件之间不要共享状态变量，否则一个组件更新另一个组件很可能实际不需要重新绘画的场景也要重新render，就导致性能问题。状态set带来影响必须尽量最小化传播。
+10 个可用 ES6 替代的 Lodash 特性   https://www.zcfy.cc/article/10-lodash-features-you-can-replace-with-es6-467.html
+
+关于chrome浏览器直接打印问题 --kiosk-printing 命令行  https://www.cnblogs.com/whoami3/p/10147746.html  注意chrome打印预览太慢死机似的。
+首先转存PDF速度慢，再看PDF转换其它格式效果太差了；PDF用作出版编排纸张媒体打印，其原来用途的大多数情景都该淘汰pdf。
+
+电梯定期检验报告(深圳  https://wenku.baidu.com/view/406492a5e43a580216fc700abb68a98271feaccf.html?rec_flag=default
+曳引驱动有机房电梯　监督　检验原始记录 https://www.mayiwenku.com/p-5770084.html
+电梯监督检验检验报告 https://wenku.baidu.com/view/2bdce1b682c4bb4cf7ec4afe04a1b0717fd5b3a9.html
+
+原始记录
+更加新的；https://wenku.baidu.com/view/144d835bf80f76c66137ee06eff9aef8951e4811.html
+https://wenku.baidu.com/view/f91a4cda52ea551810a687dd.html
+
+          <Button
+            variant="ghost"
+            intent="primary"
+            iconAfter={show  ? <IconChevronUp /> : <IconChevronDown />}
+            onPress={() => {
+                Promise.resolve().then( ()=>setShow(!show) );
+              //'mouseup' handler took 396ms时间比起这里时间要长很多。因为副作用处理的时间竟然也算在它头上，而附带更新浪费时间太大。
+            }  }
+          >
+            {show ? "都收起" : "都显示"}
+          </Button>
+React.useMemo(() =><RenderLoad/>, []); 用它加速显示组件是针对已经在当前界面显示或display：none的才管用，路由后退再回来的不管用=都刷新。
+新增history模式HTML5；旧的hash模式 都算作是前端路由这一类的。Router和Link要配套着用。 而&&逻辑方式等价于路由。
+HashRouter 有可能像一个页面# 不会刷新，历史输入数据需手动reset，useMemo起作用。 ?后来再测试又不行=会刷新。
+不跳转路由的在当前组件页内做逻辑&&切换显示，完全可以恢复历史数据状态｛这点同hash路由,hash#方式更加彻底==感觉只是局部显示一样的｝。
+除了hash路由其他方式路由都是不保留历史输入数据、但路由后组件都不会再次加载的也就是已获取服务端数据还在，新输入数据reset掉了。
+子组件间位置顺序变动，也会导致子组件重新mount的，重做挂载等效于逻辑路由刷新。父组件重做render不一定导致子孙组件重做render。
+通过const x=forwardRef((prop,ref)=>(} 创建组件，在父组件可直接访问子组件内部的<div>。
+wouter路由器的傻的实际都使用history API标准replaceState pushState接口。<Router base="/app"> <Link href　onClick={}>
+
+emotion的CSS选择器用法； &是自己；
+ "& > :not(.Spinner)":{} 一代子元素选择 <div className="Spinner"   .类名(react jsx引入的)
+ ":focus:not([data-focus-visible-added])"    属性名;    "&   .StackItem__overlay": {} 其空格是关键代表子孙代;
+ '&[aria-expanded="true"]': {} 自身属性值过滤。
+ "& span:first-of-type":{} 底下span;  "&.Touchable:first-of-type":{} 自己是且是其父元素底下第一个Touchable这类名{子孙元素不会选};
+ ".Touchable:first-of-type":{} 表示非自己的子子孙孙元素才能选择的。
+ "&.Touchable--hover": {background: "black"} 代表自己的类名选择（自身div类名组当中选中）。
+按条件active真假会动态加的类名 className={cx("", className, {"Touchable--hover": hover,"Touchable--active": active })}
+使用类名可能无法在该类出现前的父辈就开始选择？ 如上级<>加".InputGroup:first-of-type":{}无法在子辈InputGroup中选中?。".InputGroup :first-of-type":{}另选的。
+针对"&.InputGroup:first-of-type":{}的DIV有可能无法生效（父辈也是自己类名InputGroup的有可能）？，可用section代替div来做“其父元素底下第一个”。
+
+利用prop-types对公用的组件的props变量进行类型检测，和新ES7的静态类属性就不一样。
+一个检验ISP多个原始记录(不同类型的子检验类别／deduction数据分组隔开＝〉组合出报告/ 孤立的分项报告)，
+　管道数据？类别数据同一组，时间分离段区域？内部子设备编号？　管道单线图应按设计划分区域或工段进行编号!　电梯1/n层的数据表。
+单条记录包含类型版本=> 复检rexm，正检data，结论及审核改定deduction。
+压力管道检验报告　单线图*.ｄｗｇ; 　http://www.doc88.com/p-7099633212374.html
+压力管道检验 原始记录　在用工业管道在线检验结论记录　https://wenku.baidu.com/view/bc18c05e5122aaea998fcc22bcd126fff6055d7b.html
+公用管道、长输管道竣工资料要求 ，管道材质种类多; 公用管道（天然气管道）定期检验.
+结论及审核改定deduction=>对标生成报告。预览结论。修改deduction？
+步骤：ISP, 原始记录录入模式，只读的预览结论模式，(完毕提交)； 审核改正模式。（终结了）转为报告输出流程？打印或发布，（作业完成点）。
+Ａ／Ｂ／Ｃ类别的检验项目要求。 C《＝５个不合格，ＡＢ必做，Ａ前置步骤，Ｃ可以只做审查。
+复检数据拷贝初检后再度修订的。最初的初检数据原封不动。复检rexm，正检data，结论及审核改定deduction｛也可部分照搬复检rexm正检data或映射转译｝。
+原始记录录入模式复检正检，［正式报告来源项］只读的预览结论模式{动态生成结论}，(完毕提交)； [编辑报告部分]审核改正模式 deduction对表正式报告，报告排版美化。
+  //１原始记录　组件：不可改的不保存的［推断］结论项。　　　内容细化描述；复检正检数据切换的；结论项提示性质；　－－给检验操作人员录入。
+  //２审核组件：回退或者往前固化结论项后保存给正式报告页面。　项目文本简化，数据需要保存给后端；－－正式报告手机可预览版，－－核准管理人员审批。
+  //３正式报告那个目录的打印页面。只读的，结论项也是读后端的；正式报告文书版本或可转保存其他如pdf类型文档，无下拉分区，全展示；－－大众用户查看。
+一共每套３个组件来配合，１原始记录，２审核定稿组件，３正式报告。无法相互替换的。而１原始记录允许同时应对复检和正检两个场景模式。每套可能有多个版本号！；文件名O-1 原始； 审核 .A； 报告. R；
+  //审核保存?对应数据deduction结论栏目＋审核手动修改；适用于出具正式报告，正式报告只读取deduction部分。依据审核保存>随后才是原始记录复检>初检data。
+  //若复检保存 ，复检rexm，正检data。
+  //管道单线图，数量大，图像文件。可仅选定URL，预览图像。但是不全部显示出来，微缩摘要图模式，点击了才你能显示大的原图。
+ /*组件顺序变动，也会导致重新mount的，重做挂载等效于逻辑路由的刷新;key须唯一性，key不能变动否则重新加载*/
+
+//用来显示队列重组排序的；支持按照检验流程图来排列，而打印按照索引标号排列。 不规则序号的可额外编排项目号数。
+//登记入该种类子类别的原始记录所有的页面核查的项目列表。按检验步骤流程排序和按报告序号排列方式。
+React16.12版本以前的生命周期类组件HOC被弃用，基于Fiber协程异步渲染架构+Hook函数组件方式。单元测试Enzyme支持Hook的。
+    17版React废弃componentWillMount componentWillReceiveProps componentWillUpdate 只有带UNSAFE_前缀的3个函数能用。
+java还未支持协程Fiber；js其实单线程。Spring WebFlux既支持Tomcat、Jetty容器（Servlet3.1+）,又支持Netty、Undertow等异步容器。使用 Undertow 替换掉 Tomcat;
+babel 转译各种 es6 语法，webpack 负责打包。浏览器跑的代码一般用bable去转成es5的;
+tsconfig.json 详解    https://blog.csdn.net/weixin_34319111/article/details/91375440
+某些场景useReducer比useState更适用，如state逻辑较复杂且包含多个子值，或下一个state依赖于之前state。
+useState实际就是useReducer的特例版本。[state，dispatch:setState] =useReducer((state,action:state)=>{ switch(action.){return{...state, ...action}}},{});
+useMemo、useCallback就是解决性能问题的杀手锏，useMemo返回缓存组件/计算结果，useCallback(()=>{ }返回缓存回调函数。 useContext实际代替逐级向下传递props的。
+useRef()是createRef()的升级版本; useRef不仅可做DOM的引用，还可做类class的实例属性，相同位置的useRef()每次返回的都是同一个对象;有单个可变值的不可变对象。用useRef获取previous props/state：获取ＤＯＭ实例 / 数据保存。
+useRef() 比 ref={ref} 更有用。当ref.current发生变化时useRef不会通知你。变更.current不会引发组件重新渲染!!。若想要在绑定或解绑DOM时运行某些代码，则要用回调ref来实现。
+Hooks的调用只能放在function component(首字母大写的function),const()=>{}或自定义Hook(名为useXxxx的function)中。
+用React.memo来实现shouldComponentUpdate的替代const Xxxx=React.memo((props) => { }); 子组件memo后父组件就没必要再搞memo。
+死循环useEffect(()=>{ setInterval(() => { setCount(}, ) }, [count]); 放setTimeout/Interval/回调函数做就能解除死循环！
+Failed to compile.编译错误了，客户端没报错，这时前端可正常运行错误代码。若前端服务器关机，浏览器照样可以请求后端服务器，前端代码已经加载部分页面都能正常运作。
+
+装载后不在需要更新的testRenderLoad= React.useMemo(() =><TestRenderLoad/>,[ ] );就基本不会对后续操作性能添堵的，多次render重新来也能保持TestRenderLoad无负担的。
+// eslint-disable-next-line no-alert, react-hooks/exhaustive-deps     强制去除编译时的告警，当然首先确保运行真正正常且运行时都不出现告警的。
+useRef()构造的变量，比如options.current=可以被子组件直接修改。还可以安全添加到依赖项数组( ，[options, ]）。
+交互useState，useReducer；传送门useContext/.Provider，useRef,useImperativeHandle,forwardRef；性能优化useMemo,useCallback；副作用useEffect,useLayoutEffect；useDebugValue。
+WeX5的IDE基于Eclipse，H5 App开发工具,用的是BootStrap加载H5有点慢，美团、爱奇艺、微信等应用，Hybrid App开发模式以JS+Native两者相互调用为主。
+input非react控制和uncontrolled切换报错只提示一次。<input>value={inp.x ||'' }加缺省值''，不能是未定义的</>
+父组件和子组件更新render次数没有一定必然关系，可以就重点组件部分做优化减少render重复次数。
+    //组件顺序变动导致重新mount，重做挂载等效于逻辑路由的刷新，必然增加一次render;
+    //useMemo后面的依赖数组当中必要属性就必须加上，否则不会更新界面，除非有其他途径钩子去更新。
+    //统一控制提升到这：列表各项分区 一起显示收起操纵。比showAll参数到子组件才会useEffect修改的模式能减少render次数。
+    //[特别注意]！ 若底下组件同时依赖即将修改的变量，多头控制会可能引起死循环的；保证组件参数设置和这里不打架。
+github的mm=E40768768abc;；
+
