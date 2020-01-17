@@ -72,8 +72,16 @@ public class JwtAuthorizationTokenFilter extends OncePerRequestFilter {
             String startPath =request.getServletPath();
             if("GET".equals(request.getMethod()) && "/forbidden".equals(startPath)) {
                 //response.setContentType("text/html;charset=utf-8");  getMethod()
-                response.sendError(404, "资源不存在");
-                return;     //禁止使用的URL
+                if(originHeads.equals("http://27.151.117.65:8673"))
+                {
+                   // logger.debug("防火墙主动发起的..心跳吗？");
+                    //本机端口影射到外网后的，＋从外网访问＋，防火墙主动发起的，和浏览器毫无关系的。
+                   // chain.doFilter(request, response);
+                    return;
+                }else {
+                    response.sendError(404, "资源不存在");
+                    return;     //禁止使用的URL
+                }
             }
             if(isTestMode) {
                 if (startPath.startsWith("/test/") || startPath.startsWith("/vendor/")

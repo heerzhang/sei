@@ -244,3 +244,6 @@ printWarning @ react-dom.development.js:12357
 GlobalState.tsx:49 刚GlobalStateQuery经过{"auth":"{}"}进行中false
 GlobalState.tsx:59 以GlobalState1从后端获得={} user= null
 
+http://localhost:8673/grqphiql
+http://27.151.117.65:8673/grqphiql
+设置web 服务器绑定这个域名
