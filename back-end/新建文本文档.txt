@@ -212,5 +212,5 @@ report/123/isp/ 1：n DEV。 {[一次活动ISP]一次ISP可以出多个Report}�
 graphQL的数据类型：BigInteger是比ID还要长的数字，ID个数支持920亿亿的ID或是19个数字长度。
 spring security oauth2 外网防火墙，https://segmentfault.com/a/1190000015272584；
 
-外网地址了，localhost　替换运动！
+外网地址了，localhost　替换运动！27.151.117.65
 

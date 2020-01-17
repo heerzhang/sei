@@ -40,6 +40,9 @@ public class JwtTokenUtil implements Serializable {
     //时间设置要适当，秒=单位；
     @Value("${jwt.expiration}")
     private Long expiration;
+    @Value("${sei.cookie.domain:}")
+    private final String  cookieDomain="";
+
 
     public String getUsernameFromToken(String token) {
         return getClaimFromToken(token, Claims::getSubject);
@@ -139,7 +142,7 @@ public class JwtTokenUtil implements Serializable {
         String username = null;
         final Claims claims = getAllClaimsFromToken(token);
         try {
-                 //username = (Claims::getSubject).apply(claims);
+                 //username = (Claims::getSubject).apply(claims);   为何手机电脑同时登录，token时间容易失效。
             username = claims.getSubject();      //绕了个大弯 (Claims::getSubject).apply(claims);
         } catch (IllegalArgumentException e) {
             logger.error("an error occured during getting username from token", e);
@@ -189,7 +192,7 @@ public class JwtTokenUtil implements Serializable {
         String token = generateToken(userDetails);     //jwtTokenUtil.validateToken(authToken, userDetails)
         //浏览器自动遵守标准：超时的cookie就不会该送过来了。 那万一不守规矩？两手准备。
         Cookie cookie =new Cookie("token", token);
-        cookie.setDomain("localhost");
+        cookie.setDomain(cookieDomain);
         cookie.setHttpOnly(true);
         cookie.setMaxAge(5400);      //这个时间和token内部声称的时间不同，这给浏览器用的 = 1.5个小时。
         cookie.setPath("/");

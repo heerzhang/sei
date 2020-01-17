@@ -49,11 +49,13 @@ import javax.persistence.PersistenceContext;
 集成ehcache二级缓存 https://blog.csdn.net/yiduyangyi/article/details/54176453
 */
 
+//@CrossOrigin(origins = {"http://localhost:7789", "null"})
 //这里的:7789设置没有用到=无效，要在配置文件application.yml里面设置。
+//@EnableCaching		用法不同的机制。
 
-@CrossOrigin(origins = {"http://localhost:7789", "null"})
+
+
 @EnableTransactionManagement
-//@EnableCaching
 @SpringBootApplication
 @EnableConfigurationProperties({
 		FileStorageProperties.class

@@ -35,6 +35,8 @@ public class JwtAuthorizationTokenFilter extends OncePerRequestFilter {
     private final String filterMaxage;
     @Value("${sei.testMode:false}")
     private boolean  isTestMode;
+    @Value("${sei.server.URI:}")
+    private final String  serverURI;
     //允许设置多个CORS 域名;
     @Autowired
     private SeiFilterOriginProperties seiFilterOriginProperties;
@@ -45,6 +47,7 @@ public class JwtAuthorizationTokenFilter extends OncePerRequestFilter {
         this.jwtTokenUtil = jwtTokenUtil;
         this.tokenHeader = tokenHeader;
         filterMaxage="";
+        serverURI="";
     }
 
     //JSON Web Token（JWT）是一个开放式标准（RFC 7519）
@@ -72,11 +75,9 @@ public class JwtAuthorizationTokenFilter extends OncePerRequestFilter {
             String startPath =request.getServletPath();
             if("GET".equals(request.getMethod()) && "/forbidden".equals(startPath)) {
                 //response.setContentType("text/html;charset=utf-8");  getMethod()
-                if(originHeads.equals("http://27.151.117.65:8673"))
+                if(originHeads.equals(serverURI))
                 {
-                   // logger.debug("防火墙主动发起的..心跳吗？");
-                    //本机端口影射到外网后的，＋从外网访问＋，防火墙主动发起的，和浏览器毫无关系的。
-                   // chain.doFilter(request, response);
+                    //本机端口影射到外网后的，＋从外网访问＋，防火墙主动发起的，和浏览器毫无关系的。.心跳吗？
                     return;
                 }else {
                     response.sendError(404, "资源不存在");

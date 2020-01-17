@@ -14,6 +14,7 @@ import org.fjsei.yewu.service.security.JwtUserDetailsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -80,6 +81,8 @@ public class BaseMutation implements GraphQLMutationResolver {
 
     @Autowired
     private final JwtTokenUtil jwtTokenUtil=new JwtTokenUtil();
+    @Value("${sei.cookie.domain:}")
+    private final String  cookieDomain="";
 
     @Transactional
     public EQP newEQP(String cod,String type,String oid) {
@@ -204,7 +207,7 @@ public class BaseMutation implements GraphQLMutationResolver {
         SecurityContextHolder.getContext().setAuthentication(null);
         HttpServletResponse response=((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
         Cookie cookie =new Cookie("token", "");
-        cookie.setDomain("localhost");
+        cookie.setDomain(cookieDomain);
         cookie.setHttpOnly(true);
         cookie.setMaxAge(1);
         cookie.setPath("/");
@@ -237,7 +240,7 @@ public class BaseMutation implements GraphQLMutationResolver {
             //浏览器自动遵守标准：超时的cookie就不会该送过来了。 那万一不守规矩？两手准备。
            HttpServletResponse response=((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
            Cookie cookie =new Cookie("token", token);
-           cookie.setDomain("27.151.117.65");
+           cookie.setDomain(cookieDomain);
            cookie.setHttpOnly(true);
            cookie.setMaxAge(5400);      //这个时间和token内部声称的时间不同，这给浏览器用的 = 1.5个小时。
            cookie.setPath("/");
