@@ -2,9 +2,9 @@
 import { jsx,} from "@emotion/core";
 import * as React from "react";
 import {
-  useTheme,
-  Button,
-  useToast,
+    useTheme,
+    Button,Text,
+    useToast, LayerLoading, Layer,
 } from "customize-easy-ui-component";
 //import {Table, TableBody, TableHead, TableRow, Cell, CCell} from "../comp/TableExt";
 //import useLocation from "wouter/use-location";
@@ -53,7 +53,7 @@ export const RecordView: React.FunctionComponent<RecordViewProps> = ({
 
   //审核保存?对应数据deduction结论栏目＋审核手动修改；适用于出具正式报告，正式报告只读取deduction部分。依据审核保存>随后才是原始记录复检>初检data。
   //若复检保存 ，复检rexm，正检data。
-  const {result, submit:updateFunc, } = useCommitOriginalData({
+  const {result, submit:updateFunc,loading } = useCommitOriginalData({
     id:227,  operationType:1,
     data:  JSON.stringify(newOut) ,
     deduction:{emergencyElectric:'45,423'}
@@ -113,6 +113,8 @@ export const RecordView: React.FunctionComponent<RecordViewProps> = ({
           updateRecipe('1');
         }}
       >保存到服务器</Button>
+        <Text>{`当前(${JSON.stringify(newOut)})`}</Text>
+        <LayerLoading loading={loading} />
     </React.Fragment>
   );
 }

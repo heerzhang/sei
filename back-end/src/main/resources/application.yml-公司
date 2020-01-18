@@ -8,8 +8,6 @@ sei:
       list[3]: http://localhost:3765
       list[4]: https://192.168.171.3:3765
       list[5]: http://192.168.171.3:3765
-      list[6]: https://192.168.1.105:3765
-      list[7]: http://192.168.1.105:3765
     maxage: 3600
   visibility:
     #role: USER
@@ -18,9 +16,9 @@ sei:
   control:
     permitAnyURL: false
   cache.log: false
-  server.URI: http://192.168.1.105:8673
+  server.URI: http://27.151.117.65:8673
   cookie:
-    domain: 192.168.1.105
+    domain: 27.151.117.65
 
 
 debug: false

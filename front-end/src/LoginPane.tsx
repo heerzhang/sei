@@ -215,7 +215,8 @@ export const Login: React.FunctionComponent<LoginProps> = props => {
                       }}
                       value={ form.password }
                       inputSize="md"
-                      type={ form.password? "password":"text"}
+                      type="password"
+                      //type={ form.password? "password":"text"}强制要求输入密码，不采用浏览器填充记住的密码。
                       placeholder="密码"
                       autoComplete="off"
                     />
