@@ -2,13 +2,13 @@
 import { jsx, css } from "@emotion/core";
 import * as React from "react";
 import {
-  Text,
-  useTheme,
-  Button,
-  InputGroupLine,
-  SuffixInput,
-  Input,
-  Select,
+    Text,
+    useTheme,
+    Button,
+    InputGroupLine,
+    SuffixInput,
+    Input,
+    Select, useToast,
 } from "customize-easy-ui-component";
 import {Table, TableBody,  TableRow, Cell, CCell} from "../../comp/TableExt";
 import {
@@ -20,7 +20,7 @@ import {
   useItemControlAs, useProjectListAs
 } from "../comp/base";
 import {  InternalItemHandResult, InternalItemProps } from "../comp/base";
-import { callSubitemChangePar, callSubitemShow, mergeSubitemRefs } from "../../utils/tools";
+import {callSubitemChangePar, callSubitemOnSave, callSubitemShow, mergeSubitemRefs} from "../../utils/tools";
 import orderBy from "lodash.orderby";
 
 let   id = 0;
@@ -33,15 +33,25 @@ const TemplateView: React.RefForwardingComponent<InternalItemHandResult,Template
   React.forwardRef((
      {inp, showAll=false, children},   ref
   ) => {
+    const toast = useToast();
+    const [outlet, setOutlet] = React.useState(null);
     const clRefs =useProjectListAs({count: projectList.length});
     const outCome=mergeSubitemRefs( ...clRefs.current! );
-    React.useImperativeHandle( ref,() => ({ inp: outCome }), [outCome] );
+    //尝试刷新分区项目
+      const getPartitionData = React.useCallback((yes) => {
+          callSubitemOnSave( yes,  ...clRefs.current! );
+      }, [inp, clRefs]);
+
+    React.useImperativeHandle( ref,() => ({ inp: outCome,renderIt:getPartitionData}), [outCome, getPartitionData] );
     React.useEffect(() => {
      callSubitemShow(showAll,  ...clRefs.current! );
     }, [showAll, clRefs] );
     React.useEffect(() => {
       callSubitemChangePar(inp,  ...clRefs.current! );
     }, [inp, clRefs] );
+
+
+
     const recordList= React.useMemo(() =>
             <React.Fragment>
               {
@@ -53,8 +63,16 @@ const TemplateView: React.RefForwardingComponent<InternalItemHandResult,Template
                     });
                   })
               }
+              <Text>{`模板的(${JSON.stringify(outlet)})`}</Text>
             </React.Fragment>
-                  ,[showAll, clRefs]);
+                  ,[showAll, clRefs, outlet]);
+      React.useEffect(() => {
+          toast({
+              title: "renderIt更新来了",
+              subtitle: JSON.stringify(outlet) ,
+              intent: "info"
+          });
+      }, [outlet, toast]);
     return  recordList;
   } );
 

@@ -43,3 +43,13 @@ export const callSubitemChangePar= <T>(par:any, ...refs: Array<Ref<T>>) => {
   });
 };
 
+//每个分区项目的保存处理前准备，作一次render;
+export const callSubitemOnSave= <T>(outp:any, ...refs: Array<Ref<T>>) => {
+  refs.forEach(resolvableRef => {
+    if ((resolvableRef as any).current) {
+      //console.log("callSubitemChangePar 执行 ", (resolvableRef as any).current!.onParChange, "itemVal?=",  (resolvableRef as any).current!.itemVal );
+      (resolvableRef as any).current!.onSave(outp);
+    }
+  });
+};
+

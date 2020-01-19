@@ -49,7 +49,7 @@ export const RecordView: React.FunctionComponent<RecordViewProps> = ({
   //子组件利用useImperativeHandle机制把数据回传给父组件，配套地父辈用ref来定位子组件。
   //保存按钮点击后必须首先触发template动态加载的子组件即TemplateView的做1次render()后，ref.current.inp才能收到儿孙组件的最新数据。
     //useState(默认值) ； 后面参数值仅仅在组件的装载时期有起作用，若再次路由RouterLink进入的，它不会依照该新默认值去修改show。useRef跳出Cpature Value带来的限制
-    const [outlet, setOutlet] = React.useState(null);
+    //const [outlet, setOutlet] = React.useState(null);
     let timestamp = new Date().getTime();
     //手机场景：每次保存的都是迟了一步，newOut实际获取到的都是上一次数据；电脑浏览器能正常。
     //各模板组件把自己暴露给RecordView级组件，１个输出参数１个交互触发重做render的回调钩子。
@@ -69,6 +69,7 @@ export const RecordView: React.FunctionComponent<RecordViewProps> = ({
     let yes= result && result.id;
     try {
       //提交给后端， 这里将会引起底层变动，导致本组件即将要render3次。有更新的4次。更新比读取多了1次render。
+        console.log("RecordView　保存哪 newOut=", newOut);
       await updateFunc();
     } catch (err) {
       toast({
@@ -81,7 +82,7 @@ export const RecordView: React.FunctionComponent<RecordViewProps> = ({
       return;
     }
     //这里无法获得result值，就算所在组件顶层已经获得result值，这里可能还是await () 前那样null;
-    console.log("生成任务返回了＝", result,"yes=", yes, outlet);
+    console.log("生成任务返回了＝", result,"yes=", yes, );
     toast({
       title: "任务派工返回了",
       subtitle: '加入，ISP ID＝'+id,

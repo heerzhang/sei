@@ -199,61 +199,9 @@ webpack-dev-server开启https访问https://github.com/2fps/demo/tree/master/view
 chrome浏览器的跨域设置  浏览器跨域详解-很多人没有提到的坑　https://blog.csdn.net/wonking666/article/details/79159180
 
 graphql:连接 谷歌浏览器发起的。前端后端都是本地电脑跑的服务器、仅仅localhost内网的IP/域名。
-Request URL: http://localhost:8673/graphql
-Request Method: POST
-Status Code: 200
-Remote Address: [::1]:8673
-Referrer Policy: no-referrer-when-downgrade
-
-响应头
-Access-Control-Allow-Credentials: true
-Access-Control-Allow-Origin: http://localhost:3765
-Cache-Control: no-cache, no-store, max-age=0, must-revalidate
-Connection: keep-alive
-Content-Length: 158
-Content-Type: application/json;charset=UTF-8
-Date: Thu, 16 Jan 2020 21:18:24 GMT
-Expires: 0
-Pragma: no-cache
-Vary: Origin
-X-Content-Type-Options: nosniff
-X-Frame-Options: SAMEORIGIN
-X-XSS-Protection: 1; mode=block
-
-请求头
-accept: */*
-Accept-Encoding: gzip, deflate, br
-Accept-Language: zh-CN,zh;q=0.9,en;q=0.8
-Connection: keep-alive
-Content-Length: 75
-content-type: application/json
-Cookie: token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJoZXJ6aGFuZyIsImV4cCI6MTU3OTIxNDc1NSwiaWF0IjoxNTc5MjA5MzU1fQ.-QMR23UxdCbsro8VwLksNJrQBY4YKgUk9gvWCdDp2PVlQndXxjns3EpQNiYRftKWfbe60mXKdyL1m-ZjCOz9bg
-Host: localhost:8673
-Origin: http://localhost:3765
-Referer: http://localhost:3765/
-Sec-Fetch-Mode: cors
-Sec-Fetch-Site: same-site
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3970.5 Safari/537.36
-{operationName: "AUTH",
 
 对国内来说,不支持SSl加密的网页,cdn,存储等服务很尴尬....Upgrade-Insecure-Requests: 1；
 在https网页中跨域(已使用CORS解决)载入一个http的资源,那么它会将所有连接强制以https或wss等SSL加密形式发送请求,这样如果资源不支持https等SSL加密,那么该资源就不会被载入；
-
-页面端发起
-Cookie: token=eyJhb
-Host: localhost:3765
-If-None-Match: W/"929-Uo1pUEhMxzAfrA/tKQ4j0sY+C60"
-Sec-Fetch-Mode: navigate
-Sec-Fetch-Site: none
-Sec-Fetch-User: ?1
-Upgrade-Insecure-Requests: 1
-数据端发起
-Cookie: token=eyJ
-Host: localhost:8673
-Origin: http://localhost:3765
-Referer: http://localhost:3765/
-Sec-Fetch-Mode: cors
-Sec-Fetch-Site: same-site
 
 chrome低版本显示正常，76版本中确显示错误呢？低版本显示正常，76版本中确显示错误呢？
 H5网页跨域 <video  crossOrigin="anonymous">，关键点=请求头会被浏览器默认替换为Sec-Fetch-Mode: cors，后端服务端返回就添加上了跨域信息头。
