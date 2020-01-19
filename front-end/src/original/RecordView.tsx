@@ -4,7 +4,7 @@ import * as React from "react";
 import {
     useTheme,
     Button,Text,
-    useToast, LayerLoading,
+    useToast, LayerLoading, Layer,
 } from "customize-easy-ui-component";
 //import {Table, TableBody, TableHead, TableRow, Cell, CCell} from "../comp/TableExt";
 //import useLocation from "wouter/use-location";
@@ -39,7 +39,8 @@ export const RecordView: React.FunctionComponent<RecordViewProps> = ({
                                                                      }) => {
   const theme = useTheme();
   const toast = useToast();
-
+  //useState(默认值) ； 后面参数值仅仅在组件的装载时期有起作用，若再次路由RouterLink进入的，它不会依照该新默认值去修改show。useRef跳出Cpature Value带来的限制
+  const [outlet, setOutlet] = React.useState(null);
   const ref =React.useRef<InternalItemHandResult>(null);
 
   //  console.log("错误RecordView  变化 ref.current=", ref.current, "template=",template);
@@ -48,28 +49,23 @@ export const RecordView: React.FunctionComponent<RecordViewProps> = ({
   //ref可以共用current指向最新输入过的子组件；但父组件对.current的最新变化无法实时感知，只能被动刷新获知current变动。
   //子组件利用useImperativeHandle机制把数据回传给父组件，配套地父辈用ref来定位子组件。
   //保存按钮点击后必须首先触发template动态加载的子组件即TemplateView的做1次render()后，ref.current.inp才能收到儿孙组件的最新数据。
-    //useState(默认值) ； 后面参数值仅仅在组件的装载时期有起作用，若再次路由RouterLink进入的，它不会依照该新默认值去修改show。useRef跳出Cpature Value带来的限制
-    //const [outlet, setOutlet] = React.useState(null);
-    let timestamp = new Date().getTime();
-    //手机场景：每次保存的都是迟了一步，newOut实际获取到的都是上一次数据；电脑浏览器能正常。
-    //各模板组件把自己暴露给RecordView级组件，１个输出参数１个交互触发重做render的回调钩子。
-    const newOut={ ...(ref.current&&ref.current.inp) , browserTime: timestamp };
+  const newOut={ ...(ref.current&&ref.current.inp) };
+
   //审核保存?对应数据deduction结论栏目＋审核手动修改；适用于出具正式报告，正式报告只读取deduction部分。依据审核保存>随后才是原始记录复检>初检data。
   //若复检保存 ，复检rexm，正检data。
-    console.log("RecordView捕获 ｀｀｀ newOut=", newOut);
-  const {result, submit:updateFunc,loading,called } = useCommitOriginalData({
+  const {result, submit:updateFunc,loading } = useCommitOriginalData({
     id:227,  operationType:1,
     data:  JSON.stringify(newOut) ,
     deduction:{emergencyElectric:'45,423'}
   });
-    console.log("RecordView捕获  called=", called, "newOut=",newOut);
+
+  console.log("RecordView捕获 ｀｀｀ inp=", inp);
 
   async function updateRecipe(
     id: string ) {
     let yes= result && result.id;
     try {
       //提交给后端， 这里将会引起底层变动，导致本组件即将要render3次。有更新的4次。更新比读取多了1次render。
-        console.log("RecordView　保存哪 newOut=", newOut);
       await updateFunc();
     } catch (err) {
       toast({
@@ -82,7 +78,7 @@ export const RecordView: React.FunctionComponent<RecordViewProps> = ({
       return;
     }
     //这里无法获得result值，就算所在组件顶层已经获得result值，这里可能还是await () 前那样null;
-    console.log("生成任务返回了＝", result,"yes=", yes, );
+    console.log("生成任务返回了＝", result,"yes=", yes, outlet);
     toast({
       title: "任务派工返回了",
       subtitle: '加入，ISP ID＝'+id,
@@ -110,25 +106,15 @@ export const RecordView: React.FunctionComponent<RecordViewProps> = ({
       <Button
         css={{ marginTop: theme.spaces.md }}
         size="lg"  intent={'warning'}
-        disabled={loading}
-        loading={loading}
         onPress={() => {
           //这两个函数执行时刻看见的odata是一样的。 setOdata异步的，会提前触发底下子组件的更新render，随后才继续执行updateRecipe函数。
           //实际上随便搞个能够触发底下的模板TemplateView子组件重做render就可以的； 这里用setOutlet(该变量必须变动)触发来更新。
-          //在手机遇到问题：被浏览器缓存了页面。
-            const newOut={  browserTime: new Date().getTime() };
-          //setOutlet(newOut);
-          if(ref.current) {
-              ref.current.renderIt(newOut);
-          }
-          else {
-              toast({
-                  title: "renderIt了",
-                  subtitle: '每模板窗口？＝'+JSON.stringify(newOut),
-                  intent: "info"
-              });
-          }
-          updateRecipe('1');
+          setOutlet(newOut);
+
+            setTimeout(() => {
+                updateRecipe('1');
+            }, 0)
+
         }}
       >保存到服务器</Button>
         <Text>{`当前(${JSON.stringify(newOut)})`}</Text>

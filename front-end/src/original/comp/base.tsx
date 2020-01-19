@@ -267,17 +267,14 @@ export　function useItemControlAs({
 ) {
   const eos =useCollapse(false,true);
   const [inp, setInp] = React.useState(null);
-
-    const [outp, setOutp] = React.useState(null);
-    console.log("onSave 执行 outp=", outp);
   //用回调钩子setShow来替换；原先的show参数下传配合在useCollapse内部useEffect(() [defaultShow] 做修正方式。
   //回调钩子的模式。在上层父组件去统一调用本函数的，这里仅仅生成函数的代码但还未执行。
   const onParChange = React.useCallback(function (par) {
     //console.log("onParChange 执行 par=", par, "itemVal=" ,filter(par));
     setInp(filter(par));
   }, [filter]);
-    //各个分区项目组件都把自己暴露给模板组件，１个输出参数２个回调钩子。
-  React.useImperativeHandle( ref,() => ({ inp ,setShow:eos.setShow, onParChange, onSave:setOutp}), [inp, onParChange,eos.setShow] );
+
+  React.useImperativeHandle( ref,() => ({ inp ,setShow:eos.setShow, onParChange}), [inp, onParChange,eos.setShow] );
     //不直接用import { usePrevious } from "./Hooks/previous" 减少render次数。
   return {eos, setInp, inp};
 }
@@ -286,8 +283,7 @@ export　function useItemControlAs({
 
 //各个检验单项子组件暴露给父组件的接口数据。
 export interface InternalItemHandResult {
-    inp: any;
-    renderIt: Dispatch<SetStateAction<any>>;
+  inp: any;
 }
 //各个检验单项
 export interface InternalItemProps  extends React.HTMLAttributes<HTMLDivElement>{
