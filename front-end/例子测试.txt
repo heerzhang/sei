@@ -226,3 +226,9 @@ const TemplateView: React.RefForwardingComponent<InternalItemHandResult,Template
 http://localhost:8673/grqphiql
 http://27.151.117.65:8673/grqphiql
 设置web 服务器绑定这个域名
+R 62 两2次 旧数据 h
+发出给后端了pause;
+o 74 新数据 h地方
+RecordView捕获 ｀｀｀ inp= 旧数据
+RecordView捕获 ｀｀｀ inp= {tool: {…}, toolBox: "ｈ地方", registration: "√"}
+按钮跟随的提示输出，延迟！。
