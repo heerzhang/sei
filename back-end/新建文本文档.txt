@@ -213,4 +213,9 @@ graphQL的数据类型：BigInteger是比ID还要长的数字，ID个数支持92
 spring security oauth2 外网防火墙，https://segmentfault.com/a/1190000015272584；
 
 外网地址了，localhost　替换运动！27.151.117.65
-
+获取Android WebView离线调试工具 https://www.cnblogs.com/slmk/p/9832081.html
+使用Android的WebView调试工具 https://www.cnblogs.com/hjblog/p/8965868.html
+最新的解决方案！　https://www.cnblogs.com/slmk/p/9832081.html
+调试android webview html页面 遇到404的问题　https://blog.csdn.net/sishen1994/article/details/103655780
+172.217.160.116    chrome-devtools-frontend.appspot.com
+172.217.160.116    chrometophone.appspot.com

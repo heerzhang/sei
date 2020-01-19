@@ -273,7 +273,7 @@ export　function useItemControlAs({
     //console.log("onParChange 执行 par=", par, "itemVal=" ,filter(par));
     setInp(filter(par));
   }, [filter]);
-
+    //各个分区项目组件都把自己暴露给模板组件，１个输出参数２个回调钩子。
   React.useImperativeHandle( ref,() => ({ inp ,setShow:eos.setShow, onParChange}), [inp, onParChange,eos.setShow] );
     //不直接用import { usePrevious } from "./Hooks/previous" 减少render次数。
   return {eos, setInp, inp};
@@ -283,7 +283,8 @@ export　function useItemControlAs({
 
 //各个检验单项子组件暴露给父组件的接口数据。
 export interface InternalItemHandResult {
-  inp: any;
+    inp: any;
+    renderIt: Dispatch<SetStateAction<any>>;
 }
 //各个检验单项
 export interface InternalItemProps  extends React.HTMLAttributes<HTMLDivElement>{

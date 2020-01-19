@@ -4,7 +4,7 @@ import * as React from "react";
 import {
     useTheme,
     Button,Text,
-    useToast, LayerLoading, Layer,
+    useToast, LayerLoading,
 } from "customize-easy-ui-component";
 //import {Table, TableBody, TableHead, TableRow, Cell, CCell} from "../comp/TableExt";
 //import useLocation from "wouter/use-location";
@@ -50,13 +50,10 @@ export const RecordView: React.FunctionComponent<RecordViewProps> = ({
   //保存按钮点击后必须首先触发template动态加载的子组件即TemplateView的做1次render()后，ref.current.inp才能收到儿孙组件的最新数据。
     //useState(默认值) ； 后面参数值仅仅在组件的装载时期有起作用，若再次路由RouterLink进入的，它不会依照该新默认值去修改show。useRef跳出Cpature Value带来的限制
     const [outlet, setOutlet] = React.useState(null);
-  //const newOut={ ...(ref.current&&ref.current.inp) };
-    var date = '2015-03-05 17:59:00.0';
-    date = date.substring(0,19);
-    date = date.replace(/-/g,'/');
-    var timestamp = new Date(date).getTime();
-
-    const newOut={ ...(ref.current&&ref.current.inp) , browserTime: new Date().getTime() };
+    let timestamp = new Date().getTime();
+    //手机场景：每次保存的都是迟了一步，newOut实际获取到的都是上一次数据；电脑浏览器能正常。
+    //各模板组件把自己暴露给RecordView级组件，１个输出参数１个交互触发重做render的回调钩子。
+    const newOut={ ...(ref.current&&ref.current.inp) , browserTime: timestamp };
   //审核保存?对应数据deduction结论栏目＋审核手动修改；适用于出具正式报告，正式报告只读取deduction部分。依据审核保存>随后才是原始记录复检>初检data。
   //若复检保存 ，复检rexm，正检data。
   const {result, submit:updateFunc,loading } = useCommitOriginalData({
@@ -112,12 +109,24 @@ export const RecordView: React.FunctionComponent<RecordViewProps> = ({
       <Button
         css={{ marginTop: theme.spaces.md }}
         size="lg"  intent={'warning'}
+        disabled={loading}
+        loading={loading}
         onPress={() => {
           //这两个函数执行时刻看见的odata是一样的。 setOdata异步的，会提前触发底下子组件的更新render，随后才继续执行updateRecipe函数。
           //实际上随便搞个能够触发底下的模板TemplateView子组件重做render就可以的； 这里用setOutlet(该变量必须变动)触发来更新。
           //在手机遇到问题：被浏览器缓存了页面。
-           // const newOut={ ...(ref.current&&ref.current.inp) , browserTime: new Date().getTime() };
-          setOutlet(newOut);
+            const newOut={  browserTime: new Date().getTime() };
+          //setOutlet(newOut);
+          if(ref.current) {
+              ref.current.renderIt(newOut);
+          }
+          else {
+              toast({
+                  title: "renderIt了",
+                  subtitle: '每模板窗口？＝'+JSON.stringify(newOut),
+                  intent: "info"
+              });
+          }
           updateRecipe('1');
         }}
       >保存到服务器</Button>
