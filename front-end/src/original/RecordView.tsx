@@ -39,8 +39,7 @@ export const RecordView: React.FunctionComponent<RecordViewProps> = ({
                                                                      }) => {
   const theme = useTheme();
   const toast = useToast();
-  //useState(默认值) ； 后面参数值仅仅在组件的装载时期有起作用，若再次路由RouterLink进入的，它不会依照该新默认值去修改show。useRef跳出Cpature Value带来的限制
-  const [outlet, setOutlet] = React.useState(null);
+
   const ref =React.useRef<InternalItemHandResult>(null);
 
   //  console.log("错误RecordView  变化 ref.current=", ref.current, "template=",template);
@@ -49,8 +48,15 @@ export const RecordView: React.FunctionComponent<RecordViewProps> = ({
   //ref可以共用current指向最新输入过的子组件；但父组件对.current的最新变化无法实时感知，只能被动刷新获知current变动。
   //子组件利用useImperativeHandle机制把数据回传给父组件，配套地父辈用ref来定位子组件。
   //保存按钮点击后必须首先触发template动态加载的子组件即TemplateView的做1次render()后，ref.current.inp才能收到儿孙组件的最新数据。
-  const newOut={ ...(ref.current&&ref.current.inp) };
+    //useState(默认值) ； 后面参数值仅仅在组件的装载时期有起作用，若再次路由RouterLink进入的，它不会依照该新默认值去修改show。useRef跳出Cpature Value带来的限制
+    const [outlet, setOutlet] = React.useState(null);
+  //const newOut={ ...(ref.current&&ref.current.inp) };
+    var date = '2015-03-05 17:59:00.0';
+    date = date.substring(0,19);
+    date = date.replace(/-/g,'/');
+    var timestamp = new Date(date).getTime();
 
+    const newOut={ ...(ref.current&&ref.current.inp) , browserTime: new Date().getTime() };
   //审核保存?对应数据deduction结论栏目＋审核手动修改；适用于出具正式报告，正式报告只读取deduction部分。依据审核保存>随后才是原始记录复检>初检data。
   //若复检保存 ，复检rexm，正检data。
   const {result, submit:updateFunc,loading } = useCommitOriginalData({
@@ -109,6 +115,8 @@ export const RecordView: React.FunctionComponent<RecordViewProps> = ({
         onPress={() => {
           //这两个函数执行时刻看见的odata是一样的。 setOdata异步的，会提前触发底下子组件的更新render，随后才继续执行updateRecipe函数。
           //实际上随便搞个能够触发底下的模板TemplateView子组件重做render就可以的； 这里用setOutlet(该变量必须变动)触发来更新。
+          //在手机遇到问题：被浏览器缓存了页面。
+           // const newOut={ ...(ref.current&&ref.current.inp) , browserTime: new Date().getTime() };
           setOutlet(newOut);
           updateRecipe('1');
         }}
