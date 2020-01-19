@@ -56,13 +56,13 @@ export const RecordView: React.FunctionComponent<RecordViewProps> = ({
     const newOut={ ...(ref.current&&ref.current.inp) , browserTime: timestamp };
   //审核保存?对应数据deduction结论栏目＋审核手动修改；适用于出具正式报告，正式报告只读取deduction部分。依据审核保存>随后才是原始记录复检>初检data。
   //若复检保存 ，复检rexm，正检data。
-  const {result, submit:updateFunc,loading } = useCommitOriginalData({
+    console.log("RecordView捕获 ｀｀｀ newOut=", newOut);
+  const {result, submit:updateFunc,loading,called } = useCommitOriginalData({
     id:227,  operationType:1,
     data:  JSON.stringify(newOut) ,
     deduction:{emergencyElectric:'45,423'}
   });
-
-  console.log("RecordView捕获 ｀｀｀ inp=", inp);
+    console.log("RecordView捕获  called=", called, "newOut=",newOut);
 
   async function updateRecipe(
     id: string ) {

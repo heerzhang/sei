@@ -219,3 +219,9 @@ spring security oauth2 外网防火墙，https://segmentfault.com/a/119000001527
 调试android webview html页面 遇到404的问题　https://blog.csdn.net/sishen1994/article/details/103655780
 172.217.160.116    chrome-devtools-frontend.appspot.com
 172.217.160.116    chrometophone.appspot.com
+RSA驗證，顯示手機款號，開手機瀏覽器；open地址；devtools://devtools/remote      404 Not Find
+Remote Target #LOCALHOST
+vivo X9s Plus #C156BE83
+Chrome (76.0.3809.132)
+
+
