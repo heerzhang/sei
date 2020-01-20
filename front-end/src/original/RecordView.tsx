@@ -10,6 +10,7 @@ import {
 //import useLocation from "wouter/use-location";
 
 import { useCommitOriginalData,  } from "./db";
+import throttle from 'throttle-asynchronous'
 
 //import PropTypes from "prop-types";
 //import { useMeasure } from "customize-easy-ui-component/esm/Hooks/use-measure";
@@ -39,6 +40,7 @@ export const RecordView: React.FunctionComponent<RecordViewProps> = ({
                                                                      }) => {
   const theme = useTheme();
   const toast = useToast();
+  const [enable, setEnable] = React.useState(true);
   //useState(默认值) ； 后面参数值仅仅在组件的装载时期有起作用，若再次路由RouterLink进入的，它不会依照该新默认值去修改show。useRef跳出Cpature Value带来的限制
   const [outlet, setOutlet] = React.useState(null);
   const ref =React.useRef<InternalItemHandResult>(null);
@@ -87,7 +89,9 @@ export const RecordView: React.FunctionComponent<RecordViewProps> = ({
     //除非用const {data: { buildTask: some }} = await updateFunc()捕捉当前操作结果; 否则这时这地方只能用旧的result,点击函数里获取不到最新结果。
     //须用其它机制，切换界面setXXX(标记),result？():();设置新的URL转场页面, 结果要在点击函数外面/组件顶层获得；组件根据操作结果切换页面/链接。
   }
-
+  //延迟几秒才执行的。
+  const throttledUpdateStory = throttle(updateRecipe,0);
+  const throttledUpdateEnable = throttle(setEnable,30000);
   //可是这里return ；将会导致子孙组件都会umount!! 等于重新加载==路由模式刷新一样； 得权衡利弊。
   // if(updating)  return <LayerLoading loading={updating} label={'正在获取后端应答，加载中请稍后'}/>;
   //管道单线图，数量大，图像文件。可仅选定URL，预览图像。但是不全部显示出来，微缩摘要图模式，点击了才你能显示大的原图。
@@ -106,19 +110,25 @@ export const RecordView: React.FunctionComponent<RecordViewProps> = ({
       <Button
         css={{ marginTop: theme.spaces.md }}
         size="lg"  intent={'warning'}
-        disabled ={loading}
+        disabled ={!enable}
         loading ={loading}
-        onPress={() => {
+        onPress={ async () => {
           //这两个函数执行时刻看见的odata是一样的。 setOdata异步的，会提前触发底下子组件的更新render，随后才继续执行updateRecipe函数。
           //实际上随便搞个能够触发底下的模板TemplateView子组件重做render就可以的； 这里用setOutlet(该变量必须变动)触发来更新。
-
             setOutlet(newOut);
-
             //手机上更新触发失效。只好采用延迟策略，每个分区项目的保存处理前准备，作一次render完了，才能发送数据给后端。
-            updateRecipe('1');
+            /*setTimeout(() => {
+                updateRecipe('1');
+            }, 0);*/
+          setEnable(false);
+            const { hasResolved, value } =await throttledUpdateStory('1');
+          console.log("throttledUpdateStory＝", value,"hasResolved=",hasResolved);
+          if (hasResolved) {
+            throttledUpdateEnable(true);
+            console.log("throttledUpdateStory返回了＝", value);
+          }
         }}
       >保存到服务器</Button>
-        <Text>{`当前(${JSON.stringify(newOut)})`}</Text>
         <LayerLoading loading={loading} />
     </React.Fragment>
   );
