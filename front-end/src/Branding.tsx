@@ -8,8 +8,7 @@ import food from "./images/food.svg";
 import {
   Navbar,
   Toolbar,
-  Text,
-  Button,
+  Text,Button,
   useTheme,
   useResponsiveBodyPadding,
   Container,
@@ -254,7 +253,6 @@ export const Branding: React.FunctionComponent<BrandingProps> = (props) => {
               size="lg"
               intent="primary"
               iconAfter={<IconArrowRight />}
-              noBind
             >
               测试原始记录
             </Button>

@@ -214,3 +214,9 @@ http://27.151.117.65:3765/
 
 clearTimeout()用于重置js定时器，如果你希望阻止setTimeout的运行，就可以使用clearTimeout方法。
 在unmount组件时清除（clearTimeout/clearInterval）所有用到的定时器，
+useEffect、setTimeout防止按钮连续点击  https://www.jianshu.com/p/d0700d8fc1f0
+            setTimeout(() => {
+                updateRecipe('1');
+            }, 0)
+      <Button  pressDelay=pressDelay仅是UI提示，没有涉及触发函数的延迟。
+      

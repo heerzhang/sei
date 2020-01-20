@@ -225,3 +225,13 @@ vivo X9s Plus #C156BE83
 Chrome (76.0.3809.132)
 
 
+export interface TouchableOptions {
+    delay: number;
+    longPressDelay: number;
+    pressExpandPx: number;
+    behavior: "button" | "link";
+    disabled: boolean;
+    terminateOnScroll: boolean;
+    onPress?: OnPressFunction;
+    onLongPress?: OnPressFunction;
+}
