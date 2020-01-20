@@ -223,7 +223,7 @@ RSA驗證，顯示手機款號，開手機瀏覽器；open地址；devtools://de
 Remote Target #LOCALHOST
 vivo X9s Plus #C156BE83
 Chrome (76.0.3809.132)
-
+WebView in com.tencent.mm (66.0.3359.126) trace
 
 export interface TouchableOptions {
     delay: number;
