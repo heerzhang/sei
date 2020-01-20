@@ -110,7 +110,7 @@ export const RecordView: React.FunctionComponent<RecordViewProps> = ({
           //这两个函数执行时刻看见的odata是一样的。 setOdata异步的，会提前触发底下子组件的更新render，随后才继续执行updateRecipe函数。
           //实际上随便搞个能够触发底下的模板TemplateView子组件重做render就可以的； 这里用setOutlet(该变量必须变动)触发来更新。
           setOutlet(newOut);
-
+            //手机上更新触发失效。只好采用延迟策略，每个分区项目的保存处理前准备，作一次render完了，才能发送数据给后端。
             setTimeout(() => {
                 updateRecipe('1');
             }, 0)
