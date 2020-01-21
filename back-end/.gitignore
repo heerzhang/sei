@@ -1,0 +1,29 @@
+# Created by .ignore support plugin (hsz.mobi)
+### Example user template template
+### Example user template
+
+# IntelliJ project files
+.idea
+*.iml
+out
+gen
+.gradle/4.10.2/vcsMetadata-1/
+.gradle/4.10/vcsMetadata-1/
+.idea/.name
+.idea/artifacts/
+.idea/compiler.xml
+.idea/dataSources.local.xml
+.idea/dataSources.xml
+.idea/dataSources/
+.idea/encodings.xml
+.idea/gradle.xml
+.idea/httpRequests/
+.idea/libraries/
+.idea/misc.xml
+.idea/modules.xml
+.idea/modules/
+.idea/uiDesigner.xml
+out/production/classes/generated/
+out/test/classes/generated_tests/
+/cache/
+/transaction-logs/

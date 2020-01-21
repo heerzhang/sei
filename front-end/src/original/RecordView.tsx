@@ -91,7 +91,7 @@ export const RecordView: React.FunctionComponent<RecordViewProps> = ({
   }
   //延迟几秒才执行的。
   const throttledUpdateStory = throttle(updateRecipe,0);
-  const throttledUpdateEnable = throttle(setEnable,30000);
+  const throttledUpdateEnable = throttle(setEnable,20000);
   //可是这里return ；将会导致子孙组件都会umount!! 等于重新加载==路由模式刷新一样； 得权衡利弊。
   // if(updating)  return <LayerLoading loading={updating} label={'正在获取后端应答，加载中请稍后'}/>;
   //管道单线图，数量大，图像文件。可仅选定URL，预览图像。但是不全部显示出来，微缩摘要图模式，点击了才你能显示大的原图。
@@ -121,12 +121,10 @@ export const RecordView: React.FunctionComponent<RecordViewProps> = ({
                 updateRecipe('1');
             }, 0);*/
           setEnable(false);
-            const { hasResolved, value } =await throttledUpdateStory('1');
-          console.log("throttledUpdateStory＝", value,"hasResolved=",hasResolved);
-          if (hasResolved) {
+          await updateRecipe('1');
+          console.log("await updateRecipe＝");
             throttledUpdateEnable(true);
-            console.log("throttledUpdateStory返回了＝", value);
-          }
+            console.log("throttledUpdateEnable返回了＝");
         }}
       >保存到服务器</Button>
         <LayerLoading loading={loading} />

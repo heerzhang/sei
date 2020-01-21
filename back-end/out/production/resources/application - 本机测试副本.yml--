@@ -1,0 +1,147 @@
+sei:
+  filter:
+    origin: http://localhost:7789
+    maxage: 3600
+  visibility:
+    #role: USER
+    role:
+  testMode: true
+
+
+debug: false
+trace: false
+#Tomcat缺省8080，配置文件没生效的情形。
+server:
+  port: 8083
+
+  #日志配置，此处使用默认日志
+  #logging:
+  #  config: classpath:log4j2.yml
+#logging:
+#  level:
+#    org.springframework:
+##      web: DEBUG
+
+#数据库连接用户schema
+app:
+  datasource:
+    sei:
+      url: jdbc:h2:tcp://localhost/~/sei0;LOCK_MODE=3
+      username: sa
+      password:
+    incp:
+      url: jdbc:h2:tcp://localhost/~/incp;LOCK_MODE=3
+      username: sa
+      password:
+    sdn:
+      url: jdbc:h2:tcp://localhost/~/sdn;LOCK_MODE=3
+      username: sa
+      password:
+
+
+
+# spring
+spring:
+  application:
+    name: fjtj
+  profiles:
+    active:
+    - product
+
+  #jta相关参数配置
+  jta:
+    atomikos:
+      properties:
+        #没效果? 要去jta.properties文件
+        #default-jta-timeout: 2600000
+        #max-timeout: 30000000
+        enable-logging: true
+  #log-dir: classpath:newlog
+  #transaction-manager-id: txManager
+  jpa:
+    properties:
+      javax:
+        persistence:
+          sharedCache.mode: ENABLE_SELECTIVE
+      #开启查询缓存factory_class    cache.use_query_cache: true
+      hibernate.format_sql: true
+      hibernate.use_sql_comments: true
+      hibernate:
+        #看SQL打印 fasle
+        show_sql: true
+        #统计针对单个会话
+        generate_statistics: true
+        ##      dialect: org.hibernate.dialect.Oracle10gDialect
+        hbm2ddl:
+          auto: update
+      #指定缓存provider
+        cache:
+         region.factory_class: org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory
+          #开启二级缓存
+         use_second_level_cache: true
+         use_query_cache: true
+     #不起作用的 show-sql: true
+    generate-ddl: true
+    open-in-view: true
+
+  main:
+    allow-bean-definition-overriding: true
+  mvc:
+    view:
+      prefix: /
+      #suffix: .jsp
+  cache:
+
+
+graphql:
+  servlet:
+    mapping: /graphql
+    enabled: true
+    corsEnabled: true
+    exception-handlers-enabled: true
+  tools:
+    schema-location-pattern: "**/*.graphqls"
+    introspection-enabled: true
+
+graphiql:
+  mapping: /graphiql
+  endpoint:
+    graphql: /graphql
+    subscriptions: /forbidden
+  static:
+    basePath: /
+   #生产系统graphiql可关闭
+  enabled: true
+  pageTitle: GraphiQL
+  cdn:
+    enabled: false
+    version: 0.11.11
+  props:
+    resources:
+      defaultQuery: defaultQuery.graphql
+    variables:
+      editorTheme: "solarized light"
+  headers:
+    #用这会必然带上Bearer　，但是时间固定,超时,若走cockie模式就不会,而两token也不同的。给mvc浏览器读的。
+    #Authorization: "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJoZXJ6aGFuZyIsImV4cCI6MTU0OTk2MzUyNywiaWF0IjoxNTQ5OTU4MTI3fQ.z96CaGdjhI1OhudZlNTNcJWrRBEETFsliVI0x3_mrqRj2mOjLU0IOV1G3_WEufGMyfJ_MBK0jNYHF8drlAqD2A"
+
+
+jwt:
+  header: Authorization
+  secret: mySecret
+  expiration: 5400
+  route:
+    authentication:
+      path: /auth
+      refresh: /refresh
+
+
+logging:
+  level:
+    com:
+      oembedler:
+        moon:
+          graphql:
+            boot:
+              error: debug
+
