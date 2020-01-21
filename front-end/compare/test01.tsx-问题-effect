@@ -1,0 +1,253 @@
+/** @jsx jsx */
+import { jsx, css, Global } from "@emotion/core";
+import * as React from "react";
+import {
+  Text,
+  Toolbar,
+  Navbar,
+  useTheme,
+  IconButton,
+  Button,
+  Tabs,
+  Tab,
+  TabIcon,
+  Layer,
+  TabPanel,
+  MenuList,
+  MenuItem,
+  Tooltip,
+  ResponsivePopover,
+  IconChevronDown,
+  IconPlus,
+  DarkMode,
+  LightMode,
+  Pager,
+  IconUmbrella,
+  IconTrash,
+  IconArchive,
+  IconAperture,
+  IconActivity,
+  Stack,
+  StackTitle,
+  StackItem,
+  ScrollView,
+  List,
+  ListItem,
+  IconChevronRight,
+  Avatar,
+  Sheet,
+  MenuDivider,
+  IconHome,
+  IconList,
+  IconUser,
+  IconInstagram,
+  IconPackage,
+  IconMoreVertical, Skeleton, useInfiniteScroll,
+  Table, TableBody, TableCell, TableHead, TableRow
+} from "customize-easy-ui-component";
+
+
+import { Component, ReactNode } from "react";
+import useLocation from "wouter/use-location";
+
+import { globalHistory  } from "@reach/router";
+import omit from "lodash.omit";
+import useHistoryState from "use-history-state";
+import { useMedia } from "use-media";
+import { useEffect } from "react";
+
+
+var faker = require('faker/locale/zh_CN');
+
+let id = 0;
+function createData(
+  name: string,
+  calories: string | number,
+  fat: string | number,
+  carbs: string |number,
+  protein: ReactNode | string | number
+) {
+  id += 1;
+  return { id, name, calories, fat, carbs, protein };
+}
+
+const rows = [
+  createData(faker.name.findName(), 159, 6.0, 24, 4.0),
+  createData("Ice cream sandwich", 237, 9.0, "1233术，分离345345fasdfs345345器恶化567伺服5676vr", 4.3),
+  createData(faker.name.findName(), 262, "1233术，分离345345f阿什福史蒂芬森大法师多福多寿何asdfs345345器恶化567伺服5676vr", 24, "士大夫拔刀术，分离345345fasdfs345345器恶化567伺服5676vr<br>" +
+    "<hr>bcvbcv57亲卫队不是大dsf城市vbvbn12"),
+  createData("Cupcake", "1高浮雕", 3.7, 67, 4.3),
+  createData("henchandsfasf分散对方", 356, 16.0, 49, <span>sjdfl表<hr/>现出<p>vwe</p></span>)
+];
+
+
+
+export default function MainReport({name},props) {
+  const theme = useTheme();
+  const [index, setIndex] = React.useState(0);
+  const [show, setShow] = React.useState(false);
+  const [nowPath, setLocation] = useLocation(); 　//取得路由钩子, nowPath是整个url。
+
+  const ref = React.useRef();
+  const [items, setItems] = React.useState(
+    Array.from(new Array(4)).map(() => faker.name.firstName())
+  );
+
+  function fetchdata() {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve();
+      }, 500);
+    });
+  }
+
+
+  const [page, setPage] = React.useState(0);
+  //customize-easy-ui-component.useInfiniteScroll必须内容撑开才可以滚动触发函数。
+  const [fetching] = useInfiniteScroll({
+    container: ref,
+    hasMore: page <3,
+    onFetch: () => {
+      return fetchdata().then(() => {
+        setItems([
+          ...items,
+          ...Array.from(new Array(3)).map(() => faker.name.firstName())
+        ]);
+        setPage(page + 1);
+      });
+    }
+  });
+
+  //const [option, setOption] = useHistoryState("", "option");
+  //使用window.history.pushState(；必须刷新页面才有数据。
+
+  //console.log("来看当前的items nowPath=",globalHistory.location.state&&globalHistory.location.state.option, omit(globalHistory.location.state,'key'), globalHistory.location.state);
+  let fixedWidth: string[];
+  const isPrint = useMedia({ print:true });
+  useEffect( () => {
+    fixedWidth =isPrint? ["5%", "9%", "300px", "%", "150px"] : undefined;
+    console.log("useEffect fixedWidth=", fixedWidth ,isPrint);
+  },[isPrint]);
+  console.log("来看当前的 useMedia isPrint=", isPrint);
+
+  return (
+    <React.Fragment css={[ { padding: "0px", } ,
+      css`
+             `,
+    ] }>
+
+      <ScrollView  css={{ height: "100%" }} >
+        <div css={[ { padding: `0px`, } ,
+        ] }
+        >
+          <Table
+            fixed={isPrint? ["5%", "9%", "300px", "%", "150px"] : undefined}
+          >
+            <TableHead >
+              <TableRow >
+                <TableCell css={{ borderStyle: 'solid' }}  >De色vssert (那是大法师地方2额外企鹅fasdf)</TableCell>
+                <TableCell align="right" css={{ borderStyle: 'solid' }} >鬼画符光和热湾而我</TableCell>
+                <TableCell align="right"　css={{ borderStyle: 'solid' }} >Fat (g)</TableCell>
+                <TableCell align="right"　css={{ borderStyle: 'solid' }} >C士大夫巴萨vnxc (g)</TableCell>
+                <TableCell align="right"　css={{ borderStyle: 'solid' }} >猜想vxcvxcv (g)</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows.map(row => (
+                <TableRow key={row.id}>
+                  <TableCell component="th" scope="row">
+                    {row.name}
+                  </TableCell>
+                  <TableCell align="right">{row.calories}</TableCell>
+                  <TableCell align="right">{row.fat}</TableCell>
+                  <TableCell align="right">{row.carbs}</TableCell>
+                  <TableCell align="right">{row.protein}</TableCell>
+                </TableRow>
+              ))}
+              {rows.map(row => (
+                <TableRow key={row.id}>
+                  <TableCell component="th" scope="row">
+                    {row.name}
+                  </TableCell>
+                  <TableCell align="right">{row.calories}</TableCell>
+                  <TableCell align="right">{row.fat}</TableCell>
+                  <TableCell align="right">{row.carbs}</TableCell>
+                  <TableCell align="right">{row.protein}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+          <Text variant="h1" css={{width: '80vw', fontSize: theme.fontSizes[0] }}>
+            Officia laborum deserunt adipisicing PRN={`${isPrint}`},it esse
+            fugiat p老地方撒旦r ut id. Ea cillum non
+            voluptate ullamco sunt dolore esse mollit.
+          </Text>
+          <Table
+            fixed={isPrint? ["5%", "9%", "300px", "%", "150px"] : undefined}
+          >
+            <TableHead>
+              <TableRow>
+                <TableCell css={{ borderStyle: 'solid' }} >De色vssert (那是大法师地方2额外企鹅fasdf)</TableCell>
+                <TableCell align="right" css={{ borderStyle: 'solid' }} >鬼画符光和热湾而我</TableCell>
+                <TableCell align="right">Fat (g)</TableCell>
+                <TableCell align="right">C士大夫巴萨vnxc (g)</TableCell>
+                <TableCell align="right">猜想vxcvxcv (g)</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows.map(row => (
+                <TableRow key={row.id}>
+                  <TableCell component="th" scope="row">
+                    {row.name}
+                  </TableCell>
+                  <TableCell align="right">{row.calories}</TableCell>
+                  <TableCell align="right">{row.fat}</TableCell>
+                  <TableCell align="right">{row.carbs}</TableCell>
+                  <TableCell align="right">{row.protein}</TableCell>
+                </TableRow>
+              ))}
+              {rows.map(row => (
+                <TableRow key={row.id}>
+                  <TableCell component="th" scope="row">
+                    {row.name}
+                  </TableCell>
+                  <TableCell align="right">{row.calories}</TableCell>
+                  <TableCell align="right">{row.fat}</TableCell>
+                  <TableCell align="right">{row.carbs}</TableCell>
+                  <TableCell align="right">{row.protein}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+
+      </ScrollView>
+      <Text variant="h1" >
+        Offprehenderit esse
+        fugiat p老地方撒旦r ut id. Ea cillum non
+        voluptate ullamco sunt dolore esse mollit.
+      </Text>
+    </React.Fragment>
+  );
+}
+
+
+
+function getUser() {
+  faker.seed(0);
+
+  return {
+    name: faker.name.firstName() + " " + faker.name.lastName(),
+    uid: faker.random.uuid(),
+    description: faker.lorem.sentence()
+  };
+}
+
+
+/*
+制作模板尺寸格式 <Table fixed={isPrint? ["150px", "300px", "15%", "15%", "50px"] : undefined}>
+   实际表格尺寸会被调整；其中x%部分会优先分配的，150px实际也会被调小调大，不限定的"%"的{可变动很大！,最多用在某个列}。
+   固定数100px会导致适应不同纸张和缩放比例后打印表格的各列尺寸变化较大！最好统一用％的相对尺寸设置。
+*/
+
+

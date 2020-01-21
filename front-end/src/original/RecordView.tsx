@@ -86,9 +86,10 @@ export const RecordView: React.FunctionComponent<RecordViewProps> = ({
     //除非用const {data: { buildTask: some }} = await updateFunc()捕捉当前操作结果; 否则这时这地方只能用旧的result,点击函数里获取不到最新结果。
     //须用其它机制，切换界面setXXX(标记),result？():();设置新的URL转场页面, 结果要在点击函数外面/组件顶层获得；组件根据操作结果切换页面/链接。
   }
-  //延迟几秒才执行的。
-  const throttledUpdateStory = throttle(updateRecipe,0);
-  const throttledUpdateEnable = throttle(setEnable,20000);
+
+  const throttledUpdateBackend = throttle(updateRecipe,0);
+  //延迟30秒才执行的; 可限制频繁操作，若很多下点击的30秒后触发2-3次。
+  const throttledUpdateEnable = throttle(setEnable,30000);
   //可是这里return ；将会导致子孙组件都会umount!! 等于重新加载==路由模式刷新一样； 得权衡利弊。
   // if(updating)  return <LayerLoading loading={updating} label={'正在获取后端应答，加载中请稍后'}/>;
   //管道单线图，数量大，图像文件。可仅选定URL，预览图像。但是不全部显示出来，微缩摘要图模式，点击了才你能显示大的原图。
@@ -112,10 +113,8 @@ export const RecordView: React.FunctionComponent<RecordViewProps> = ({
         onPress={ async () => {
           //手机上更新模板TemplateView子组件重做render触发失效。只好采用延迟策略，每个分区项目的保存处理前准备，作一次render完了，才能发送数据给后端。
           setEnable(false);
-          await updateRecipe('1');
-          console.log("await updateRecipe＝");
-            throttledUpdateEnable(true);
-            console.log("throttledUpdateEnable返回了＝");
+          const {hasResolved,} =await throttledUpdateBackend('1');
+          hasResolved&&throttledUpdateEnable(true);
         }}
       >保存到服务器</Button>
       <LayerLoading loading={loading} />

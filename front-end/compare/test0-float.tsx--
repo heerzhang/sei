@@ -1,0 +1,195 @@
+/** @jsx jsx */
+import { jsx, css } from "@emotion/core";
+import * as React from "react";
+import {
+  Text,
+  Toolbar,
+  Navbar,
+  useTheme,
+  IconButton,
+  Button,
+  Tabs,
+  Tab,
+  TabIcon,
+  Layer,
+  TabPanel,
+  MenuList,
+  MenuItem,
+  Tooltip,
+  ResponsivePopover,
+  IconChevronDown,
+  IconPlus,
+  DarkMode,
+  LightMode,
+  Pager,
+  IconUmbrella,
+  IconTrash,
+  IconArchive,
+  IconAperture,
+  IconActivity,
+  Stack,
+  StackTitle,
+  StackItem,
+  ScrollView,
+  List,
+  ListItem,
+  IconChevronRight,
+  Avatar,
+  Sheet,
+  MenuDivider,
+  IconHome,
+  IconList,
+  IconUser,
+  IconInstagram,
+  IconPackage,
+  IconMoreVertical, Skeleton, useInfiniteScroll,
+  Table, TableBody, TableCell, TableHead, TableRow, ExpandingRow
+} from "customize-easy-ui-component";
+
+
+import { Component, ReactNode } from "react";
+import useLocation from "wouter/use-location";
+
+import { globalHistory  } from "@reach/router";
+import omit from "lodash.omit";
+import useHistoryState from "use-history-state";
+import theme from "customize-easy-ui-component/src/Theme/index";
+//import { ExpandingRow } from "customize-easy-ui-component/src/Table";
+
+
+var faker = require('faker/locale/zh_CN');
+
+let id = 0;
+function createData(
+  name: string,
+  calories: string | number,
+  fat: string | number,
+  carbs: string |number,
+  protein: ReactNode | string | number
+) {
+  id += 1;
+  return { id, name, calories, fat, carbs, protein };
+}
+
+const rows = [
+  createData(faker.name.findName(), 159, 6.0, 24, 4.0),
+  createData("Ice cream sandwich", 237, 9.0, "1233术，分离345345fasdfs345345器恶化567伺服5676vr", 4.3),
+  createData(faker.name.findName(), 262, "1233术，分离345345f阿什福史蒂芬森大法师多福多寿何asdfs345345器恶化567伺服5676vr", 24, "士大夫拔刀术，分离345345fas器恶化567伺服5676vr<br>" +
+    "<hr>bcvbcv57亲卫队不是大dsf城市vbvbn12"),
+  createData("Cupcake", "1高浮雕", 3.7, 67, 4.3),
+  createData("henchandsfasf分散对方", 356, 16.0, 49, <span>sjdfl表<hr/>现出<p>vwe</p></span>)
+];
+
+
+
+export default function MainReport({name},props) {
+  const theme = useTheme();
+  const [index, setIndex] = React.useState(0);
+  const [show, setShow] = React.useState(false);
+  const [nowPath, setLocation] = useLocation(); 　//取得路由钩子, nowPath是整个url。
+
+  const ref = React.useRef();
+  const [items, setItems] = React.useState(
+    Array.from(new Array(4)).map(() => faker.name.firstName())
+  );
+
+  function fetchdata() {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve();
+      }, 500);
+    });
+  }
+
+
+  const [page, setPage] = React.useState(0);
+  //customize-easy-ui-component.useInfiniteScroll必须内容撑开才可以滚动触发函数。
+  const [fetching] = useInfiniteScroll({
+    container: ref,
+    hasMore: page <3,
+    onFetch: () => {
+      return fetchdata().then(() => {
+        setItems([
+          ...items,
+          ...Array.from(new Array(3)).map(() => faker.name.firstName())
+        ]);
+        setPage(page + 1);
+      });
+    }
+  });
+
+  //const [option, setOption] = useHistoryState("", "option");
+ //使用window.history.pushState(；必须刷新页面才有数据。
+
+  //console.log("来看当前的items nowPath=",globalHistory.location.state&&globalHistory.location.state.option, omit(globalHistory.location.state,'key'), globalHistory.location.state);
+
+  console.log("来看当前的items nowPath=",globalHistory.location.state ,"option=",globalHistory);
+  // @ts-ignore
+ // ref.current && ( ref.current.scrollHeight=350);
+  // @ts-ignore
+  ref.current && console.log("来看", ref.current.offsetHeight,"+",ref.current.clientHeight,"大于",ref.current.scrollHeight);
+
+
+  return (
+    <ScrollView overflowY css={{ height: '100%' }} innerRef={ref}>
+      <div
+        css={{
+          minHeight: "100vh",
+          padding: "48px"
+        }}
+      >
+        <Layer elevation="sm" css={{ overflow: "auto" }}>
+
+          <Table  fixed={["180", "150", "230", "200", "240"]}>
+            <TableHead>
+              <TableRow>
+                <TableCell>Dessert (100g serving)</TableCell>
+                <TableCell align="right">Calories</TableCell>
+                <TableCell align="right">Fat (g)</TableCell>
+                <TableCell align="right">Carbs (g)</TableCell>
+                <TableCell align="right">Protein (g)</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows.map(row => (
+                <TableRow key={row.id}>
+                  <TableCell component="th" scope="row">
+                    {row.name}
+                  </TableCell>
+                  <TableCell align="right">{row.calories}</TableCell>
+                  <TableCell align="right">{row.fat}</TableCell>
+                  <TableCell align="right">{row.carbs}</TableCell>
+                  <TableCell align="right">{row.protein}</TableCell>
+                </TableRow>
+              ))}
+              <TableRow>
+                <TableCell component="th" scope="row">
+                  With a really really really stupidly long name
+                </TableCell>
+                <TableCell align="right">10</TableCell>
+                <TableCell align="right">30</TableCell>
+                <TableCell align="right"></TableCell>
+                <TableCell align="right">手动阀首发式冯绍
+                  峰电光火石大\r\n富豪nfghfh冈伺服5345似懂非懂伺服2345的</TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+
+        </Layer>
+      </div>
+    </ScrollView>
+  );
+}
+
+
+
+function getUser() {
+  faker.seed(0);
+
+  return {
+    name: faker.name.firstName() + " " + faker.name.lastName(),
+    uid: faker.random.uuid(),
+    description: faker.lorem.sentence()
+  };
+}
+
