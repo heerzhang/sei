@@ -411,7 +411,7 @@ export const Branding: React.FunctionComponent<BrandingProps> = (props) => {
               fontSize: theme.fontSizes[0]
             }}
           >
-            Made by <Link href="http://www.fjsei.com">hez</Link>
+            Made by <Link href="/chaipu">hez</Link>
             <br />
             <Link href="mailto:fjsei@gmail.com">Email me</Link> with
             questions or whatevs!
@@ -425,7 +425,7 @@ export const Branding: React.FunctionComponent<BrandingProps> = (props) => {
                 Smashicons
               </Link>{" "}
               from{" "}
-              <Link href="/device" title="福建特检">
+              <Link href="/report" title="福建特检">
                 福建特检
               </Link>{" "}
               is licensed by{" "}
