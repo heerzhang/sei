@@ -654,6 +654,7 @@ graphiQL输入参数
 }    
 
 反射WARNING: Illegal reflective access by com.esotericsoftware.reflectasm.AccessClassLoader：com.esotericsoftware.reflectasm/reflectasm/
+ASM使Java程序多一些灵活性和Magic，使用ASM字节码框架实现AOP功能；高效率java反射机制； https://www.cnblogs.com/tohxyblog/p/8661090.html
 并不需要“保证”数据一致性的场合，可用redis缓存产品，而严格一致性敏感的场合必须用 数据库 自带的能力。
 
 EntityGraph是和LAZY相反的？，总体写死掉策略搞lazy，动态的个性化查询用EntityGraph来提示{深度定制的,细化,仅针对个别使用到的字段的}，
