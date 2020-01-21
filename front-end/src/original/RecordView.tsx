@@ -42,7 +42,7 @@ export const RecordView: React.FunctionComponent<RecordViewProps> = ({
   const toast = useToast();
   const [enable, setEnable] = React.useState(true);
   //useState(默认值) ； 后面参数值仅仅在组件的装载时期有起作用，若再次路由RouterLink进入的，它不会依照该新默认值去修改show。useRef跳出Cpature Value带来的限制
-  const [outlet, setOutlet] = React.useState(null);
+  const [, setOutlet] = React.useState(null);
   const ref =React.useRef<InternalItemHandResult>(null);
 
   //  console.log("错误RecordView  变化 ref.current=", ref.current, "template=",template);
@@ -80,7 +80,7 @@ export const RecordView: React.FunctionComponent<RecordViewProps> = ({
       return;
     }
     //这里无法获得result值，就算所在组件顶层已经获得result值，这里可能还是await () 前那样null;
-    console.log("生成任务返回了＝", result,"yes=", yes, outlet);
+    console.log("生成任务返回了＝", result,"yes=", yes);
     toast({
       title: "任务派工返回了",
       subtitle: '加入，ISP ID＝'+id,
@@ -128,6 +128,7 @@ export const RecordView: React.FunctionComponent<RecordViewProps> = ({
         }}
       >保存到服务器</Button>
       <LayerLoading loading={loading} />
+      <Text  css={{wordWrap: 'break-word'}}>{`当前(${JSON.stringify(newOut)})`}</Text>
     </React.Fragment>
   );
 }
