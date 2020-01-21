@@ -4,7 +4,7 @@ import * as React from "react";
 import {
   useTheme,
   Button,Text,
-  useToast, LayerLoading, Layer,
+  useToast, LayerLoading,
 } from "customize-easy-ui-component";
 //import {Table, TableBody, TableHead, TableRow, Cell, CCell} from "../comp/TableExt";
 //import useLocation from "wouter/use-location";
@@ -42,11 +42,8 @@ export const RecordView: React.FunctionComponent<RecordViewProps> = ({
   const toast = useToast();
   const [enable, setEnable] = React.useState(true);
   //useState(默认值) ； 后面参数值仅仅在组件的装载时期有起作用，若再次路由RouterLink进入的，它不会依照该新默认值去修改show。useRef跳出Cpature Value带来的限制
-  const [, setOutlet] = React.useState(null);
   const ref =React.useRef<InternalItemHandResult>(null);
 
-  //  console.log("错误RecordView  变化 ref.current=", ref.current, "template=",template);
-  // let filtercomp={ id:227 };
 
   //ref可以共用current指向最新输入过的子组件；但父组件对.current的最新变化无法实时感知，只能被动刷新获知current变动。
   //子组件利用useImperativeHandle机制把数据回传给父组件，配套地父辈用ref来定位子组件。
@@ -113,13 +110,7 @@ export const RecordView: React.FunctionComponent<RecordViewProps> = ({
         disabled ={!enable}
         loading ={loading}
         onPress={ async () => {
-          //这两个函数执行时刻看见的odata是一样的。 setOdata异步的，会提前触发底下子组件的更新render，随后才继续执行updateRecipe函数。
-          //实际上随便搞个能够触发底下的模板TemplateView子组件重做render就可以的； 这里用setOutlet(该变量必须变动)触发来更新。
-          setOutlet(newOut);
-          //手机上更新触发失效。只好采用延迟策略，每个分区项目的保存处理前准备，作一次render完了，才能发送数据给后端。
-          /*setTimeout(() => {
-              updateRecipe('1');
-          }, 0);*/
+          //手机上更新模板TemplateView子组件重做render触发失效。只好采用延迟策略，每个分区项目的保存处理前准备，作一次render完了，才能发送数据给后端。
           setEnable(false);
           await updateRecipe('1');
           console.log("await updateRecipe＝");
