@@ -2,9 +2,9 @@
 import { jsx,} from "@emotion/core";
 import * as React from "react";
 import {
-    useTheme,
-    Button,Text,
-    useToast, LayerLoading, Layer,
+  useTheme,
+  Button,Text,
+  useToast, LayerLoading, Layer,
 } from "customize-easy-ui-component";
 //import {Table, TableBody, TableHead, TableRow, Cell, CCell} from "../comp/TableExt";
 //import useLocation from "wouter/use-location";
@@ -99,8 +99,8 @@ export const RecordView: React.FunctionComponent<RecordViewProps> = ({
   return (
     <React.Fragment>
       {
-       //useMemo使用后：各分区项目子组件inp各自独立的，分区项目子组件内若使用setInp(null) 清空重置后，无法靠重新拉取后端数据来保证恢复显示。
-       //项目子组件使用setInp(null) 重置后，若上级组件重新取后端数据没变化的，也必须再次路由后再进入才可以让各分区项目子组件render恢复显示数据。
+        //useMemo使用后：各分区项目子组件inp各自独立的，分区项目子组件内若使用setInp(null) 清空重置后，无法靠重新拉取后端数据来保证恢复显示。
+        //项目子组件使用setInp(null) 重置后，若上级组件重新取后端数据没变化的，也必须再次路由后再进入才可以让各分区项目子组件render恢复显示数据。
         React.cloneElement(template as React.ReactElement<any>, {
           ref: ref,
           inp: inp,
@@ -115,11 +115,11 @@ export const RecordView: React.FunctionComponent<RecordViewProps> = ({
         onPress={ async () => {
           //这两个函数执行时刻看见的odata是一样的。 setOdata异步的，会提前触发底下子组件的更新render，随后才继续执行updateRecipe函数。
           //实际上随便搞个能够触发底下的模板TemplateView子组件重做render就可以的； 这里用setOutlet(该变量必须变动)触发来更新。
-            setOutlet(newOut);
-            //手机上更新触发失效。只好采用延迟策略，每个分区项目的保存处理前准备，作一次render完了，才能发送数据给后端。
-            /*setTimeout(() => {
-                updateRecipe('1');
-            }, 0);*/
+          setOutlet(newOut);
+          //手机上更新触发失效。只好采用延迟策略，每个分区项目的保存处理前准备，作一次render完了，才能发送数据给后端。
+          /*setTimeout(() => {
+              updateRecipe('1');
+          }, 0);*/
           setEnable(false);
           await updateRecipe('1');
           console.log("await updateRecipe＝");
@@ -127,7 +127,7 @@ export const RecordView: React.FunctionComponent<RecordViewProps> = ({
             console.log("throttledUpdateEnable返回了＝");
         }}
       >保存到服务器</Button>
-        <LayerLoading loading={loading} />
+      <LayerLoading loading={loading} />
     </React.Fragment>
   );
 }
