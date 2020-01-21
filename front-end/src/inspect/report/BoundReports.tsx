@@ -30,17 +30,17 @@ export const BoundReports: React.FunctionComponent<
 > = ({ id }) => {
   const theme = useTheme();
   console.log("看FollowingRecipes filter =id=", id );
-  let filtercomp={ id:id };
 
-  const [filter, setFilter] = React.useState(filtercomp);
+
+  const [filter, setFilter] = React.useState({ id:id });
   const {loading, error, items, loadMore } =useLookReports(filter);
 
   console.log("看FollowingRecipes filter=", filter );
   //就算id切换了，本组件的数据还是会被appollo自动缓存的，id变化不会一定导致重新查询后端数据库的，看着像页面显示的缓存。
   //根据id和界面操作后的参数，来要修正graphQL的Query()的参数 = 要做重新查询。
   React.useEffect(() => {
-    setFilter(filtercomp);
-  }, [id, filtercomp]);
+    setFilter({ id:id });
+  }, [id,]);
   //滚动条触发的更多查询。初始查询的记录满员必须大于让滚动条开启{满屏了}的数量，否则无法触发后续更多查询。
   const ref = React.useRef();
   const [hasMore, setHasMore] = React.useState(true);
