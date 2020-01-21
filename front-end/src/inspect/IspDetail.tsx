@@ -22,7 +22,7 @@ import {
 import {  useDispatchIspMen, useIspDetail } from "./db";
 //import { useSession } from "../auth";
 import {Helmet} from "react-helmet";
-import { Link as RouterLink, Link,  } from "wouter";
+import { Link as RouterLink, } from "wouter";
 import { ContainLine, TransparentInput } from "../comp/base";
 
 //[HOOK限制]按钮点击函数内部直接上toast()或toaster.notify()很可能无法正常显示。而放在函数组件顶层render代码前却能正常。
