@@ -188,20 +188,19 @@ export const IspDetail: React.FunctionComponent<ComposeProps> = ({
             display: "flex"
           }}
         >
-          <IconButton
-            icon={<IconArrowLeft />}
-            component={Link}
-            to="/inspect"
-            label="后退"
-            replace
-            variant="ghost"
-            css={{
-              marginRight: theme.spaces.sm,
-              [theme.mediaQueries.md]: {
-                display: "none"     //大屏不需要
-              }
-            }}
-          />
+          <RouterLink   to="/inspect/">
+            <IconButton
+              icon={<IconArrowLeft />}
+              label="后退"
+              variant="ghost"
+              css={{
+                marginRight: theme.spaces.sm,
+                [theme.mediaQueries.md]: {
+                  display: "none"     //大屏不需要
+                }
+              }}
+            />
+          </RouterLink>
           {editing ? (
             <div css={{ marginLeft: "-0.75rem", flex: 1 }}>
               <TransparentInput
@@ -348,7 +347,7 @@ export const IspDetail: React.FunctionComponent<ComposeProps> = ({
                                 autoFocus={true}
                                 readOnly
                                 placeholder="设备号"
-                                value={ (ingredients.dev||{}).cod }
+                                value={ (ingredients.dev||{}).cod ||'' }
                                 onChange={e => {
                                   setIngredients( {
                                     ...ingredients,
@@ -361,7 +360,7 @@ export const IspDetail: React.FunctionComponent<ComposeProps> = ({
                               autoFocus={true}
                               readOnly
                               placeholder="审核人"
-                              value={ingredients.checkMen && ingredients.checkMen.username}
+                              value={ingredients.checkMen?.username||''}
                               onChange={e => {
                                 setIngredients( {
                                   ...ingredients,
@@ -377,18 +376,17 @@ export const IspDetail: React.FunctionComponent<ComposeProps> = ({
                                      width: '100%',
                                    }}
                             >
-                             {ingredients.ispMen && ingredients.ispMen.map(one => {
+                             {ingredients.ispMen && ingredients.ispMen.map((one,i) => {
                                return (
-                                 <Button
-                                   size="md"
-                                   variant="ghost"
-                                   intent="none"
-                                   iconAfter={<IconArrowRight />}
-                                   component={RouterLink}
-                                   to="/inspect/"  　　
-                                 >
-                                   {one.username}
-                                 </Button>
+                                 <RouterLink key={i}  to="/inspect/">
+                                   <Button
+                                     size="md"
+                                     variant="ghost"
+                                     intent="none"
+                                     iconAfter={<IconArrowRight />}
+                                   >{one.username}
+                                   </Button>
+                                 </RouterLink>
                                )
                               } )}
                             </Text>
@@ -398,7 +396,7 @@ export const IspDetail: React.FunctionComponent<ComposeProps> = ({
                               autoFocus={true}
                               readOnly
                               placeholder="输入日期格式2019-08-03"
-                              value={ingredients.nextIspDate}
+                              value={ingredients.nextIspDate||''}
                               onChange={e => {
                                 setIngredients( {
                                   ...ingredients,

@@ -229,7 +229,7 @@ function BoundListItem({ recipe, id, highlight ,task }: any) {
         highlight ? (
           <span dangerouslySetInnerHTML={{ __html: highlight.title.value }} />
         ) : (
-          recipe.path
+          recipe.path ||''
         )
       }
     />
