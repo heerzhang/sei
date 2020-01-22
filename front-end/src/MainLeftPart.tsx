@@ -200,7 +200,6 @@ export const MainLeftPart: React.FunctionComponent<MainLeftPartProps> = ({ path,
                   >
                     关注队伍
                   </Tab>
-                  <Tab id="city">城市</Tab>
                   <Tab id="inspect">检验任务</Tab>
                   <Tab id="device">设备检验委托</Tab>
                 </Tabs>
