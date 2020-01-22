@@ -238,3 +238,5 @@ export interface TouchableOptions {
 .gitignore只能忽略那些原来没有被track的文件，如果某些文件已经被纳入了版本管理中，则修改.gitignore是无效的。https://blog.csdn.net/byy8023/article/details/82259155
 IntelliJ idea 撤回(已经commit未push的)操作 reset head^  https://blog.csdn.net/hyy11111/article/details/84969970
 git忽略已经提交的文件    https://www.cnblogs.com/DawaTech/p/10728182.html
+阿里云：买的ECS也能装mysql，选择POLARDB？数据库网络和节点管理/主从配置/读写分离/数据库扩容/性能方面/数据容灾。
+
