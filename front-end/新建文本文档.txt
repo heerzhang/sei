@@ -232,3 +232,5 @@ opacity= 1 active= true 转=%o translateX(0%)
 SearchTitle捕获 opacity= 1 active= false 转=%o translateX(0%)
 SearchTitle捕获 opacity= 0 active= false 转=%o translateX(-42.5%)
 SearchTitle捕获 opacity= 0 active= true 转=%o translateX(-42.5%)
+审核人员主要看正式报告，有时附带看下原始记录的。
+
