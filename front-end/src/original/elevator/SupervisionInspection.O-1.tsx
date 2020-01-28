@@ -10,7 +10,7 @@ import {
   Input,
   Select,
 } from "customize-easy-ui-component";
-import {Table, TableBody,  TableRow, CCell} from "../../comp/TableExt";
+import {Table, TableBody,  TableRow, Cell, CCell} from "../../comp/TableExt";
 import {
   AntCheck,
   IndentationLayText,
@@ -406,7 +406,82 @@ const InternalItem12: React.RefForwardingComponent<InternalItemHandResult,Intern
     );
   } );
 
+const InternalItem27: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+  React.forwardRef((
+    props:{ children },  ref
+  ) => {
+    const getInpFilter = React.useCallback((par) => {
+      const {cageDistortion,brokenWires,diameterSteelWire,seriouslyRusted,otherSuspension} =par||{};
+      return {cageDistortion,brokenWires,diameterSteelWire,seriouslyRusted,otherSuspension};
+    }, []);
+    const { eos, setInp, inp } = useItemControlAs({ref,  filter: getInpFilter});
 
+    return (
+      <InspectRecordTitle  control={eos}   label={'检验项目 27'}>
+        <InspectRecordHeadColumn  level={'C'}  bigLabel={'5 悬挂装置 、 补偿装置及旋转部件防护'}  label={'5.1 悬挂装置、补偿装置的磨损、断丝、变形等情况'}>
+          出现下列情况之一时，悬挂钢丝绳和补偿钢丝绳应当报废:
+        </InspectRecordHeadColumn>
+        <InputGroupLine  label='①出现笼状畸变、绳股挤出、扭结、部分压扁、弯折'>
+          <SelectHookfork value={ inp?.cageDistortion  ||''}
+                          onChange={e => setInp({ ...inp, cageDistortion: e.currentTarget.value? e.currentTarget.value : undefined}) }
+          />
+        </InputGroupLine>
+        ②一个捻距内出现的断丝数大于下表列出的数值时：
+        <Table minWidth={'140px'} css={{borderCollapse:'collapse'}}>
+          <TableBody>
+            <TableRow>
+              <CCell rowSpan={2}>断丝的形式</CCell>
+              <CCell colSpan={3}>钢丝绳的类型</CCell>
+            </TableRow>
+            <TableRow>
+              <CCell>6×19</CCell>
+              <CCell>8×9</CCell>
+              <CCell>9×19</CCell>
+            </TableRow>
+            <TableRow>
+              <CCell>均布在外层绳股上</CCell>
+              <CCell>24</CCell><CCell>30</CCell><CCell>34</CCell>
+            </TableRow>
+            <TableRow>
+              <CCell>集中在一或者两根外层绳股上</CCell>
+              <CCell>24</CCell><CCell>30</CCell><CCell>34</CCell>
+            </TableRow>
+            <TableRow>
+              <CCell>一根外绳股上相邻的断丝</CCell>
+              <CCell>4</CCell><CCell>4</CCell><CCell>4</CCell>
+            </TableRow>
+            <TableRow>
+              <CCell>股谷（缝）断丝 </CCell>
+              <CCell>2</CCell><CCell>3</CCell><CCell>6</CCell>
+            </TableRow>
+            <TableRow>
+              <Cell colSpan={4}>注：上述断丝数参考长度为一个捻距，约为6d(d表示钢丝绳的公称直径，mm）</Cell>
+            </TableRow>
+          </TableBody>
+        </Table>
+        <InputGroupLine  label='②断丝查验结果'>
+          <SelectHookfork value={ inp?.brokenWires ||''}
+                          onChange={e => setInp({ ...inp, brokenWires: e.currentTarget.value? e.currentTarget.value : undefined}) }
+          />
+        </InputGroupLine>
+        <InputGroupLine  label='③钢丝绳直径小于其公称直径的90%'>
+          <SelectHookfork value={ inp?.diameterSteelWire ||''}
+                          onChange={e => setInp({ ...inp, diameterSteelWire: e.currentTarget.value? e.currentTarget.value : undefined}) }
+          />
+        </InputGroupLine>
+        <InputGroupLine  label='④钢丝绳严重锈蚀，铁锈填满绳股间隙'>
+          <SelectHookfork value={ inp?.seriouslyRusted  ||''}
+                          onChange={e => setInp({ ...inp, seriouslyRusted: e.currentTarget.value? e.currentTarget.value : undefined}) }
+          />
+        </InputGroupLine>
+        <InputGroupLine  label='⑤采用其他类型悬挂装置的，悬挂装置的磨损、变形等不得超过制造单位设定的报废指标'>
+          <SelectHookfork value={ inp?.otherSuspension ||''}
+                          onChange={e => setInp({ ...inp, otherSuspension: e.currentTarget.value? e.currentTarget.value : undefined}) }
+          />
+        </InputGroupLine>
+      </InspectRecordTitle>
+    );
+  } );
 
 const InternalItem8: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
   React.forwardRef((
@@ -444,12 +519,104 @@ const InternalItem8: React.RefForwardingComponent<InternalItemHandResult,Interna
     );
   } );
 
+const InternalItem7: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+  React.forwardRef((
+    props:{ children },  ref
+  ) => {
+    const getInpFilter = React.useCallback((par) => {
+      const {phaseFailure,emergencyEOperation,convenientAccess,directlyObserve,permanentLighting,stopSwitch,bypassDoor,loopDetection,brakeFailure,rescueDevice} =par||{};
+      return {phaseFailure,emergencyEOperation,convenientAccess,directlyObserve,permanentLighting,stopSwitch,bypassDoor,loopDetection,brakeFailure,rescueDevice};
+    }, []);
+    const { eos, setInp, inp } = useItemControlAs({ref,  filter: getInpFilter});
+
+    return (
+      <InspectRecordTitle  control={eos}   label={'检验项目 2.8'}>
+        <InspectRecordHeadColumn  level={'B'}  bigLabel={'2 机器设备间及相关设备'}  label={'2.8 控制柜、 紧急操作和动态测试装置'}>
+        </InspectRecordHeadColumn>
+        <InputGroupLine  label='(2)断相、错相保护功能有效；电梯运行与相序无关时，可以不设错相保护。'>
+          <SelectHookfork value={ inp?.phaseFailure ||''}
+                          onChange={e => setInp({ ...inp, phaseFailure: e.currentTarget.value? e.currentTarget.value : undefined}) }
+          />
+        </InputGroupLine>
+        <IndentationLayText title={'(4)紧急电动运行装置应当符合以下要求：'}>
+          ①依靠持续揿压按钮来控制轿厢运行，此按钮有防止误操作的保护，按钮上或其近旁标出 相应的运行方向<br/>
+          ②一旦进入检修运行，紧急电动运行装置控制轿厢运行的功能由检修控制装置所取代；<br/>
+          ③进行紧急电动运行操作时，易于观察到轿厢是否在开锁区。
+        </IndentationLayText>
+        <InputGroupLine  label='(4)紧急电动运行装置查验结果'>
+          <SelectHookfork value={ inp?.emergencyEOperation ||''}
+                          onChange={e => setInp({ ...inp, emergencyEOperation: e.currentTarget.value? e.currentTarget.value : undefined}) }
+          />
+        </InputGroupLine>
+        <IndentationLayText title={'(5)无机房电梯的紧急操作和动态测试装置应当符合以下要求：'}>
+          <InputGroupLine  label='①在任何情况下均能够安全方便地从井道外接近和操作该装置；'>
+            <SelectHookfork value={ inp?.convenientAccess  ||''}
+                            onChange={e => setInp({ ...inp, convenientAccess: e.currentTarget.value? e.currentTarget.value : undefined}) }
+            />
+          </InputGroupLine>
+          <InputGroupLine  label='②能够直接或者通过显示装置观察到轿厢的运行方向、速度以及是否位于开锁区；'>
+            <SelectHookfork value={ inp?.directlyObserve  ||''}
+                            onChange={e => setInp({ ...inp, directlyObserve: e.currentTarget.value? e.currentTarget.value : undefined}) }
+            />
+          </InputGroupLine>
+          <InputGroupLine  label='③装置上设有永久性照明和照明开关；'>
+            <SelectHookfork value={ inp?.permanentLighting  ||''}
+                            onChange={e => setInp({ ...inp, permanentLighting: e.currentTarget.value? e.currentTarget.value : undefined}) }
+            />
+          </InputGroupLine>
+          <InputGroupLine  label='④装置上设有停止装置或者主开关。'>
+            <SelectHookfork value={inp?.stopSwitch  ||''}
+                            onChange={e => setInp({ ...inp, stopSwitch: e.currentTarget.value? e.currentTarget.value : undefined}) }
+            />
+          </InputGroupLine>
+        </IndentationLayText>
+        <IndentationLayText title={'☆(6)层门和轿门旁路装置应当符合以下要求：'}>
+          ①在层门和轿门旁路装置上或者其附近标明“旁路”字样,并且标明旁路装置的“旁路”状态或者“关”状态;<br/>
+          ②旁路时取消正常运行(包括动力操作的自动门的任何运行);只有在检修运行或者紧急电动运行状态下,轿厢才能够运行;运行期间,轿厢上的听觉信号和轿底的闪烁灯起作用;<br/>
+          ③能够旁路层门关闭触点、层门门锁触点、轿门关闭触点、轿门门锁触点;不能同时旁路层门和轿门的触点;对于手动层门,不能同时旁路层门关闭触点和层门门锁触点;<br/>
+          ④提供独立的监控信号证实轿门处于关闭位置。
+        </IndentationLayText>
+        <InputGroupLine  label='☆(6)层门和轿门旁路装置查验结果'>
+          <SelectHookfork value={ inp?.bypassDoor ||''}
+                          onChange={e => setInp({ ...inp, bypassDoor: e.currentTarget.value? e.currentTarget.value : undefined}) }
+          />
+        </InputGroupLine>
+        ☆(7)应当具有门回路检测功能,当轿厢在开锁区域内、轿门开启并且层门门锁释放时,监测检查
+        轿门关闭位置的电气安全装置、检查层门门锁锁紧位置的电气安全装置和轿门监控信号的正确动
+        作;如果监测到上述装置的故障,能够防止电梯的正常运行。
+        <InputGroupLine  label='☆(7)应当具有门回路检测功能'>
+          <SelectHookfork value={ inp?.loopDetection  ||''}
+                          onChange={e => setInp({ ...inp, loopDetection: e.currentTarget.value? e.currentTarget.value : undefined}) }
+          />
+        </InputGroupLine>
+        ☆(8)应当具有制动器故障保护功能,当监测到制动器的提起(或者释放)失效时,能够防止电梯的正常启动。
+        <InputGroupLine  label='☆(8)应当具有制动器故障保护'>
+          <SelectHookfork value={ inp?.brakeFailure ||''}
+                          onChange={e => setInp({ ...inp, brakeFailure: e.currentTarget.value? e.currentTarget.value : undefined}) }
+          />
+        </InputGroupLine>
+        <IndentationLayText title={'☆(9)自动救援操作装置(如果有)应该符合以下要求:'}>
+          ①设有铭牌,标明制造单位名称、产品型号、产品编号、主要技术参数,加装的自动救援操作装置的铭牌和该装置的产品质量证明文件相符;<br/>
+          ②在外电网断电至少等待3s后自动投入救援运行,电梯自动平层并且开门;<br/>
+          ③当电梯处于检修运行、紧急电动运行、电气安全装置动作或者主开关断开时,不得投入救援运行;<br/>
+          ④设有一个非自动复位的开关,当该开关处于关闭状态时,该装置不能启动救援运行。
+        </IndentationLayText>
+        <InputGroupLine  label='☆(9)自动救援操作装置(如果有)'>
+          <SelectHookfork value={ inp?.rescueDevice  ||''}
+                          onChange={e => setInp({ ...inp, rescueDevice: e.currentTarget.value? e.currentTarget.value : undefined}) }
+          />
+        </InputGroupLine>
+      </InspectRecordTitle>
+    );
+  } );
 
 
 const projectList = [
   createItem(8, <InternalItem1/>),
+  createItem(6, <InternalItem7/>),
   createItem(5, <InternalItem8/>),
   createItem(2, <InternalItem12/>),
+  createItem(7, <InternalItem27/>),
   createItem(4, <InternalItem31/>),
   createItem(3, <InternalItem37/>),
   createItem(1, <InternalItem50/>),

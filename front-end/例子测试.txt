@@ -225,13 +225,7 @@ const TemplateView: React.RefForwardingComponent<InternalItemHandResult,Template
 
 http://localhost:8673/grqphiql
 http://27.151.117.65:8673/grqphiql
-设置web 服务器绑定这个域名
-R 62 两2次 旧数据 h
-发出给后端了pause;
-o 74 新数据 h地方
-RecordView捕获 ｀｀｀ inp= 旧数据
-RecordView捕获 ｀｀｀ inp= {tool: {…}, toolBox: "ｈ地方", registration: "√"}
-按钮跟随的提示输出，延迟！。
+
 https://www.cnblogs.com/lmyt/p/10584679.html
 https://chrome-devtools-frontend.appspot.com
 https://www.cnblogs.com/slmk/p/7591126.html（不需要FQ）
@@ -239,3 +233,4 @@ https://www.cnblogs.com/slmk/p/7591126.html（不需要FQ）
 由于是离线包，当你点击Inspect时就不用再去Google下载了，而是直接从本地加载。从而达到了不FQ使用Inspect调试的目的。
 
 注意：电脑端需要使用正式版Chrome，Dev版本不支持的。
+Button 超小屏幕 whiteSpace: 'unset'就多行的。 高度不能限制, 派出個特異按鈕區域？直接用鏈接router

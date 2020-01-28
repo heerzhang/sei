@@ -105,14 +105,15 @@ easy-ui-component>Link,  这里Link等同于基础的<a><a/>，会跳转重新�
 
 关于chrome浏览器直接打印问题 --kiosk-printing 命令行  https://www.cnblogs.com/whoami3/p/10147746.html  注意chrome打印预览太慢死机似的。
 首先转存PDF速度慢，再看PDF转换其它格式效果太差了；PDF用作出版编排纸张媒体打印，其原来用途的大多数情景都该淘汰pdf。
-
+2019电梯新检规讲稿  https://wenku.baidu.com/view/01bb1527aff8941ea76e58fafab069dc512247cd.html
 电梯定期检验报告(深圳  https://wenku.baidu.com/view/406492a5e43a580216fc700abb68a98271feaccf.html?rec_flag=default
 曳引驱动有机房电梯　监督　检验原始记录 https://www.mayiwenku.com/p-5770084.html
 电梯监督检验检验报告 https://wenku.baidu.com/view/2bdce1b682c4bb4cf7ec4afe04a1b0717fd5b3a9.html
-
-原始记录
-更加新的；https://wenku.baidu.com/view/144d835bf80f76c66137ee06eff9aef8951e4811.html
-https://wenku.baidu.com/view/f91a4cda52ea551810a687dd.html
+原始记录 更新的；https://wenku.baidu.com/view/144d835bf80f76c66137ee06eff9aef8951e4811.html
+电梯检验程序及方法 https://wenku.baidu.com/view/6062b767a31614791711cc7931b765ce05087a80.html
+监检检验流程  https://wenku.baidu.com/view/67955c3769eae009591bec0f.html
+电梯检验过程流程图 https://wenku.baidu.com/view/553229875122aaea998fcc22bcd126fff7055d8c.html
+电梯检验流程！    https://wenku.baidu.com/view/fc43cb9ea1116c175f0e7cd184254b35eefd1afd.html
 
           <Button
             variant="ghost"
@@ -223,14 +224,5 @@ useEffect、setTimeout防止按钮连续点击  https://www.jianshu.com/p/d0700d
 localhost:9222
 localhost:9229
 
-opacity: 1; transform: translateX(0%);"
-opacity: 0; transform: translateX(100%);
-translateX(-42.5%)
- opacity: 1; transform:translateX(0%)
-
-opacity= 1 active= true 转=%o translateX(0%)
-SearchTitle捕获 opacity= 1 active= false 转=%o translateX(0%)
-SearchTitle捕获 opacity= 0 active= false 转=%o translateX(-42.5%)
-SearchTitle捕获 opacity= 0 active= true 转=%o translateX(-42.5%)
-审核人员主要看正式报告，有时附带看下原始记录的。
+电梯监督检验自检原始记录 https://wenku.baidu.com/view/bc5420ed9a6648d7c1c708a1284ac850ac02045c.html
 

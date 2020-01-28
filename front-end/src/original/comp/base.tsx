@@ -7,7 +7,7 @@ import {
   Button,
   IconChevronUp,
   IconChevronDown,
-  Select, Layer, Check, Collapse, useCollapse
+  Select, Layer, Check, Collapse, useCollapse, SelectProps
 } from "customize-easy-ui-component";
 import PropTypes from "prop-types";
 //import { useUid } from "customize-easy-ui-component/esm/Hooks/use-uid";
@@ -78,6 +78,59 @@ InspectRecordHeadColumn.propTypes = {
 };
 
 
+export interface InspectZoneHeadColumnProps {
+  label: string;
+  projects: string[];
+  children?: React.ReactNode;
+}
+//几个检验项目的聚合模式，1个下拉的分区装入多个项目。
+export const InspectZoneHeadColumn: React.FunctionComponent<InspectZoneHeadColumnProps> = ({
+      label,
+      projects,
+      children,
+      ...other
+   }) => {
+
+  return (
+    <React.Fragment>
+      <div css={{ display: 'flex', justifyContent: 'space-around'}}>
+        <Text  variant="h6">项目:{projects.join(',')}</Text>
+        <Text  variant="h6">{label}</Text>
+      </div>
+      {children}
+    </React.Fragment>
+  );
+};
+
+
+export interface InspectItemHeadColumnProps {
+  level: string;
+  label: string;
+  children: React.ReactNode;
+}
+//下拉的分区装入多个项目, 之后单一个检验项目的开头
+export const InspectItemHeadColumn: React.FunctionComponent<InspectItemHeadColumnProps> = ({
+      level,
+      label,
+      children,
+      ...other
+      }) => {
+
+  return (
+    <React.Fragment>
+      <div css={{ display: 'flex',justifyContent: 'space-around',marginTop:'1rem'}}>
+        <Text  variant="h6">{label}</Text>
+        <Text  variant="h6">检验类别 {level}  </Text>
+      </div>
+        <hr/>
+        {children}
+      <Text  variant="h4"　>
+        查验结果
+      </Text>
+    </React.Fragment>
+  );
+};
+
 //React.useMemo(() =><RenderLoad/>, []); 用它加速显示组件是针对已经在当前界面显示或display：none的才管用;
 
 export interface InspectRecordTitleProps {
@@ -136,8 +189,7 @@ InspectRecordTitle.propTypes = {
   }).isRequired,　
 };
 
-export interface SelectHookforkProps
-  extends React.SelectHTMLAttributes<HTMLSelectElement> {
+export interface SelectHookforkProps extends SelectProps {
   topDivStyle?: SerializedStyles;
 }
 //太多重复了，自定义成一个新组件。
@@ -150,11 +202,14 @@ export const SelectHookfork: React.FunctionComponent<SelectHookforkProps> = ({
   return (
     <Select inputSize="md" css={{minWidth:'140px',fontSize:'2rem',padding:'0 1rem'}} divStyle={css`max-width:240px;`}
             value={value}  onChange={onChange}  topDivStyle={topDivStyle}
+            {...other}
     >
-        <option></option>
-        <option>／</option>
-        <option>√</option>
-        <option>×</option>
+      <option></option>
+      <option>√</option>
+      <option>▽</option>
+      <option>／</option>
+      <option>×</option>
+      <option>△</option>
     </Select>
   );
 };

@@ -8,14 +8,14 @@ import {
   InputGroupLine,
   SuffixInput,
   Input,
-  Select,
+  Select, useCollapse
 } from "customize-easy-ui-component";
 import {Table, TableBody,  TableRow, Cell, CCell} from "../../comp/TableExt";
 import {
   AntCheck,
-  IndentationLayText,
+  IndentationLayText, InspectItemHeadColumn,
   InspectRecordHeadColumn,
-  InspectRecordTitle,
+  InspectRecordTitle, InspectZoneHeadColumn,
   SelectHookfork, TemplateViewProps,
   useItemControlAs, useProjectListAs
 } from "../comp/base";
@@ -194,66 +194,208 @@ const InternalItem50: React.RefForwardingComponent<InternalItemHandResult,Intern
     );
   } );
 
-const InternalItem37: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+const InternalItem30: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
   React.forwardRef((
     props:{ children },  ref
   ) => {
     const getInpFilter = React.useCallback((par) => {
-      const {dr,dn1,dn2} =par||{};
-      return {dr,dn1,dn2};
+      const {dr,leaf,frame,sill,gap,tooth,knife,roller,doorClearance,manPowerGap,doorLock,cabinLock,lengthDoorLock} =par||{};
+      return {dr,leaf,frame,sill,gap,tooth,knife,roller,doorClearance,manPowerGap,doorLock,cabinLock,lengthDoorLock};
     }, []);
     const { eos, setInp, inp } = useItemControlAs({ref,  filter: getInpFilter});
     const theme = useTheme();
     const [floor, setFloor] = React.useState(null);
+    const cAppendix =useCollapse(false,true);
+    let  toothUnquf=inp?.dr?.find((f,i)=>{
+      return parseFloat(inp?.tooth?.[f])<7;
+    });
+    console.log("InternalItem30这里,捕获isToothOK=", toothUnquf);
 
     return (
       <React.Fragment>
-        <InspectRecordTitle  control={eos}   label={'检验项目 6.9'}>
-          <InspectRecordHeadColumn  level={'B'}  bigLabel={'6 轿门与层门'}  label={'6.9 门的锁紧'}  >
+        <InspectRecordTitle  control={eos}   label={'层门间隙门锁'}>
+          <InspectZoneHeadColumn label={'6 轿门与层门'} projects={['6.3','6.9','6.12']} />
+          <InspectRecordTitle  control={cAppendix} label={'附录A 层门间隙、啮合长度'}>
+            <div>
+              已检查记录:
+              {inp?.dr?.map(a=>{
+                return ` [ ${a} ]层: ${inp?.leaf?.[a]||''} , ${inp?.frame?.[a]||''} , ${inp?.sill?.[a]||''} , ${inp?.gap?.[a]||''} , ${inp?.tooth?.[a]||''} , ${inp?.knife?.[a]||''} , ${inp?.roller?.[a]||''};`
+              }) }
+            </div>
+            新增检查=>
+            <InputGroupLine  label='首先设置当前层站号'>
+              <SuffixInput
+                autoFocus={true}
+                value={floor||''}
+                onChange={e => {setFloor( e.currentTarget.value) }}
+              >
+                <Button onPress={() =>floor&&(inp?.dr?.includes(floor)? null:
+                    setInp( (inp?.dr&&{...inp,dr:[...inp?.dr,floor] } )
+                      || {...inp,dr:[floor] } )
+                )}
+                >新增</Button>
+              </SuffixInput>
+            </InputGroupLine>
+            <div css={{ textAlign: 'center' }}>
+              <Button css={{ marginTop: theme.spaces.sm }} size="sm"
+                      onPress={() => floor&&inp?.dr?.includes(floor) &&(
+                        setInp({...inp,dr:[...inp.dr.filter(a => a!==floor )],
+                          leaf:{...inp?.leaf,[floor]:undefined}, frame:{...inp?.frame,[floor]:undefined}, sill:{...inp?.sill,[floor]:undefined}
+                          , gap:{...inp?.gap,[floor]:undefined}, tooth:{...inp?.tooth,[floor]:undefined}, knife:{...inp?.knife,[floor]:undefined}
+                          , roller:{...inp?.roller,[floor]:undefined}
+                        })
+                      )}
+              >刪除该层</Button>
+            </div>
+            <InputGroupLine label={`层门门扇间间隙(层号 ${floor}):`}>
+              <SuffixInput
+                autoFocus={true}
+                placeholder="请输入测量数"
+                value={ (inp?.leaf?.[floor] ) || ''}
+                onChange={e => floor&&setInp({ ...inp, leaf:{...inp?.leaf,[floor]:e.currentTarget.value? e.currentTarget.value:undefined} }) }
+              >mm</SuffixInput>
+            </InputGroupLine>
+            <InputGroupLine label={`层门门扇与门套间隙(层号 ${floor}):`}>
+              <SuffixInput
+                autoFocus={true}
+                placeholder="请输入测量数"
+                value={ (inp?.frame?.[floor] ) || ''}
+                onChange={e => floor&&setInp({ ...inp, frame:{...inp?.frame,[floor]:e.currentTarget.value? e.currentTarget.value:undefined} }) }
+              >mm</SuffixInput>
+            </InputGroupLine>
+            <InputGroupLine label={`层门扇与地坎间隙(层号 ${floor}):`}>
+              <SuffixInput
+                autoFocus={true}
+                placeholder="请输入测量数"
+                value={ (inp?.sill?.[floor] ) || ''}
+                onChange={e => floor&&setInp({ ...inp, sill:{...inp?.sill,[floor]:e.currentTarget.value? e.currentTarget.value:undefined} }) }
+              >mm</SuffixInput>
+            </InputGroupLine>
+            <InputGroupLine label={`层门扇间施力间隙(层号 ${floor}):`}>
+              <SuffixInput
+                autoFocus={true}
+                placeholder="请输入测量数"
+                value={ (inp?.gap?.[floor] ) || ''}
+                onChange={e => floor&&setInp({ ...inp, gap:{...inp?.gap,[floor]:e.currentTarget.value? e.currentTarget.value:undefined} }) }
+              >mm</SuffixInput>
+            </InputGroupLine>
+            <InputGroupLine label={`门锁啮合长度(层号 ${floor}):`}>
+              <SuffixInput
+                autoFocus={true}
+                placeholder="请输入测量数"
+                value={ (inp?.tooth?.[floor] ) || ''}
+                onChange={e => floor&&setInp({ ...inp, tooth:{...inp?.tooth,[floor]:e.currentTarget.value? e.currentTarget.value:undefined} }) }
+              >mm</SuffixInput>
+            </InputGroupLine>
+            <InputGroupLine label={`轿门门刀与层门地坎间距(层号 ${floor}):`}>
+              <SuffixInput
+                autoFocus={true}
+                placeholder="请输入测量数"
+                value={ (inp?.knife?.[floor] ) || ''}
+                onChange={e => floor&&setInp({ ...inp, knife:{...inp?.knife,[floor]:e.currentTarget.value? e.currentTarget.value:undefined} }) }
+              >mm</SuffixInput>
+            </InputGroupLine>
+            <InputGroupLine label={`门锁滚轮与轿门地坎间距(层号 ${floor}):`}>
+              <SuffixInput
+                autoFocus={true}
+                placeholder="请输入测量数"
+                value={ (inp?.roller?.[floor] ) || ''}
+                onChange={e => floor&&setInp({ ...inp, roller:{...inp?.roller,[floor]:e.currentTarget.value? e.currentTarget.value:undefined} }) }
+              >mm</SuffixInput>
+            </InputGroupLine>
+          </InspectRecordTitle>
+
+            <InspectItemHeadColumn  level={'C'} label={'6.3 门间隙'}  >
+              <IndentationLayText title={'门关闭后,应当符合以下要求:'}>
+                (1) 门扇之间及门扇与立柱、门楣和地坎之间的间的间隙,对于乘客电梯不大于6mm;对于载货电梯不大于8mm,使用过程中由于磨损,允许达10mm;<br />
+                (2) 在水平移动门和折叠门主动门扇的开启方向,以150N的人力施加在一个最不利的点，前条所述的间
+                隙允许增大，但对于旁开门不大于30mm，对于中分门其总和不大于45mm
+              </IndentationLayText>
+              <Table css={{borderCollapse:'collapse'}}>
+                <TableBody>
+                  <TableRow >
+                    <CCell>层</CCell>
+                    <CCell>门扇隙</CCell>
+                    <CCell>门套隙</CCell>
+                    <CCell>地坎隙</CCell>
+                    <CCell>施力隙</CCell>
+                  </TableRow>
+                  {inp?.dr?.map(a=>{
+                    return <TableRow>
+                      <CCell>{a}</CCell>
+                      <CCell>{inp?.leaf?.[a]||''}</CCell>
+                      <CCell>{inp?.frame?.[a]||''}</CCell>
+                      <CCell>{inp?.sill?.[a]||''}</CCell>
+                      <CCell>{inp?.gap?.[a]||''}</CCell>
+                    </TableRow>
+                  }) }
+                </TableBody>
+              </Table>
+            </InspectItemHeadColumn>
+            <InputGroupLine  label='(1)门扇间隙'>
+              <SelectHookfork value={ inp?.doorClearance ||''}
+                              onChange={e => setInp({ ...inp, doorClearance: e.currentTarget.value||undefined}) }
+              />
+            </InputGroupLine>
+            <InputGroupLine  label='(2)人力施加在最不利点时间隙'>
+              <SelectHookfork value={ inp?.manPowerGap ||''}
+                              onChange={e => setInp({ ...inp, manPowerGap: e.currentTarget.value||undefined}) }
+              />
+            </InputGroupLine>
+
+            <InspectItemHeadColumn  level={'B'} label={'6.9 门的锁紧'}  >
+              <IndentationLayText title={'(1)每个层门都应当设有符合下述要求的门锁装置:'}>
+                ②锁紧动作由重力、永久磁铁或者弹簧来产生和保持，即使永久磁铁或者弹簧失效，重力亦不能导致开锁；<br/>
+                ③轿厢在锁紧元件啮合不小于7mm时才能启动；<br/>
+                ④门的锁紧由一个电气安全装置来验证，该装置由锁紧元件强制操作而没有任何中间机构，并且能够防止误动作；
+              </IndentationLayText>
+              (2)如果轿门采用了门锁装置,该装置也应当符合本条(1)的要求。
+            </InspectItemHeadColumn>
+          <div>
+            已检门锁啮合长度:
+            {inp?.dr?.map(a=>{
+              return ` ${a}层:${inp?.tooth?.[a]||''};`
+             }) }
+          </div>
+          <InputGroupLine  label='(1)③门锁啮合长度'>
+            <SelectHookfork value={toothUnquf? '×': inp?.dr?.length>=1? '√':''} disabled/>
+          </InputGroupLine>
+            <InputGroupLine  label='(1)层门门锁装置'>
+              <SelectHookfork value={ inp?.doorLock ||''}
+                              onChange={e => setInp({ ...inp, doorLock: e.currentTarget.value||undefined}) }
+              />
+            </InputGroupLine>
+            <InputGroupLine  label='(2)轿门门锁装置'>
+              <SelectHookfork value={ inp?.cabinLock ||''}
+                              onChange={e => setInp({ ...inp, cabinLock: e.currentTarget.value||undefined}) }
+              />
+            </InputGroupLine>
+
+          <InspectItemHeadColumn  level={'C'} label={'6.12 门的锁紧'}  >
             <IndentationLayText title={'(1)每个层门都应当设有符合下述要求的门锁装置:'}>
-              ①锁紧动作由重力、永久磁铁或者弹簧来产生和保持,即使永久磁铁或者弹簧失效,重力亦不能导致开锁<br/>
-              ②轿厢在锁紧元件啮合不小于7mm时才能启动;<br/>
-              ③门的锁紧应当由一个电气安全装置来验证,该装置由锁紧元件强制操作而没有任何中间机构,并且能够防止误动作;
+              ②锁紧动作由重力、永久磁铁或者弹簧来产生和保持，即使永久磁铁或者弹簧失效，重力亦不能导致开锁；<br/>
+              ③轿厢在锁紧元件啮合不小于7mm时才能启动；<br/>
+              ④门的锁紧由一个电气安全装置来验证，该装置由锁紧元件强制操作而没有任何中间机构，并且能够防止误动作；
             </IndentationLayText>
             (2)如果轿门采用了门锁装置,该装置也应当符合本条(1)的要求。
-          </InspectRecordHeadColumn>
+          </InspectItemHeadColumn>
           <div>
-            已检查记录:
+            已检门锁啮合长度:
             {inp?.dr?.map(a=>{
-              return ` [ ${a} ]层: ${inp?.dn1?.[a]||''} , ${inp?.dn2?.[a]||''};`
+              return ` ${a}层:${inp?.tooth?.[a]||''};`
             }) }
           </div>
-          新增检查=>
-          <InputGroupLine  label='首先设置当前层站号'>
-            <SuffixInput
-              autoFocus={true}
-              value={floor||''}
-              onChange={e => {setFloor( e.currentTarget.value) }}
-            >
-              <Button onPress={() =>floor&&(inp?.dr?.includes(floor)? null:
-                  setInp( (inp?.dr&&{...inp,dr:[...inp?.dr,floor],dn1:{...inp?.dn1,[floor]:undefined},dn2:{...inp?.dn2,[floor]:undefined} } )
-                    || {...inp,dr:[floor],dn1:{...inp?.dn1,[floor]:undefined},dn2:{...inp?.dn2,[floor]:undefined} } )
-              )}
-              >设定</Button>
-            </SuffixInput>
+          <InputGroupLine  label='(1)③门锁啮合长度'>
+            <SelectHookfork value={toothUnquf? '×': inp?.dr?.length>=1? '√':''} disabled/>
           </InputGroupLine>
-          <div css={{ textAlign: 'center' }}>
-            <Button css={{ marginTop: theme.spaces.sm }} size="sm"
-                    onPress={() => floor&&inp?.dr?.includes(floor) &&(
-                      setInp({...inp,dr:[...inp.dr.filter(a => a!==floor )],
-                        dn1:{...inp?.dn1,[floor]:undefined}, dn2:{...inp?.dn2,[floor]:undefined}
-                      })
-                    )}
-            >刪除该层站</Button>
-          </div>
-          <InputGroupLine label={`(1)层门门锁(层站号 ${floor}):`}>
-            <SelectHookfork value={ (inp?.dn1?.[floor] ) || ''}
-                            onChange={e => floor&&setInp({ ...inp, dn1:{...inp?.dn1,[floor]:e.currentTarget.value? e.currentTarget.value:undefined} }) }
+          <InputGroupLine  label='(1)层门门锁装置'>
+            <SelectHookfork value={ inp?.doorLock ||''}
+                            onChange={e => setInp({ ...inp, doorLock: e.currentTarget.value||undefined}) }
             />
           </InputGroupLine>
-          <InputGroupLine label={`(2)轿门装置(层站号 ${floor}):`}>
-            <SelectHookfork value={ (inp?.dn2?.[floor] ) || ''}
-                            onChange={e => floor&&setInp({ ...inp, dn2:{...inp?.dn2,[floor]:e.currentTarget.value? e.currentTarget.value:undefined} }) }
+          <InputGroupLine  label='(2)轿门门锁装置'>
+            <SelectHookfork value={ inp?.cabinLock ||''}
+                            onChange={e => setInp({ ...inp, cabinLock: e.currentTarget.value||undefined}) }
             />
           </InputGroupLine>
         </InspectRecordTitle>
@@ -272,8 +414,8 @@ const InternalItem31: React.RefForwardingComponent<InternalItemHandResult,Intern
     const { eos, setInp, inp } = useItemControlAs({ref,  filter: getInpFilter});
 
     return (
-      <InspectRecordTitle  control={eos}   label={'检验项目 31'}>
-        <InspectRecordHeadColumn  level={'C'}  bigLabel={'6 轿门与层门'}  label={'6.2 门间隙'}  >
+      <InspectRecordTitle  control={eos}   label={'6.456/78/1011'}>
+        <InspectRecordHeadColumn  level={'C'}  bigLabel={'6 轿门与层门'}  label={'6.3 门间隙'}  >
           <IndentationLayText title={'门关闭后,应当符合以下要求:'}>
             (1) 门扇之间及门扇与立柱、门楣和地坎之间的间的间隙,对于乘客电梯不大于6mm;对于载货电梯不大于8mm,使用过程中由于磨损,允许达10mm;<br />
             (2) 在水平移动门和折叠门主动门扇的开启方向,以150N的人力施加在一个最不利的点，前条所述的间
@@ -519,7 +661,7 @@ const InternalItem8: React.RefForwardingComponent<InternalItemHandResult,Interna
     );
   } );
 
-const InternalItem7: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+const InternalItem6: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
   React.forwardRef((
     props:{ children },  ref
   ) => {
@@ -530,7 +672,7 @@ const InternalItem7: React.RefForwardingComponent<InternalItemHandResult,Interna
     const { eos, setInp, inp } = useItemControlAs({ref,  filter: getInpFilter});
 
     return (
-      <InspectRecordTitle  control={eos}   label={'检验项目 2.8'}>
+      <InspectRecordTitle  control={eos}   label={'控制柜2.8'}>
         <InspectRecordHeadColumn  level={'B'}  bigLabel={'2 机器设备间及相关设备'}  label={'2.8 控制柜、 紧急操作和动态测试装置'}>
         </InspectRecordHeadColumn>
         <InputGroupLine  label='(2)断相、错相保护功能有效；电梯运行与相序无关时，可以不设错相保护。'>
@@ -548,60 +690,38 @@ const InternalItem7: React.RefForwardingComponent<InternalItemHandResult,Interna
                           onChange={e => setInp({ ...inp, emergencyEOperation: e.currentTarget.value? e.currentTarget.value : undefined}) }
           />
         </InputGroupLine>
-        <IndentationLayText title={'(5)无机房电梯的紧急操作和动态测试装置应当符合以下要求：'}>
-          <InputGroupLine  label='①在任何情况下均能够安全方便地从井道外接近和操作该装置；'>
-            <SelectHookfork value={ inp?.convenientAccess  ||''}
-                            onChange={e => setInp({ ...inp, convenientAccess: e.currentTarget.value? e.currentTarget.value : undefined}) }
-            />
-          </InputGroupLine>
-          <InputGroupLine  label='②能够直接或者通过显示装置观察到轿厢的运行方向、速度以及是否位于开锁区；'>
-            <SelectHookfork value={ inp?.directlyObserve  ||''}
-                            onChange={e => setInp({ ...inp, directlyObserve: e.currentTarget.value? e.currentTarget.value : undefined}) }
-            />
-          </InputGroupLine>
-          <InputGroupLine  label='③装置上设有永久性照明和照明开关；'>
-            <SelectHookfork value={ inp?.permanentLighting  ||''}
-                            onChange={e => setInp({ ...inp, permanentLighting: e.currentTarget.value? e.currentTarget.value : undefined}) }
-            />
-          </InputGroupLine>
-          <InputGroupLine  label='④装置上设有停止装置或者主开关。'>
-            <SelectHookfork value={inp?.stopSwitch  ||''}
-                            onChange={e => setInp({ ...inp, stopSwitch: e.currentTarget.value? e.currentTarget.value : undefined}) }
-            />
-          </InputGroupLine>
-        </IndentationLayText>
-        <IndentationLayText title={'☆(6)层门和轿门旁路装置应当符合以下要求：'}>
+        <IndentationLayText title={'(6)层门和轿门旁路装置应当符合以下要求：'}>
           ①在层门和轿门旁路装置上或者其附近标明“旁路”字样,并且标明旁路装置的“旁路”状态或者“关”状态;<br/>
           ②旁路时取消正常运行(包括动力操作的自动门的任何运行);只有在检修运行或者紧急电动运行状态下,轿厢才能够运行;运行期间,轿厢上的听觉信号和轿底的闪烁灯起作用;<br/>
           ③能够旁路层门关闭触点、层门门锁触点、轿门关闭触点、轿门门锁触点;不能同时旁路层门和轿门的触点;对于手动层门,不能同时旁路层门关闭触点和层门门锁触点;<br/>
           ④提供独立的监控信号证实轿门处于关闭位置。
         </IndentationLayText>
-        <InputGroupLine  label='☆(6)层门和轿门旁路装置查验结果'>
+        <InputGroupLine  label='(6)层门和轿门旁路装置查验结果'>
           <SelectHookfork value={ inp?.bypassDoor ||''}
                           onChange={e => setInp({ ...inp, bypassDoor: e.currentTarget.value? e.currentTarget.value : undefined}) }
           />
         </InputGroupLine>
-        ☆(7)应当具有门回路检测功能,当轿厢在开锁区域内、轿门开启并且层门门锁释放时,监测检查
+        (7)应当具有门回路检测功能,当轿厢在开锁区域内、轿门开启并且层门门锁释放时,监测检查
         轿门关闭位置的电气安全装置、检查层门门锁锁紧位置的电气安全装置和轿门监控信号的正确动
         作;如果监测到上述装置的故障,能够防止电梯的正常运行。
-        <InputGroupLine  label='☆(7)应当具有门回路检测功能'>
+        <InputGroupLine  label='(7)应当具有门回路检测功能'>
           <SelectHookfork value={ inp?.loopDetection  ||''}
                           onChange={e => setInp({ ...inp, loopDetection: e.currentTarget.value? e.currentTarget.value : undefined}) }
           />
         </InputGroupLine>
-        ☆(8)应当具有制动器故障保护功能,当监测到制动器的提起(或者释放)失效时,能够防止电梯的正常启动。
-        <InputGroupLine  label='☆(8)应当具有制动器故障保护'>
+        (8)应当具有制动器故障保护功能,当监测到制动器的提起(或者释放)失效时,能够防止电梯的正常启动。
+        <InputGroupLine  label='(8)应当具有制动器故障保护'>
           <SelectHookfork value={ inp?.brakeFailure ||''}
                           onChange={e => setInp({ ...inp, brakeFailure: e.currentTarget.value? e.currentTarget.value : undefined}) }
           />
         </InputGroupLine>
-        <IndentationLayText title={'☆(9)自动救援操作装置(如果有)应该符合以下要求:'}>
+        <IndentationLayText title={'(9)自动救援操作装置(如果有)应该符合以下要求:'}>
           ①设有铭牌,标明制造单位名称、产品型号、产品编号、主要技术参数,加装的自动救援操作装置的铭牌和该装置的产品质量证明文件相符;<br/>
           ②在外电网断电至少等待3s后自动投入救援运行,电梯自动平层并且开门;<br/>
           ③当电梯处于检修运行、紧急电动运行、电气安全装置动作或者主开关断开时,不得投入救援运行;<br/>
           ④设有一个非自动复位的开关,当该开关处于关闭状态时,该装置不能启动救援运行。
         </IndentationLayText>
-        <InputGroupLine  label='☆(9)自动救援操作装置(如果有)'>
+        <InputGroupLine  label='(9)自动救援操作装置(如果有)'>
           <SelectHookfork value={ inp?.rescueDevice  ||''}
                           onChange={e => setInp({ ...inp, rescueDevice: e.currentTarget.value? e.currentTarget.value : undefined}) }
           />
@@ -610,14 +730,52 @@ const InternalItem7: React.RefForwardingComponent<InternalItemHandResult,Interna
     );
   } );
 
+const InternalItem2t4: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+  React.forwardRef((
+    props:{ children },  ref
+  ) => {
+    const getInpFilter = React.useCallback((par) => {
+      const {emergencyElectric} =par||{};
+      return {emergencyElectric};
+    }, []);
+    const { eos, setInp, inp } = useItemControlAs({ref,  filter: getInpFilter});
+
+    return (
+      <InspectRecordTitle  control={eos}   label={'检验项目 2.1,5,6'}>
+        <InspectRecordHeadColumn  level={'C'}  bigLabel={'2 机房(机器设备间)及相关设备'}
+                                  label={'2.1 通道与通道门'}   tinyLabel={'2.1'} >
+          <IndentationLayText >
+            ① 依靠持续揿压按钮来控制轿厢运行，此按钮有防止误操作的保护，按钮上或其近旁标出相应的运行方向；<br/>
+            ② 一旦进入检修运行，紧急电动运行装置控制轿厢运行的功能由检修控制装置所取代； <br/>
+            ③ 进行紧急电动运行操作时，易于观察到轿厢是否在开锁区。
+          </IndentationLayText>
+        </InspectRecordHeadColumn>
+        <InputGroupLine  label='符合与否'   labelTextStyle={css`font-size:1.5rem`} >
+          <Select inputSize="md" css={{minWidth:'140px',fontSize:'2rem',padding:'0 1rem'}} divStyle={css`max-width:240px;`}
+                  value={ inp?.emergencyElectric  ||''}
+                  onChange={e => setInp({ ...inp, emergencyElectric: e.currentTarget.value? e.currentTarget.value : undefined}) }
+          >
+            <option></option>
+            <option>／</option>
+            <option>√</option>
+            <option>×</option>
+            <option>▽</option>
+          </Select>
+        </InputGroupLine>
+      </InspectRecordTitle>
+    );
+  } );
+
+
 
 const projectList = [
-  createItem(8, <InternalItem1/>),
-  createItem(6, <InternalItem7/>),
-  createItem(5, <InternalItem8/>),
-  createItem(2, <InternalItem12/>),
-  createItem(7, <InternalItem27/>),
-  createItem(4, <InternalItem31/>),
-  createItem(3, <InternalItem37/>),
-  createItem(1, <InternalItem50/>),
+  createItem(1, <InternalItem1/>),
+  createItem(2, <InternalItem2t4/>),
+  createItem(6, <InternalItem6/>),
+  createItem(8, <InternalItem8/>),
+  createItem(12, <InternalItem12/>),
+  createItem(27, <InternalItem27/>),
+  createItem(30, <InternalItem30/>),
+  createItem(31, <InternalItem31/>),
+  createItem(50, <InternalItem50/>),
 ];
