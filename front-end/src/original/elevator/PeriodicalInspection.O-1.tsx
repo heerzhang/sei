@@ -1,14 +1,12 @@
 /** @jsx jsx */
-import { jsx, css } from "@emotion/core";
+import { jsx,  } from "@emotion/core";
 import * as React from "react";
 import {
   Text,
   useTheme,
   Button,
   InputGroupLine,
-  SuffixInput,
-  Input,
-  Select, useCollapse
+  SuffixInput,   useCollapse
 } from "customize-easy-ui-component";
 import {Table, TableBody,  TableRow, Cell, CCell} from "../../comp/TableExt";
 import {
@@ -133,7 +131,7 @@ const InternalItem50: React.RefForwardingComponent<InternalItemHandResult,Intern
     const { eos, setInp, inp } = useItemControlAs({ref,  filter: getInpFilter});
 
     return (
-      <InspectRecordTitle  control={eos}   label={'检验主要仪器设备'}>
+      <InspectRecordTitle  control={eos}   label={'主要检验仪器设备'}>
         <InputGroupLine  label='本次检验使用的工具箱为' >
           <SuffixInput
             value={(inp?.toolBox) ||'' }
@@ -419,61 +417,38 @@ const InternalItem31: React.RefForwardingComponent<InternalItemHandResult,Intern
     const { eos, setInp, inp } = useItemControlAs({ref,  filter: getInpFilter});
 
     return (
-      <InspectRecordTitle  control={eos}   label={'6.456/78/1011'}>
-        <InspectRecordHeadColumn  level={'C'}  bigLabel={'6 轿门与层门'}  label={'6.3 门间隙'}  >
-          <IndentationLayText title={'门关闭后,应当符合以下要求:'}>
-            (1) 门扇之间及门扇与立柱、门楣和地坎之间的间的间隙,对于乘客电梯不大于6mm;对于载货电梯不大于8mm,使用过程中由于磨损,允许达10mm;<br />
-            (2) 在水平移动门和折叠门主动门扇的开启方向,以150N的人力施加在一个最不利的点，前条所述的间
-            隙允许增大，但对于旁开门不大于30mm，对于中分门其总和不大于45mm
-          </IndentationLayText>
-        </InspectRecordHeadColumn>
-        <InputGroupLine  label='客梯(最大值)' >
-          <SuffixInput
-            value={(inp?.passengerMax) ||''}
-            onChange={e => {setInp({ ...inp, passengerMax: e.currentTarget.value? e.currentTarget.value : undefined});  }}
-            inputSize="md"
-            type="text"
-            placeholder="请输入测量数"
-          >mm</SuffixInput>
-        </InputGroupLine>
-        <InputGroupLine label={'货梯(最大值)'}>
-          <SuffixInput
-            autoFocus={true}
-            placeholder="请输入测量数"
-            value={(inp?.cargoMax) ||''}
-            onChange={e => {setInp({ ...inp, cargoMax: e.currentTarget.value? e.currentTarget.value : undefined});  }}
-          >mm</SuffixInput>
-        </InputGroupLine>
-        <InputGroupLine label={'不合格层号'}>
-          <Input
-            autoFocus={true}
-            placeholder="请以,号分割层号"
-            value={(inp?.unqualifiedLayer1)  ||''}
-            onChange={e => setInp({ ...inp, unqualifiedLayer1: e.currentTarget.value? e.currentTarget.value : undefined}) }
+      <InspectRecordTitle  control={eos}   label={'项目6.4-7'}>
+        <InspectZoneHeadColumn label={'6 轿门与层门'} projects={['6.4','6.5','6.6','6.7']} />
+        <InspectItemHeadColumn  level={'C'} label={'6.4 玻璃门防拖曳措施'}>
+        （1）层门和轿门采用玻璃门时，应当有防止儿童的手被拖曳的措施
+        </InspectItemHeadColumn>
+        <InputGroupLine  label='玻璃门防拖曳措施'>
+          <SelectHookfork value={ inp?.ladderAccess ||''}
+                          onChange={e => setInp({ ...inp, ladderAccess: e.currentTarget.value||undefined}) }
           />
         </InputGroupLine>
-        <InputGroupLine label={'中分门间隙(最大值)'}>
-          <SuffixInput
-            autoFocus={true}
-            placeholder="请输入测量数"
-            value={(inp?.middleDoorMax) ||'' }
-            onChange={e => setInp({ ...inp, middleDoorMax: e.currentTarget.value? e.currentTarget.value : undefined}) }
-          >mm</SuffixInput>
+        <InspectItemHeadColumn  level={'B'} label={'6.5 防止门夹人的保护装置'}>
+        （1）动力驱动的自动水平滑动门应当设置防止门夹人的保护装置，当人员通过层门入口被正在关闭的门扇撞击或者将被撞击时，该装置应当自动使门重新开启
+        </InspectItemHeadColumn>
+        <InputGroupLine  label='防止门夹人的保护装置'>
+          <SelectHookfork value={ inp?.ladderAccess ||''}
+                          onChange={e => setInp({ ...inp, ladderAccess: e.currentTarget.value||undefined}) }
+          />
         </InputGroupLine>
-        <InputGroupLine label={'旁开门间隙(最大值)'}>
-          <SuffixInput
-            autoFocus={true}
-            placeholder="请输入测量数"
-            value={(inp?.sideDoorMax) ||'' }
-            onChange={e => setInp({ ...inp, sideDoorMax: e.currentTarget.value? e.currentTarget.value : undefined}) }
-          >mm</SuffixInput>
+        <InspectItemHeadColumn  level={'B'} label={'6.6 门的运行与导向'}>
+        （1）层门和轿门正常运行时不得出现脱轨、机械卡阻或者在行程终端时错位；由于磨损、锈蚀或者火灾可能造成层门导向装置失效时，应当设置应急导向装置，使层门保持在原有位置
+        </InspectItemHeadColumn>
+        <InputGroupLine  label='门的运行与导向'>
+          <SelectHookfork value={ inp?.ladderAccess ||''}
+                          onChange={e => setInp({ ...inp, ladderAccess: e.currentTarget.value||undefined}) }
+          />
         </InputGroupLine>
-        <InputGroupLine label={'不合格层号'}>
-          <Input
-            autoFocus={true}
-            placeholder="请以,号分割层号"
-            value={(inp?.unqualifiedLayer2) ||''}
-            onChange={e => setInp({ ...inp, unqualifiedLayer2: e.currentTarget.value? e.currentTarget.value : undefined}) }
+        <InspectItemHeadColumn  level={'B'} label={'6.7 自动关闭层门装置'}>
+        （1）在轿门驱动层门的情况下，当轿厢在开锁区域之外时，如果层门开启（无论何种原因），应当有一种装置能够确保该层门自动关闭。自动关闭装置采用重块时，应当有防止重块坠落的措施
+        </InspectItemHeadColumn>
+        <InputGroupLine  label='自动关闭层门装置'>
+          <SelectHookfork value={ inp?.ladderAccess ||''}
+                          onChange={e => setInp({ ...inp, ladderAccess: e.currentTarget.value||undefined}) }
           />
         </InputGroupLine>
       </InspectRecordTitle>
@@ -491,66 +466,93 @@ const InternalItem25: React.RefForwardingComponent<InternalItemHandResult,Intern
     const { eos, setInp, inp } = useItemControlAs({ref,  filter: getInpFilter});
 
     return (
-      <InspectRecordTitle  control={eos}   label={'检验项目 5.1-'}>
-        <InspectRecordHeadColumn  level={'C'}  bigLabel={'5 悬挂装置 、 补偿装置及旋转部件防护'}  label={'5.1 悬挂装置、补偿装置的磨损、断丝、变形等情况'}>
-          出现下列情况之一时，悬挂钢丝绳和补偿钢丝绳应当报废:
-        </InspectRecordHeadColumn>
-        <InputGroupLine  label='①出现笼状畸变、绳股挤出、扭结、部分压扁、弯折'>
-          <SelectHookfork value={ inp?.cageDistortion  ||''}
-                          onChange={e => setInp({ ...inp, cageDistortion: e.currentTarget.value? e.currentTarget.value : undefined}) }
-          />
+      <InspectRecordTitle  control={eos}   label={'检验项目 5.1-2'}>
+        <InspectZoneHeadColumn label={'5 悬挂装置、补偿装置及旋转部件防护'} projects={['5.1','5.2']} />
+        <InspectItemHeadColumn  level={'C'} label={'5.1 悬挂装置、补偿装置的磨损、断丝、变形'}>
+          出现下列情况之一时，悬挂钢丝绳和补偿钢丝绳应当报废：<br/>
+          ①出现笼状畸变、绳股挤出、扭结、部分压扁、弯折；<br/>
+          ②一个捻距内出现的断丝数大于下表列出的数值时：
+          <Table minWidth={'140px'} css={{borderCollapse:'collapse'}}>
+            <TableBody>
+              <TableRow>
+                <CCell rowSpan={2}>断丝的形式</CCell>
+                <CCell colSpan={3}>钢丝绳的类型</CCell>
+              </TableRow>
+              <TableRow>
+                <CCell>6×19</CCell><CCell>8×9</CCell><CCell>9×19</CCell>
+              </TableRow>
+              <TableRow>
+                <CCell>均布在外层绳股上</CCell>
+                <CCell>24</CCell><CCell>30</CCell><CCell>34</CCell>
+              </TableRow>
+              <TableRow>
+                <CCell>集中在一或者两根外层绳股上</CCell>
+                <CCell>8</CCell><CCell>10</CCell><CCell>11</CCell>
+              </TableRow>
+              <TableRow>
+                <CCell>一根外绳股上相邻的断丝</CCell>
+                <CCell>4</CCell><CCell>4</CCell><CCell>4</CCell>
+              </TableRow>
+              <TableRow>
+                <CCell>股谷（缝）断丝 </CCell>
+                <CCell>1</CCell><CCell>1</CCell><CCell>1</CCell>
+              </TableRow>
+              <TableRow>
+                <Cell colSpan={4}>注：上述断丝数参考长度为一个捻距，约为6d(d表示钢丝绳的公称直径，mm）</Cell>
+              </TableRow>
+            </TableBody>
+          </Table>
+          ③钢丝绳直径小于其公称直径的90%；<br/>
+          ④钢丝绳严重锈蚀，铁锈填满绳股间隙。<br/>
+          采用其他类型悬挂装置的，悬挂装置的磨损、变形等不得超过制造单位设定的报废指标
+        </InspectItemHeadColumn>
+        数据及测量
+        <InputGroupLine label={`②断丝数`}>
+          <SuffixInput
+            autoFocus={true}
+            placeholder="请输入测量数"
+            value={ inp?.brokenWires ||''}
+            onChange={e => setInp({ ...inp, brokenWires: e.currentTarget.value||undefined}) }
+          >根</SuffixInput>
         </InputGroupLine>
-        ②一个捻距内出现的断丝数大于下表列出的数值时：
-        <Table minWidth={'140px'} css={{borderCollapse:'collapse'}}>
-          <TableBody>
-            <TableRow>
-              <CCell rowSpan={2}>断丝的形式</CCell>
-              <CCell colSpan={3}>钢丝绳的类型</CCell>
-            </TableRow>
-            <TableRow>
-              <CCell>6×19</CCell>
-              <CCell>8×9</CCell>
-              <CCell>9×19</CCell>
-            </TableRow>
-            <TableRow>
-              <CCell>均布在外层绳股上</CCell>
-              <CCell>24</CCell><CCell>30</CCell><CCell>34</CCell>
-            </TableRow>
-            <TableRow>
-              <CCell>集中在一或者两根外层绳股上</CCell>
-              <CCell>24</CCell><CCell>30</CCell><CCell>34</CCell>
-            </TableRow>
-            <TableRow>
-              <CCell>一根外绳股上相邻的断丝</CCell>
-              <CCell>4</CCell><CCell>4</CCell><CCell>4</CCell>
-            </TableRow>
-            <TableRow>
-              <CCell>股谷（缝）断丝 </CCell>
-              <CCell>2</CCell><CCell>3</CCell><CCell>6</CCell>
-            </TableRow>
-            <TableRow>
-              <Cell colSpan={4}>注：上述断丝数参考长度为一个捻距，约为6d(d表示钢丝绳的公称直径，mm）</Cell>
-            </TableRow>
-          </TableBody>
-        </Table>
-        <InputGroupLine  label='②断丝查验结果'>
-          <SelectHookfork value={ inp?.brokenWires ||''}
-                          onChange={e => setInp({ ...inp, brokenWires: e.currentTarget.value? e.currentTarget.value : undefined}) }
-          />
-        </InputGroupLine>
-        <InputGroupLine  label='③钢丝绳直径小于其公称直径的90%'>
-          <SelectHookfork value={ inp?.diameterSteelWire ||''}
-                          onChange={e => setInp({ ...inp, diameterSteelWire: e.currentTarget.value? e.currentTarget.value : undefined}) }
-          />
-        </InputGroupLine>
-        <InputGroupLine  label='④钢丝绳严重锈蚀，铁锈填满绳股间隙'>
+        <InputGroupLine  label='②一个捻距断丝数,结果判定'>
           <SelectHookfork value={ inp?.seriouslyRusted  ||''}
                           onChange={e => setInp({ ...inp, seriouslyRusted: e.currentTarget.value? e.currentTarget.value : undefined}) }
           />
         </InputGroupLine>
-        <InputGroupLine  label='⑤采用其他类型悬挂装置的，悬挂装置的磨损、变形等不得超过制造单位设定的报废指标'>
+        <InputGroupLine label={`③钢丝绳直径`}>
+          <SuffixInput
+            autoFocus={true}
+            placeholder="请输入测量数"
+            value={ inp?.brokenWires ||''}
+            onChange={e => setInp({ ...inp, brokenWires: e.currentTarget.value||undefined}) }
+          >mm</SuffixInput>
+        </InputGroupLine>
+        <InputGroupLine label={`③公称直径`}>
+          <SuffixInput
+            autoFocus={true}
+            placeholder="请输入测量数"
+            value={ inp?.brokenWires ||''}
+            onChange={e => setInp({ ...inp, brokenWires: e.currentTarget.value||undefined}) }
+          >mm</SuffixInput>
+        </InputGroupLine>
+        <InputGroupLine  label='③钢丝绳直径小于公称90%,结果判定'>
+          <SelectHookfork value={ inp?.diameterSteelWire ||''}
+                          onChange={e => setInp({ ...inp, diameterSteelWire: e.currentTarget.value? e.currentTarget.value : undefined}) }
+          />
+        </InputGroupLine>
+        <InputGroupLine  label='悬挂装置、补偿装置的磨损、断丝、变形等情况'>
           <SelectHookfork value={ inp?.otherSuspension ||''}
                           onChange={e => setInp({ ...inp, otherSuspension: e.currentTarget.value? e.currentTarget.value : undefined}) }
+          />
+        </InputGroupLine>
+        <InspectItemHeadColumn  level={'C'} label={'5.2 绳端固定'}>
+        （1）悬挂钢丝绳绳端固定应当可靠，弹簧、螺母、开口销等连接部件无缺损。<br/>
+         采用其他类型悬挂装置的，其端部固定应当符合制造单位的规定。
+        </InspectItemHeadColumn>
+        <InputGroupLine  label='绳端固定'>
+          <SelectHookfork value={ inp?.diameterSteelWire ||''}
+                          onChange={e => setInp({ ...inp, diameterSteelWire: e.currentTarget.value? e.currentTarget.value : undefined}) }
           />
         </InputGroupLine>
       </InspectRecordTitle>
@@ -1186,6 +1188,279 @@ const InternalItem22: React.RefForwardingComponent<InternalItemHandResult,Intern
     );
   } );
 
+const InternalItem27: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+  React.forwardRef((
+    props:{ children },  ref
+  ) => {
+    const getInpFilter = React.useCallback((par) => {
+      const {aboveGround,horiztAngle,ladderAccess,channelSet,channelLight,accessWidth,accessHeight,roomAccess,accessDoor,lightingSwitch,mainSwitch} =par||{};
+      return {aboveGround,horiztAngle,ladderAccess,channelSet,channelLight,accessWidth,accessHeight,roomAccess,accessDoor,lightingSwitch,mainSwitch};
+    }, []);
+    const { eos, setInp, inp } = useItemControlAs({ref,  filter: getInpFilter});
+
+    return (
+      <InspectRecordTitle  control={eos}   label={'检验项目 5.3-6'}>
+        <InspectZoneHeadColumn label={'5 悬挂装置、补偿装置及旋转部件防护'} projects={['5.3','5.5','5.6']} />
+        <InspectItemHeadColumn  level={'C'} label={'5.3 补偿装置'}>
+        （1）补偿绳（链）端固定应当可靠；<br/>
+        （2）应当使用电气安全装置来检查补偿绳的最小张紧位置；<br/>
+        （3）当电梯的额定速度大于3.5m/s时，还应当设置补偿绳防跳装置，该装置动作时应当有一个电气安全装置使电梯驱动主机停止运转。
+        </InspectItemHeadColumn>
+        <InputGroupLine  label='(1)绳(链)端固定'>
+          <SelectHookfork value={ inp?.ladderAccess ||''}
+                          onChange={e => setInp({ ...inp, ladderAccess: e.currentTarget.value||undefined}) }
+          />
+        </InputGroupLine>
+        <InputGroupLine  label='(2)电气安全装置'>
+          <SelectHookfork value={ inp?.ladderAccess ||''}
+                          onChange={e => setInp({ ...inp, ladderAccess: e.currentTarget.value||undefined}) }
+          />
+        </InputGroupLine>
+        <InputGroupLine  label='(3)补偿绳防跳装置'>
+          <SelectHookfork value={ inp?.ladderAccess ||''}
+                          onChange={e => setInp({ ...inp, ladderAccess: e.currentTarget.value||undefined}) }
+          />
+        </InputGroupLine>
+        <InspectItemHeadColumn  level={'B'} label={'5.5 松绳(链)保护'}>
+        （1）如果轿厢悬挂在两根钢丝绳或者链条上，则应当设置检查绳(链)松弛的电气安全装置，当其中一根钢丝绳(链条)发生异常相对伸长时，电梯应当停止运行
+        </InspectItemHeadColumn>
+        <InputGroupLine  label='松绳(链)保护'>
+          <SelectHookfork value={ inp?.ladderAccess ||''}
+                          onChange={e => setInp({ ...inp, ladderAccess: e.currentTarget.value||undefined}) }
+          />
+        </InputGroupLine>
+        <InspectItemHeadColumn  level={'C'} label={'5.6 旋转部件的防护'}>
+        （1）在机房（机器设备间）内的曳引轮、滑轮、链轮、限速器，在井道内的曳引轮、滑轮、链轮、限速器及张紧轮、补偿绳张紧轮，在轿厢上的滑轮、链轮等与钢丝绳、链条形成传动的旋转部件，均应当设置防护装置，以避免人身伤害、钢丝绳或链条因松弛而脱离绳槽或链轮、异物进入绳与绳槽或链与链轮之间；<br/>
+        对于允许按照GB 7588—1995及更早期标准生产的电梯，可以按照以下要求检验：<br/>
+        ①采用悬臂式曳引轮或者链轮时，有防止钢丝绳脱离绳槽或者链条脱离链轮的装置，并且当驱动主机不装设在井道上部时，有防止异物进入绳与绳槽之间或者链条与链轮之间的装置；<br/>
+        ②井道内的导向滑轮、曳引轮、轿架上固定的反绳轮和补偿绳张紧轮，有防止钢丝绳脱离绳槽和进入异物的防护装置
+        </InspectItemHeadColumn>
+        <InputGroupLine  label='旋转部件的防护'>
+          <SelectHookfork value={ inp?.ladderAccess ||''}
+                          onChange={e => setInp({ ...inp, ladderAccess: e.currentTarget.value||undefined}) }
+          />
+        </InputGroupLine>
+      </InspectRecordTitle>
+    );
+  } );
+
+const InternalItem35: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+  React.forwardRef((
+    props:{ children },  ref
+  ) => {
+    const getInpFilter = React.useCallback((par) => {
+      const {passengerMax,cargoMax,unqualifiedLayer1,middleDoorMax,sideDoorMax,unqualifiedLayer2} =par||{};
+      return {passengerMax,cargoMax,unqualifiedLayer1,middleDoorMax,sideDoorMax,unqualifiedLayer2};
+    }, []);
+    const { eos, setInp, inp } = useItemControlAs({ref,  filter: getInpFilter});
+
+    return (
+      <InspectRecordTitle  control={eos}   label={'项目6.8,6.10-11'}>
+        <InspectZoneHeadColumn label={'6 轿门与层门'} projects={['6.8','6.10','6.11']} />
+        <InspectItemHeadColumn  level={'B'} label={'6.8 紧急开锁装置'}>
+        （1）每个层门均应当能够被一把符合要求的钥匙从外面开启；紧急开锁后，在层门闭合时门锁装置不应当保持开锁位置
+        </InspectItemHeadColumn>
+        <InputGroupLine  label='紧急开锁装置'>
+          <SelectHookfork value={ inp?.ladderAccess ||''}
+                          onChange={e => setInp({ ...inp, ladderAccess: e.currentTarget.value||undefined}) }
+          />
+        </InputGroupLine>
+        <InspectItemHeadColumn  level={'B'} label={'6.10 门的闭合'}>
+        （1）正常运行时应当不能打开层门，除非轿厢在该层门的开锁区域内停止或停站；如果一个层门或者轿门（或者多扇门中的任何一扇门）开着，在正常操作情况下，应当不能启动电梯或者不能保持继续运行；<br/>
+        （2）每个层门和轿门的闭合都应当由电气安全装置来验证，如果滑动门是由数个间接机械连接的门扇组成，则未被锁住的门扇上也应当设置电气安全装置以验证其闭合状态
+        </InspectItemHeadColumn>
+        <InputGroupLine  label='(1)机电联锁'>
+          <SelectHookfork value={ inp?.ladderAccess ||''}
+                          onChange={e => setInp({ ...inp, ladderAccess: e.currentTarget.value||undefined}) }
+          />
+        </InputGroupLine>
+        <InputGroupLine  label='(2)电气安全装置'>
+          <SelectHookfork value={ inp?.ladderAccess ||''}
+                          onChange={e => setInp({ ...inp, ladderAccess: e.currentTarget.value||undefined}) }
+          />
+        </InputGroupLine>
+        <InspectItemHeadColumn  level={'B'} label={'6.11 轿门开门限制装置及轿门的开启'}>
+        （1）应当设置轿门开门限制装置，当轿厢停在开锁区域外时，能够防止轿厢内的人员打开轿门离开轿厢；<br/>
+        （2）在轿厢意外移动保护装置允许的最大制停距离范围内，打开对应的层门后，能够不用工具(三角钥匙或者永久性设置在现场的工具除外)从层站处打开轿门
+        </InspectItemHeadColumn>
+        <InputGroupLine  label='(1)轿门开门限制装置'>
+          <SelectHookfork value={ inp?.ladderAccess ||''}
+                          onChange={e => setInp({ ...inp, ladderAccess: e.currentTarget.value||undefined}) }
+          />
+        </InputGroupLine>
+        <InputGroupLine  label='(2)轿门的开启'>
+          <SelectHookfork value={ inp?.ladderAccess ||''}
+                          onChange={e => setInp({ ...inp, ladderAccess: e.currentTarget.value||undefined}) }
+          />
+        </InputGroupLine>
+      </InspectRecordTitle>
+    );
+  } );
+
+const InternalItem8d1: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+  React.forwardRef((
+    props:{ children },  ref
+  ) => {
+    const getInpFilter = React.useCallback((par) => {
+      const {aboveGround,horiztAngle,ladderAccess,channelSet,channelLight,accessWidth,accessHeight,roomAccess,accessDoor,lightingSwitch,mainSwitch} =par||{};
+      return {aboveGround,horiztAngle,ladderAccess,channelSet,channelLight,accessWidth,accessHeight,roomAccess,accessDoor,lightingSwitch,mainSwitch};
+    }, []);
+    const { eos, setInp, inp } = useItemControlAs({ref,  filter: getInpFilter});
+
+    return (
+      <InspectRecordTitle  control={eos}   label={'试验 8.1-4'}>
+        <InspectZoneHeadColumn label={'8 试验'} projects={['8.1','8.2','8.3','8.4']} />
+        <InspectItemHeadColumn  level={'C'} label={'8.1 平衡系数试验'}>
+        （1）曳引电梯的平衡系数应当在0.40～0.50之间，或者符合制造（改造）单位的设计值
+        </InspectItemHeadColumn>
+        <InputGroupLine  label='平衡系数试验'>
+          <SelectHookfork value={ inp?.ladderAccess ||''}
+                          onChange={e => setInp({ ...inp, ladderAccess: e.currentTarget.value||undefined}) }
+          />
+        </InputGroupLine>
+        <InspectItemHeadColumn  level={'C'} label={'8.2 ★轿厢上行超速保护装置试验'}>
+        （1）当轿厢上行速度失控时，轿厢上行超速保护装置应当动作，使轿厢制停或者至少使其速度降低至对重缓冲器的设计范围；该装置动作时，应当使一个电气安全装置动作
+        </InspectItemHeadColumn>
+        <InputGroupLine  label='轿厢上行超速保护装置试验'>
+          <SelectHookfork value={ inp?.ladderAccess ||''}
+                          onChange={e => setInp({ ...inp, ladderAccess: e.currentTarget.value||undefined}) }
+          />
+        </InputGroupLine>
+        <InspectItemHeadColumn  level={'B'} label={'8.3 ☆轿厢意外移动保护装置试验'}>
+        （1）轿厢在井道上部空载，以型式试验证书所给出的试验速度上行并触发制停部件，仅使用制停部件能够使电梯停止，轿厢的移动距离在型式试验证书给出的范围内；
+        （2）如果电梯采用存在内部冗余的制动器作为制停部件，则当制动器提起(或者释放)失效，或者制动力不足时，应当关闭轿门和层门，并且防止电梯的正常启动
+        </InspectItemHeadColumn>
+        <InputGroupLine  label='(1)制停情况'>
+          <SelectHookfork value={ inp?.ladderAccess ||''}
+                          onChange={e => setInp({ ...inp, ladderAccess: e.currentTarget.value||undefined}) }
+          />
+        </InputGroupLine>
+        <InputGroupLine  label='(2)自监测功能'>
+          <SelectHookfork value={ inp?.ladderAccess ||''}
+                          onChange={e => setInp({ ...inp, ladderAccess: e.currentTarget.value||undefined}) }
+          />
+        </InputGroupLine>
+        <InspectItemHeadColumn  level={'B'} label={'8.4 轿厢限速器－安全钳试验'}>
+        （2）定期检验：轿厢空载，以检修速度下行，进行限速器-安全钳联动试验，限速器－安全钳动作应当可靠
+        </InspectItemHeadColumn>
+        <InputGroupLine  label='轿厢限速器－安全钳试验'>
+          <SelectHookfork value={ inp?.ladderAccess ||''}
+                          onChange={e => setInp({ ...inp, ladderAccess: e.currentTarget.value||undefined}) }
+          />
+        </InputGroupLine>
+      </InspectRecordTitle>
+    );
+  } );
+
+const InternalItem8d5: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+  React.forwardRef((
+    props:{ children },  ref
+  ) => {
+    const getInpFilter = React.useCallback((par) => {
+      const {aboveGround,horiztAngle,ladderAccess,channelSet,channelLight,accessWidth,accessHeight,roomAccess,accessDoor,lightingSwitch,mainSwitch} =par||{};
+      return {aboveGround,horiztAngle,ladderAccess,channelSet,channelLight,accessWidth,accessHeight,roomAccess,accessDoor,lightingSwitch,mainSwitch};
+    }, []);
+    const { eos, setInp, inp } = useItemControlAs({ref,  filter: getInpFilter});
+
+    return (
+      <InspectRecordTitle  control={eos}   label={'试验 8.5-9'}>
+        <InspectZoneHeadColumn label={'8 试验'} projects={['8.5','8.6','8.7','8.9']} />
+        <InspectItemHeadColumn  level={'B'} label={'8.5 对重(平衡重)限速器—安全钳'}>
+        （1）轿厢空载，以检修速度上行，进行限速器-安全钳联动试验，限速器－安全钳动作应当可靠
+        </InspectItemHeadColumn>
+        <InputGroupLine  label='对重(平衡重)限速器—安全钳试验'>
+          <SelectHookfork value={ inp?.ladderAccess ||''}
+                          onChange={e => setInp({ ...inp, ladderAccess: e.currentTarget.value||undefined}) }
+          />
+        </InputGroupLine>
+        <InspectItemHeadColumn  level={'C'} label={'8.6 运行试验'}>
+        （1）轿厢空载，以正常运行速度上、下运行，呼梯、楼层显示等信号系统功能有效、指示正确、动作无误，轿厢平层良好，无异常现象发生；对于设有IC卡系统的电梯，轿厢内的人员无需通过IC卡系统即可到达建筑物的出口层，并且在电梯退出正常服务时，自动退出IC卡功能
+        </InspectItemHeadColumn>
+        <InputGroupLine  label='运行试验'>
+          <SelectHookfork value={ inp?.ladderAccess ||''}
+                          onChange={e => setInp({ ...inp, ladderAccess: e.currentTarget.value||undefined}) }
+          />
+        </InputGroupLine>
+        <InspectItemHeadColumn  level={'B'} label={'8.7 应急救援试验'}>
+        （1）在机房内或者紧急操作和动态测试装置上设有明晰的应急救援程序；<br/>
+        （2）建筑物内的救援通道保持通畅，以便相关人员无阻碍地抵达实施紧急操作的位置和层站等处；<br/>
+        （3）在各种载荷工况下，按照本条(1)所述的应急救援程序实施操作，能够安全、及时地解救被困人员
+        </InspectItemHeadColumn>
+        <InputGroupLine  label='(1)救援程序'>
+          <SelectHookfork value={ inp?.ladderAccess ||''}
+                          onChange={e => setInp({ ...inp, ladderAccess: e.currentTarget.value||undefined}) }
+          />
+        </InputGroupLine>
+        <InputGroupLine  label='(2)救援通道'>
+          <SelectHookfork value={ inp?.ladderAccess ||''}
+                          onChange={e => setInp({ ...inp, ladderAccess: e.currentTarget.value||undefined}) }
+          />
+        </InputGroupLine>
+        <InputGroupLine  label='(3)救援操作'>
+          <SelectHookfork value={ inp?.ladderAccess ||''}
+                          onChange={e => setInp({ ...inp, ladderAccess: e.currentTarget.value||undefined}) }
+          />
+        </InputGroupLine>
+        <InspectItemHeadColumn  level={'B'} label={'8.9 空载曳引检查'}>
+        （1）当对重压在缓冲器上而曳引机按电梯上行方向旋转时，应当不能提升空载轿厢
+        </InspectItemHeadColumn>
+        <InputGroupLine  label='空载曳引检查'>
+          <SelectHookfork value={ inp?.ladderAccess ||''}
+                          onChange={e => setInp({ ...inp, ladderAccess: e.currentTarget.value||undefined}) }
+          />
+        </InputGroupLine>
+      </InspectRecordTitle>
+    );
+  } );
+
+const InternalItem8d10: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+  React.forwardRef((
+    props:{ children },  ref
+  ) => {
+    const getInpFilter = React.useCallback((par) => {
+      const {aboveGround,horiztAngle,ladderAccess,channelSet,channelLight,accessWidth,accessHeight,roomAccess,accessDoor,lightingSwitch,mainSwitch} =par||{};
+      return {aboveGround,horiztAngle,ladderAccess,channelSet,channelLight,accessWidth,accessHeight,roomAccess,accessDoor,lightingSwitch,mainSwitch};
+    }, []);
+    const { eos, setInp, inp } = useItemControlAs({ref,  filter: getInpFilter});
+
+    return (
+      <InspectRecordTitle  control={eos}   label={'试验 8.10-13'}>
+        <InspectZoneHeadColumn label={'8 试验'} projects={['8.10','8.11','8.12','8.13']} />
+        <InspectItemHeadColumn  level={'B'} label={'8.10 上行制动工况曳引检查'}>
+        （1）轿厢空载以正常运行速度上行至行程上部，切断电动机与制动器供电，轿厢应当完全停止
+        </InspectItemHeadColumn>
+        <InputGroupLine  label='上行制动工况曳引检查'>
+          <SelectHookfork value={ inp?.ladderAccess ||''}
+                          onChange={e => setInp({ ...inp, ladderAccess: e.currentTarget.value||undefined}) }
+          />
+        </InputGroupLine>
+        <InspectItemHeadColumn  level={'B'} label={'8.11 ▲下行制动工况曳引检查'}>
+        （1）轿厢装载125%额定载重量，以正常运行速度下行至行程下部，切断电动机与制动器供电，轿厢应当完全停止
+        </InspectItemHeadColumn>
+        <InputGroupLine  label='▲下行制动工况曳引检查'>
+          <SelectHookfork value={ inp?.ladderAccess ||''}
+                          onChange={e => setInp({ ...inp, ladderAccess: e.currentTarget.value||undefined}) }
+          />
+        </InputGroupLine>
+        <InspectItemHeadColumn  level={'B'} label={'8.12 ▲静态曳引试验'}>
+        （1）对于轿厢面积超过规定的载货电梯，以轿厢实际面积所对应的125%额定载重量进行静态曳引试验；对于额定载重量按照单位轿厢有效面积不小于200kg/m2计算的汽车电梯，以150%额定载重量做静态曳引试验；历时10min，曳引绳应当没有打滑现象
+        </InspectItemHeadColumn>
+        <InputGroupLine  label='▲静态曳引试验'>
+          <SelectHookfork value={ inp?.ladderAccess ||''}
+                          onChange={e => setInp({ ...inp, ladderAccess: e.currentTarget.value||undefined}) }
+          />
+        </InputGroupLine>
+        <InspectItemHeadColumn  level={'B'} label={'8.13 制动试验'}>
+        （1）轿厢装载125%额定载重量，以正常运行速度下行时，切断电动机和制动器供电，制动器应当能够使驱动主机停止运转，试验后轿厢应无明显变形和损坏
+        </InspectItemHeadColumn>
+        <InputGroupLine  label='制动试验'>
+          <SelectHookfork value={ inp?.ladderAccess ||''}
+                          onChange={e => setInp({ ...inp, ladderAccess: e.currentTarget.value||undefined}) }
+          />
+        </InputGroupLine>
+      </InspectRecordTitle>
+    );
+  } );
 
 const projectList = [
   createItem(1, <InternalItem1/>),
@@ -1199,7 +1474,12 @@ const projectList = [
   createItem(18, <InternalItem18/>),
   createItem(22, <InternalItem22/>),
   createItem(25, <InternalItem25/>),
+  createItem(27, <InternalItem27/>),
   createItem(30, <InternalItem30/>),
   createItem(31, <InternalItem31/>),
+  createItem(35, <InternalItem35/>),
+  createItem(40, <InternalItem8d1/>),
+  createItem(44, <InternalItem8d5/>),
+  createItem(48, <InternalItem8d10/>),
   createItem(50, <InternalItem50/>),
 ];

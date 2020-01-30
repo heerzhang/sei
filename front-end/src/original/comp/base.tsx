@@ -264,7 +264,7 @@ interface IndentationLayTextProps  {
   children?: React.ReactNode;
   component?: React.ElementType<any>;
 }
-//子元素缩进排版。
+//子元素缩进排版: 文本段落，缩进的。
 export const IndentationLayText: React.FunctionComponent<IndentationLayTextProps> = ({
                  children,
                  title,
