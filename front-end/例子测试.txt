@@ -234,3 +234,42 @@ https://www.cnblogs.com/slmk/p/7591126.html（不需要FQ）
 
 注意：电脑端需要使用正式版Chrome，Dev版本不支持的。
 Button 超小屏幕 whiteSpace: 'unset'就多行的。 高度不能限制, 派出個特異按鈕區域？直接用鏈接router
+Popover 可能點擊不激發，可能動畫庫關係。
+
+奇葩？        <ResponsivePopover
+             content={
+               <MenuList>
+                 <MenuItem onPress={()=>onDeleteSeq(0,obj)}>刪除这条</MenuItem>
+                 <MenuItem
+                   onPress={() => alert("Hello 1kkkk")}
+                 >
+                   Drink coffee
+                 </MenuItem>
+               </MenuList>
+             }
+           >
+             <Button
+               size="md"
+               iconAfter={<IconChevronDown />}
+               variant="ghost"
+             >
+               {`仪器编号[6666666666666] 回给集合`}
+             </Button>
+           </ResponsivePopover>
+
+           <div>
+             已检查记录:
+             {inp?.mse?.map((a,i)=>{
+               return <React.Fragment key={i}>
+                 <div>{
+                   `仪器编号[${a.no}] 名称 ${a.name||''} 型号 ${a.type||''} 开机后 ${a.powerOn||''} 关机前 ${a.shutDown||''}`
+                 }
+                 </div>
+               </React.Fragment>;
+             }) }
+           </div>
+           Warning: Can't perform a React state update on an unmounted component. This is a no-op, but it indicates a memory leak in your application. To fix, cancel all subscriptions and asynchronous tasks in a useEffect cleanup function.
+               in MenuItem (at PeriodicalInspection.O-1.tsx:1443)
+竟然下面那个删除文字导致按钮执行异常，最终导致以后的按钮也能无法触发了，需要上级组件滚移动复位才正常。
+
+ResponsivePopover大屏？

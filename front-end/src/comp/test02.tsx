@@ -5,8 +5,8 @@ import {
   Text,
   Button,
   Sheet,
- InputGroup,
-   Input ,ScrollView, ScrollViewHandles
+  InputGroup,
+  Input, ScrollView, ScrollViewHandles, Layer, Table, TableHead, TableRow, TableCell, ExpandingRow, useTheme, Toolbar
 } from "customize-easy-ui-component";
 
 
@@ -54,7 +54,7 @@ function TouchableHighlight() {
   );
 }
 
-export  function Example() {
+export  function Example2() {
   const [count, setCount] = React.useState(0);
   const [step, setStep] = React.useState(1);
 
@@ -214,3 +214,124 @@ export  function Example22() {
   );
 }
 
+
+
+let id = 0;
+function createData(
+  name: string,
+  calories: number,
+  fat: number,
+  carbs: number,
+  protein: number
+) {
+  id += 1;
+  return { id, name, calories, fat, carbs, protein };
+}
+
+const rows = [
+  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
+  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
+  createData("Eclair", 262, 16.0, 24, 6.0),
+  createData("Cupcake", 305, 3.7, 67, 4.3),
+  createData("Gingerbread", 356, 16.0, 49, 3.9)
+];
+export  function Example() {
+  const theme = useTheme();
+  return (
+    <React.Fragment >
+  <div
+    css={{
+      minHeight: "100vh",
+      background: theme.colors.background.tint2,
+      padding: "48px"
+    }}
+  >
+    <Layer elevation="sm">
+      <Toolbar
+        css={{
+          borderTopRightRadius: theme.radii.lg,
+          borderTopLeftRadius: theme.radii.lg,
+          borderBottom: `1px solid ${theme.colors.border.default}`,
+          background: theme.colors.background.tint1,
+          justifyContent: "space-between"
+        }}
+      >
+        <Text css={{ margin: 0 }} variant="h4">
+          Ingredients
+        </Text>
+
+        <div>
+          <Button intent="primary">Add ingredient</Button>
+        </div>
+      </Toolbar>
+      <Table fixed={["200", "15%", "15%", "15%", "15%"]}>
+        <TableHead>
+          <TableRow>
+            <TableCell>Dessert (100g serving)</TableCell>
+            <TableCell align="right">Calories</TableCell>
+            <TableCell align="right">Fat (g)</TableCell>
+            <TableCell align="right">Carbs (g)</TableCell>
+            <TableCell align="right">Protein (g)</TableCell>
+          </TableRow>
+        </TableHead>
+
+        {rows.map(row => (
+          <ExpandingRow
+            content={close => {
+              return (
+                <div
+                  css={{
+                    padding: theme.spaces.lg,
+                    paddingTop: 0,
+                    paddingBottom: 0
+                  }}
+                >
+                  <Text variant="body" css={{ fontSize: theme.fontSizes[0] }}>
+shun 公董 寫
+                    了，這多方
+                  </Text>
+                  <div
+                    css={{
+                      display: "flex",
+                      marginTop: "1rem",
+                      justifyContent: "flex-end"
+                    }}
+                  >
+                    <Button
+                      variant="ghost"
+                      css={{ marginRight: theme.spaces.sm }}
+                      onClick={close}
+                    >
+                      Cancel
+                    </Button>
+                    <Button intent="primary">Save</Button>
+                  </div>
+                </div>
+              );
+            }}
+            key={row.id}
+          >
+            <TableCell   scope="row">
+              {row.name}
+            </TableCell>
+            <TableCell align="right">{row.calories}</TableCell>
+            <TableCell align="right">{row.fat}</TableCell>
+            <TableCell align="right">{row.carbs}</TableCell>
+            <TableCell align="right">{row.protein}</TableCell>
+          </ExpandingRow>
+        ))}
+      </Table>
+      <Toolbar
+        compressed
+        css={{
+          borderBottomRightRadius: theme.radii.lg,
+          borderBottomLeftRadius: theme.radii.lg,
+
+          background: theme.colors.background.tint1
+        }}
+      />
+    </Layer>
+  </div>
+    </React.Fragment>
+  );
+}

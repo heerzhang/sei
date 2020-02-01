@@ -222,7 +222,7 @@ export const Branding: React.FunctionComponent<BrandingProps> = (props) => {
         >
           <RouterLink   to="/login?register=true" >
               <Button
-                size="lg"
+                size="lg" noBind
                 intent="primary"
                 iconAfter={<IconArrowRight />}
               >
@@ -231,7 +231,7 @@ export const Branding: React.FunctionComponent<BrandingProps> = (props) => {
           </RouterLink>
           <RouterLink   to="/device/">
             <Button
-              size="lg"
+              size="lg" noBind
               intent="primary"
               iconAfter={<IconArrowRight />}
 
@@ -241,7 +241,7 @@ export const Branding: React.FunctionComponent<BrandingProps> = (props) => {
           </RouterLink>
           <RouterLink   to="/inspect/">
             <Button
-              size="lg"
+              size="lg" noBind
               intent="primary"
               iconAfter={<IconArrowRight />}
             >
@@ -250,7 +250,7 @@ export const Branding: React.FunctionComponent<BrandingProps> = (props) => {
           </RouterLink>
           <RouterLink   to="/original/">
             <Button
-              size="lg"
+              size="lg" noBind
               intent="primary"
               iconAfter={<IconArrowRight />}
             >

@@ -4,10 +4,10 @@ import * as React from "react";
 import {
   useTheme,
   Text,
-  Button,
+  Button,SelectProps,
   IconChevronUp,
   IconChevronDown,
-  Select, Layer, Check, Collapse, useCollapse, SelectProps
+  Select, Layer, Check,
 } from "customize-easy-ui-component";
 import PropTypes from "prop-types";
 //import { useUid } from "customize-easy-ui-component/esm/Hooks/use-uid";
@@ -15,6 +15,7 @@ import { Dispatch, SetStateAction } from "react";
 //import isEqual from "lodash.isequal";
 import { MutableRefObject } from "react";
 import { Ref } from "react";
+import { Collapse, useCollapse } from "../../comp/Collapse";
 //import { useUid } from "customize-easy-ui-component/src/Hooks/use-uid";
 
 
@@ -139,14 +140,16 @@ export interface InspectRecordTitleProps {
   control:  {　show?:boolean , buttonProps?: any , collapseProps?:{id:string,　show:boolean} 　};　
   label: string;
   children: React.ReactNode;
+  collapseNoLazy?:boolean;
 }
 //原始记录的列表项，很像菜单列表标题；　　包装成一个组件，以便　修改和复用。
 export const InspectRecordTitle: React.FunctionComponent<InspectRecordTitleProps> = ({
-                                                                                 control,
-                                                                                 label,
-                                                                                 children,
-                                                                                 ...other
-                                                                              }) => {
+         control,
+         label,
+         collapseNoLazy=false,
+         children,
+         ...other
+      }) => {
   const theme = useTheme();
 
   return (
@@ -161,7 +164,7 @@ export const InspectRecordTitle: React.FunctionComponent<InspectRecordTitleProps
             {<Text variant="h5" css={{color: control.show ? theme.colors.palette.red.base:undefined}}>{label}</Text>}
           </Button>
 
-          <Collapse {...control.collapseProps}   noAnimated>
+          <Collapse {...control.collapseProps}  noAnimated  lazy={!collapseNoLazy}>
               {children}
              <div css={{textAlign: 'right',padding:'0.2rem'}}>
               <Button

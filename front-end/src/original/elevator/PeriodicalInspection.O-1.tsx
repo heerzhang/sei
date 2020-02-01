@@ -6,7 +6,7 @@ import {
   useTheme,
   Button,
   InputGroupLine,
-  SuffixInput,   useCollapse
+  SuffixInput, useCollapse, Input, ResponsivePopover, IconChevronDown, Popover
 } from "customize-easy-ui-component";
 import {Table, TableBody,  TableRow, Cell, CCell} from "../../comp/TableExt";
 import {
@@ -20,6 +20,8 @@ import {
 import {  InternalItemHandResult, InternalItemProps } from "../comp/base";
 import { callSubitemChangePar, callSubitemShow, mergeSubitemRefs } from "../../utils/tools";
 import orderBy from "lodash.orderby";
+import { MenuItem, MenuList } from "../../comp/Menu";
+
 
 let   id = 0;
 const genId = () => ++id;
@@ -120,79 +122,7 @@ const InternalItem1: React.RefForwardingComponent<InternalItemHandResult,Interna
     );
   } );
 
-const InternalItem50: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
-  React.forwardRef((
-    props:{ children },  ref
-  ) => {
-    const getInpFilter = React.useCallback((par) => {
-      const {tool,toolBox,measurementCycle,goodFunction,meetRequirement,cantUsedReason} =par||{};
-      return {tool,toolBox,measurementCycle,goodFunction,meetRequirement,cantUsedReason};
-    }, []);
-    const { eos, setInp, inp } = useItemControlAs({ref,  filter: getInpFilter});
-
-    return (
-      <InspectRecordTitle  control={eos}   label={'主要检验仪器设备'}>
-        <InputGroupLine  label='本次检验使用的工具箱为' >
-          <SuffixInput
-            value={(inp?.toolBox) ||'' }
-            onChange={e => setInp({ ...inp, toolBox: e.currentTarget.value? e.currentTarget.value : undefined}) }
-            inputSize="md"
-            type="text"
-            placeholder="请输入箱号"
-          >号
-          </SuffixInput>
-        </InputGroupLine>
-        <div css={{ display: 'flex', justifyContent: 'space-between',flexWrap: 'wrap'}}>
-          <AntCheck label='万用表' inp={inp} setInp={setInp} sup={'tool'} item={'multimeter'}/>
-          <AntCheck label='钳形电流表' inp={inp} setInp={setInp} sup={'tool'} item={'clampAmmeter'}/>
-          <AntCheck label='绝缘电阻测量仪' inp={inp} setInp={setInp} sup={'tool'} item={'resistanceMeter'}/>
-          <AntCheck label='转速表' inp={inp} setInp={setInp} sup={'tool'} item={'tachometer'}/>
-          <AntCheck label='游标卡尺' inp={inp} setInp={setInp} sup={'tool'} item={'vernierCaliper'}/>
-          <AntCheck label='钢直尺' inp={inp} setInp={setInp} sup={'tool'} item={'steelRuler'}/>
-          <AntCheck label='卷尺' inp={inp} setInp={setInp} sup={'tool'} item={'tapeMeasure'}/>
-          <AntCheck label='塞尺' inp={inp} setInp={setInp} sup={'tool'} item={'feelerGauge'}/>
-          <AntCheck label='温湿度计' inp={inp} setInp={setInp} sup={'tool'} item={'temperatureMeter'}/>
-          <AntCheck label='测力计' inp={inp} setInp={setInp} sup={'tool'} item={'dynamometer'}/>
-          <AntCheck label='放大镜(20倍)' inp={inp} setInp={setInp} sup={'tool'} item={'magnifier'}/>
-          <AntCheck label='线锤' inp={inp} setInp={setInp} sup={'tool'} item={'plumbBob'}/>
-          <AntCheck label='验电器及常用电工工具' inp={inp} setInp={setInp} sup={'tool'} item={'electroscope'}/>
-          <AntCheck label='便携式检验灯' inp={inp} setInp={setInp} sup={'tool'} item={'inspLamp'}/>
-          <AntCheck label='限速器测试设备' inp={inp} setInp={setInp} sup={'tool'} item={'speedGovernorTest'}/>
-          <AntCheck label='其它' inp={inp} setInp={setInp} sup={'tool'} item={'other'}/>
-        </div>
-        <hr/>
-        <Text  variant="h4"　>
-          仪器设备状态确认
-        </Text>
-        <InputGroupLine  label='在计量周期内'  >
-          <SelectHookfork value={ (inp?.measurementCycle) ||''}
-                          onChange={e => setInp({ ...inp, measurementCycle: e.currentTarget.value? e.currentTarget.value : undefined}) }
-          />
-        </InputGroupLine>
-        <InputGroupLine  label='功能良好'>
-          <SelectHookfork value={ (inp?.goodFunction)  ||''}
-                          onChange={e => setInp({ ...inp, goodFunction: e.currentTarget.value? e.currentTarget.value : undefined}) }
-          />
-        </InputGroupLine>
-        <InputGroupLine  label='满足检验要求'  >
-          <SelectHookfork value={ (inp?.meetRequirement) ||''}
-                          onChange={e => setInp({ ...inp, meetRequirement: e.currentTarget.value? e.currentTarget.value : undefined}) }
-          />
-        </InputGroupLine>
-        <InputGroupLine  label='因为' >
-          <SuffixInput
-            value={(inp?.cantUsedReason) ||'' }
-            onChange={e => setInp({ ...inp, cantUsedReason: e.currentTarget.value? e.currentTarget.value : undefined}) }
-            inputSize="md"
-            type="text"
-          >的原因不能用
-          </SuffixInput>
-        </InputGroupLine>
-      </InspectRecordTitle>
-    );
-  } );
-
-const InternalItem30: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+const InternalItem6d3: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
   React.forwardRef((
     props:{ children },  ref
   ) => {
@@ -1462,6 +1392,151 @@ const InternalItem8d10: React.RefForwardingComponent<InternalItemHandResult,Inte
     );
   } );
 
+const InternalItemh2: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+  React.forwardRef((
+    props:{ children },  ref
+  ) => {
+    const getInpFilter = React.useCallback((par) => {
+      const {mse,tool,toolBox,measurementCycle,goodFunction,meetRequirement,cantUsedReason} =par||{};
+      return {mse,tool,toolBox,measurementCycle,goodFunction,meetRequirement,cantUsedReason};
+    }, []);
+    const { eos, setInp, inp } = useItemControlAs({ref,  filter: getInpFilter});
+    const theme = useTheme();
+    const [seq, setSeq] = React.useState(null);
+    const [obj, setObj] = React.useState({no:'',name:'',type:'',powerOn:'',shutDown:''});
+    React.useEffect(() => {
+      console.log("onDeleteSeq! useEffect =",seq,inp?.mse?.length-1);
+      setSeq(inp?.mse?.length-1);
+    }, []);
+    function onModifySeq(idx,it){
+      setObj(it);
+      setSeq(idx);
+    };
+    function onDeleteSeq(idx,it){
+      console.log("onDeleteSeq!  tplTypesize =",idx, inp?.mse, it);
+      //inp?.mse?.splice(idx,1);      ...inp?.mse
+      setInp({...inp,mse: [inp?.mse[0] ] });
+     // setSeq(null);
+    };
+    function onInsertSeq(idx,it){
+      inp?.mse?.splice(idx,0, obj);
+      setInp({...inp,mse:[...inp?.mse] });
+      setSeq(idx);
+    };
+    function onAddSeq(idx){
+      let size =inp?.mse?.push(obj);
+      setInp( (inp?.mse&&{...inp,mse:[...inp?.mse] } )  || {...inp,mse:[obj] } );
+      setSeq(inp?.mse&&(size-1)  || 0 );
+      console.log("onAddSeq!  tplTypesize =", size, inp?.mse, seq);
+    };
+
+    const mesrList= React.useMemo(() =>
+        <div>
+          已检查记录:
+          {inp?.mse?.map((a,i)=>{
+            return <React.Fragment key={a.no}>
+              <div>{
+                `仪器编号[${a.no}] 名称 ${a.name||''} 型号 ${a.type||''} 开机后 ${a.powerOn||''} 关机前 ${a.shutDown||''}`
+              }
+              </div>
+            </React.Fragment>;
+          }) }
+        </div>
+      ,[inp]);
+
+    return (
+      <InspectRecordTitle  control={eos} collapseNoLazy  label={'主要检验仪器设备'}>
+        <Text  variant="h4"　>
+          仪器设备状态确认
+        </Text>
+        <hr/>
+        <Popover
+          content={
+            <MenuList>
+              <MenuItem to={'hah'}  onPress={
+                () => {
+                  try {
+                    onDeleteSeq(0,obj)
+                  } catch (error) {
+                    this.setState({ error });
+                  }
+                }
+              }>刪除这条</MenuItem>
+              <MenuItem to={'hah'} onPress={
+                    () => {
+                    try {
+                    alert("Hello 1kkkk")
+                  } catch (error) {
+                    this.setState({ error });
+                  }
+                  }
+              }
+              >
+                Drink coffee
+              </MenuItem>
+            </MenuList>
+          }
+        >
+          <Button
+            size="md"
+            iconAfter={<IconChevronDown />}
+            variant="ghost"
+          >
+            {`仪器编号[6666666666666] 回给集合`}
+          </Button>
+        </Popover>
+
+        {mesrList}
+
+        <InputGroupLine  label='首先设置当前仪器设备编号'>
+          <SuffixInput
+            autoFocus={true}
+            value={seq||''}
+            onChange={e => {setSeq( e.currentTarget.value) }}
+          >
+            <Button onPress={() =>seq&&(inp?.mse?.includes(seq)? null:
+                setInp( (inp?.mse&&{...inp,mse:[...inp?.mse,seq] } )
+                  || {...inp,mse:[seq] } )
+            )}
+            >新增</Button>
+          </SuffixInput>
+        </InputGroupLine>
+        <div css={{ textAlign: 'center' }}>
+
+        </div>
+        <InputGroupLine label={`测量设备名称(层号 ${seq}):`}>
+          <Input autoFocus={true}  value={obj.name ||''}   onChange={e =>setObj({...obj, name: e.currentTarget.value} ) } />
+        </InputGroupLine>
+        <InputGroupLine label={`规格型号(层号 ${seq}):`}>
+          <Input autoFocus={true}  value={obj.type ||''}   onChange={e =>setObj({...obj, type: e.currentTarget.value} ) } />
+        </InputGroupLine>
+        <InputGroupLine label={`测量设备编号(层号 ${seq}):`}>
+          <Input autoFocus={true}  value={obj.no ||''}   onChange={e =>setObj({...obj, no: e.currentTarget.value} ) } />
+        </InputGroupLine>
+        <InputGroupLine label={`性能状态-开机后(层号 ${seq}):`}>
+          <SuffixInput
+            autoFocus={true}
+            value={ (inp?.mse?.[seq] ) || ''}
+            onChange={e => seq&&setInp({ ...inp, powerOn:{...inp?.psPowerOn,[seq]:e.currentTarget.value? e.currentTarget.value:undefined} }) }
+          >mm</SuffixInput>
+        </InputGroupLine>
+        <InputGroupLine label={`性能状态-关机前(层号ps shutDown ${seq}):`}>
+          <SuffixInput
+            autoFocus={true}
+            value={ (inp?.mse?.[seq] ) || ''}
+            onChange={e => seq&&setInp({ ...inp, powerOn:{...inp?.psPowerOn,[seq]:e.currentTarget.value? e.currentTarget.value:undefined} }) }
+          >mm</SuffixInput>
+        </InputGroupLine>
+        <Button onPress={() => {
+            if(seq!==null)   inp?.mse?.splice(seq, 1, obj);
+            setInp({ ...inp, mse: [...inp?.mse] });
+            } }
+        >改一条就确认</Button>
+      </InspectRecordTitle>
+    );
+  } );
+
+
 const projectList = [
   createItem(1, <InternalItem1/>),
   createItem(2, <InternalItem2t4/>),
@@ -1475,11 +1550,11 @@ const projectList = [
   createItem(22, <InternalItem22/>),
   createItem(25, <InternalItem25/>),
   createItem(27, <InternalItem27/>),
-  createItem(30, <InternalItem30/>),
+  createItem(30, <InternalItem6d3/>),
   createItem(31, <InternalItem31/>),
   createItem(35, <InternalItem35/>),
   createItem(40, <InternalItem8d1/>),
   createItem(44, <InternalItem8d5/>),
   createItem(48, <InternalItem8d10/>),
-  createItem(50, <InternalItem50/>),
+  createItem(52, <InternalItemh2/>),
 ];
