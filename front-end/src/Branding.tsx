@@ -456,3 +456,5 @@ export default Branding;
 */
 //模拟A4打印机窗口大小。A4，边距=无，缩放=默认。exact-width:595px; A4，边距=无，缩放=70%。exact-width:850px;不算大哦，差不多就是810px宽度。看着像1142px*1590px。
 //打印机的所用代码宽度px实际很小的，没有缩放可能才600px的。["@media print and (min-width:551px)and (max-width:849px)"]: {display: "none",}
+//<RouterLink   to="/device/">    <Button />  />   这里： 实际向Button会注入{ onClick=navigate(href) }； 估计useTouchable的bind导致异常。
+

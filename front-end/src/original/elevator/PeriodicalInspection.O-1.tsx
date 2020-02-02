@@ -4,9 +4,9 @@ import * as React from "react";
 import {
   Text,
   useTheme,
-  Button,
+  Button, MenuItem, MenuList,
   InputGroupLine,
-  SuffixInput, useCollapse, Input, ResponsivePopover, IconChevronDown, Popover
+  SuffixInput, useCollapse, Input, ResponsivePopover, IconChevronDown, Popover, Layer
 } from "customize-easy-ui-component";
 import {Table, TableBody,  TableRow, Cell, CCell} from "../../comp/TableExt";
 import {
@@ -20,7 +20,6 @@ import {
 import {  InternalItemHandResult, InternalItemProps } from "../comp/base";
 import { callSubitemChangePar, callSubitemShow, mergeSubitemRefs } from "../../utils/tools";
 import orderBy from "lodash.orderby";
-import { MenuItem, MenuList } from "../../comp/Menu";
 
 
 let   id = 0;
@@ -1402,21 +1401,20 @@ const InternalItemh2: React.RefForwardingComponent<InternalItemHandResult,Intern
     }, []);
     const { eos, setInp, inp } = useItemControlAs({ref,  filter: getInpFilter});
     const theme = useTheme();
-    const [seq, setSeq] = React.useState(null);
+    const [seq, setSeq] = React.useState(null);   //表對象的當前一條。
     const [obj, setObj] = React.useState({no:'',name:'',type:'',powerOn:'',shutDown:''});
     React.useEffect(() => {
-      console.log("onDeleteSeq! useEffect =",seq,inp?.mse?.length-1);
-      setSeq(inp?.mse?.length-1);
-    }, []);
+      let size =inp?.mse?.length;
+      setSeq(size>0?  size-1:null);
+    }, [inp]);
     function onModifySeq(idx,it){
       setObj(it);
       setSeq(idx);
     };
     function onDeleteSeq(idx,it){
-      console.log("onDeleteSeq!  tplTypesize =",idx, inp?.mse, it);
-      //inp?.mse?.splice(idx,1);      ...inp?.mse
-      setInp({...inp,mse: [inp?.mse[0] ] });
-     // setSeq(null);
+      inp?.mse?.splice(idx,1);
+      setInp({...inp,mse: [...inp?.mse] });
+      setSeq(null);
     };
     function onInsertSeq(idx,it){
       inp?.mse?.splice(idx,0, obj);
@@ -1426,112 +1424,71 @@ const InternalItemh2: React.RefForwardingComponent<InternalItemHandResult,Intern
     function onAddSeq(idx){
       let size =inp?.mse?.push(obj);
       setInp( (inp?.mse&&{...inp,mse:[...inp?.mse] } )  || {...inp,mse:[obj] } );
-      setSeq(inp?.mse&&(size-1)  || 0 );
-      console.log("onAddSeq!  tplTypesize =", size, inp?.mse, seq);
+      setSeq((inp?.mse&&(size-1))  || 0 );
     };
 
-    const mesrList= React.useMemo(() =>
-        <div>
-          已检查记录:
+    const editor=<Layer elevation={"sm"} css={{ padding: '0.25rem' }}>
+      <div>
+        <InputGroupLine label={`测量设备名称(${seq+1}):`}>
+          <Input autoFocus={true}  value={obj.name ||''}   onChange={e =>setObj({...obj, name: e.currentTarget.value} ) } />
+        </InputGroupLine>
+        <InputGroupLine label={`规格型号(${seq+1}):`}>
+          <Input autoFocus={true}  value={obj.type ||''}   onChange={e =>setObj({...obj, type: e.currentTarget.value} ) } />
+        </InputGroupLine>
+        <InputGroupLine label={`测量设备编号(${seq+1}):`}>
+          <Input autoFocus={true}  value={obj.no ||''}   onChange={e =>setObj({...obj, no: e.currentTarget.value} ) } />
+        </InputGroupLine>
+        <InputGroupLine  label='性能状态-开机后'>
+          <SelectHookfork value={obj.powerOn ||''}  onChange={e =>setObj({...obj, powerOn: e.currentTarget.value} ) } />
+        </InputGroupLine>
+        <InputGroupLine  label='性能状态-关机前'>
+          <SelectHookfork value={obj.shutDown ||''}  onChange={e =>setObj({...obj, shutDown: e.currentTarget.value} ) } />
+        </InputGroupLine>
+        <Button onPress={() => {
+          if(seq !== null) {
+            inp?.mse?.splice(seq, 1, obj);
+            setInp({ ...inp, mse: [...inp?.mse] });
+          }
+          else setInp({ ...inp, mse: [obj] });
+        } }
+        >{inp?.mse?.length>0? `改一条就确认`: `新增一条`}</Button>
+      </div>
+    </Layer>;
+
+    const instrumentTable=<div>
           {inp?.mse?.map((a,i)=>{
-            return <React.Fragment key={a.no}>
-              <div>{
-                `仪器编号[${a.no}] 名称 ${a.name||''} 型号 ${a.type||''} 开机后 ${a.powerOn||''} 关机前 ${a.shutDown||''}`
-              }
+            return <React.Fragment  key={i}>
+              <div>{`${i+1}`}
+                <ResponsivePopover
+                  content={
+                    <MenuList>
+                      <MenuItem onPress={()=>onModifySeq(i,a)}>修改</MenuItem>
+                      <MenuItem onPress={()=>onDeleteSeq(i,a)}>刪除这条</MenuItem>
+                      <MenuItem onPress={()=>onInsertSeq(i,a)}>插入一条</MenuItem>
+                      <MenuItem onPress={()=>onAddSeq(i)}>末尾新增一条</MenuItem>
+                    </MenuList>
+                  }
+                >
+                  <Button  size="md" iconAfter={<IconChevronDown />} variant="ghost" css={{whiteSpace:'unset'}}>
+                  {`[${a.no}] ${a.name||''} 型号${a.type||''} 开机${a.powerOn||''} 关机${a.shutDown||''}`}
+                  </Button>
+                </ResponsivePopover>
               </div>
+              {i===seq && editor}
             </React.Fragment>;
           }) }
-        </div>
-      ,[inp]);
+        </div>;
 
     return (
       <InspectRecordTitle  control={eos} collapseNoLazy  label={'主要检验仪器设备'}>
-        <Text  variant="h4"　>
-          仪器设备状态确认
+        <Text  variant="h5"　>
+          二、主要测量设备性能检查
         </Text>
+        使用的仪器设备表:
         <hr/>
-        <Popover
-          content={
-            <MenuList>
-              <MenuItem to={'hah'}  onPress={
-                () => {
-                  try {
-                    onDeleteSeq(0,obj)
-                  } catch (error) {
-                    this.setState({ error });
-                  }
-                }
-              }>刪除这条</MenuItem>
-              <MenuItem to={'hah'} onPress={
-                    () => {
-                    try {
-                    alert("Hello 1kkkk")
-                  } catch (error) {
-                    this.setState({ error });
-                  }
-                  }
-              }
-              >
-                Drink coffee
-              </MenuItem>
-            </MenuList>
-          }
-        >
-          <Button
-            size="md"
-            iconAfter={<IconChevronDown />}
-            variant="ghost"
-          >
-            {`仪器编号[6666666666666] 回给集合`}
-          </Button>
-        </Popover>
+        {instrumentTable}
+        {seq===null && editor}
 
-        {mesrList}
-
-        <InputGroupLine  label='首先设置当前仪器设备编号'>
-          <SuffixInput
-            autoFocus={true}
-            value={seq||''}
-            onChange={e => {setSeq( e.currentTarget.value) }}
-          >
-            <Button onPress={() =>seq&&(inp?.mse?.includes(seq)? null:
-                setInp( (inp?.mse&&{...inp,mse:[...inp?.mse,seq] } )
-                  || {...inp,mse:[seq] } )
-            )}
-            >新增</Button>
-          </SuffixInput>
-        </InputGroupLine>
-        <div css={{ textAlign: 'center' }}>
-
-        </div>
-        <InputGroupLine label={`测量设备名称(层号 ${seq}):`}>
-          <Input autoFocus={true}  value={obj.name ||''}   onChange={e =>setObj({...obj, name: e.currentTarget.value} ) } />
-        </InputGroupLine>
-        <InputGroupLine label={`规格型号(层号 ${seq}):`}>
-          <Input autoFocus={true}  value={obj.type ||''}   onChange={e =>setObj({...obj, type: e.currentTarget.value} ) } />
-        </InputGroupLine>
-        <InputGroupLine label={`测量设备编号(层号 ${seq}):`}>
-          <Input autoFocus={true}  value={obj.no ||''}   onChange={e =>setObj({...obj, no: e.currentTarget.value} ) } />
-        </InputGroupLine>
-        <InputGroupLine label={`性能状态-开机后(层号 ${seq}):`}>
-          <SuffixInput
-            autoFocus={true}
-            value={ (inp?.mse?.[seq] ) || ''}
-            onChange={e => seq&&setInp({ ...inp, powerOn:{...inp?.psPowerOn,[seq]:e.currentTarget.value? e.currentTarget.value:undefined} }) }
-          >mm</SuffixInput>
-        </InputGroupLine>
-        <InputGroupLine label={`性能状态-关机前(层号ps shutDown ${seq}):`}>
-          <SuffixInput
-            autoFocus={true}
-            value={ (inp?.mse?.[seq] ) || ''}
-            onChange={e => seq&&setInp({ ...inp, powerOn:{...inp?.psPowerOn,[seq]:e.currentTarget.value? e.currentTarget.value:undefined} }) }
-          >mm</SuffixInput>
-        </InputGroupLine>
-        <Button onPress={() => {
-            if(seq!==null)   inp?.mse?.splice(seq, 1, obj);
-            setInp({ ...inp, mse: [...inp?.mse] });
-            } }
-        >改一条就确认</Button>
       </InspectRecordTitle>
     );
   } );

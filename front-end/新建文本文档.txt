@@ -226,3 +226,7 @@ localhost:9229
 
 电梯监督检验自检原始记录 https://wenku.baidu.com/view/bc5420ed9a6648d7c1c708a1284ac850ac02045c.html
 
+<MenuItem 按钮会经常被unmount场景需要用onClick；而onPress在手机完全正常。 Can't perform a React state update on an unmounted    in MenuItem
+<Popover 用onClick正常；<ResponsivePopover 用onClick在手机上不能正常；MenuItem出问题！
+泪奔node_modules直接拷贝目录的工程更换了没修改，还是win10快捷目录，疼啊！
+

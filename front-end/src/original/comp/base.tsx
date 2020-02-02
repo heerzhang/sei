@@ -6,7 +6,7 @@ import {
   Text,
   Button,SelectProps,
   IconChevronUp,
-  IconChevronDown,
+  IconChevronDown, Collapse, useCollapse,
   Select, Layer, Check,
 } from "customize-easy-ui-component";
 import PropTypes from "prop-types";
@@ -15,7 +15,7 @@ import { Dispatch, SetStateAction } from "react";
 //import isEqual from "lodash.isequal";
 import { MutableRefObject } from "react";
 import { Ref } from "react";
-import { Collapse, useCollapse } from "../../comp/Collapse";
+//import { Collapse, useCollapse } from "../../comp/Collapse";
 //import { useUid } from "customize-easy-ui-component/src/Hooks/use-uid";
 
 
@@ -164,7 +164,7 @@ export const InspectRecordTitle: React.FunctionComponent<InspectRecordTitleProps
             {<Text variant="h5" css={{color: control.show ? theme.colors.palette.red.base:undefined}}>{label}</Text>}
           </Button>
 
-          <Collapse {...control.collapseProps}  noAnimated  lazy={!collapseNoLazy}>
+          <Collapse {...control.collapseProps}  noAnimated>
               {children}
              <div css={{textAlign: 'right',padding:'0.2rem'}}>
               <Button
