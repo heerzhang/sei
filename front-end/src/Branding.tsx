@@ -254,7 +254,7 @@ export const Branding: React.FunctionComponent<BrandingProps> = (props) => {
               intent="primary"
               iconAfter={<IconArrowRight />}
             >
-              测试原始记录
+              原始记录先来
             </Button>
         </RouterLink>
         </div>

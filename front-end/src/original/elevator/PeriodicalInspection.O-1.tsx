@@ -6,7 +6,7 @@ import {
   useTheme,
   Button, MenuItem, MenuList,
   InputGroupLine,
-  SuffixInput, useCollapse, Input, ResponsivePopover, IconChevronDown, Popover, Layer
+  SuffixInput, useCollapse, Input, ResponsivePopover, IconChevronDown, Popover, Layer, TextArea, Select
 } from "customize-easy-ui-component";
 import {Table, TableBody,  TableRow, Cell, CCell} from "../../comp/TableExt";
 import {
@@ -1429,13 +1429,13 @@ const InternalItemh2: React.RefForwardingComponent<InternalItemHandResult,Intern
 
     const editor=<Layer elevation={"sm"} css={{ padding: '0.25rem' }}>
       <div>
-        <InputGroupLine label={`测量设备名称(${seq+1}):`}>
+        <InputGroupLine label={`测量设备名称`}>
           <Input autoFocus={true}  value={obj.name ||''}   onChange={e =>setObj({...obj, name: e.currentTarget.value} ) } />
         </InputGroupLine>
-        <InputGroupLine label={`规格型号(${seq+1}):`}>
+        <InputGroupLine label={`规格型号`}>
           <Input autoFocus={true}  value={obj.type ||''}   onChange={e =>setObj({...obj, type: e.currentTarget.value} ) } />
         </InputGroupLine>
-        <InputGroupLine label={`测量设备编号(${seq+1}):`}>
+        <InputGroupLine label={`测量设备编号`}>
           <Input autoFocus={true}  value={obj.no ||''}   onChange={e =>setObj({...obj, no: e.currentTarget.value} ) } />
         </InputGroupLine>
         <InputGroupLine  label='性能状态-开机后'>
@@ -1488,13 +1488,317 @@ const InternalItemh2: React.RefForwardingComponent<InternalItemHandResult,Intern
         <hr/>
         {instrumentTable}
         {seq===null && editor}
+      </InspectRecordTitle>
+    );
+  } );
 
+const InternalItem0: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+  React.forwardRef((
+    props:{ children },  ref
+  ) => {
+    const getInpFilter = React.useCallback((par) => {
+      const {aboveGround,horiztAngle,ladderAccess,channelSet,channelLight,accessWidth,accessHeight,roomAccess,accessDoor,lightingSwitch,mainSwitch} =par||{};
+      return {aboveGround,horiztAngle,ladderAccess,channelSet,channelLight,accessWidth,accessHeight,roomAccess,accessDoor,lightingSwitch,mainSwitch};
+    }, []);
+    const { eos, setInp, inp } = useItemControlAs({ref,  filter: getInpFilter});
+
+    return (
+      <InspectRecordTitle  control={eos}   label={'一、设备概况'}>
+        可直接修改部分
+        <InputGroupLine  label='设备号' >
+          <Input autoFocus={true} value={inp?.insulResistance ||''}  placeholder="那一台电梯？"
+                 onChange={e => setInp({ ...inp, insulResistance: e.currentTarget.value? e.currentTarget.value : undefined}) } />
+        </InputGroupLine>
+        <InputGroupLine  label='检验日期' >
+          <Input autoFocus={true} value={inp?.insulResistance ||''}  placeholder="基准日" type='date'
+                 onChange={e => setInp({ ...inp, insulResistance: e.currentTarget.value? e.currentTarget.value : undefined}) } />
+        </InputGroupLine>
+        <InputGroupLine  label='安全管理人员' >
+          <Input autoFocus={true} value={inp?.insulResistance ||''}
+                 onChange={e => setInp({ ...inp, insulResistance: e.currentTarget.value? e.currentTarget.value : undefined}) } />
+        </InputGroupLine>
+        <InputGroupLine  label='联系电话1' >
+          <Input autoFocus={true} value={inp?.insulResistance ||''}
+                 onChange={e => setInp({ ...inp, insulResistance: e.currentTarget.value? e.currentTarget.value : undefined}) } />
+        </InputGroupLine>
+      </InspectRecordTitle>
+    );
+  } );
+
+const InternalItem97: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+  React.forwardRef((
+    props:{ children },  ref
+  ) => {
+    const getInpFilter = React.useCallback((par) => {
+      const {dr,leaf,frame,sill,gap,tooth,knife,roller,doorClearance,manPowerGap,doorLock,cabinLock,lengthDoorLock,clearanceKnife} =par||{};
+      return {dr,leaf,frame,sill,gap,tooth,knife,roller,doorClearance,manPowerGap,doorLock,cabinLock,lengthDoorLock,clearanceKnife};
+    }, []);
+    const { eos, setInp, inp } = useItemControlAs({ref,  filter: getInpFilter});
+    const theme = useTheme();
+    const [floor, setFloor] = React.useState(null);
+    const cAppendix =useCollapse(false,true);
+    let  toothUnquf=inp?.dr?.find((f,i)=>{
+      return parseFloat(inp?.tooth?.[f])<7;
+    });
+    let  knifeUnquf=inp?.dr?.find((f,i)=>{
+      return parseFloat(inp?.knife?.[f])<5;
+    });
+    let  rollerUnquf=inp?.dr?.find((f,i)=>{
+      return parseFloat(inp?.roller?.[f])<5;
+    });
+
+    return (
+      <React.Fragment>
+          <InspectRecordTitle  control={cAppendix} label={'附录B：现场检验条件'}>
+            1、机房或者机器设备间的空气温度保持在5℃～40℃之间；<br/>
+            2、电源输入电压波动在额定电压值±7％的范围内；<br/>
+            3、环境空气中没有腐蚀性和易燃性气体及导电尘埃； <br/>
+            4、检验现场（主要指机房或者机器设备间、井道、轿顶、底坑）清洁，没有与电梯工作无关的物品和设备，基站、相关层站等检验现场放置表明正在进行检验的警示牌；<br/>
+            5、对井道进行了必要的封闭。 <br/>
+            特殊情况下，电梯设计文件对温度、湿度、电压、环境空气条件等进行了专门规定的，检验现场的温度、湿度、电压、环境空气条件等应当符合电梯设计文件的规定。
+            <hr/>
+            <div>
+              确认过的记录:
+              {inp?.dr?.map((a,i)=>{
+                return <React.Fragment key={i}>
+                  <br/>{
+                  `[${a}]层: ${inp?.leaf?.[a]||''} , ${inp?.frame?.[a]||''} , ${inp?.sill?.[a]||''} , ${inp?.gap?.[a]||''} , ${inp?.tooth?.[a]||''} , ${inp?.knife?.[a]||''} , ${inp?.roller?.[a]||''};`
+                }
+                </React.Fragment>;
+              }) }
+            </div>
+            新增检查=>
+            <InputGroupLine  label='首先设置当前检验日期'>
+              <SuffixInput
+                autoFocus={true}  type='date'
+                value={floor||''}
+                onChange={e => {setFloor( e.currentTarget.value) }}
+              >
+                <Button onPress={() =>floor&&(inp?.dr?.includes(floor)? null:
+                    setInp( (inp?.dr&&{...inp,dr:[...inp?.dr,floor] } )
+                      || {...inp,dr:[floor] } )
+                )}
+                >新增</Button>
+              </SuffixInput>
+            </InputGroupLine>
+            <div css={{ textAlign: 'center' }}>
+              <Button css={{ marginTop: theme.spaces.sm }} size="sm"
+                      onPress={() => floor&&inp?.dr?.includes(floor) &&(
+                        setInp({...inp,dr:[...inp.dr.filter(a => a!==floor )],
+                          leaf:{...inp?.leaf,[floor]:undefined}, frame:{...inp?.frame,[floor]:undefined}, sill:{...inp?.sill,[floor]:undefined}
+                          , gap:{...inp?.gap,[floor]:undefined}, tooth:{...inp?.tooth,[floor]:undefined}, knife:{...inp?.knife,[floor]:undefined}
+                          , roller:{...inp?.roller,[floor]:undefined}
+                        })
+                      )}
+              >刪除</Button>
+            </div>
+            <InputGroupLine label={`机房空气温度(${floor}):`}>
+              <SuffixInput
+                autoFocus={true}
+                placeholder="请输入测量数"
+                value={ (inp?.leaf?.[floor] ) || ''}
+                onChange={e => floor&&setInp({ ...inp, leaf:{...inp?.leaf,[floor]:e.currentTarget.value? e.currentTarget.value:undefined} }) }
+              >℃</SuffixInput>
+            </InputGroupLine>
+            <InputGroupLine label={`电源输入电压(${floor}):`}>
+              <SuffixInput
+                autoFocus={true}
+                placeholder="请输入测量数"
+                value={ (inp?.frame?.[floor] ) || ''}
+                onChange={e => floor&&setInp({ ...inp, frame:{...inp?.frame,[floor]:e.currentTarget.value? e.currentTarget.value:undefined} }) }
+              >V</SuffixInput>
+            </InputGroupLine>
+          </InspectRecordTitle>
+      </React.Fragment>
+    );
+  } );
+
+const InternalItem98: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+  React.forwardRef((
+    props:{ children },  ref
+  ) => {
+    const getInpFilter = React.useCallback((par) => {
+      const {aboveGround,horiztAngle,ladderAccess,channelSet,channelLight,accessWidth,accessHeight,roomAccess,accessDoor,lightingSwitch,mainSwitch} =par||{};
+      return {aboveGround,horiztAngle,ladderAccess,channelSet,channelLight,accessWidth,accessHeight,roomAccess,accessDoor,lightingSwitch,mainSwitch};
+    }, []);
+    const { eos, setInp, inp } = useItemControlAs({ref,  filter: getInpFilter});
+
+    return (
+      <InspectRecordTitle  control={eos}   label={'资料确认描述或问题描述'}>
+        六、见证材料
+        <InputGroupLine  label='1、维保自检材料' >
+          <Input autoFocus={true} value={inp?.insulResistance ||''}  placeholder="使用默认规则的可省略不填"
+                 onChange={e => setInp({ ...inp, insulResistance: e.currentTarget.value? e.currentTarget.value : undefined}) } />
+        </InputGroupLine>
+        <InputGroupLine  label='2、限速器动作速度校验材料' >
+          <Input autoFocus={true} value={inp?.insulResistance ||''}
+                 onChange={e => setInp({ ...inp, insulResistance: e.currentTarget.value? e.currentTarget.value : undefined}) } />
+        </InputGroupLine>
+        <InputGroupLine  label='3、使用单位整改反馈材料' >
+          <Input autoFocus={true} value={inp?.insulResistance ||''}
+                 onChange={e => setInp({ ...inp, insulResistance: e.currentTarget.value? e.currentTarget.value : undefined}) } />
+        </InputGroupLine>
+        <InputGroupLine  label='4、其他资料及编号' >
+          <Input autoFocus={true} value={inp?.insulResistance ||''}
+                 onChange={e => setInp({ ...inp, insulResistance: e.currentTarget.value? e.currentTarget.value : undefined}) } />
+        </InputGroupLine>
+        七、备注<br/><br/>
+        呈现在正式报告的备注
+        <TextArea autoFocus={true} value={inp?.insulResistance ||''}
+                 onChange={e => setInp({ ...inp, insulResistance: e.currentTarget.value? e.currentTarget.value : undefined}) } />
+        <br/>明细说明的部分
+         <TextArea autoFocus={true} value={inp?.insulResistance ||''} rows={10}
+                    onChange={e => setInp({ ...inp, insulResistance: e.currentTarget.value? e.currentTarget.value : undefined}) } />
+      </InspectRecordTitle>
+    );
+  } );
+
+const InternalItem99: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+  React.forwardRef((
+    props:{ children },  ref
+  ) => {
+    const getInpFilter = React.useCallback((par) => {
+      const {aboveGround,horiztAngle,ladderAccess,channelSet,channelLight,accessWidth,accessHeight,roomAccess,accessDoor,lightingSwitch,mainSwitch} =par||{};
+      return {aboveGround,horiztAngle,ladderAccess,channelSet,channelLight,accessWidth,accessHeight,roomAccess,accessDoor,lightingSwitch,mainSwitch};
+    }, []);
+    const { eos, setInp, inp } = useItemControlAs({ref,  filter: getInpFilter});
+
+    return (
+      <InspectRecordTitle  control={eos}   label={'下结论!'}>
+        五、现场检验意见
+        <InputGroupLine  label='下结论' >
+          <Select inputSize="md" css={{minWidth:'140px',fontSize:'2rem',padding:'0 1rem'}}
+                  value={ inp?.emergencyElectric  ||''}
+                  onChange={e => setInp({ ...inp, emergencyElectric: e.currentTarget.value? e.currentTarget.value : undefined}) }
+          >
+            <option></option>
+            <option>合格</option>
+            <option>不合格</option>
+            <option>复检合格</option>
+            <option>复检不合格</option>
+          </Select>
+        </InputGroupLine>
+        <InputGroupLine  label='检验人员' >
+          <Input autoFocus={true} value={inp?.insulResistance ||''} placeholder="那些人检验，名字"
+                 onChange={e => setInp({ ...inp, insulResistance: e.currentTarget.value? e.currentTarget.value : undefined}) } />
+        </InputGroupLine>
+        <InputGroupLine  label='编制人员' >
+          <Input autoFocus={true} value={inp?.insulResistance ||''} placeholder="名字"
+                 onChange={e => setInp({ ...inp, insulResistance: e.currentTarget.value? e.currentTarget.value : undefined}) } />
+        </InputGroupLine>
+        <InputGroupLine  label='编制日期' >
+          <Input autoFocus={true} value={inp?.insulResistance ||''}  type='date'
+                 onChange={e => setInp({ ...inp, insulResistance: e.currentTarget.value? e.currentTarget.value : undefined}) } />
+        </InputGroupLine>
+      </InspectRecordTitle>
+    );
+  } );
+
+const InternalItem96: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+  React.forwardRef((
+    props:{ children },  ref
+  ) => {
+    const getInpFilter = React.useCallback((par) => {
+      const {unq,tool,toolBox,measurementCycle,goodFunction,meetRequirement,cantUsedReason} =par||{};
+      return {unq,tool,toolBox,measurementCycle,goodFunction,meetRequirement,cantUsedReason};
+    }, []);
+    const { eos, setInp, inp } = useItemControlAs({ref,  filter: getInpFilter});
+    const theme = useTheme();
+    const [seq, setSeq] = React.useState(null);   //表對象的當前一條。
+    const [obj, setObj] = React.useState({no:'',desc:'',rres:'',rdate:''});
+    React.useEffect(() => {
+      let size =inp?.unq?.length;
+      setSeq(size>0?  size-1:null);
+    }, [inp]);
+    function onModifySeq(idx,it){
+      setObj(it);
+      setSeq(idx);
+    };
+    function onDeleteSeq(idx,it){
+      inp?.unq?.splice(idx,1);
+      setInp({...inp,unq: [...inp?.unq] });
+      setSeq(null);
+    };
+    function onInsertSeq(idx,it){
+      inp?.unq?.splice(idx,0, obj);
+      setInp({...inp,unq:[...inp?.unq] });
+      setSeq(idx);
+    };
+    function onAddSeq(idx){
+      let size =inp?.unq?.push(obj);
+      setInp( (inp?.unq&&{...inp,unq:[...inp?.unq] } )  || {...inp,unq:[obj] } );
+      setSeq((inp?.unq&&(size-1))  || 0 );
+    };
+
+    const editor=<Layer elevation={"sm"} css={{ padding: '0.25rem' }}>
+      <div>
+        <InputGroupLine label={`类别/编号`}>
+          <Input autoFocus={true}  value={obj.no ||''} placeholder="类比B/4.8这样"
+                 onChange={e =>setObj({...obj, no: e.currentTarget.value} ) } />
+        </InputGroupLine>
+        <InputGroupLine label={`不合格内容描述`}>
+          <Input autoFocus={true}  value={obj.desc ||''}   onChange={e =>setObj({...obj, desc: e.currentTarget.value} ) } />
+        </InputGroupLine>
+        <InputGroupLine label={`复检结果`}>
+          <SelectHookfork value={obj.rres ||''}
+                          onChange={e =>setObj({...obj, rres: e.currentTarget.value} ) }
+          />
+        </InputGroupLine>
+        <InputGroupLine  label='复检日期' >
+          <Input autoFocus={true} value={obj.rdate ||''}  type='date'
+                 onChange={e =>setObj({...obj, rdate: e.currentTarget.value} ) } />
+        </InputGroupLine>
+        <Button onPress={() => {
+          if(seq !== null) {
+            inp?.unq?.splice(seq, 1, obj);
+            setInp({ ...inp, unq: [...inp?.unq] });
+          }
+          else setInp({ ...inp, unq: [obj] });
+        } }
+        >{inp?.unq?.length>0? `改一条就确认`: `新增一条`}</Button>
+      </div>
+    </Layer>;
+
+    const instrumentTable=<div>
+      {inp?.unq?.map((a,i)=>{
+        return <React.Fragment  key={i}>
+          <div>{`${i+1}`}
+            <ResponsivePopover
+              content={
+                <MenuList>
+                  <MenuItem onPress={()=>onModifySeq(i,a)}>修改</MenuItem>
+                  <MenuItem onPress={()=>onDeleteSeq(i,a)}>刪除这条</MenuItem>
+                  <MenuItem onPress={()=>onInsertSeq(i,a)}>插入一条</MenuItem>
+                  <MenuItem onPress={()=>onAddSeq(i)}>末尾新增一条</MenuItem>
+                </MenuList>
+              }
+            >
+              <Button  size="md" iconAfter={<IconChevronDown />} variant="ghost" css={{whiteSpace:'unset'}}>
+                {`[${a.rdate}] 项目${a.no||''}： ${a.desc||''}。 复检结果${a.rres||''}`}
+              </Button>
+            </ResponsivePopover>
+          </div>
+          {i===seq && editor}
+        </React.Fragment>;
+      }) }
+    </div>;
+
+    return (
+      <InspectRecordTitle  control={eos} collapseNoLazy  label={'不合格复检结果记录'}>
+        <Text  variant="h5"　>
+          四、检验不合格记录及复检结果
+        </Text>
+        明细表:
+        <hr/>
+        {instrumentTable}
+        {seq===null && editor}
       </InspectRecordTitle>
     );
   } );
 
 
 const projectList = [
+  createItem(0, <InternalItem0/>),
   createItem(1, <InternalItem1/>),
   createItem(2, <InternalItem2t4/>),
   createItem(5, <InternalItem5/>),
@@ -1514,4 +1818,8 @@ const projectList = [
   createItem(44, <InternalItem8d5/>),
   createItem(48, <InternalItem8d10/>),
   createItem(52, <InternalItemh2/>),
+  createItem(96, <InternalItem96/>),
+  createItem(97, <InternalItem97/>),
+  createItem(98, <InternalItem98/>),
+  createItem(99, <InternalItem99/>)
 ];

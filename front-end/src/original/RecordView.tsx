@@ -118,7 +118,7 @@ export const RecordView: React.FunctionComponent<RecordViewProps> = ({
         }}
       >保存到服务器</Button>
       <LayerLoading loading={loading} />
-      <Text  css={{wordWrap: 'break-word'}}>{`当前(${JSON.stringify(newOut)})`}</Text>
+      <Text  css={{wordWrap: 'break-word'}}>{false && `当前(${JSON.stringify(newOut)})`}</Text>
     </React.Fragment>
   );
 }
