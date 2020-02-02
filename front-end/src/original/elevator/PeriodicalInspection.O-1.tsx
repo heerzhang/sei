@@ -1530,94 +1530,6 @@ const InternalItem0: React.RefForwardingComponent<InternalItemHandResult,Interna
     );
   } );
 
-const InternalItem97: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
-  React.forwardRef((
-    props:{ children },  ref
-  ) => {
-    const getInpFilter = React.useCallback((par) => {
-      const {dr,leaf,frame,sill,gap,tooth,knife,roller,doorClearance,manPowerGap,doorLock,cabinLock,lengthDoorLock,clearanceKnife} =par||{};
-      return {dr,leaf,frame,sill,gap,tooth,knife,roller,doorClearance,manPowerGap,doorLock,cabinLock,lengthDoorLock,clearanceKnife};
-    }, []);
-    const { eos, setInp, inp } = useItemControlAs({ref,  filter: getInpFilter});
-    const theme = useTheme();
-    const [floor, setFloor] = React.useState(null);
-    const cAppendix =useCollapse(false,true);
-    let  toothUnquf=inp?.dr?.find((f,i)=>{
-      return parseFloat(inp?.tooth?.[f])<7;
-    });
-    let  knifeUnquf=inp?.dr?.find((f,i)=>{
-      return parseFloat(inp?.knife?.[f])<5;
-    });
-    let  rollerUnquf=inp?.dr?.find((f,i)=>{
-      return parseFloat(inp?.roller?.[f])<5;
-    });
-
-    return (
-      <React.Fragment>
-          <InspectRecordTitle  control={cAppendix} label={'附录B：现场检验条件'}>
-            1、机房或者机器设备间的空气温度保持在5℃～40℃之间；<br/>
-            2、电源输入电压波动在额定电压值±7％的范围内；<br/>
-            3、环境空气中没有腐蚀性和易燃性气体及导电尘埃； <br/>
-            4、检验现场（主要指机房或者机器设备间、井道、轿顶、底坑）清洁，没有与电梯工作无关的物品和设备，基站、相关层站等检验现场放置表明正在进行检验的警示牌；<br/>
-            5、对井道进行了必要的封闭。 <br/>
-            特殊情况下，电梯设计文件对温度、湿度、电压、环境空气条件等进行了专门规定的，检验现场的温度、湿度、电压、环境空气条件等应当符合电梯设计文件的规定。
-            <hr/>
-            <div>
-              确认过的记录:
-              {inp?.dr?.map((a,i)=>{
-                return <React.Fragment key={i}>
-                  <br/>{
-                  `[${a}]层: ${inp?.leaf?.[a]||''} , ${inp?.frame?.[a]||''} , ${inp?.sill?.[a]||''} , ${inp?.gap?.[a]||''} , ${inp?.tooth?.[a]||''} , ${inp?.knife?.[a]||''} , ${inp?.roller?.[a]||''};`
-                }
-                </React.Fragment>;
-              }) }
-            </div>
-            新增检查=>
-            <InputGroupLine  label='首先设置当前检验日期'>
-              <SuffixInput
-                autoFocus={true}  type='date'
-                value={floor||''}
-                onChange={e => {setFloor( e.currentTarget.value) }}
-              >
-                <Button onPress={() =>floor&&(inp?.dr?.includes(floor)? null:
-                    setInp( (inp?.dr&&{...inp,dr:[...inp?.dr,floor] } )
-                      || {...inp,dr:[floor] } )
-                )}
-                >新增</Button>
-              </SuffixInput>
-            </InputGroupLine>
-            <div css={{ textAlign: 'center' }}>
-              <Button css={{ marginTop: theme.spaces.sm }} size="sm"
-                      onPress={() => floor&&inp?.dr?.includes(floor) &&(
-                        setInp({...inp,dr:[...inp.dr.filter(a => a!==floor )],
-                          leaf:{...inp?.leaf,[floor]:undefined}, frame:{...inp?.frame,[floor]:undefined}, sill:{...inp?.sill,[floor]:undefined}
-                          , gap:{...inp?.gap,[floor]:undefined}, tooth:{...inp?.tooth,[floor]:undefined}, knife:{...inp?.knife,[floor]:undefined}
-                          , roller:{...inp?.roller,[floor]:undefined}
-                        })
-                      )}
-              >刪除</Button>
-            </div>
-            <InputGroupLine label={`机房空气温度(${floor}):`}>
-              <SuffixInput
-                autoFocus={true}
-                placeholder="请输入测量数"
-                value={ (inp?.leaf?.[floor] ) || ''}
-                onChange={e => floor&&setInp({ ...inp, leaf:{...inp?.leaf,[floor]:e.currentTarget.value? e.currentTarget.value:undefined} }) }
-              >℃</SuffixInput>
-            </InputGroupLine>
-            <InputGroupLine label={`电源输入电压(${floor}):`}>
-              <SuffixInput
-                autoFocus={true}
-                placeholder="请输入测量数"
-                value={ (inp?.frame?.[floor] ) || ''}
-                onChange={e => floor&&setInp({ ...inp, frame:{...inp?.frame,[floor]:e.currentTarget.value? e.currentTarget.value:undefined} }) }
-              >V</SuffixInput>
-            </InputGroupLine>
-          </InspectRecordTitle>
-      </React.Fragment>
-    );
-  } );
-
 const InternalItem98: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
   React.forwardRef((
     props:{ children },  ref
@@ -1629,7 +1541,7 @@ const InternalItem98: React.RefForwardingComponent<InternalItemHandResult,Intern
     const { eos, setInp, inp } = useItemControlAs({ref,  filter: getInpFilter});
 
     return (
-      <InspectRecordTitle  control={eos}   label={'资料确认描述或问题描述'}>
+      <InspectRecordTitle  control={eos}   label={'见证材料或问题备注'}>
         六、见证材料
         <InputGroupLine  label='1、维保自检材料' >
           <Input autoFocus={true} value={inp?.insulResistance ||''}  placeholder="使用默认规则的可省略不填"
@@ -1648,11 +1560,8 @@ const InternalItem98: React.RefForwardingComponent<InternalItemHandResult,Intern
                  onChange={e => setInp({ ...inp, insulResistance: e.currentTarget.value? e.currentTarget.value : undefined}) } />
         </InputGroupLine>
         七、备注<br/><br/>
-        呈现在正式报告的备注
-        <TextArea autoFocus={true} value={inp?.insulResistance ||''}
-                 onChange={e => setInp({ ...inp, insulResistance: e.currentTarget.value? e.currentTarget.value : undefined}) } />
-        <br/>明细说明的部分
-         <TextArea autoFocus={true} value={inp?.insulResistance ||''} rows={10}
+        纸质正式报告备注可能只取前几行
+         <TextArea autoFocus={true} value={inp?.insulResistance ||''} rows={10} placeholder="网页版本正式报告备注可随意多写"
                     onChange={e => setInp({ ...inp, insulResistance: e.currentTarget.value? e.currentTarget.value : undefined}) } />
       </InspectRecordTitle>
     );
@@ -1798,6 +1707,83 @@ const InternalItem96: React.RefForwardingComponent<InternalItemHandResult,Intern
         {instrumentTable}
         {seq===null && editor}
       </InspectRecordTitle>
+    );
+  } );
+
+
+const InternalItem97: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+  React.forwardRef((
+    props:{ children },  ref
+  ) => {
+    const getInpFilter = React.useCallback((par) => {
+      const {检验条件,温度,电压值} =par||{};
+      return {检验条件,温度,电压值};
+    }, []);
+    const { eos, setInp, inp } = useItemControlAs({ref,  filter: getInpFilter});
+    const theme = useTheme();
+    const [floor, setFloor] = React.useState(null);
+
+    return (
+      <React.Fragment>
+        <InspectRecordTitle  control={eos} label={'附录B：现场检验条件'}>
+          1、机房或者机器设备间的空气温度保持在5℃～40℃之间；<br/>
+          2、电源输入电压波动在额定电压值±7％的范围内；<br/>
+          3、环境空气中没有腐蚀性和易燃性气体及导电尘埃； <br/>
+          4、检验现场（主要指机房或者机器设备间、井道、轿顶、底坑）清洁，没有与电梯工作无关的物品和设备，基站、相关层站等检验现场放置表明正在进行检验的警示牌；<br/>
+          5、对井道进行了必要的封闭。 <br/>
+          特殊情况下，电梯设计文件对温度、湿度、电压、环境空气条件等进行了专门规定的，检验现场的温度、湿度、电压、环境空气条件等应当符合电梯设计文件的规定。
+          <hr/>
+          <div>
+            确认过的记录:
+            {inp?.检验条件?.map((a,i)=>{
+              return <React.Fragment key={i}>
+                <br/>{
+                `[${a}]日: ${inp?.温度?.[a]||''} ℃, ${inp?.电压值?.[a]||''} V;`
+              }
+              </React.Fragment>;
+            }) }
+          </div>
+          新增检查=>
+          <InputGroupLine  label='首先设置当前检验日期'>
+            <SuffixInput
+              autoFocus={true}  type='date'
+              value={floor||''}
+              onChange={e => {setFloor( e.currentTarget.value) }}
+            >
+              <Button onPress={() =>floor&&(inp?.检验条件?.includes(floor)? null:
+                  setInp( (inp?.检验条件&&{...inp,检验条件:[...inp?.检验条件,floor] } )
+                    || {...inp,检验条件:[floor] } )
+              )}
+              >新增</Button>
+            </SuffixInput>
+          </InputGroupLine>
+          <div css={{ textAlign: 'center' }}>
+            <Button css={{ marginTop: theme.spaces.sm }} size="sm"
+                    onPress={() => floor&&inp?.检验条件?.includes(floor) &&(
+                      setInp({...inp,检验条件:[...inp.检验条件.filter(a => a!==floor )],
+                        温度:{...inp?.温度,[floor]:undefined}, 电压值:{...inp?.电压值,[floor]:undefined}
+                      })
+                    )}
+            >刪除</Button>
+          </div>
+          <InputGroupLine label={`机房空气温度(${floor}):`}>
+            <SuffixInput
+              autoFocus={true}
+              placeholder="请输入测量数"
+              value={ (inp?.温度?.[floor] ) || ''}
+              onChange={e => floor&&setInp({ ...inp, 温度:{...inp?.温度,[floor]:e.currentTarget.value? e.currentTarget.value:undefined} }) }
+            >℃</SuffixInput>
+          </InputGroupLine>
+          <InputGroupLine label={`电源输入电压(${floor}):`}>
+            <SuffixInput
+              autoFocus={true}
+              placeholder="请输入测量数"
+              value={ (inp?.电压值?.[floor] ) || ''}
+              onChange={e => floor&&setInp({ ...inp, 电压值:{...inp?.电压值,[floor]:e.currentTarget.value? e.currentTarget.value:undefined} }) }
+            >V</SuffixInput>
+          </InputGroupLine>
+        </InspectRecordTitle>
+      </React.Fragment>
     );
   } );
 
