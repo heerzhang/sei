@@ -389,10 +389,14 @@ const InternalItem25: React.RefForwardingComponent<InternalItemHandResult,Intern
     props:{ children },  ref
   ) => {
     const getInpFilter = React.useCallback((par) => {
-      const {cageDistortion,brokenWires,diameterSteelWire,seriouslyRusted,otherSuspension} =par||{};
-      return {cageDistortion,brokenWires,diameterSteelWire,seriouslyRusted,otherSuspension};
+      const {断丝数,断丝判定,钢绳直径,钢绳公称,钢绳判定,磨损变形,绳端固定} =par||{};
+      return {断丝数,断丝判定,钢绳直径,钢绳公称,钢绳判定,磨损变形,绳端固定};
     }, []);
     const { eos, setInp, inp } = useItemControlAs({ref,  filter: getInpFilter});
+    if(false&&inp&&(parseFloat(inp?.断丝数) > 10 ) )
+        inp.断丝判定='×';
+    if(false&&inp&&(parseFloat(inp?.钢绳直径) < 0.85*parseFloat(inp?.钢绳公称) ) )
+        inp.钢绳判定='×';
 
     return (
       <InspectRecordTitle  control={eos}   label={'检验项目 5.1-2'}>
@@ -440,39 +444,39 @@ const InternalItem25: React.RefForwardingComponent<InternalItemHandResult,Intern
           <SuffixInput
             autoFocus={true}
             placeholder="请输入测量数"
-            value={ inp?.brokenWires ||''}
-            onChange={e => setInp({ ...inp, brokenWires: e.currentTarget.value||undefined}) }
+            value={ inp?.断丝数 ||''}
+            onChange={e => setInp({ ...inp, 断丝数: e.currentTarget.value||undefined}) }
           >根</SuffixInput>
         </InputGroupLine>
         <InputGroupLine  label='②一个捻距断丝数,结果判定'>
-          <SelectHookfork value={ inp?.seriouslyRusted  ||''}
-                          onChange={e => setInp({ ...inp, seriouslyRusted: e.currentTarget.value? e.currentTarget.value : undefined}) }
+          <SelectHookfork value={ inp?.断丝判定  ||''}
+                          onChange={e => setInp({ ...inp, 断丝判定: e.currentTarget.value? e.currentTarget.value : undefined}) }
           />
         </InputGroupLine>
         <InputGroupLine label={`③钢丝绳直径`}>
           <SuffixInput
             autoFocus={true}
             placeholder="请输入测量数"
-            value={ inp?.brokenWires ||''}
-            onChange={e => setInp({ ...inp, brokenWires: e.currentTarget.value||undefined}) }
+            value={ inp?.钢绳直径 ||''}
+            onChange={e => setInp({ ...inp, 钢绳直径: e.currentTarget.value||undefined}) }
           >mm</SuffixInput>
         </InputGroupLine>
         <InputGroupLine label={`③公称直径`}>
           <SuffixInput
             autoFocus={true}
             placeholder="请输入测量数"
-            value={ inp?.brokenWires ||''}
-            onChange={e => setInp({ ...inp, brokenWires: e.currentTarget.value||undefined}) }
+            value={ inp?.钢绳公称 ||''}
+            onChange={e => setInp({ ...inp, 钢绳公称: e.currentTarget.value||undefined}) }
           >mm</SuffixInput>
         </InputGroupLine>
         <InputGroupLine  label='③钢丝绳直径小于公称90%,结果判定'>
-          <SelectHookfork value={ inp?.diameterSteelWire ||''}
-                          onChange={e => setInp({ ...inp, diameterSteelWire: e.currentTarget.value? e.currentTarget.value : undefined}) }
+          <SelectHookfork value={ inp?.钢绳判定 ||''}
+                          onChange={e => setInp({ ...inp, 钢绳判定: e.currentTarget.value? e.currentTarget.value : undefined}) }
           />
         </InputGroupLine>
         <InputGroupLine  label='悬挂装置、补偿装置的磨损、断丝、变形等情况'>
-          <SelectHookfork value={ inp?.otherSuspension ||''}
-                          onChange={e => setInp({ ...inp, otherSuspension: e.currentTarget.value? e.currentTarget.value : undefined}) }
+          <SelectHookfork value={ inp?.磨损变形 ||''}
+                          onChange={e => setInp({ ...inp, 磨损变形: e.currentTarget.value? e.currentTarget.value : undefined}) }
           />
         </InputGroupLine>
         <InspectItemHeadColumn  level={'C'} label={'5.2 绳端固定'}>
@@ -480,8 +484,8 @@ const InternalItem25: React.RefForwardingComponent<InternalItemHandResult,Intern
          采用其他类型悬挂装置的，其端部固定应当符合制造单位的规定。
         </InspectItemHeadColumn>
         <InputGroupLine  label='绳端固定'>
-          <SelectHookfork value={ inp?.diameterSteelWire ||''}
-                          onChange={e => setInp({ ...inp, diameterSteelWire: e.currentTarget.value? e.currentTarget.value : undefined}) }
+          <SelectHookfork value={ inp?.绳端固定 ||''}
+                          onChange={e => setInp({ ...inp, 绳端固定: e.currentTarget.value? e.currentTarget.value : undefined}) }
           />
         </InputGroupLine>
       </InspectRecordTitle>
@@ -1122,8 +1126,8 @@ const InternalItem27: React.RefForwardingComponent<InternalItemHandResult,Intern
     props:{ children },  ref
   ) => {
     const getInpFilter = React.useCallback((par) => {
-      const {aboveGround,horiztAngle,ladderAccess,channelSet,channelLight,accessWidth,accessHeight,roomAccess,accessDoor,lightingSwitch,mainSwitch} =par||{};
-      return {aboveGround,horiztAngle,ladderAccess,channelSet,channelLight,accessWidth,accessHeight,roomAccess,accessDoor,lightingSwitch,mainSwitch};
+      const {补偿绳固定,补偿绳电安,补偿绳防跳,松绳保护,旋转部件} =par||{};
+      return {补偿绳固定,补偿绳电安,补偿绳防跳,松绳保护,旋转部件};
     }, []);
     const { eos, setInp, inp } = useItemControlAs({ref,  filter: getInpFilter});
 
@@ -1136,26 +1140,26 @@ const InternalItem27: React.RefForwardingComponent<InternalItemHandResult,Intern
         （3）当电梯的额定速度大于3.5m/s时，还应当设置补偿绳防跳装置，该装置动作时应当有一个电气安全装置使电梯驱动主机停止运转。
         </InspectItemHeadColumn>
         <InputGroupLine  label='(1)绳(链)端固定'>
-          <SelectHookfork value={ inp?.ladderAccess ||''}
-                          onChange={e => setInp({ ...inp, ladderAccess: e.currentTarget.value||undefined}) }
+          <SelectHookfork value={ inp?.补偿绳固定 ||''}
+                          onChange={e => setInp({ ...inp, 补偿绳固定: e.currentTarget.value||undefined}) }
           />
         </InputGroupLine>
         <InputGroupLine  label='(2)电气安全装置'>
-          <SelectHookfork value={ inp?.ladderAccess ||''}
-                          onChange={e => setInp({ ...inp, ladderAccess: e.currentTarget.value||undefined}) }
+          <SelectHookfork value={ inp?.补偿绳电安 ||''}
+                          onChange={e => setInp({ ...inp, 补偿绳电安: e.currentTarget.value||undefined}) }
           />
         </InputGroupLine>
         <InputGroupLine  label='(3)补偿绳防跳装置'>
-          <SelectHookfork value={ inp?.ladderAccess ||''}
-                          onChange={e => setInp({ ...inp, ladderAccess: e.currentTarget.value||undefined}) }
+          <SelectHookfork value={ inp?.补偿绳防跳 ||''}
+                          onChange={e => setInp({ ...inp, 补偿绳防跳: e.currentTarget.value||undefined}) }
           />
         </InputGroupLine>
         <InspectItemHeadColumn  level={'B'} label={'5.5 松绳(链)保护'}>
         （1）如果轿厢悬挂在两根钢丝绳或者链条上，则应当设置检查绳(链)松弛的电气安全装置，当其中一根钢丝绳(链条)发生异常相对伸长时，电梯应当停止运行
         </InspectItemHeadColumn>
         <InputGroupLine  label='松绳(链)保护'>
-          <SelectHookfork value={ inp?.ladderAccess ||''}
-                          onChange={e => setInp({ ...inp, ladderAccess: e.currentTarget.value||undefined}) }
+          <SelectHookfork value={ inp?.松绳保护 ||''}
+                          onChange={e => setInp({ ...inp, 松绳保护: e.currentTarget.value||undefined}) }
           />
         </InputGroupLine>
         <InspectItemHeadColumn  level={'C'} label={'5.6 旋转部件的防护'}>
@@ -1165,8 +1169,8 @@ const InternalItem27: React.RefForwardingComponent<InternalItemHandResult,Intern
         ②井道内的导向滑轮、曳引轮、轿架上固定的反绳轮和补偿绳张紧轮，有防止钢丝绳脱离绳槽和进入异物的防护装置
         </InspectItemHeadColumn>
         <InputGroupLine  label='旋转部件的防护'>
-          <SelectHookfork value={ inp?.ladderAccess ||''}
-                          onChange={e => setInp({ ...inp, ladderAccess: e.currentTarget.value||undefined}) }
+          <SelectHookfork value={ inp?.旋转部件 ||''}
+                          onChange={e => setInp({ ...inp, 旋转部件: e.currentTarget.value||undefined}) }
           />
         </InputGroupLine>
       </InspectRecordTitle>
