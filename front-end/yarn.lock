@@ -4719,10 +4719,10 @@ csstype@^2.6.5, csstype@^2.6.7:
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.6.8.tgz#0fb6fc2417ffd2816a418c9336da74d7f07db431"
   integrity sha512-msVS9qTuMT5zwAGCVm4mxfrZ18BNc6Csd0oJAtiFMZ1FAx1CCvy2+5MDmYoix63LM/6NDbNtodCiGYGmFgO0dA==
 
-customize-easy-ui-component@^4.1.4:
-  version "4.1.4"
-  resolved "https://registry.yarnpkg.com/customize-easy-ui-component/-/customize-easy-ui-component-4.1.4.tgz#4ac0e2bbe756a755d3b69d0bc800013026b7ab5a"
-  integrity sha512-Egpqn1GFS+FzLqFGZJ3xqZcwJYN7IIG+etUCuQ6qirkCzYnLuuPbf4sSZTCeBGNVAloFrR4nUXG0Na+bJLcQsA==
+customize-easy-ui-component@^4.1.5:
+  version "4.1.5"
+  resolved "https://registry.yarnpkg.com/customize-easy-ui-component/-/customize-easy-ui-component-4.1.5.tgz#3af5db753f9fe761ab01b74aad1ee620e30d37c1"
+  integrity sha512-/X/AZEhxqP2GFIk3Nj3pPu4FGucNSquAxDj7F61o0NeFExkCTM0ftQzh5NwZ2e7+Nja5aid/ZffGLYu6AgM89A==
   dependencies:
     "@reach/alert" "^0.1.2"
     "@reach/skip-nav" "^0.1.2"
@@ -4738,7 +4738,7 @@ customize-easy-ui-component@^4.1.4:
     classnames "^2.2.6"
     color "^3.1.0"
     compute-scroll-into-view "^1.0.11"
-    focus-trap "5"
+    focus-trap "^5.1.0"
     is-mobile "^2.0.0"
     open-color "^1.6.3"
     popper.js "^1.14.7"
@@ -4748,12 +4748,12 @@ customize-easy-ui-component@^4.1.4:
     react-gesture-stack "^1.3.2"
     react-highlight-words "^0.16.0"
     react-page-controller "^3.0.1"
-    react-popper "^1.3.3"
+    react-popper "^1.3.7"
     react-remove-scroll "^2.0.4"
     react-spring "9.0.0-beta.34"
     resize-observer-polyfill "^1.5.1"
     toasted-notes "^3.0.0"
-    touchable-hook "^1.2.1"
+    touchable-hook "^1.3.0"
     tslib "^1.9.3"
     use-media "^1.2.0"
     use-scroll-lock "^1.0.0"
@@ -4845,7 +4845,7 @@ dedent@^0.7.0:
   resolved "https://registry.yarnpkg.com/dedent/-/dedent-0.7.0.tgz#2495ddbaf6eb874abb0e1be9df22d2e5a544326c"
   integrity sha1-JJXduvbrh0q7Dhvp3yLS5aVEMmw=
 
-deep-equal@^1.0.1:
+deep-equal@^1.0.1, deep-equal@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/deep-equal/-/deep-equal-1.1.1.tgz#b5c98c942ceffaf7cb051e24e1434a25a2e6076a"
   integrity sha512-yd9c5AdiqVcR+JjcwUQb9DkhJc8ngNr0MahEBGvDiJw8puWab2yZlh+nkasOnZP+EGTAP6rRp2JzJhJZzvNF8g==
@@ -6190,7 +6190,7 @@ flush-write-stream@^1.0.0:
     inherits "^2.0.3"
     readable-stream "^2.3.6"
 
-focus-trap@5:
+focus-trap@^5.1.0:
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/focus-trap/-/focus-trap-5.1.0.tgz#64a0bfabd95c382103397dbc96bfef3a3cf8e5ad"
   integrity sha512-CkB/nrO55069QAUjWFBpX6oc+9V90Qhgpe6fBWApzruMq5gnlh90Oo7iSSDK7pKiV5ugG6OY2AXM5mxcmL3lwQ==
@@ -11719,13 +11719,14 @@ react-page-controller@^3.0.1:
     tslib "^1.9.3"
     use-scroll-lock "^1.0.0"
 
-react-popper@^1.3.3:
-  version "1.3.6"
-  resolved "https://registry.yarnpkg.com/react-popper/-/react-popper-1.3.6.tgz#32122f83af8fda01bdd4f86625ddacaf64fdd06d"
-  integrity sha512-kLTfa9z8n+0jJvRVal9+vIuirg41rObg4Bbrvv/ZfsGPQDN9reyVVSxqnHF1ZNgXgV7x11PeUfd5ItF8DZnqhg==
+react-popper@^1.3.7:
+  version "1.3.7"
+  resolved "https://registry.yarnpkg.com/react-popper/-/react-popper-1.3.7.tgz#f6a3471362ef1f0d10a4963673789de1baca2324"
+  integrity sha512-nmqYTx7QVjCm3WUZLeuOomna138R1luC4EqkW3hxJUrAe+3eNz3oFCLYdnPwILfn0mX1Ew2c3wctrjlUMYYUww==
   dependencies:
     "@babel/runtime" "^7.1.2"
     create-react-context "^0.3.0"
+    deep-equal "^1.1.1"
     popper.js "^1.14.4"
     prop-types "^15.6.1"
     typed-styles "^0.0.7"
@@ -13728,7 +13729,7 @@ toidentifier@1.0.0:
   resolved "https://registry.yarnpkg.com/toidentifier/-/toidentifier-1.0.0.tgz#7e1be3470f1e77948bc43d94a3c8f4d7752ba553"
   integrity sha512-yaOH/Pk/VEhBWWTlhI+qXxDFXlejDGcQipMlyxda9nthulaxLZUNcUqFxokp0vcYnvteJln5FNQDRrxj3YcbVw==
 
-touchable-hook@^1.2.1:
+touchable-hook@^1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/touchable-hook/-/touchable-hook-1.3.0.tgz#e1b39351d8b0bc30ecb35697ca0d5879d79c81a6"
   integrity sha512-m2KQXJO2sNHbGdFv9LYPRPA0KP5V4ajeDs9fVKGFcWd3pZg14bY0BKCFJHkpPgdNssR9ikm56gN34OTRmDtutA==
