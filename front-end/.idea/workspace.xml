@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="339baf3b-3b56-43fa-821a-88a7b6723788" name="Default Changelist" comment="">
+    <list default="true" id="e48fec4c-3a71-48a9-8891-c7d2e360ebf3" name="Default Changelist" comment="准备定检扩充">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/original/elevator/PeriodicalInspection.O-1.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/original/elevator/PeriodicalInspection.O-1.tsx" afterDir="false" />
     </list>
-    <ignored path="$PROJECT_DIR$/.tmp/" />
-    <ignored path="$PROJECT_DIR$/temp/" />
-    <ignored path="$PROJECT_DIR$/tmp/" />
+    <list id="62955bfe-d339-4f2d-b647-48fa64ae7c14" name="Revert: localhost cookie" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,103 +12,131 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FUSProjectUsageTrigger">
-    <session id="784151677">
+    <session id="1619344079">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="24" />
-          <entry key="project.open.time.0" value="3" />
-          <entry key="project.open.time.1" value="2" />
-          <entry key="project.open.time.11" value="1" />
-          <entry key="project.open.time.12" value="1" />
-          <entry key="project.open.time.13" value="1" />
-          <entry key="project.open.time.14" value="1" />
-          <entry key="project.open.time.16" value="3" />
-          <entry key="project.open.time.18" value="1" />
-          <entry key="project.open.time.19" value="2" />
-          <entry key="project.open.time.20" value="3" />
-          <entry key="project.open.time.22" value="1" />
-          <entry key="project.open.time.30" value="1" />
-          <entry key="project.open.time.5" value="1" />
-          <entry key="project.open.time.6" value="1" />
-          <entry key="project.open.time.7" value="2" />
-          <entry key="project.open.time.8" value="1" />
-          <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="26" />
+          <entry key="project.closed" value="4" />
+          <entry key="project.open.time.1" value="1" />
+          <entry key="project.open.time.35" value="1" />
+          <entry key="project.open.time.57" value="1" />
+          <entry key="project.open.time.59" value="1" />
+          <entry key="project.opened" value="4" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.js.language.service.starts">
+        <counts>
+          <entry key="TypeScriptServerServiceImpl" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="env" value="5" />
+          <entry key="LICENSE" value="1" />
+          <entry key="env" value="2" />
+          <entry key="env-公司" value="1" />
           <entry key="env-家里" value="1" />
-          <entry key="js" value="3" />
-          <entry key="json" value="4" />
+          <entry key="js" value="7" />
+          <entry key="json" value="12" />
           <entry key="jsx" value="2" />
-          <entry key="md" value="1" />
-          <entry key="rep" value="4" />
-          <entry key="ts" value="36" />
-          <entry key="tsx" value="107" />
-          <entry key="tsx-" value="3" />
-          <entry key="txt" value="18" />
-          <entry key="xml" value="4" />
+          <entry key="md" value="2" />
+          <entry key="ts" value="18" />
+          <entry key="tsx" value="45" />
+          <entry key="txt" value="7" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key=".env file" value="5" />
-          <entry key="JSON" value="3" />
+          <entry key=".env file" value="2" />
+          <entry key="JSON" value="11" />
           <entry key="JSX Harmony" value="2" />
-          <entry key="JavaScript" value="3" />
-          <entry key="Markdown" value="1" />
-          <entry key="PLAIN_TEXT" value="26" />
-          <entry key="TypeScript" value="36" />
-          <entry key="TypeScript JSX" value="107" />
-          <entry key="XML" value="4" />
+          <entry key="JavaScript" value="7" />
+          <entry key="Markdown" value="2" />
+          <entry key="PLAIN_TEXT" value="10" />
+          <entry key="TypeScript" value="18" />
+          <entry key="TypeScript JSX" value="45" />
           <entry key="tsconfig" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="env" value="1" />
-          <entry key="tsx" value="4809" />
-          <entry key="txt" value="438" />
-          <entry key="xml" value="1" />
+          <entry key="json" value="4" />
+          <entry key="tsx" value="700" />
+          <entry key="txt" value="40" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key=".env file" value="1" />
-          <entry key="PLAIN_TEXT" value="438" />
-          <entry key="TypeScript JSX" value="4809" />
-          <entry key="XML" value="1" />
+          <entry key="JSON" value="4" />
+          <entry key="PLAIN_TEXT" value="40" />
+          <entry key="TypeScript JSX" value="700" />
+        </counts>
+      </usages-collector>
+    </session>
+    <session id="676568496">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="4" />
+          <entry key="project.open.time.0" value="1" />
+          <entry key="project.open.time.10" value="1" />
+          <entry key="project.open.time.24" value="1" />
+          <entry key="project.open.time.5" value="1" />
+          <entry key="project.opened" value="4" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="env" value="1" />
+          <entry key="env-公司" value="1" />
+          <entry key="html" value="1" />
+          <entry key="json" value="1" />
+          <entry key="mhtml" value="1" />
+          <entry key="rep" value="1" />
+          <entry key="tsx" value="2" />
+          <entry key="txt" value="2" />
+          <entry key="xml" value="3" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key=".env file" value="1" />
+          <entry key="HTML" value="1" />
+          <entry key="JSON" value="1" />
+          <entry key="PLAIN_TEXT" value="5" />
+          <entry key="TypeScript JSX" value="2" />
+          <entry key="XML" value="3" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="env" value="1" />
+          <entry key="html" value="4" />
+          <entry key="tsx" value="4" />
+          <entry key="txt" value="41" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key=".env file" value="1" />
+          <entry key="HTML" value="4" />
+          <entry key="PLAIN_TEXT" value="41" />
+          <entry key="TypeScript JSX" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.js.language.service.starts">
         <counts>
-          <entry key="ESLintLanguageService" value="1" />
-          <entry key="TypeScriptServerServiceImpl" value="18" />
+          <entry key="TypeScriptServerServiceImpl" value="1" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/original/elevator/PeriodicalInspection.O-1.tsx">
+        <entry file="file://$PROJECT_DIR$/新建文本文档.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="406">
-              <caret line="1187" column="75" lean-forward="true" selection-start-line="1187" selection-start-column="75" selection-end-line="1187" selection-end-column="75" />
-              <folding>
-                <element signature="e#16#54#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/original/OriginalRecord.tsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="311">
-              <caret line="69" column="67" lean-forward="true" selection-start-line="69" selection-start-column="8" selection-end-line="69" selection-end-column="67" />
+            <state relative-caret-position="238">
+              <caret line="225" column="39" lean-forward="true" selection-start-line="225" selection-start-column="39" selection-end-line="225" selection-end-column="39" />
             </state>
           </provider>
         </entry>
@@ -120,47 +145,42 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>MenuListContext</find>
-      <find>RequestCloseContext</find>
-      <find>useEffect</find>
-      <find>useUid</find>
-      <find>LazyToggleViewer</find>
-      <find>useMem</find>
-      <find>MenuItem</find>
-      <find>Sheet</find>
-      <find>OnPressFunction</find>
-      <find>onPress</find>
-      <find>other</find>
-      <find>bind</find>
-      <find>whiteSpace</find>
-      <find>css</find>
       <find>noBind</find>
-      <find>scroll</find>
-      <find>setSeq</find>
-      <find>onDeleteSeq</find>
-      <find>seq</find>
-      <find>Select</find>
-      <find>停止装置</find>
-      <find>轿顶停止装置</find>
-      <find>紧急照明</find>
-      <find>超载保护</find>
-      <find>&lt;</find>
-      <find>parse</find>
-      <find>钢绳_公称直径</find>
-      <find>钢绳公称径</find>
-      <find>绳端固定</find>
-      <find>旋转部件</find>
+      <find>isLink</find>
+      <find>pressDelay</find>
+      <find>Button</find>
+      <find>wordWrap</find>
+      <find>css=</find>
+      <find>throttledUpdateStory</find>
+      <find>throttledUpdateEnable</find>
+      <find>setEnable</find>
+      <find>newOut</find>
+      <find>outlet</find>
+      <find>setOutlet</find>
+      <find>filtercomp</find>
+      <find>的所有报告</find>
+      <find>replace</find>
+      <find>RouterLink</find>
+      <find>Link</find>
+      <find>createAnimatedComponent</find>
+      <find>Component</find>
+      <find>react-spring</find>
+      <find>animated</find>
+      <find>react-gesture-stack</find>
+      <find>SearchTitle</find>
+      <find>城市</find>
+      <find>紧急报警装置未接到有人值班处</find>
+      <find>4.5</find>
+      <find>R4.5</find>
+      <find>8.13</find>
     </findStrings>
     <replaceStrings>
-      <replace>InternalItem8</replace>
-      <replace>InternalItem6</replace>
-      <replace>InternalItem31</replace>
-      <replace>InternalItem30</replace>
-      <replace>钢绳公称径</replace>
-      <replace>钢绳公称</replace>
+      <replace>throttledUpdateBackend</replace>
     </replaceStrings>
     <dirStrings>
-      <dir>D:\coding\home\sei\front-end\src</dir>
+      <dir>D:\home\sei\front-end\src\inspect</dir>
+      <dir>D:\home\sei\front-end\node_modules\wouter</dir>
+      <dir>D:\home\sei\front-end\src</dir>
     </dirStrings>
   </component>
   <component name="Git.Settings">
@@ -170,28 +190,33 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/inspect/IspDetail.tsx" />
+        <option value="$PROJECT_DIR$/front-end/src/comp/Button.tsx" />
+        <option value="$PROJECT_DIR$/front-end/src/Branding.tsx" />
+        <option value="$PROJECT_DIR$/front-end/package.json" />
+        <option value="$PROJECT_DIR$/front-end/.env" />
+        <option value="$PROJECT_DIR$/front-end/src/original/RecordView.tsx" />
+        <option value="$PROJECT_DIR$/front-end/src/device/task/BoundDevices.tsx" />
+        <option value="$PROJECT_DIR$/front-end/src/inspect/report/BoundReports.tsx" />
+        <option value="$PROJECT_DIR$/front-end/src/inspect/IspDetail.tsx" />
+        <option value="$PROJECT_DIR$/front-end/新建文本文档.txt" />
+        <option value="$PROJECT_DIR$/front-end/src/inspect/RelationList.tsx" />
         <option value="$PROJECT_DIR$/.env" />
-        <option value="E:/何尔章/2020报告/对应testlog.xml" />
-        <option value="$PROJECT_DIR$/src/original/elevator/SupervisionInspection.O-1.tsx" />
-        <option value="$PROJECT_DIR$/src/comp/test02.tsx" />
-        <option value="$PROJECT_DIR$/src/comp/Collapse.tsx" />
-        <option value="$PROJECT_DIR$/src/original/comp/base.tsx" />
-        <option value="$PROJECT_DIR$/例子测试.txt" />
-        <option value="$PROJECT_DIR$/src/comp/Positions.tsx" />
-        <option value="$PROJECT_DIR$/src/comp/Popover.tsx" />
+        <option value="$PROJECT_DIR$/src/MainLeftPart.tsx" />
+        <option value="$PROJECT_DIR$/src/Main.tsx" />
+        <option value="$USER_HOME$/Downloads/特检.html" />
         <option value="$PROJECT_DIR$/新建文本文档.txt" />
-        <option value="$PROJECT_DIR$/src/comp/Menu.tsx" />
-        <option value="$PROJECT_DIR$/src/Branding.tsx" />
-        <option value="$PROJECT_DIR$/src/original/RecordView.tsx" />
-        <option value="$PROJECT_DIR$/src/original/elevator/PeriodicalInspection.O-1.tsx" />
       </list>
     </option>
   </component>
-  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER">
-    <package-json value="$PROJECT_DIR$/package.json" />
+  <component name="IgnoredFileRootStore">
+    <option name="generatedRoots">
+      <set>
+        <option value="D:\home\sei\.idea" />
+      </set>
+    </option>
   </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
   <component name="JsGulpfileManager">
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
@@ -205,12 +230,15 @@
     </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="545" />
-    <option name="y" value="20" />
-    <option name="width" value="1600" />
-    <option name="height" value="960" />
+    <option name="x" value="530" />
+    <option name="y" value="5" />
+    <option name="width" value="1278" />
+    <option name="height" value="726" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectId" id="1WSYwHJQZzoA6cWqJvJUnHAeBQA" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -228,26 +256,6 @@
               <item name="front-end" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="front-end" type="b2602c69:ProjectViewProjectNode" />
-              <item name="front-end" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="original" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="front-end" type="b2602c69:ProjectViewProjectNode" />
-              <item name="front-end" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="original" type="462c0819:PsiDirectoryNode" />
-              <item name="comp" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="front-end" type="b2602c69:ProjectViewProjectNode" />
-              <item name="front-end" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="original" type="462c0819:PsiDirectoryNode" />
-              <item name="elevator" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -255,26 +263,146 @@
       <pane id="Scope" />
     </panes>
   </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
-    <property name="node.js.selected.package.eslint" value="D:\coding\home\sei\front-end\node_modules\eslint" />
+    <property name="node.js.selected.package.eslint" value="D:\home\sei\front-end\node_modules\eslint" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="nodejs_package_manager_path" value="yarn" />
-    <property name="prettierjs.PrettierConfiguration.Package" value="D:\coding\home\sei\front-end\node_modules\prettier" />
-    <property name="ts.external.directory.path" value="D:\coding\home\sei\front-end\node_modules\typescript\lib" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="ts.external.directory.path" value="D:\home\sei\front-end\node_modules\typescript\lib" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\coding\home\sei\front-end\src\comp" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\coding\home\sei\front-end\src\comp" />
-      <recent name="D:\coding\home\sei\front-end\compare" />
+      <recent name="D:\home\sei\front-end\compare" />
+      <recent name="D:\home\sei\front-end\src\comp" />
     </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\hez\技术改造\模板-检验文档" />
+      <recent name="D:\home\sei\front-end" />
+    </key>
+  </component>
+  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
+    <UpdatedFiles>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Updated from server" />
+        <option name="myStatusName" value="Changed on server" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="CHANGED_ON_SERVER" />
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Updated" />
+          <option name="myStatusName" value="Changed" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="UPDATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/../back-end/新建文本文档.txt</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Created" />
+          <option name="myStatusName" value="Created" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="CREATED" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Deleted" />
+          <option name="myStatusName" value="Deleted" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="true" />
+          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Restored" />
+          <option name="myStatusName" value="Will be restored" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="RESTORED" />
+        </FILE-GROUP>
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Modified" />
+        <option name="myStatusName" value="Modified" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MODIFIED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Skipped" />
+        <option name="myStatusName" value="Skipped" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SKIPPED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with conflicts" />
+        <option name="myStatusName" value="Will be merged with conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_CONFLICTS" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with tree conflicts" />
+        <option name="myStatusName" value="Merged with tree conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with property conflicts" />
+        <option name="myStatusName" value="Will be merged with property conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged" />
+        <option name="myStatusName" value="Will be merged" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Not in repository" />
+        <option name="myStatusName" value="Not in repository" />
+        <option name="mySupportsDeletion" value="true" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="UNKNOWN" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally added" />
+        <option name="myStatusName" value="Locally added" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_ADDED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally removed" />
+        <option name="myStatusName" value="Locally removed" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_REMOVED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Switched" />
+        <option name="myStatusName" value="Switched" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SWITCHED" />
+      </FILE-GROUP>
+    </UpdatedFiles>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -288,8 +416,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
-    <configuration name="start" type="js.build_tools.npm" factoryName="npm" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="npm.start (1)">
+    <configuration name="start (1)" type="js.build_tools.npm" factoryName="npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
       <scripts>
@@ -299,192 +427,248 @@
       <envs />
       <method v="2" />
     </configuration>
+    <configuration name="start" type="js.build_tools.npm" factoryName="npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/front-end/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="npm.start" />
+      <item itemvalue="npm.start (1)" />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.start (1)" />
         <item itemvalue="npm.start" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="339baf3b-3b56-43fa-821a-88a7b6723788" name="Default Changelist" comment="" />
-      <created>1579637943024</created>
+      <changelist id="e48fec4c-3a71-48a9-8891-c7d2e360ebf3" name="Default Changelist" comment="" />
+      <changelist id="62955bfe-d339-4f2d-b647-48fa64ae7c14" name="Revert: localhost cookie" comment="" />
+      <created>1579144699906</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1579637943024</updated>
-      <workItem from="1579637944330" duration="151000" />
-      <workItem from="1579638323453" duration="912000" />
-      <workItem from="1579639274971" duration="559000" />
-      <workItem from="1579639842905" duration="443000" />
-      <workItem from="1579640290170" duration="4225000" />
-      <workItem from="1579724958997" duration="4482000" />
-      <workItem from="1579761240199" duration="181000" />
-      <workItem from="1579772276181" duration="3658000" />
-      <workItem from="1580004954297" duration="2168000" />
-      <workItem from="1580099757734" duration="17065000" />
-      <workItem from="1580160516050" duration="38734000" />
-      <workItem from="1580258970567" duration="23393000" />
-      <workItem from="1580338682046" duration="10195000" />
-      <workItem from="1580359896060" duration="595000" />
-      <workItem from="1580415383736" duration="24758000" />
-      <workItem from="1580491659601" duration="33627000" />
-      <workItem from="1580532020675" duration="4143000" />
-      <workItem from="1580554164220" duration="1195000" />
-      <workItem from="1580555378772" duration="530000" />
-      <workItem from="1580577962338" duration="6643000" />
-      <workItem from="1580584848292" duration="84000" />
-      <workItem from="1580584950630" duration="31340000" />
-      <workItem from="1580639867720" duration="598000" />
-      <workItem from="1580640486257" duration="2477000" />
-      <workItem from="1580672002944" duration="3368000" />
-      <workItem from="1580675918415" duration="4946000" />
+      <updated>1579144699906</updated>
+      <workItem from="1579144702148" duration="514000" />
+      <workItem from="1579146445824" duration="95000" />
+      <workItem from="1579146552581" duration="26633000" />
+      <workItem from="1579397839896" duration="1740000" />
+      <workItem from="1579399612179" duration="1791000" />
+      <workItem from="1579401614901" duration="1497000" />
+      <workItem from="1579403434843" duration="1832000" />
+      <workItem from="1579405481109" duration="976000" />
+      <workItem from="1579410116748" duration="1479000" />
+      <workItem from="1579418522394" duration="1788000" />
+      <workItem from="1579420348133" duration="1789000" />
+      <workItem from="1579422202615" duration="1854000" />
+      <workItem from="1579424159339" duration="1008000" />
+      <workItem from="1579479535613" duration="1791000" />
+      <workItem from="1579483885894" duration="1424000" />
+      <workItem from="1579487579422" duration="9921000" />
+      <workItem from="1579505504971" duration="7379000" />
+      <workItem from="1579569029083" duration="6060000" />
+      <workItem from="1579575411198" duration="17683000" />
+      <workItem from="1579651886391" duration="49000" />
+      <workItem from="1579652159508" duration="896000" />
+      <workItem from="1579653483047" duration="235000" />
+      <workItem from="1579653898442" duration="11973000" />
     </task>
-    <task id="LOCAL-00001" summary="重整home">
-      <created>1579639739223</created>
+    <task id="LOCAL-00001" summary="只好这里落户了">
+      <created>1579145126499</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1579639739223</updated>
+      <updated>1579145126499</updated>
     </task>
-    <task id="LOCAL-00002" summary="重整home2">
-      <created>1579640164505</created>
+    <task id="LOCAL-00002" summary="手机接入第一步">
+      <created>1579163985328</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1579640164505</updated>
+      <updated>1579163985328</updated>
     </task>
-    <task id="LOCAL-00003" summary="重整home2">
-      <created>1579641714554</created>
+    <task id="LOCAL-00003" summary="只好这里落户了">
+      <created>1579165332690</created>
       <option name="number" value="00003" />
       <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
-      <updated>1579641714554</updated>
+      <updated>1579165332690</updated>
     </task>
-    <task id="LOCAL-00004" summary="重整home2">
-      <created>1579642345728</created>
+    <task id="LOCAL-00004" summary="只好这里落户了">
+      <created>1579251791908</created>
       <option name="number" value="00004" />
       <option name="presentableId" value="LOCAL-00004" />
       <option name="project" value="LOCAL" />
-      <updated>1579642345728</updated>
+      <updated>1579251791908</updated>
     </task>
-    <task id="LOCAL-00005" summary="重整home完畢">
-      <created>1579644648408</created>
+    <task id="LOCAL-00005" summary="只好这里落户了">
+      <created>1579401064673</created>
       <option name="number" value="00005" />
       <option name="presentableId" value="LOCAL-00005" />
       <option name="project" value="LOCAL" />
-      <updated>1579644648408</updated>
+      <updated>1579401064673</updated>
     </task>
-    <task id="LOCAL-00006" summary="开启搞原始记录">
-      <created>1580195279498</created>
+    <task id="LOCAL-00006" summary="手机电脑一致， render差了一次">
+      <created>1579425111072</created>
       <option name="number" value="00006" />
       <option name="presentableId" value="LOCAL-00006" />
       <option name="project" value="LOCAL" />
-      <updated>1580195279499</updated>
+      <updated>1579425111072</updated>
     </task>
-    <task id="LOCAL-00007" summary="原始记录看看">
-      <created>1580291723772</created>
+    <task id="LOCAL-00007" summary="普通按钮可以抵抗快速多点但一次触发">
+      <created>1579492422973</created>
       <option name="number" value="00007" />
       <option name="presentableId" value="LOCAL-00007" />
       <option name="project" value="LOCAL" />
-      <updated>1580291723772</updated>
+      <updated>1579492422973</updated>
     </task>
-    <task id="LOCAL-00008" summary="原始记录看看">
-      <created>1580424235196</created>
+    <task id="LOCAL-00008" summary="throttledUpdateStory">
+      <created>1579510302917</created>
       <option name="number" value="00008" />
       <option name="presentableId" value="LOCAL-00008" />
       <option name="project" value="LOCAL" />
-      <updated>1580424235197</updated>
+      <updated>1579510302917</updated>
     </task>
-    <task id="LOCAL-00009" summary="poper 按；没应答">
-      <created>1580530893243</created>
+    <task id="LOCAL-00009" summary="只好这里落户了">
+      <created>1579571434048</created>
       <option name="number" value="00009" />
       <option name="presentableId" value="LOCAL-00009" />
       <option name="project" value="LOCAL" />
-      <updated>1580530893243</updated>
+      <updated>1579571434048</updated>
     </task>
-    <task id="LOCAL-00010" summary="表单样式模型">
-      <created>1580608679246</created>
+    <task id="LOCAL-00010" summary="更新延迟">
+      <created>1579574230674</created>
       <option name="number" value="00010" />
       <option name="presentableId" value="LOCAL-00010" />
       <option name="project" value="LOCAL" />
-      <updated>1580608679246</updated>
+      <updated>1579574230674</updated>
     </task>
-    <task id="LOCAL-00011" summary="表单样式模型">
-      <created>1580618808122</created>
+    <task id="LOCAL-00011" summary="初次较完善">
+      <created>1579575134264</created>
       <option name="number" value="00011" />
       <option name="presentableId" value="LOCAL-00011" />
       <option name="project" value="LOCAL" />
-      <updated>1580618808122</updated>
+      <updated>1579575134264</updated>
     </task>
-    <task id="LOCAL-00012" summary="表单样式模型">
-      <created>1580674670586</created>
+    <task id="LOCAL-00012" summary="只好这里落户了">
+      <created>1579579202736</created>
       <option name="number" value="00012" />
       <option name="presentableId" value="LOCAL-00012" />
       <option name="project" value="LOCAL" />
-      <updated>1580674670586</updated>
+      <updated>1579579202736</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="toast-notes必须要用低版本的react-spring版本不对导致">
+      <created>1579597436435</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1579597436435</updated>
+    </task>
+    <task id="LOCAL-00014" summary="公司重置idea">
+      <created>1579653616719</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1579653616719</updated>
+    </task>
+    <task id="LOCAL-00015" summary="公司重置idea">
+      <created>1579653692912</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1579653692912</updated>
+    </task>
+    <task id="LOCAL-00016" summary="公司重置idea">
+      <created>1579654574592</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1579654574592</updated>
+    </task>
+    <task id="LOCAL-00017" summary="公司重置idea">
+      <created>1579657196146</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1579657196146</updated>
+    </task>
+    <task id="LOCAL-00018" summary="准备定检扩充">
+      <created>1579682479966</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1579682479966</updated>
+    </task>
+    <task id="LOCAL-00019" summary="准备定检扩充">
+      <created>1579751972997</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1579751972997</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="220470000" />
+    <option name="totallyTimeSpent" value="54196000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16182299" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.28869048" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="npm" order="2" side_tool="true" />
-      <window_info id="Favorites" order="3" side_tool="true" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3286119" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.59490085" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.80360067" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.7594108" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" weight="0.3286119" />
-      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" weight="0.3286119" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.5779037" />
-      <window_info anchor="bottom" id="TypeScript" order="11" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.40261865" />
+      <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="TypeScript" order="9" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.14402619" />
+      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" weight="0.7119476" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
-    <layout-to-restore>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15984148" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="npm" order="2" side_tool="true" />
-      <window_info id="Favorites" order="3" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.63172805" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" weight="0.3286119" />
-      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" weight="0.3286119" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.5779037" />
-      <window_info anchor="bottom" id="TypeScript" order="11" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
-    <option name="exactExcludedFiles">
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="SHOW_OTHER_BRANCHES" value="true" />
+    <option name="COLUMN_ORDER">
       <list>
-        <option value="$PROJECT_DIR$/compare/Button.jsx" />
-        <option value="$PROJECT_DIR$/node_modules/selection-is-backward/index.d.ts" />
-        <option value="$PROJECT_DIR$/node_modules/selection-is-backward/index.js" />
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
       </list>
     </option>
   </component>
@@ -492,354 +676,251 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="重整home" />
-    <MESSAGE value="重整home2" />
-    <MESSAGE value="重整home完畢" />
-    <MESSAGE value="开启搞原始记录" />
-    <MESSAGE value="原始记录看看" />
-    <MESSAGE value="poper 按；没应答" />
-    <MESSAGE value="表单样式模型" />
-    <option name="LAST_COMMIT_MESSAGE" value="表单样式模型" />
+    <ignored-roots>
+      <path value="$PROJECT_DIR$" />
+    </ignored-roots>
+    <MESSAGE value="手机接入第一步" />
+    <MESSAGE value="手机电脑一致， render差了一次" />
+    <MESSAGE value="普通按钮可以抵抗快速多点但一次触发" />
+    <MESSAGE value="throttledUpdateStory" />
+    <MESSAGE value="更新延迟" />
+    <MESSAGE value="初次较完善" />
+    <MESSAGE value="只好这里落户了" />
+    <MESSAGE value="toast-notes必须要用低版本的react-spring版本不对导致" />
+    <MESSAGE value="公司重置idea" />
+    <MESSAGE value="准备定检扩充" />
+    <option name="LAST_COMMIT_MESSAGE" value="准备定检扩充" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="420" y="171" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1579393206921">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="420" y="171" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.728@0.0.1366.728" timestamp="1579393206921" />
+    <state x="262" y="0" key="CommitChangelistDialog2" timestamp="1579480152201">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="262" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1579480152201" />
+    <state width="387" height="438" key="DebuggerActiveHint" timestamp="1579419572899">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="387" height="438" key="DebuggerActiveHint/0.0.1366.728@0.0.1366.728" timestamp="1579419572899" />
+    <state x="-8" y="-8" width="1182" height="544" maximized="true" key="DiffContextDialog" timestamp="1579220204991">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="-8" y="-8" width="1182" height="544" maximized="true" key="DiffContextDialog/0.0.1366.728@0.0.1366.728" timestamp="1579220204991" />
+    <state width="1344" height="467" key="GridCell.Tab.0.bottom" timestamp="1579484171895">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1344" height="467" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1579484171895" />
+    <state width="1344" height="467" key="GridCell.Tab.0.center" timestamp="1579484171894">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1344" height="467" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1579484171894" />
+    <state width="1344" height="467" key="GridCell.Tab.0.left" timestamp="1579484171894">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1344" height="467" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1579484171894" />
+    <state width="1344" height="467" key="GridCell.Tab.0.right" timestamp="1579484171895">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1344" height="467" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1579484171895" />
+    <state width="1344" height="467" key="GridCell.Tab.1.bottom" timestamp="1579484171896">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1344" height="467" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1579484171896" />
+    <state width="1344" height="467" key="GridCell.Tab.1.center" timestamp="1579484171896">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1344" height="467" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1579484171896" />
+    <state width="1344" height="467" key="GridCell.Tab.1.left" timestamp="1579484171895">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1344" height="467" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1579484171895" />
+    <state width="1344" height="467" key="GridCell.Tab.1.right" timestamp="1579484171896">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1344" height="467" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1579484171896" />
+    <state width="1344" height="467" key="GridCell.Tab.2.bottom" timestamp="1579484171897">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1344" height="467" key="GridCell.Tab.2.bottom/0.0.1366.728@0.0.1366.728" timestamp="1579484171897" />
+    <state width="1344" height="467" key="GridCell.Tab.2.center" timestamp="1579484171897">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1344" height="467" key="GridCell.Tab.2.center/0.0.1366.728@0.0.1366.728" timestamp="1579484171897" />
+    <state width="1344" height="467" key="GridCell.Tab.2.left" timestamp="1579484171897">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1344" height="467" key="GridCell.Tab.2.left/0.0.1366.728@0.0.1366.728" timestamp="1579484171897" />
+    <state width="1344" height="467" key="GridCell.Tab.2.right" timestamp="1579484171897">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1344" height="467" key="GridCell.Tab.2.right/0.0.1366.728@0.0.1366.728" timestamp="1579484171897" />
+    <state width="1344" height="467" key="GridCell.Tab.3.bottom" timestamp="1579484171899">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1344" height="467" key="GridCell.Tab.3.bottom/0.0.1366.728@0.0.1366.728" timestamp="1579484171899" />
+    <state width="1344" height="467" key="GridCell.Tab.3.center" timestamp="1579484171898">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1344" height="467" key="GridCell.Tab.3.center/0.0.1366.728@0.0.1366.728" timestamp="1579484171898" />
+    <state width="1344" height="467" key="GridCell.Tab.3.left" timestamp="1579484171898">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1344" height="467" key="GridCell.Tab.3.left/0.0.1366.728@0.0.1366.728" timestamp="1579484171898" />
+    <state width="1344" height="467" key="GridCell.Tab.3.right" timestamp="1579484171898">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1344" height="467" key="GridCell.Tab.3.right/0.0.1366.728@0.0.1366.728" timestamp="1579484171898" />
+    <state x="636" y="76" key="RollbackChangesDialog" timestamp="1579401024159">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="636" y="76" key="RollbackChangesDialog/0.0.1366.728@0.0.1366.728" timestamp="1579401024159" />
+    <state x="275" y="99" key="Vcs.Push.Dialog.v2" timestamp="1579425120042">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="275" y="99" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1579425120042" />
+    <state x="477" y="281" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1579424984601">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="477" y="281" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1579424984601" />
+    <state x="290" y="7" width="975" height="721" key="find.popup" timestamp="1579480094665">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="290" y="7" width="975" height="721" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1579480094665" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/front-end/src/original/elevator/PeriodicalInspection.O-1.tsx</url>
+          <line>1</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/.env-家里">
+    <entry file="file://$PROJECT_DIR$/front-end/node_modules/customize-easy-ui-component/esm/Text.d.ts" />
+    <entry file="file://$PROJECT_DIR$/front-end/src/report/ReportEntrance.tsx" />
+    <entry file="file://$PROJECT_DIR$/front-end/src/original/elevator/SupervisionInspection.O-1.tsx" />
+    <entry file="file://$PROJECT_DIR$/front-end/node_modules/throttle-asynchronous/index.js" />
+    <entry file="file://$PROJECT_DIR$/front-end/node_modules/throttle-asynchronous/package.json" />
+    <entry file="file://$PROJECT_DIR$/front-end/例子测试.txt" />
+    <entry file="file://$PROJECT_DIR$/front-end/src/device/task/BoundDevices.tsx" />
+    <entry file="file://$PROJECT_DIR$/front-end/src/ImageUpload.jsx" />
+    <entry file="file://$PROJECT_DIR$/front-end/.env" />
+    <entry file="file://$PROJECT_DIR$/front-end/src/comp/base.tsx" />
+    <entry file="file://$PROJECT_DIR$/front-end/src/inspect/report/BoundReports.tsx" />
+    <entry file="file://$PROJECT_DIR$/front-end/node_modules/customize-easy-ui-component/esm/IconButton.d.ts" />
+    <entry file="file://$PROJECT_DIR$/front-end/node_modules/typescript/lib/lib.dom.d.ts" />
+    <entry file="file://$PROJECT_DIR$/front-end/node_modules/@types/react/index.d.ts" />
+    <entry file="file://$PROJECT_DIR$/front-end/src/device/task/DispatchIspMen.tsx" />
+    <entry file="file://$PROJECT_DIR$/front-end/src/Compose.tsx" />
+    <entry file="file://$PROJECT_DIR$/front-end/src/device/ComposeDevice.tsx" />
+    <entry file="file://$PROJECT_DIR$/front-end/node_modules/wouter/package.json" />
+    <entry file="file://$PROJECT_DIR$/front-end/node_modules/wouter/index.js" />
+    <entry file="file://$PROJECT_DIR$/front-end/src/Branding.tsx" />
+    <entry file="file://$PROJECT_DIR$/front-end/node_modules/wouter/index.d.ts" />
+    <entry file="file://$PROJECT_DIR$/front-end/src/inspect/InspectMain.tsx" />
+    <entry file="file://$PROJECT_DIR$/front-end/node_modules/react-spring/renderprops-universal.js" />
+    <entry file="file://$PROJECT_DIR$/front-end/node_modules/react-spring/index.d.ts" />
+    <entry file="file://$PROJECT_DIR$/front-end/node_modules/react-spring/renderprops.d.ts" />
+    <entry file="file://$PROJECT_DIR$/front-end/node_modules/react-spring/renderprops-universal.d.ts" />
+    <entry file="file://$PROJECT_DIR$/front-end/node_modules/react-spring/package.json" />
+    <entry file="file://$PROJECT_DIR$/front-end/node_modules/react-gesture-stack/Readme.md" />
+    <entry file="file://$PROJECT_DIR$/front-end/node_modules/react-gesture-stack/tsconfig.json" />
+    <entry file="file://$PROJECT_DIR$/front-end/node_modules/react-gesture-stack/package.json" />
+    <entry file="file://$PROJECT_DIR$/front-end/node_modules/@react-spring/web/node_modules/@react-spring/core/package.json" />
+    <entry file="file://$PROJECT_DIR$/front-end/node_modules/@react-spring/web/node_modules/@react-spring/core/index.d.ts" />
+    <entry file="file://$PROJECT_DIR$/front-end/node_modules/@react-spring/web/node_modules/@react-spring/animated/index.d.ts" />
+    <entry file="file://$PROJECT_DIR$/front-end/src/original/RecordView.tsx" />
+    <entry file="file://$PROJECT_DIR$/front-end/src/inspect/IspDetail.tsx" />
+    <entry file="file://$PROJECT_DIR$/front-end/新建文本文档.txt" />
+    <entry file="file://$PROJECT_DIR$/front-end/package.json" />
+    <entry file="file://$PROJECT_DIR$/front-end/node_modules/react-gesture-stack/esm/StackContext.d.ts" />
+    <entry file="file://$PROJECT_DIR$/front-end/node_modules/customize-easy-ui-component/esm/Stack.d.ts" />
+    <entry file="file://$PROJECT_DIR$/front-end/src/inspect/RelationList.tsx" />
+    <entry file="file://$PROJECT_DIR$/.env-公司">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="12" lean-forward="true" selection-end-line="12" />
+        <state relative-caret-position="286">
+          <caret line="13" lean-forward="true" selection-end-line="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/.env">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://E:/何尔章/2020报告/对应testlog.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="32965">
-          <caret line="1735" column="6" lean-forward="true" selection-start-line="1735" selection-start-column="6" selection-end-line="1735" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../模板-检验文档/report-rep.xml" />
-    <entry file="file://$PROJECT_DIR$/../../模板-检验文档/单个页的xml.txt" />
-    <entry file="file://$PROJECT_DIR$/../../模板-检验文档/report-rep---.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="1552" column="34" lean-forward="true" selection-start-line="1552" selection-start-column="34" selection-end-line="1552" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/original/template.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/customize-easy-ui-component/esm/Theme/breakpoints.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="17" column="6" lean-forward="true" selection-start-line="17" selection-start-column="6" selection-end-line="17" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/typescript/lib/lib.es5.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="282">
-          <caret line="1249" column="7" lean-forward="true" selection-start-line="1249" selection-start-column="7" selection-end-line="1249" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/typescript/lib/lib.es2015.core.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="26" column="45" selection-start-line="26" selection-start-column="40" selection-end-line="26" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/customize-easy-ui-component/esm/Form.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../模板-检验文档/对应report.rep">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="254">
-          <caret line="475" column="15" lean-forward="true" selection-start-line="475" selection-start-column="15" selection-end-line="475" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/TopRouter.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="689">
-          <caret line="229" column="31" selection-start-line="229" selection-start-column="31" selection-end-line="229" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/customize-easy-ui-component/esm/Table.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="31" column="99" selection-start-line="31" selection-start-column="99" selection-end-line="31" selection-end-column="99" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/customize-easy-ui-component/node_modules/@types/react/index.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4571">
-          <caret line="1204" column="14" selection-start-line="1204" selection-start-column="14" selection-end-line="1204" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/comp/test02.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="457">
-          <caret line="307" column="24" lean-forward="true" selection-start-line="307" selection-start-column="24" selection-end-line="307" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/comp/test01.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="26" column="20" lean-forward="true" selection-start-line="26" selection-start-column="20" selection-end-line="26" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ImageUpload.jsx">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Editor.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1520">
-          <caret line="86" selection-start-line="86" selection-end-line="86" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/MainLeftPart.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1957">
-          <caret line="130" selection-start-line="130" selection-end-line="146" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/customize-easy-ui-component/esm/Theme/Providers.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6327">
-          <caret line="334" column="23" selection-start-line="334" selection-start-column="23" selection-end-line="334" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/typescript/lib/lib.dom.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="19557" column="14" selection-start-line="19557" selection-start-column="14" selection-end-line="19557" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/customize-easy-ui-component/esm/Text.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="359">
-          <caret line="307" column="27" lean-forward="true" selection-start-line="307" selection-start-column="27" selection-end-line="307" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/customize-easy-ui-component/esm/Sheet.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="2" column="21" selection-start-line="2" selection-start-column="21" selection-end-line="2" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/customize-easy-ui-component/esm/Hooks/compose-bind.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="3" column="21" selection-start-line="3" selection-start-column="21" selection-end-line="3" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/comp/base.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/例子测试.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="549">
-          <caret line="276" lean-forward="true" selection-start-line="276" selection-end-line="276" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/compare/Collapse.tsx-">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="6" column="43" lean-forward="true" selection-start-line="6" selection-start-column="43" selection-end-line="6" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/compare/Positions.tsx--">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="55" column="51" lean-forward="true" selection-start-line="55" selection-start-column="51" selection-end-line="55" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/wouter/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1978">
-          <caret line="115" column="51" lean-forward="true" selection-start-line="115" selection-start-column="51" selection-end-line="115" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/wouter/index.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="18" column="14" selection-start-line="18" selection-start-column="14" selection-end-line="18" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/compare/Popover.tsx--">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3147">
-          <caret line="15" column="49" lean-forward="true" selection-start-line="15" selection-start-column="49" selection-end-line="15" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/customize-easy-ui-component/esm/misc/noop.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="24" selection-start-column="24" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/touchable-hook/esm/index.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="18" column="24" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/customize-easy-ui-component/esm/Menu.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="18" column="37" lean-forward="true" selection-start-line="18" selection-start-column="37" selection-end-line="18" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/customize-easy-ui-component/esm/Popover.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="17" column="27" selection-start-line="17" selection-start-column="27" selection-end-line="17" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tsconfig.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="9" column="25" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor />
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/@types/react/index.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="23085">
-          <caret line="1241" column="80" selection-start-line="1241" selection-start-column="72" selection-end-line="1241" selection-end-column="80" />
+        <state relative-caret-position="264">
+          <caret line="12" column="27" lean-forward="true" selection-start-line="12" selection-start-column="27" selection-end-line="12" selection-end-column="27" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="482">
-          <caret line="62" column="27" lean-forward="true" selection-start-line="62" selection-start-column="27" selection-end-line="62" selection-end-column="27" />
+        <state relative-caret-position="339">
+          <caret line="81" column="9" lean-forward="true" selection-start-line="81" selection-start-column="9" selection-end-line="81" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="348">
+          <caret line="231" column="21" lean-forward="true" selection-start-line="231" selection-start-column="21" selection-end-line="231" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MainLeftPart.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="188">
+          <caret line="195" column="28" lean-forward="true" selection-start-line="195" selection-start-column="28" selection-end-line="195" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Downloads/特检.mhtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1122">
+          <caret line="51" column="72" lean-forward="true" selection-start-line="51" selection-start-column="72" selection-end-line="51" selection-end-column="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Downloads/特检.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="412">
+          <caret line="44" lean-forward="true" selection-start-line="44" selection-end-line="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://F:/hez/技术改造/模板-检验文档/report.rep">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="44">
+          <caret line="2" column="14" lean-forward="true" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://F:/hez/技术改造/模板-检验文档/report-rep.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="309">
+          <caret line="2113" column="11" lean-forward="true" selection-start-line="2113" selection-start-column="11" selection-end-line="2113" selection-end-column="11" />
+          <folding>
+            <element signature="n#equipinfos#0;n#config#0;n#!!top" />
+            <element signature="n#measures#0;n#config#0;n#!!top" />
+            <element signature="n#sign1#0;n#config#0;n#!!top" />
+            <element signature="n#sign2#0;n#config#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://F:/hez/技术改造/模板-检验文档/对应testlog.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="440">
+          <caret line="20" column="18" lean-forward="true" selection-start-line="20" selection-start-column="18" selection-end-line="20" selection-end-column="18" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/新建文本文档.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="302">
-          <caret line="218" column="30" lean-forward="true" selection-start-line="218" selection-start-column="30" selection-end-line="218" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/compare/Button.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="398">
-          <caret line="541" column="12" lean-forward="true" selection-start-line="541" selection-start-column="12" selection-end-line="541" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/comp/TableExt.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="14" column="28" lean-forward="true" selection-start-line="14" selection-start-column="28" selection-end-line="14" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/comp/Menu.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="198" column="40" lean-forward="true" selection-start-line="198" selection-start-column="40" selection-end-line="198" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/original/comp/base.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="156" column="11" lean-forward="true" selection-start-line="156" selection-start-column="11" selection-end-line="156" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Branding.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1965">
-          <caret line="259" column="14" lean-forward="true" selection-start-line="259" selection-start-column="14" selection-end-line="259" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/original/RecordView.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="444">
-          <caret line="125" lean-forward="true" selection-start-line="125" selection-end-line="125" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/customize-easy-ui-component/esm/Form.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
-          <caret line="38" column="26" lean-forward="true" selection-start-line="38" selection-start-column="26" selection-end-line="38" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/original/elevator/SupervisionInspection.O-1.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="246">
-          <caret line="505" selection-start-line="505" selection-end-line="516" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/original/OriginalRecord.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="311">
-          <caret line="69" column="67" lean-forward="true" selection-start-line="69" selection-start-column="8" selection-end-line="69" selection-end-column="67" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/original/elevator/PeriodicalInspection.O-1.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="406">
-          <caret line="1187" column="75" lean-forward="true" selection-start-line="1187" selection-start-column="75" selection-end-line="1187" selection-end-column="75" />
-          <folding>
-            <element signature="e#16#54#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="238">
+          <caret line="225" column="39" lean-forward="true" selection-start-line="225" selection-start-column="39" selection-end-line="225" selection-end-column="39" />
         </state>
       </provider>
     </entry>
