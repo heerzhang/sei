@@ -1499,6 +1499,8 @@ const InternalItem0: React.RefForwardingComponent<InternalItemHandResult,Interna
     props:{ children },  ref
   ) => {
     const getInpFilter = React.useCallback((par) => {
+      //devCod,检验日期：这些字段要提升到关系数据库表中，json半结构化数据的就不做保留。
+      //安全人员,联系电话：放json，算是过度性质输入形态。报告正式批准/终结后，就该触发修改同步到库表中去。也可反馈给下一次定期检验，继承或修改。
       const {devCod,检验日期,安全人员,联系电话} =par||{};
       return {devCod,检验日期,安全人员,联系电话};
     }, []);
@@ -1507,13 +1509,13 @@ const InternalItem0: React.RefForwardingComponent<InternalItemHandResult,Interna
     return (
       <InspectRecordTitle  control={eos}   label={'一、设备概况'}>
         允许直接修改部分
-        <InputGroupLine  label='设备号' >
+        <InputGroupLine  label='设备号{将来是点击链接自动获得}' >
           <Input autoFocus={true} value={inp?.devCod ||''}  placeholder="那一台电梯？暂时要求，将来是点击链接自动获得"
                  onChange={e => setInp({ ...inp, devCod: e.currentTarget.value||undefined}) } />
         </InputGroupLine>
-        <InputGroupLine  label='检验日期' >
-          <Input autoFocus={true} value={inp?.检验日期 ||''}  placeholder="基准日" type='date'
-                 onChange={e => setInp({ ...inp, 检验日期: e.currentTarget.value||undefined}) } />
+        <InputGroupLine  label='检验日期{将来提升到创立原始记录的前置输入}' >
+          <Input value={inp?.检验日期 ||''}  placeholder="基准日" type='date'
+                 onChange={e => setInp({ ...inp, 检验日期: e.currentTarget.value}) } />
         </InputGroupLine>
         <InputGroupLine  label='安全管理人员' >
           <Input autoFocus={true} value={inp?.安全人员 ||''}
@@ -1570,15 +1572,16 @@ const InternalItem99: React.RefForwardingComponent<InternalItemHandResult,Intern
     props:{ children },  ref
   ) => {
     const getInpFilter = React.useCallback((par) => {
-      const {检验结论,编制日期,编制人,channelSet,channelLight,accessWidth,accessHeight,roomAccess,accessDoor,lightingSwitch,mainSwitch} =par||{};
-      return {检验结论,编制日期,编制人,channelSet,channelLight,accessWidth,accessHeight,roomAccess,accessDoor,lightingSwitch,mainSwitch};
+     //检验人IDs编制日期编制人结论：这些字段要提升到关系数据库表中，而不是json字段里面。只能保留上级语义更强的，json半结构化数据的就不做保留。
+      const {检验结论,编制日期,编制人,检验人IDs} =par||{};
+      return {检验结论,编制日期,编制人,检验人IDs};
     }, []);
     const { eos, setInp, inp } = useItemControlAs({ref,  filter: getInpFilter});
 
     return (
       <InspectRecordTitle  control={eos}   label={'下结论!'}>
         五、现场检验意见
-        <InputGroupLine  label='下结论' >
+        <InputGroupLine  label='检验结论{签名后结论不能再改}' >
           <Select inputSize="md" css={{minWidth:'140px',fontSize:'2rem',padding:'0 1rem'}}
                   value={ inp?.检验结论  ||''}
                   onChange={e => setInp({ ...inp, 检验结论: e.currentTarget.value||undefined}) }
@@ -1590,17 +1593,17 @@ const InternalItem99: React.RefForwardingComponent<InternalItemHandResult,Intern
             <option>复检不合格</option>
           </Select>
         </InputGroupLine>
-        <InputGroupLine  label='检验人员{将来用选择框}' >
-          <Input autoFocus={true} value={inp?.insulResistance ||''} placeholder="目前直接输入名字，将来签名要选择框列表或工号，多个人"
-                 onChange={e => setInp({ ...inp, insulResistance: e.currentTarget.value||undefined}) } />
+        <InputGroupLine  label='检验人员{用户ID列表,将来签名，登录来签注}' >
+          <Input autoFocus={true} value={inp?.检验人IDs ||''} placeholder="输入本系统用户ID，将来签名后结论不能再改，多人签名：以 分割"
+                 onChange={e => setInp({ ...inp, 检验人IDs: e.currentTarget.value||undefined}) } />
         </InputGroupLine>
-        <InputGroupLine  label='编制人员{将来用选择框}' >
+        <InputGroupLine  label='编制人员{将来是提交人员，自动的}' >
           <Input autoFocus={true} value={inp?.编制人 ||''} placeholder="目前直接输入名字，一个人"
                  onChange={e => setInp({ ...inp, 编制人: e.currentTarget.value||undefined}) } />
         </InputGroupLine>
-        <InputGroupLine  label='编制日期' >
+        <InputGroupLine  label='编制日期{将来等于提交日，自动的}' >
           <Input autoFocus={true} value={inp?.编制日期 ||''}  type='date'
-                 onChange={e => setInp({ ...inp, 编制日期: e.currentTarget.value||undefined}) } />
+                 onChange={e => setInp({ ...inp, 编制日期: e.currentTarget.value}) } />
         </InputGroupLine>
       </InspectRecordTitle>
     );
