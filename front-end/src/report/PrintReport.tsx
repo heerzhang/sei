@@ -149,7 +149,32 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
       有机房曳引驱动电梯定期检验报告
       <ScrollView  css={{ height: "100%" }} >
         <div >
-          <Table  fixed={ ["5%","5%","6%","8%","10%","%","17%","9%"]  }
+          检验不合格项目内容及复检结果
+          <Table  fixed={ ["5%","11%","%","14%","14%"]  }
+                  printColWidth={ ["35","66","700","70","95"] }
+                  css={ {borderCollapse: 'collapse' } }
+          >
+            <TableHead >
+              <TableRow>
+                <CCell>序号</CCell>
+                <CCell>类别/编号</CCell>
+                <CCell>检验不合格内容记录</CCell>
+                <CCell>复检结果</CCell>
+                <CCell>复检日期</CCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              <TableRow key={1}>
+                <CCell component="th" scope="row">检验日期</CCell>
+                <CCell colSpan={2}>2020-01-02</CCell>
+                <CCell>下次检验日期</CCell>
+                <CCell>/</CCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+
+          <br/>
+          <Table  fixed={ ["6%","7%","7%","9%","10%","%","17%","9%"]  }
                   printColWidth={ ["46","46","55","55","130","405","175","120"] }
                  css={ {borderCollapse: 'collapse' } }
           >
@@ -200,11 +225,11 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <CCell>资料确认符合</CCell>
                 <CCell rowSpan={3}>合格</CCell>
               </TableRow>
-              <TableRow key={2}>
+              <TableRow key={4}>
                 <Cell>(2)通道照明</Cell>
                 <CCell>资料确认符合</CCell>
               </TableRow>
-              <TableRow key={2}>
+              <TableRow key={5}>
                 <Cell>(3)通道门</Cell>
                 <CCell>资料确认符合</CCell>
               </TableRow>
@@ -321,7 +346,7 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <Cell>(4)电气安全装置</Cell>
                 <CCell>／</CCell>
               </TableRow>
-              <TableRow key={11}>
+              <TableRow >
                 <CCell component="th" scope="row" rowSpan={2}>11</CCell>
                 <CCell rowSpan={2}>C</CCell>
                 <CCell rowSpan={2}>3.5</CCell>
@@ -334,7 +359,7 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <Cell>(4)电气安全装置</Cell>
                 <CCell>／</CCell>
               </TableRow>
-              <TableRow key={11}>
+              <TableRow >
                 <CCell component="th" scope="row">12</CCell>
                 <CCell>B</CCell>
                 <CCell>3.7</CCell>
@@ -342,7 +367,7 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <CCell>间距0.14m</CCell>
                 <CCell></CCell>
               </TableRow>
-              <TableRow key={11}>
+              <TableRow >
                 <CCell component="th" scope="row">13</CCell>
                 <CCell>B</CCell>
                 <CCell>3.10</CCell>
@@ -350,7 +375,7 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <CCell>符合</CCell>
                 <CCell></CCell>
               </TableRow>
-              <TableRow key={11}>
+              <TableRow >
                 <CCell component="th" scope="row">14</CCell>
                 <CCell>C</CCell>
                 <CCell rowSpan={7}>3井道及相关设备</CCell>
@@ -359,7 +384,7 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <CCell>符合</CCell>
                 <CCell></CCell>
               </TableRow>
-              <TableRow key={11}>
+              <TableRow >
                 <CCell component="th" scope="row" rowSpan={2}>15</CCell>
                 <CCell rowSpan={2}>C</CCell>
                 <CCell rowSpan={2}>3.12</CCell>
@@ -372,7 +397,7 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <Cell>(3)停止装置</Cell>
                 <CCell>符合</CCell>
               </TableRow>
-              <TableRow key={11}>
+              <TableRow >
                 <CCell component="th" scope="row">16</CCell>
                 <CCell>B</CCell>
                 <CCell>3.14</CCell>
@@ -533,10 +558,232 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <Cell>(2)人力施加在最不利点时间隙</Cell>
                 <CCell>符合</CCell>
               </TableRow>
-
+              <TableRow key={5}>
+                <CCell component="th" scope="row" >31</CCell>
+                <CCell>C</CCell>
+                <CCell>6.4</CCell>
+                <Cell colSpan={2}>玻璃门防拖曳措施</Cell>
+                <CCell>／</CCell>
+                <CCell>／</CCell>
+              </TableRow>
+              <TableRow key={5}>
+                <CCell component="th" scope="row" >32</CCell>
+                <CCell>B</CCell>
+                <CCell>6.5</CCell>
+                <Cell colSpan={2}>防止门夹人的保护装置</Cell>
+                <CCell>符合</CCell>
+                <CCell>合格</CCell>
+              </TableRow>
+              <TableRow key={5}>
+                <CCell component="th" scope="row" >33</CCell>
+                <CCell>B</CCell>
+                <CCell>6.6</CCell>
+                <Cell colSpan={2}>门的运行与导向</Cell>
+                <CCell>符合</CCell>
+                <CCell>合格</CCell>
+              </TableRow>
+              <TableRow key={5}>
+                <CCell component="th" scope="row" >34</CCell>
+                <CCell>B</CCell>
+                <CCell>6.7</CCell>
+                <Cell colSpan={2}>自动关闭层门装置</Cell>
+                <CCell>符合</CCell>
+                <CCell>合格</CCell>
+              </TableRow>
+              <TableRow key={5}>
+                <CCell component="th" scope="row" >35</CCell>
+                <CCell>B</CCell>
+                <CCell>6.8</CCell>
+                <Cell colSpan={2}>紧急开锁装置</Cell>
+                <CCell>符合</CCell>
+                <CCell>合格</CCell>
+              </TableRow>
+              <TableRow key={5}>
+                <CCell component="th" scope="row" rowSpan={2}>36</CCell>
+                <CCell rowSpan={2}>B</CCell>
+                <CCell rowSpan={7}>6<br/>轿门与层门</CCell>
+                <CCell rowSpan={2}>6.9</CCell>
+                <CCell rowSpan={2}>门的锁紧</CCell>
+                <Cell>(1)层门门锁装置[不含6.9(1)①]</Cell>
+                <CCell>符合</CCell>
+                <CCell rowSpan={2}>合格</CCell>
+              </TableRow>
+              <TableRow key={2}>
+                <Cell>(2)轿门门锁装置[不含6.9(1)①]</Cell>
+                <CCell>符合</CCell>
+              </TableRow>
+              <TableRow key={5}>
+                <CCell component="th" scope="row" rowSpan={2}>37</CCell>
+                <CCell rowSpan={2}>B</CCell>
+                <CCell rowSpan={2}>6.10</CCell>
+                <CCell rowSpan={2}>门的闭合</CCell>
+                <Cell>(1)机电联锁</Cell>
+                <CCell>符合</CCell>
+                <CCell rowSpan={2}>合格</CCell>
+              </TableRow>
+              <TableRow key={2}>
+                <Cell>(2)电气安全装置</Cell>
+                <CCell>符合</CCell>
+              </TableRow>
+              <TableRow key={5}>
+                <CCell component="th" scope="row" rowSpan={2}>38</CCell>
+                <CCell rowSpan={2}>B</CCell>
+                <CCell rowSpan={2}>☆<br/>6.11</CCell>
+                <CCell rowSpan={2}>轿门开门限制装置及轿门的开启</CCell>
+                <Cell>(1)轿门开门限制装置</Cell>
+                <CCell>／</CCell>
+                <CCell rowSpan={2}>／</CCell>
+              </TableRow>
+              <TableRow key={2}>
+                <Cell>(2)轿门的开启</Cell>
+                <CCell>／</CCell>
+              </TableRow>
+              <TableRow key={5}>
+                <CCell component="th" scope="row" >39</CCell>
+                <CCell>C</CCell>
+                <CCell>6.12</CCell>
+                <Cell colSpan={2}>门刀、门锁滚轮与地坎间隙</Cell>
+                <CCell>符合</CCell>
+                <CCell>合格</CCell>
+              </TableRow>
+              <TableRow key={5}>
+                <CCell component="th" scope="row" >40</CCell>
+                <CCell>C</CCell>
+                <CCell rowSpan={7}>8<br/>试验</CCell>
+                <CCell>8.1</CCell>
+                <Cell colSpan={2}>平衡系数试验</Cell>
+                <CCell>资料确认符合</CCell>
+                <CCell>合格</CCell>
+              </TableRow>
+              <TableRow key={5}>
+                <CCell component="th" scope="row" >41</CCell>
+                <CCell>C</CCell>
+                <CCell>8.2</CCell>
+                <Cell colSpan={2}>★轿厢上行超速保护装置试验</Cell>
+                <CCell>符合</CCell>
+                <CCell>合格</CCell>
+              </TableRow>
+              <TableRow key={5}>
+                <CCell component="th" scope="row" rowSpan={2}>42</CCell>
+                <CCell rowSpan={2}>B</CCell>
+                <CCell rowSpan={2}>☆<br/>8.3</CCell>
+                <CCell rowSpan={2}>轿厢意外移动保护装置试验</CCell>
+                <Cell>(1)制停情况</Cell>
+                <CCell>／</CCell>
+                <CCell rowSpan={2}>／</CCell>
+              </TableRow>
+              <TableRow key={2}>
+                <Cell>(2)自监测功能</Cell>
+                <CCell>／</CCell>
+              </TableRow>
+              <TableRow key={5}>
+                <CCell component="th" scope="row" >43</CCell>
+                <CCell>B</CCell>
+                <CCell>8.4</CCell>
+                <Cell colSpan={2}>轿厢限速器－安全钳试验</Cell>
+                <CCell>符合</CCell>
+                <CCell>合格</CCell>
+              </TableRow>
+              <TableRow key={5}>
+                <CCell component="th" scope="row" >44</CCell>
+                <CCell>B</CCell>
+                <CCell>8.5</CCell>
+                <Cell colSpan={2}>对重(平衡重)限速器—安全钳试验</Cell>
+                <CCell>／</CCell>
+                <CCell>／</CCell>
+              </TableRow>
+              <TableRow key={5}>
+                <CCell component="th" scope="row" >45</CCell>
+                <CCell>C</CCell>
+                <CCell>8.6</CCell>
+                <Cell colSpan={2}>运行试验</Cell>
+                <CCell>符合</CCell>
+                <CCell>合格</CCell>
+              </TableRow>
+              <TableRow key={5}>
+                <CCell component="th" scope="row" rowSpan={3}>46</CCell>
+                <CCell rowSpan={3}>B</CCell>
+                <CCell rowSpan={8}>8<br/>试验</CCell>
+                <CCell rowSpan={3}>8.7</CCell>
+                <CCell rowSpan={3}>应急救援试验</CCell>
+                <Cell>(1)救援程序</Cell>
+                <CCell>符合</CCell>
+                <CCell rowSpan={3}>合格</CCell>
+              </TableRow>
+              <TableRow key={2}>
+                <Cell>(2)救援通道</Cell>
+                <CCell>符合</CCell>
+              </TableRow>
+              <TableRow key={2}>
+                <Cell>(3)救援操作</Cell>
+                <CCell>符合</CCell>
+              </TableRow>
+              <TableRow key={5}>
+                <CCell component="th" scope="row" >47</CCell>
+                <CCell>B</CCell>
+                <CCell>8.9</CCell>
+                <Cell colSpan={2}>空载曳引检查</Cell>
+                <CCell>符合</CCell>
+                <CCell>合格</CCell>
+              </TableRow>
+              <TableRow key={5}>
+                <CCell component="th" scope="row" >48</CCell>
+                <CCell>B</CCell>
+                <CCell>8.10</CCell>
+                <Cell colSpan={2}>上行制动工况曳引检查</Cell>
+                <CCell>符合</CCell>
+                <CCell>合格</CCell>
+              </TableRow>
+              <TableRow key={5}>
+                <CCell component="th" scope="row" >49</CCell>
+                <CCell>B</CCell>
+                <CCell>8.11</CCell>
+                <Cell colSpan={2}>▲下行制动工况曳引检查</Cell>
+                <CCell>／</CCell>
+                <CCell>／</CCell>
+              </TableRow>
+              <TableRow key={5}>
+                <CCell component="th" scope="row" >50</CCell>
+                <CCell>B</CCell>
+                <CCell>8.12</CCell>
+                <Cell colSpan={2}>▲静态曳引试验</Cell>
+                <CCell>／</CCell>
+                <CCell>／</CCell>
+              </TableRow>
+              <TableRow key={5}>
+                <CCell component="th" scope="row" >51</CCell>
+                <CCell>B</CCell>
+                <CCell>8.13</CCell>
+                <Cell colSpan={2}>制动试验</Cell>
+                <CCell>／</CCell>
+                <CCell>／</CCell>
+              </TableRow>
             </TableBody>
           </Table>
-
+          检验不合格项目内容及复检结果
+          <Table  fixed={ ["5%","11%","%","14%","14%"]  }
+                  printColWidth={ ["35","66","700","70","95"] }
+                  css={ {borderCollapse: 'collapse' } }
+          >
+            <TableHead >
+              <TableRow>
+                <CCell>序号</CCell>
+                <CCell>类别/编号</CCell>
+                <CCell>检验不合格内容记录</CCell>
+                <CCell>复检结果</CCell>
+                <CCell>复检日期</CCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              <TableRow key={1}>
+                <CCell component="th" scope="row">1</CCell>
+                <CCell>B/4.8</CCell>
+                <CCell>紧急报警装置未接到有人值班处。</CCell>
+                <CCell>不合格</CCell>
+                <CCell>2015-08-13</CCell>
+              </TableRow>
+            </TableBody>
+          </Table>
         </div>
       </ScrollView>
     </React.Fragment>
