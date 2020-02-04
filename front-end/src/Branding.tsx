@@ -411,7 +411,7 @@ export const Branding: React.FunctionComponent<BrandingProps> = (props) => {
               fontSize: theme.fontSizes[0]
             }}
           >
-            Made by <Link href="/chaipu">hez</Link>
+            制作者 <Link href="/chaipu">hez</Link>
             <br />
             <Link href="mailto:fjsei@gmail.com">Email me</Link> with
             questions or whatevs!

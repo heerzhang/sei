@@ -52,38 +52,52 @@ const rows = [
       <div  css={{padding:"6px 0"}}>出现下列情况之一时，悬挂钢丝绳和补偿钢丝绳应当报废：<br/>
         ①出现笼状畸变、绳股挤出、扭结、部分压扁、弯折；<br/>②一个捻距内出现的断丝数大于下表列出的数值时：
       </div>
-      <Table css={{borderCollapse:'collapse'}}>
-        <TableRow css={{height:'23px'}}>
-          <CCell rowSpan={2}>断丝的形式</CCell>
-          <CCell colSpan={3}>钢丝绳的类型
-          </CCell>
-        </TableRow>
-        <TableRow css={{height:'23px'}}>
-          <CCell>6×19</CCell>
-          <CCell>8×19</CCell>
-          <CCell>9×19</CCell>
-        </TableRow>
-        <TableRow>
-          <CCell>均布在外层绳股上</CCell>
-          <CCell>24</CCell><CCell>30</CCell><CCell>34</CCell>
-        </TableRow>
-        <TableRow>
-          <CCell>集中在一或者两根外层绳股上</CCell>
-          <CCell>24</CCell><CCell>30</CCell><CCell>34</CCell>
-        </TableRow>
-        <TableRow>
-          <CCell>一根外绳股上相邻的断丝</CCell>
-          <CCell>4</CCell><CCell>4</CCell><CCell>4</CCell>
-        </TableRow>
-        <TableRow>
-          <CCell>股谷（缝）断丝 </CCell>
-          <CCell>1</CCell><CCell>1</CCell><CCell>1</CCell>
-        </TableRow>
-        <TableRow>
-          <Cell colSpan={4}>注：上述断丝数参考长度为一个捻距，约为6d（d表示钢丝绳
-            的公称直径，mm）</Cell>
-        </TableRow>
-      </Table>
+                    <Table  minWidth={'90px'}　css={{borderCollapse:'collapse'}}>
+                      <TableRow css={{height:"20"}}>
+                        <CCell rowSpan={2}>断丝的形式</CCell>
+                        <CCell colSpan={3}>钢丝绳的类型
+                        </CCell>
+                      </TableRow>
+                      <TableRow css={{height:"19 px"}}>
+                        <CCell>6×19</CCell>
+                        <CCell>13×14</CCell>
+                        <CCell>9×19</CCell>
+                      </TableRow>
+                      <TableRow>
+                        <CCell>均布在外层绳股上</CCell>
+                        <CCell>24</CCell><CCell>30</CCell><CCell>34</CCell>
+                      </TableRow>
+                      <TableRow>
+                        <CCell>集中在一或者{items&&items[0].upLoadDate}两根外层绳股上</CCell>
+                        <CCell>24</CCell><CCell>30</CCell><CCell>34</CCell>
+                      </TableRow>
+                      <TableRow>
+                        <CCell>一根外绳股上相邻的断丝</CCell>
+                        <CCell>4</CCell><CCell>4</CCell><CCell>4</CCell>
+                      </TableRow>
+                      <TableRow>
+                        <CCell>股谷（缝）断丝 </CCell>
+                        {
+                          items? ( items.map(hit => {
+                              //const myurl ='/inspect/'+hit.id;
+                              return (
+                                <CCell>
+                                    {hit.no}
+                                </CCell>
+                              );
+                            } ) )
+                            :
+                            (<React.Fragment>
+                              <CCell>2</CCell> <CCell>3</CCell> <CCell>6</CCell>
+                            </React.Fragment>)
+                        }
+
+                      </TableRow>
+                      <TableRow>
+                        <Cell colSpan={4}>注：上述断丝数参考长度为一个捻距，约为6d（d表示钢丝绳
+                          的公称直径，mm）</Cell>
+                      </TableRow>
+                    </Table>
       <div css={{padding:"19px 12px"}}>③钢丝绳直径小于其公称直径的90%；<br/>
         ④钢丝绳严重锈蚀，铁锈填满绳股间隙。<br/>
         采用其他类型悬挂装置的，悬挂装置的磨损、变形等不得超过制造单位设定的报废指标
@@ -132,10 +146,10 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
   //最多＝8列 <Table合计约1040px；原来PDF打印看着像是905px的。
   return (
     <React.Fragment>
-
+      有机房曳引驱动电梯定期检验报告
       <ScrollView  css={{ height: "100%" }} >
         <div >
-          <Table  fixed={ ["5%","5%","6%","6%","10%","%","175","10%"]  }
+          <Table  fixed={ ["5%","5%","6%","8%","10%","%","17%","9%"]  }
                   printColWidth={ ["46","46","55","55","130","405","175","120"] }
                  css={ {borderCollapse: 'collapse' } }
           >
@@ -217,7 +231,7 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <CCell rowSpan={4}>驱动主机</CCell>
                 <Cell>(2)工作状况</Cell>
                 <CCell>符合</CCell>
-                <CCell rowSpan={4}></CCell>
+                <CCell rowSpan={4}>合格</CCell>
               </TableRow>
               <TableRow key={2}>
                 <Cell>(3)轮槽磨损</Cell>
@@ -301,7 +315,7 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <Cell rowSpan={2}>井道安全门</Cell>
                 <Cell>(3)门锁</Cell>
                 <CCell>／</CCell>
-                <CCell rowSpan={2}></CCell>
+                <CCell rowSpan={2}>／</CCell>
               </TableRow>
               <TableRow key={2}>
                 <Cell>(4)电气安全装置</Cell>
@@ -314,7 +328,7 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <Cell rowSpan={2}>井道检修门</Cell>
                 <Cell>(3)门锁</Cell>
                 <CCell>／</CCell>
-                <CCell rowSpan={2}></CCell>
+                <CCell rowSpan={2}>／</CCell>
               </TableRow>
               <TableRow key={2}>
                 <Cell>(4)电气安全装置</Cell>
@@ -352,7 +366,7 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <CCell rowSpan={2}>底坑设施与装置</CCell>
                 <Cell>(1)底坑底部</Cell>
                 <CCell>符合</CCell>
-                <CCell rowSpan={2}></CCell>
+                <CCell rowSpan={2}>合格</CCell>
               </TableRow>
               <TableRow key={2}>
                 <Cell>(3)停止装置</Cell>
@@ -373,74 +387,153 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <CCell rowSpan={3}>缓冲器</CCell>
                 <Cell>(3)固定和完好情况</Cell>
                 <CCell>符合</CCell>
-                <CCell rowSpan={3}></CCell>
+                <CCell rowSpan={3}>合格</CCell>
               </TableRow>
               <TableRow key={2}>
-                <Cell> <div>
-                  <div>
-                    <div  css={{padding:"6px 0"}}>出现下列情况之一时，悬挂钢丝绳和补偿钢丝绳应当报废：<br/>
-                      ①出现笼状畸变、绳股挤出、扭结、部分压扁、弯折；<br/>②一个捻距内出现的断丝数大于下表列出的数值时：
-                    </div>
-
-                    <Table  minWidth={'90px'}　css={{borderCollapse:'collapse'}}>
-                      <TableRow css={{height:"20"}}>
-                        <CCell rowSpan={2}>断丝的形式</CCell>
-                        <CCell colSpan={3}>钢丝绳的类型
-                        </CCell>
-                      </TableRow>
-                      <TableRow css={{height:"19 px"}}>
-                        <CCell>6×19</CCell>
-                        <CCell>13×14</CCell>
-                        <CCell>9×19</CCell>
-                      </TableRow>
-                      <TableRow>
-                        <CCell>均布在外层绳股上</CCell>
-                        <CCell>24</CCell><CCell>30</CCell><CCell>34</CCell>
-                      </TableRow>
-                      <TableRow>
-                        <CCell>集中在一或者{items&&items[0].upLoadDate}两根外层绳股上</CCell>
-                        <CCell>24</CCell><CCell>30</CCell><CCell>34</CCell>
-                      </TableRow>
-                      <TableRow>
-                        <CCell>一根外绳股上相邻的断丝</CCell>
-                        <CCell>4</CCell><CCell>4</CCell><CCell>4</CCell>
-                      </TableRow>
-                      <TableRow>
-                        <CCell>股谷（缝）断丝 </CCell>
-                        {
-                          items? ( items.map(hit => {
-                              //const myurl ='/inspect/'+hit.id;
-                              return (
-                                <CCell>
-                                    {hit.no}
-                                </CCell>
-                              );
-                            } ) )
-                            :
-                            (<React.Fragment>
-                              <CCell>2</CCell> <CCell>3</CCell> <CCell>6</CCell>
-                            </React.Fragment>)
-                        }
-
-                      </TableRow>
-                      <TableRow>
-                        <Cell colSpan={4}>注：上述断丝数参考长度为一个捻距，约为6d（d表示钢丝绳
-                          的公称直径，mm）</Cell>
-                      </TableRow>
-                    </Table>
-                    <div css={{padding: `${11} 0 6px`}}>
-                      "③钢丝绳直径小于其公称直径的90%；<br/>"+
-                      "④钢丝绳严重锈蚀，铁锈填满绳股间隙。【】<br/>
-                      采用其他类型悬挂装置的，悬挂装置的磨损、变形等不得超过制造单位设定的报废指标
-                    </div>
-                  </div>
-                </div></Cell>
+                <Cell>(4)液位和电气安全装置</Cell>
                 <CCell>符合</CCell>
               </TableRow>
               <TableRow key={2}>
                 <Cell>(5)对重越程距离</Cell>
-                <CCell>最大允许值400mm;测量值260mm</CCell>
+                <CCell>最大允许值400mm; 测量值260mm</CCell>
               </TableRow>
+              <TableRow key={5}>
+                <CCell component="th" scope="row" rowSpan={2}>18</CCell>
+                <CCell rowSpan={2}>C</CCell>
+                <CCell rowSpan={10}>4轿厢与对重</CCell>
+                <CCell rowSpan={2}>4.1</CCell>
+                <CCell rowSpan={2}>轿顶电气装置</CCell>
+                <Cell>(1)检修装置</Cell>
+                <CCell>符合</CCell>
+                <CCell rowSpan={2}>合格</CCell>
+              </TableRow>
+              <TableRow key={2}>
+                <Cell>(2)停止装置</Cell>
+                <CCell>符合</CCell>
+              </TableRow>
+              <TableRow key={5}>
+                <CCell component="th" scope="row" >19</CCell>
+                <CCell>C</CCell>
+                <CCell>4.3</CCell>
+                <Cell colSpan={2}>(3)安全门(窗)电气安全装置</Cell>
+                <CCell>／</CCell>
+                <CCell>／</CCell>
+              </TableRow>
+              <TableRow key={5}>
+                <CCell component="th" scope="row" rowSpan={2}>20</CCell>
+                <CCell rowSpan={2}>B</CCell>
+                <CCell rowSpan={2}>4.5</CCell>
+                <CCell rowSpan={2}>对重(平衡重)块</CCell>
+                <Cell>(1)固定</Cell>
+                <CCell>符合</CCell>
+                <CCell rowSpan={2}>合格</CCell>
+              </TableRow>
+              <TableRow key={2}>
+                <Cell>(2)识别数量的措施</Cell>
+                <CCell>符合</CCell>
+              </TableRow>
+              <TableRow key={5}>
+                <CCell component="th" scope="row" >21</CCell>
+                <CCell>C</CCell>
+                <CCell>4.6</CCell>
+                <Cell colSpan={2}>(2)轿厢超面积载货电梯的控制条件</Cell>
+                <CCell>／</CCell>
+                <CCell>／</CCell>
+              </TableRow>
+              <TableRow key={5}>
+                <CCell component="th" scope="row" rowSpan={2}>22</CCell>
+                <CCell rowSpan={2}>B</CCell>
+                <CCell rowSpan={2}>4.8</CCell>
+                <CCell rowSpan={2}>紧急照明和报警装置</CCell>
+                <Cell>(1)紧急照明</Cell>
+                <CCell>符合</CCell>
+                <CCell rowSpan={2}>不合格</CCell>
+              </TableRow>
+              <TableRow key={2}>
+                <Cell>(2)紧急报警装置</Cell>
+                <CCell>不符合</CCell>
+              </TableRow>
+              <TableRow key={5}>
+                <CCell component="th" scope="row" >23</CCell>
+                <CCell>C</CCell>
+                <CCell>4.9</CCell>
+                <Cell colSpan={2}>地坎护脚板</Cell>
+                <CCell>资料确认符合</CCell>
+                <CCell>合格</CCell>
+              </TableRow>
+              <TableRow key={5}>
+                <CCell component="th" scope="row" >24</CCell>
+                <CCell>C</CCell>
+                <CCell>4.10</CCell>
+                <Cell colSpan={2}>超载保护装置</Cell>
+                <CCell>资料确认符合</CCell>
+                <CCell>合格</CCell>
+              </TableRow>
+              <TableRow key={5}>
+                <CCell component="th" scope="row" >25</CCell>
+                <CCell>C</CCell>
+                <CCell rowSpan={7}>5<br/>悬挂装置、补偿装置及旋转部件防护</CCell>
+                <CCell>5.1</CCell>
+                <Cell colSpan={2}>悬挂装置、补偿装置的磨损、断丝、变形等情况</Cell>
+                <CCell>符合</CCell>
+                <CCell>合格</CCell>
+              </TableRow>
+              <TableRow key={5}>
+                <CCell component="th" scope="row" >26</CCell>
+                <CCell>C</CCell>
+                <CCell>5.2</CCell>
+                <Cell colSpan={2}>绳端固定</Cell>
+                <CCell>符合</CCell>
+                <CCell>合格</CCell>
+              </TableRow>
+              <TableRow key={5}>
+                <CCell component="th" scope="row" rowSpan={3}>27</CCell>
+                <CCell rowSpan={3}>C</CCell>
+                <CCell rowSpan={3}>5.3</CCell>
+                <CCell rowSpan={3}>补偿装置</CCell>
+                <Cell>(1)绳(链)端固定</Cell>
+                <CCell>符合</CCell>
+                <CCell rowSpan={3}>合格</CCell>
+              </TableRow>
+              <TableRow key={2}>
+                <Cell>(2)电气安全装置</Cell>
+                <CCell>／</CCell>
+              </TableRow>
+              <TableRow key={2}>
+                <Cell>(3)补偿绳防跳装置</Cell>
+                <CCell>／</CCell>
+              </TableRow>
+              <TableRow key={5}>
+                <CCell component="th" scope="row" >28</CCell>
+                <CCell>B</CCell>
+                <CCell>5.5</CCell>
+                <Cell colSpan={2}>松绳(链)保护</Cell>
+                <CCell>／</CCell>
+                <CCell>／</CCell>
+              </TableRow>
+              <TableRow key={5}>
+                <CCell component="th" scope="row" >29</CCell>
+                <CCell>C</CCell>
+                <CCell>5.6</CCell>
+                <Cell colSpan={2}>旋转部件的防护</Cell>
+                <CCell>符合</CCell>
+                <CCell>合格</CCell>
+              </TableRow>
+              <TableRow key={5}>
+                <CCell component="th" scope="row" rowSpan={2}>30</CCell>
+                <CCell rowSpan={2}>C</CCell>
+                <CCell rowSpan={7}>6<br/>轿门与层门</CCell>
+                <CCell rowSpan={2}>6.3</CCell>
+                <CCell rowSpan={2}>门间隙</CCell>
+                <Cell>(1)门扇间隙</Cell>
+                <CCell>符合</CCell>
+                <CCell rowSpan={2}>合格</CCell>
+              </TableRow>
+              <TableRow key={2}>
+                <Cell>(2)人力施加在最不利点时间隙</Cell>
+                <CCell>符合</CCell>
+              </TableRow>
+
             </TableBody>
           </Table>
 
