@@ -242,9 +242,6 @@ export const Cell: React.FunctionComponent<TableCellProps> = ({
           [theme.mediaQueries.lg]: {
             paddingLeft: theme.spaces.sm,
             paddingRight: theme.spaces.sm
-          },
-          ":last-child": {
-            paddingRight: theme.spaces.sm
           }
         },
         ellipsis && {

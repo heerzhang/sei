@@ -2,8 +2,9 @@
 import { jsx,} from "@emotion/core";
 import * as React from "react";
 import {
-   ScrollView,
- useInfiniteScroll
+  Embed,
+  ScrollView,
+  useInfiniteScroll
 } from "customize-easy-ui-component";
 import {Table, TableBody, TableHead, TableRow, Cell, CCell} from "../comp/TableExt";
 
@@ -13,6 +14,7 @@ import {Table, TableBody, TableHead, TableRow, Cell, CCell} from "../comp/TableE
 import { useMedia } from "use-media";
 //import { FadeImage } from "../FadeImage";
 import faker from "faker/locale/zh_CN";
+import { FadeImage } from "../FadeImage";
 
 /*let id = 0;
 function createData(
@@ -94,8 +96,12 @@ const rows = [
 
                       </TableRow>
                       <TableRow>
-                        <Cell colSpan={4}>注：上述断丝数参考长度为一个捻距，约为6d（d表示钢丝绳
-                          的公称直径，mm）</Cell>
+                <CCell rowSpan={3} css={{backgroundImage: `url(http://g1.dfcfw.com/g3/201910/20191025193912.jpg)`,backgroundSize:"cover"}}>
+                  机构核准证号：TS7110236-2022  （机构公章或检验专用章 ）
+                  <Embed width={4} height={4} css={{ maxWidth: '40vmin' }}>
+                  </Embed>
+                  签发日期：2020-04-22
+                </CCell>
                       </TableRow>
                     </Table>
       <div css={{padding:"19px 12px"}}>③钢丝绳直径小于其公称直径的90%；<br/>
@@ -149,26 +155,48 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
       有机房曳引驱动电梯定期检验报告
       <ScrollView  css={{ height: "100%" }} >
         <div >
-          检验不合格项目内容及复检结果
-          <Table  fixed={ ["5%","11%","%","14%","14%"]  }
+          检验标题开始
+          <Table  fixed={ ["11%","23%","6%","12%","%"]  }
                   printColWidth={ ["35","66","700","70","95"] }
                   css={ {borderCollapse: 'collapse' } }
           >
-            <TableHead >
-              <TableRow>
-                <CCell>序号</CCell>
-                <CCell>类别/编号</CCell>
-                <CCell>检验不合格内容记录</CCell>
-                <CCell>复检结果</CCell>
-                <CCell>复检日期</CCell>
-              </TableRow>
-            </TableHead>
             <TableBody>
-              <TableRow key={1}>
+              <TableRow>
                 <CCell component="th" scope="row">检验日期</CCell>
                 <CCell colSpan={2}>2020-01-02</CCell>
                 <CCell>下次检验日期</CCell>
                 <CCell>/</CCell>
+              </TableRow>
+              <TableRow>
+                <CCell component="th" scope="row">检验人员</CCell>
+                <Cell colSpan={4}>照明士 大夫 照明 开关</Cell>
+              </TableRow>
+              <TableRow>
+                <CCell component="th" scope="row">编制</CCell>
+                <CCell>刘洪亮</CCell>
+                <CCell>日期</CCell>
+                <CCell>2020-01-02</CCell>
+                <CCell rowSpan={3}>
+                  <div css={{backgroundImage: `url(${require("../images/repMA.png")})`,backgroundSize:"cover",backgroundPosition:"center",minHeight:'35vmin'}}>
+                  机构核准证号：TS7110236-2022 <br/>
+                    <br/>
+                  （机构公章或检验专用章 ）<br/>
+                    <br/>
+                  签发日期：2020-04-22
+                  </div>
+                </CCell>
+              </TableRow>
+              <TableRow >
+                <CCell component="th" scope="row">审核</CCell>
+                <CCell></CCell>
+                <CCell>日期</CCell>
+                <CCell>2020-01-02</CCell>
+              </TableRow>
+              <TableRow >
+                <CCell component="th" scope="row">批准</CCell>
+                <CCell></CCell>
+                <CCell>日期</CCell>
+                <CCell></CCell>
               </TableRow>
             </TableBody>
           </Table>
@@ -189,7 +217,7 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
             </TableHead>
             <TableBody>
 
-              <TableRow key={1}>
+              <TableRow>
                 <CCell component="th" scope="row" rowSpan={5}>1</CCell>
                 <CCell rowSpan={5}>B</CCell>
                 <CCell rowSpan={5}>1技术资料</CCell>
@@ -203,19 +231,19 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <Cell>(2)安全技术档案</Cell>
                 <CCell>符合</CCell>
               </TableRow>
-              <TableRow key={2}>
+              <TableRow >
                 <Cell>(3)管理规章制度</Cell>
                 <CCell>符合</CCell>
               </TableRow>
-              <TableRow key={2}>
+              <TableRow >
                 <Cell>(4)日常维护保养合同</Cell>
                 <CCell>符合</CCell>
               </TableRow>
-              <TableRow key={2}>
+              <TableRow >
                 <Cell>(5)特种设备作业人员证</Cell>
                 <CCell>符合</CCell>
               </TableRow>
-              <TableRow key={1}>
+              <TableRow >
                 <CCell component="th" scope="row" rowSpan={3}>2</CCell>
                 <CCell rowSpan={3}>C</CCell>
                 <CCell rowSpan={20}>2机房(机器设备间)及相关设备</CCell>
@@ -225,15 +253,15 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <CCell>资料确认符合</CCell>
                 <CCell rowSpan={3}>合格</CCell>
               </TableRow>
-              <TableRow key={4}>
+              <TableRow >
                 <Cell>(2)通道照明</Cell>
                 <CCell>资料确认符合</CCell>
               </TableRow>
-              <TableRow key={5}>
+              <TableRow>
                 <Cell>(3)通道门</Cell>
                 <CCell>资料确认符合</CCell>
               </TableRow>
-              <TableRow key={1}>
+              <TableRow >
                 <CCell component="th" scope="row">3</CCell>
                 <CCell>C</CCell>
                 <CCell>2.5</CCell>
@@ -241,7 +269,7 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <CCell>符合</CCell>
                 <CCell></CCell>
               </TableRow>
-              <TableRow key={1}>
+              <TableRow >
                 <CCell component="th" scope="row">4</CCell>
                 <CCell>B</CCell>
                 <CCell>2.6</CCell>
@@ -249,7 +277,7 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <CCell>符合</CCell>
                 <CCell></CCell>
               </TableRow>
-              <TableRow key={5}>
+              <TableRow >
                 <CCell component="th" scope="row" rowSpan={4}>5</CCell>
                 <CCell rowSpan={4}>B</CCell>
                 <CCell rowSpan={4}>2.7</CCell>
@@ -258,19 +286,19 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <CCell>符合</CCell>
                 <CCell rowSpan={4}>合格</CCell>
               </TableRow>
-              <TableRow key={2}>
+              <TableRow >
                 <Cell>(3)轮槽磨损</Cell>
                 <CCell>符合</CCell>
               </TableRow>
-              <TableRow key={2}>
+              <TableRow >
                 <Cell>(4)制动器动作情况</Cell>
                 <CCell>符合</CCell>
               </TableRow>
-              <TableRow key={2}>
+              <TableRow >
                 <Cell>★(5)手动紧急操作装置</Cell>
                 <CCell>符合</CCell>
               </TableRow>
-              <TableRow key={5}>
+              <TableRow >
                 <CCell component="th" scope="row" rowSpan={6}>6</CCell>
                 <CCell rowSpan={6}>B</CCell>
                 <CCell rowSpan={6}>2.8</CCell>
@@ -279,27 +307,27 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <CCell>符合</CCell>
                 <CCell rowSpan={6}></CCell>
               </TableRow>
-              <TableRow key={2}>
+              <TableRow >
                 <Cell>(4)紧急电动运行装置</Cell>
                 <CCell>／</CCell>
               </TableRow>
-              <TableRow key={2}>
+              <TableRow >
                 <Cell>☆(6)层门和轿门旁路装置</Cell>
                 <CCell>／</CCell>
               </TableRow>
-              <TableRow key={2}>
+              <TableRow >
                 <Cell>☆(7)门回路检测功能</Cell>
                 <CCell>／</CCell>
               </TableRow>
-              <TableRow key={2}>
+              <TableRow >
                 <Cell>☆(8)制动器故障保护</Cell>
                 <CCell>／</CCell>
               </TableRow>
-              <TableRow key={2}>
+              <TableRow >
                 <Cell>☆(9)自动救援操作装置</Cell>
                 <CCell>／</CCell>
               </TableRow>
-              <TableRow key={5}>
+              <TableRow>
                 <CCell component="th" scope="row" rowSpan={3}>7</CCell>
                 <CCell rowSpan={3}>B</CCell>
                 <CCell rowSpan={3}>2.9</CCell>
@@ -308,15 +336,15 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <CCell>符合</CCell>
                 <CCell rowSpan={3}>合格</CCell>
               </TableRow>
-              <TableRow key={2}>
+              <TableRow >
                 <Cell>(3)封记及运转情况</Cell>
                 <CCell>符合</CCell>
               </TableRow>
-              <TableRow key={2}>
+              <TableRow >
                 <Cell>(4)动作速度校验</Cell>
                 <CCell>资料确认符合</CCell>
               </TableRow>
-              <TableRow key={5}>
+              <TableRow >
                 <CCell component="th" scope="row">8</CCell>
                 <CCell>C</CCell>
                 <CCell>2.10</CCell>
@@ -324,7 +352,7 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <CCell>符合</CCell>
                 <CCell></CCell>
               </TableRow>
-              <TableRow key={5}>
+              <TableRow >
                 <CCell component="th" scope="row">9</CCell>
                 <CCell>C</CCell>
                 <CCell>2.11</CCell>
@@ -332,7 +360,7 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <CCell>资料确认符合</CCell>
                 <CCell></CCell>
               </TableRow>
-              <TableRow key={5}>
+              <TableRow >
                 <CCell component="th" scope="row" rowSpan={2}>10</CCell>
                 <CCell rowSpan={2}>C</CCell>
                 <CCell rowSpan={6}>3井道及相关设备</CCell>
@@ -342,7 +370,7 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <CCell>／</CCell>
                 <CCell rowSpan={2}>／</CCell>
               </TableRow>
-              <TableRow key={2}>
+              <TableRow >
                 <Cell>(4)电气安全装置</Cell>
                 <CCell>／</CCell>
               </TableRow>
@@ -355,7 +383,7 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <CCell>／</CCell>
                 <CCell rowSpan={2}>／</CCell>
               </TableRow>
-              <TableRow key={2}>
+              <TableRow >
                 <Cell>(4)电气安全装置</Cell>
                 <CCell>／</CCell>
               </TableRow>
@@ -393,7 +421,7 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <CCell>符合</CCell>
                 <CCell rowSpan={2}>合格</CCell>
               </TableRow>
-              <TableRow key={2}>
+              <TableRow >
                 <Cell>(3)停止装置</Cell>
                 <CCell>符合</CCell>
               </TableRow>
@@ -405,7 +433,7 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <CCell>符合</CCell>
                 <CCell></CCell>
               </TableRow>
-              <TableRow key={5}>
+              <TableRow >
                 <CCell component="th" scope="row" rowSpan={3}>17</CCell>
                 <CCell rowSpan={3}>B</CCell>
                 <CCell rowSpan={3}>3.15</CCell>
@@ -414,15 +442,15 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <CCell>符合</CCell>
                 <CCell rowSpan={3}>合格</CCell>
               </TableRow>
-              <TableRow key={2}>
+              <TableRow >
                 <Cell>(4)液位和电气安全装置</Cell>
                 <CCell>符合</CCell>
               </TableRow>
-              <TableRow key={2}>
+              <TableRow >
                 <Cell>(5)对重越程距离</Cell>
                 <CCell>最大允许值400mm; 测量值260mm</CCell>
               </TableRow>
-              <TableRow key={5}>
+              <TableRow >
                 <CCell component="th" scope="row" rowSpan={2}>18</CCell>
                 <CCell rowSpan={2}>C</CCell>
                 <CCell rowSpan={10}>4轿厢与对重</CCell>
@@ -432,11 +460,11 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <CCell>符合</CCell>
                 <CCell rowSpan={2}>合格</CCell>
               </TableRow>
-              <TableRow key={2}>
+              <TableRow >
                 <Cell>(2)停止装置</Cell>
                 <CCell>符合</CCell>
               </TableRow>
-              <TableRow key={5}>
+              <TableRow >
                 <CCell component="th" scope="row" >19</CCell>
                 <CCell>C</CCell>
                 <CCell>4.3</CCell>
@@ -444,7 +472,7 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <CCell>／</CCell>
                 <CCell>／</CCell>
               </TableRow>
-              <TableRow key={5}>
+              <TableRow >
                 <CCell component="th" scope="row" rowSpan={2}>20</CCell>
                 <CCell rowSpan={2}>B</CCell>
                 <CCell rowSpan={2}>4.5</CCell>
@@ -453,11 +481,11 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <CCell>符合</CCell>
                 <CCell rowSpan={2}>合格</CCell>
               </TableRow>
-              <TableRow key={2}>
+              <TableRow >
                 <Cell>(2)识别数量的措施</Cell>
                 <CCell>符合</CCell>
               </TableRow>
-              <TableRow key={5}>
+              <TableRow >
                 <CCell component="th" scope="row" >21</CCell>
                 <CCell>C</CCell>
                 <CCell>4.6</CCell>
@@ -465,7 +493,7 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <CCell>／</CCell>
                 <CCell>／</CCell>
               </TableRow>
-              <TableRow key={5}>
+              <TableRow >
                 <CCell component="th" scope="row" rowSpan={2}>22</CCell>
                 <CCell rowSpan={2}>B</CCell>
                 <CCell rowSpan={2}>4.8</CCell>
@@ -474,11 +502,11 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <CCell>符合</CCell>
                 <CCell rowSpan={2}>不合格</CCell>
               </TableRow>
-              <TableRow key={2}>
+              <TableRow >
                 <Cell>(2)紧急报警装置</Cell>
                 <CCell>不符合</CCell>
               </TableRow>
-              <TableRow key={5}>
+              <TableRow >
                 <CCell component="th" scope="row" >23</CCell>
                 <CCell>C</CCell>
                 <CCell>4.9</CCell>
@@ -486,7 +514,7 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <CCell>资料确认符合</CCell>
                 <CCell>合格</CCell>
               </TableRow>
-              <TableRow key={5}>
+              <TableRow >
                 <CCell component="th" scope="row" >24</CCell>
                 <CCell>C</CCell>
                 <CCell>4.10</CCell>
@@ -494,7 +522,7 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <CCell>资料确认符合</CCell>
                 <CCell>合格</CCell>
               </TableRow>
-              <TableRow key={5}>
+              <TableRow >
                 <CCell component="th" scope="row" >25</CCell>
                 <CCell>C</CCell>
                 <CCell rowSpan={7}>5<br/>悬挂装置、补偿装置及旋转部件防护</CCell>
@@ -503,7 +531,7 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <CCell>符合</CCell>
                 <CCell>合格</CCell>
               </TableRow>
-              <TableRow key={5}>
+              <TableRow >
                 <CCell component="th" scope="row" >26</CCell>
                 <CCell>C</CCell>
                 <CCell>5.2</CCell>
@@ -511,7 +539,7 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <CCell>符合</CCell>
                 <CCell>合格</CCell>
               </TableRow>
-              <TableRow key={5}>
+              <TableRow >
                 <CCell component="th" scope="row" rowSpan={3}>27</CCell>
                 <CCell rowSpan={3}>C</CCell>
                 <CCell rowSpan={3}>5.3</CCell>
@@ -520,15 +548,15 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <CCell>符合</CCell>
                 <CCell rowSpan={3}>合格</CCell>
               </TableRow>
-              <TableRow key={2}>
+              <TableRow >
                 <Cell>(2)电气安全装置</Cell>
                 <CCell>／</CCell>
               </TableRow>
-              <TableRow key={2}>
+              <TableRow >
                 <Cell>(3)补偿绳防跳装置</Cell>
                 <CCell>／</CCell>
               </TableRow>
-              <TableRow key={5}>
+              <TableRow >
                 <CCell component="th" scope="row" >28</CCell>
                 <CCell>B</CCell>
                 <CCell>5.5</CCell>
@@ -536,7 +564,7 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <CCell>／</CCell>
                 <CCell>／</CCell>
               </TableRow>
-              <TableRow key={5}>
+              <TableRow >
                 <CCell component="th" scope="row" >29</CCell>
                 <CCell>C</CCell>
                 <CCell>5.6</CCell>
@@ -544,7 +572,7 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <CCell>符合</CCell>
                 <CCell>合格</CCell>
               </TableRow>
-              <TableRow key={5}>
+              <TableRow >
                 <CCell component="th" scope="row" rowSpan={2}>30</CCell>
                 <CCell rowSpan={2}>C</CCell>
                 <CCell rowSpan={7}>6<br/>轿门与层门</CCell>
@@ -554,11 +582,11 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <CCell>符合</CCell>
                 <CCell rowSpan={2}>合格</CCell>
               </TableRow>
-              <TableRow key={2}>
+              <TableRow >
                 <Cell>(2)人力施加在最不利点时间隙</Cell>
                 <CCell>符合</CCell>
               </TableRow>
-              <TableRow key={5}>
+              <TableRow >
                 <CCell component="th" scope="row" >31</CCell>
                 <CCell>C</CCell>
                 <CCell>6.4</CCell>
@@ -566,7 +594,7 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <CCell>／</CCell>
                 <CCell>／</CCell>
               </TableRow>
-              <TableRow key={5}>
+              <TableRow >
                 <CCell component="th" scope="row" >32</CCell>
                 <CCell>B</CCell>
                 <CCell>6.5</CCell>
@@ -574,7 +602,7 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <CCell>符合</CCell>
                 <CCell>合格</CCell>
               </TableRow>
-              <TableRow key={5}>
+              <TableRow >
                 <CCell component="th" scope="row" >33</CCell>
                 <CCell>B</CCell>
                 <CCell>6.6</CCell>
@@ -582,7 +610,7 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <CCell>符合</CCell>
                 <CCell>合格</CCell>
               </TableRow>
-              <TableRow key={5}>
+              <TableRow >
                 <CCell component="th" scope="row" >34</CCell>
                 <CCell>B</CCell>
                 <CCell>6.7</CCell>
@@ -590,7 +618,7 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <CCell>符合</CCell>
                 <CCell>合格</CCell>
               </TableRow>
-              <TableRow key={5}>
+              <TableRow >
                 <CCell component="th" scope="row" >35</CCell>
                 <CCell>B</CCell>
                 <CCell>6.8</CCell>
@@ -598,7 +626,7 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <CCell>符合</CCell>
                 <CCell>合格</CCell>
               </TableRow>
-              <TableRow key={5}>
+              <TableRow >
                 <CCell component="th" scope="row" rowSpan={2}>36</CCell>
                 <CCell rowSpan={2}>B</CCell>
                 <CCell rowSpan={7}>6<br/>轿门与层门</CCell>
@@ -608,11 +636,11 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <CCell>符合</CCell>
                 <CCell rowSpan={2}>合格</CCell>
               </TableRow>
-              <TableRow key={2}>
+              <TableRow >
                 <Cell>(2)轿门门锁装置[不含6.9(1)①]</Cell>
                 <CCell>符合</CCell>
               </TableRow>
-              <TableRow key={5}>
+              <TableRow >
                 <CCell component="th" scope="row" rowSpan={2}>37</CCell>
                 <CCell rowSpan={2}>B</CCell>
                 <CCell rowSpan={2}>6.10</CCell>
@@ -621,11 +649,11 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <CCell>符合</CCell>
                 <CCell rowSpan={2}>合格</CCell>
               </TableRow>
-              <TableRow key={2}>
+              <TableRow >
                 <Cell>(2)电气安全装置</Cell>
                 <CCell>符合</CCell>
               </TableRow>
-              <TableRow key={5}>
+              <TableRow >
                 <CCell component="th" scope="row" rowSpan={2}>38</CCell>
                 <CCell rowSpan={2}>B</CCell>
                 <CCell rowSpan={2}>☆<br/>6.11</CCell>
@@ -634,11 +662,11 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <CCell>／</CCell>
                 <CCell rowSpan={2}>／</CCell>
               </TableRow>
-              <TableRow key={2}>
+              <TableRow >
                 <Cell>(2)轿门的开启</Cell>
                 <CCell>／</CCell>
               </TableRow>
-              <TableRow key={5}>
+              <TableRow >
                 <CCell component="th" scope="row" >39</CCell>
                 <CCell>C</CCell>
                 <CCell>6.12</CCell>
@@ -646,7 +674,7 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <CCell>符合</CCell>
                 <CCell>合格</CCell>
               </TableRow>
-              <TableRow key={5}>
+              <TableRow >
                 <CCell component="th" scope="row" >40</CCell>
                 <CCell>C</CCell>
                 <CCell rowSpan={7}>8<br/>试验</CCell>
@@ -655,7 +683,7 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <CCell>资料确认符合</CCell>
                 <CCell>合格</CCell>
               </TableRow>
-              <TableRow key={5}>
+              <TableRow >
                 <CCell component="th" scope="row" >41</CCell>
                 <CCell>C</CCell>
                 <CCell>8.2</CCell>
@@ -663,7 +691,7 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <CCell>符合</CCell>
                 <CCell>合格</CCell>
               </TableRow>
-              <TableRow key={5}>
+              <TableRow >
                 <CCell component="th" scope="row" rowSpan={2}>42</CCell>
                 <CCell rowSpan={2}>B</CCell>
                 <CCell rowSpan={2}>☆<br/>8.3</CCell>
@@ -672,11 +700,11 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <CCell>／</CCell>
                 <CCell rowSpan={2}>／</CCell>
               </TableRow>
-              <TableRow key={2}>
+              <TableRow >
                 <Cell>(2)自监测功能</Cell>
                 <CCell>／</CCell>
               </TableRow>
-              <TableRow key={5}>
+              <TableRow >
                 <CCell component="th" scope="row" >43</CCell>
                 <CCell>B</CCell>
                 <CCell>8.4</CCell>
@@ -684,7 +712,7 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <CCell>符合</CCell>
                 <CCell>合格</CCell>
               </TableRow>
-              <TableRow key={5}>
+              <TableRow >
                 <CCell component="th" scope="row" >44</CCell>
                 <CCell>B</CCell>
                 <CCell>8.5</CCell>
@@ -692,7 +720,7 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <CCell>／</CCell>
                 <CCell>／</CCell>
               </TableRow>
-              <TableRow key={5}>
+              <TableRow >
                 <CCell component="th" scope="row" >45</CCell>
                 <CCell>C</CCell>
                 <CCell>8.6</CCell>
@@ -700,7 +728,7 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <CCell>符合</CCell>
                 <CCell>合格</CCell>
               </TableRow>
-              <TableRow key={5}>
+              <TableRow >
                 <CCell component="th" scope="row" rowSpan={3}>46</CCell>
                 <CCell rowSpan={3}>B</CCell>
                 <CCell rowSpan={8}>8<br/>试验</CCell>
@@ -710,15 +738,15 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <CCell>符合</CCell>
                 <CCell rowSpan={3}>合格</CCell>
               </TableRow>
-              <TableRow key={2}>
+              <TableRow >
                 <Cell>(2)救援通道</Cell>
                 <CCell>符合</CCell>
               </TableRow>
-              <TableRow key={2}>
+              <TableRow >
                 <Cell>(3)救援操作</Cell>
                 <CCell>符合</CCell>
               </TableRow>
-              <TableRow key={5}>
+              <TableRow >
                 <CCell component="th" scope="row" >47</CCell>
                 <CCell>B</CCell>
                 <CCell>8.9</CCell>
@@ -726,7 +754,7 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <CCell>符合</CCell>
                 <CCell>合格</CCell>
               </TableRow>
-              <TableRow key={5}>
+              <TableRow >
                 <CCell component="th" scope="row" >48</CCell>
                 <CCell>B</CCell>
                 <CCell>8.10</CCell>
@@ -734,7 +762,7 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <CCell>符合</CCell>
                 <CCell>合格</CCell>
               </TableRow>
-              <TableRow key={5}>
+              <TableRow >
                 <CCell component="th" scope="row" >49</CCell>
                 <CCell>B</CCell>
                 <CCell>8.11</CCell>
@@ -742,7 +770,7 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <CCell>／</CCell>
                 <CCell>／</CCell>
               </TableRow>
-              <TableRow key={5}>
+              <TableRow >
                 <CCell component="th" scope="row" >50</CCell>
                 <CCell>B</CCell>
                 <CCell>8.12</CCell>
@@ -750,7 +778,7 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <CCell>／</CCell>
                 <CCell>／</CCell>
               </TableRow>
-              <TableRow key={5}>
+              <TableRow >
                 <CCell component="th" scope="row" >51</CCell>
                 <CCell>B</CCell>
                 <CCell>8.13</CCell>
@@ -775,7 +803,7 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
               </TableRow>
             </TableHead>
             <TableBody>
-              <TableRow key={1}>
+              <TableRow>
                 <CCell component="th" scope="row">1</CCell>
                 <CCell>B/4.8</CCell>
                 <CCell>紧急报警装置未接到有人值班处。</CCell>
