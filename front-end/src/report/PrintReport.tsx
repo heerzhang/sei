@@ -157,7 +157,7 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
         <div >
           检验标题开始
           <Table  fixed={ ["11%","23%","6%","12%","%"]  }
-                  printColWidth={ ["35","66","700","70","95"] }
+                  printColWidth={ ["95","210","90","110","300"] }
                   css={ {borderCollapse: 'collapse' } }
           >
             <TableBody>
@@ -177,13 +177,28 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <CCell>日期</CCell>
                 <CCell>2020-01-02</CCell>
                 <CCell rowSpan={3}>
-                  <div css={{backgroundImage: `url(${require("../images/repMA.png")})`,backgroundSize:"cover",backgroundPosition:"center",minHeight:'35vmin'}}>
-                  机构核准证号：TS7110236-2022 <br/>
-                    <br/>
-                  （机构公章或检验专用章 ）<br/>
-                    <br/>
-                  签发日期：2020-04-22
+                  <Embed width={4} height={4} css={{ maxWidth: '40vmin' }}>
+                  <div css={{backgroundImage:`url(${require("../images/sampleQR.png")})`,backgroundSize:"cover",backgroundPosition:"center",minHeight:'33vmin'}}>
+                    <Table  fixed={ ["40%","%"]  }
+                            printColWidth={ ["170","230"] }
+                            css={ {borderCollapse: 'collapse',height:'fill-available',border:`none`} }
+                    >
+                      <TableBody>
+                        <TableRow>
+                          <CCell css={{border:'none'}}>机构核准证号：</CCell>
+                          <CCell css={{border:'none'}}>TS7110236-2022</CCell>
+                        </TableRow>
+                        <TableRow>
+                          <CCell css={{border:'none'}} colSpan={2}>（机构公章或检验专用章）</CCell>
+                        </TableRow>
+                        <TableRow>
+                          <CCell css={{border:'none'}}>签发日期：</CCell>
+                          <CCell css={{border:'none'}}>2020-04-22</CCell>
+                        </TableRow>
+                      </TableBody>
+                    </Table>
                   </div>
+                  </Embed>
                 </CCell>
               </TableRow>
               <TableRow >
@@ -859,4 +874,6 @@ Collapse-捕获bounds = DOMRectReadOnly?{x: 0, y: 0, width: 759.1875, height: 25
           >
   media queries查询条件的使用 Query的语法只有四项：and、or、not、only ;
 */
+
+//CSS height: fill-available;谷歌可以，火狐不行啊。  不可以加maxHeight:'35vw'高度限制；限制最小不限最大。
 
