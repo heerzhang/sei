@@ -4,7 +4,7 @@ import * as React from "react";
 import {
   Embed,
   ScrollView,
-  useInfiniteScroll
+  useInfiniteScroll, useTheme
 } from "customize-easy-ui-component";
 import {Table, TableBody, TableHead, TableRow, Cell, CCell} from "../comp/TableExt";
 
@@ -114,7 +114,7 @@ const rows = [
 
 //printing是否是打印预览。
 export default function PrintReport({printing, }:{printing?:boolean, },props) {
- // const theme = useTheme();
+  const theme = useTheme();
 
   const ref = React.useRef();
   const [items, setItems] = React.useState(
@@ -156,6 +156,47 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
       <ScrollView  css={{ height: "100%" }} >
         <div >
           检验标题开始
+          <Table  fixed={ ["6%","7%","7%","9%","10%","17%","%"]  }
+                  printColWidth={ ["46","46","55","55","130","405","175"] }
+                  css={ {borderCollapse: 'collapse' } }
+          >
+            <TableBody>
+              <TableRow>
+                <CCell component="th" scope="row">设备技术参数</CCell>
+                <CCell colSpan={6} css={{padding:0}}>
+                  <Table  fixed={ ["11%","23%","6%","%"]  }
+                          printColWidth={ ["95","210","110","300"] }
+                          css={ {borderCollapse: 'collapse' } }
+                  >
+                    <TableBody>
+                      <TableRow >
+                        <CCell>额定载重量</CCell>
+                        <CCell>1050         kg</CCell>
+                        <CCell>额定速度</CCell>
+                        <CCell>1.75       m/s</CCell>
+                      </TableRow>
+                      <TableRow >
+                        <CCell>层站数</CCell>
+                        <CCell>12  层     12     站     12         门 </CCell>
+                        <CCell>控制方式</CCell>
+                        <CCell>集选</CCell>
+                      </TableRow>
+                    </TableBody>
+                  </Table>
+                </CCell>
+              </TableRow>
+              <TableRow>
+                <CCell component="th" scope="row">检验依据</CCell>
+                <Cell colSpan={6}>《电梯监督检验和定期检验规则——曳引与强制驱动电梯》（TSG T7001-2009）及1号、2号修改单</Cell>
+              </TableRow>
+              <TableRow >
+                <CCell component="th" scope="row">批准</CCell>
+                <CCell></CCell>
+                <CCell>日期</CCell>
+                <CCell></CCell>
+              </TableRow>
+            </TableBody>
+          </Table>
           <Table  fixed={ ["11%","23%","6%","12%","%"]  }
                   printColWidth={ ["95","210","90","110","300"] }
                   css={ {borderCollapse: 'collapse' } }
@@ -177,11 +218,10 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <CCell>日期</CCell>
                 <CCell>2020-01-02</CCell>
                 <CCell rowSpan={3}>
-                  <Embed width={4} height={4} css={{ maxWidth: '40vmin' }}>
-                  <div css={{backgroundImage:`url(${require("../images/sampleQR.png")})`,backgroundSize:"cover",backgroundPosition:"center",minHeight:'33vmin'}}>
+                  <div css={{backgroundImage:`url(${require("../images/repMA.png")})`,backgroundSize:"cover",backgroundPosition:"center",minHeight:'33vmin'}}>
                     <Table  fixed={ ["40%","%"]  }
                             printColWidth={ ["170","230"] }
-                            css={ {borderCollapse: 'collapse',height:'fill-available',border:`none`} }
+                            css={ {borderCollapse: 'collapse',height:'fill-available'} }
                     >
                       <TableBody>
                         <TableRow>
@@ -198,7 +238,6 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                       </TableBody>
                     </Table>
                   </div>
-                  </Embed>
                 </CCell>
               </TableRow>
               <TableRow >

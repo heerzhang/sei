@@ -239,10 +239,6 @@ export const Cell: React.FunctionComponent<TableCellProps> = ({
           border: "1px solid",
           display: "table-cell",
           padding: `${theme.spaces.xs} ${theme.spaces.xs}`,
-          [theme.mediaQueries.lg]: {
-            paddingLeft: theme.spaces.sm,
-            paddingRight: theme.spaces.sm
-          }
         },
         ellipsis && {
           whiteSpace: "nowrap",
