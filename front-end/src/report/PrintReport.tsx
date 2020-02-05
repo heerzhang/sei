@@ -2,6 +2,7 @@
 import { jsx,} from "@emotion/core";
 import * as React from "react";
 import {
+  Divider,
   Embed,
   ScrollView, Text,
   useInfiniteScroll, useTheme
@@ -155,7 +156,43 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
     <React.Fragment>
       有机房曳引驱动电梯定期检验报告
       <ScrollView  css={{ height: "100%" }} >
-        <div >
+        <div>
+          <Text variant="h6" css={{textAlign:'center'}}>
+            FUJIAN SPECIAL EQUIPMENT INSPECTION AND RESEARCH INSTITUTE
+          </Text>
+          <Divider css={{borderTopColor: 'black'}}/>
+          <Text variant="h5" >
+            地址（Add.）：福建省福州市仓山区卢滨路370号
+          </Text>
+          <div css={{display:'flex'}}>
+            <p css={{flex:'1'}}>电话（Tel.）：0591-968829 </p>
+            <p css={{flex:'1'}}>	传真（Fax）：0591-88700509 </p>
+            <p css={{flex:'1'}}>邮政编码：350008 </p>
+          </div>
+
+          <p>  网址（Website）：www.fjtj.com 	电子邮箱（Email）：fjtj@fjtj.org</p>
+          <br/>
+
+
+          <Text variant="h1" css={{textAlign:'center'}}>注意事项</Text>
+          <Text variant="h4"><br/>
+            1. 本报告依据《电梯监督检验和定期检验规则——曳引与强制驱动电梯》（TSG T7001-2009）及1号、2号修改单制定，适用于有机房曳引驱动电梯定期检验。<br/>
+            <br/>
+            2. 本报告应当由计算机打印输出，或者用钢笔、签字笔填写，字迹应当工整，修改无效。<br/>
+            <br/>
+            3. 本报告无检验、编制、审核、批准人员签字和检验机构的核准证号、检验专用章或者公章无效。<br/>
+            <br/>
+            4. 本报告一式三份，由检验机构、施工单位和使用单位分别保存。<br/>
+            <br/>
+            5. 受检单位对本报告结论如有异议，请在收到报告书之日起15日内，向检验机构提出书面意见。<br/>
+            <br/>
+            6. 根据《中华人民共和国特种设备安全法》，使用单位应于下次检验日期届满前1个月向检验机构提出定期检验申请。<br/>
+            <br/>
+            7. 有关检测数据未经允许，施工、使用单位不得擅自向社会发布信息。<br/>
+            <br/>
+            8. 报检电话：968829，网址：http://27.151.117.65:9999/sdn<br/>
+            <br/>
+          </Text>
           <Text variant="h2" css={{textAlign:'center'}}>有机房曳引驱动电梯定期检验报告</Text>
           <Table  fixed={ ["11%","23%","6%","%"]  }
                   printColWidth={ ["95","210","110","300"] }
