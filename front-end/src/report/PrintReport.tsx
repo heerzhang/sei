@@ -3,7 +3,7 @@ import { jsx,} from "@emotion/core";
 import * as React from "react";
 import {
   Embed,
-  ScrollView,
+  ScrollView, Text,
   useInfiniteScroll, useTheme
 } from "customize-easy-ui-component";
 import {Table, TableBody, TableHead, TableRow, Cell, CCell} from "../comp/TableExt";
@@ -15,6 +15,7 @@ import { useMedia } from "use-media";
 //import { FadeImage } from "../FadeImage";
 import faker from "faker/locale/zh_CN";
 import { FadeImage } from "../FadeImage";
+import { InspectRecordTitle } from "../original/comp/base";
 
 /*let id = 0;
 function createData(
@@ -155,7 +156,82 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
       有机房曳引驱动电梯定期检验报告
       <ScrollView  css={{ height: "100%" }} >
         <div >
-          检验标题开始
+          <Text variant="h2" css={{textAlign:'center'}}>有机房曳引驱动电梯定期检验报告</Text>
+          <Table  fixed={ ["11%","23%","6%","%"]  }
+                  printColWidth={ ["95","210","110","300"] }
+                  css={ {borderCollapse: 'collapse' } }
+          >
+            <TableBody>
+              <TableRow>
+                <CCell component="th" scope="row">设备品种</CCell>
+                <CCell>曳引驱动乘客电梯</CCell>
+                <CCell>使用登记证编号</CCell>
+                <CCell>梯11闽AB139(17)</CCell>
+              </TableRow>
+              <TableRow >
+                <CCell component="th" scope="row">使用单位名称</CCell>
+                <CCell colSpan={3}>林钦全</CCell>
+              </TableRow>
+              <TableRow >
+                <CCell component="th" scope="row">使用单位地址</CCell>
+                <CCell colSpan={3}>福建省连江县马鼻镇南门村岐尾69号</CCell>
+              </TableRow>
+              <TableRow >
+                <CCell component="th" scope="row">楼盘名称</CCell>
+                <CCell colSpan={3}>/</CCell>
+              </TableRow>
+              <TableRow >
+                <CCell component="th" scope="row">楼盘地址</CCell>
+                <CCell colSpan={3}>/</CCell>
+              </TableRow>
+              <TableRow >
+                <CCell component="th" scope="row">分支机构名称</CCell>
+                <CCell colSpan={3}>/</CCell>
+              </TableRow>
+              <TableRow >
+                <CCell component="th" scope="row">分支机构地址</CCell>
+                <CCell colSpan={3}>/</CCell>
+              </TableRow>
+              <TableRow>
+                <CCell component="th" scope="row">设备使用地点</CCell>
+                <CCell colSpan={3}>连江县马鼻镇南门村岐尾69号</CCell>
+              </TableRow>
+              <TableRow>
+                <CCell component="th" scope="row">使用单位代码</CCell>
+                <CCell colSpan={3}>350122197109084531</CCell>
+              </TableRow>
+              <TableRow>
+                <CCell component="th" scope="row">安全管理人员</CCell>
+                <CCell>林钦全</CCell>
+                <CCell>使用单位设备编号</CCell>
+                <CCell>1#</CCell>
+              </TableRow>
+              <TableRow>
+                <CCell component="th" scope="row">制造日期</CCell>
+                <CCell>2016-11-22</CCell>
+                <CCell>改造日期</CCell>
+                <CCell>/</CCell>
+              </TableRow>
+              <TableRow>
+                <CCell component="th" scope="row">制造单位名称</CCell>
+                <CCell colSpan={3}>快意电梯股份有限公司</CCell>
+              </TableRow>
+              <TableRow>
+                <CCell component="th" scope="row">改造单位名称</CCell>
+                <CCell colSpan={3}>/</CCell>
+              </TableRow>
+              <TableRow>
+                <CCell component="th" scope="row">产品编号</CCell>
+                <CCell>ZT1600005085</CCell>
+                <CCell>型号</CCell>
+                <CCell>METIS</CCell>
+              </TableRow>
+              <TableRow>
+                <CCell component="th" scope="row">维护保养单位名称</CCell>
+                <CCell colSpan={3}>福州新奥电梯工程有限公司</CCell>
+              </TableRow>
+            </TableBody>
+          </Table>
           <Table  fixed={ ["6%","7%","7%","9%","10%","17%","%"]  }
                   printColWidth={ ["46","46","55","55","130","405","175"] }
                   css={ {borderCollapse: 'collapse' } }
@@ -190,10 +266,37 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <Cell colSpan={6}>《电梯监督检验和定期检验规则——曳引与强制驱动电梯》（TSG T7001-2009）及1号、2号修改单</Cell>
               </TableRow>
               <TableRow >
-                <CCell component="th" scope="row">批准</CCell>
-                <CCell></CCell>
-                <CCell>日期</CCell>
-                <CCell></CCell>
+                <CCell component="th" scope="row" rowSpan={3}>主要检验仪器设备</CCell>
+                <CCell>序号</CCell>
+                <CCell>仪器名称</CCell>
+                <CCell>仪器编号</CCell>
+                <CCell>序号</CCell>
+                <CCell>仪器名称</CCell>
+                <CCell>仪器编号</CCell>
+              </TableRow>
+              <TableRow >
+                <CCell>1</CCell>
+                <CCell>宽量面游标卡尺</CCell>
+                <CCell>JDA0520</CCell>
+                <CCell>2</CCell>
+                <CCell>钢卷尺</CCell>
+                <CCell>JDA0520</CCell>
+              </TableRow>
+              <TableRow >
+                <CCell>3</CCell>
+                <CCell>宽量面游标卡尺</CCell>
+                <CCell>JDA0520</CCell>
+                <CCell>4</CCell>
+                <CCell>钢卷尺</CCell>
+                <CCell>JDA0520</CCell>
+              </TableRow>
+              <TableRow>
+                <CCell component="th" scope="row">检验结论</CCell>
+                <CCell colSpan={6}><Text variant="h1" css={{fontSize:'4rem'}}>不合格</Text></CCell>
+              </TableRow>
+              <TableRow>
+                <CCell component="th" scope="row">备注</CCell>
+                <Cell colSpan={6}>/</Cell>
               </TableRow>
             </TableBody>
           </Table>
@@ -218,7 +321,7 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <CCell>日期</CCell>
                 <CCell>2020-01-02</CCell>
                 <CCell rowSpan={3}>
-                  <div css={{backgroundImage:`url(${require("../images/repMA.png")})`,backgroundSize:"cover",backgroundPosition:"center",minHeight:'33vmin'}}>
+                  <div css={{backgroundImage:`url(${require("../images/MA.png")})`,backgroundSize:"cover",backgroundPosition:"center",minHeight:'33vmin'}}>
                     <Table  fixed={ ["40%","%"]  }
                             printColWidth={ ["170","230"] }
                             css={ {borderCollapse: 'collapse',height:'fill-available'} }
