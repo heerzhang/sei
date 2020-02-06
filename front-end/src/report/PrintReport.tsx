@@ -169,20 +169,20 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 display: "flex",
                 justifyContent: "space-between",
                 "& > div": {
-                  margin: theme.spaces.lg,
+                  margin: theme.spaces.xs,
                 }
               },
             }}
           >
             <div>
-              <Embed css={{ width: "190px" }} width={95} height={45}>
+              <Embed css={{width: "190px",margin: "auto"}} width={95} height={45}>
                 <FadeImage src={`${require("../images/MA.png")}`}/>
               </Embed>
               <br/>
               <Text variant="h5">181320110160</Text>
             </div>
             <div>
-              <Embed css={{ width: "140px" }} width={10} height={10}>
+              <Embed css={{width: "140px",margin: "auto"}} width={10} height={10}>
                 <FadeImage src={`${require("../images/reportNoQR.png")}`}/>
               </Embed>
             </div>
@@ -195,7 +195,12 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
             </div>
           </div>
 
-          <Text variant="h1" css={{textAlign:'center'}}>
+          <Text variant="h3" css={{
+                  textAlign:'center',
+                  "@media (min-width:690px),print and (min-width:538px)": {
+                    fontSize: theme.fontSizes[6],
+                  }
+                }}>
           有机房曳引驱动电梯定期检验报告
           </Text>
           <Table  fixed={ ["20%","%"]  }

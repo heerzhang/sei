@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="339baf3b-3b56-43fa-821a-88a7b6723788" name="Default Changelist" comment="盖章">
+    <list default="true" id="339baf3b-3b56-43fa-821a-88a7b6723788" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/compare/空白.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/compare/空白.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/report/PrintReport.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/report/PrintReport.tsx" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -50,7 +49,7 @@
           <entry key="jsx" value="2" />
           <entry key="md" value="1" />
           <entry key="rep" value="5" />
-          <entry key="ts" value="40" />
+          <entry key="ts" value="42" />
           <entry key="tsx" value="160" />
           <entry key="tsx-" value="3" />
           <entry key="txt" value="18" />
@@ -65,7 +64,7 @@
           <entry key="JavaScript" value="4" />
           <entry key="Markdown" value="1" />
           <entry key="PLAIN_TEXT" value="27" />
-          <entry key="TypeScript" value="40" />
+          <entry key="TypeScript" value="42" />
           <entry key="TypeScript JSX" value="160" />
           <entry key="XML" value="4" />
           <entry key="tsconfig" value="1" />
@@ -74,16 +73,16 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="env" value="1" />
-          <entry key="tsx" value="6925" />
-          <entry key="txt" value="512" />
+          <entry key="tsx" value="6957" />
+          <entry key="txt" value="515" />
           <entry key="xml" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key=".env file" value="1" />
-          <entry key="PLAIN_TEXT" value="512" />
-          <entry key="TypeScript JSX" value="6925" />
+          <entry key="PLAIN_TEXT" value="515" />
+          <entry key="TypeScript JSX" value="6957" />
           <entry key="XML" value="1" />
         </counts>
       </usages-collector>
@@ -100,11 +99,20 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/report/PrintReport.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="413">
-              <caret line="172" column="17" lean-forward="true" selection-start-line="172" selection-start-column="17" selection-end-line="172" selection-end-column="17" />
+            <state relative-caret-position="250">
+              <caret line="166" column="16" lean-forward="true" selection-start-line="166" selection-start-column="16" selection-end-line="166" selection-end-column="16" />
               <folding>
                 <element signature="e#16#52#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/node_modules/customize-easy-ui-component/esm/Theme/Providers.d.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="285">
+              <caret line="16" column="10" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -341,7 +349,7 @@
       <workItem from="1580939395848" duration="262000" />
       <workItem from="1580939780010" duration="25000" />
       <workItem from="1580939822656" duration="17000" />
-      <workItem from="1580939974283" duration="17474000" />
+      <workItem from="1580939974283" duration="18335000" />
     </task>
     <task id="LOCAL-00001" summary="重整home">
       <created>1579639739223</created>
@@ -518,11 +526,18 @@
       <option name="project" value="LOCAL" />
       <updated>1580962412266</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="还可以">
+      <created>1580962641373</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1580962641373</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="309621000" />
+    <option name="totallyTimeSpent" value="310482000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -613,7 +628,8 @@
     <MESSAGE value="盖章  &lt;/Embed&gt;" />
     <MESSAGE value="剩首页" />
     <MESSAGE value="盖章" />
-    <option name="LAST_COMMIT_MESSAGE" value="盖章" />
+    <MESSAGE value="还可以" />
+    <option name="LAST_COMMIT_MESSAGE" value="还可以" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/node_modules/typescript/lib/lib.es2015.core.d.ts">
@@ -889,13 +905,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/customize-easy-ui-component/esm/Text.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="306" column="25" lean-forward="true" selection-start-line="306" selection-start-column="25" selection-end-line="306" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/customize-easy-ui-component/esm/Link.d.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="247">
@@ -934,13 +943,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/customize-easy-ui-component/esm/Theme/Providers.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="616">
-          <caret line="42" column="8" selection-start-line="42" selection-start-column="8" selection-end-line="42" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/customize-easy-ui-component/esm/Theme/breakpoints.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="437">
@@ -962,10 +964,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/customize-easy-ui-component/esm/Theme/Providers.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="16" column="10" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/customize-easy-ui-component/esm/Text.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="300" column="25" lean-forward="true" selection-start-line="300" selection-start-column="25" selection-end-line="300" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/report/PrintReport.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="413">
-          <caret line="172" column="17" lean-forward="true" selection-start-line="172" selection-start-column="17" selection-end-line="172" selection-end-column="17" />
+        <state relative-caret-position="250">
+          <caret line="166" column="16" lean-forward="true" selection-start-line="166" selection-start-column="16" selection-end-line="166" selection-end-column="16" />
           <folding>
             <element signature="e#16#52#0" expanded="true" />
           </folding>
