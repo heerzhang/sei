@@ -2,6 +2,7 @@
 import { jsx,} from "@emotion/core";
 import * as React from "react";
 import {
+  Collapse,
   Container,
   Divider,
   Embed, Link,
@@ -9,7 +10,7 @@ import {
   useInfiniteScroll, useTheme
 } from "customize-easy-ui-component";
 import { Table, TableBody, TableHead, TableRow, Cell, CCell, RCell } from "../comp/TableExt";
-
+import { useTouchable, OnPressFunction } from "touchable-hook";
 
 
 //import { globalHistory  } from "@reach/router";
@@ -18,6 +19,7 @@ import { useMedia } from "use-media";
 import faker from "faker/locale/zh_CN";
 import { FadeImage } from "../FadeImage";
 import { InspectRecordTitle } from "../original/comp/base";
+import { safeBind } from "customize-easy-ui-component/esm/Hooks/compose-bind";
 
 /*let id = 0;
 function createData(
@@ -148,8 +150,25 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
       });
     }
   });
+
   //针对较小屏幕优化显示效果； "@media (min-width:690px),print and (min-width:538px)":
   const smallScr = useMedia('screen and (max-width:799px)');
+
+  const [redundance, setRedundance] = React.useState(!smallScr);
+  function onPress() {
+    setRedundance(!redundance);
+    console.log("豆腐乾豆腐乾Pressed!redundance=",redundance, smallScr);
+  }
+  const { bind, active, hover } = useTouchable({
+    onPress,
+    terminateOnScroll: false,
+    behavior: "link"
+  });
+  React.useEffect(() => {
+    setRedundance(!smallScr);
+  }, [smallScr] );
+  console.log("当前的 useMediasmallScr=",smallScr, "printing=",printing, redundance);
+
   //最多＝8列 <Table合计约1040px；原来PDF打印看着像是905px的。
   return (
     <React.Fragment>
@@ -214,12 +233,36 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
             }
           }}>
           </div>
-          { smallScr && (
-              <Text variant="h2" >
-                chexpinmu屏幕太小shi测试小品触发
-              </Text>
-          )
-          }
+
+          <div
+            role="link"
+            tabIndex={2}
+            {...bind}
+          >
+            一行露出一點的
+          </div>
+
+
+          <Collapse id={'14'} show={redundance}  noAnimated
+          >
+            <div
+              role="link"
+              tabIndex={21}
+              {...safeBind(
+                bind,
+                {
+                  onClick: (e: React.MouseEvent) => {
+                    e.stopPropagation();
+                  }
+                }
+              )}
+            >
+            <Text variant="h2" >
+              chexpinmu屏幕太小shi测试小品触发
+            </Text>
+            </div>
+          </Collapse>
+
           <Table  fixed={ ["20%","%"]  }
                   printColWidth={ ["210","750"] }
                   css={ {borderCollapse: 'collapse'} }
