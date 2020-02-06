@@ -118,7 +118,7 @@ const rows = [
 */
 
 //这个printing打印场景，实现比css更加强化CSS层面只能局限DOM节点，而JS操纵能力是在上层的逻辑。
-export default function PrintReport({printing, }:{printing?:boolean, },props) {
+export default function PrintReport({printing=false, }:{printing?:boolean, },props) {
   const theme = useTheme();
 
   const ref = React.useRef();
@@ -152,14 +152,13 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
   });
 
   //针对较小屏幕优化显示效果； "@media (min-width:690px),print and (min-width:538px)":
-  const smallScr = useMedia('screen and (max-width:799px)');
-
-  const [redundance, setRedundance] = React.useState(!smallScr);
+  const smallScr = useMedia('only screen and (max-width:799px)');
+  //小屏幕缺省可隐藏些不重要的内容。
+  const [redundance, setRedundance] =React.useState(!smallScr);
   function onPress() {
     setRedundance(!redundance);
-    console.log("豆腐乾豆腐乾Pressed!redundance=",redundance, smallScr);
   }
-  const { bind, active, hover } = useTouchable({
+  const { bind, } = useTouchable({
     onPress,
     terminateOnScroll: false,
     behavior: "link"
@@ -167,8 +166,8 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
   React.useEffect(() => {
     setRedundance(!smallScr);
   }, [smallScr] );
-  console.log("当前的 useMediasmallScr=",smallScr, "printing=",printing, redundance);
 
+  console.log("当前的 useMediasmallScr=",smallScr, "printing=",printing,"redundance=", redundance);
   //最多＝8列 <Table合计约1040px；原来PDF打印看着像是905px的。
   return (
     <React.Fragment>
@@ -234,32 +233,14 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
           }}>
           </div>
 
-          <div
-            role="link"
-            tabIndex={2}
-            {...bind}
-          >
+          <div role="link" tabIndex={0} {...bind}>
             一行露出一點的
           </div>
-
-
-          <Collapse id={'14'} show={redundance}  noAnimated
-          >
-            <div
-              role="link"
-              tabIndex={21}
-              {...safeBind(
-                bind,
-                {
-                  onClick: (e: React.MouseEvent) => {
-                    e.stopPropagation();
-                  }
-                }
-              )}
-            >
-            <Text variant="h2" >
-              chexpinmu屏幕太小shi测试小品触发
-            </Text>
+          <Collapse id={'1'} show={redundance||printing} noAnimated>
+            <div role="link" {...bind}>
+              <Text variant="h2" >
+                chexpinmu屏幕太小shi测试小品触发
+              </Text>
             </div>
           </Collapse>
 
