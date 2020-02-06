@@ -414,3 +414,28 @@ export const CCell: React.FunctionComponent<TableCellProps> =
 /*
 被删除的部分 xxx.propTypes = {  };  是和rollup.js相关，一个模块打包工具/发布工具库，使用ES6的模块标准。
 */
+
+export const RCell: React.FunctionComponent<TableCellProps> =
+  ({
+     align = "right",
+     variant,
+     component,
+     ellipsis,
+     children,
+     ...other
+   }) =>
+  {
+
+    return (
+      Cell({
+        align,
+        variant,
+        component,
+        ellipsis,
+        children,
+        ...other
+      })
+    );
+  };
+
+

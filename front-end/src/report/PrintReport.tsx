@@ -2,12 +2,13 @@
 import { jsx,} from "@emotion/core";
 import * as React from "react";
 import {
+  Container,
   Divider,
   Embed, Link,
   ScrollView, Text,
   useInfiniteScroll, useTheme
 } from "customize-easy-ui-component";
-import {Table, TableBody, TableHead, TableRow, Cell, CCell} from "../comp/TableExt";
+import { Table, TableBody, TableHead, TableRow, Cell, CCell, RCell } from "../comp/TableExt";
 
 
 
@@ -154,21 +155,99 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
   //最多＝8列 <Table合计约1040px；原来PDF打印看着像是905px的。
   return (
     <React.Fragment>
-      有机房曳引驱动电梯定期检验报告
       <ScrollView  css={{ height: "100%" }} >
         <div>
-          <Table  fixed={ ["40%","%"]  }
-                  printColWidth={ ["170","230"] }
-                  css={ {borderCollapse: 'collapse',height:'fill-available'} }
+          <div
+            css={{
+              display: "block",
+              textAlign: "center",
+              "& > div": {
+                marginBottom: theme.spaces.xl,
+
+                marginLeft: "auto",
+                marginRight: "auto"
+              },
+              "@media (min-width:690px),print and (min-width:538px)": {
+                display: "flex",
+                justifyContent: "space-between",
+                "& > div": {
+                  margin: theme.spaces.lg,
+
+                }
+              },
+            }}
+          >
+            <div>
+              <Embed css={{ width: "190px" }} width={95} height={45}>
+                <FadeImage src={`${require("../images/MA.png")}`}/>
+              </Embed>
+              <br/>
+              <Text variant="h5">181320110160</Text>
+            </div>
+            <div>
+              <Embed css={{ width: "140px" }} width={10} height={10}>
+                <FadeImage src={`${require("../images/reportNoQR.png")}`}/>
+              </Embed>
+            </div>
+            <div
+              css={{
+                marginBottom: "0 !important",
+                [theme.mediaQueries.md]: {
+                  marginBottom:　theme.spaces.xl,
+                }
+              }}
+            >
+              <Text variant="h5">FJB/TC-1001-1-0-2017</Text>
+              <br/><br/>
+              <Text variant="h5">
+               No：JD2020FTC00004
+              </Text>
+            </div>
+          </div>
+
+          <Text variant="h1" css={{textAlign:'center'}}>
+          有机房曳引驱动电梯定期检验报告
+          </Text>
+          <Table  fixed={ ["20%","%"]  }
+                  printColWidth={ ["210","750"] }
+                  css={ {borderCollapse: 'collapse'} }
           >
             <TableBody>
               <TableRow>
-                <CCell css={{border:'none'}}>机构核准证号：</CCell>
-                <CCell css={{border:'none'}}>TS7110236-2022</CCell>
+                <RCell css={{border:'none'}}>使用单位</RCell>
+                <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>林钦全</CCell>
               </TableRow>
               <TableRow>
-                <CCell css={{border:'none'}}>签发日期：</CCell>
-                <CCell css={{border:'none'}}>2020-04-22</CCell>
+                <RCell css={{border:'none'}}>分支机构</RCell>
+                <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>/</CCell>
+              </TableRow>
+              <TableRow>
+                <RCell css={{border:'none'}}>楼盘名称</RCell>
+                <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>/</CCell>
+              </TableRow>
+              <TableRow>
+                <RCell css={{border:'none'}}>设备类别</RCell>
+                <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>曳引与强制驱动电梯</CCell>
+              </TableRow>
+              <TableRow>
+                <RCell css={{border:'none'}}>设备品种</RCell>
+                <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>曳引驱动乘客电梯</CCell>
+              </TableRow>
+              <TableRow>
+                <RCell css={{border:'none'}}>检验日期</RCell>
+                <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>2020-01-02</CCell>
+              </TableRow>
+              <TableRow>
+                <RCell css={{border:'none'}}>监察识别码</RCell>
+                <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>TA74507</CCell>
+              </TableRow>
+              <TableRow>
+                <RCell css={{border:'none'}}>设备号</RCell>
+                <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>3501T104807</CCell>
+              </TableRow>
+              <TableRow>
+                <RCell css={{border:'none'}}>设备代码</RCell>
+                <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>/</CCell>
               </TableRow>
             </TableBody>
           </Table>
@@ -1071,5 +1150,6 @@ Collapse-捕获bounds = DOMRectReadOnly?{x: 0, y: 0, width: 759.1875, height: 25
   media queries查询条件的使用 Query的语法只有四项：and、or、not、only ;
 */
 
-//CSS height: fill-available;谷歌可以，火狐不行啊。  不可以加maxHeight:'35vw'高度限制；限制最小不限最大。
+//CSS height: fill-available;最大满屏幕，打印不超一张，用火狐不行！ 不可以加maxHeight:'35vw'高度限制；限制最小不限最大。
+//利用fill-available可以轻松地实现等高布局；width:min-content，默认英文单词不换行，最小宽度是里面最长的英文单词的宽度，超小屏幕会超出。
 
