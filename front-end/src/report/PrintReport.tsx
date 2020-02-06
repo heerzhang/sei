@@ -159,7 +159,6 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
         <div>
           <div
             css={{
-              display: "block",
               textAlign: "center",
               "& > div": {
                 marginLeft: "auto",
@@ -169,9 +168,9 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 display: "flex",
                 justifyContent: "space-between",
                 "& > div": {
-                  margin: theme.spaces.xs,
+                  margin: theme.spaces.sm,
                 }
-              },
+              }
             }}
           >
             <div>
@@ -189,8 +188,12 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
             <div>
               <Text variant="h5">FJB/TC-1001-1-0-2017</Text>
               <br/><br/>
-              <Text variant="h5">
-               No：JD2020FTC00004
+              <Text variant="h5" css={{
+                "@media (min-width:690px),print and (min-width:538px)": {
+                  marginRight: "1rem"
+                }
+              }}
+              >No：JD2020FTC00004
               </Text>
             </div>
           </div>
