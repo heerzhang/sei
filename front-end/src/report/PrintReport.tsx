@@ -162,8 +162,6 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
               display: "block",
               textAlign: "center",
               "& > div": {
-                marginBottom: theme.spaces.xl,
-
                 marginLeft: "auto",
                 marginRight: "auto"
               },
@@ -172,7 +170,6 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 justifyContent: "space-between",
                 "& > div": {
                   margin: theme.spaces.lg,
-
                 }
               },
             }}
@@ -189,14 +186,7 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 <FadeImage src={`${require("../images/reportNoQR.png")}`}/>
               </Embed>
             </div>
-            <div
-              css={{
-                marginBottom: "0 !important",
-                [theme.mediaQueries.md]: {
-                  marginBottom:　theme.spaces.xl,
-                }
-              }}
-            >
+            <div>
               <Text variant="h5">FJB/TC-1001-1-0-2017</Text>
               <br/><br/>
               <Text variant="h5">

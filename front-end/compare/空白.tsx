@@ -16,4 +16,3 @@ import {
   ResponsivePopover, Text
 } from "customize-easy-ui-component";
 
-
