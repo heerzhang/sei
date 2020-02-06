@@ -49,7 +49,7 @@
           <entry key="jsx" value="2" />
           <entry key="md" value="1" />
           <entry key="rep" value="5" />
-          <entry key="ts" value="42" />
+          <entry key="ts" value="43" />
           <entry key="tsx" value="160" />
           <entry key="tsx-" value="3" />
           <entry key="txt" value="18" />
@@ -64,7 +64,7 @@
           <entry key="JavaScript" value="4" />
           <entry key="Markdown" value="1" />
           <entry key="PLAIN_TEXT" value="27" />
-          <entry key="TypeScript" value="42" />
+          <entry key="TypeScript" value="43" />
           <entry key="TypeScript JSX" value="160" />
           <entry key="XML" value="4" />
           <entry key="tsconfig" value="1" />
@@ -73,16 +73,16 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="env" value="1" />
-          <entry key="tsx" value="6957" />
-          <entry key="txt" value="515" />
+          <entry key="tsx" value="7099" />
+          <entry key="txt" value="523" />
           <entry key="xml" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key=".env file" value="1" />
-          <entry key="PLAIN_TEXT" value="515" />
-          <entry key="TypeScript JSX" value="6957" />
+          <entry key="PLAIN_TEXT" value="523" />
+          <entry key="TypeScript JSX" value="7099" />
           <entry key="XML" value="1" />
         </counts>
       </usages-collector>
@@ -99,8 +99,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/report/PrintReport.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
-              <caret line="166" column="16" lean-forward="true" selection-start-line="166" selection-start-column="16" selection-end-line="166" selection-end-column="16" />
+            <state relative-caret-position="171">
+              <caret line="278" column="25" lean-forward="true" selection-start-line="278" selection-start-column="25" selection-end-line="278" selection-end-column="25" />
               <folding>
                 <element signature="e#16#52#0" expanded="true" />
               </folding>
@@ -121,7 +121,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>检验人员</find>
       <find>编制日期</find>
       <find>date</find>
       <find>type='date'</find>
@@ -151,6 +150,7 @@
       <find>align</find>
       <find>borderBottom</find>
       <find>&lt;Embed</find>
+      <find>fill-available</find>
     </findStrings>
     <replaceStrings>
       <replace>InternalItem8</replace>
@@ -349,7 +349,7 @@
       <workItem from="1580939395848" duration="262000" />
       <workItem from="1580939780010" duration="25000" />
       <workItem from="1580939822656" duration="17000" />
-      <workItem from="1580939974283" duration="18335000" />
+      <workItem from="1580939974283" duration="22648000" />
     </task>
     <task id="LOCAL-00001" summary="重整home">
       <created>1579639739223</created>
@@ -533,17 +533,31 @@
       <option name="project" value="LOCAL" />
       <updated>1580962641373</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="还可以">
+      <created>1580963495225</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1580963495225</updated>
+    </task>
+    <task id="LOCAL-00028" summary="shen第1分页">
+      <created>1580964720026</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1580964720026</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="310482000" />
+    <option name="totallyTimeSpent" value="314795000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12681638" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.18295905" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -629,7 +643,8 @@
     <MESSAGE value="剩首页" />
     <MESSAGE value="盖章" />
     <MESSAGE value="还可以" />
-    <option name="LAST_COMMIT_MESSAGE" value="还可以" />
+    <MESSAGE value="shen第1分页" />
+    <option name="LAST_COMMIT_MESSAGE" value="shen第1分页" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/node_modules/typescript/lib/lib.es2015.core.d.ts">
@@ -973,15 +988,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/customize-easy-ui-component/esm/Text.d.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="300" column="25" lean-forward="true" selection-start-line="300" selection-start-column="25" selection-end-line="300" selection-end-column="25" />
+        <state relative-caret-position="530">
+          <caret line="316" column="21" selection-start-line="316" selection-start-column="21" selection-end-line="316" selection-end-column="21" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/report/PrintReport.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="166" column="16" lean-forward="true" selection-start-line="166" selection-start-column="16" selection-end-line="166" selection-end-column="16" />
+        <state relative-caret-position="171">
+          <caret line="278" column="25" lean-forward="true" selection-start-line="278" selection-start-column="25" selection-end-line="278" selection-end-column="25" />
           <folding>
             <element signature="e#16#52#0" expanded="true" />
           </folding>

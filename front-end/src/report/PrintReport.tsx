@@ -250,24 +250,52 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
             </TableBody>
           </Table>
           <br/>
-          <Text variant="h4" css={{textAlign:'center'}}>福建省特种设备检验研究院</Text>
-          <Text variant="h6" css={{textAlign:'center'}}>
-            FUJIAN SPECIAL EQUIPMENT INSPECTION AND RESEARCH INSTITUTE
-          </Text>
-          <Divider css={{borderTopColor: 'black'}}/>
-          <Text variant="h5" >
-            地址（Add.）：福建省福州市仓山区卢滨路370号
-          </Text>
-          <div css={{display:'flex'}}>
-            <span css={{flex:'1'}}>电话（Tel.）：0591-968829</span>
-            <span css={{flex:'1'}}>	传真（Fax）：0591-88700509</span>
-            <span css={{flex:'1'}}>邮政编码：350008</span>
+          <div  css={{
+            textAlign:'center',
+            pageBreakAfter:'always',
+          //  height:'fill-available',
+            "@media print": {
+
+            }
+          }}>
+            <Table  fixed={ ["40%","%"]  }
+                    printColWidth={ ["170","230"] }
+                    css={ {borderCollapse: 'collapse',height:'fill-available'} }
+            >
+              <TableBody>
+                <TableRow>
+                </TableRow>
+                <TableRow>
+                </TableRow>
+                <TableRow>
+                </TableRow>
+              </TableBody>
+            </Table>
+            <div css={{
+              textAlign:'center',
+              "@media print": {
+               // pageBreakAfter:'always',
+              }
+            }}>fdsf</div>
+            <Text variant="h4" css={{textAlign:'center'}}>福建省特种设备检验研究院</Text>
+            <Text variant="h6" css={{textAlign:'center'}}>
+              FUJIAN SPECIAL EQUIPMENT INSPECTION AND RESEARCH INSTITUTE
+            </Text>
+            <Divider css={{borderTopColor: 'black'}}/>
+            <Text variant="h5" >
+              地址（Add.）：福建省福州市仓山区卢滨路370号
+            </Text>
+            <div css={{display:'flex'}}>
+              <span css={{flex:'1'}}>电话（Tel.）：0591-968829</span>
+              <span css={{flex:'1'}}>	传真（Fax）：0591-88700509</span>
+              <span css={{flex:'1'}}>邮政编码：350008</span>
+            </div>
+            <div css={{display:'flex'}}>
+              <span css={{flex:'1'}}>网址（Website）：www.fjtj.com</span>
+              <span css={{flex:'1'}}>	电子邮箱（Email）：fjtj@fjtj.org</span>
+            </div>
+            <br/>
           </div>
-          <div css={{display:'flex'}}>
-            <span css={{flex:'1'}}>网址（Website）：www.fjtj.com</span>
-            <span css={{flex:'1'}}>	电子邮箱（Email）：fjtj@fjtj.org</span>
-          </div>
-          <br/>
           <Text variant="h1" css={{textAlign:'center'}}>注意事项</Text>
           <Text variant="h4"><br/>
             1. 本报告依据《电梯监督检验和定期检验规则——曳引与强制驱动电梯》（TSG T7001-2009）及1号、2号修改单制定，适用于有机房曳引驱动电梯定期检验。<br/>
