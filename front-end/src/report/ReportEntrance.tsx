@@ -6,28 +6,31 @@ import * as React from "react";
 //import { globalHistory  } from "@reach/router";
 //import omit from "lodash.omit";
 import PrintReport from "./PrintReport";
+import { useMedia } from "use-media";
 
 
 export default function ReportEntrance({name},props) {
 
   //没办法：无法使用hook来打印，只好放在外部包裹一层了；<PrintReport/>状态需要稳定输出，否则需要处理打印摇摆的异常。
+  //const printSizeW = useMedia('print');  这个printSizeW在打印场景时会摇摆，先是true然后变成=>false了。
+
   return (
     <React.Fragment>
-      <div  css={{
+      <div css={{
          "@media print": {
-          display: "none",
-        },
+          display: "none"
+        }
          }}
       >
-        <PrintReport   />
+        <PrintReport  />
       </div>
-      <div  css={{
+      <div css={{
         "@media screen": {
-          display: "none",
-        },
+          display: "none"
+        }
          }}
       >
-        <PrintReport printing  />
+        <PrintReport printing />
       </div>
     </React.Fragment>
   );

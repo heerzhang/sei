@@ -115,7 +115,7 @@ const rows = [
 ];
 */
 
-//printing是否是打印预览。
+//这个printing打印场景，实现比css更加强化CSS层面只能局限DOM节点，而JS操纵能力是在上层的逻辑。
 export default function PrintReport({printing, }:{printing?:boolean, },props) {
   const theme = useTheme();
 
@@ -148,17 +148,14 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
       });
     }
   });
-
-  const printSizeW = useMedia('print and (min-width: 769px) and (max-width: 769px)');
-
-  console.log("当前的 useMedia PRTreport printSizeW=",printSizeW, "printing=",printing, fetching);
+  //针对较小屏幕优化显示效果； "@media (min-width:690px),print and (min-width:538px)":
+  const smallScr = useMedia('screen and (max-width:799px)');
   //最多＝8列 <Table合计约1040px；原来PDF打印看着像是905px的。
   return (
     <React.Fragment>
       <ScrollView  css={{ height: "100%" }} >
         <div>
-          <div
-            css={{
+          <div css={{
               textAlign: "center",
               "& > div": {
                 marginLeft: "auto",
@@ -197,7 +194,12 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
               </Text>
             </div>
           </div>
-
+          <div css={{
+            "@media print": {
+              height:'110px'
+            }
+          }}>
+          </div>
           <Text variant="h3" css={{
                   textAlign:'center',
                   "@media (min-width:690px),print and (min-width:538px)": {
@@ -206,6 +208,18 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
                 }}>
           有机房曳引驱动电梯定期检验报告
           </Text>
+          <div css={{
+            "@media print": {
+              height:'200px'
+            }
+          }}>
+          </div>
+          { smallScr && (
+              <Text variant="h2" >
+                chexpinmu屏幕太小shi测试小品触发
+              </Text>
+          )
+          }
           <Table  fixed={ ["20%","%"]  }
                   printColWidth={ ["210","750"] }
                   css={ {borderCollapse: 'collapse'} }
@@ -250,33 +264,18 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
             </TableBody>
           </Table>
           <br/>
-          <div  css={{
-            textAlign:'center',
-            pageBreakAfter:'always',
-          //  height:'fill-available',
+          <div css={{
             "@media print": {
-
+              height:'210px'
             }
           }}>
-            <Table  fixed={ ["40%","%"]  }
-                    printColWidth={ ["170","230"] }
-                    css={ {borderCollapse: 'collapse',height:'fill-available'} }
-            >
-              <TableBody>
-                <TableRow>
-                </TableRow>
-                <TableRow>
-                </TableRow>
-                <TableRow>
-                </TableRow>
-              </TableBody>
-            </Table>
-            <div css={{
-              textAlign:'center',
-              "@media print": {
-               // pageBreakAfter:'always',
-              }
-            }}>fdsf</div>
+          </div>
+          <div  css={{
+            textAlign:'center',
+            "@media print": {
+              pageBreakAfter:'always'
+            }
+          }}>
             <Text variant="h4" css={{textAlign:'center'}}>福建省特种设备检验研究院</Text>
             <Text variant="h6" css={{textAlign:'center'}}>
               FUJIAN SPECIAL EQUIPMENT INSPECTION AND RESEARCH INSTITUTE
