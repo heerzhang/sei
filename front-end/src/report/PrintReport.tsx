@@ -157,6 +157,22 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
       有机房曳引驱动电梯定期检验报告
       <ScrollView  css={{ height: "100%" }} >
         <div>
+          <Table  fixed={ ["40%","%"]  }
+                  printColWidth={ ["170","230"] }
+                  css={ {borderCollapse: 'collapse',height:'fill-available'} }
+          >
+            <TableBody>
+              <TableRow>
+                <CCell css={{border:'none'}}>机构核准证号：</CCell>
+                <CCell css={{border:'none'}}>TS7110236-2022</CCell>
+              </TableRow>
+              <TableRow>
+                <CCell css={{border:'none'}}>签发日期：</CCell>
+                <CCell css={{border:'none'}}>2020-04-22</CCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+          <br/>
           <Text variant="h4" css={{textAlign:'center'}}>福建省特种设备检验研究院</Text>
           <Text variant="h6" css={{textAlign:'center'}}>
             FUJIAN SPECIAL EQUIPMENT INSPECTION AND RESEARCH INSTITUTE
