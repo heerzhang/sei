@@ -3,7 +3,7 @@ import { jsx,} from "@emotion/core";
 import * as React from "react";
 import {
   Divider,
-  Embed,
+  Embed, Link,
   ScrollView, Text,
   useInfiniteScroll, useTheme
 } from "customize-easy-ui-component";
@@ -157,6 +157,7 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
       有机房曳引驱动电梯定期检验报告
       <ScrollView  css={{ height: "100%" }} >
         <div>
+          <Text variant="h4" css={{textAlign:'center'}}>福建省特种设备检验研究院</Text>
           <Text variant="h6" css={{textAlign:'center'}}>
             FUJIAN SPECIAL EQUIPMENT INSPECTION AND RESEARCH INSTITUTE
           </Text>
@@ -165,15 +166,15 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
             地址（Add.）：福建省福州市仓山区卢滨路370号
           </Text>
           <div css={{display:'flex'}}>
-            <p css={{flex:'1'}}>电话（Tel.）：0591-968829 </p>
-            <p css={{flex:'1'}}>	传真（Fax）：0591-88700509 </p>
-            <p css={{flex:'1'}}>邮政编码：350008 </p>
+            <span css={{flex:'1'}}>电话（Tel.）：0591-968829</span>
+            <span css={{flex:'1'}}>	传真（Fax）：0591-88700509</span>
+            <span css={{flex:'1'}}>邮政编码：350008</span>
           </div>
-
-          <p>  网址（Website）：www.fjtj.com 	电子邮箱（Email）：fjtj@fjtj.org</p>
+          <div css={{display:'flex'}}>
+            <span css={{flex:'1'}}>网址（Website）：www.fjtj.com</span>
+            <span css={{flex:'1'}}>	电子邮箱（Email）：fjtj@fjtj.org</span>
+          </div>
           <br/>
-
-
           <Text variant="h1" css={{textAlign:'center'}}>注意事项</Text>
           <Text variant="h4"><br/>
             1. 本报告依据《电梯监督检验和定期检验规则——曳引与强制驱动电梯》（TSG T7001-2009）及1号、2号修改单制定，适用于有机房曳引驱动电梯定期检验。<br/>
@@ -190,8 +191,8 @@ export default function PrintReport({printing, }:{printing?:boolean, },props) {
             <br/>
             7. 有关检测数据未经允许，施工、使用单位不得擅自向社会发布信息。<br/>
             <br/>
-            8. 报检电话：968829，网址：http://27.151.117.65:9999/sdn<br/>
-            <br/>
+            8. 报检电话：968829，网址：<Link href="http://27.151.117.65:9999/sdn" title="报检">http:// 27.151.117.65:9999 /sdn</Link>
+            <br/><br/>
           </Text>
           <Text variant="h2" css={{textAlign:'center'}}>有机房曳引驱动电梯定期检验报告</Text>
           <Table  fixed={ ["11%","23%","6%","%"]  }
