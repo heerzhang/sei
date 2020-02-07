@@ -12,26 +12,15 @@ import { useMedia } from "use-media";
 export default function ReportEntrance({name},props) {
 
   //没办法：无法使用hook来打印，只好放在外部包裹一层了；<PrintReport/>状态需要稳定输出，否则需要处理打印摇摆的异常。
-  //const printSizeW = useMedia('print');  这个printSizeW在打印场景时会摇摆，先是true然后变成=>false了。
+  //const printSizeW = useMedia('print');  这个printSizeW在打印场景时会摇摆，先是true然后变false。打印预览useMedia最终看到false。
 
+  //可打印预览时刻：这下面两个互怼的<PrintReport 两个组件实际都会同时挂载，都运行甚至运行log时间是交错的；打印预览不仅打印，还同时会更新网页。
+  //打印预览实际是根据当前页面最新状态去打印的。【特别注意】包括动态特征的显示！点击也算；打印实际不是从刷新页面后才去照搬的。
   return (
     <React.Fragment>
-      <div css={{
-         "@media print": {
-          display: "none"
-        }
-         }}
-      >
-        <PrintReport  />
-      </div>
-      <div css={{
-        "@media screen": {
-          display: "none"
-        }
-         }}
-      >
-        <PrintReport printing />
-      </div>
+
+        <PrintReport />
+
     </React.Fragment>
   );
 }

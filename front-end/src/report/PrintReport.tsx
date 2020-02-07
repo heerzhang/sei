@@ -118,6 +118,7 @@ const rows = [
 */
 
 //这个printing打印场景，实现比css更加强化CSS层面只能局限DOM节点，而JS操纵能力是在上层的逻辑。
+//这个printing修改成应用层面用户的指认：明确为了打印而启动页面，它就和css毫无关系了，和useMedia也无关了。
 export default function PrintReport({printing=false, }:{printing?:boolean, },props) {
   const theme = useTheme();
 
@@ -151,10 +152,14 @@ export default function PrintReport({printing=false, }:{printing?:boolean, },pro
     }
   });
 
-  //针对较小屏幕优化显示效果； "@media (min-width:690px),print and (min-width:538px)":
-  const smallScr = useMedia('only screen and (max-width:799px)');
+  //针对较小屏幕优化显示效果； "@media (min-width:690px),print and (min-width:538px)":  "@media (min-width:690px),print and (min-width:538px)"
+  //const smallScr = useMedia('only screen and (max-width:799px)');
+  //useMedia实际上很可能有一个初始数值false然后才是新的，可能有两次render才会稳住；不能指望一次就能获取正确。打印预览实际是根据当前页面最新状态去打印的。
+  //useMedia('print')这个在打印场景时会摇摆，先是=true然后变=false。打印预览useMedia最终竟然是false了，有2次的render。因为打印预览不仅打印，还同时会更新网页；无法！。
+  const notSmallScr = useMedia('(min-width:800px),print');
+
   //小屏幕缺省可隐藏些不重要的内容。
-  const [redundance, setRedundance] =React.useState(!smallScr);
+  const [redundance, setRedundance] =React.useState(notSmallScr||printing);
   function onPress() {
     setRedundance(!redundance);
   }
@@ -164,10 +169,10 @@ export default function PrintReport({printing=false, }:{printing?:boolean, },pro
     behavior: "link"
   });
   React.useEffect(() => {
-    setRedundance(!smallScr);
-  }, [smallScr] );
+    setRedundance(notSmallScr||printing);
+  }, [notSmallScr, printing] );
 
-  //console.log("当前的 useMediasmallScr=",smallScr, "printing=",printing,"redundance=", redundance);
+  console.log("当前的 useMediasmallScr=",notSmallScr, "printing=",printing,"redundance=", redundance);
   //最多＝8列 <Table合计约1040px；原来PDF打印看着像是905px的。
   return (
     <React.Fragment>
@@ -175,9 +180,9 @@ export default function PrintReport({printing=false, }:{printing?:boolean, },pro
       <ScrollView  css={{ height: "100%" }} >
         <div>
           <div role="link" tabIndex={0} {...bind}>
-            {!(redundance||printing) && `No：JD2020FTC00004 更多...`}
+            {!(redundance) && `No：JD2020FTC00004 更多...`}
           </div>
-          <Collapse id={'1'} show={redundance||printing} noAnimated>
+          <Collapse id={'1'} show={redundance} noAnimated>
             <div role="link" {...bind}>
               <div css={{
                 textAlign: "center",
@@ -285,9 +290,9 @@ export default function PrintReport({printing=false, }:{printing?:boolean, },pro
           </Table>
           <br/>
           <div role="link" tabIndex={0} {...bind}>
-            {!(redundance||printing) && `福建省特种设备检验研究院 更多...`}
+            {!(redundance) && `福建省特种设备检验研究院 更多...`}
           </div>
-          <Collapse id={'1'} show={redundance||printing} noAnimated>
+          <Collapse id={'1'} show={redundance} noAnimated>
             <div role="link" {...bind}>
               <div css={{
                 "@media print": {
