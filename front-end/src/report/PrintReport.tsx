@@ -511,7 +511,7 @@ export default function PrintReport({printing=false, }:{printing?:boolean, },pro
                 <CCell>日期</CCell>
                 <CCell>2020-01-02</CCell>
                 <CCell rowSpan={3}>
-                  <div css={{backgroundImage:`url(${require("../images/seal.png")})`,backgroundSize:"cover",backgroundPosition:"center",minHeight:'33vmin'}}>
+                  <div css={{backgroundImage:`url(${require("../images/seal.png")})`,backgroundSize:"cover",backgroundPosition:"center",minHeight:'30vmin'}}>
                     <Table  fixed={ ["40%","%"]  }
                             printColWidth={ ["170","230"] }
                             css={ {borderCollapse: 'collapse',height:'fill-available'} }
