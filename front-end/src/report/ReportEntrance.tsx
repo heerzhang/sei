@@ -5,21 +5,34 @@ import * as React from "react";
 
 //import { globalHistory  } from "@reach/router";
 //import omit from "lodash.omit";
-import PrintReport from "./PrintReport";
+import {PrintReport} from "./PrintReport";
 import { useMedia } from "use-media";
+import { useQueryOriginalRecord } from "../original/db";
 
 
 export default function ReportEntrance({name},props) {
+  let filtercomp={ id:227 };
+  //refetch() 引起 loading= True/False变化，从而需要组件范围render重做搞2次。
+  //若是浏览器后退前进的场景不会执行useQueryOriginalRecord代码，item已经有数据了，loading不会变化。
+  const {loading,items, refetch } =useQueryOriginalRecord(filtercomp);
+  const [inp, setInp] = React.useState(null);
 
-  //没办法：无法使用hook来打印，只好放在外部包裹一层了；<PrintReport/>状态需要稳定输出，否则需要处理打印摇摆的异常。
+
+  //外部dat不能加到依赖，变成死循环! const  dat =items&&items.data&&JSON.parse(items.data);  这dat每次render都变了？
+  //从后端返回的数据可能items已经被修改了
+  React.useEffect(() => {
+    const  dat =items&&items.data&&JSON.parse(items.data);
+    dat && setInp(dat);
+  }, [items]);
+
+  console.log("ReportEntrance：捕获 ==inp=[",  inp,  "]items=", items ,"loading=", loading);
+
   //const printSizeW = useMedia('print');  这个printSizeW在打印场景时会摇摆，先是true然后变false。打印预览useMedia最终看到false。
-
-  //可打印预览时刻：这下面两个互怼的<PrintReport 两个组件实际都会同时挂载，都运行甚至运行log时间是交错的；打印预览不仅打印，还同时会更新网页。
-  //打印预览实际是根据当前页面最新状态去打印的。【特别注意】包括动态特征的显示！点击也算；打印实际不是从刷新页面后才去照搬的。
+  //打印预览不仅打印，还同时会更新网页。打印预览实际是根据当前页面最新状态去打印的。【特别注意】包括动态特征的显示！点击也算；打印实际不是从刷新页面后才去照搬的。
   return (
     <React.Fragment>
 
-        <PrintReport />
+        <PrintReport source={inp}/>
 
     </React.Fragment>
   );

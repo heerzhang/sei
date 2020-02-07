@@ -27,13 +27,19 @@ const TableSectionContext = React.createContext<TableSectionContextType>({
  */
 
 interface TableProps extends React.HTMLAttributes<HTMLTableElement> {
-  /** An optional minimum width for table content. */
+  /** An optional minimum width for table content.
+   * 配置表格的最小宽度，小于它就启用水平滚动条。 举例：minWidth=css 单位。
+   *  */
   minWidth?: string;
-  /** An optional array of fixed layout widths for each column */
+  /** An optional array of fixed layout widths for each column
+   * 非打印场景的必须看fixed； 打印场景优先使用printColWidth；若这两者都没定义那就是系统自动的。
+   * 百分比% 和数值px两种形式。 举例：fixed={["8%","23%","%","12%"] }  printColWidth={["60","156","700","80"]}
+   * */
   fixed?: string[];
-  //根据屏幕大小打印来敲定的列宽on printer case,set just as fixed  above;  [pixels, %, relative_length];
+  //打印场景才采用的： 敲定的列宽on printer case,set just as fixed  above; 3种形式[pixels, %, relative_length];
   printColWidth?: string[];
 }
+
 
 export const Table: React.FunctionComponent<TableProps> = ({
                                                              children,
@@ -415,6 +421,7 @@ export const CCell: React.FunctionComponent<TableCellProps> =
 被删除的部分 xxx.propTypes = {  };  是和rollup.js相关，一个模块打包工具/发布工具库，使用ES6的模块标准。
 */
 
+//做点简化，免得看起来是一大堆重复性质代码：
 export const RCell: React.FunctionComponent<TableCellProps> =
   ({
      align = "right",
