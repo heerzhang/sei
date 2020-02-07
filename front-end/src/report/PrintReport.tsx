@@ -174,7 +174,7 @@ export default function PrintReport({printing=false, }:{printing?:boolean, },pro
       <ScrollView  css={{ height: "100%" }} >
         <div>
           <div role="link" tabIndex={0} {...bind}>
-            {!(redundance||printing) && `No：JD2020FTC00004   更多...`}
+            {!(redundance||printing) && `No：JD2020FTC00004 更多...`}
           </div>
           <Collapse id={'1'} show={redundance||printing} noAnimated>
             <div role="link" {...bind}>
@@ -225,8 +225,6 @@ export default function PrintReport({printing=false, }:{printing?:boolean, },pro
               </div>
             </div>
           </Collapse>
-
-
           <Text variant="h3" css={{
                   textAlign:'center',
                   "@media (min-width:690px),print and (min-width:538px)": {
@@ -241,9 +239,6 @@ export default function PrintReport({printing=false, }:{printing?:boolean, },pro
             }
           }}>
           </div>
-
-
-
           <Table  fixed={ ["20%","%"]  }
                   printColWidth={ ["210","750"] }
                   css={ {borderCollapse: 'collapse'} }
@@ -288,57 +283,64 @@ export default function PrintReport({printing=false, }:{printing?:boolean, },pro
             </TableBody>
           </Table>
           <br/>
-          <div css={{
-            "@media print": {
-              height:'210px'
-            }
-          }}>
+          <div role="link" tabIndex={0} {...bind}>
+            {!(redundance||printing) && `福建省特种设备检验研究院 更多...`}
           </div>
-          <div  css={{
-            textAlign:'center',
-            "@media print": {
-              pageBreakAfter:'always'
-            }
-          }}>
-            <Text variant="h4" css={{textAlign:'center'}}>福建省特种设备检验研究院</Text>
-            <Text variant="h6" css={{textAlign:'center'}}>
-              FUJIAN SPECIAL EQUIPMENT INSPECTION AND RESEARCH INSTITUTE
-            </Text>
-            <Divider css={{borderTopColor: 'black'}}/>
-            <Text variant="h5" >
-              地址（Add.）：福建省福州市仓山区卢滨路370号
-            </Text>
-            <div css={{display:'flex'}}>
-              <span css={{flex:'1'}}>电话（Tel.）：0591-968829</span>
-              <span css={{flex:'1'}}>	传真（Fax）：0591-88700509</span>
-              <span css={{flex:'1'}}>邮政编码：350008</span>
+          <Collapse id={'1'} show={redundance||printing} noAnimated>
+            <div role="link" {...bind}>
+              <div css={{
+                "@media print": {
+                  height:'210px'
+                }
+              }}>
+              </div>
+              <div  css={{
+                textAlign:'center',
+                "@media print": {
+                  pageBreakAfter:'always'
+                }
+              }}>
+                <Text variant="h4" css={{textAlign:'center'}}>福建省特种设备检验研究院</Text>
+                <Text variant="h6" css={{textAlign:'center'}}>
+                  FUJIAN SPECIAL EQUIPMENT INSPECTION AND RESEARCH INSTITUTE
+                </Text>
+                <Divider css={{borderTopColor: 'black'}}/>
+                <Text variant="h5" >
+                  地址（Add.）：福建省福州市仓山区卢滨路370号
+                </Text>
+                <div css={{display:'flex'}}>
+                  <span css={{flex:'1'}}>电话（Tel.）：0591-968829</span>
+                  <span css={{flex:'1'}}>	传真（Fax）：0591-88700509</span>
+                  <span css={{flex:'1'}}>邮政编码：350008</span>
+                </div>
+                <div css={{display:'flex'}}>
+                  <span css={{flex:'1'}}>网址（Website）：www.fjtj.com</span>
+                  <span css={{flex:'1'}}>	电子邮箱（Email）：fjtj@fjtj.org</span>
+                </div>
+                <br/>
+              </div>
+              <Text variant="h1" css={{textAlign:'center'}}>注意事项</Text>
+              <Text variant="h4"><br/>
+                1. 本报告依据《电梯监督检验和定期检验规则——曳引与强制驱动电梯》（TSG T7001-2009）及1号、2号修改单制定，适用于有机房曳引驱动电梯定期检验。<br/>
+                <br/>
+                2. 本报告应当由计算机打印输出，或者用钢笔、签字笔填写，字迹应当工整，修改无效。<br/>
+                <br/>
+                3. 本报告无检验、编制、审核、批准人员签字和检验机构的核准证号、检验专用章或者公章无效。<br/>
+                <br/>
+                4. 本报告一式三份，由检验机构、施工单位和使用单位分别保存。<br/>
+                <br/>
+                5. 受检单位对本报告结论如有异议，请在收到报告书之日起15日内，向检验机构提出书面意见。<br/>
+                <br/>
+                6. 根据《中华人民共和国特种设备安全法》，使用单位应于下次检验日期届满前1个月向检验机构提出定期检验申请。<br/>
+                <br/>
+                7. 有关检测数据未经允许，施工、使用单位不得擅自向社会发布信息。<br/>
+                <br/>
+                8. 报检电话：968829，网址：<Link href="http://27.151.117.65:9999/sdn" title="报检">http:// 27.151.117.65:9999 /sdn</Link>
+                <br/><br/>
+              </Text>
+              <Text variant="h2" css={{textAlign:'center'}}>有机房曳引驱动电梯定期检验报告</Text>
             </div>
-            <div css={{display:'flex'}}>
-              <span css={{flex:'1'}}>网址（Website）：www.fjtj.com</span>
-              <span css={{flex:'1'}}>	电子邮箱（Email）：fjtj@fjtj.org</span>
-            </div>
-            <br/>
-          </div>
-          <Text variant="h1" css={{textAlign:'center'}}>注意事项</Text>
-          <Text variant="h4"><br/>
-            1. 本报告依据《电梯监督检验和定期检验规则——曳引与强制驱动电梯》（TSG T7001-2009）及1号、2号修改单制定，适用于有机房曳引驱动电梯定期检验。<br/>
-            <br/>
-            2. 本报告应当由计算机打印输出，或者用钢笔、签字笔填写，字迹应当工整，修改无效。<br/>
-            <br/>
-            3. 本报告无检验、编制、审核、批准人员签字和检验机构的核准证号、检验专用章或者公章无效。<br/>
-            <br/>
-            4. 本报告一式三份，由检验机构、施工单位和使用单位分别保存。<br/>
-            <br/>
-            5. 受检单位对本报告结论如有异议，请在收到报告书之日起15日内，向检验机构提出书面意见。<br/>
-            <br/>
-            6. 根据《中华人民共和国特种设备安全法》，使用单位应于下次检验日期届满前1个月向检验机构提出定期检验申请。<br/>
-            <br/>
-            7. 有关检测数据未经允许，施工、使用单位不得擅自向社会发布信息。<br/>
-            <br/>
-            8. 报检电话：968829，网址：<Link href="http://27.151.117.65:9999/sdn" title="报检">http:// 27.151.117.65:9999 /sdn</Link>
-            <br/><br/>
-          </Text>
-          <Text variant="h2" css={{textAlign:'center'}}>有机房曳引驱动电梯定期检验报告</Text>
+          </Collapse>
           <Table  fixed={ ["11%","23%","6%","%"]  }
                   printColWidth={ ["95","210","110","300"] }
                   css={ {borderCollapse: 'collapse' } }
@@ -1197,6 +1199,14 @@ Collapse-捕获bounds = DOMRectReadOnly?{x: 0, y: 0, width: 759.1875, height: 25
                  css={ {borderCollapse: 'collapse' } }
           >
   media queries查询条件的使用 Query的语法只有四项：and、or、not、only ;
+小屏幕非打印的：简化显示。
+      <div role="link" tabIndex={0} {...bind}>
+            {!(redundance||printing) && `No：JD2020FTC00004   更多...`}
+      </div>
+      <Collapse id={'1'} show={redundance||printing} noAnimated>
+        <div role="link" {...bind}>
+        </div>
+      </Collapse>
 */
 
 //CSS height: fill-available;最大满屏幕，打印不超一张，用火狐不行！ 不可以加maxHeight:'35vw'高度限制；限制最小不限最大。
