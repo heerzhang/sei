@@ -175,16 +175,18 @@ export const PrintReport: React.FunctionComponent<PrintReportProps> = ({
   function onPress() {
     setRedundance(!redundance);
   }
+  //这个外来useTouchable组件感觉有点小毛病。
   const { bind, } = useTouchable({
     onPress,
     terminateOnScroll: false,
-    behavior: "link"
+    delay: 0,
+    behavior: "button"
   });
   React.useEffect(() => {
     setRedundance(notSmallScr||printing);
   }, [notSmallScr, printing] );
 
-  console.log("当前的 useMediasmallScr=",notSmallScr, "printing=",printing,"redundance=", redundance);
+  console.log("当前的 useMediasmallScr=",notSmallScr, "source=",source);
   //最多＝8列 <Table合计约1040px；原来PDF打印看着像是905px的。
   return (
     <React.Fragment>
@@ -196,14 +198,14 @@ export const PrintReport: React.FunctionComponent<PrintReportProps> = ({
         }
       }}
       >
-        <div role="link" tabIndex={0} {...bind}>
+        <div role="button" tabIndex={0} {...bind}>
           {!(redundance) && <Text variant="h4">
                {`No：JD2020FTC00004 更多...`}
              </Text>
           }
         </div>
         <Collapse id={'1'} show={redundance} noAnimated>
-          <div role="link" {...bind}>
+          <div role="button" {...bind}>
             <div css={{
               textAlign: "center",
               "& > div": {
@@ -309,13 +311,13 @@ export const PrintReport: React.FunctionComponent<PrintReportProps> = ({
           </TableBody>
         </Table>
         <br/>
-        <div role="link" tabIndex={0} {...bind}>
+        <div role="button" tabIndex={1} {...bind}>
           {!(redundance) && <Text variant="h4">
                 福建省特种设备检验研究院 更多...
               </Text>
           }
         </div>
-        <Collapse id={'1'} show={redundance} noAnimated>
+        <Collapse id={'2'} show={redundance} noAnimated>
             <div css={{
               "@media print": {
                 height:'210px'
@@ -347,7 +349,7 @@ export const PrintReport: React.FunctionComponent<PrintReportProps> = ({
               </div>
               <br/>
             </div>
-          <div role="link" {...bind}>
+          <div role="button" {...bind}>
             <Text variant="h1" css={{textAlign:'center'}}>注意事项</Text>
           </div>
             <Text variant="h4"><br/>
@@ -368,7 +370,7 @@ export const PrintReport: React.FunctionComponent<PrintReportProps> = ({
               8. 报检电话：968829，网址：<Link href="http://27.151.117.65:9999/sdn" title="报检">http:// 27.151.117.65:9999 /sdn</Link>
               <br/><br/>
             </Text>
-          <div role="link" {...bind}>
+          <div role="button" {...bind}>
             <Text variant="h2" css={{textAlign:'center'}}>有机房曳引驱动电梯定期检验报告</Text>
           </div>
         </Collapse>
