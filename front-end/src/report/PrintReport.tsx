@@ -167,57 +167,66 @@ export default function PrintReport({printing=false, }:{printing?:boolean, },pro
     setRedundance(!smallScr);
   }, [smallScr] );
 
-  console.log("当前的 useMediasmallScr=",smallScr, "printing=",printing,"redundance=", redundance);
+  //console.log("当前的 useMediasmallScr=",smallScr, "printing=",printing,"redundance=", redundance);
   //最多＝8列 <Table合计约1040px；原来PDF打印看着像是905px的。
   return (
     <React.Fragment>
       <ScrollView  css={{ height: "100%" }} >
         <div>
-          <div css={{
-              textAlign: "center",
-              "& > div": {
-                marginLeft: "auto",
-                marginRight: "auto"
-              },
-              "@media (min-width:690px),print and (min-width:538px)": {
-                display: "flex",
-                justifyContent: "space-between",
+          <div role="link" tabIndex={0} {...bind}>
+            {!(redundance||printing) && `No：JD2020FTC00004   更多...`}
+          </div>
+          <Collapse id={'1'} show={redundance||printing} noAnimated>
+            <div role="link" {...bind}>
+              <div css={{
+                textAlign: "center",
                 "& > div": {
-                  margin: theme.spaces.sm,
-                }
-              }
-            }}
-          >
-            <div>
-              <Embed css={{width: "190px",margin: "auto"}} width={95} height={45}>
-                <FadeImage src={`${require("../images/MA.png")}`}/>
-              </Embed>
-              <br/>
-              <Text variant="h5">181320110160</Text>
-            </div>
-            <div>
-              <Embed css={{width: "140px",margin: "auto"}} width={10} height={10}>
-                <FadeImage src={`${require("../images/reportNoQR.png")}`}/>
-              </Embed>
-            </div>
-            <div>
-              <Text variant="h5">FJB/TC-1001-1-0-2017</Text>
-              <br/><br/>
-              <Text variant="h5" css={{
+                  marginLeft: "auto",
+                  marginRight: "auto"
+                },
                 "@media (min-width:690px),print and (min-width:538px)": {
-                  marginRight: "1rem"
+                  display: "flex",
+                  justifyContent: "space-between",
+                  "& > div": {
+                    margin: theme.spaces.sm,
+                  }
                 }
               }}
-              >No：JD2020FTC00004
-              </Text>
+              >
+                <div>
+                  <Embed css={{width: "190px",margin: "auto"}} width={95} height={45}>
+                    <FadeImage src={`${require("../images/MA.png")}`}/>
+                  </Embed>
+                  <br/>
+                  <Text variant="h5">181320110160</Text>
+                </div>
+                <div>
+                  <Embed css={{width: "140px",margin: "auto"}} width={10} height={10}>
+                    <FadeImage src={`${require("../images/reportNoQR.png")}`}/>
+                  </Embed>
+                </div>
+                <div>
+                  <Text variant="h5">FJB/TC-1001-1-0-2017</Text>
+                  <br/><br/>
+                  <Text variant="h5" css={{
+                    "@media (min-width:690px),print and (min-width:538px)": {
+                      marginRight: "1rem"
+                    }
+                  }}
+                  >No：JD2020FTC00004
+                  </Text>
+                </div>
+              </div>
+              <div css={{
+                "@media print": {
+                  height:'110px'
+                }
+              }}>
+              </div>
             </div>
-          </div>
-          <div css={{
-            "@media print": {
-              height:'110px'
-            }
-          }}>
-          </div>
+          </Collapse>
+
+
           <Text variant="h3" css={{
                   textAlign:'center',
                   "@media (min-width:690px),print and (min-width:538px)": {
@@ -233,16 +242,7 @@ export default function PrintReport({printing=false, }:{printing?:boolean, },pro
           }}>
           </div>
 
-          <div role="link" tabIndex={0} {...bind}>
-            一行露出一點的
-          </div>
-          <Collapse id={'1'} show={redundance||printing} noAnimated>
-            <div role="link" {...bind}>
-              <Text variant="h2" >
-                chexpinmu屏幕太小shi测试小品触发
-              </Text>
-            </div>
-          </Collapse>
+
 
           <Table  fixed={ ["20%","%"]  }
                   printColWidth={ ["210","750"] }
