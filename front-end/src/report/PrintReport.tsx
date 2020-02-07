@@ -11,7 +11,7 @@ import {
 } from "customize-easy-ui-component";
 import { Table, TableBody, TableHead, TableRow, Cell, CCell, RCell } from "../comp/TableExt";
 import { useTouchable, OnPressFunction } from "touchable-hook";
-
+import { Helmet } from "react-helmet";
 
 //import { globalHistory  } from "@reach/router";
 import { useMedia } from "use-media";
@@ -171,6 +171,7 @@ export default function PrintReport({printing=false, }:{printing?:boolean, },pro
   //最多＝8列 <Table合计约1040px；原来PDF打印看着像是905px的。
   return (
     <React.Fragment>
+      <Helmet title={`JD2020FTC00004`}/>
       <ScrollView  css={{ height: "100%" }} >
         <div>
           <div role="link" tabIndex={0} {...bind}>
