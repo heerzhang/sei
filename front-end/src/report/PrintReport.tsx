@@ -665,7 +665,7 @@ export const PrintReport: React.FunctionComponent<PrintReportProps> = ({
           <TableBody>
             <TableRow>
               <CCell component="th" scope="row" rowSpan={5}>1</CCell>
-              <CCell rowSpan={5}>B</CCell>
+              <CCell rowSpan={5}>{itr[1.4].iclass}</CCell>
               <CCell rowSpan={5}>1技术资料</CCell>
               <CCell rowSpan={5}>1.4</CCell>
               <CCell rowSpan={5}>使用资料</CCell>
@@ -691,7 +691,7 @@ export const PrintReport: React.FunctionComponent<PrintReportProps> = ({
             </TableRow>
             <TableRow >
               <CCell component="th" scope="row" rowSpan={3}>2</CCell>
-              <CCell rowSpan={3}>C</CCell>
+              <CCell rowSpan={3}>{itr[2.1].iclass}</CCell>
               <CCell rowSpan={20}>2机房(机器设备间)及相关设备</CCell>
               <CCell rowSpan={3}>2.1</CCell>
               <CCell rowSpan={3}>通道与通道门</CCell>
