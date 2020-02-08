@@ -7,8 +7,13 @@ import * as React from "react";
 //import omit from "lodash.omit";
 import {PrintReport} from "./PrintReport";
 import { useMedia } from "use-media";
-import { useQueryOriginalRecord } from "../original/db";
+import { useQueryOriginalRecord } from "./db";
 import { LayerLoading } from "customize-easy-ui-component";
+import { lazy } from "react";
+import { WaitingComponent } from "../TopRouter";
+
+
+const TemplateMain = WaitingComponent(lazy(() => import("./TemplateMain")));
 
 
 export default function ReportEntrance({name},props) {
@@ -33,9 +38,9 @@ export default function ReportEntrance({name},props) {
 
   return (
     <React.Fragment>
-      <LayerLoading loading={loading} label={'更新数据，加载中请稍后'}/>;
+      <LayerLoading loading={loading} label={'更新数据，加载中请稍后'}/>
       { inp &&
-        <PrintReport source={inp}/>
+        <TemplateMain source={inp}/>
       }
     </React.Fragment>
   );

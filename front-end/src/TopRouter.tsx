@@ -131,7 +131,7 @@ const NestingtRoute = ({
 //延迟加载（在组件渲染的时候，再去加载该组件）：延迟加载组件，需要个渲染加载过程,用旋转圆圈提示用户，加载进行时。
 //js打包的，延迟加载。
 // Function that wraps the component in a React Suspense component. Provides a fallback Loading screen
-const WaitingComponent = (Component: any) => {
+export const WaitingComponent = (Component: any) => {
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   return (props: any) => (
     <Suspense

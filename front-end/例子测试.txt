@@ -269,7 +269,7 @@ Popover 可能點擊不激發，可能動畫庫關係。
              }) }
            </div>
            Warning: Can't perform a React state update on an unmounted component. This is a no-op, but it indicates a memory leak in your application. To fix, cancel all subscriptions and asynchronous tasks in a useEffect cleanup function.
-               in MenuItem (at PeriodicalInspection.O-1.tsx:1443)
+               in MenuItem (at PeriodicalInspection-1.tsx:1443)
 竟然下面那个删除文字导致按钮执行异常，最终导致以后的按钮也能无法触发了，需要上级组件滚移动复位才正常。
 
 ResponsivePopover大屏？
