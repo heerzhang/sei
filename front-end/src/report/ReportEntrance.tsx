@@ -8,6 +8,7 @@ import * as React from "react";
 import {PrintReport} from "./PrintReport";
 import { useMedia } from "use-media";
 import { useQueryOriginalRecord } from "../original/db";
+import { LayerLoading } from "customize-easy-ui-component";
 
 
 export default function ReportEntrance({name},props) {
@@ -29,11 +30,13 @@ export default function ReportEntrance({name},props) {
 
   //const printSizeW = useMedia('print');  这个printSizeW在打印场景时会摇摆，先是true然后变false。打印预览useMedia最终看到false。
   //打印预览不仅打印，还同时会更新网页。打印预览实际是根据当前页面最新状态去打印的。【特别注意】包括动态特征的显示！点击也算；打印实际不是从刷新页面后才去照搬的。
+
   return (
     <React.Fragment>
-
+      <LayerLoading loading={loading} label={'更新数据，加载中请稍后'}/>;
+      { inp &&
         <PrintReport source={inp}/>
-
+      }
     </React.Fragment>
   );
 }

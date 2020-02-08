@@ -117,6 +117,19 @@ const rows = [
 ];
 */
 
+const getInstrument = (instbl: [any]) => {
+  let size=instbl.length;
+  let lines=size/2, i=0;
+  let newT=[];
+  if(lines===0)  newT[0]={s1:'', name1:'', no1:'', s2:'', name2:'', no2:''};
+  for(; i<lines; i++){
+    if(2*i+2 <= size)
+      newT[i]={s1:2*i+1, name1:instbl[2*i].name, no1:instbl[2*i].no, s2:2*(i+1), name2:instbl[2*i+1].name, no2:instbl[2*i+1].no};
+    else
+      newT[i]={s1:2*i+1, name1:instbl[2*i].name, no1:instbl[2*i].no, s2:'', name2:'', no2:''};
+  }
+  return newT;
+}
 //这个printing打印场景，实现比css更加强化CSS层面只能局限DOM节点，而JS操纵能力是在上层的逻辑。
 //这个printing修改成应用层面用户的指认：明确为了打印而启动页面，它就和css毫无关系了，和useMedia也无关了。
 interface PrintReportProps {
@@ -127,11 +140,11 @@ interface PrintReportProps {
 //viewAll是否是整个报表都一起显示。
 //export default function RecordView({printing, inp}:{printing?:boolean,inp:any },props) {
 export const PrintReport: React.FunctionComponent<PrintReportProps> = ({
-                                                                       printing=false,
-                                                                         source,
-                                                                       template,
-                                                                       ...other
-                                                                     }) => {
+    printing=false,
+    source: orc,
+    template,
+    ...other
+    }) => {
   const theme = useTheme();
 
   const ref = React.useRef();
@@ -178,15 +191,16 @@ export const PrintReport: React.FunctionComponent<PrintReportProps> = ({
   //这个外来useTouchable组件感觉有点小毛病。
   const { bind, } = useTouchable({
     onPress,
-    terminateOnScroll: false,
-    delay: 0,
+   // terminateOnScroll: false,
     behavior: "button"
   });
   React.useEffect(() => {
     setRedundance(notSmallScr||printing);
   }, [notSmallScr, printing] );
 
-  console.log("当前的 useMediasmallScr=",notSmallScr, "source=",source);
+  const ins2Table =React.useMemo(() => getInstrument(orc.仪器表), [orc.仪器表]);
+
+  console.log("当前的 useMediasmallScr=",notSmallScr, "source=",orc);
   //最多＝8列 <Table合计约1040px；原来PDF打印看着像是905px的。
   return (
     <React.Fragment>
@@ -294,7 +308,7 @@ export const PrintReport: React.FunctionComponent<PrintReportProps> = ({
             </TableRow>
             <TableRow>
               <RCell css={{border:'none'}}>检验日期</RCell>
-              <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>2020-01-02</CCell>
+              <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>{orc.检验日期}</CCell>
             </TableRow>
             <TableRow>
               <RCell css={{border:'none'}}>监察识别码</RCell>
@@ -374,7 +388,7 @@ export const PrintReport: React.FunctionComponent<PrintReportProps> = ({
             <Text variant="h2" css={{textAlign:'center'}}>有机房曳引驱动电梯定期检验报告</Text>
           </div>
         </Collapse>
-        <Table  fixed={ ["11%","23%","6%","%"]  }
+        <Table  fixed={ ["15%","34%","16%","%"]  }
                 printColWidth={ ["95","210","110","300"] }
                 css={ {borderCollapse: 'collapse' } }
         >
@@ -419,7 +433,7 @@ export const PrintReport: React.FunctionComponent<PrintReportProps> = ({
             </TableRow>
             <TableRow>
               <CCell component="th" scope="row">安全管理人员</CCell>
-              <CCell>林钦全</CCell>
+              <CCell>{orc.安全人员}</CCell>
               <CCell>使用单位设备编号</CCell>
               <CCell>1#</CCell>
             </TableRow>
@@ -449,15 +463,15 @@ export const PrintReport: React.FunctionComponent<PrintReportProps> = ({
             </TableRow>
           </TableBody>
         </Table>
-        <Table  fixed={ ["6%","7%","7%","9%","10%","17%","%"]  }
-                printColWidth={ ["46","46","55","55","130","405","175"] }
+        <Table  fixed={ ["6%","8%","26%","14%","8%","%","14%"]  }
+                printColWidth={ ["46","70","240","160","70","240","160"] }
                 css={ {borderCollapse: 'collapse' } }
         >
           <TableBody>
             <TableRow>
               <CCell component="th" scope="row">设备技术参数</CCell>
               <CCell colSpan={6} css={{padding:0}}>
-                <Table  fixed={ ["11%","23%","6%","%"]  }
+                <Table  fixed={ ["17%","33%","16%","%"]  }
                         printColWidth={ ["95","210","110","300"] }
                         css={ {borderCollapse: 'collapse' } }
                 >
@@ -483,7 +497,7 @@ export const PrintReport: React.FunctionComponent<PrintReportProps> = ({
               <Cell colSpan={6}>《电梯监督检验和定期检验规则——曳引与强制驱动电梯》（TSG T7001-2009）及1号、2号修改单</Cell>
             </TableRow>
             <TableRow >
-              <CCell component="th" scope="row" rowSpan={3}>主要检验仪器设备</CCell>
+              <CCell component="th" scope="row" rowSpan={1+ins2Table.length}>主要检验仪器设备</CCell>
               <CCell>序号</CCell>
               <CCell>仪器名称</CCell>
               <CCell>仪器编号</CCell>
@@ -491,29 +505,26 @@ export const PrintReport: React.FunctionComponent<PrintReportProps> = ({
               <CCell>仪器名称</CCell>
               <CCell>仪器编号</CCell>
             </TableRow>
-            <TableRow >
-              <CCell>1</CCell>
-              <CCell>宽量面游标卡尺</CCell>
-              <CCell>JDA0520</CCell>
-              <CCell>2</CCell>
-              <CCell>钢卷尺</CCell>
-              <CCell>JDA0520</CCell>
-            </TableRow>
-            <TableRow >
-              <CCell>3</CCell>
-              <CCell>宽量面游标卡尺</CCell>
-              <CCell>JDA0520</CCell>
-              <CCell>4</CCell>
-              <CCell>钢卷尺</CCell>
-              <CCell>JDA0520</CCell>
-            </TableRow>
-            <TableRow>
+            {ins2Table.map((o,i) => {
+                return (
+                  <TableRow key={i}>
+                    <CCell>{o.s1}</CCell>
+                    <CCell>{o.name1}</CCell>
+                    <CCell css={{wordBreak: 'break-all'}}>{o.no1}</CCell>
+                    <CCell>{o.s2}</CCell>
+                    <CCell>{o.name2}</CCell>
+                    <CCell css={{wordBreak: 'break-all'}}>{o.no2}</CCell>
+                  </TableRow>
+                );
+              } )
+            }
+             <TableRow>
               <CCell component="th" scope="row">检验结论</CCell>
-              <CCell colSpan={6}><Text variant="h1" css={{fontSize:'4rem'}}>不合格</Text></CCell>
+              <CCell colSpan={6}><Text variant="h1" css={{fontSize:'4rem'}}>{orc.检验结论}</Text></CCell>
             </TableRow>
             <TableRow>
               <CCell component="th" scope="row">备注</CCell>
-              <Cell colSpan={6}>/</Cell>
+              <Cell colSpan={6}>{orc.memo}</Cell>
             </TableRow>
           </TableBody>
         </Table>
@@ -524,19 +535,19 @@ export const PrintReport: React.FunctionComponent<PrintReportProps> = ({
           <TableBody>
             <TableRow>
               <CCell component="th" scope="row">检验日期</CCell>
-              <CCell colSpan={2}>2020-01-02</CCell>
+              <CCell colSpan={2}>{orc.检验日期}</CCell>
               <CCell>下次检验日期</CCell>
               <CCell>/</CCell>
             </TableRow>
             <TableRow>
               <CCell component="th" scope="row">检验人员</CCell>
-              <Cell colSpan={4}>照明士 大夫 照明 开关</Cell>
+              <Cell colSpan={4}>{orc.检验人IDs}</Cell>
             </TableRow>
             <TableRow>
               <CCell component="th" scope="row">编制</CCell>
-              <CCell>刘洪亮</CCell>
+              <CCell>{orc.编制人}</CCell>
               <CCell>日期</CCell>
-              <CCell>2020-01-02</CCell>
+              <CCell>{orc.编制日期}</CCell>
               <CCell rowSpan={3}>
                 <div css={{backgroundImage:`url(${require("../images/seal.png")})`,backgroundSize:"cover",backgroundPosition:"center",minHeight:'30vmin'}}>
                   <Table  fixed={ ["40%","%"]  }
@@ -590,7 +601,6 @@ export const PrintReport: React.FunctionComponent<PrintReportProps> = ({
             </TableRow>
           </TableHead>
           <TableBody>
-
             <TableRow>
               <CCell component="th" scope="row" rowSpan={5}>1</CCell>
               <CCell rowSpan={5}>B</CCell>
@@ -598,24 +608,24 @@ export const PrintReport: React.FunctionComponent<PrintReportProps> = ({
               <CCell rowSpan={5}>1.4</CCell>
               <CCell rowSpan={5}>使用资料</CCell>
               <Cell>(1)使用登记资料</Cell>
-              <CCell>符合</CCell>
+              <CCell>{orc.登记资料}</CCell>
               <CCell rowSpan={5}></CCell>
             </TableRow>
             <TableRow key={2}>
               <Cell>(2)安全技术档案</Cell>
-              <CCell>符合</CCell>
+              <CCell>{orc.安全档案}</CCell>
             </TableRow>
             <TableRow >
               <Cell>(3)管理规章制度</Cell>
-              <CCell>符合</CCell>
+              <CCell>{orc.管理制度}</CCell>
             </TableRow>
             <TableRow >
               <Cell>(4)日常维护保养合同</Cell>
-              <CCell>符合</CCell>
+              <CCell>{orc.维保合同}</CCell>
             </TableRow>
             <TableRow >
               <Cell>(5)特种设备作业人员证</Cell>
-              <CCell>符合</CCell>
+              <CCell>{orc.作业人员证}</CCell>
             </TableRow>
             <TableRow >
               <CCell component="th" scope="row" rowSpan={3}>2</CCell>

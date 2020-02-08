@@ -1697,13 +1697,13 @@ const InternalItem96: React.RefForwardingComponent<InternalItemHandResult,Intern
         </React.Fragment>;
       }) }
     </div>;
-
+  //不合格unq表数据生成时机：复检编制开始时初始化来的。在初检场景看到是动态校验目的前端显示表还未存储到后端数据库。
     return (
       <InspectRecordTitle  control={eos} label={'不合格复检结果记录'}>
         <Text  variant="h5">
           四、检验不合格记录及复检结果
         </Text>
-        明细表:
+        明细表: 初检报告后才显示,复检时修改但是不能删除;
         <hr/>
         {myTable}
         {seq===null && editor}
