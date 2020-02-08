@@ -186,6 +186,8 @@ const getItemTransform = (orc: any) => {
   //特殊处理也在这里。
   out[1.4] =aItemTransform(orc, 'B','登记资料','安全档案','管理制度','维保合同','作业人员证');
   if(out[1.4].result==='不合格')  failure.push(1.4);
+  out[2.1] =aItemTransform(orc, 'C','通道设置','通道照明','通道门');
+  if(out[2.1].result==='不合格')  failure.push(2.1);
 
   return {...out, failure};
 }
@@ -694,16 +696,16 @@ export const PrintReport: React.FunctionComponent<PrintReportProps> = ({
               <CCell rowSpan={3}>2.1</CCell>
               <CCell rowSpan={3}>通道与通道门</CCell>
               <Cell>(1)通道设置</Cell>
-              <CCell>资料确认符合</CCell>
-              <CCell rowSpan={3}>合格</CCell>
+              <CCell>{itr[2.1][0]}</CCell>
+              <CCell rowSpan={3}>{itr[2.1].result}</CCell>
             </TableRow>
             <TableRow >
               <Cell>(2)通道照明</Cell>
-              <CCell>资料确认符合</CCell>
+              <CCell>{itr[2.1][1]}</CCell>
             </TableRow>
             <TableRow>
               <Cell>(3)通道门</Cell>
-              <CCell>资料确认符合</CCell>
+              <CCell>{itr[2.1][2]}</CCell>
             </TableRow>
             <TableRow >
               <CCell component="th" scope="row">3</CCell>

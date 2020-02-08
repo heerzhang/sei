@@ -565,8 +565,8 @@ const InternalItem2t4: React.RefForwardingComponent<InternalItemHandResult,Inter
     props:{ children },  ref
   ) => {
     const getInpFilter = React.useCallback((par) => {
-      const {机房高出,梯子夹角,梯子判定,通道,通道照明,通道门宽,通道门高,通道判定,机房通道门,机房照明,开关电路关系} =par||{};
-      return {机房高出,梯子夹角,梯子判定,通道,通道照明,通道门宽,通道门高,通道判定,机房通道门,机房照明,开关电路关系};
+      const {机房高出,梯子夹角,梯子判定,通道设置,通道照明,通道门宽,通道门高,通道判定,通道门,机房照明,开关电路关系} =par||{};
+      return {机房高出,梯子夹角,梯子判定,通道设置,通道照明,通道门宽,通道门高,通道判定,通道门,机房照明,开关电路关系};
     }, []);
     const { eos, setInp, inp } = useItemControlAs({ref,  filter: getInpFilter});
 
@@ -607,8 +607,8 @@ const InternalItem2t4: React.RefForwardingComponent<InternalItemHandResult,Inter
           />
         </InputGroupLine>
         <InputGroupLine  label='(1)通道设置'>
-          <SelectHookfork value={ inp?.通道 ||''}
-                          onChange={e => setInp({ ...inp, 通道: e.currentTarget.value||undefined}) }
+          <SelectHookfork value={ inp?.通道设置 ||''}
+                          onChange={e => setInp({ ...inp, 通道设置: e.currentTarget.value||undefined}) }
           />
         </InputGroupLine>
         <InputGroupLine  label='(2)通道照明'>
@@ -639,8 +639,8 @@ const InternalItem2t4: React.RefForwardingComponent<InternalItemHandResult,Inter
           />
         </InputGroupLine>
         <InputGroupLine  label='(3)通道门'>
-          <SelectHookfork value={ inp?.机房通道门 ||''}
-                          onChange={e => setInp({ ...inp, 机房通道门: e.currentTarget.value||undefined}) }
+          <SelectHookfork value={ inp?.通道门 ||''}
+                          onChange={e => setInp({ ...inp, 通道门: e.currentTarget.value||undefined}) }
           />
         </InputGroupLine>
         <InspectItemHeadColumn  level={'C'} label={'2.5 照明开关'}>
