@@ -134,34 +134,58 @@ const getInstrument = (instbl: [any]) => {
 //单个项目进行转换
 const aItemTransform = (orc: any, iclass:string,  ...ns) => {
   let size=ns.length;
-  let fail=null, i=0;
   let amazing=[];
+  let fdesc='';
   if(size<1)  throw new Error(`没项目参数`);
+  //整体检验结论：不合格{未输入的也算不合格结论} '／' 合格
+  let result='合格';
+  //失败 优先，没输入的也算不合格， 但是：无此项／如都是／合并也是／。多个小项统筹判定。
+  let i=0;
   for(; i<size; i++){
-    if(!orc[ns[i]] || orc[ns[i]]==='×' || orc[ns[i]]==='' || orc[ns[i]]==='△'){
-      fail= fail? fail+','+ns[i] : ns[i];
-      amazing[i]='不符合';
+    if(!orc[ns[i]] || orc[ns[i]]==='' || orc[ns[i]]==='△'){
+      amazing[i]='未检测';
+      if(result!=='不合格')  result='不合格';
     }
-    else if(orc[ns[i]]==='√' || orc[ns[i]]==='／' || orc[ns[i]]==='▽'){
+    else if(orc[ns[i]]==='×'){
+      amazing[i]='不符合';
+      if(result!=='不合格')  result='不合格';
+    }
+    else if(orc[ns[i]]==='√'){
       amazing[i]='符合';
+    }
+    else if(orc[ns[i]]==='／'){
+      amazing[i]='／';
+      if(result!=='不合格' && result!=='／')   result='／';
+    }
+    else if(orc[ns[i]]==='▽'){
+      amazing[i]='资料确认符合';
     }
     else
       throw new Error(`非法结果${orc[ns[i]]}`);
+    if(orc[ns[i]]==='×' || orc[ns[i]]==='△'){
+        //【应用保留字】描述字段特征：xxxx_D 这样的属性名。
+      let objKey = ns[i]+'_D';
+      if(orc[objKey])
+        fdesc += orc[objKey] +'; ';
+    }
   }
-  //神奇缝合了
-  amazing['result']='合格';
-  //不合格的。
-  //  ["不符","间距0.14m",'资料确认符合/不符合'],  result:'合格/'，n?:不合格描述,
-  return {...amazing, fail, iclass};
+  //例外的 修正。
+  if(result==='／'){
+    for(i=0; i<size; i++){
+      if(orc[ns[i]]==='√')   result='合格';
+    }
+  }
+  //神奇缝合了 amazing['result']='合格';
+  return {...amazing, result, iclass, fdesc};
 }
 //把原始记录的数据转换成报告的各个项目的结论。
 const getItemTransform = (orc: any) => {
-  let out={};
+  let  out={};
   //不合格的。
   let failure=[];
-  //  ["不符","间距0.14m",'资料确认符合/不符合'],  result:'合格/'，n?:不合格描述,
-  out['1.4'] =aItemTransform(orc, 'B','登记资料','安全档案','管理制度','维保合同','作业人员证');
-  //out['1.4'].fail? failure.add
+  //特殊处理也在这里。
+  out[1.4] =aItemTransform(orc, 'B','登记资料','安全档案','管理制度','维保合同','作业人员证');
+  if(out[1.4].result==='不合格')  failure.push(1.4);
 
   return {...out, failure};
 }
@@ -1223,13 +1247,18 @@ export const PrintReport: React.FunctionComponent<PrintReportProps> = ({
             </TableRow>
           </TableHead>
           <TableBody>
-            <TableRow>
-              <CCell component="th" scope="row">1</CCell>
-              <CCell>B/4.8</CCell>
-              <CCell>紧急报警装置未接到有人值班处。</CCell>
-              <CCell>不合格</CCell>
-              <CCell>2015-08-13</CCell>
-            </TableRow>
+            {itr.failure.map((ts, i) => {
+              return (
+                <TableRow key={i}>
+                  <CCell component="th" scope="row">{i+1}</CCell>
+                  <CCell>{itr[ts].iclass}/{ts}</CCell>
+                  <CCell>{itr[ts].fdesc}</CCell>
+                  <CCell></CCell>
+                  <CCell></CCell>
+                </TableRow>
+              );
+            })
+            }
           </TableBody>
         </Table>
       </div>
