@@ -21,6 +21,8 @@ import { FadeImage } from "../FadeImage";
 import { InspectRecordTitle, InternalItemHandResult, TemplateViewProps } from "../original/comp/base";
 import { safeBind } from "customize-easy-ui-component/esm/Hooks/compose-bind";
 import { string } from "prop-types";
+import { Link as RouterLink } from "wouter";
+
 
 /*let id = 0;
 function createData(
@@ -1251,13 +1253,15 @@ export const PrintReport: React.FunctionComponent<PrintReportProps> = ({
           <TableBody>
             {itr.failure.map((ts, i) => {
               return (
-                <TableRow key={i}>
-                  <CCell component="th" scope="row">{i+1}</CCell>
-                  <CCell>{itr[ts].iclass}/{ts}</CCell>
-                  <CCell>{itr[ts].fdesc}</CCell>
-                  <CCell></CCell>
-                  <CCell></CCell>
-                </TableRow>
+                <RouterLink   to="/original/">
+                  <TableRow key={i}>
+                    <CCell component="th" scope="row">{i+1}</CCell>
+                    <CCell>{itr[ts].iclass}/{ts}</CCell>
+                    <CCell>{itr[ts].fdesc}</CCell>
+                    <CCell></CCell>
+                    <CCell></CCell>
+                  </TableRow>
+                </RouterLink>
               );
             })
             }

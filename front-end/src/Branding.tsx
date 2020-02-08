@@ -249,13 +249,13 @@ export const Branding: React.FunctionComponent<BrandingProps> = (props) => {
             </Button>
           </RouterLink>
           <RouterLink   to="/original/">
-            <Button
-              size="lg" noBind
-              intent="primary"
-              iconAfter={<IconArrowRight />}
-            >
-              原始记录先来
-            </Button>
+          <Button
+            size="lg" noBind
+            intent="primary"
+            iconAfter={<IconArrowRight />}
+          >
+            原始记录先来
+          </Button>
         </RouterLink>
         </div>
 
