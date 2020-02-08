@@ -645,7 +645,7 @@ export const PrintReport: React.FunctionComponent<PrintReportProps> = ({
               <CCell rowSpan={5}>使用资料</CCell>
               <Cell>(1)使用登记资料</Cell>
               <CCell>{itr[1.4][0]}</CCell>
-              <CCell rowSpan={5}>{itr[1.4]['result']}</CCell>
+              <CCell rowSpan={5}>{itr[1.4].result}</CCell>
             </TableRow>
             <TableRow key={2}>
               <Cell>(2)安全技术档案</Cell>
