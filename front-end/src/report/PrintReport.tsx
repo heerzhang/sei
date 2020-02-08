@@ -6,7 +6,7 @@ import {
   Container,
   Divider,
   Embed, Link,
-  ScrollView, Text,
+  ScrollView, Select, Text,
   useInfiniteScroll, useTheme
 } from "customize-easy-ui-component";
 import { Table, TableBody, TableHead, TableRow, Cell, CCell, RCell } from "../comp/TableExt";
@@ -20,6 +20,7 @@ import faker from "faker/locale/zh_CN";
 import { FadeImage } from "../FadeImage";
 import { InspectRecordTitle, InternalItemHandResult, TemplateViewProps } from "../original/comp/base";
 import { safeBind } from "customize-easy-ui-component/esm/Hooks/compose-bind";
+import { string } from "prop-types";
 
 /*let id = 0;
 function createData(
@@ -130,6 +131,39 @@ const getInstrument = (instbl: [any]) => {
   }
   return newT;
 }
+//单个项目进行转换
+const aItemTransform = (orc: any, iclass:string,  ...ns) => {
+  let size=ns.length;
+  let fail=null, i=0;
+  let out=[];
+  if(size<1)  throw new Error(`没项目参数`);
+  for(; i<size; i++){
+    if(!orc[ns[i]] || orc[ns[i]]==='×' || orc[ns[i]]==='' || orc[ns[i]]==='△'){
+      fail= fail? fail+','+ns[i] : ns[i];
+      out[i]='不符合';
+    }
+    else if(orc[ns[i]]==='√' || orc[ns[i]]==='／' || orc[ns[i]]==='▽'){
+      out[i]='符合';
+    }
+    else
+      throw new Error(`非法结果${orc[ns[i]]}`);
+  }
+  out['result']='合格';
+  //不合格的。
+  //  ["不符","间距0.14m",'资料确认符合/不符合'],  result:'合格/'，n?:不合格描述,
+  return {...out, fail};
+}
+//把原始记录的数据转换成报告的各个项目的结论。
+const getItemTransform = (orc: any) => {
+  let out={};
+  //不合格的。
+  let failure=[];
+  //  ["不符","间距0.14m",'资料确认符合/不符合'],  result:'合格/'，n?:不合格描述,
+  out['1.4'] =aItemTransform(orc, 'B','登记资料','安全档案','管理制度','维保合同','作业人员证');
+  //out['1.4'].fail? failure.add
+
+  return {...out, failure};
+}
 //这个printing打印场景，实现比css更加强化CSS层面只能局限DOM节点，而JS操纵能力是在上层的逻辑。
 //这个printing修改成应用层面用户的指认：明确为了打印而启动页面，它就和css毫无关系了，和useMedia也无关了。
 interface PrintReportProps {
@@ -199,8 +233,9 @@ export const PrintReport: React.FunctionComponent<PrintReportProps> = ({
   }, [notSmallScr, printing] );
 
   const ins2Table =React.useMemo(() => getInstrument(orc.仪器表), [orc.仪器表]);
+  const itr =React.useMemo(() => getItemTransform(orc), [orc]);
 
-  console.log("当前的 useMediasmallScr=",notSmallScr, "source=",orc);
+  console.log("当前useMemo的 itr=",itr, "source=",orc);
   //最多＝8列 <Table合计约1040px；原来PDF打印看着像是905px的。
   return (
     <React.Fragment>
@@ -608,24 +643,24 @@ export const PrintReport: React.FunctionComponent<PrintReportProps> = ({
               <CCell rowSpan={5}>1.4</CCell>
               <CCell rowSpan={5}>使用资料</CCell>
               <Cell>(1)使用登记资料</Cell>
-              <CCell>{orc.登记资料}</CCell>
-              <CCell rowSpan={5}></CCell>
+              <CCell>{itr[1.4][0]}</CCell>
+              <CCell rowSpan={5}>{itr[1.4]['result']}</CCell>
             </TableRow>
             <TableRow key={2}>
               <Cell>(2)安全技术档案</Cell>
-              <CCell>{orc.安全档案}</CCell>
+              <CCell>{itr[1.4][1]}</CCell>
             </TableRow>
             <TableRow >
               <Cell>(3)管理规章制度</Cell>
-              <CCell>{orc.管理制度}</CCell>
+              <CCell>{itr[1.4][2]}</CCell>
             </TableRow>
             <TableRow >
               <Cell>(4)日常维护保养合同</Cell>
-              <CCell>{orc.维保合同}</CCell>
+              <CCell>{itr[1.4][3]}</CCell>
             </TableRow>
             <TableRow >
               <Cell>(5)特种设备作业人员证</Cell>
-              <CCell>{orc.作业人员证}</CCell>
+              <CCell>{itr[1.4][4]}</CCell>
             </TableRow>
             <TableRow >
               <CCell component="th" scope="row" rowSpan={3}>2</CCell>
