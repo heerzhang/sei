@@ -11,6 +11,8 @@ import { useQueryOriginalRecord } from "./db";
 import { LayerLoading } from "customize-easy-ui-component";
 import { lazy } from "react";
 import { WaitingComponent } from "../TopRouter";
+import { Route, Switch } from "wouter";
+import { ReportSample } from "../inspect/ReportSample";
 
 
 const TemplateMain = WaitingComponent(lazy(() => import("./TemplateMain")));
@@ -39,9 +41,12 @@ export default function ReportEntrance({name},props) {
   return (
     <React.Fragment>
       <LayerLoading loading={loading} label={'更新数据，加载中请稍后'}/>
-      { inp &&
-        <TemplateMain source={inp}/>
-      }
+      <Switch>
+        <Route path="/report/EL-DJ/ver/1/:repId/preview">  {inp &&<PrintReport source={inp}/>} </Route>
+        <Route path="/:rest*">
+          { inp && <TemplateMain source={inp}/> }
+        </Route>
+      </Switch>
     </React.Fragment>
   );
 }

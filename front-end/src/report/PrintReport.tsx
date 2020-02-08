@@ -1253,7 +1253,7 @@ export const PrintReport: React.FunctionComponent<PrintReportProps> = ({
           <TableBody>
             {itr.failure.map((ts, i) => {
               return (
-                <RouterLink   to="/original/">
+                <RouterLink   to={`/report/EL-DJ/ver/1/227/item/${ts}`}>
                   <TableRow key={i}>
                     <CCell component="th" scope="row">{i+1}</CCell>
                     <CCell>{itr[ts].iclass}/{ts}</CCell>
