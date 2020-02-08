@@ -64,8 +64,8 @@ const InternalItem1: React.RefForwardingComponent<InternalItemHandResult,Interna
     props:{ children },  ref
   ) => {
     const getInpFilter = React.useCallback((par) => {
-      const {登记资料,安全档案,管理制度,维保合同,作业人员证} =par||{};
-      return {登记资料,安全档案,管理制度,维保合同,作业人员证};
+      const {登记资料,安全档案,管理制度,维保合同,作业人员证,安全档案_D} =par||{};
+      return {登记资料,安全档案,管理制度,维保合同,作业人员证,安全档案_D};
     }, []);
     const { eos, setInp, inp } = useItemControlAs({ref,  filter: getInpFilter});
 
@@ -100,6 +100,9 @@ const InternalItem1: React.RefForwardingComponent<InternalItemHandResult,Interna
           <SelectHookfork value={ (inp?.安全档案) ||''}
                           onChange={e => setInp({ ...inp, 安全档案: e.currentTarget.value||undefined}) }
           />
+        </InputGroupLine>
+        <InputGroupLine label='描述或问题'>
+          <Input value={ (inp?.安全档案_D) ||''} onChange={e => setInp({ ...inp, 安全档案_D: e.currentTarget.value||undefined}) } />
         </InputGroupLine>
         <InputGroupLine  label='(3)以岗位责任制为核心的电梯运行管理规章制度，包括： '>
           <SelectHookfork value={ (inp?.管理制度) ||''}
