@@ -135,23 +135,24 @@ const getInstrument = (instbl: [any]) => {
 const aItemTransform = (orc: any, iclass:string,  ...ns) => {
   let size=ns.length;
   let fail=null, i=0;
-  let out=[];
+  let amazing=[];
   if(size<1)  throw new Error(`没项目参数`);
   for(; i<size; i++){
     if(!orc[ns[i]] || orc[ns[i]]==='×' || orc[ns[i]]==='' || orc[ns[i]]==='△'){
       fail= fail? fail+','+ns[i] : ns[i];
-      out[i]='不符合';
+      amazing[i]='不符合';
     }
     else if(orc[ns[i]]==='√' || orc[ns[i]]==='／' || orc[ns[i]]==='▽'){
-      out[i]='符合';
+      amazing[i]='符合';
     }
     else
       throw new Error(`非法结果${orc[ns[i]]}`);
   }
-  out['result']='合格';
+  //神奇缝合了
+  amazing['result']='合格';
   //不合格的。
   //  ["不符","间距0.14m",'资料确认符合/不符合'],  result:'合格/'，n?:不合格描述,
-  return {...out, fail};
+  return {...amazing, fail, iclass};
 }
 //把原始记录的数据转换成报告的各个项目的结论。
 const getItemTransform = (orc: any) => {
