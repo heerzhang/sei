@@ -188,29 +188,22 @@ export interface ItemTransProps {
   orc: any;
   iclass: string;
 }
-//簡化點
-export　function useItemTrans( {item,orc,iclass } :ItemTransProps,   ...names)
-{
-  let out={};
-  let failure=[];
-  out[item] =aItemTransform(orc, iclass, ...names);
-  if(out[item].result==='不合格')  failure.push(item);
-  return {out, failure};
-}
 
 //把原始记录的数据转换成报告的各个项目的结论。
 const getItemTransform = (orc: any) => {
   let out={};
-  let failure=[];
   //特殊处理也在这里。
   out[1.4] =aItemTransform(orc, 'B','登记资料','安全档案','管理制度','维保合同','作业人员证');
-  if(out[1.4].result==='不合格')  failure.push(1.4);
   out[2.1] =aItemTransform(orc, 'C','通道设置','通道照明','通道门');
-  if(out[2.1].result==='不合格')  failure.push(2.1);
   out[2.5] =aItemTransform(orc, 'C','机房照明');
-  if(out[2.5].result==='不合格')  failure.push(2.5);
-  const {out:a, failure:b}=useItemTrans({item:'2.1' ,orc,iclass: 'C'},'通道设置','通道照明','通道门');
+  out[2.6] =aItemTransform(orc, 'B','开关电路关系');
+  out[2.7] =aItemTransform(orc, 'B','主机工况','轮槽磨损','制动器','手动紧急操作');
 
+
+  let failure=[];
+  for(let key  in out){
+    if(out[key].result==='不合格')  failure.push(key);
+  }
   return {...out, failure};
 }
 
