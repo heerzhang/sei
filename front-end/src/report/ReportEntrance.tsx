@@ -42,7 +42,7 @@ export default function ReportEntrance({name},props) {
     <React.Fragment>
       <LayerLoading loading={loading} label={'更新数据，加载中请稍后'}/>
       <Switch>
-        <Route path="/report/EL-DJ/ver/1/:repId/preview">  {inp &&<PrintReport source={inp}/>} </Route>
+        <Route path="/report/preview/:repId/EL-DJ/ver/1">  {inp &&<PrintReport source={inp}/>} </Route>
         <Route path="/:rest*">
           { inp && <TemplateMain source={inp}/> }
         </Route>
