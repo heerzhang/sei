@@ -275,3 +275,4 @@ Popover 可能點擊不激發，可能動畫庫關係。
 ResponsivePopover大屏？
 poperover 小屏幕alert2次;
 http://192.168.1.105:3765/report/item/1.4/227/EL-DJ/ver/1
+http://192.168.1.105:3765/report/preview/227/EL-DJ/ver/1

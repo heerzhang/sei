@@ -6,7 +6,7 @@ import {
   Container,
   Divider,
   Embed, Link,
-  ScrollView, Select, Text,
+  ScrollView, Select, Text, useCollapse,
   useInfiniteScroll, useTheme
 } from "customize-easy-ui-component";
 import { Table, TableBody, TableHead, TableRow, Cell, CCell, RCell } from "../comp/TableExt";
@@ -22,6 +22,7 @@ import { InspectRecordTitle, InternalItemHandResult, TemplateViewProps } from ".
 import { safeBind } from "customize-easy-ui-component/esm/Hooks/compose-bind";
 import { string } from "prop-types";
 import { Link as RouterLink } from "wouter";
+import { ItemControlProps } from "./comp/base";
 
 
 /*let id = 0;
@@ -120,10 +121,12 @@ const rows = [
 ];
 */
 
+//生成臨時2列一行儀器表
 const getInstrument = (instbl: [any]) => {
+  let newT=[];
+  if(!instbl)  return newT;
   let size=instbl.length;
   let lines=size/2, i=0;
-  let newT=[];
   if(lines===0)  newT[0]={s1:'', name1:'', no1:'', s2:'', name2:'', no2:''};
   for(; i<lines; i++){
     if(2*i+2 <= size)
@@ -180,19 +183,37 @@ const aItemTransform = (orc: any, iclass:string,  ...ns) => {
   //神奇缝合了 amazing['result']='合格';
   return {...amazing, result, iclass, fdesc};
 }
+export interface ItemTransProps {
+  item: string;
+  orc: any;
+  iclass: string;
+}
+//簡化點
+export　function useItemTrans( {item,orc,iclass } :ItemTransProps,   ...names)
+{
+  let out={};
+  let failure=[];
+  out[item] =aItemTransform(orc, iclass, ...names);
+  if(out[item].result==='不合格')  failure.push(item);
+  return {out, failure};
+}
+
 //把原始记录的数据转换成报告的各个项目的结论。
 const getItemTransform = (orc: any) => {
-  let  out={};
-  //不合格的。
+  let out={};
   let failure=[];
   //特殊处理也在这里。
   out[1.4] =aItemTransform(orc, 'B','登记资料','安全档案','管理制度','维保合同','作业人员证');
   if(out[1.4].result==='不合格')  failure.push(1.4);
   out[2.1] =aItemTransform(orc, 'C','通道设置','通道照明','通道门');
   if(out[2.1].result==='不合格')  failure.push(2.1);
+  out[2.5] =aItemTransform(orc, 'C','机房照明');
+  if(out[2.5].result==='不合格')  failure.push(2.5);
+  const {out:a, failure:b}=useItemTrans({item:'2.1' ,orc,iclass: 'C'},'通道设置','通道照明','通道门');
 
   return {...out, failure};
 }
+
 //这个printing打印场景，实现比css更加强化CSS层面只能局限DOM节点，而JS操纵能力是在上层的逻辑。
 //这个printing修改成应用层面用户的指认：明确为了打印而启动页面，它就和css毫无关系了，和useMedia也无关了。
 interface PrintReportProps {
@@ -293,6 +314,7 @@ export const PrintReport: React.FunctionComponent<PrintReportProps> = ({
               "@media (min-width:690px),print and (min-width:538px)": {
                 display: "flex",
                 justifyContent: "space-between",
+                flexWrap: 'wrap',
                 "& > div": {
                   margin: theme.spaces.sm,
                 }
@@ -711,11 +733,11 @@ export const PrintReport: React.FunctionComponent<PrintReportProps> = ({
             </TableRow>
             <TableRow >
               <CCell component="th" scope="row">3</CCell>
-              <CCell>C</CCell>
+              <CCell>{itr[2.5].iclass}</CCell>
               <CCell>2.5</CCell>
               <Cell colSpan={2}>(1)照明、照明开关</Cell>
-              <CCell>符合</CCell>
-              <CCell></CCell>
+              <CCell>{itr[2.5][0]}</CCell>
+              <CCell>{itr[2.5].result}</CCell>
             </TableRow>
             <TableRow >
               <CCell component="th" scope="row">4</CCell>
