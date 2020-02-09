@@ -19,40 +19,48 @@ import {
 import {  InternalItemHandResult, InternalItemProps } from "../comp/base";
 import { callSubitemChangePar, callSubitemShow, mergeSubitemRefs } from "../../utils/tools";
 import orderBy from "lodash.orderby";
+import { string } from "prop-types";
 
 
 let   id = 0;
 const genId = () => ++id;
-function createItem( order:  number, content: React.ReactNode) {
-  return {id:genId(), order, content};
+function createItem( items: string[], zoneContent: React.ReactNode) {
+  return {items,  zoneContent};
 }
 
-const TemplateView: React.RefForwardingComponent<InternalItemHandResult,TemplateViewProps>=
+export const TemplateView: React.RefForwardingComponent<InternalItemHandResult,TemplateViewProps>=
   React.forwardRef((
-     {inp, showAll=false, children},   ref
+     {inp, action='None', children},   ref
   ) => {
     const clRefs =useProjectListAs({count: projectList.length});
     const outCome=mergeSubitemRefs( ...clRefs.current! );
     React.useImperativeHandle( ref,() => ({ inp: outCome }), [outCome] );
-    React.useEffect(() => {
-     callSubitemShow(showAll,  ...clRefs.current! );
-    }, [showAll, clRefs] );
+
     React.useEffect(() => {
       callSubitemChangePar(inp,  ...clRefs.current! );
     }, [inp, clRefs] );
     const recordList= React.useMemo(() =>
-            <React.Fragment>
-              {
-                (showAll ? projectList : orderBy(projectList,['order'],['asc']) )
-                  .map((each, i) => {
-                    return  React.cloneElement(each.content as React.ReactElement<any>, {
-                      ref: clRefs.current![i],
-                      key: each.order
-                    });
-                  })
-              }
-            </React.Fragment>
-                  ,[showAll, clRefs]);
+          <React.Fragment>
+            {
+               projectList.map((each, i) => {
+                 if(each.items.indexOf(action)>=0 || action==='ALL')
+                     return  React.cloneElement(each.zoneContent as React.ReactElement<any>, {
+                        ref: clRefs.current![i],
+                        key: i
+                      });
+                  else
+                    return <div key={i} css={{display:'none'}}>
+                     {
+                       React.cloneElement(each.zoneContent as React.ReactElement<any>, {
+                         ref: clRefs.current![i],
+                         key: i
+                       })
+                     }
+                    </div>;
+                })
+            }
+          </React.Fragment>
+                ,[action, clRefs]);
     return  recordList;
   } );
 
@@ -1397,7 +1405,7 @@ const InternalItem8d10: React.RefForwardingComponent<InternalItemHandResult,Inte
     );
   } );
 
-const InternalItemh2: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+const ItemInstrumentTable: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
   React.forwardRef((
     props:{ children },  ref
   ) => {
@@ -1497,7 +1505,7 @@ const InternalItemh2: React.RefForwardingComponent<InternalItemHandResult,Intern
     );
   } );
 
-const InternalItem0: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+const ItemLinkManTel: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
   React.forwardRef((
     props:{ children },  ref
   ) => {
@@ -1533,7 +1541,7 @@ const InternalItem0: React.RefForwardingComponent<InternalItemHandResult,Interna
     );
   } );
 
-const InternalItem98: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+const ItemRemarks: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
   React.forwardRef((
     props:{ children },  ref
   ) => {
@@ -1570,7 +1578,7 @@ const InternalItem98: React.RefForwardingComponent<InternalItemHandResult,Intern
     );
   } );
 
-const InternalItem99: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+const ItemConclusion: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
   React.forwardRef((
     props:{ children },  ref
   ) => {
@@ -1612,7 +1620,7 @@ const InternalItem99: React.RefForwardingComponent<InternalItemHandResult,Intern
     );
   } );
 
-const InternalItem96: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+const ItemRecheckResult: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
   React.forwardRef((
     props:{ children },  ref
   ) => {
@@ -1714,7 +1722,7 @@ const InternalItem96: React.RefForwardingComponent<InternalItemHandResult,Intern
     );
   } );
 
-const InternalItem97: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+const ItemAppendixB: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
   React.forwardRef((
     props:{ children },  ref
   ) => {
@@ -1790,30 +1798,31 @@ const InternalItem97: React.RefForwardingComponent<InternalItemHandResult,Intern
     );
   } );
 
-
+//項目標記符列表：不能用的ALL None zoneContent保留字；
 const projectList = [
-  createItem(0, <InternalItem0/>),
-  createItem(1, <InternalItem1/>),
-  createItem(2, <InternalItem2t4/>),
-  createItem(5, <InternalItem5/>),
-  createItem(6, <InternalItem2d8/>),
-  createItem(7, <InternalItem2d9/>),
-  createItem(10, <InternalItem3d4/>),
-  createItem(13, <InternalItem13/>),
-  createItem(16, <InternalItem16/>),
-  createItem(18, <InternalItem18/>),
-  createItem(22, <InternalItem22/>),
-  createItem(25, <InternalItem25/>),
-  createItem(27, <InternalItem27/>),
-  createItem(30, <InternalItem6d3/>),
-  createItem(31, <InternalItem31/>),
-  createItem(35, <InternalItem35/>),
-  createItem(40, <InternalItem8d1/>),
-  createItem(44, <InternalItem8d5/>),
-  createItem(48, <InternalItem8d10/>),
-  createItem(52, <InternalItemh2/>),
-  createItem(96, <InternalItem96/>),
-  createItem(97, <InternalItem97/>),
-  createItem(98, <InternalItem98/>),
-  createItem(99, <InternalItem99/>)
+  createItem(['LinkMan'], <ItemLinkManTel/>),
+  createItem(['1.4'], <InternalItem1/>),
+  createItem(['2.1','2.5','2.6'], <InternalItem2t4/>),
+  createItem(['2.7'], <InternalItem5/>),
+  createItem(['2.8'], <InternalItem2d8/>),
+  createItem(['2.9','2.10','2.11'], <InternalItem2d9/>),
+  createItem(['3.4','3.5','3.7'], <InternalItem3d4/>),
+  createItem(['3.10','3.11','3.12'], <InternalItem13/>),
+  createItem(['3.14','3.15'], <InternalItem16/>),
+  createItem(['4.1','4.3','4.5','4.6'], <InternalItem18/>),
+  createItem(['4.8','4.9','4.10'], <InternalItem22/>),
+  createItem(['5.1','5.2'], <InternalItem25/>),
+  createItem(['5.3','5.5','5.6'], <InternalItem27/>),
+  createItem(['6.3','6.9','6.12'], <InternalItem6d3/>),
+  createItem(['6.4','6.5','6.6','6.7'], <InternalItem31/>),
+  createItem(['6.8','6.10','6.11'], <InternalItem35/>),
+  createItem(['8.1','8.2','8.3','8.4'], <InternalItem8d1/>),
+  createItem(['8.5','8.6','8.7','8.9'], <InternalItem8d5/>),
+  createItem(['8.10','8.11','8.12','8.13'], <InternalItem8d10/>),
+  createItem(['Instrument'], <ItemInstrumentTable/>),
+  createItem(['ReCheck'], <ItemRecheckResult/>),
+  createItem(['Appendix'], <ItemAppendixB/>),
+  createItem(['Remark'], <ItemRemarks/>),
+  createItem(['Conclusion'], <ItemConclusion/>)
 ];
+

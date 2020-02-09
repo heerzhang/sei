@@ -32,10 +32,11 @@ import { ReportSample } from "../inspect/ReportSample";
 import { BoundReports } from "../inspect/report/BoundReports";
 import { PrintReport } from "./PrintReport";
 import { Branding } from "../Branding";
-import { InternalItemHandResult } from "../original/comp/base";
-import { useCommitOriginalData } from "../original/db";
+import { InternalItemHandResult, TemplateViewProps } from "./comp/base";
+import { useCommitOriginalData } from "./db";
 import throttle from 'throttle-asynchronous'
-
+import { loadTemplate } from "./template";
+import typeAsRoute from "../typeAsRoute.json";
 
 export interface MainProps {
   path?: string;
@@ -49,18 +50,21 @@ export const TemplateMain: React.FunctionComponent<MainProps> = ({source}) => {
   //可提前从URL筛选出参数来的。 "/report/item/1.4/:repId/EL-DJ/ver/1"
   const [match, params] = useRoute("/report/item/:action/:repId/:template/ver/:verId");
   let showingRecipe = params && params.repId   &&  params.action;
+  let action = params &&  params.action;
   const [activeTab, setActiveTab] = React.useState(0);
   const [, setLocation] = useLocation();
   const isLarge = useMedia({ minWidth: "800px" });
   const renderList =match||     isLarge || !showingRecipe;  　//大屏或者小屏但是没有显示具体明细页的场合。
-
+  const [template, setTemplate] = React.useState(null   as any);
 
   console.log("来TemplateMain当前的params match=",match ,"showingRecipe=",params, showingRecipe);
-
   function onLogoutDo() {
     setLocation("/login",  false );
   }
   const { submitfunc:signOut,  } = useSignOut(onLogoutDo);
+
+  if(!params || !(params.template))   return null;
+  loadTemplate(typeAsRoute[params &&params.template], setTemplate);
 
   return (
     <Layout>
@@ -307,7 +311,9 @@ export const TemplateMain: React.FunctionComponent<MainProps> = ({source}) => {
                   }
                 }}
               >
-                <RecordView id={'227'} source={source}/>
+                {template && action!=='none'
+                   && <RecordView id={'227'} source={source} action={action} template={template}/>
+                }
               </Layer>
             </div>
 
@@ -319,11 +325,18 @@ export const TemplateMain: React.FunctionComponent<MainProps> = ({source}) => {
 };
 
 interface RecordViewProps {
-  id?: string;
+  id: string;
+  action: string;
   source: any;
+  template: React.ReactElement<React.RefForwardingComponent<InternalItemHandResult,TemplateViewProps>>;
 }
-
-function RecordView({ id, source }: RecordViewProps) {
+export const RecordView: React.FunctionComponent<RecordViewProps> = ({
+                                                                       id,
+                                                                       action,
+                                                                       source,
+                                                                       template,
+                                                                       ...other
+                                                                     }) => {
   const theme = useTheme();
   const toast = useToast();
   const [enable, setEnable] = React.useState(true);
@@ -386,8 +399,15 @@ function RecordView({ id, source }: RecordViewProps) {
   return (
     <React.Fragment>
       开头部分条
-      <SecondRoterContent id={id} source={source}/>
-
+      {
+        //useMemo使用后：各分区项目子组件inp各自独立的，分区项目子组件内若使用setInp(null) 清空重置后，无法靠重新拉取后端数据来保证恢复显示。
+        //项目子组件使用setInp(null) 重置后，若上级组件重新取后端数据没变化的，也必须再次路由后再进入才可以让各分区项目子组件render恢复显示数据。
+        React.cloneElement(template as React.ReactElement<any>, {
+          ref: ref,
+          inp: source,
+          action
+        })
+      }
       <Button
         css={{ marginTop: theme.spaces.md }}
         size="lg"  intent={'warning'}
@@ -411,7 +431,7 @@ interface SecondRoterProps {
   id?: string;
   source?: any;
 }
-//上级是path="/report/:rest*"的。在底下扩充目录。
+//作廢！！
 function SecondRoterContent({id, source}: SecondRoterProps) {
   return (
     <React.Fragment>
