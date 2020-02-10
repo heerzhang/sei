@@ -65,7 +65,7 @@ export const TemplateView: React.RefForwardingComponent<InternalItemHandResult,T
           </React.Fragment>
                 ,[action, clRefs]);
 
-    console.log("公用配置对象 ==inspectionContent：",  inspectionContent, inspectionContent[0].items[0].names[1]);
+   // console.log("公用配置对象 ==inspectionContent：",  inspectionContent, inspectionContent[0].items[0].names[1]);
     return  recordList;
   } );
 
@@ -76,12 +76,13 @@ const InternalItem1: React.RefForwardingComponent<InternalItemHandResult,Interna
   React.forwardRef((
     props:{ children },  ref
   ) => {
+    const namex=`${inspectionContent[0].items[0].names[1]}`;
     const getInpFilter = React.useCallback((par) => {
       const {登记资料,安全档案,管理制度,维保合同,作业人员证,安全档案_D} =par||{};
       return {登记资料,安全档案,管理制度,维保合同,作业人员证,安全档案_D};
     }, []);
     const { eos, setInp, inp } = useItemControlAs({ref,  filter: getInpFilter});
-
+    console.log("公用配置对象 安全档案==inp：",  inp, `${inspectionContent[0].items[0].names[1]}`);
     return (
       <InspectRecordTitle  control={eos}   label={'检验项目 1.4'}>
         <InspectRecordHeadColumn  level={'B'}  bigLabel={'1 技术资料'}  label={'1.4 使用资料'} tinyLabel={' 使用单位提供了以下资料：'} >
@@ -109,14 +110,26 @@ const InternalItem1: React.RefForwardingComponent<InternalItemHandResult,Interna
                           onChange={e => setInp({ ...inp, 登记资料: e.currentTarget.value||undefined}) }
           />
         </InputGroupLine>
-        <InputGroupLine  label='(2)安全技术档案应保存完好，至少包括： '>
-          <SelectHookfork value={ (inp?.安全档案) ||''}
-                          onChange={e => setInp({ ...inp, 安全档案: e.currentTarget.value||undefined}) }
-          />
-        </InputGroupLine>
-        <InputGroupLine label='描述或问题'>
-          <Input value={ (inp?.安全档案_D) ||''} onChange={e => setInp({ ...inp, 安全档案_D: e.currentTarget.value||undefined}) } />
-        </InputGroupLine>
+        { [1].map((each, i) => {
+            return (
+              <React.Fragment key={i}>
+              <InputGroupLine  label='(2)安全技术档案应保存完好，至少包括： (inp?.安全档案) || '>
+                <SelectHookfork value={ (inp?.[namex]) ||''}
+                                onChange={e => {
+                                  inp[namex]=e.currentTarget.value||undefined;
+                                  setInp({ ...inp});
+                                  }
+                                }
+                />
+              </InputGroupLine>
+                <InputGroupLine label='描述或问题'>
+                  <Input value={ (inp?.安全档案_D) ||''} onChange={e => setInp({ ...inp, 安全档案_D: e.currentTarget.value||undefined}) } />
+                </InputGroupLine>
+              </React.Fragment>
+          )
+          })
+        }
+
         <InputGroupLine  label='(3)以岗位责任制为核心的电梯运行管理规章制度，包括： '>
           <SelectHookfork value={ (inp?.管理制度) ||''}
                           onChange={e => setInp({ ...inp, 管理制度: e.currentTarget.value||undefined}) }
