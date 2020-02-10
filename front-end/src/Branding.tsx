@@ -257,7 +257,7 @@ export const Branding: React.FunctionComponent<BrandingProps> = (props) => {
               录入报告记录
             </Button>
          </RouterLink>
-          <RouterLink to="/report/EL-DJ/ver/1/227/preview">
+          <RouterLink to="/report/preview/227/EL-DJ/ver/1">
             <Button
               size="lg" noBind
               intent="primary"

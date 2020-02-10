@@ -171,7 +171,6 @@ const InternalItem6d3: React.RefForwardingComponent<InternalItemHandResult,Inter
             新增检查=>
             <InputGroupLine  label='首先设置当前层站号'>
               <SuffixInput
-                autoFocus={true}
                 value={floor||''}
                 onChange={e => {setFloor( e.currentTarget.value) }}
               >
@@ -195,7 +194,6 @@ const InternalItem6d3: React.RefForwardingComponent<InternalItemHandResult,Inter
             </div>
             <InputGroupLine label={`层门门扇间间隙(层号 ${floor}):`}>
               <SuffixInput
-                autoFocus={true}
                 placeholder="请输入测量数"
                 value={ (inp?.门扇隙?.[floor] ) || ''}
                 onChange={e => floor&&setInp({ ...inp, 门扇隙:{...inp?.门扇隙,[floor]:e.currentTarget.value||undefined} }) }
@@ -203,7 +201,6 @@ const InternalItem6d3: React.RefForwardingComponent<InternalItemHandResult,Inter
             </InputGroupLine>
             <InputGroupLine label={`层门门扇与门套间隙(层号 ${floor}):`}>
               <SuffixInput
-                autoFocus={true}
                 placeholder="请输入测量数"
                 value={ (inp?.门套隙?.[floor] ) || ''}
                 onChange={e => floor&&setInp({ ...inp, 门套隙:{...inp?.门套隙,[floor]:e.currentTarget.value||undefined} }) }
@@ -211,7 +208,6 @@ const InternalItem6d3: React.RefForwardingComponent<InternalItemHandResult,Inter
             </InputGroupLine>
             <InputGroupLine label={`层门扇与地坎间隙(层号 ${floor}):`}>
               <SuffixInput
-                autoFocus={true}
                 placeholder="请输入测量数"
                 value={ (inp?.地坎隙?.[floor] ) || ''}
                 onChange={e => floor&&setInp({ ...inp, 地坎隙:{...inp?.地坎隙,[floor]:e.currentTarget.value||undefined} }) }
@@ -219,7 +215,6 @@ const InternalItem6d3: React.RefForwardingComponent<InternalItemHandResult,Inter
             </InputGroupLine>
             <InputGroupLine label={`层门扇间施力间隙(层号 ${floor}):`}>
               <SuffixInput
-                autoFocus={true}
                 placeholder="请输入测量数"
                 value={ (inp?.施力隙?.[floor] ) || ''}
                 onChange={e => floor&&setInp({ ...inp, 施力隙:{...inp?.施力隙,[floor]:e.currentTarget.value||undefined} }) }
@@ -227,7 +222,6 @@ const InternalItem6d3: React.RefForwardingComponent<InternalItemHandResult,Inter
             </InputGroupLine>
             <InputGroupLine label={`门锁啮合长度(层号 ${floor}):`}>
               <SuffixInput
-                autoFocus={true}
                 placeholder="请输入测量数"
                 value={ (inp?.门锁啮长?.[floor] ) || ''}
                 onChange={e => floor&&setInp({ ...inp, 门锁啮长:{...inp?.门锁啮长,[floor]:e.currentTarget.value||undefined} }) }
@@ -235,7 +229,6 @@ const InternalItem6d3: React.RefForwardingComponent<InternalItemHandResult,Inter
             </InputGroupLine>
             <InputGroupLine label={`轿门门刀与层门地坎间距(层号 ${floor}):`}>
               <SuffixInput
-                autoFocus={true}
                 placeholder="请输入测量数"
                 value={ (inp?.刀坎距?.[floor] ) || ''}
                 onChange={e => floor&&setInp({ ...inp, 刀坎距:{...inp?.刀坎距,[floor]:e.currentTarget.value||undefined} }) }
@@ -243,7 +236,6 @@ const InternalItem6d3: React.RefForwardingComponent<InternalItemHandResult,Inter
             </InputGroupLine>
             <InputGroupLine label={`门锁滚轮与轿门地坎间距(层号 ${floor}):`}>
               <SuffixInput
-                autoFocus={true}
                 placeholder="请输入测量数"
                 value={ (inp?.轮坎距?.[floor] ) || ''}
                 onChange={e => floor&&setInp({ ...inp, 轮坎距:{...inp?.轮坎距,[floor]:e.currentTarget.value||undefined} }) }
@@ -452,7 +444,6 @@ const InternalItem25: React.RefForwardingComponent<InternalItemHandResult,Intern
         数据及测量
         <InputGroupLine label={`②断丝数`}>
           <SuffixInput
-            autoFocus={true}
             placeholder="请输入测量数"
             value={ inp?.断丝数 ||''}
             onChange={e => setInp({ ...inp, 断丝数: e.currentTarget.value||undefined}) }
@@ -465,7 +456,6 @@ const InternalItem25: React.RefForwardingComponent<InternalItemHandResult,Intern
         </InputGroupLine>
         <InputGroupLine label={`③钢丝绳直径`}>
           <SuffixInput
-            autoFocus={true}
             placeholder="请输入测量数"
             value={ inp?.钢绳直径 ||''}
             onChange={e => setInp({ ...inp, 钢绳直径: e.currentTarget.value||undefined}) }
@@ -473,7 +463,6 @@ const InternalItem25: React.RefForwardingComponent<InternalItemHandResult,Intern
         </InputGroupLine>
         <InputGroupLine label={`③公称直径`}>
           <SuffixInput
-            autoFocus={true}
             placeholder="请输入测量数"
             value={ inp?.钢绳公称 ||''}
             onChange={e => setInp({ ...inp, 钢绳公称: e.currentTarget.value||undefined}) }
@@ -598,7 +587,6 @@ const InternalItem2t4: React.RefForwardingComponent<InternalItemHandResult,Inter
         采用梯子作为通道时
         <InputGroupLine label={`机房高出平面`}>
           <SuffixInput
-            autoFocus={true}
             placeholder="请输入测量数"
             value={ inp?.机房高出 ||''}
             onChange={e => setInp({ ...inp, 机房高出: e.currentTarget.value||undefined}) }
@@ -606,7 +594,6 @@ const InternalItem2t4: React.RefForwardingComponent<InternalItemHandResult,Inter
         </InputGroupLine>
         <InputGroupLine label={`水平方向夹角`}>
           <SuffixInput
-            autoFocus={true}
             placeholder="请输入测量数"
             value={ inp?.梯子夹角 ||''}
             onChange={e => setInp({ ...inp, 梯子夹角: e.currentTarget.value||undefined}) }
@@ -630,7 +617,6 @@ const InternalItem2t4: React.RefForwardingComponent<InternalItemHandResult,Inter
         机房通道门
         <InputGroupLine label={`宽度`}>
           <SuffixInput
-            autoFocus={true}
             placeholder="请输入测量数"
             value={ inp?.通道门宽 ||''}
             onChange={e => setInp({ ...inp, 通道门宽: e.currentTarget.value||undefined}) }
@@ -638,7 +624,6 @@ const InternalItem2t4: React.RefForwardingComponent<InternalItemHandResult,Inter
         </InputGroupLine>
         <InputGroupLine label={`高度`}>
           <SuffixInput
-            autoFocus={true}
             placeholder="请输入测量数"
             value={ inp?.通道门高 ||''}
             onChange={e => setInp({ ...inp, 通道门高: e.currentTarget.value||undefined}) }
@@ -713,7 +698,6 @@ const InternalItem16: React.RefForwardingComponent<InternalItemHandResult,Intern
         (5)对重越程距离
         <InputGroupLine label={`最大允许值`}>
           <SuffixInput
-            autoFocus={true}
             placeholder="请输入测量数"
             value={ inp?.对重越程最大 ||''}
             onChange={e => setInp({ ...inp, 对重越程最大: e.currentTarget.value||undefined}) }
@@ -721,7 +705,6 @@ const InternalItem16: React.RefForwardingComponent<InternalItemHandResult,Intern
         </InputGroupLine>
         <InputGroupLine label={`测量值`}>
           <SuffixInput
-            autoFocus={true}
             placeholder="请输入测量数"
             value={ inp?.对重越程 ||''}
             onChange={e => setInp({ ...inp, 对重越程: e.currentTarget.value||undefined}) }
@@ -937,7 +920,6 @@ const InternalItem3d4: React.RefForwardingComponent<InternalItemHandResult,Inter
         数据及测量
         <InputGroupLine label={`间距`}>
           <SuffixInput
-            autoFocus={true}
             placeholder="请输入测量数"
             value={ inp?.轿井间距 ||''}
             onChange={e => setInp({ ...inp, 轿井间距: e.currentTarget.value||undefined}) }
@@ -1103,7 +1085,6 @@ const InternalItem22: React.RefForwardingComponent<InternalItemHandResult,Intern
         数据及测量
         <InputGroupLine label={`护脚板高度`}>
           <SuffixInput
-            autoFocus={true}
             placeholder="请输入测量数"
             value={ inp?.护脚板高 ||''}
             onChange={e => setInp({ ...inp, 护脚板高: e.currentTarget.value||undefined}) }
@@ -1443,13 +1424,13 @@ const ItemInstrumentTable: React.RefForwardingComponent<InternalItemHandResult,I
     const editor=<Layer elevation={"sm"} css={{ padding: '0.25rem' }}>
       <div>
         <InputGroupLine label={`测量设备名称`}>
-          <Input autoFocus={true}  value={obj.name ||''}   onChange={e =>setObj({...obj, name: e.currentTarget.value} ) } />
+          <Input   value={obj.name ||''}   onChange={e =>setObj({...obj, name: e.currentTarget.value} ) } />
         </InputGroupLine>
         <InputGroupLine label={`规格型号`}>
-          <Input autoFocus={true}  value={obj.type ||''}   onChange={e =>setObj({...obj, type: e.currentTarget.value} ) } />
+          <Input   value={obj.type ||''}   onChange={e =>setObj({...obj, type: e.currentTarget.value} ) } />
         </InputGroupLine>
         <InputGroupLine label={`测量设备编号`}>
-          <Input autoFocus={true}  value={obj.no ||''}   onChange={e =>setObj({...obj, no: e.currentTarget.value} ) } />
+          <Input   value={obj.no ||''}   onChange={e =>setObj({...obj, no: e.currentTarget.value} ) } />
         </InputGroupLine>
         <InputGroupLine  label='性能状态-开机后'>
           <SelectHookfork value={obj.powerOn ||''}  onChange={e =>setObj({...obj, powerOn: e.currentTarget.value} ) } />
@@ -1521,7 +1502,7 @@ const ItemLinkManTel: React.RefForwardingComponent<InternalItemHandResult,Intern
       <InspectRecordTitle  control={eos}   label={'一、设备概况'}>
         允许直接修改部分
         <InputGroupLine  label='设备号{将来是点击链接自动获得}' >
-          <Input autoFocus={true} value={inp?.devCod ||''}  placeholder="那一台电梯？暂时要求，将来是点击链接自动获得"
+          <Input  value={inp?.devCod ||''}  placeholder="那一台电梯？暂时要求，将来是点击链接自动获得"
                  onChange={e => setInp({ ...inp, devCod: e.currentTarget.value||undefined}) } />
         </InputGroupLine>
         <InputGroupLine  label='检验日期{将来提升到创立原始记录的前置输入}' >
@@ -1529,11 +1510,11 @@ const ItemLinkManTel: React.RefForwardingComponent<InternalItemHandResult,Intern
                  onChange={e => setInp({ ...inp, 检验日期: e.currentTarget.value}) } />
         </InputGroupLine>
         <InputGroupLine  label='安全管理人员' >
-          <Input autoFocus={true} value={inp?.安全人员 ||''}
+          <Input  value={inp?.安全人员 ||''}
                  onChange={e => setInp({ ...inp, 安全人员: e.currentTarget.value||undefined}) } />
         </InputGroupLine>
         <InputGroupLine  label='联系电话1' >
-          <Input autoFocus={true} value={inp?.联系电话 ||''}
+          <Input  value={inp?.联系电话 ||''}
                  onChange={e => setInp({ ...inp, 联系电话: e.currentTarget.value||undefined}) } />
         </InputGroupLine>
         不可修改的明细：待续或点外部链接。
@@ -1555,24 +1536,24 @@ const ItemRemarks: React.RefForwardingComponent<InternalItemHandResult,InternalI
       <InspectRecordTitle  control={eos}   label={'见证材料或问题备注'}>
         六、见证材料{`{将来可能只需输入编号链接即可}`}
         <InputGroupLine  label='1、维保自检材料' >
-          <Input autoFocus={true} value={inp?.自检材料 ||''}  placeholder="使用默认规则，缺省编号情况的可不填"
+          <Input  value={inp?.自检材料 ||''}  placeholder="使用默认规则，缺省编号情况的可不填"
                  onChange={e => setInp({ ...inp, 自检材料: e.currentTarget.value||undefined}) } />
         </InputGroupLine>
         <InputGroupLine  label='2、限速器动作速度校验材料' >
-          <Input autoFocus={true} value={inp?.校验材料 ||''}
+          <Input  value={inp?.校验材料 ||''}
                  onChange={e => setInp({ ...inp, 校验材料: e.currentTarget.value||undefined}) } />
         </InputGroupLine>
         <InputGroupLine  label='3、使用单位整改反馈材料' >
-          <Input autoFocus={true} value={inp?.整改材料 ||''}
+          <Input  value={inp?.整改材料 ||''}
                  onChange={e => setInp({ ...inp, 整改材料: e.currentTarget.value||undefined}) } />
         </InputGroupLine>
         <InputGroupLine  label='4、其他资料及编号' >
-          <Input autoFocus={true} value={inp?.资料及编号 ||''}
+          <Input  value={inp?.资料及编号 ||''}
                  onChange={e => setInp({ ...inp, 资料及编号: e.currentTarget.value||undefined}) } />
         </InputGroupLine>
         七、备注<br/><br/>
         纸质正式报告备注可能只取前几行
-         <TextArea autoFocus={true} value={inp?.memo ||''} rows={10} placeholder="网页版本正式报告备注可随意多写"
+         <TextArea  value={inp?.memo ||''} rows={10} placeholder="网页版本正式报告备注可随意多写"
                     onChange={e => setInp({ ...inp, memo: e.currentTarget.value||undefined}) } />
       </InspectRecordTitle>
     );
@@ -1605,15 +1586,15 @@ const ItemConclusion: React.RefForwardingComponent<InternalItemHandResult,Intern
           </Select>
         </InputGroupLine>
         <InputGroupLine  label='检验人员{用户ID列表,将来签名，登录来签注}' >
-          <Input autoFocus={true} value={inp?.检验人IDs ||''} placeholder="输入本系统用户ID，将来签名后结论不能再改，多人签名：以 分割"
+          <Input  value={inp?.检验人IDs ||''} placeholder="输入本系统用户ID，将来签名后结论不能再改，多人签名：以 分割"
                  onChange={e => setInp({ ...inp, 检验人IDs: e.currentTarget.value||undefined}) } />
         </InputGroupLine>
         <InputGroupLine  label='编制人员{将来是提交人员，自动的}' >
-          <Input autoFocus={true} value={inp?.编制人 ||''} placeholder="目前直接输入名字，一个人"
+          <Input  value={inp?.编制人 ||''} placeholder="目前直接输入名字，一个人"
                  onChange={e => setInp({ ...inp, 编制人: e.currentTarget.value||undefined}) } />
         </InputGroupLine>
         <InputGroupLine  label='编制日期{将来等于提交日，自动的}' >
-          <Input autoFocus={true} value={inp?.编制日期 ||''}  type='date'
+          <Input  value={inp?.编制日期 ||''}  type='date'
                  onChange={e => setInp({ ...inp, 编制日期: e.currentTarget.value}) } />
         </InputGroupLine>
       </InspectRecordTitle>
@@ -1658,11 +1639,11 @@ const ItemRecheckResult: React.RefForwardingComponent<InternalItemHandResult,Int
     const editor=<Layer elevation={"sm"} css={{ padding: '0.25rem' }}>
       <div>
         <InputGroupLine label={`类别/编号{将来自动的不能改}`}>
-          <Input autoFocus={true}  value={obj.no ||''} placeholder="目前是人工输入，类比B/4.8这样的"
+          <Input   value={obj.no ||''} placeholder="目前是人工输入，类比B/4.8这样的"
                  onChange={e =>setObj({...obj, no: e.currentTarget.value} ) } />
         </InputGroupLine>
         <InputGroupLine label={`不合格内容描述{将来自动的}`}>
-          <Input autoFocus={true}  value={obj.desc ||''}  placeholder="目前是人工输入，正式报告要呈现不合格说明"
+          <Input   value={obj.desc ||''}  placeholder="目前是人工输入，正式报告要呈现不合格说明"
                  onChange={e =>setObj({...obj, desc: e.currentTarget.value} ) } />
         </InputGroupLine>
         <InputGroupLine label={`复检结果`}>
@@ -1671,7 +1652,7 @@ const ItemRecheckResult: React.RefForwardingComponent<InternalItemHandResult,Int
           />
         </InputGroupLine>
         <InputGroupLine  label='复检日期' >
-          <Input autoFocus={true} value={obj.rdate ||''}  type='date'
+          <Input  value={obj.rdate ||''}  type='date'
                  onChange={e =>setObj({...obj, rdate: e.currentTarget.value} ) } />
         </InputGroupLine>
         <Button onPress={() => {
@@ -1757,7 +1738,7 @@ const ItemAppendixB: React.RefForwardingComponent<InternalItemHandResult,Interna
           新增检查=>
           <InputGroupLine  label='首先设置当前检验日期'>
             <SuffixInput
-              autoFocus={true}  type='date'
+                type='date'
               value={floor||''}
               onChange={e => {setFloor( e.currentTarget.value) }}
             >
@@ -1779,7 +1760,6 @@ const ItemAppendixB: React.RefForwardingComponent<InternalItemHandResult,Interna
           </div>
           <InputGroupLine label={`机房空气温度(${floor}):`}>
             <SuffixInput
-              autoFocus={true}
               placeholder="请输入测量数"
               value={ (inp?.温度?.[floor] ) || ''}
               onChange={e => floor&&setInp({ ...inp, 温度:{...inp?.温度,[floor]:e.currentTarget.value||undefined} }) }
@@ -1787,7 +1767,6 @@ const ItemAppendixB: React.RefForwardingComponent<InternalItemHandResult,Interna
           </InputGroupLine>
           <InputGroupLine label={`电源输入电压(${floor}):`}>
             <SuffixInput
-              autoFocus={true}
               placeholder="请输入测量数"
               value={ (inp?.电压值?.[floor] ) || ''}
               onChange={e => floor&&setInp({ ...inp, 电压值:{...inp?.电压值,[floor]:e.currentTarget.value||undefined} }) }
