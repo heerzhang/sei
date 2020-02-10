@@ -77,12 +77,23 @@ const InternalItem1: React.RefForwardingComponent<InternalItemHandResult,Interna
     props:{ children },  ref
   ) => {
     const namex=`${inspectionContent[0].items[0].names[1]}`;
+    //,安全档案
     const getInpFilter = React.useCallback((par) => {
-      const {登记资料,安全档案,管理制度,维保合同,作业人员证,安全档案_D} =par||{};
-      return {登记资料,安全档案,管理制度,维保合同,作业人员证,安全档案_D};
+      const {登记资料,管理制度,维保合同,作业人员证,安全档案_D} =par||{};
+      return {登记资料,管理制度,维保合同,作业人员证,安全档案_D};
     }, []);
-    const { eos, setInp, inp } = useItemControlAs({ref,  filter: getInpFilter});
-    console.log("公用配置对象 安全档案==inp：",  inp, `${inspectionContent[0].items[0].names[1]}`);
+    //inp=要想返回保存的必须在inp里面。不要保存的只读字段不能放在inp，只能直接从par获取了；
+    const { eos, setInp, inp ,par } = useItemControlAs({ref,  filter: getInpFilter});
+
+    React.useEffect(() => {
+      if(inp){
+        inp[namex] =par[namex];
+        //动态添加可以保存的变量名。
+        setInp({ ...inp});
+      }
+    }, [par] );
+
+    console.log("公用配置对象！局部性质inp是",inp, "当前变量名=",`${inspectionContent[0].items[0].names[1]}`, "只读的=",par);
     return (
       <InspectRecordTitle  control={eos}   label={'检验项目 1.4'}>
         <InspectRecordHeadColumn  level={'B'}  bigLabel={'1 技术资料'}  label={'1.4 使用资料'} tinyLabel={' 使用单位提供了以下资料：'} >
