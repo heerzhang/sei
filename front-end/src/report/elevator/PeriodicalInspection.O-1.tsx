@@ -113,7 +113,7 @@ const InternalItem1: React.RefForwardingComponent<InternalItemHandResult,Interna
         { [1].map((each, i) => {
             return (
               <React.Fragment key={i}>
-              <InputGroupLine  label='(2)安全技术档案应保存完好，至少包括： (inp?.安全档案) || '>
+              <InputGroupLine  label='(2)安全技术档案应保存完好，至少包括：(inp?.安全档案) || '>
                 <SelectHookfork value={ (inp?.[namex]) ||''}
                                 onChange={e => {
                                   inp[namex]=e.currentTarget.value||undefined;
