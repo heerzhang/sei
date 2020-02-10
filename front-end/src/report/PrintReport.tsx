@@ -121,6 +121,29 @@ const rows = [
 ];
 */
 
+//尝试通用模型作配置看看：
+export const inspectionContent=[
+  {
+    bigNo: '2',
+    bigLabel:'机房(机器设备间)及相关设备',
+    items:[
+      {
+        item:2.1,
+        label:'通道与通道门',
+        iclass:'C',
+        subItems:['(2)通道照明','']
+      },
+      {
+        item:4.3,
+        label:'通道与通道门',
+        iclass:'C',
+      }
+    ]
+  }
+];
+
+console.log("inspectionContent：捕获 ==inp=[",  inspectionContent,  "]items=", inspectionContent[0].items[0].subItems);
+
 //生成臨時2列一行儀器表
 const getInstrument = (instbl: [any]) => {
   let newT=[];

@@ -28,6 +28,8 @@ function createItem( items: string[], zoneContent: React.ReactNode) {
   return {items,  zoneContent};
 }
 
+
+
 export const TemplateView: React.RefForwardingComponent<InternalItemHandResult,TemplateViewProps>=
   React.forwardRef((
      {inp, action='None', children},   ref
@@ -61,6 +63,7 @@ export const TemplateView: React.RefForwardingComponent<InternalItemHandResult,T
             }
           </React.Fragment>
                 ,[action, clRefs]);
+
     return  recordList;
   } );
 
