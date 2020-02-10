@@ -20,6 +20,7 @@ import {  InternalItemHandResult, InternalItemProps } from "../comp/base";
 import { callSubitemChangePar, callSubitemShow, mergeSubitemRefs } from "../../utils/tools";
 import orderBy from "lodash.orderby";
 import { string } from "prop-types";
+import {inspectionContent} from "../PrintReport"
 
 
 let   id = 0;
@@ -64,6 +65,7 @@ export const TemplateView: React.RefForwardingComponent<InternalItemHandResult,T
           </React.Fragment>
                 ,[action, clRefs]);
 
+    console.log("公用配置对象 ==inspectionContent：",  inspectionContent, inspectionContent[0].items[0].names[1]);
     return  recordList;
   } );
 
