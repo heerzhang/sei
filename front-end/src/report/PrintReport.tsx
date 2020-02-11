@@ -122,6 +122,7 @@ const rows = [
 */
 
 //尝试通用模型作配置看看：
+//names是要修改并保存的控制字段，一个字段只能被一个分区项目编辑组件内操纵，多头控制只听最后那个。
 export const inspectionContent=[
   {
     bigNo: 1,

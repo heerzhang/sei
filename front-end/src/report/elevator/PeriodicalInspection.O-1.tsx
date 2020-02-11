@@ -79,6 +79,7 @@ const InternalItem1: React.RefForwardingComponent<InternalItemHandResult,Interna
     const namex=`${inspectionContent[0].items[0].names[1]}`;
     //,安全档案
     //不是配置的非动态命名的字段都可直接定义在这里，过滤par读取旧的数据。更新保存实际和这里无关。
+    //这里是要读取旧数据的但是同时是要修改并保存的字段；一个属性字段只能一个分区项目编辑组件来做保存。
     const getInpFilter = React.useCallback((par) => {
       const {登记资料,管理制度,维保合同,作业人员证,安全档案_D} =par||{};
       let fields={登记资料,管理制度,维保合同,作业人员证,安全档案_D};
@@ -87,7 +88,7 @@ const InternalItem1: React.RefForwardingComponent<InternalItemHandResult,Interna
       fields[namex] =par[namex];
       return fields;
     }, []);
-    //要更新的字段：想返回保存的必须在inp里面。不要保存的只读字段不能放在inp；只能直接从par获取了；
+    //要更新的字段：想返回保存的必须在inp里面。只读字段不能放在inp；只读属性字段只能直接从par获取了；
     const { eos, setInp, inp ,par } = useItemControlAs({ref,  filter: getInpFilter});
 
    /* React.useEffect(() => {
