@@ -95,7 +95,7 @@ export const InspectZoneHeadColumn: React.FunctionComponent<InspectZoneHeadColum
   return (
     <React.Fragment>
       <div css={{ display: 'flex', justifyContent: 'space-around'}}>
-        <Text  variant="h6">项目:{projects.join(',')}</Text>
+        <Text  variant="h6">项目: {projects.join(',')}</Text>
         <Text  variant="h6">{label}</Text>
       </div>
       {children}
@@ -350,9 +350,9 @@ export interface InternalItemHandResult {
 export interface InternalItemProps  extends React.HTMLAttributes<HTMLDivElement>{
   //par?: any;        //父组件往子组件传数据
   //show?: boolean;
-  layout?: any;     //传递一个检验项目开头流程性内容，显示的格式等。
+//  layout?: any;     //传递一个检验项目开头流程性内容，显示的格式等。
   ref?: any;
-  details?: any[];    //传递各个子项目(若没有子项目的，就算项目本身[0])的定制，测量数据细节内容。
+ // details?: any[];    //传递各个子项目(若没有子项目的，就算项目本身[0])的定制，测量数据细节内容。
 }
 //动态载入的模板组件, 所有参数都必须？可选的，否则报错。
 export interface TemplateViewProps {

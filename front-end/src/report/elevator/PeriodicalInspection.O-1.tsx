@@ -34,7 +34,7 @@ function verifyAction( action:  string, generalFormat: any[]) {
   let x=parseInt(itemNums[0]);
   let y=parseInt(itemNums[1]);
   if(generalFormat[x-1]?.items[y-1]?.procedure)
-      return {isItemNo:true, x, y};
+      return {isItemNo:true, x:x-1, y:y-1};
   else  return {isItemNo: false};
 }
 
@@ -52,7 +52,7 @@ export const TemplateView: React.RefForwardingComponent<InternalItemHandResult,T
       callSubitemChangePar(inp,  ...clRefs.current! );
     }, [inp, clRefs] );
 
-    //原始记录检验内容通用格式部分：
+    //原始记录检验内容通用格式部分：这个是可以跟随检验记录数据变化的可配置部分。
     const generalFormat= React.useMemo(() =>
      [
       {
@@ -78,46 +78,66 @@ export const TemplateView: React.RefForwardingComponent<InternalItemHandResult,T
         items:[
           {
             item:2.1,
-            procedure:
-              <InspectItemHeadColumn  level={'C'} label={'2.1 通道与通道门'}>
+            procedure: <div>
               （1）应当在任何情况下均能够安全方便地使用通道。采用梯子作为通道时，必须符合以下条件：
-              <IndentationLayText >
-                ①通往机房(机器设备间)的通道不应当高出楼梯所到平面4m；<br/>
-                ②梯子必须固定在通道上而不能被移动；<br/>
-                ③梯子高度超过1.50m时，其与水平方向的夹角应当在65°～75°之间，并不易滑动或者翻转；<br/>
-                ④靠近梯子顶端应当设置容易握到的把手。
-              </IndentationLayText>
+                <IndentationLayText >
+                  ①通往机房(机器设备间)的通道不应当高出楼梯所到平面4m；<br/>
+                  ②梯子必须固定在通道上而不能被移动；<br/>
+                  ③梯子高度超过1.50m时，其与水平方向的夹角应当在65°～75°之间，并不易滑动或者翻转；<br/>
+                  ④靠近梯子顶端应当设置容易握到的把手。
+                </IndentationLayText>
               （2）通道应当设置永久性电气照明；<br/>
               （3）机房通道门的宽度应当不小于0.60m，高度应当不小于1.80m，并且门不得向机房内开启。门应当装有带钥匙的锁，并且可以从机房内不用钥匙打开。门外侧有下述或者类似的警示标志：“电梯机器——危险 未经允许禁止入内”
-             </InspectItemHeadColumn>,
+              </div>,
             label:'通道与通道门',
             iClass:'C',
             details:[ (inp,setInp)=>{
-               return <div>
-              采用梯子作为通道时
-              <InputGroupLine label={`机房高出平面`}>
-                <SuffixInput
-                  placeholder="请输入测量数"
-                  value={ inp?.机房高出 ||''}
-                  onChange={e => setInp({ ...inp, 机房高出: e.currentTarget.value||undefined}) }
-                >m</SuffixInput>
-              </InputGroupLine>
-              <InputGroupLine label={`水平方向夹角`}>
-                <SuffixInput
-                  placeholder="请输入测量数"
-                  value={ inp?.梯子夹角 ||''}
-                  onChange={e => setInp({ ...inp, 梯子夹角: e.currentTarget.value||undefined}) }
-                >(°)</SuffixInput>
-              </InputGroupLine>
-              <InputGroupLine  label='用梯子作为通道时，测量结果判定'>
-                <SelectHookfork value={ inp?.梯子判定 ||''}
-                                onChange={e => setInp({ ...inp, 梯子判定: e.currentTarget.value||undefined}) }
-                />
-              </InputGroupLine>
-            </div>
+               return <div>采用梯子作为通道时
+                  <InputGroupLine label={`机房高出平面`}>
+                    <SuffixInput
+                      placeholder="请输入测量数"
+                      value={ inp?.机房高出 ||''}
+                      onChange={e => setInp({ ...inp, 机房高出: e.currentTarget.value||undefined}) }
+                    >m</SuffixInput>
+                  </InputGroupLine>
+                  <InputGroupLine label={`水平方向夹角`}>
+                    <SuffixInput
+                      placeholder="请输入测量数"
+                      value={ inp?.梯子夹角 ||''}
+                      onChange={e => setInp({ ...inp, 梯子夹角: e.currentTarget.value||undefined}) }
+                    >(°)</SuffixInput>
+                  </InputGroupLine>
+                  <InputGroupLine  label='用梯子作为通道时，测量结果判定'>
+                    <SelectHookfork value={ inp?.梯子判定 ||''}
+                                    onChange={e => setInp({ ...inp, 梯子判定: e.currentTarget.value||undefined}) }
+                    />
+                  </InputGroupLine>
+               </div>
               },
               '',
-              '(3)通道门'
+              (inp,setInp)=>{
+                return  <div>机房通道门
+                  <InputGroupLine label={`宽度`}>
+                    <SuffixInput
+                      placeholder="请输入测量数"
+                      value={ inp?.通道门宽 ||''}
+                      onChange={e => setInp({ ...inp, 通道门宽: e.currentTarget.value||undefined}) }
+                    >m</SuffixInput>
+                      </InputGroupLine>
+                      <InputGroupLine label={`高度`}>
+                    <SuffixInput
+                      placeholder="请输入测量数"
+                      value={ inp?.通道门高 ||''}
+                      onChange={e => setInp({ ...inp, 通道门高: e.currentTarget.value||undefined}) }
+                    >m</SuffixInput>
+                      </InputGroupLine>
+                      <InputGroupLine  label='机房通道门的测量结果判定'>
+                        <SelectHookfork value={ inp?.通道判定 ||''}
+                      onChange={e => setInp({ ...inp, 通道判定: e.currentTarget.value||undefined}) }
+                      />
+                    </InputGroupLine>
+                </div>
+              }
             ],
             names:['通道设置','通道照明','通道门']
           },
@@ -534,10 +554,14 @@ export const TemplateView: React.RefForwardingComponent<InternalItemHandResult,T
           <React.Fragment>
             {
                projectList.map((each, i) => {
-                 const itemView =React.cloneElement(each.zoneContent as React.ReactElement<any>, {
+                 const itemView= isItemNo? <ItemUniversal key={i} ref={clRefs.current![i]}  x={x}  y={y}
+                                             procedure={generalFormat[x].items[y].procedure}  details={generalFormat[x].items[y].details}
+                   />
+                   :
+                 React.cloneElement(each.zoneContent as React.ReactElement<any>, {
                    ref: clRefs.current![i],
-                   layout: generalFormat[1].items[0].procedure,
-                   details: generalFormat[1].items[0].details,
+                   //procedure: generalFormat[1].items[0].procedure,
+                   //details: generalFormat[1].items[0].details,
                    key: i
                  });
 
@@ -2412,53 +2436,73 @@ const ItemGapMeasure: React.RefForwardingComponent<InternalItemHandResult,Intern
     );
   } );
 
+export interface ItemUniversalProps  extends React.HTMLAttributes<HTMLDivElement>{
+  //检验项目配置对象标准的索引.[x].[y] ； 这里x是大项目；y是检验项目{还可拆分成几个更小项目的}。比如对应action="2.1"就是x=1,y=0的配置。
+  x: number;
+  y: number;
+  ref?: any;
+  procedure?: any;     //传递一个检验项目开头流程性内容，显示的格式等。
+  details?: any[];    //传递各个子项目(若没有子项目的，就算项目本身[0])的定制，测量数据细节内容。
+}
 //引进Render Props模式提高复用能力 { details[0](inp,setInp)  }；就可以配置成通用的组件。
-const ItemUniversal: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+const ItemUniversal: React.RefForwardingComponent<InternalItemHandResult,ItemUniversalProps>=
   React.forwardRef((
-    { children, layout, details },  ref
+    { children, procedure, details, x, y },  ref
   ) => {
     const getInpFilter = React.useCallback((par) => {
-      const {} =par||{};
+      //const {} =par||{};
       let fields={};
       //配置动态命名的字段获取旧的值，还想保存修改数据，还要界面同步显示变化数值的场景，就按这里做法。
       fields[namex] =par[namex];
       fields[namexD] =par[namexD];
-      inspectionContent[1].items[0].addNames.forEach(name=>
+      inspectionContent[x].items[y].addNames.forEach(name=>
         fields[name] =par[name]
       );
       return fields;
     }, []);
     const { eos, setInp, inp ,par } = useItemControlAs({ref,  filter: getInpFilter});
-    const namex =`${inspectionContent[1].items[0].names[0]}`;
-    const namexD =`${inspectionContent[1].items[0].names[0]}_D`;
+    const namex =`${inspectionContent[x].items[y].names[0]}`;
+    const namexD =`${inspectionContent[x].items[y].names[0]}_D`;
 
 
-    console.log("通用检验内容部件：",  inspectionContent[1], "procedure:", inspectionContent[1].items[0].names, "namex=",namex);
+    console.log("通用检验内容部件：",  inspectionContent[x], "procedure:", inspectionContent[x].items[y].names, "namex=",namex);
     return (
-      <InspectRecordTitle  control={eos}   label={'试验 8.10-13'}>
-        <InspectZoneHeadColumn label={'8 试验'} projects={['8.10','8.11','8.12','8.13']} />
-        <InspectItemHeadColumn  level={'B'} label={'8.10 上行制动工况曳引检查'}>
-          {layout}
-        </InspectItemHeadColumn>
-        {
-          details[0](inp,setInp)
-        }
+      <React.Fragment>
+        <div css={{ display: 'flex', justifyContent: 'space-around'}}>
+          <Text  variant="h6">检验项目: {`${x+1}.${y+1}`}</Text>
+          <Text  variant="h6">{`${x+1} ${inspectionContent[x].bigLabel}`}</Text>
+        </div>
+        <div css={{ display: 'flex',justifyContent: 'space-around',marginTop:'0.5rem'}}>
+          <Text  variant="h6">{`${x+1}.${y+1} ${inspectionContent[x].items[y].label}`}</Text>
+          <Text  variant="h6">检验类别 {`${inspectionContent[x].items[y].iClass}`}  </Text>
+        </div>
+        <hr/>
+        {procedure}
+        <Text  variant="h5"　>
+          查验结果
+        </Text>
+        {inspectionContent[x].items[y].subItems?.map((a,i)=>{
+          return <React.Fragment key={i}>
+            {details[i] && details[i](inp,setInp)}
+            <InputGroupLine  label={inspectionContent[x].items[y].subItems[i]}>
+              <SelectHookfork value={ (inp?.[namex]) ||''}  onChange={e => {
+                inp[namex]=e.currentTarget.value||undefined;
+                setInp({ ...inp});
+              } }
+              />
+            </InputGroupLine>
+            <InputGroupLine label='描述或问题'>
+              <Input value={ (inp?.[namexD]) ||''}  onChange={e => {
+                inp[namexD]=e.currentTarget.value||undefined;
+                setInp({ ...inp});
+              } }
+              />
+            </InputGroupLine>
+          </React.Fragment>;
+        }) }
 
-        <InputGroupLine  label={inspectionContent[1].items[0].subItems[0]}>
-          <SelectHookfork value={ (inp?.[namex]) ||''}  onChange={e => {
-                            inp[namex]=e.currentTarget.value||undefined;
-                            setInp({ ...inp});
-                          } }
-          />
-        </InputGroupLine>
-        <InputGroupLine label='描述或问题'>
-          <Input value={ (inp?.[namexD]) ||''}  onChange={e => {
-                        inp[namexD]=e.currentTarget.value||undefined;
-                        setInp({ ...inp});
-                      } }
-          />
-        </InputGroupLine>
-      </InspectRecordTitle>
+
+      </React.Fragment>
     );
   } );
 
@@ -2470,7 +2514,7 @@ const projectList = [
   /*createItem(['LinkMan'], <ItemLinkManTel/>),
   createItem(['1.4'], <InternalItem1/>),
   */
-  createItem(['2.1','2.5','2.6'], <ItemUniversal/>),
+  createItem(['2.1','2.5','2.6'], <ItemUniversal x={1} y={0}/>),
   /*createItem(['2.7'], <InternalItem5/>),
   createItem(['2.8'], <InternalItem2d8/>),
   createItem(['2.9','2.10','2.11'], <InternalItem2d9/>),
