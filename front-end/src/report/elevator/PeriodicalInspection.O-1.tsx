@@ -52,12 +52,14 @@ export const TemplateView: React.RefForwardingComponent<InternalItemHandResult,T
         bigLabel:'技术资料',
         cutLines:[5],
         items:[
+          {},{},{},
           {
             item:1.4,
             label:'使用资料',
             iClass:'B',
             subItems:['(1)使用登记资料','(2)安全技术档案','(3)管理规章制度','(4)日常维护保养合同','(5)特种设备作业人员证'],
-            names:['登记资料','安全档案','管理制度','维保合同','作业人员证']
+            names:['登记资料','安全档案','管理制度','维保合同','作业人员证'],
+            details:[]
           }
         ]
       },
@@ -68,55 +70,100 @@ export const TemplateView: React.RefForwardingComponent<InternalItemHandResult,T
         items:[
           {
             item:2.1,
+            procedure:
+              <InspectItemHeadColumn  level={'C'} label={'2.1 通道与通道门'}>
+              （1）应当在任何情况下均能够安全方便地使用通道。采用梯子作为通道时，必须符合以下条件：
+              <IndentationLayText >
+                ①通往机房(机器设备间)的通道不应当高出楼梯所到平面4m；<br/>
+                ②梯子必须固定在通道上而不能被移动；<br/>
+                ③梯子高度超过1.50m时，其与水平方向的夹角应当在65°～75°之间，并不易滑动或者翻转；<br/>
+                ④靠近梯子顶端应当设置容易握到的把手。
+              </IndentationLayText>
+              （2）通道应当设置永久性电气照明；<br/>
+              （3）机房通道门的宽度应当不小于0.60m，高度应当不小于1.80m，并且门不得向机房内开启。门应当装有带钥匙的锁，并且可以从机房内不用钥匙打开。门外侧有下述或者类似的警示标志：“电梯机器——危险 未经允许禁止入内”
+             </InspectItemHeadColumn>,
             label:'通道与通道门',
             iClass:'C',
-            subItems:['(1)通道设置','(2)通道照明','(3)通道门'],
+            details:[ (inp,setInp)=>{
+               return <div>
+              采用梯子作为通道时
+              <InputGroupLine label={`机房高出平面`}>
+                <SuffixInput
+                  placeholder="请输入测量数"
+                  value={ inp?.机房高出 ||''}
+                  onChange={e => setInp({ ...inp, 机房高出: e.currentTarget.value||undefined}) }
+                >m</SuffixInput>
+              </InputGroupLine>
+              <InputGroupLine label={`水平方向夹角`}>
+                <SuffixInput
+                  placeholder="请输入测量数"
+                  value={ inp?.梯子夹角 ||''}
+                  onChange={e => setInp({ ...inp, 梯子夹角: e.currentTarget.value||undefined}) }
+                >(°)</SuffixInput>
+              </InputGroupLine>
+              <InputGroupLine  label='用梯子作为通道时，测量结果判定'>
+                <SelectHookfork value={ inp?.梯子判定 ||''}
+                                onChange={e => setInp({ ...inp, 梯子判定: e.currentTarget.value||undefined}) }
+                />
+              </InputGroupLine>
+            </div>
+              },
+              '',
+              '(3)通道门'
+            ],
             names:['通道设置','通道照明','通道门']
           },
           {
             item:2.5,
             label:'(1)照明、照明开关',
             iClass:'C',
-            names:['机房照明']
+            names:['机房照明'],
+            details:[]
           },
           {
             item:2.6,
             label:'(2)主开关与照明等电路的控制关系',
             iClass:'B',
-            names:['开关电路关系']
+            names:['开关电路关系'],
+            details:[]
           },
           {
             item:2.7,
             label:'驱动主机',
             iClass:'B',
             subItems:['(2)工作状况','(3)轮槽磨损','(4)制动器动作情况','★(5)手动紧急操作装置'],
-            names:['主机工况','轮槽磨损','制动器','手动紧急操作']
+            names:['主机工况','轮槽磨损','制动器','手动紧急操作'],
+            details:[]
           },
           {
             item:2.8,
             label:'控制柜、紧急操作和动态测试装置',
             iClass:'B',
             subItems:['(2)断错相保护','(4)紧急电动运行装置','☆(6)层门和轿门旁路装置','☆(7)门回路检测功能','☆(8)制动器故障保护','☆(9)自动救援操作装置'],
-            names:['错相保护','紧急电动','门旁路','门回路','制动故障保护','自动救援']
+            names:['错相保护','紧急电动','门旁路','门回路','制动故障保护','自动救援'],
+            details:[]
           },
           {
             item:2.9,
             label:'限速器',
             iClass:'B',
             subItems:['(2)电气安全装置','(3)封记及运转情况','(4)动作速度校验'],
-            names:['限速器电安','封记','速度校验']
+            names:['限速器电安','封记','速度校验'],
+            details:[]
           },
           {
             item:2.10,
             label:'(2)接地连接',
             iClass:'C',
-            names:['接地连接']
+            names:['接地连接'],
+            details:[]
           },
           {
             item:2.11,
             label:'电气绝缘',
             iClass:'C',
-            names:['绝缘判定']
+            names:['绝缘判定'],
+            details:[]
           }
         ]
       },
@@ -130,52 +177,60 @@ export const TemplateView: React.RefForwardingComponent<InternalItemHandResult,T
             label:'井道安全门',
             iClass:'C',
             subItems:['(3)门锁','(4)电气安全装置'],
-            names:['安全门门锁','安全门电安']
+            names:['安全门门锁','安全门电安'],
+            details:[]
           },
           {
             item:3.5,
             label:'井道检修门',
             iClass:'C',
             subItems:['(3)门锁','(4)电气安全装置'],
-            names:['检修门门锁','检修门电安']
+            names:['检修门门锁','检修门电安'],
+            details:[]
           },
           {
             item:3.7,
             label:'轿厢与井道壁距离',
             iClass:'B',
-            names:['轿井距离判定']
+            names:['轿井距离判定'],
+            details:[]
           },
           {
             item:3.10,
             label:'极限开关',
             iClass:'B',
-            names:['极限开关']
+            names:['极限开关'],
+            details:[]
           },
           {
             item:3.11,
             label:'井道照明',
             iClass:'C',
-            names:['井道照明']
+            names:['井道照明'],
+            details:[]
           },
           {
             item:3.12,
             label:'底坑设施与装置',
             iClass:'C',
             subItems:['(1)底坑底部','(3)停止装置'],
-            names:['底坑底部','停止装置']
+            names:['底坑底部','停止装置'],
+            details:[]
           },
           {
             item:3.14,
             label:'(2)限速绳张紧装置的电气安全装置',
             iClass:'B',
-            names:['限速绳电安']
+            names:['限速绳电安'],
+            details:[]
           },
           {
             item:3.15,
             label:'缓冲器',
             iClass:'B',
             subItems:['(3)固定和完好情况','(4)液位和电气安全装置','(5)对重越程距离'],
-            names:['缓冲器固定','液位电安','对重越程判定']
+            names:['缓冲器固定','液位电安','对重越程判定'],
+            details:[]
           },
         ]
       },
@@ -189,45 +244,52 @@ export const TemplateView: React.RefForwardingComponent<InternalItemHandResult,T
             label:'轿顶电气装置',
             iClass:'C',
             subItems:['(1)检修装置','(2)停止装置'],
-            names:['检修装置','轿顶停止装置']
+            names:['检修装置','轿顶停止装置'],
+            details:[]
           },
           {
             item:4.3,
             label:'(3)安全门(窗)电气安全装置',
             iClass:'C',
-            names:['安全窗门']
+            names:['安全窗门'],
+            details:[]
           },
           {
             item:4.5,
             label:'对重(平衡重)块',
             iClass:'B',
             subItems:['(1)固定','(2)识别数量的措施'],
-            names:['对重固定','识别数量']
+            names:['对重固定','识别数量'],
+            details:[]
           },
           {
             item:4.6,
             label:'(2)轿厢超面积载货电梯的控制条件',
             iClass:'C',
-            names:['超面积载货']
+            names:['超面积载货'],
+            details:[]
           },
           {
             item:4.8,
             label:'紧急照明和报警装置',
             iClass:'B',
             subItems:['(1)紧急照明','(2)紧急报警装置'],
-            names:['紧急照明','报警装置']
+            names:['紧急照明','报警装置'],
+            details:[]
           },
           {
             item:4.9,
             label:'地坎护脚板',
             iClass:'C',
-            names:['护脚板']
+            names:['护脚板'],
+            details:[]
           },
           {
             item:4.10,
             label:'超载保护装置',
             iClass:'C',
-            names:['超载保护']
+            names:['超载保护'],
+            details:[]
           }
         ]
       },
@@ -240,32 +302,37 @@ export const TemplateView: React.RefForwardingComponent<InternalItemHandResult,T
             item:5.1,
             label:'悬挂装置、补偿装置的磨损、断丝、变形等情况',
             iClass:'C',
-            names:['磨损变形']
+            names:['磨损变形'],
+            details:[]
           },
           {
             item:5.2,
             label:'绳端固定',
             iClass:'C',
-            names:['绳端固定']
+            names:['绳端固定'],
+            details:[]
           },
           {
             item:5.3,
             label:'补偿装置',
             iClass:'C',
             subItems:['(1)绳(链)端固定','(2)电气安全装置','(3)补偿绳防跳装置'],
-            names:['补偿绳固定','补偿绳电安','补偿绳防跳']
+            names:['补偿绳固定','补偿绳电安','补偿绳防跳'],
+            details:[]
           },
           {
             item:5.5,
             label:'松绳(链)保护',
             iClass:'B',
-            names:['松绳保护']
+            names:['松绳保护'],
+            details:[]
           },
           {
             item:5.6,
             label:'旋转部件的防护',
             iClass:'C',
-            names:['旋转部件']
+            names:['旋转部件'],
+            details:[]
           },
         ]
       },
@@ -279,64 +346,74 @@ export const TemplateView: React.RefForwardingComponent<InternalItemHandResult,T
             label:'门间隙',
             iClass:'C',
             subItems:['(1)门扇间隙','(2)人力施加在最不利点时间隙'],
-            names:['门扇间隙','最不利隙']
+            names:['门扇间隙','最不利隙'],
+            details:[]
           },
           {
             item:6.4,
             label:'玻璃门防拖曳措施',
             iClass:'C',
-            names:['玻门防拖曳']
+            names:['玻门防拖曳'],
+            details:[]
           },
           {
             item:6.5,
             label:'防止门夹人的保护装置',
             iClass:'B',
-            names:['门夹人']
+            names:['门夹人'],
+            details:[]
           },
           {
             item:6.6,
             label:'门的运行与导向',
             iClass:'B',
-            names:['门运行']
+            names:['门运行'],
+            details:[]
           },
           {
             item:6.7,
             label:'自动关闭层门装置',
             iClass:'B',
-            names:['自动关门']
+            names:['自动关门'],
+            details:[]
           },
           {
             item:6.8,
             label:'紧急开锁装置',
             iClass:'B',
-            names:['紧急开锁']
+            names:['紧急开锁'],
+            details:[]
           },
           {
             item:6.9,
             label:'门的锁紧',
             iClass:'B',
             subItems:['(1)层门门锁装置[不含6.9(1)①]','(2)轿门门锁装置[不含6.9(1)①]'],
-            names:['层门锁','轿门锁']
+            names:['层门锁','轿门锁'],
+            details:[]
           },
           {
             item:6.10,
             label:'门的闭合',
             iClass:'B',
             subItems:['(1)机电联锁','(2)电气安全装置'],
-            names:['机电联锁','门闭合电安']
+            names:['机电联锁','门闭合电安'],
+            details:[]
           },
           {
             item:6.11,
             label:'☆轿门开门限制装置及轿门的开启',
             iClass:'B',
             subItems:['(1)轿门开门限制装置','(2)轿门的开启'],
-            names:['开门限制','门开启']
+            names:['开门限制','门开启'],
+            details:[]
           },
           {
             item:6.12,
             label:'门刀、门锁滚轮与地坎间隙',
             iClass:'C',
-            names:['刀轮地隙']
+            names:['刀轮地隙'],
+            details:[]
           }
         ]
       },
@@ -350,52 +427,60 @@ export const TemplateView: React.RefForwardingComponent<InternalItemHandResult,T
             item:8.1,
             label:'平衡系数试验',
             iClass:'C',
-            names:['平衡系数']
+            names:['平衡系数'],
+            details:[]
           },
           {
             item:8.2,
             label:'★轿厢上行超速保护装置试验',
             iClass:'C',
-            names:['超速保护']
+            names:['超速保护'],
+            details:[]
           },
           {
             item:8.3,
             label:'☆轿厢意外移动保护装置试验',
             iClass:'B',
             subItems:['(1)制停情况','(2)自监测功能'],
-            names:['制停情况','自监测']
+            names:['制停情况','自监测'],
+            details:[]
           },
           {
             item:8.4,
             label:'轿厢限速器－安全钳试验',
             iClass:'B',
-            names:['限速安全钳']
+            names:['限速安全钳'],
+            details:[]
           },
           {
             item:8.5,
             label:'对重(平衡重)限速器—安全钳试验',
             iClass:'B',
-            names:['对重限速试验']
+            names:['对重限速试验'],
+            details:[]
           },
           {
             item:8.6,
             label:'运行试验',
             iClass:'C',
-            names:['运行试验']
+            names:['运行试验'],
+            details:[]
           },
           {
             item:8.7,
             label:'应急救援试验',
             iClass:'B',
             subItems:['(1)救援程序','(2)救援通道','(3)救援操作'],
-            names:['救援程序','救援通道','救援操作']
+            names:['救援程序','救援通道','救援操作'],
+            details:[]
           },
           {},
           {
             item:8.9,
             label:'空载曳引检查',
             iClass:'B',
-            names:['空载曳引']
+            names:['空载曳引'],
+            details:[]
           },
           {
             item:8.10,
@@ -403,27 +488,31 @@ export const TemplateView: React.RefForwardingComponent<InternalItemHandResult,T
             iClass:'B',
             names:['上行制动'],
             procedure: <p> （1）轿厢空载以<span>正常运行速度
-                  </span>上行至行程上部，<br/> 切断电动机与制动器供电，轿厢
+                  </span>上行至行程上部，<br/> 切断电动机与制动器供电，轿厢<ItemLinkManTel/>
               <br/>应当完全停止
-            </p>
+            </p>,
+            details:[]
           },
           {
             item:8.11,
             label:'▲下行制动工况曳引检查',
             iClass:'B',
-            names:['下行制动']
+            names:['下行制动'],
+            details:[]
           },
           {
             item:8.12,
             label:'▲静态曳引试验',
             iClass:'B',
-            names:['静态曳引']
+            names:['静态曳引'],
+            details:[]
           },
           {
             item:8.13,
             label:'制动试验',
             iClass:'B',
-            names:['制动试验']
+            names:['制动试验'],
+            details:[]
           }
         ]
       }
@@ -436,7 +525,8 @@ export const TemplateView: React.RefForwardingComponent<InternalItemHandResult,T
                projectList.map((each, i) => {
                  const itemView =React.cloneElement(each.zoneContent as React.ReactElement<any>, {
                    ref: clRefs.current![i],
-                   layout: generalFormat[7].items[9].procedure,
+                   layout: generalFormat[1].items[0].procedure,
+                   details: generalFormat[1].items[0].details,
                    key: i
                  });
 
@@ -451,7 +541,7 @@ export const TemplateView: React.RefForwardingComponent<InternalItemHandResult,T
           </React.Fragment>
                 ,[action, clRefs]);
 
-   // console.log("公用配置对象 ==inspectionContent：",  inspectionContent, inspectionContent[0].items[0].names[1]);
+    console.log("公用配置对象 ==generalFormat：",  generalFormat, generalFormat[0].items[0]);
     return  recordList;
   } );
 
@@ -1005,6 +1095,7 @@ const InternalItem2t4: React.RefForwardingComponent<InternalItemHandResult,Inter
          （2）通道应当设置永久性电气照明；<br/>
          （3）机房通道门的宽度应当不小于0.60m，高度应当不小于1.80m，并且门不得向机房内开启。门应当装有带钥匙的锁，并且可以从机房内不用钥匙打开。门外侧有下述或者类似的警示标志：“电梯机器——危险 未经允许禁止入内”
         </InspectItemHeadColumn>
+        <div>
         采用梯子作为通道时
         <InputGroupLine label={`机房高出平面`}>
           <SuffixInput
@@ -1025,6 +1116,7 @@ const InternalItem2t4: React.RefForwardingComponent<InternalItemHandResult,Inter
                           onChange={e => setInp({ ...inp, 梯子判定: e.currentTarget.value||undefined}) }
           />
         </InputGroupLine>
+        </div>
         <InputGroupLine  label='(1)通道设置'>
           <SelectHookfork value={ inp?.通道设置 ||''}
                           onChange={e => setInp({ ...inp, 通道设置: e.currentTarget.value||undefined}) }
@@ -2312,7 +2404,7 @@ const ItemGapMeasure: React.RefForwardingComponent<InternalItemHandResult,Intern
 
 const ItemUniversal: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
   React.forwardRef((
-    { children, layout },  ref
+    { children, layout, details },  ref
   ) => {
     const getInpFilter = React.useCallback((par) => {
       const {} =par||{};
@@ -2332,6 +2424,10 @@ const ItemUniversal: React.RefForwardingComponent<InternalItemHandResult,Interna
         <InspectItemHeadColumn  level={'B'} label={'8.10 上行制动工况曳引检查'}>
           {layout}
         </InspectItemHeadColumn>
+        {
+          details[0](inp,setInp)
+        }
+
         <InputGroupLine  label={inspectionContent[7].items[9].label}>
           <SelectHookfork value={ (inp?.[namex]) ||''}  onChange={e => {
                             inp[namex]=e.currentTarget.value||undefined;
@@ -2352,10 +2448,13 @@ const ItemUniversal: React.RefForwardingComponent<InternalItemHandResult,Interna
 
 
 //項目標記符列表：不能用的ALL None zoneContent保留字；
+//可以考虑createItem这里Itemxx后面可以简化些通用性质组件只需要参数就搞定。
+//generalFormat配置里面设置，要不要特殊化，要不要从createItem/projectList提取特别定制版本的组件。
 const projectList = [
   createItem(['LinkMan'], <ItemLinkManTel/>),
   createItem(['1.4'], <InternalItem1/>),
-  createItem(['2.1','2.5','2.6'], <InternalItem2t4/>),
+  //createItem(['2.1','2.5','2.6'], <InternalItem2t4/>),
+  createItem(['2.1','2.5','2.6'], <ItemUniversal/>),
   createItem(['2.7'], <InternalItem5/>),
   createItem(['2.8'], <InternalItem2d8/>),
   createItem(['2.9','2.10','2.11'], <InternalItem2d9/>),
