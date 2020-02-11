@@ -182,6 +182,7 @@ useRef() 比 ref={ref} 更有用。当ref.current发生变化时useRef不会通�
 Hooks的调用只能放在function component(首字母大写的function),const()=>{}或自定义Hook(名为useXxxx的function)中。
 用React.memo来实现shouldComponentUpdate的替代const Xxxx=React.memo((props) => { }); 子组件memo后父组件就没必要再搞memo。
 死循环useEffect(()=>{ setInterval(() => { setCount(}, ) }, [count]); 放setTimeout/Interval/回调函数做就能解除死循环！
+副作用钩子 useEffect[]   (,)第二参数null是每次都要做的， 第二参数若是[]数组的就是只做一次的。
 Failed to compile.编译错误了，客户端没报错，这时前端可正常运行错误代码。若前端服务器关机，浏览器照样可以请求后端服务器，前端代码已经加载部分页面都能正常运作。
 
 装载后不在需要更新的testRenderLoad= React.useMemo(() =><TestRenderLoad/>,[ ] );就基本不会对后续操作性能添堵的，多次render重新来也能保持TestRenderLoad无负担的。

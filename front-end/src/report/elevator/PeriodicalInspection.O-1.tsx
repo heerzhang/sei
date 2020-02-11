@@ -72,12 +72,10 @@ export const TemplateView: React.RefForwardingComponent<InternalItemHandResult,T
         ]
       },
       {
-        bigNo: 2,
-        bigLabel:'机房(机器设备间)及相关设备',
-        cutLines:[10,11],
+        //bigNo: 2,
         items:[
           {
-            item:2.1,
+            //item:2.1,
             procedure: <div>
               （1）应当在任何情况下均能够安全方便地使用通道。采用梯子作为通道时，必须符合以下条件：
                 <IndentationLayText >
@@ -89,10 +87,9 @@ export const TemplateView: React.RefForwardingComponent<InternalItemHandResult,T
               （2）通道应当设置永久性电气照明；<br/>
               （3）机房通道门的宽度应当不小于0.60m，高度应当不小于1.80m，并且门不得向机房内开启。门应当装有带钥匙的锁，并且可以从机房内不用钥匙打开。门外侧有下述或者类似的警示标志：“电梯机器——危险 未经允许禁止入内”
               </div>,
-            label:'通道与通道门',
-            iClass:'C',
             details:[ (inp,setInp)=>{
-               return <div>采用梯子作为通道时
+                return <React.Fragment>
+                     采用梯子作为通道时
                   <InputGroupLine label={`机房高出平面`}>
                     <SuffixInput
                       placeholder="请输入测量数"
@@ -112,11 +109,12 @@ export const TemplateView: React.RefForwardingComponent<InternalItemHandResult,T
                                     onChange={e => setInp({ ...inp, 梯子判定: e.currentTarget.value||undefined}) }
                     />
                   </InputGroupLine>
-               </div>
+                </React.Fragment>
               },
               '',
               (inp,setInp)=>{
-                return  <div>机房通道门
+                return  <React.Fragment>
+                     机房通道门
                   <InputGroupLine label={`宽度`}>
                     <SuffixInput
                       placeholder="请输入测量数"
@@ -136,10 +134,9 @@ export const TemplateView: React.RefForwardingComponent<InternalItemHandResult,T
                       onChange={e => setInp({ ...inp, 通道判定: e.currentTarget.value||undefined}) }
                       />
                     </InputGroupLine>
-                </div>
+                </React.Fragment>
               }
-            ],
-            names:['通道设置','通道照明','通道门']
+            ]
           },
           {
             item:2.5,
@@ -576,7 +573,7 @@ export const TemplateView: React.RefForwardingComponent<InternalItemHandResult,T
           </React.Fragment>
                 ,[action, clRefs]);
 
-    console.log("公用配置对象 ==generalFormat：",  generalFormat, generalFormat[0].items[0]);
+    console.log("公用配置对象--isItemNo=",isItemNo,"x=", x,"y=",y, generalFormat, "inspectionContent=", inspectionContent);
     return  recordList;
   } );
 
@@ -2325,9 +2322,10 @@ const ItemAppendixB: React.RefForwardingComponent<InternalItemHandResult,Interna
     );
   } );
 
+//提供給6.3 6.9 6.12項目公用的部分。
 const ItemGapMeasure: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
   React.forwardRef((
-    props:{ children },  ref
+    { children },  ref
   ) => {
     const getInpFilter = React.useCallback((par) => {
       const {层站,门扇隙,门套隙,地坎隙,施力隙,门锁啮长,刀坎距,轮坎距,门扇间隙,最不利隙,层门锁,轿门锁,刀轮地隙} =par||{};
@@ -2436,43 +2434,44 @@ const ItemGapMeasure: React.RefForwardingComponent<InternalItemHandResult,Intern
     );
   } );
 
+//检验项目的标准化展示组件
 export interface ItemUniversalProps  extends React.HTMLAttributes<HTMLDivElement>{
   //检验项目配置对象标准的索引.[x].[y] ； 这里x是大项目；y是检验项目{还可拆分成几个更小项目的}。比如对应action="2.1"就是x=1,y=0的配置。
   x: number;
   y: number;
   ref?: any;
   procedure?: any;     //传递一个检验项目开头流程性内容，显示的格式等。
-  details?: any[];    //传递各个子项目(若没有子项目的，就算项目本身[0])的定制，测量数据细节内容。
+  details?: any[];     //传递各个子项目(若没有子项目的，就算项目本身[0])的定制，测量数据细节内容。
 }
 //引进Render Props模式提高复用能力 { details[0](inp,setInp)  }；就可以配置成通用的组件。
 const ItemUniversal: React.RefForwardingComponent<InternalItemHandResult,ItemUniversalProps>=
   React.forwardRef((
     { children, procedure, details, x, y },  ref
   ) => {
+    console.log("通用检验内容部件 x=", x,"y=",y, inspectionContent[x], "details=", details);
     const getInpFilter = React.useCallback((par) => {
       //const {} =par||{};
       let fields={};
       //配置动态命名的字段获取旧的值，还想保存修改数据，还要界面同步显示变化数值的场景，就按这里做法。
-      fields[namex] =par[namex];
-      fields[namexD] =par[namexD];
+      inspectionContent[x].items[y].names?.map((aName,i)=> {
+        const namexD = `${aName}_D`;
+        fields[aName] =par[aName];
+        fields[namexD] =par[namexD];
+      });
       inspectionContent[x].items[y].addNames.forEach(name=>
         fields[name] =par[name]
       );
       return fields;
     }, []);
     const { eos, setInp, inp ,par } = useItemControlAs({ref,  filter: getInpFilter});
-    const namex =`${inspectionContent[x].items[y].names[0]}`;
-    const namexD =`${inspectionContent[x].items[y].names[0]}_D`;
 
-
-    console.log("通用检验内容部件：",  inspectionContent[x], "procedure:", inspectionContent[x].items[y].names, "namex=",namex);
     return (
       <React.Fragment>
         <div css={{ display: 'flex', justifyContent: 'space-around'}}>
           <Text  variant="h6">检验项目: {`${x+1}.${y+1}`}</Text>
           <Text  variant="h6">{`${x+1} ${inspectionContent[x].bigLabel}`}</Text>
         </div>
-        <div css={{ display: 'flex',justifyContent: 'space-around',marginTop:'0.5rem'}}>
+        <div css={{ display: 'flex',justifyContent: 'space-around'}}>
           <Text  variant="h6">{`${x+1}.${y+1} ${inspectionContent[x].items[y].label}`}</Text>
           <Text  variant="h6">检验类别 {`${inspectionContent[x].items[y].iClass}`}  </Text>
         </div>
@@ -2482,6 +2481,8 @@ const ItemUniversal: React.RefForwardingComponent<InternalItemHandResult,ItemUni
           查验结果
         </Text>
         {inspectionContent[x].items[y].subItems?.map((a,i)=>{
+          const namex =`${inspectionContent[x].items[y].names[i]}`;
+          const namexD =`${inspectionContent[x].items[y].names[i]}_D`;
           return <React.Fragment key={i}>
             {details[i] && details[i](inp,setInp)}
             <InputGroupLine  label={inspectionContent[x].items[y].subItems[i]}>
@@ -2514,7 +2515,9 @@ const projectList = [
   /*createItem(['LinkMan'], <ItemLinkManTel/>),
   createItem(['1.4'], <InternalItem1/>),
   */
-  createItem(['2.1','2.5','2.6'], <ItemUniversal x={1} y={0}/>),
+  createItem(['2.1','2.5','2.6'], <InternalItem2t4/>),
+  //createItem(['2.1','2.5','2.6'], <ItemUniversal x={1} y={0}/>),
+  createItem(['gap'], <ItemGapMeasure/>),
   /*createItem(['2.7'], <InternalItem5/>),
   createItem(['2.8'], <InternalItem2d8/>),
   createItem(['2.9','2.10','2.11'], <InternalItem2d9/>),
@@ -2526,7 +2529,6 @@ const projectList = [
   createItem(['5.1','5.2'], <InternalItem25/>),
   createItem(['5.3','5.5','5.6'], <InternalItem27/>),
 
-  createItem(['gap'], <ItemGapMeasure/>),
   createItem(['6.3','6.9','6.12'], <InternalItem6d3/>),
   createItem(['6.4','6.5','6.6','6.7'], <InternalItem31/>),
   createItem(['6.8','6.10','6.11'], <InternalItem35/>),
@@ -2542,6 +2544,6 @@ const projectList = [
   */
 ];
 
-//createItem(['2.1','2.5','2.6'], <InternalItem2t4/>),
+
 //'附录A 层门间隙、啮合长度' 这7个测量数据，单独放一个编辑组件。而原本'6.3','6.9','6.12'只读和跳转连接。
 //createItem(['8.10','8.11','8.12','8.13'], <InternalItem8d10/>),

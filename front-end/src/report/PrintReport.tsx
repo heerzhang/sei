@@ -184,7 +184,7 @@ export const inspectionContent=[
         addNames:[]
       },
       {
-        item:2.9,
+        //item:2.9,
         label:'限速器',
         iClass:'B',
         subItems:['(2)电气安全装置','(3)封记及运转情况','(4)动作速度校验'],
@@ -192,14 +192,14 @@ export const inspectionContent=[
         addNames:[]
       },
       {
-        item:2.10,
+        //2.10,
         label:'(2)接地连接',
         iClass:'C',
         names:['接地连接'],
         addNames:[]
       },
       {
-        item:2.11,
+        //item:2.11,
         label:'电气绝缘',
         iClass:'C',
         names:['绝缘判定'],
