@@ -28,7 +28,15 @@ const genId = () => ++id;
 function createItem( items: string[], zoneContent: React.ReactNode) {
   return {items,  zoneContent};
 }
-
+function verifyAction( action:  string, generalFormat: any[]) {
+  let itemNums=action.split(".");
+  if(itemNums.length!==2)   return {isItemNo: false};
+  let x=parseInt(itemNums[0]);
+  let y=parseInt(itemNums[1]);
+  if(generalFormat[x-1]?.items[y-1]?.procedure)
+      return {isItemNo:true, x, y};
+  else  return {isItemNo: false};
+}
 
 export const TemplateView: React.RefForwardingComponent<InternalItemHandResult,TemplateViewProps>=
   React.forwardRef((
@@ -518,6 +526,9 @@ export const TemplateView: React.RefForwardingComponent<InternalItemHandResult,T
       }
     ]
         ,[inp]);
+
+
+    const {isItemNo, x, y} =verifyAction(action,generalFormat);
 
     const recordList= React.useMemo(() =>
           <React.Fragment>
@@ -2401,7 +2412,7 @@ const ItemGapMeasure: React.RefForwardingComponent<InternalItemHandResult,Intern
     );
   } );
 
-
+//引进Render Props模式提高复用能力 { details[0](inp,setInp)  }；就可以配置成通用的组件。
 const ItemUniversal: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
   React.forwardRef((
     { children, layout, details },  ref
@@ -2412,12 +2423,17 @@ const ItemUniversal: React.RefForwardingComponent<InternalItemHandResult,Interna
       //配置动态命名的字段获取旧的值，还想保存修改数据，还要界面同步显示变化数值的场景，就按这里做法。
       fields[namex] =par[namex];
       fields[namexD] =par[namexD];
+      inspectionContent[1].items[0].addNames.forEach(name=>
+        fields[name] =par[name]
+      );
       return fields;
     }, []);
-    const { eos, setInp, inp } = useItemControlAs({ref,  filter: getInpFilter});
-    const namex =`${inspectionContent[7].items[9].names[0]}`;
-    const namexD =`${inspectionContent[7].items[9].names[0]}_D`;
-    console.log("通用检验内容部件：",  children, "procedure:", layout);
+    const { eos, setInp, inp ,par } = useItemControlAs({ref,  filter: getInpFilter});
+    const namex =`${inspectionContent[1].items[0].names[0]}`;
+    const namexD =`${inspectionContent[1].items[0].names[0]}_D`;
+
+
+    console.log("通用检验内容部件：",  inspectionContent[1], "procedure:", inspectionContent[1].items[0].names, "namex=",namex);
     return (
       <InspectRecordTitle  control={eos}   label={'试验 8.10-13'}>
         <InspectZoneHeadColumn label={'8 试验'} projects={['8.10','8.11','8.12','8.13']} />
@@ -2428,7 +2444,7 @@ const ItemUniversal: React.RefForwardingComponent<InternalItemHandResult,Interna
           details[0](inp,setInp)
         }
 
-        <InputGroupLine  label={inspectionContent[7].items[9].label}>
+        <InputGroupLine  label={inspectionContent[1].items[0].subItems[0]}>
           <SelectHookfork value={ (inp?.[namex]) ||''}  onChange={e => {
                             inp[namex]=e.currentTarget.value||undefined;
                             setInp({ ...inp});
@@ -2451,11 +2467,11 @@ const ItemUniversal: React.RefForwardingComponent<InternalItemHandResult,Interna
 //可以考虑createItem这里Itemxx后面可以简化些通用性质组件只需要参数就搞定。
 //generalFormat配置里面设置，要不要特殊化，要不要从createItem/projectList提取特别定制版本的组件。
 const projectList = [
-  createItem(['LinkMan'], <ItemLinkManTel/>),
+  /*createItem(['LinkMan'], <ItemLinkManTel/>),
   createItem(['1.4'], <InternalItem1/>),
-  //createItem(['2.1','2.5','2.6'], <InternalItem2t4/>),
+  */
   createItem(['2.1','2.5','2.6'], <ItemUniversal/>),
-  createItem(['2.7'], <InternalItem5/>),
+  /*createItem(['2.7'], <InternalItem5/>),
   createItem(['2.8'], <InternalItem2d8/>),
   createItem(['2.9','2.10','2.11'], <InternalItem2d9/>),
   createItem(['3.4','3.5','3.7'], <InternalItem3d4/>),
@@ -2465,19 +2481,23 @@ const projectList = [
   createItem(['4.8','4.9','4.10'], <InternalItem22/>),
   createItem(['5.1','5.2'], <InternalItem25/>),
   createItem(['5.3','5.5','5.6'], <InternalItem27/>),
-  //'附录A 层门间隙、啮合长度' 这7个测量数据，单独放一个编辑组件。而原本'6.3','6.9','6.12'只读和跳转连接。
+
   createItem(['gap'], <ItemGapMeasure/>),
   createItem(['6.3','6.9','6.12'], <InternalItem6d3/>),
   createItem(['6.4','6.5','6.6','6.7'], <InternalItem31/>),
   createItem(['6.8','6.10','6.11'], <InternalItem35/>),
   createItem(['8.1','8.2','8.3','8.4'], <InternalItem8d1/>),
   createItem(['8.5','8.6','8.7','8.9'], <InternalItem8d5/>),
-  //createItem(['8.10','8.11','8.12','8.13'], <InternalItem8d10/>),
+
   createItem(['8.10','8.11','8.12','8.13'], <ItemUniversal/>),
   createItem(['Instrument'], <ItemInstrumentTable/>),
   createItem(['ReCheck'], <ItemRecheckResult/>),
   createItem(['Appendix'], <ItemAppendixB/>),
   createItem(['Remark'], <ItemRemarks/>),
   createItem(['Conclusion'], <ItemConclusion/>)
+  */
 ];
 
+//createItem(['2.1','2.5','2.6'], <InternalItem2t4/>),
+//'附录A 层门间隙、啮合长度' 这7个测量数据，单独放一个编辑组件。而原本'6.3','6.9','6.12'只读和跳转连接。
+//createItem(['8.10','8.11','8.12','8.13'], <InternalItem8d10/>),
