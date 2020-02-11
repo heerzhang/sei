@@ -122,6 +122,7 @@ const rows = [
 */
 
 //尝试通用模型作配置看看：
+//item:8.10, item:8.1, 看起来是数字的一样！非字符串啊；
 //names是要修改并保存的控制字段，一个字段只能被一个分区项目编辑组件内操纵，多头控制只听最后那个。
 export const inspectionContent=[
   {
@@ -417,6 +418,7 @@ export const inspectionContent=[
       }
     ]
   },
+  {},
   {
     bigNo: 8,
     bigLabel:'试验',
@@ -466,6 +468,7 @@ export const inspectionContent=[
         subItems:['(1)救援程序','(2)救援通道','(3)救援操作'],
         names:['救援程序','救援通道','救援操作']
       },
+      {},
       {
         item:8.9,
         label:'空载曳引检查',

@@ -30,7 +30,6 @@ function createItem( items: string[], zoneContent: React.ReactNode) {
 }
 
 
-
 export const TemplateView: React.RefForwardingComponent<InternalItemHandResult,TemplateViewProps>=
   React.forwardRef((
      {inp, action='None', children},   ref
@@ -42,24 +41,408 @@ export const TemplateView: React.RefForwardingComponent<InternalItemHandResult,T
     React.useEffect(() => {
       callSubitemChangePar(inp,  ...clRefs.current! );
     }, [inp, clRefs] );
+
+    //原始记录检验内容通用格式部分：
+    const generalFormat= React.useMemo(() =>
+     [
+      {
+        bigNo: 1,
+        bigLabel:'技术资料',
+        cutLines:[5],
+        items:[
+          {
+            item:1.4,
+            label:'使用资料',
+            iClass:'B',
+            subItems:['(1)使用登记资料','(2)安全技术档案','(3)管理规章制度','(4)日常维护保养合同','(5)特种设备作业人员证'],
+            names:['登记资料','安全档案','管理制度','维保合同','作业人员证']
+          }
+        ]
+      },
+      {
+        bigNo: 2,
+        bigLabel:'机房(机器设备间)及相关设备',
+        cutLines:[10,11],
+        items:[
+          {
+            item:2.1,
+            label:'通道与通道门',
+            iClass:'C',
+            subItems:['(1)通道设置','(2)通道照明','(3)通道门'],
+            names:['通道设置','通道照明','通道门']
+          },
+          {
+            item:2.5,
+            label:'(1)照明、照明开关',
+            iClass:'C',
+            names:['机房照明']
+          },
+          {
+            item:2.6,
+            label:'(2)主开关与照明等电路的控制关系',
+            iClass:'B',
+            names:['开关电路关系']
+          },
+          {
+            item:2.7,
+            label:'驱动主机',
+            iClass:'B',
+            subItems:['(2)工作状况','(3)轮槽磨损','(4)制动器动作情况','★(5)手动紧急操作装置'],
+            names:['主机工况','轮槽磨损','制动器','手动紧急操作']
+          },
+          {
+            item:2.8,
+            label:'控制柜、紧急操作和动态测试装置',
+            iClass:'B',
+            subItems:['(2)断错相保护','(4)紧急电动运行装置','☆(6)层门和轿门旁路装置','☆(7)门回路检测功能','☆(8)制动器故障保护','☆(9)自动救援操作装置'],
+            names:['错相保护','紧急电动','门旁路','门回路','制动故障保护','自动救援']
+          },
+          {
+            item:2.9,
+            label:'限速器',
+            iClass:'B',
+            subItems:['(2)电气安全装置','(3)封记及运转情况','(4)动作速度校验'],
+            names:['限速器电安','封记','速度校验']
+          },
+          {
+            item:2.10,
+            label:'(2)接地连接',
+            iClass:'C',
+            names:['接地连接']
+          },
+          {
+            item:2.11,
+            label:'电气绝缘',
+            iClass:'C',
+            names:['绝缘判定']
+          }
+        ]
+      },
+      {
+        bigNo: 3,
+        bigLabel:'井道及相关设备',
+        cutLines:[6,7],
+        items:[
+          {
+            item:3.4,
+            label:'井道安全门',
+            iClass:'C',
+            subItems:['(3)门锁','(4)电气安全装置'],
+            names:['安全门门锁','安全门电安']
+          },
+          {
+            item:3.5,
+            label:'井道检修门',
+            iClass:'C',
+            subItems:['(3)门锁','(4)电气安全装置'],
+            names:['检修门门锁','检修门电安']
+          },
+          {
+            item:3.7,
+            label:'轿厢与井道壁距离',
+            iClass:'B',
+            names:['轿井距离判定']
+          },
+          {
+            item:3.10,
+            label:'极限开关',
+            iClass:'B',
+            names:['极限开关']
+          },
+          {
+            item:3.11,
+            label:'井道照明',
+            iClass:'C',
+            names:['井道照明']
+          },
+          {
+            item:3.12,
+            label:'底坑设施与装置',
+            iClass:'C',
+            subItems:['(1)底坑底部','(3)停止装置'],
+            names:['底坑底部','停止装置']
+          },
+          {
+            item:3.14,
+            label:'(2)限速绳张紧装置的电气安全装置',
+            iClass:'B',
+            names:['限速绳电安']
+          },
+          {
+            item:3.15,
+            label:'缓冲器',
+            iClass:'B',
+            subItems:['(3)固定和完好情况','(4)液位和电气安全装置','(5)对重越程距离'],
+            names:['缓冲器固定','液位电安','对重越程判定']
+          },
+        ]
+      },
+      {
+        bigNo: 4,
+        bigLabel:'轿厢与对重',
+        cutLines:[10],
+        items:[
+          {
+            item:4.1,
+            label:'轿顶电气装置',
+            iClass:'C',
+            subItems:['(1)检修装置','(2)停止装置'],
+            names:['检修装置','轿顶停止装置']
+          },
+          {
+            item:4.3,
+            label:'(3)安全门(窗)电气安全装置',
+            iClass:'C',
+            names:['安全窗门']
+          },
+          {
+            item:4.5,
+            label:'对重(平衡重)块',
+            iClass:'B',
+            subItems:['(1)固定','(2)识别数量的措施'],
+            names:['对重固定','识别数量']
+          },
+          {
+            item:4.6,
+            label:'(2)轿厢超面积载货电梯的控制条件',
+            iClass:'C',
+            names:['超面积载货']
+          },
+          {
+            item:4.8,
+            label:'紧急照明和报警装置',
+            iClass:'B',
+            subItems:['(1)紧急照明','(2)紧急报警装置'],
+            names:['紧急照明','报警装置']
+          },
+          {
+            item:4.9,
+            label:'地坎护脚板',
+            iClass:'C',
+            names:['护脚板']
+          },
+          {
+            item:4.10,
+            label:'超载保护装置',
+            iClass:'C',
+            names:['超载保护']
+          }
+        ]
+      },
+      {
+        bigNo: 5,
+        bigLabel:'悬挂装置、补偿装置及旋转部件防护',
+        cutLines:[7],
+        items:[
+          {
+            item:5.1,
+            label:'悬挂装置、补偿装置的磨损、断丝、变形等情况',
+            iClass:'C',
+            names:['磨损变形']
+          },
+          {
+            item:5.2,
+            label:'绳端固定',
+            iClass:'C',
+            names:['绳端固定']
+          },
+          {
+            item:5.3,
+            label:'补偿装置',
+            iClass:'C',
+            subItems:['(1)绳(链)端固定','(2)电气安全装置','(3)补偿绳防跳装置'],
+            names:['补偿绳固定','补偿绳电安','补偿绳防跳']
+          },
+          {
+            item:5.5,
+            label:'松绳(链)保护',
+            iClass:'B',
+            names:['松绳保护']
+          },
+          {
+            item:5.6,
+            label:'旋转部件的防护',
+            iClass:'C',
+            names:['旋转部件']
+          },
+        ]
+      },
+      {
+        bigNo: 6,
+        bigLabel:'轿门与层门',
+        cutLines:[7,7],
+        items:[
+          {
+            item:6.3,
+            label:'门间隙',
+            iClass:'C',
+            subItems:['(1)门扇间隙','(2)人力施加在最不利点时间隙'],
+            names:['门扇间隙','最不利隙']
+          },
+          {
+            item:6.4,
+            label:'玻璃门防拖曳措施',
+            iClass:'C',
+            names:['玻门防拖曳']
+          },
+          {
+            item:6.5,
+            label:'防止门夹人的保护装置',
+            iClass:'B',
+            names:['门夹人']
+          },
+          {
+            item:6.6,
+            label:'门的运行与导向',
+            iClass:'B',
+            names:['门运行']
+          },
+          {
+            item:6.7,
+            label:'自动关闭层门装置',
+            iClass:'B',
+            names:['自动关门']
+          },
+          {
+            item:6.8,
+            label:'紧急开锁装置',
+            iClass:'B',
+            names:['紧急开锁']
+          },
+          {
+            item:6.9,
+            label:'门的锁紧',
+            iClass:'B',
+            subItems:['(1)层门门锁装置[不含6.9(1)①]','(2)轿门门锁装置[不含6.9(1)①]'],
+            names:['层门锁','轿门锁']
+          },
+          {
+            item:6.10,
+            label:'门的闭合',
+            iClass:'B',
+            subItems:['(1)机电联锁','(2)电气安全装置'],
+            names:['机电联锁','门闭合电安']
+          },
+          {
+            item:6.11,
+            label:'☆轿门开门限制装置及轿门的开启',
+            iClass:'B',
+            subItems:['(1)轿门开门限制装置','(2)轿门的开启'],
+            names:['开门限制','门开启']
+          },
+          {
+            item:6.12,
+            label:'门刀、门锁滚轮与地坎间隙',
+            iClass:'C',
+            names:['刀轮地隙']
+          }
+        ]
+      },
+      {},
+      {
+        bigNo: 8,
+        bigLabel:'试验',
+        cutLines:[7,8],
+        items:[
+          {
+            item:8.1,
+            label:'平衡系数试验',
+            iClass:'C',
+            names:['平衡系数']
+          },
+          {
+            item:8.2,
+            label:'★轿厢上行超速保护装置试验',
+            iClass:'C',
+            names:['超速保护']
+          },
+          {
+            item:8.3,
+            label:'☆轿厢意外移动保护装置试验',
+            iClass:'B',
+            subItems:['(1)制停情况','(2)自监测功能'],
+            names:['制停情况','自监测']
+          },
+          {
+            item:8.4,
+            label:'轿厢限速器－安全钳试验',
+            iClass:'B',
+            names:['限速安全钳']
+          },
+          {
+            item:8.5,
+            label:'对重(平衡重)限速器—安全钳试验',
+            iClass:'B',
+            names:['对重限速试验']
+          },
+          {
+            item:8.6,
+            label:'运行试验',
+            iClass:'C',
+            names:['运行试验']
+          },
+          {
+            item:8.7,
+            label:'应急救援试验',
+            iClass:'B',
+            subItems:['(1)救援程序','(2)救援通道','(3)救援操作'],
+            names:['救援程序','救援通道','救援操作']
+          },
+          {},
+          {
+            item:8.9,
+            label:'空载曳引检查',
+            iClass:'B',
+            names:['空载曳引']
+          },
+          {
+            item:8.10,
+            label:'上行制动工况曳引检查',
+            iClass:'B',
+            names:['上行制动'],
+            procedure: <p> （1）轿厢空载以<span>正常运行速度
+                  </span>上行至行程上部，<br/> 切断电动机与制动器供电，轿厢
+              <br/>应当完全停止
+            </p>
+          },
+          {
+            item:8.11,
+            label:'▲下行制动工况曳引检查',
+            iClass:'B',
+            names:['下行制动']
+          },
+          {
+            item:8.12,
+            label:'▲静态曳引试验',
+            iClass:'B',
+            names:['静态曳引']
+          },
+          {
+            item:8.13,
+            label:'制动试验',
+            iClass:'B',
+            names:['制动试验']
+          }
+        ]
+      }
+    ]
+        ,[inp]);
+
     const recordList= React.useMemo(() =>
           <React.Fragment>
             {
                projectList.map((each, i) => {
+                 const itemView =React.cloneElement(each.zoneContent as React.ReactElement<any>, {
+                   ref: clRefs.current![i],
+                   key: i
+                 });
+
                  if(each.items.indexOf(action)>=0 || action==='ALL')
-                     return  React.cloneElement(each.zoneContent as React.ReactElement<any>, {
-                        ref: clRefs.current![i],
-                        key: i
-                      });
+                     return  itemView;
                   else
                     return <div key={i} css={{display:'none'}}>
-                     {
-                       React.cloneElement(each.zoneContent as React.ReactElement<any>, {
-                         ref: clRefs.current![i],
-                         key: i
-                       })
-                     }
-                    </div>;
+                           {itemView}
+                        </div>;
                 })
             }
           </React.Fragment>
@@ -1812,6 +2195,159 @@ const ItemAppendixB: React.RefForwardingComponent<InternalItemHandResult,Interna
     );
   } );
 
+const ItemGapMeasure: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+  React.forwardRef((
+    props:{ children },  ref
+  ) => {
+    const getInpFilter = React.useCallback((par) => {
+      const {层站,门扇隙,门套隙,地坎隙,施力隙,门锁啮长,刀坎距,轮坎距,门扇间隙,最不利隙,层门锁,轿门锁,刀轮地隙} =par||{};
+      return {层站,门扇隙,门套隙,地坎隙,施力隙,门锁啮长,刀坎距,轮坎距,门扇间隙,最不利隙,层门锁,轿门锁,刀轮地隙};
+    }, []);
+    const { eos, setInp, inp } = useItemControlAs({ref,  filter: getInpFilter});
+    const theme = useTheme();
+    const [floor, setFloor] = React.useState(null);
+    const cAppendix =useCollapse(true,true);
+    let  toothUnquf=inp?.层站?.find((f,i)=>{
+      return parseFloat(inp?.门锁啮长?.[f])<7;
+    });
+    let  knifeUnquf=inp?.层站?.find((f,i)=>{
+      return parseFloat(inp?.刀坎距?.[f])<5;
+    });
+    let  rollerUnquf=inp?.层站?.find((f,i)=>{
+      return parseFloat(inp?.轮坎距?.[f])<5;
+    });
+
+    return (
+      <InspectRecordTitle  control={cAppendix} label={'附录A 层门间隙、啮合长度'}>
+        <div>
+          已检记录,每层七个尺寸:
+          {inp?.层站?.map((a,i)=>{
+            return <React.Fragment key={i}>
+              <br/>{
+              `[${a}]层: ${inp?.门扇隙?.[a]||''} , ${inp?.门套隙?.[a]||''} , ${inp?.地坎隙?.[a]||''} , ${inp?.施力隙?.[a]||''} , ${inp?.门锁啮长?.[a]||''} , ${inp?.刀坎距?.[a]||''} , ${inp?.轮坎距?.[a]||''};`
+            }
+            </React.Fragment>;
+          }) }
+        </div>
+        新增检查=>
+        <InputGroupLine  label='首先设置当前层站号'>
+          <SuffixInput
+            value={floor||''}
+            onChange={e => {setFloor( e.currentTarget.value) }}
+          >
+            <Button onPress={() =>floor&&(inp?.层站?.includes(floor)? null:
+                setInp( (inp?.层站&&{...inp,层站:[...inp?.层站,floor] } )
+                  || {...inp,层站:[floor] } )
+            )}
+            >新增</Button>
+          </SuffixInput>
+        </InputGroupLine>
+        <div css={{ textAlign: 'center' }}>
+          <Button css={{ marginTop: theme.spaces.sm }} size="sm"
+                  onPress={() => floor&&inp?.层站?.includes(floor) &&(
+                    setInp({...inp,层站:[...inp.层站.filter(a => a!==floor )],
+                      门扇隙:{...inp?.门扇隙,[floor]:undefined}, 门套隙:{...inp?.门套隙,[floor]:undefined}, 地坎隙:{...inp?.地坎隙,[floor]:undefined}
+                      , 施力隙:{...inp?.施力隙,[floor]:undefined}, 门锁啮长:{...inp?.门锁啮长,[floor]:undefined}, 刀坎距:{...inp?.刀坎距,[floor]:undefined}
+                      , 轮坎距:{...inp?.轮坎距,[floor]:undefined}
+                    })
+                  )}
+          >刪除该层</Button>
+        </div>
+        <InputGroupLine label={`层门门扇间间隙(层号 ${floor}):`}>
+          <SuffixInput
+            placeholder="请输入测量数"
+            value={ (inp?.门扇隙?.[floor] ) || ''}
+            onChange={e => floor&&setInp({ ...inp, 门扇隙:{...inp?.门扇隙,[floor]:e.currentTarget.value||undefined} }) }
+          >mm</SuffixInput>
+        </InputGroupLine>
+        <InputGroupLine label={`层门门扇与门套间隙(层号 ${floor}):`}>
+          <SuffixInput
+            placeholder="请输入测量数"
+            value={ (inp?.门套隙?.[floor] ) || ''}
+            onChange={e => floor&&setInp({ ...inp, 门套隙:{...inp?.门套隙,[floor]:e.currentTarget.value||undefined} }) }
+          >mm</SuffixInput>
+        </InputGroupLine>
+        <InputGroupLine label={`层门扇与地坎间隙(层号 ${floor}):`}>
+          <SuffixInput
+            placeholder="请输入测量数"
+            value={ (inp?.地坎隙?.[floor] ) || ''}
+            onChange={e => floor&&setInp({ ...inp, 地坎隙:{...inp?.地坎隙,[floor]:e.currentTarget.value||undefined} }) }
+          >mm</SuffixInput>
+        </InputGroupLine>
+        <InputGroupLine label={`层门扇间施力间隙(层号 ${floor}):`}>
+          <SuffixInput
+            placeholder="请输入测量数"
+            value={ (inp?.施力隙?.[floor] ) || ''}
+            onChange={e => floor&&setInp({ ...inp, 施力隙:{...inp?.施力隙,[floor]:e.currentTarget.value||undefined} }) }
+          >mm</SuffixInput>
+        </InputGroupLine>
+        <InputGroupLine label={`门锁啮合长度(层号 ${floor}):`}>
+          <SuffixInput
+            placeholder="请输入测量数"
+            value={ (inp?.门锁啮长?.[floor] ) || ''}
+            onChange={e => floor&&setInp({ ...inp, 门锁啮长:{...inp?.门锁啮长,[floor]:e.currentTarget.value||undefined} }) }
+          >mm</SuffixInput>
+        </InputGroupLine>
+        <InputGroupLine label={`轿门门刀与层门地坎间距(层号 ${floor}):`}>
+          <SuffixInput
+            placeholder="请输入测量数"
+            value={ (inp?.刀坎距?.[floor] ) || ''}
+            onChange={e => floor&&setInp({ ...inp, 刀坎距:{...inp?.刀坎距,[floor]:e.currentTarget.value||undefined} }) }
+          >mm</SuffixInput>
+        </InputGroupLine>
+        <InputGroupLine label={`门锁滚轮与轿门地坎间距(层号 ${floor}):`}>
+          <SuffixInput
+            placeholder="请输入测量数"
+            value={ (inp?.轮坎距?.[floor] ) || ''}
+            onChange={e => floor&&setInp({ ...inp, 轮坎距:{...inp?.轮坎距,[floor]:e.currentTarget.value||undefined} }) }
+          >mm</SuffixInput>
+        </InputGroupLine>
+      </InspectRecordTitle>
+    );
+  } );
+
+
+const ItemUniversal: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+  React.forwardRef((
+    props:{ children },  ref
+  ) => {
+    const getInpFilter = React.useCallback((par) => {
+      const {} =par||{};
+      let fields={};
+      //配置动态命名的字段获取旧的值，还想保存修改数据，还要界面同步显示变化数值的场景，就按这里做法。
+      fields[namex] =par[namex];
+      fields[namexD] =par[namexD];
+      return fields;
+    }, []);
+    const { eos, setInp, inp } = useItemControlAs({ref,  filter: getInpFilter});
+    const namex =`${inspectionContent[7].items[9].names[0]}`;
+    const namexD =`${inspectionContent[7].items[9].names[0]}_D`;
+    console.log("通用检验内容部件：",  generalFormat, "procedure:", generalFormat[7].items[9].procedure);
+    return (
+      <InspectRecordTitle  control={eos}   label={'试验 8.10-13'}>
+        <InspectZoneHeadColumn label={'8 试验'} projects={['8.10','8.11','8.12','8.13']} />
+        <InspectItemHeadColumn  level={'B'} label={'8.10 上行制动工况曳引检查'}>
+          {generalFormat[7].items[9].procedure}
+        </InspectItemHeadColumn>
+        <InputGroupLine  label={inspectionContent[7].items[9].label}>
+          <SelectHookfork value={ (inp?.[namex]) ||''}  onChange={e => {
+                            inp[namex]=e.currentTarget.value||undefined;
+                            setInp({ ...inp});
+                          } }
+          />
+        </InputGroupLine>
+        <InputGroupLine label='描述或问题'>
+          <Input value={ (inp?.[namexD]) ||''}  onChange={e => {
+                        inp[namexD]=e.currentTarget.value||undefined;
+                        setInp({ ...inp});
+                      } }
+          />
+        </InputGroupLine>
+      </InspectRecordTitle>
+    );
+  } );
+
+
 //項目標記符列表：不能用的ALL None zoneContent保留字；
 const projectList = [
   createItem(['LinkMan'], <ItemLinkManTel/>),
@@ -1827,12 +2363,15 @@ const projectList = [
   createItem(['4.8','4.9','4.10'], <InternalItem22/>),
   createItem(['5.1','5.2'], <InternalItem25/>),
   createItem(['5.3','5.5','5.6'], <InternalItem27/>),
+  //'附录A 层门间隙、啮合长度' 这7个测量数据，单独放一个编辑组件。而原本'6.3','6.9','6.12'只读和跳转连接。
+  createItem(['gap'], <ItemGapMeasure/>),
   createItem(['6.3','6.9','6.12'], <InternalItem6d3/>),
   createItem(['6.4','6.5','6.6','6.7'], <InternalItem31/>),
   createItem(['6.8','6.10','6.11'], <InternalItem35/>),
   createItem(['8.1','8.2','8.3','8.4'], <InternalItem8d1/>),
   createItem(['8.5','8.6','8.7','8.9'], <InternalItem8d5/>),
-  createItem(['8.10','8.11','8.12','8.13'], <InternalItem8d10/>),
+  //createItem(['8.10','8.11','8.12','8.13'], <InternalItem8d10/>),
+  createItem(['8.10','8.11','8.12','8.13'], <ItemUniversal/>),
   createItem(['Instrument'], <ItemInstrumentTable/>),
   createItem(['ReCheck'], <ItemRecheckResult/>),
   createItem(['Appendix'], <ItemAppendixB/>),
