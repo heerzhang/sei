@@ -35,6 +35,8 @@ export const TemplateView: React.RefForwardingComponent<InternalItemHandResult,T
      {inp, action='None', children},   ref
   ) => {
     const clRefs =useProjectListAs({count: projectList.length});
+    //? 单个项目独立保存可行吗，　非要全部都来，　项目全部显示时刻就不能修改保存了。?
+    //同名字的字段：清除／整体清空／单项目独立保存＋合并。
     const outCome=mergeSubitemRefs( ...clRefs.current! );
     React.useImperativeHandle( ref,() => ({ inp: outCome }), [outCome] );
 
