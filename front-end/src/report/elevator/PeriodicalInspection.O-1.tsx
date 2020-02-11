@@ -78,17 +78,18 @@ const InternalItem1: React.RefForwardingComponent<InternalItemHandResult,Interna
   ) => {
     const namex=`${inspectionContent[0].items[0].names[1]}`;
     //,安全档案
+    //不是配置的非动态命名的字段都可直接定义在这里，过滤par读取旧的数据。更新保存实际和这里无关。
     const getInpFilter = React.useCallback((par) => {
       const {登记资料,管理制度,维保合同,作业人员证,安全档案_D} =par||{};
       return {登记资料,管理制度,维保合同,作业人员证,安全档案_D};
     }, []);
-    //inp=要想返回保存的必须在inp里面。不要保存的只读字段不能放在inp，只能直接从par获取了；
+    //要更新的字段：想返回保存的必须在inp里面。不要保存的只读字段不能放在inp；只能直接从par获取了；
     const { eos, setInp, inp ,par } = useItemControlAs({ref,  filter: getInpFilter});
-
+    //配置动态命名的字段获取旧的值，还想保存修改数据，还要界面同步显示变化数值的场景，就按这里做法。
     React.useEffect(() => {
       if(inp){
         inp[namex] =par[namex];
-        //动态添加可以保存的变量名。
+        //动态添加可以保存的变量名。 【关键差别】动态变量名无法享受静态代码写入的变量名的这点的便利性。
         setInp({ ...inp});
       }
     }, [par] );
