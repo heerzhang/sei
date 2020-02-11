@@ -434,6 +434,7 @@ export const TemplateView: React.RefForwardingComponent<InternalItemHandResult,T
                projectList.map((each, i) => {
                  const itemView =React.cloneElement(each.zoneContent as React.ReactElement<any>, {
                    ref: clRefs.current![i],
+                   layout: generalFormat[7].items[9].procedure,
                    key: i
                  });
 
@@ -2309,7 +2310,7 @@ const ItemGapMeasure: React.RefForwardingComponent<InternalItemHandResult,Intern
 
 const ItemUniversal: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
   React.forwardRef((
-    props:{ children },  ref
+    { children, layout },  ref
   ) => {
     const getInpFilter = React.useCallback((par) => {
       const {} =par||{};
@@ -2322,12 +2323,12 @@ const ItemUniversal: React.RefForwardingComponent<InternalItemHandResult,Interna
     const { eos, setInp, inp } = useItemControlAs({ref,  filter: getInpFilter});
     const namex =`${inspectionContent[7].items[9].names[0]}`;
     const namexD =`${inspectionContent[7].items[9].names[0]}_D`;
-    console.log("通用检验内容部件：",  generalFormat, "procedure:", generalFormat[7].items[9].procedure);
+    console.log("通用检验内容部件：",  children, "procedure:", layout);
     return (
       <InspectRecordTitle  control={eos}   label={'试验 8.10-13'}>
         <InspectZoneHeadColumn label={'8 试验'} projects={['8.10','8.11','8.12','8.13']} />
         <InspectItemHeadColumn  level={'B'} label={'8.10 上行制动工况曳引检查'}>
-          {generalFormat[7].items[9].procedure}
+          {layout}
         </InspectItemHeadColumn>
         <InputGroupLine  label={inspectionContent[7].items[9].label}>
           <SelectHookfork value={ (inp?.[namex]) ||''}  onChange={e => {

@@ -350,6 +350,7 @@ export interface InternalItemHandResult {
 export interface InternalItemProps  extends React.HTMLAttributes<HTMLDivElement>{
   //par?: any;        //父组件往子组件传数据
   //show?: boolean;
+  layout?: any;   //传递显示的格式内容文本等。
   ref?: any;
 }
 //动态载入的模板组件, 所有参数都必须？可选的，否则报错。
