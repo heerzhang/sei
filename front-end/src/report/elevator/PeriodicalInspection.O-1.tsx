@@ -21,6 +21,7 @@ import { callSubitemChangePar, callSubitemShow, mergeSubitemRefs } from "../../u
 import orderBy from "lodash.orderby";
 import { string } from "prop-types";
 import {inspectionContent} from "../PrintReport"
+import { Link as RouterLink } from "wouter";
 
 
 let   id = 0;
@@ -542,7 +543,7 @@ export const TemplateView: React.RefForwardingComponent<InternalItemHandResult,T
         ]
       }
     ]
-        ,[inp]);
+        ,[]);
 
 
     const {isItemNo, x, y} =verifyAction(action,generalFormat);
@@ -569,25 +570,52 @@ export const TemplateView: React.RefForwardingComponent<InternalItemHandResult,T
                         </div>;
                 })
               */
-           if(action==='2.1'){ return
+            let resView;
+           if(action==='2.1'){ resView=
               <React.Fragment>
-                  <ItemUniversal key={i} ref={clRefs.current![i]}  x={x}  y={y}
+                  <ItemUniversal key={0} ref={clRefs.current![0]}  x={x}  y={y}
                   procedure={generalFormat[x].items[y].procedure}  details={generalFormat[x].items[y].details}
                   />
+                <div key={1} css={{display:'none'}}>
+                  {
+                    [1].map((each, i) => {
+                      return React.cloneElement(projectList[1].zoneContent as React.ReactElement<any>, {
+                        ref: clRefs.current![1],
+                        key: i
+                      });
+                    })
+                  }
+                </div>
               </React.Fragment>;
            }
-            else if(action==='gap'){ return
-              React.cloneElement(each.zoneContent as React.ReactElement<any>, {
-                ref: clRefs.current![i],
-                //procedure: generalFormat[1].items[0].procedure,
-                //details: generalFormat[1].items[0].details,
-                key: i
-              });
+            else if(action==='gap'){
+             // x=1; y=0;
+              resView=
+               <React.Fragment>
+                 <div key={2} css={{display:'none'}}>
+                     <ItemUniversal key={0} ref={clRefs.current![0]}  x={1}  y={0}
+                                    procedure={generalFormat[1].items[0].procedure}  details={generalFormat[1].items[0].details}
+                     />
+                 </div>
+                 {
+                   [1].map((each, i) => {
+                     return React.cloneElement(projectList[1].zoneContent as React.ReactElement<any>, {
+                       ref: clRefs.current![1],
+                       key: i
+                     });
+                   })
+                 }
+             </React.Fragment>;
             }
-            }
-                ,[action, clRefs]);
+            else resView= <div key={0}>
+               士大夫辜负了所发生的
+             </div>;
+            return  resView;
+          }
+                ,[action, clRefs ,generalFormat,x,y]);
 
     console.log("公用配置对象--isItemNo=",isItemNo,"x=", x,"y=",y, generalFormat, "inspectionContent=", inspectionContent);
+    console.log("公用配置对象--action=",action,"recordList=", recordList);
     return  recordList;
   } );
 
@@ -2361,6 +2389,8 @@ const ItemGapMeasure: React.RefForwardingComponent<InternalItemHandResult,Intern
 
     return (
       <InspectRecordTitle  control={cAppendix} label={'附录A 层门间隙、啮合长度'}>
+
+        <RouterLink key={99} to={`/report/item/2.1/227/EL-DJ/ver/1`}>
         <div>
           已检记录,每层七个尺寸:
           {inp?.层站?.map((a,i)=>{
@@ -2372,6 +2402,9 @@ const ItemGapMeasure: React.RefForwardingComponent<InternalItemHandResult,Intern
           }) }
         </div>
         新增检查=>
+
+        </RouterLink>
+
         <InputGroupLine  label='首先设置当前层站号'>
           <SuffixInput
             value={floor||''}
@@ -2491,9 +2524,14 @@ const ItemUniversal: React.RefForwardingComponent<InternalItemHandResult,ItemUni
         </div>
         <hr/>
         {procedure}
+
+        <RouterLink key={99} to={`/report/item/gap/227/EL-DJ/ver/1`}>
         <Text  variant="h5"　>
           查验结果
         </Text>
+        </RouterLink>
+
+
         {inspectionContent[x].items[y].subItems?.map((a,i)=>{
           const namex =`${inspectionContent[x].items[y].names[i]}`;
           const namexD =`${inspectionContent[x].items[y].names[i]}_D`;

@@ -229,5 +229,8 @@ localhost:9229
 
 <MenuItem 按钮会经常被unmount场景需要用onClick；而onPress在手机完全正常。 Can't perform a React state update on an unmounted    in MenuItem
 <Popover 用onClick正常；<ResponsivePopover 用onClick在手机上不能正常；MenuItem出问题！
-泪奔node_modules直接拷贝目录的工程更换了没修改，还是win10快捷目录，疼啊！
+泪奔node_modules直接拷贝目录的工程更换了没修改，还是win10快捷目录！
+单ISP对应多个报告亦即多个原始记录；而单个原始记录存储json数据体量估算不算太大；在线实时性质的保存互动，有多少制约要考虑折衷，需减少保存次数的需求（服务器能力/处理延迟）。
+用户交互和认知机制，保存，默认方式，2个层次的存储概念？，多出一个用户编辑状态管理？ 繁琐/容易出现用户操作错误。
+路由模式切换页面，很可能不会触发去后端服务器获取数据的请求包。
 

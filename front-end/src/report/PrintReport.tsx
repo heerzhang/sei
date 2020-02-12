@@ -1716,6 +1716,17 @@ export const PrintReport: React.FunctionComponent<PrintReportProps> = ({
               );
             })
             }
+
+
+            <TableRow>
+              <CCell component="th" scope="row">{99}</CCell>
+              <RouterLink key={99} to={`/report/item/gap/227/EL-DJ/ver/1`}>
+              <CCell>gap</CCell>
+              <CCell>{'实验GAP'}</CCell>
+            </RouterLink>
+              <CCell>ahshd的话as</CCell>
+              <CCell>发了的方式</CCell>
+            </TableRow>
           </TableBody>
         </Table>
       </div>
