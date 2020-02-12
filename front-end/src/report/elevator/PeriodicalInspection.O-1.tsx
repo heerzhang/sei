@@ -548,9 +548,8 @@ export const TemplateView: React.RefForwardingComponent<InternalItemHandResult,T
     const {isItemNo, x, y} =verifyAction(action,generalFormat);
 
     const recordList= React.useMemo(() =>
-          <React.Fragment>
             {
-               projectList.map((each, i) => {
+            /*    projectList.map((each, i) => {
                  const itemView= isItemNo? <ItemUniversal key={i} ref={clRefs.current![i]}  x={x}  y={y}
                                              procedure={generalFormat[x].items[y].procedure}  details={generalFormat[x].items[y].details}
                    />
@@ -561,7 +560,7 @@ export const TemplateView: React.RefForwardingComponent<InternalItemHandResult,T
                    //details: generalFormat[1].items[0].details,
                    key: i
                  });
-
+              f(each.items.indexOf(action)>=0 || action==='ALL') return <div key={i} css={{display:'none'}}>
                  if(each.items.indexOf(action)>=0 || action==='ALL')
                      return  itemView;
                   else
@@ -569,8 +568,23 @@ export const TemplateView: React.RefForwardingComponent<InternalItemHandResult,T
                            {itemView}
                         </div>;
                 })
+              */
+           if(action==='2.1'){ return
+              <React.Fragment>
+                  <ItemUniversal key={i} ref={clRefs.current![i]}  x={x}  y={y}
+                  procedure={generalFormat[x].items[y].procedure}  details={generalFormat[x].items[y].details}
+                  />
+              </React.Fragment>;
+           }
+            else if(action==='gap'){ return
+              React.cloneElement(each.zoneContent as React.ReactElement<any>, {
+                ref: clRefs.current![i],
+                //procedure: generalFormat[1].items[0].procedure,
+                //details: generalFormat[1].items[0].details,
+                key: i
+              });
             }
-          </React.Fragment>
+            }
                 ,[action, clRefs]);
 
     console.log("公用配置对象--isItemNo=",isItemNo,"x=", x,"y=",y, generalFormat, "inspectionContent=", inspectionContent);
@@ -2462,7 +2476,7 @@ const ItemUniversal: React.RefForwardingComponent<InternalItemHandResult,ItemUni
         fields[name] =par[name]
       );
       return fields;
-    }, []);
+    }, [x,y]);
     const { eos, setInp, inp ,par } = useItemControlAs({ref,  filter: getInpFilter});
 
     return (
