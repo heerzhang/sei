@@ -43,7 +43,13 @@ export const TemplateView: React.RefForwardingComponent<InternalItemHandResult,T
   React.forwardRef((
      {inp, action='None', children},   ref
   ) => {
-    const clRefs =useProjectListAs({count: projectList.length});
+    let refSize=0;     //项目可独立编辑，其它没有界面显示的项目部分可以省略inp的传回ref等。动态的可独立编辑项目区的数量。
+    if(action==='2.1'){
+      refSize=1;
+    }
+    else refSize=3;
+   // const clRefs =useProjectListAs({count: projectList.length});  　//
+    const clRefs =useProjectListAs({count: refSize});
     //? 单个项目独立保存可行吗，　非要全部都来，　项目全部显示时刻就不能修改保存了。?
     //同名字的字段：清除／整体清空／单项目独立保存＋合并。
     const outCome=mergeSubitemRefs( ...clRefs.current! );

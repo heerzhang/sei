@@ -188,7 +188,9 @@ Failed to compile.编译错误了，客户端没报错，这时前端可正常�
 装载后不在需要更新的testRenderLoad= React.useMemo(() =><TestRenderLoad/>,[ ] );就基本不会对后续操作性能添堵的，多次render重新来也能保持TestRenderLoad无负担的。
 // eslint-disable-next-line no-alert, react-hooks/exhaustive-deps     强制去除编译时的告警，当然首先确保运行真正正常且运行时都不出现告警的。
 useRef()构造的变量，比如options.current=可以被子组件直接修改。还可以安全添加到依赖项数组( ，[options, ]）。
-交互useState，useReducer；传送门useContext/.Provider，useRef,useImperativeHandle,forwardRef；性能优化useMemo,useCallback；副作用useEffect,useLayoutEffect；useDebugValue。
+useContext接收context对象（createContext的值）返回该context当前值。context值由上层组件距离当前组件最近<CountContext.Provider>的value决定。用useContext的组件总会在context值变化时重新渲染。
+useContext：访问全局状态，跨级传递数据=还能代替redux的存取功能。
+交互useState，useReducer；传送门createContext+useContext+<.Provider，useRef,useImperativeHandle,forwardRef；性能优化useMemo,useCallback；副作用useEffect,useLayoutEffect；useDebugValue。
 WeX5的IDE基于Eclipse，H5 App开发工具,用的是BootStrap加载H5有点慢，美团、爱奇艺、微信等应用，Hybrid App开发模式以JS+Native两者相互调用为主。
 input非react控制和uncontrolled切换报错只提示一次。<input>value={inp.x ||'' }加缺省值''，不能是未定义的</>
 父组件和子组件更新render次数没有一定必然关系，可以就重点组件部分做优化减少render重复次数。
@@ -233,4 +235,4 @@ localhost:9229
 单ISP对应多个报告亦即多个原始记录；而单个原始记录存储json数据体量估算不算太大；在线实时性质的保存互动，有多少制约要考虑折衷，需减少保存次数的需求（服务器能力/处理延迟）。
 用户交互和认知机制，保存，默认方式，2个层次的存储概念？，多出一个用户编辑状态管理？ 繁琐/容易出现用户操作错误。
 路由模式切换页面，很可能不会触发去后端服务器获取数据的请求包。
-
+测试someoneInp={ "仪器表": undefined} outCome={...outCome , ...someoneInp} ！会覆盖前面的=清空；"仪器表": []等效。

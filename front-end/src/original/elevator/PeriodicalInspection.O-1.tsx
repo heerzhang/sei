@@ -32,7 +32,11 @@ const TemplateView: React.RefForwardingComponent<InternalItemHandResult,Template
      {inp, showAll=false, children},   ref
   ) => {
     const clRefs =useProjectListAs({count: projectList.length});
-    const outCome=mergeSubitemRefs( ...clRefs.current! );
+    let outCome=mergeSubitemRefs( ...clRefs.current! );
+　//测试修改someoneInp={ "仪器表": undefined} outCome={...outCome , ...someoneInp} ！会覆盖前面的=清空；"仪器表": []等效。
+ //   let  someoneInp={"机房高出":undefined,"梯子夹角":"","梯子判定":undefined,"通道设置":null};
+ //   outCome={...outCome , ...someoneInp};   //后面undefined会覆盖前面的；
+
     React.useImperativeHandle( ref,() => ({ inp: outCome }), [outCome] );
     React.useEffect(() => {
      callSubitemShow(showAll,  ...clRefs.current! );

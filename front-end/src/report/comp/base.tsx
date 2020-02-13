@@ -366,6 +366,7 @@ export interface TemplateViewProps {
 //若本组件没有重新加载，{count}数组长度变化，会导致ｈｏｏｋ报错。  重命名也逃不掉报错。
 //count=下拉组件亦即独立展示项目个数；
 //HOOK机制要求，useXXX() 次数与顺序都不允许变化。HOOK报错。
+//外部采用路由模式，组件进入后采取根据入口参数来调节count的就没问题，count不会因为两次render表现出个数差异。
 export function useProjectListAs({count}) {
   const array= new Array(count).fill(null);
   function WrappedComp(i: number) {
