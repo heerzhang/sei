@@ -2388,11 +2388,12 @@ const ItemGapMeasure: React.RefForwardingComponent<InternalItemHandResult,Intern
   React.forwardRef((
     { children },  ref
   ) => {
+    const {inp: waibu,setInp: setWaibu} =React.useContext(EditStorageContext);
     const getInpFilter = React.useCallback((par) => {
       const {层站,门扇隙,门套隙,地坎隙,施力隙,门锁啮长,刀坎距,轮坎距,门扇间隙,最不利隙,层门锁,轿门锁,刀轮地隙} =par||{};
       return {层站,门扇隙,门套隙,地坎隙,施力隙,门锁啮长,刀坎距,轮坎距,门扇间隙,最不利隙,层门锁,轿门锁,刀轮地隙};
     }, []);
-    const { eos, setInp, inp } = useItemControlAs({ref,  filter: getInpFilter});
+    const { eos, setInp, inp, par } = useItemControlAs({ref,  filter: getInpFilter});
     const theme = useTheme();
     const [floor, setFloor] = React.useState(null);
     const cAppendix =useCollapse(true,true);
@@ -2407,6 +2408,7 @@ const ItemGapMeasure: React.RefForwardingComponent<InternalItemHandResult,Intern
     });
 
     return (
+      <React.Fragment>
       <InspectRecordTitle  control={cAppendix} label={'附录A 层门间隙、啮合长度'}>
 
         <RouterLink key={99} to={`/report/item/2.1/227/EL-DJ/ver/1`}>
@@ -2497,6 +2499,13 @@ const ItemGapMeasure: React.RefForwardingComponent<InternalItemHandResult,Intern
           >mm</SuffixInput>
         </InputGroupLine>
       </InspectRecordTitle>
+        <Button
+          size="lg"  intent={'warning'}
+          onPress={ () => {
+            setWaibu({...par, ...inp});
+          }}
+        >最雷城暂存</Button>
+      </React.Fragment>
     );
   } );
 
