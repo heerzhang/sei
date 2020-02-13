@@ -43,7 +43,7 @@ export default function ReportEntrance({name},props) {
       <LayerLoading loading={loading} label={'更新数据，加载中请稍后'}/>
       <Switch>
         <Route path="/report/preview/:repId/EL-DJ/ver/1">  {inp &&<PrintReport source={inp}/>} </Route>
-        <Route path="/:rest*">
+        <Route path="/report/:rest*">
           { inp && <TemplateMain source={inp}/> }
         </Route>
       </Switch>

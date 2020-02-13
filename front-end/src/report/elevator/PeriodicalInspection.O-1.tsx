@@ -22,6 +22,7 @@ import orderBy from "lodash.orderby";
 import { string } from "prop-types";
 import {inspectionContent} from "../PrintReport"
 import { Link as RouterLink } from "wouter";
+import { EditStorageContext } from "../RecordView";
 
 
 let   id = 0;
@@ -41,8 +42,9 @@ function verifyAction( action:  string, generalFormat: any[]) {
 
 export const TemplateView: React.RefForwardingComponent<InternalItemHandResult,TemplateViewProps>=
   React.forwardRef((
-     {inp, action='None', children},   ref
+     {inp:oldWay, action='None', children},   ref
   ) => {
+    const {inp,setInp} =React.useContext(EditStorageContext);
     let refSize=0;     //项目可独立编辑，其它没有界面显示的项目部分可以省略inp的传回ref等。动态的可独立编辑项目区的数量。
     if(action==='2.1'){
       refSize=1;
@@ -53,7 +55,10 @@ export const TemplateView: React.RefForwardingComponent<InternalItemHandResult,T
     //? 单个项目独立保存可行吗，　非要全部都来，　项目全部显示时刻就不能修改保存了。?
     //同名字的字段：清除／整体清空／单项目独立保存＋合并。
     const outCome=mergeSubitemRefs( ...clRefs.current! );
+    //旧的模式
     React.useImperativeHandle( ref,() => ({ inp: outCome }), [outCome] );
+     //触发方式？了
+     // setInp(outCome);
 
     React.useEffect(() => {
       callSubitemChangePar(inp,  ...clRefs.current! );
@@ -622,7 +627,15 @@ export const TemplateView: React.RefForwardingComponent<InternalItemHandResult,T
 
     console.log("公用配置对象--isItemNo=",isItemNo,"x=", x,"y=",y, generalFormat, "inspectionContent=", inspectionContent);
     console.log("公用配置对象--action=",action,"recordList=", recordList);
-    return  recordList;
+    return <React.Fragment>
+          {recordList}
+          <Button
+            size="lg"  intent={'warning'}
+            onPress={ () => {
+              setInp(outCome);
+            }}
+          >确认修改暂存</Button>
+        </React.Fragment>;
   } );
 
 export  const  myTemplate= <TemplateView/>;
@@ -2501,7 +2514,8 @@ const ItemUniversal: React.RefForwardingComponent<InternalItemHandResult,ItemUni
   React.forwardRef((
     { children, procedure, details, x, y },  ref
   ) => {
-    console.log("通用检验内容部件 x=", x,"y=",y, inspectionContent[x], "details=", details);
+    const {inp: waibu,setInp: setWaibu} =React.useContext(EditStorageContext);
+    console.log("通用检验内容部件 x=", x,"y=",y, inspectionContent[x], "waibu=", waibu);
     const getInpFilter = React.useCallback((par) => {
       //const {} =par||{};
       let fields={};
@@ -2560,7 +2574,12 @@ const ItemUniversal: React.RefForwardingComponent<InternalItemHandResult,ItemUni
           </React.Fragment>;
         }) }
 
-
+        <Button
+          size="lg"  intent={'warning'}
+          onPress={ () => {
+            setWaibu({...par, ...inp});
+          }}
+        >内除了暂存</Button>
       </React.Fragment>
     );
   } );
