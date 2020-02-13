@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { jsx,  Global } from "@emotion/core";
 import { Suspense, lazy,  } from "react";
+import * as React from "react";
 //import * as firebase from "firebase/app";
 import { Route, Redirect, useRoute, Switch } from "wouter";
 
@@ -15,6 +16,7 @@ import { useSession } from "./auth";
 import { Example as Test } from "./comp/test02";
 import  Example  from "./comp/test01";
 //import MainReport from "./report/ReportEntrance";
+import { EditStorageContext } from "./report/RecordView";
 
 
 //网站的顶级路由器；　这里可以添加或分解子网站，分批开发，分开管理属于同一个域名底下的多个内容网站。
@@ -166,8 +168,9 @@ const OriginalRecord = WaitingComponent(lazy(() => import("./original/OriginalRe
 function TopRouter() {
   //const { initialising, } = useAuthState(firebase.auth());
   const {user,loading} = useSession();  //App初始期间，无法获取到GlobalState组件后才生成的context信息。
+  const [storage, setStorage] = React.useState(null);
     //强制URL输入框去刷新才执行的；若是浏览器后退前进的不会执行到这，该场景直接执行NestingtRoute代码。
-  console.log("PageRouters入=",user,"loading=",loading );
+  console.log("PageRouters入=",user,"storage=",storage );
   //<Router>套在<GlobalState>底下，所以鼠标点击在网页内切换页面不会再次运行GlobalState，除非是浏览器地址栏录入和手动刷新才会重新获取后端授权信息。
   //这下面第一个<div>不能改成<>报错。
   return (
@@ -194,6 +197,9 @@ function TopRouter() {
 　   注意底下<Switch>下面<Route path:是内定的，不管PrivateRoute还是其他，必有path,上层路由分解必须在这层进行，不能放在PrivateRoute内部。
           */ }
 
+          <EditStorageContext.Provider
+            value={{ storage, setStorage }}
+          >
 
           <Switch>
             {!user &&  <Route path="/">   <Branding />    </Route> }
@@ -221,7 +227,7 @@ function TopRouter() {
             <Route path="/:rest*"><h1>没有该URL匹配的视图内容</h1></Route>
           </Switch>
 
-
+          </EditStorageContext.Provider>
         </div>
     </div>
   );

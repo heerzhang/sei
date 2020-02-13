@@ -69,7 +69,7 @@ export const RecordView: React.FunctionComponent<RecordViewProps> = ({
   const theme = useTheme();
   const toast = useToast();
   //初始化不可以直接取React.useState(source || {})，不然路由器切换就变成旧source。新修改被抛弃了。
-  const [storage, setStorage] = React.useState(null);
+
   const [enable, setEnable] = React.useState(true);
   //useState(默认值) ； 后面参数值仅仅在组件的装载时期有起作用，若再次路由RouterLink进入的，它不会依照该新默认值去修改show。useRef跳出Cpature Value带来的限制
   const ref =React.useRef<InternalItemHandResult>(null);
@@ -88,7 +88,7 @@ export const RecordView: React.FunctionComponent<RecordViewProps> = ({
     deduction:{emergencyElectric:'45,423'}
   });
 
-  console.log("RecordView捕获,切花source=", source,"新storage=", storage);
+  console.log("RecordView捕获,切花source=", source,"新");
 
   async function updateRecipe(
     id: string ) {
@@ -130,9 +130,7 @@ export const RecordView: React.FunctionComponent<RecordViewProps> = ({
   return (
     <React.Fragment>
       开头部分条
-      <EditStorageContext.Provider
-        value={{ storage, setStorage }}
-      >
+
       {
         //useMemo使用后：各分区项目子组件inp各自独立的，分区项目子组件内若使用setInp(null) 清空重置后，无法靠重新拉取后端数据来保证恢复显示。
         //项目子组件使用setInp(null) 重置后，若上级组件重新取后端数据没变化的，也必须再次路由后再进入才可以让各分区项目子组件render恢复显示数据。
@@ -142,7 +140,7 @@ export const RecordView: React.FunctionComponent<RecordViewProps> = ({
           action
         })
       }
-      </EditStorageContext.Provider>
+
       <Button
         css={{ marginTop: theme.spaces.md }}
         size="lg"  intent={'warning'}
