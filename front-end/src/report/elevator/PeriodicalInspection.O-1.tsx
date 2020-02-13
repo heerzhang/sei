@@ -2502,7 +2502,7 @@ const ItemGapMeasure: React.RefForwardingComponent<InternalItemHandResult,Intern
         <Button
           size="lg"  intent={'warning'}
           onPress={ () => {
-            setWaibu({...par, ...inp});
+            setWaibu({...waibu, ...inp});
           }}
         >最雷城暂存</Button>
       </React.Fragment>
@@ -2586,7 +2586,7 @@ const ItemUniversal: React.RefForwardingComponent<InternalItemHandResult,ItemUni
         <Button
           size="lg"  intent={'warning'}
           onPress={ () => {
-            setWaibu({...par, ...inp});
+            setWaibu({...waibu, ...inp});
           }}
         >内除了暂存</Button>
       </React.Fragment>

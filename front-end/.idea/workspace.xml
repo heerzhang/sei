@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="339baf3b-3b56-43fa-821a-88a7b6723788" name="Default Changelist" comment="原始记录能否也增加配置形式的？">
-      <change beforePath="$PROJECT_DIR$/../back-end/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+    <list default="true" id="339baf3b-3b56-43fa-821a-88a7b6723788" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/report/elevator/PeriodicalInspection.O-1.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/report/elevator/PeriodicalInspection.O-1.tsx" afterDir="false" />
     </list>
@@ -127,12 +125,12 @@
         <counts>
           <entry key="ts" value="2" />
           <entry key="tsx" value="2750" />
-          <entry key="txt" value="295" />
+          <entry key="txt" value="309" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PLAIN_TEXT" value="295" />
+          <entry key="PLAIN_TEXT" value="309" />
           <entry key="TypeScript" value="2" />
           <entry key="TypeScript JSX" value="2750" />
         </counts>
@@ -152,11 +150,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/report/elevator/PeriodicalInspection.O-1.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="41212">
-              <caret line="2389" column="8" lean-forward="true" selection-start-line="2389" selection-start-column="8" selection-end-line="2389" selection-end-column="8" />
+            <state relative-caret-position="338">
+              <caret line="2506" column="23" lean-forward="true" selection-start-line="2506" selection-start-column="23" selection-end-line="2506" selection-end-column="23" />
               <folding>
                 <element signature="e#16#54#0" expanded="true" />
-                <element signature="e#2077#14810#0" />
               </folding>
             </state>
           </provider>
@@ -165,8 +162,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/utils/tools.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="36" column="13" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
+            <state relative-caret-position="302">
+              <caret line="40" column="49" selection-start-line="40" selection-start-column="38" selection-end-line="40" selection-end-column="49" />
             </state>
           </provider>
         </entry>
@@ -209,8 +206,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/report/comp/base.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="54">
-              <caret line="320" column="16" selection-start-line="320" selection-start-column="16" selection-end-line="320" selection-end-column="16" />
+            <state relative-caret-position="-218">
+              <caret line="334" lean-forward="true" selection-start-line="334" selection-end-line="334" />
             </state>
           </provider>
         </entry>
@@ -651,14 +648,7 @@
       <workItem from="1581250408908" duration="4587000" />
       <workItem from="1581285207473" duration="3245000" />
       <workItem from="1581379878718" duration="29317000" />
-      <workItem from="1581553340620" duration="12955000" />
-    </task>
-    <task id="LOCAL-00022" summary="盖章">
-      <created>1580944663925</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1580944663925</updated>
+      <workItem from="1581553340620" duration="13115000" />
     </task>
     <task id="LOCAL-00023" summary="盖章">
       <created>1580949976263</created>
@@ -996,11 +986,18 @@
       <option name="project" value="LOCAL" />
       <updated>1581565519222</updated>
     </task>
-    <option name="localTasksCounter" value="71" />
+    <task id="LOCAL-00071" summary="１２：２２－2个实验">
+      <created>1581567766308</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1581567766308</updated>
+    </task>
+    <option name="localTasksCounter" value="72" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="496667000" />
+    <option name="totallyTimeSpent" value="496827000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -1102,7 +1099,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="手机打印和折叠小屏" />
     <MESSAGE value="印章来" />
     <MESSAGE value="打印啊" />
     <MESSAGE value="导入输入数据" />
@@ -1127,7 +1123,8 @@
     <MESSAGE value="下班" />
     <MESSAGE value="准备useContext上，临时性质保存页面的数据，不需要每次都直接送后端" />
     <MESSAGE value="useContext替换useImperativeHandle来实现临时存储，避免后端频繁保存，感觉有可能。" />
-    <option name="LAST_COMMIT_MESSAGE" value="useContext替换useImperativeHandle来实现临时存储，避免后端频繁保存，感觉有可能。" />
+    <MESSAGE value="１２：２２－2个实验" />
+    <option name="LAST_COMMIT_MESSAGE" value="１２：２２－2个实验" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/images/seal.png">
@@ -1415,13 +1412,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/utils/tools.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="36" column="13" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/report/template.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="264">
@@ -1461,20 +1451,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/utils/tools.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="302">
+          <caret line="40" column="49" selection-start-line="40" selection-start-column="38" selection-end-line="40" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/report/comp/base.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="320" column="16" selection-start-line="320" selection-start-column="16" selection-end-line="320" selection-end-column="16" />
+        <state relative-caret-position="-218">
+          <caret line="334" lean-forward="true" selection-start-line="334" selection-end-line="334" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/report/elevator/PeriodicalInspection.O-1.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="41212">
-          <caret line="2389" column="8" lean-forward="true" selection-start-line="2389" selection-start-column="8" selection-end-line="2389" selection-end-column="8" />
+        <state relative-caret-position="338">
+          <caret line="2506" column="23" lean-forward="true" selection-start-line="2506" selection-start-column="23" selection-end-line="2506" selection-end-column="23" />
           <folding>
             <element signature="e#16#54#0" expanded="true" />
-            <element signature="e#2077#14810#0" />
           </folding>
         </state>
       </provider>
