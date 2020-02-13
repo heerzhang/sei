@@ -43,8 +43,8 @@ import { Dispatch, SetStateAction } from "react";
 
 //当作，模板在线文档的编辑数据的，临时存储。 子组件需要监听变化的数据。
 interface EditStorageContextType {
-  inp: any,
-  setInp: Dispatch<SetStateAction<any>>
+  storage: any,
+  setStorage: Dispatch<SetStateAction<any>>
 }
 
 export const EditStorageContext = React.createContext<EditStorageContextType | null>(
@@ -68,7 +68,8 @@ export const RecordView: React.FunctionComponent<RecordViewProps> = ({
                                                                      }) => {
   const theme = useTheme();
   const toast = useToast();
-  const [storage, setStorage] = React.useState(source || {});
+  //初始化不可以直接取React.useState(source || {})，不然路由器切换就变成旧source。新修改被抛弃了。
+  const [storage, setStorage] = React.useState(null);
   const [enable, setEnable] = React.useState(true);
   //useState(默认值) ； 后面参数值仅仅在组件的装载时期有起作用，若再次路由RouterLink进入的，它不会依照该新默认值去修改show。useRef跳出Cpature Value带来的限制
   const ref =React.useRef<InternalItemHandResult>(null);
@@ -87,7 +88,7 @@ export const RecordView: React.FunctionComponent<RecordViewProps> = ({
     deduction:{emergencyElectric:'45,423'}
   });
 
-  console.log("RecordView捕获 source=", source,"storage=", storage);
+  console.log("RecordView捕获,切花source=", source,"新storage=", storage);
 
   async function updateRecipe(
     id: string ) {
@@ -130,10 +131,7 @@ export const RecordView: React.FunctionComponent<RecordViewProps> = ({
     <React.Fragment>
       开头部分条
       <EditStorageContext.Provider
-        value={{
-          inp: storage,
-          setInp: setStorage
-        }}
+        value={{ storage, setStorage }}
       >
       {
         //useMemo使用后：各分区项目子组件inp各自独立的，分区项目子组件内若使用setInp(null) 清空重置后，无法靠重新拉取后端数据来保证恢复显示。

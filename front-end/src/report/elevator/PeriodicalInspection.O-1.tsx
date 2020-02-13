@@ -44,7 +44,7 @@ export const TemplateView: React.RefForwardingComponent<InternalItemHandResult,T
   React.forwardRef((
      {inp:oldWay, action='None', children},   ref
   ) => {
-    const {inp,setInp} =React.useContext(EditStorageContext);
+    const {storage, setStorage} =React.useContext(EditStorageContext);
     let refSize=0;     //项目可独立编辑，其它没有界面显示的项目部分可以省略inp的传回ref等。动态的可独立编辑项目区的数量。
     if(action==='2.1'){
       refSize=1;
@@ -59,10 +59,13 @@ export const TemplateView: React.RefForwardingComponent<InternalItemHandResult,T
     React.useImperativeHandle( ref,() => ({ inp: outCome }), [outCome] );
      //触发方式？了
      // setInp(outCome);
+    console.log("实验进行时６３６３　-storage=",storage,"outCome=", outCome);
+
 
     React.useEffect(() => {
-      callSubitemChangePar(inp,  ...clRefs.current! );
-    }, [inp, clRefs] );
+      callSubitemChangePar(oldWay,  ...clRefs.current! );
+    }, [oldWay, clRefs] );
+
 
     //原始记录检验内容通用格式部分：这个是可以跟随检验记录数据变化的可配置部分。
     const generalFormat= React.useMemo(() =>
@@ -625,14 +628,14 @@ export const TemplateView: React.RefForwardingComponent<InternalItemHandResult,T
           }
                 ,[action, clRefs ,generalFormat,x,y]);
 
-    console.log("公用配置对象--isItemNo=",isItemNo,"x=", x,"y=",y, generalFormat, "inspectionContent=", inspectionContent);
+  //  console.log("公用配置对象--isItemNo=",isItemNo,"x=", x,"y=",y, generalFormat, "inspectionContent=", inspectionContent);
     console.log("公用配置对象--action=",action,"recordList=", recordList);
     return <React.Fragment>
           {recordList}
           <Button
             size="lg"  intent={'warning'}
             onPress={ () => {
-              setInp(outCome);
+              setStorage(outCome);
             }}
           >确认修改暂存</Button>
         </React.Fragment>;
@@ -2388,7 +2391,7 @@ const ItemGapMeasure: React.RefForwardingComponent<InternalItemHandResult,Intern
   React.forwardRef((
     { children },  ref
   ) => {
-    const {inp: waibu,setInp: setWaibu} =React.useContext(EditStorageContext);
+    const {storage, setStorage} =React.useContext(EditStorageContext);
     const getInpFilter = React.useCallback((par) => {
       const {层站,门扇隙,门套隙,地坎隙,施力隙,门锁啮长,刀坎距,轮坎距,门扇间隙,最不利隙,层门锁,轿门锁,刀轮地隙} =par||{};
       return {层站,门扇隙,门套隙,地坎隙,施力隙,门锁啮长,刀坎距,轮坎距,门扇间隙,最不利隙,层门锁,轿门锁,刀轮地隙};
@@ -2406,6 +2409,7 @@ const ItemGapMeasure: React.RefForwardingComponent<InternalItemHandResult,Intern
     let  rollerUnquf=inp?.层站?.find((f,i)=>{
       return parseFloat(inp?.轮坎距?.[f])<5;
     });
+    console.log("通ＧＡＰ－ｇａｐ部件　par=",par, "storage=", storage);
 
     return (
       <React.Fragment>
@@ -2502,7 +2506,7 @@ const ItemGapMeasure: React.RefForwardingComponent<InternalItemHandResult,Intern
         <Button
           size="lg"  intent={'warning'}
           onPress={ () => {
-            setWaibu({...waibu, ...inp});
+            setStorage({...storage, ...inp});
           }}
         >最雷城暂存</Button>
       </React.Fragment>
@@ -2523,8 +2527,8 @@ const ItemUniversal: React.RefForwardingComponent<InternalItemHandResult,ItemUni
   React.forwardRef((
     { children, procedure, details, x, y },  ref
   ) => {
-    const {inp: waibu,setInp: setWaibu} =React.useContext(EditStorageContext);
-    console.log("通用检验内容部件 x=", x,"y=",y, inspectionContent[x], "waibu=", waibu);
+    const {storage, setStorage} =React.useContext(EditStorageContext);
+    console.log("通用检验内容部件 x=", x,"y=",y, "storage=", storage);
     const getInpFilter = React.useCallback((par) => {
       //const {} =par||{};
       let fields={};
@@ -2586,7 +2590,7 @@ const ItemUniversal: React.RefForwardingComponent<InternalItemHandResult,ItemUni
         <Button
           size="lg"  intent={'warning'}
           onPress={ () => {
-            setWaibu({...waibu, ...inp});
+            setStorage({...storage, ...inp});
           }}
         >内除了暂存</Button>
       </React.Fragment>

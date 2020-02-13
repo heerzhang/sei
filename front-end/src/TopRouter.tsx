@@ -193,6 +193,8 @@ function TopRouter() {
           { /*
 　   注意底下<Switch>下面<Route path:是内定的，不管PrivateRoute还是其他，必有path,上层路由分解必须在这层进行，不能放在PrivateRoute内部。
           */ }
+
+
           <Switch>
             {!user &&  <Route path="/">   <Branding />    </Route> }
 
@@ -218,6 +220,8 @@ function TopRouter() {
             <Route path="/test/test01">   <Example  />    </Route>
             <Route path="/:rest*"><h1>没有该URL匹配的视图内容</h1></Route>
           </Switch>
+
+
         </div>
     </div>
   );
