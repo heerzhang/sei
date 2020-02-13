@@ -72,13 +72,13 @@ export const RecordView: React.FunctionComponent<RecordViewProps> = ({
   const {storage, setStorage} =React.useContext(EditStorageContext);
   const [enable, setEnable] = React.useState(true);
   //useState(默认值) ； 后面参数值仅仅在组件的装载时期有起作用，若再次路由RouterLink进入的，它不会依照该新默认值去修改show。useRef跳出Cpature Value带来的限制
-  const ref =React.useRef<InternalItemHandResult>(null);
+//旧模式淘汰！  const ref =React.useRef<InternalItemHandResult>(null);
 
 
   //ref可以共用current指向最新输入过的子组件；但父组件对.current的最新变化无法实时感知，只能被动刷新获知current变动。
   //子组件利用useImperativeHandle机制把数据回传给父组件，配套地父辈用ref来定位子组件。
   //保存按钮点击后必须首先触发template动态加载的子组件即TemplateView的做1次render()后，ref.current.inp才能收到儿孙组件的最新数据。
-  const newOut={ ...(ref.current&&ref.current.inp) };
+//  const newOut={ ...(ref.current&&ref.current.inp) };
 
   //审核保存?对应数据deduction结论栏目＋审核手动修改；适用于出具正式报告，正式报告只读取deduction部分。依据审核保存>随后才是原始记录复检>初检data。
   //若复检保存 ，复检rexm，正检data。
@@ -137,7 +137,7 @@ export const RecordView: React.FunctionComponent<RecordViewProps> = ({
         //useMemo使用后：各分区项目子组件inp各自独立的，分区项目子组件内若使用setInp(null) 清空重置后，无法靠重新拉取后端数据来保证恢复显示。
         //项目子组件使用setInp(null) 重置后，若上级组件重新取后端数据没变化的，也必须再次路由后再进入才可以让各分区项目子组件render恢复显示数据。
         React.cloneElement(template as React.ReactElement<any>, {
-          ref: ref,
+          ref: null,
           inp: source,
           action
         })
@@ -156,7 +156,7 @@ export const RecordView: React.FunctionComponent<RecordViewProps> = ({
         }}
       >保存到服务器</Button>
       <LayerLoading loading={loading} />
-      <Text  css={{wordWrap: 'break-word'}}>{false && `当前(${JSON.stringify(newOut)})`}</Text>
+      <Text  css={{wordWrap: 'break-word'}}>{false && `当前(${JSON.stringify(storage)})`}</Text>
     </React.Fragment>
   );
 }

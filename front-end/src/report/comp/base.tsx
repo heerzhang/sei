@@ -333,13 +333,13 @@ export　function useItemControlAs({
   const onParChange = React.useCallback(function (par) {
         //            setPar(par);
         //            setInp(filter(par));
-                }, [filter]);
+                }, [  ]);
 
 
   //【廢棄】setShow功能，無需排序和全部開或拉上。
 
-  //准备废弃了！
-  React.useImperativeHandle( ref,() => ({ inp ,setShow:eos.setShow, onParChange}), [inp, onParChange,eos.setShow] );
+  //旧的模式,子组件把自己的东西暴露给了父组件；，准备废弃了！
+//  React.useImperativeHandle( ref,() => ({ inp ,setShow:eos.setShow, onParChange}), [inp, onParChange,eos.setShow] );
     //不直接用import { usePrevious } from "./Hooks/previous" 减少render次数。
   return {eos, setInp, inp, par};
 }

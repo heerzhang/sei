@@ -1142,6 +1142,8 @@ export const PrintReport: React.FunctionComponent<PrintReportProps> = ({
               <Cell>(5)特种设备作业人员证</Cell>
               <CCell>{itr[1.4][4]}</CCell>
             </TableRow>
+
+           <RouterLink key={35} to={`/report/item/2.1/227/EL-DJ/ver/1`}>
             <TableRow >
               <CCell component="th" scope="row" rowSpan={3}>2</CCell>
               <CCell rowSpan={3}>{itr[2.1].iclass}</CCell>
@@ -1152,6 +1154,8 @@ export const PrintReport: React.FunctionComponent<PrintReportProps> = ({
               <CCell>{itr[2.1][0]}</CCell>
               <CCell rowSpan={3}>{itr[2.1].result}</CCell>
             </TableRow>
+           </RouterLink>
+
             <TableRow >
               <Cell>(2)通道照明</Cell>
               <CCell>{itr[2.1][1]}</CCell>
@@ -1160,6 +1164,8 @@ export const PrintReport: React.FunctionComponent<PrintReportProps> = ({
               <Cell>(3)通道门</Cell>
               <CCell>{itr[2.1][2]}</CCell>
             </TableRow>
+
+
             <TableRow >
               <CCell component="th" scope="row">3</CCell>
               <CCell>{itr[2.5].iclass}</CCell>
@@ -1168,6 +1174,7 @@ export const PrintReport: React.FunctionComponent<PrintReportProps> = ({
               <CCell>{itr[2.5][0]}</CCell>
               <CCell>{itr[2.5].result}</CCell>
             </TableRow>
+          <RouterLink key={26} to={`/report/item/gap/227/EL-DJ/ver/1`}>
             <TableRow >
               <CCell component="th" scope="row">4</CCell>
               <CCell>B</CCell>
@@ -1176,6 +1183,9 @@ export const PrintReport: React.FunctionComponent<PrintReportProps> = ({
               <CCell>符合</CCell>
               <CCell></CCell>
             </TableRow>
+          </RouterLink>
+
+          <RouterLink key={57} to={`/report/item/6.3/227/EL-DJ/ver/1`}>
             <TableRow >
               <CCell component="th" scope="row" rowSpan={4}>5</CCell>
               <CCell rowSpan={4}>B</CCell>
@@ -1185,6 +1195,8 @@ export const PrintReport: React.FunctionComponent<PrintReportProps> = ({
               <CCell>符合</CCell>
               <CCell rowSpan={4}>合格</CCell>
             </TableRow>
+          </RouterLink>
+
             <TableRow >
               <Cell>(3)轮槽磨损</Cell>
               <CCell>符合</CCell>
@@ -1197,35 +1209,43 @@ export const PrintReport: React.FunctionComponent<PrintReportProps> = ({
               <Cell>★(5)手动紧急操作装置</Cell>
               <CCell>符合</CCell>
             </TableRow>
-            <TableRow >
-              <CCell component="th" scope="row" rowSpan={6}>6</CCell>
-              <CCell rowSpan={6}>B</CCell>
-              <CCell rowSpan={6}>2.8</CCell>
-              <CCell rowSpan={6}>控制柜、紧急操作和动态测试装置</CCell>
-              <Cell>(2)断错相保护</Cell>
-              <CCell>符合</CCell>
-              <CCell rowSpan={6}></CCell>
-            </TableRow>
-            <TableRow >
-              <Cell>(4)紧急电动运行装置</Cell>
-              <CCell>／</CCell>
-            </TableRow>
-            <TableRow >
-              <Cell>☆(6)层门和轿门旁路装置</Cell>
-              <CCell>／</CCell>
-            </TableRow>
-            <TableRow >
-              <Cell>☆(7)门回路检测功能</Cell>
-              <CCell>／</CCell>
-            </TableRow>
-            <TableRow >
-              <Cell>☆(8)制动器故障保护</Cell>
-              <CCell>／</CCell>
-            </TableRow>
-            <TableRow >
-              <Cell>☆(9)自动救援操作装置</Cell>
-              <CCell>／</CCell>
-            </TableRow>
+
+            <RouterLink key={69} href={`/report/item/gap/227/EL-DJ/ver/1`}>
+              <TableRow >
+                <CCell component="th" scope="row" rowSpan={6}>6</CCell>
+                <CCell rowSpan={6}>B</CCell>
+                <CCell rowSpan={6}>2.8</CCell>
+                <CCell rowSpan={6}>控制柜、紧急操作和动态测试装置</CCell>
+                <Cell>(2)断错相保护</Cell>
+                <CCell>符合</CCell>
+                <CCell rowSpan={6}></CCell>
+              </TableRow>
+            </RouterLink>
+              <TableRow >
+                <Cell>(4)紧急电动运行装置</Cell>
+                <CCell>／</CCell>
+              </TableRow>
+              <TableRow >
+                <Cell>☆(6)层门和轿门旁路装置</Cell>
+                <CCell>／</CCell>
+              </TableRow>
+              <TableRow >
+                <Cell>☆(7)门回路检测功能</Cell>
+                <CCell>／</CCell>
+              </TableRow>
+            <RouterLink key={60} href={`/report/item/6.3/227/EL-DJ/ver/1`}>
+              <TableRow >
+                <Cell>☆(8)制动器故障保护</Cell>
+                <CCell>／</CCell>
+              </TableRow>
+            </RouterLink>
+
+              <TableRow >
+                <Cell>☆(9)自动救援操作装置</Cell>
+                <CCell>／</CCell>
+              </TableRow>
+
+
             <TableRow>
               <CCell component="th" scope="row" rowSpan={3}>7</CCell>
               <CCell rowSpan={3}>B</CCell>
@@ -1726,7 +1746,7 @@ export const PrintReport: React.FunctionComponent<PrintReportProps> = ({
               <CCell>发了的方式</CCell>
             </TableRow>
           </RouterLink>
-            <RouterLink key={99} to={`/report/item/6.3/227/EL-DJ/ver/1`}>
+            <RouterLink key={92} to={`/report/item/6.3/227/EL-DJ/ver/1`}>
               <TableRow>
                 <CCell component="th" scope="row">{99}</CCell>
                 <CCell>gap</CCell>

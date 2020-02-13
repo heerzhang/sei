@@ -54,17 +54,17 @@ export const TemplateView: React.RefForwardingComponent<InternalItemHandResult,T
     const clRefs =useProjectListAs({count: refSize});
     //? 单个项目独立保存可行吗，　非要全部都来，　项目全部显示时刻就不能修改保存了。?
     //同名字的字段：清除／整体清空／单项目独立保存＋合并。
-    const outCome=mergeSubitemRefs( ...clRefs.current! );
+ //   const outCome=mergeSubitemRefs( ...clRefs.current! );
     //旧的模式
-    React.useImperativeHandle( ref,() => ({ inp: outCome }), [outCome] );
+ //   React.useImperativeHandle( ref,() => ({ inp: outCome }), [outCome] );
      //触发方式？了
      // setInp(outCome);
-    console.log("实验进行时６３６３　-storage=",storage,"outCome=", outCome);
+    console.log("实验进行时６３６３　-storage=",storage,"outCome=" );
 
 
-    React.useEffect(() => {
-      callSubitemChangePar(oldWay,  ...clRefs.current! );
-    }, [oldWay, clRefs] );
+  //  React.useEffect(() => {
+  //    callSubitemChangePar(oldWay,  ...clRefs.current! );
+ //   }, [oldWay, clRefs] );
 
 
     //原始记录检验内容通用格式部分：这个是可以跟随检验记录数据变化的可配置部分。
@@ -587,7 +587,7 @@ export const TemplateView: React.RefForwardingComponent<InternalItemHandResult,T
             let resView;
            if(action==='2.1'){ resView=
               <React.Fragment>
-                  <ItemUniversal key={0} ref={clRefs.current![0]}  x={x}  y={y}
+                  <ItemUniversal key={0} ref={null}  x={x}  y={y}
                   procedure={generalFormat[x].items[y].procedure}  details={generalFormat[x].items[y].details}
                   />
               </React.Fragment>;
@@ -599,7 +599,7 @@ export const TemplateView: React.RefForwardingComponent<InternalItemHandResult,T
                  {
                    [1].map((each, i) => {
                      return React.cloneElement(projectList[1].zoneContent as React.ReactElement<any>, {
-                       ref: clRefs.current![1],
+                       ref: null,
                        key: i
                      });
                    })
@@ -613,7 +613,7 @@ export const TemplateView: React.RefForwardingComponent<InternalItemHandResult,T
                  {
                    [1].map((each, i) => {
                      return React.cloneElement(projectList[2].zoneContent as React.ReactElement<any>, {
-                       ref: clRefs.current![2],
+                       ref: null,
                        key: i
                      });
                    })
