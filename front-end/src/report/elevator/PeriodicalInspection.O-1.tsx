@@ -2392,6 +2392,10 @@ const ItemGapMeasure: React.RefForwardingComponent<InternalItemHandResult,Intern
       return {层站,门扇隙,门套隙,地坎隙,施力隙,门锁啮长,刀坎距,轮坎距,门扇间隙,最不利隙,层门锁,轿门锁,刀轮地隙};
     }, []);
     const { eos, setInp, inp, par } = useItemControlAs({ref,  filter: getInpFilter});
+    React.useEffect(() => {
+      storage&&setInp(getInpFilter(storage));
+    }, [storage, setInp, getInpFilter] );
+
     const theme = useTheme();
     const [floor, setFloor] = React.useState(null);
     const cAppendix =useCollapse(true,true);
@@ -2515,6 +2519,7 @@ export interface ItemUniversalProps  extends React.HTMLAttributes<HTMLDivElement
   details?: any[];     //传递各个子项目(若没有子项目的，就算项目本身[0])的定制，测量数据细节内容。
 }
 //引进Render Props模式提高复用能力 { details[0](inp,setInp)  }；就可以配置成通用的组件。
+//forwardRef实际上已经没用了　ref，可改成简易的组件模式。
 const ItemUniversal: React.RefForwardingComponent<InternalItemHandResult,ItemUniversalProps>=
   React.forwardRef((
     { children, procedure, details, x, y },  ref
@@ -2535,7 +2540,10 @@ const ItemUniversal: React.RefForwardingComponent<InternalItemHandResult,ItemUni
       );
       return fields;
     }, [x,y]);
-    const { eos, setInp, inp ,par } = useItemControlAs({ref,  filter: getInpFilter});
+    const { eos, setInp, inp , } = useItemControlAs({ref,  filter: getInpFilter});
+    React.useEffect(() => {
+      storage&&setInp(getInpFilter(storage));
+    }, [storage, setInp, getInpFilter] );
 
     return (
       <React.Fragment>

@@ -328,13 +328,17 @@ export　function useItemControlAs({
   const [par, setPar] = React.useState(null);
   //用回调钩子setShow来替换；原先的show参数下传配合在useCollapse内部useEffect(() [defaultShow] 做修正方式。
   //回调钩子的模式。在上层父组件去统一调用本函数的，这里仅仅生成函数的代码但还未执行。
+
+
   const onParChange = React.useCallback(function (par) {
-                    setPar(par);
-                    setInp(filter(par));
+        //            setPar(par);
+        //            setInp(filter(par));
                 }, [filter]);
+
 
   //【廢棄】setShow功能，無需排序和全部開或拉上。
 
+  //准备废弃了！
   React.useImperativeHandle( ref,() => ({ inp ,setShow:eos.setShow, onParChange}), [inp, onParChange,eos.setShow] );
     //不直接用import { usePrevious } from "./Hooks/previous" 减少render次数。
   return {eos, setInp, inp, par};
