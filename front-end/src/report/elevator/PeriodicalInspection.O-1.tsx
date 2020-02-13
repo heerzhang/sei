@@ -632,12 +632,7 @@ export const TemplateView: React.RefForwardingComponent<InternalItemHandResult,T
     console.log("公用配置对象--action=",action,"recordList=", recordList);
     return <React.Fragment>
           {recordList}
-          <Button
-            size="lg"  intent={'warning'}
-            onPress={ () => {
-              setStorage(outCome);
-            }}
-          >确认修改暂存</Button>
+
         </React.Fragment>;
   } );
 
@@ -2503,12 +2498,9 @@ const ItemGapMeasure: React.RefForwardingComponent<InternalItemHandResult,Intern
           >mm</SuffixInput>
         </InputGroupLine>
       </InspectRecordTitle>
-        <Button
-          size="lg"  intent={'warning'}
-          onPress={ () => {
-            setStorage({...storage, ...inp});
-          }}
-        >最雷城暂存</Button>
+        <Button size="lg" intent={'primary'} onPress={() =>{ setStorage({...storage, ...inp}) }}>
+          修改确认
+        </Button>
       </React.Fragment>
     );
   } );
@@ -2587,12 +2579,9 @@ const ItemUniversal: React.RefForwardingComponent<InternalItemHandResult,ItemUni
           </React.Fragment>;
         }) }
 
-        <Button
-          size="lg"  intent={'warning'}
-          onPress={ () => {
-            setStorage({...storage, ...inp});
-          }}
-        >内除了暂存</Button>
+        <Button size="lg" intent={'primary'} onPress={() =>{ setStorage({...storage, ...inp}) }}>
+          修改确认
+        </Button>
       </React.Fragment>
     );
   } );

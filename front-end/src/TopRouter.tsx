@@ -168,6 +168,7 @@ const OriginalRecord = WaitingComponent(lazy(() => import("./original/OriginalRe
 function TopRouter() {
   //const { initialising, } = useAuthState(firebase.auth());
   const {user,loading} = useSession();  //App初始期间，无法获取到GlobalState组件后才生成的context信息。
+  //报告和原始记录用的临时内存存储！，避免太多次数保存发送给后端服务器。
   const [storage, setStorage] = React.useState(null);
     //强制URL输入框去刷新才执行的；若是浏览器后退前进的不会执行到这，该场景直接执行NestingtRoute代码。
   console.log("PageRouters入=",user,"storage=",storage );
@@ -198,7 +199,7 @@ function TopRouter() {
           */ }
 
           <EditStorageContext.Provider
-            value={{ storage, setStorage }}
+                    value={{ storage, setStorage }}
           >
 
           <Switch>

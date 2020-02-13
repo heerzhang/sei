@@ -69,7 +69,7 @@ export const RecordView: React.FunctionComponent<RecordViewProps> = ({
   const theme = useTheme();
   const toast = useToast();
   //初始化不可以直接取React.useState(source || {})，不然路由器切换就变成旧source。新修改被抛弃了。
-
+  const {storage, setStorage} =React.useContext(EditStorageContext);
   const [enable, setEnable] = React.useState(true);
   //useState(默认值) ； 后面参数值仅仅在组件的装载时期有起作用，若再次路由RouterLink进入的，它不会依照该新默认值去修改show。useRef跳出Cpature Value带来的限制
   const ref =React.useRef<InternalItemHandResult>(null);
@@ -84,11 +84,11 @@ export const RecordView: React.FunctionComponent<RecordViewProps> = ({
   //若复检保存 ，复检rexm，正检data。
   const {result, submit:updateFunc,loading } = useCommitOriginalData({
     id:227,  operationType:1,
-    data:  JSON.stringify(newOut) ,
+    data:  JSON.stringify(storage || source) ,
     deduction:{emergencyElectric:'45,423'}
   });
 
-  console.log("RecordView捕获,切花source=", source,"新");
+  console.log("RecordView捕获,切花source=", source,"新storage=",storage);
 
   async function updateRecipe(
     id: string ) {
@@ -127,6 +127,8 @@ export const RecordView: React.FunctionComponent<RecordViewProps> = ({
   if (!id) {
     return null;
   }
+
+  //无法把<EditStorageContext.Provider value={{storage,setStorage}}>放这附近能产生效果，必须提升到顶级路由组件内去做。
   return (
     <React.Fragment>
       开头部分条
