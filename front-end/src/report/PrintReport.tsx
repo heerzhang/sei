@@ -1726,7 +1726,15 @@ export const PrintReport: React.FunctionComponent<PrintReportProps> = ({
               <CCell>发了的方式</CCell>
             </TableRow>
           </RouterLink>
-
+            <RouterLink key={99} to={`/report/item/6.3/227/EL-DJ/ver/1`}>
+              <TableRow>
+                <CCell component="th" scope="row">{99}</CCell>
+                <CCell>gap</CCell>
+                <CCell>{'看看6.3实验'}</CCell>
+                <CCell>a 6。3 话as</CCell>
+                <CCell>发了的方式</CCell>
+              </TableRow>
+            </RouterLink>
           </TableBody>
         </Table>
       </div>

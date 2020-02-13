@@ -47,7 +47,7 @@ export const TemplateView: React.RefForwardingComponent<InternalItemHandResult,T
     const {storage, setStorage} =React.useContext(EditStorageContext);
     let refSize=0;     //项目可独立编辑，其它没有界面显示的项目部分可以省略inp的传回ref等。动态的可独立编辑项目区的数量。
     if(action==='2.1'){
-      refSize=1;
+      refSize=3;
     }
     else refSize=3;
    // const clRefs =useProjectListAs({count: projectList.length});  　//
@@ -590,27 +590,12 @@ export const TemplateView: React.RefForwardingComponent<InternalItemHandResult,T
                   <ItemUniversal key={0} ref={clRefs.current![0]}  x={x}  y={y}
                   procedure={generalFormat[x].items[y].procedure}  details={generalFormat[x].items[y].details}
                   />
-                <div key={1} css={{display:'none'}}>
-                  {
-                    [1].map((each, i) => {
-                      return React.cloneElement(projectList[1].zoneContent as React.ReactElement<any>, {
-                        ref: clRefs.current![1],
-                        key: i
-                      });
-                    })
-                  }
-                </div>
               </React.Fragment>;
            }
             else if(action==='gap'){
              // x=1; y=0;
               resView=
                <React.Fragment>
-                 <div key={2} css={{display:'none'}}>
-                     <ItemUniversal key={0} ref={clRefs.current![0]}  x={1}  y={0}
-                                    procedure={generalFormat[1].items[0].procedure}  details={generalFormat[1].items[0].details}
-                     />
-                 </div>
                  {
                    [1].map((each, i) => {
                      return React.cloneElement(projectList[1].zoneContent as React.ReactElement<any>, {
@@ -621,6 +606,20 @@ export const TemplateView: React.RefForwardingComponent<InternalItemHandResult,T
                  }
              </React.Fragment>;
             }
+           else if(action==='6.3'){
+             // x=1; y=0;
+             resView=
+               <React.Fragment>
+                 {
+                   [1].map((each, i) => {
+                     return React.cloneElement(projectList[2].zoneContent as React.ReactElement<any>, {
+                       ref: clRefs.current![2],
+                       key: i
+                     });
+                   })
+                 }
+               </React.Fragment>;
+           }
             else resView= <div key={0}>
                士大夫辜负了所发生的
              </div>;
@@ -737,11 +736,16 @@ const InternalItem6d3: React.RefForwardingComponent<InternalItemHandResult,Inter
   React.forwardRef((
     props:{ children },  ref
   ) => {
+    const {storage, setStorage} =React.useContext(EditStorageContext);
     const getInpFilter = React.useCallback((par) => {
       const {层站,门扇隙,门套隙,地坎隙,施力隙,门锁啮长,刀坎距,轮坎距,门扇间隙,最不利隙,层门锁,轿门锁,刀轮地隙} =par||{};
       return {层站,门扇隙,门套隙,地坎隙,施力隙,门锁啮长,刀坎距,轮坎距,门扇间隙,最不利隙,层门锁,轿门锁,刀轮地隙};
     }, []);
     const { eos, setInp, inp } = useItemControlAs({ref,  filter: getInpFilter});
+    React.useEffect(() => {
+      storage&&setInp(getInpFilter(storage));
+    }, [storage, setInp, getInpFilter] );
+
     const theme = useTheme();
     const [floor, setFloor] = React.useState(null);
     const cAppendix =useCollapse(false,true);
@@ -759,91 +763,7 @@ const InternalItem6d3: React.RefForwardingComponent<InternalItemHandResult,Inter
       <React.Fragment>
         <InspectRecordTitle  control={eos}   label={'层门间隙门锁'}>
           <InspectZoneHeadColumn label={'6 轿门与层门'} projects={['6.3','6.9','6.12']} />
-          <InspectRecordTitle  control={cAppendix} label={'附录A 层门间隙、啮合长度'}>
-            <div>
-              已检记录,每层七个尺寸:
-              {inp?.层站?.map((a,i)=>{
-                return <React.Fragment key={i}>
-                  <br/>{
-                  `[${a}]层: ${inp?.门扇隙?.[a]||''} , ${inp?.门套隙?.[a]||''} , ${inp?.地坎隙?.[a]||''} , ${inp?.施力隙?.[a]||''} , ${inp?.门锁啮长?.[a]||''} , ${inp?.刀坎距?.[a]||''} , ${inp?.轮坎距?.[a]||''};`
-                }
-                </React.Fragment>;
-              }) }
-            </div>
-            新增检查=>
-            <InputGroupLine  label='首先设置当前层站号'>
-              <SuffixInput
-                value={floor||''}
-                onChange={e => {setFloor( e.currentTarget.value) }}
-              >
-                <Button onPress={() =>floor&&(inp?.层站?.includes(floor)? null:
-                    setInp( (inp?.层站&&{...inp,层站:[...inp?.层站,floor] } )
-                      || {...inp,层站:[floor] } )
-                )}
-                >新增</Button>
-              </SuffixInput>
-            </InputGroupLine>
-            <div css={{ textAlign: 'center' }}>
-              <Button css={{ marginTop: theme.spaces.sm }} size="sm"
-                      onPress={() => floor&&inp?.层站?.includes(floor) &&(
-                        setInp({...inp,层站:[...inp.层站.filter(a => a!==floor )],
-                          门扇隙:{...inp?.门扇隙,[floor]:undefined}, 门套隙:{...inp?.门套隙,[floor]:undefined}, 地坎隙:{...inp?.地坎隙,[floor]:undefined}
-                          , 施力隙:{...inp?.施力隙,[floor]:undefined}, 门锁啮长:{...inp?.门锁啮长,[floor]:undefined}, 刀坎距:{...inp?.刀坎距,[floor]:undefined}
-                          , 轮坎距:{...inp?.轮坎距,[floor]:undefined}
-                        })
-                      )}
-              >刪除该层</Button>
-            </div>
-            <InputGroupLine label={`层门门扇间间隙(层号 ${floor}):`}>
-              <SuffixInput
-                placeholder="请输入测量数"
-                value={ (inp?.门扇隙?.[floor] ) || ''}
-                onChange={e => floor&&setInp({ ...inp, 门扇隙:{...inp?.门扇隙,[floor]:e.currentTarget.value||undefined} }) }
-              >mm</SuffixInput>
-            </InputGroupLine>
-            <InputGroupLine label={`层门门扇与门套间隙(层号 ${floor}):`}>
-              <SuffixInput
-                placeholder="请输入测量数"
-                value={ (inp?.门套隙?.[floor] ) || ''}
-                onChange={e => floor&&setInp({ ...inp, 门套隙:{...inp?.门套隙,[floor]:e.currentTarget.value||undefined} }) }
-              >mm</SuffixInput>
-            </InputGroupLine>
-            <InputGroupLine label={`层门扇与地坎间隙(层号 ${floor}):`}>
-              <SuffixInput
-                placeholder="请输入测量数"
-                value={ (inp?.地坎隙?.[floor] ) || ''}
-                onChange={e => floor&&setInp({ ...inp, 地坎隙:{...inp?.地坎隙,[floor]:e.currentTarget.value||undefined} }) }
-              >mm</SuffixInput>
-            </InputGroupLine>
-            <InputGroupLine label={`层门扇间施力间隙(层号 ${floor}):`}>
-              <SuffixInput
-                placeholder="请输入测量数"
-                value={ (inp?.施力隙?.[floor] ) || ''}
-                onChange={e => floor&&setInp({ ...inp, 施力隙:{...inp?.施力隙,[floor]:e.currentTarget.value||undefined} }) }
-              >mm</SuffixInput>
-            </InputGroupLine>
-            <InputGroupLine label={`门锁啮合长度(层号 ${floor}):`}>
-              <SuffixInput
-                placeholder="请输入测量数"
-                value={ (inp?.门锁啮长?.[floor] ) || ''}
-                onChange={e => floor&&setInp({ ...inp, 门锁啮长:{...inp?.门锁啮长,[floor]:e.currentTarget.value||undefined} }) }
-              >mm</SuffixInput>
-            </InputGroupLine>
-            <InputGroupLine label={`轿门门刀与层门地坎间距(层号 ${floor}):`}>
-              <SuffixInput
-                placeholder="请输入测量数"
-                value={ (inp?.刀坎距?.[floor] ) || ''}
-                onChange={e => floor&&setInp({ ...inp, 刀坎距:{...inp?.刀坎距,[floor]:e.currentTarget.value||undefined} }) }
-              >mm</SuffixInput>
-            </InputGroupLine>
-            <InputGroupLine label={`门锁滚轮与轿门地坎间距(层号 ${floor}):`}>
-              <SuffixInput
-                placeholder="请输入测量数"
-                value={ (inp?.轮坎距?.[floor] ) || ''}
-                onChange={e => floor&&setInp({ ...inp, 轮坎距:{...inp?.轮坎距,[floor]:e.currentTarget.value||undefined} }) }
-              >mm</SuffixInput>
-            </InputGroupLine>
-          </InspectRecordTitle>
+
 
           <InspectItemHeadColumn  level={'C'} label={'6.3 门间隙'}  >
             <IndentationLayText title={'门关闭后,应当符合以下要求:'}>
@@ -853,13 +773,16 @@ const InternalItem6d3: React.RefForwardingComponent<InternalItemHandResult,Inter
             </IndentationLayText>
             <Table css={{borderCollapse:'collapse'}}>
               <TableBody>
-                <TableRow >
-                  <CCell>层</CCell>
-                  <CCell>门扇隙</CCell>
-                  <CCell>门套隙</CCell>
-                  <CCell>地坎隙</CCell>
-                  <CCell>施力隙</CCell>
-                </TableRow>
+                <RouterLink key={99} to={`/report/item/gap/227/EL-DJ/ver/1`}>
+                  <TableRow >
+                    <CCell>层</CCell>
+                    <CCell>门扇隙</CCell>
+                    <CCell>门套隙</CCell>
+                    <CCell>地坎隙</CCell>
+                    <CCell>施力隙</CCell>
+                  </TableRow>
+                </RouterLink>
+
                 {inp?.层站?.map((a,i)=>{
                   return <TableRow key={i}>
                     <CCell>{a}</CCell>
@@ -882,7 +805,9 @@ const InternalItem6d3: React.RefForwardingComponent<InternalItemHandResult,Inter
                             onChange={e => setInp({ ...inp, 最不利隙: e.currentTarget.value||undefined}) }
             />
           </InputGroupLine>
-
+          <Button size="lg" intent={'primary'} onPress={() =>{ setStorage({...storage, ...inp}) }}>
+            修改确认
+          </Button>
           <InspectItemHeadColumn  level={'B'} label={'6.9 门的锁紧'}  >
             <IndentationLayText title={'(1)每个层门都应当设有符合下述要求的门锁装置:'}>
               ②锁紧动作由重力、永久磁铁或者弹簧来产生和保持，即使永久磁铁或者弹簧失效，重力亦不能导致开锁；<br/>
@@ -2414,7 +2339,7 @@ const ItemGapMeasure: React.RefForwardingComponent<InternalItemHandResult,Intern
       <React.Fragment>
       <InspectRecordTitle  control={cAppendix} label={'附录A 层门间隙、啮合长度'}>
 
-        <RouterLink key={99} to={`/report/item/2.1/227/EL-DJ/ver/1`}>
+        <RouterLink key={99} to={`/report/item/6.3/227/EL-DJ/ver/1`}>
         <div>
           已检记录,每层七个尺寸:
           {inp?.层站?.map((a,i)=>{
@@ -2605,6 +2530,7 @@ const projectList = [
   createItem(['2.1','2.5','2.6'], <InternalItem2t4/>),
   //createItem(['2.1','2.5','2.6'], <ItemUniversal x={1} y={0}/>),
   createItem(['gap'], <ItemGapMeasure/>),
+  createItem(['6.3','6.9','6.12'], <InternalItem6d3/>),
   /*createItem(['2.7'], <InternalItem5/>),
   createItem(['2.8'], <InternalItem2d8/>),
   createItem(['2.9','2.10','2.11'], <InternalItem2d9/>),
@@ -2616,7 +2542,7 @@ const projectList = [
   createItem(['5.1','5.2'], <InternalItem25/>),
   createItem(['5.3','5.5','5.6'], <InternalItem27/>),
 
-  createItem(['6.3','6.9','6.12'], <InternalItem6d3/>),
+
   createItem(['6.4','6.5','6.6','6.7'], <InternalItem31/>),
   createItem(['6.8','6.10','6.11'], <InternalItem35/>),
   createItem(['8.1','8.2','8.3','8.4'], <InternalItem8d1/>),
