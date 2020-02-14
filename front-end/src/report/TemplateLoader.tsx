@@ -38,27 +38,24 @@ import throttle from 'throttle-asynchronous'
 import { loadTemplate } from "./template";
 import typeAsRoute from "../typeAsRoute.json";
 import { Dispatch, SetStateAction } from "react";
+import { EditStorageContext } from "./StorageContext";
 
-
-//当作，模板在线文档的编辑数据的，临时存储。 子组件需要监听变化的数据。
-interface EditStorageContextType {
-  storage: any,
-  setStorage: Dispatch<SetStateAction<any>>
-}
-
+/*
+错误！ 本地重复定义了外部全局实例，结果本文件内只能看到 自己的EditStorageContext，而不是公用的哪一个。
 export const EditStorageContext = React.createContext<EditStorageContextType | null>(
   null
 );
+*/
 
 
-interface RecordViewProps {
+interface RecordStarterProps {
   id: string;
   action: string;
   source: any;
   template: React.ReactElement<React.RefForwardingComponent<InternalItemHandResult,TemplateViewProps>>;
 }
 //这才是右边的！，编辑，或原始记录的查看：
-export const RecordView: React.FunctionComponent<RecordViewProps> = ({
+export const RecordStarter: React.FunctionComponent<RecordStarterProps> = ({
                                                                        id,
                                                                        action,
                                                                        source,
@@ -163,4 +160,45 @@ export const RecordView: React.FunctionComponent<RecordViewProps> = ({
 
 
 
+
+interface ReportStarterProps {
+  id: string;
+  action: string;
+  source: any;
+  template: React.ReactElement<React.RefForwardingComponent<InternalItemHandResult,TemplateViewProps>>;
+}
+//这才是右边的！，编辑，或原始记录的查看：
+export const ReportStarter: React.FunctionComponent<ReportStarterProps> = ({
+                                                                             id,
+                                                                             action,
+                                                                             source,
+                                                                             template,
+                                                                             ...other
+                                                                           }) => {
+  const theme = useTheme();
+  //初始化不可以直接取React.useState(source || {})，不然路由器切换就变成旧source。新修改被抛弃了。
+  const {storage, setStorage} =React.useContext(EditStorageContext);
+
+  console.log("ReportStarter捕获,切花source=", source,"新storage=",storage);
+
+  if (!id) {
+    return null;
+  }
+
+  //无法把<EditStorageContext.Provider value={{storage,setStorage}}>放这附近能产生效果，必须提升到顶级路由组件内去做。
+  return (
+    <React.Fragment>
+      开头部分条
+      {
+        //useMemo使用后：各分区项目子组件inp各自独立的，分区项目子组件内若使用setInp(null) 清空重置后，无法靠重新拉取后端数据来保证恢复显示。
+        //项目子组件使用setInp(null) 重置后，若上级组件重新取后端数据没变化的，也必须再次路由后再进入才可以让各分区项目子组件render恢复显示数据。
+        React.cloneElement(template as React.ReactElement<any>, {
+          source,
+          action
+        })
+      }
+      <Text  css={{wordWrap: 'break-word'}}>{false && `当前(${JSON.stringify(storage)})`}</Text>
+    </React.Fragment>
+  );
+}
 

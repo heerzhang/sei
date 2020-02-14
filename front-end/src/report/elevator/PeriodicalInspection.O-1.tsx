@@ -20,9 +20,9 @@ import {  InternalItemHandResult, InternalItemProps } from "../comp/base";
 import { callSubitemChangePar, callSubitemShow, mergeSubitemRefs } from "../../utils/tools";
 import orderBy from "lodash.orderby";
 import { string } from "prop-types";
-import {inspectionContent} from "../PrintReport"
+import { inspectionContent, ReportView } from "./PeriodicalInspection.R-1";
 import { Link as RouterLink } from "wouter";
-import { EditStorageContext } from "../RecordView";
+import { EditStorageContext } from "../StorageContext";
 
 
 let   id = 0;
@@ -40,7 +40,7 @@ function verifyAction( action:  string, generalFormat: any[]) {
   else  return {isItemNo: false};
 }
 
-export const TemplateView: React.RefForwardingComponent<InternalItemHandResult,TemplateViewProps>=
+const OriginalView: React.RefForwardingComponent<InternalItemHandResult,TemplateViewProps>=
   React.forwardRef((
      {inp:oldWay, action='None', children},   ref
   ) => {
@@ -635,7 +635,6 @@ export const TemplateView: React.RefForwardingComponent<InternalItemHandResult,T
         </React.Fragment>;
   } );
 
-export  const  myTemplate= <TemplateView/>;
 
 
 const InternalItem1: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
@@ -2560,3 +2559,8 @@ const projectList = [
 
 //'附录A 层门间隙、啮合长度' 这7个测量数据，单独放一个编辑组件。而原本'6.3','6.9','6.12'只读和跳转连接。
 //createItem(['8.10','8.11','8.12','8.13'], <InternalItem8d10/>),
+
+
+//模板入口
+export  const  originalTemplate= <OriginalView inp={null} action='ALL'/>;
+export  const  reportTemplate= <ReportView source={null} action='ALL'/>;

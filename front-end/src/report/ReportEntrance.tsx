@@ -13,7 +13,7 @@ import { lazy } from "react";
 import { WaitingComponent } from "../TopRouter";
 import { Route, Switch } from "wouter";
 import { ReportSample } from "../inspect/ReportSample";
-import { EditStorageContext } from "./RecordView";
+import { EditStorageContext } from "./StorageContext";
 
 
 const TemplateMain = WaitingComponent(lazy(() => import("./TemplateMain")));

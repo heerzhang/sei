@@ -38,7 +38,8 @@ import { useCommitOriginalData } from "./db";
 import throttle from 'throttle-asynchronous'
 import { loadTemplate } from "./template";
 import typeAsRoute from "../typeAsRoute.json";
-import { RecordView } from "./RecordView";
+//import { RecordView } from "./RecordView";
+import { RecordStarter, ReportStarter } from "./TemplateLoader";
 
 export interface MainProps {
   path?: string;
@@ -59,14 +60,17 @@ export const TemplateMain: React.FunctionComponent<MainProps> = ({source}) => {
   const renderList =match||     isLarge || !showingRecipe;  　//大屏或者小屏但是没有显示具体明细页的场合。
   const [template, setTemplate] = React.useState(null   as any);
 
-  console.log("来TemplateMain当前的params match=",match ,"showingRecipe=",params, showingRecipe);
   function onLogoutDo() {
     setLocation("/login",  false );
   }
   const { submitfunc:signOut,  } = useSignOut(onLogoutDo);
 
-  if(!params || !(params.template))   return null;
-  loadTemplate(typeAsRoute[params &&params.template], setTemplate);
+  if(!params || !(params.template))   throw new Error(`没指定模板`);
+
+  React.useEffect(() => {
+    loadTemplate(typeAsRoute[params &&params.template], setTemplate);
+  }, []);
+  console.log("来TemplateMain当前的params action=",action ,"showingRecipe=",params, showingRecipe);
 
   return (
     <Layout>
@@ -243,7 +247,10 @@ export const TemplateMain: React.FunctionComponent<MainProps> = ({source}) => {
                             }
                           }}
               >
-                <PrintReport source={source}/>
+                {template &&
+                  <ReportStarter id={'227'} action={action} source={source} template={template.report}/>
+                }
+
               </ScrollView>
             </TabPanel>
             <TabPanel  id="ISPlist">
@@ -314,7 +321,7 @@ export const TemplateMain: React.FunctionComponent<MainProps> = ({source}) => {
                 }}
               >
                 {template && action!=='none'
-                   && <RecordView id={'227'} source={source} action={action} template={template}/>
+                 && <RecordStarter id={'227'} action={action}  source={source} template={template.original}/>
                 }
               </Layer>
             </div>

@@ -16,7 +16,7 @@ import { useSession } from "./auth";
 import { Example as Test } from "./comp/test02";
 import  Example  from "./comp/test01";
 //import MainReport from "./report/ReportEntrance";
-import { EditStorageContext } from "./report/RecordView";
+import { EditStorageContext } from "./report/StorageContext";
 
 
 //网站的顶级路由器；　这里可以添加或分解子网站，分批开发，分开管理属于同一个域名底下的多个内容网站。

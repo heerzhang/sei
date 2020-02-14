@@ -649,13 +649,15 @@ const getItemTransform = (orc: any) => {
 interface PrintReportProps {
   source: any;
   printing?: boolean;
+  action: string;
   template?: React.ReactElement<React.RefForwardingComponent<InternalItemHandResult,TemplateViewProps>>;
 }
 //viewAll是否是整个报表都一起显示。
 //export default function RecordView({printing, inp}:{printing?:boolean,inp:any },props) {
-export const PrintReport: React.FunctionComponent<PrintReportProps> = ({
+export const ReportView: React.FunctionComponent<PrintReportProps> = ({
     printing=false,
     source: orc,
+    action,
     template,
     ...other
     }) => {
@@ -753,14 +755,14 @@ export const PrintReport: React.FunctionComponent<PrintReportProps> = ({
             >
               <div>
                 <Embed css={{width: "190px",margin: "auto"}} width={95} height={45}>
-                  <FadeImage src={`${require("../images/MA.png")}`}/>
+                  <FadeImage src={`${require("../../images/MA.png")}`}/>
                 </Embed>
                 <br/>
                 <Text variant="h5">181320110160</Text>
               </div>
               <div>
                 <Embed css={{width: "140px",margin: "auto"}} width={10} height={10}>
-                  <FadeImage src={`${require("../images/reportNoQR.png")}`}/>
+                  <FadeImage src={`${require("../../images/reportNoQR.png")}`}/>
                 </Embed>
               </div>
               <div>
@@ -1065,7 +1067,7 @@ export const PrintReport: React.FunctionComponent<PrintReportProps> = ({
               <CCell>日期</CCell>
               <CCell>{orc.编制日期}</CCell>
               <CCell rowSpan={3}>
-                <div css={{backgroundImage:`url(${require("../images/seal.png")})`,backgroundSize:"cover",backgroundPosition:"center",minHeight:'30vmin'}}>
+                <div css={{backgroundImage:`url(${require("../../images/seal.png")})`,backgroundSize:"cover",backgroundPosition:"center",minHeight:'30vmin'}}>
                   <Table  fixed={ ["40%","%"]  }
                           printColWidth={ ["170","230"] }
                           css={ {borderCollapse: 'collapse',height:'fill-available'} }
