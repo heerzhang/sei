@@ -162,7 +162,7 @@ export const WaitingComponent = (Component: any) => {
 const Main = WaitingComponent(lazy(() => import("./Main")));
 const DeviceMain = WaitingComponent(lazy(() => import("./device/DeviceMain")));
 const InspectMain = WaitingComponent(lazy(() => import("./inspect/InspectMain")));
-const MainReport = WaitingComponent(lazy(() => import("./report/ReportEntrance")));
+const ReportEntrance = WaitingComponent(lazy(() => import("./report/ReportEntrance")));
 const OriginalRecord = WaitingComponent(lazy(() => import("./original/OriginalRecord")));
 
 function TopRouter() {
@@ -221,7 +221,7 @@ function TopRouter() {
             <NestingtRoute path="/device/:rest*" component={DeviceMain}/>
             <NestingtRoute path="/inspect/:rest*" component={InspectMain}/>
 
-            <NestingtRoute path="/report/:rest*" component={MainReport}/>
+            <NestingtRoute path="/report/:rest*" component={ReportEntrance}/>
             <NestingtRoute path="/original/:rest*" component={OriginalRecord}/>
 
             <Route path="/test/test01">   <Example  />    </Route>

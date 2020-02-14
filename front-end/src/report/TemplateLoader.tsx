@@ -188,7 +188,6 @@ export const ReportStarter: React.FunctionComponent<ReportStarterProps> = ({
   //无法把<EditStorageContext.Provider value={{storage,setStorage}}>放这附近能产生效果，必须提升到顶级路由组件内去做。
   return (
     <React.Fragment>
-      开头部分条
       {
         //useMemo使用后：各分区项目子组件inp各自独立的，分区项目子组件内若使用setInp(null) 清空重置后，无法靠重新拉取后端数据来保证恢复显示。
         //项目子组件使用setInp(null) 重置后，若上级组件重新取后端数据没变化的，也必须再次路由后再进入才可以让各分区项目子组件render恢复显示数据。

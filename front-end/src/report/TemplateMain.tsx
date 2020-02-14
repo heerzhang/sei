@@ -41,36 +41,71 @@ import typeAsRoute from "../typeAsRoute.json";
 //import { RecordView } from "./RecordView";
 import { RecordStarter, ReportStarter } from "./TemplateLoader";
 
-export interface MainProps {
+
+
+
+interface TemplateMainProps {
+  id?: string;
+  source?: any;
+}
+
+function TemplateMain({id, source}: TemplateMainProps) {
+  const [match, params] = useRoute("/report/:template/ver/:verId/:action/:repId");
+  let action = params &&  params.action;
+  const [template, setTemplate] = React.useState(null as any);
+  console.log("来TemplateMain当前的match=",match ,"params=",params);
+  if(!match || !params || !params.template || !params.verId || !params.action)
+      throw new Error(`没路由了`);
+
+  React.useEffect(() => {
+    loadTemplate(typeAsRoute[params &&params.template], setTemplate);
+  }, []);
+
+  return (
+    <React.Fragment>
+      <Switch>
+        <Route path="/report/:template/ver/:verId/preview/:repId">
+          {template && source &&
+              <ReportStarter id={'227'} action={action} source={source} template={template.report}/>
+          }
+        </Route>
+        <Route path="/report/:rest*">
+          { source &&
+               <RecordEditorOrPrint source={source} action={action} templateSet={template}/>
+          }
+        </Route>
+      </Switch>
+    </React.Fragment>
+  );
+}
+
+
+export interface RecordEditorOrPrintProps {
   path?: string;
   id?: string;
   source: any;  //原始记录的json数据 + 。
+  templateSet: any;
+  action: string;
 }
 
-export const TemplateMain: React.FunctionComponent<MainProps> = ({source}) => {
+export const RecordEditorOrPrint: React.FunctionComponent<RecordEditorOrPrintProps> = (
+  {source,templateSet, action}
+  ) => {
   const theme = useTheme();
   const {user} = useSession();
-  //可提前从URL筛选出参数来的。 "/report/item/1.4/:repId/EL-DJ/ver/1"
-  const [match, params] = useRoute("/report/item/:action/:repId/:template/ver/:verId");
-  let showingRecipe = params && params.repId   &&  params.action;
-  let action = params &&  params.action;
+  let showingRecipe = (action!=='none');
   const [activeTab, setActiveTab] = React.useState(0);
   const [, setLocation] = useLocation();
   const isLarge = useMedia({ minWidth: "800px" });
-  const renderList =match||     isLarge || !showingRecipe;  　//大屏或者小屏但是没有显示具体明细页的场合。
-  const [template, setTemplate] = React.useState(null   as any);
+  const renderList =(action!=='printALL') ||  isLarge || !showingRecipe;  　//大屏或者小屏但是没有显示具体明细页的场合。
 
   function onLogoutDo() {
     setLocation("/login",  false );
   }
   const { submitfunc:signOut,  } = useSignOut(onLogoutDo);
 
-  if(!params || !(params.template))   throw new Error(`没指定模板`);
-
-  React.useEffect(() => {
-    loadTemplate(typeAsRoute[params &&params.template], setTemplate);
-  }, []);
-  console.log("来TemplateMain当前的params action=",action ,"showingRecipe=",params, showingRecipe);
+  if(!templateSet)   throw new Error(`没模板哦`);
+  console.log("来TemplateMain当前的params action=",action ,"showingRecipe=",showingRecipe);
 
   return (
     <Layout>
@@ -247,8 +282,8 @@ export const TemplateMain: React.FunctionComponent<MainProps> = ({source}) => {
                             }
                           }}
               >
-                {template &&
-                  <ReportStarter id={'227'} action={action} source={source} template={template.report}/>
+                {templateSet?.report &&
+                  <ReportStarter id={'227'} action={action} source={source} template={templateSet.report}/>
                 }
 
               </ScrollView>
@@ -266,7 +301,7 @@ export const TemplateMain: React.FunctionComponent<MainProps> = ({source}) => {
         {
           //实际情况：在小屏场合，左半边内容被后面的右中文档流后面的界面部分给屏蔽遮盖掉了。
         }
-        {match &&showingRecipe && (
+        {showingRecipe && (
           <div
             css={{
               display: "block",
@@ -302,7 +337,7 @@ export const TemplateMain: React.FunctionComponent<MainProps> = ({source}) => {
               <Layer
                 elevation="xl"
             //组件id! 缺少key导致：遇到小屏幕轮转显示正常，大屏整个显示模式却必须手动刷新才能切换内容。
-                key={showingRecipe}
+                key={action}
                 css={{
                   borderRadius: 0,
                   position: "relative",
@@ -320,8 +355,8 @@ export const TemplateMain: React.FunctionComponent<MainProps> = ({source}) => {
                   }
                 }}
               >
-                {template && action!=='none'
-                 && <RecordStarter id={'227'} action={action}  source={source} template={template.original}/>
+                {templateSet?.original && action!=='none'
+                 && <RecordStarter id={'227'} action={action}  source={source} template={templateSet.original}/>
                 }
               </Layer>
             </div>
@@ -335,29 +370,5 @@ export const TemplateMain: React.FunctionComponent<MainProps> = ({source}) => {
 
 
 
-interface SecondRoterProps {
-  id?: string;
-  source?: any;
-}
-//作廢！！
-function SecondRoterContent({id, source}: SecondRoterProps) {
-  return (
-    <React.Fragment>
-
-      <Route path={"/report/item/1.4/:repId/EL-DJ/ver/1"} component={ReportSample} />
-
-      //作廢！！
-      <Route path="/report/item/ALL/:repId/EL-DJ/ver/1">  <PrintReport source={source}/> </Route>
-      <Route path="/report/item/None/:repId/EL-DJ/ver/1">  </Route>
-
-      <Route path={"/report/item/5.1/:repId/EL-DJ/ver/1"} component={ReportSample} />
-
-      <Route path="/:rest*"> <h1>没有该URL匹配的视图内容</h1> </Route>
-
-    </React.Fragment>
-  );
-}
-
 
 export default TemplateMain;
-
