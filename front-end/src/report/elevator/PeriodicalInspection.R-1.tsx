@@ -131,6 +131,7 @@ export const inspectionContent=[
     bigLabel:'技术资料',
     cutLines:[5],
     items:[
+      null,null,null,
       {
         item:1.4,
         label:'使用资料',
@@ -154,6 +155,7 @@ export const inspectionContent=[
         names:['通道设置','通道照明','通道门'],
         addNames:['机房高出','梯子夹角','梯子判定','通道门宽','通道门高','通道判定']
       },
+      null,null,null,
       {
         item:2.5,
         label:'(1)照明、照明开关',
@@ -213,6 +215,7 @@ export const inspectionContent=[
     bigLabel:'井道及相关设备',
     cutLines:[6,7],
     items:[
+      null,null,null,
       {
         item:3.4,
         label:'井道安全门',
@@ -229,6 +232,7 @@ export const inspectionContent=[
         names:['检修门门锁','检修门电安'],
         addNames:[]
       },
+      null,
       {
         item:3.7,
         label:'轿厢与井道壁距离',
@@ -236,6 +240,7 @@ export const inspectionContent=[
         names:['轿井距离判定'],
         addNames:[]
       },
+      null,null,
       {
         item:3.10,
         label:'极限开关',
@@ -258,6 +263,7 @@ export const inspectionContent=[
         names:['底坑底部','停止装置'],
         addNames:[]
       },
+      null,
       {
         item:3.14,
         label:'(2)限速绳张紧装置的电气安全装置',
@@ -288,6 +294,7 @@ export const inspectionContent=[
         names:['检修装置','轿顶停止装置'],
         addNames:[]
       },
+      null,
       {
         item:4.3,
         label:'(3)安全门(窗)电气安全装置',
@@ -295,6 +302,7 @@ export const inspectionContent=[
         names:['安全窗门'],
         addNames:[]
       },
+      null,
       {
         item:4.5,
         label:'对重(平衡重)块',
@@ -310,6 +318,7 @@ export const inspectionContent=[
         names:['超面积载货'],
         addNames:[]
       },
+      null,
       {
         item:4.8,
         label:'紧急照明和报警装置',
@@ -361,6 +370,7 @@ export const inspectionContent=[
         names:['补偿绳固定','补偿绳电安','补偿绳防跳'],
         addNames:[]
       },
+      null,
       {
         item:5.5,
         label:'松绳(链)保护',
@@ -382,6 +392,7 @@ export const inspectionContent=[
     bigLabel:'轿门与层门',
     cutLines:[7,7],
     items:[
+      null,null,
       {
         item:6.3,
         label:'门间隙',
@@ -458,7 +469,7 @@ export const inspectionContent=[
       }
     ]
   },
-  {},
+  null,
   {
     bigNo: 8,
     bigLabel:'试验',
@@ -515,7 +526,7 @@ export const inspectionContent=[
         names:['救援程序','救援通道','救援操作'],
         addNames:[]
       },
-      {},
+      null,
       {
         item:8.9,
         label:'空载曳引检查',
@@ -555,7 +566,7 @@ export const inspectionContent=[
   }
 ];
 
-console.log("inspectionContent：捕获 ==inp=[",  inspectionContent,  "]items=", inspectionContent[0].items[0].subItems);
+console.log("inspectionContent：捕获 ==inp=[",  inspectionContent,  "]items=");
 
 //生成臨時2列一行儀器表
 const getInstrument = (instbl: [any]) => {
@@ -626,21 +637,19 @@ export interface ItemTransProps {
 }
 
 //把原始记录的数据转换成报告的各个项目的结论。
+//特殊处理也在这里。
 const getItemTransform = (orc: any) => {
   let out={};
-  //特殊处理也在这里。
-  out[1.4] =aItemTransform(orc, 'B',  ...inspectionContent[0].items[0].names);
-  // out[1.4] =aItemTransform(orc, 'B','登记资料','安全档案','管理制度','维保合同','作业人员证');
-  out[2.1] =aItemTransform(orc, 'C','通道设置','通道照明','通道门');
-  out[2.5] =aItemTransform(orc, 'C','机房照明');
-  out[2.6] =aItemTransform(orc, 'B','开关电路关系');
-  out[2.7] =aItemTransform(orc, 'B','主机工况','轮槽磨损','制动器','手动紧急操作');
-
-
+  inspectionContent.forEach((rowBigItem, x) => {
+    rowBigItem && rowBigItem.items.forEach((item, y)=> {
+      if(item)   out[`${x+1}.${y+1}`] =aItemTransform(orc, item.iClass,  ...item.names);
+    });
+  });
   let failure=[];
   for(let key  in out){
     if(out[key].result==='不合格')  failure.push(key);
   }
+  //特别的转型！都转成key/value;
   return {...out, failure};
 }
 
@@ -650,7 +659,6 @@ interface PrintReportProps {
   source: any;
   printing?: boolean;
   action: string;
-  template?: React.ReactElement<React.RefForwardingComponent<InternalItemHandResult,TemplateViewProps>>;
 }
 //viewAll是否是整个报表都一起显示。
 //export default function RecordView({printing, inp}:{printing?:boolean,inp:any },props) {
@@ -658,7 +666,6 @@ export const ReportView: React.FunctionComponent<PrintReportProps> = ({
     printing=false,
     source: orc,
     action,
-    template,
     ...other
     }) => {
   const theme = useTheme();
@@ -1146,7 +1153,7 @@ export const ReportView: React.FunctionComponent<PrintReportProps> = ({
               <CCell>{itr[1.4][4]}</CCell>
             </TableRow>
 
-           <RouterLink key={35} to={`/report/item/2.1/227/EL-DJ/ver/1`}>
+           <RouterLink key={35} to={`/report/EL-DJ/ver/1/2.1/227`}>
             <TableRow >
               <CCell component="th" scope="row" rowSpan={3}>2</CCell>
               <CCell rowSpan={3}>{itr[2.1].iclass}</CCell>
@@ -1727,7 +1734,7 @@ export const ReportView: React.FunctionComponent<PrintReportProps> = ({
           <TableBody>
             {itr.failure.map((ts, i) => {
               return (
-                <RouterLink key={i} to={`/report/item/${ts}/227/EL-DJ/ver/1`}>
+                <RouterLink key={i} to={`/report/EL-DJ/ver/1/${ts}/227`}>
                   <TableRow>
                     <CCell component="th" scope="row">{i+1}</CCell>
                     <CCell>{itr[ts].iclass}/{ts}</CCell>
@@ -1740,7 +1747,7 @@ export const ReportView: React.FunctionComponent<PrintReportProps> = ({
             })
             }
 
-            <RouterLink key={99} to={`/report/item/gap/227/EL-DJ/ver/1`}>
+            <RouterLink key={99} to={`/report/EL-DJ/ver/1/gap/227`}>
             <TableRow>
               <CCell component="th" scope="row">{99}</CCell>
               <CCell>gap</CCell>
@@ -1749,7 +1756,7 @@ export const ReportView: React.FunctionComponent<PrintReportProps> = ({
               <CCell>发了的方式</CCell>
             </TableRow>
           </RouterLink>
-            <RouterLink key={92} to={`/report/item/6.3/227/EL-DJ/ver/1`}>
+            <RouterLink key={92} to={`/report/EL-DJ/ver/1/6.3/227`}>
               <TableRow>
                 <CCell component="th" scope="row">{99}</CCell>
                 <CCell>gap</CCell>

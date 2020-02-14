@@ -2338,7 +2338,7 @@ const ItemGapMeasure: React.RefForwardingComponent<InternalItemHandResult,Intern
       <React.Fragment>
       <InspectRecordTitle  control={cAppendix} label={'附录A 层门间隙、啮合长度'}>
 
-        <RouterLink key={99} to={`/report/item/6.3/227/EL-DJ/ver/1`}>
+        <RouterLink key={99} to={`/report/EL-DJ/ver/1/6.3/227`}>
         <div>
           已检记录,每层七个尺寸:
           {inp?.层站?.map((a,i)=>{
@@ -2482,7 +2482,7 @@ const ItemUniversal: React.RefForwardingComponent<InternalItemHandResult,ItemUni
         <hr/>
         {procedure}
 
-        <RouterLink key={99} to={`/report/item/gap/227/EL-DJ/ver/1`}>
+        <RouterLink key={99} to={`/report/EL-DJ/ver/1/gap/227`}>
         <Text  variant="h5"　>
           查验结果
         </Text>
