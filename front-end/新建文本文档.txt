@@ -194,10 +194,12 @@ useContext：访问全局状态，跨级传递数据=还能代替redux的存取�
 一般回调和useContext机制是子组件触发的操作；但若是反方向父辈组件来触发的调用多个子组件的函数。
 useRef两个用途：1=传统ref的真DOM实例操控，safeBind；2=保存不可变对象refs = React.useRef<Map<number, HTMLButtonElement | null>>(new Map())可以免除遭受render制约的保存信息用;跨越生命周期保存。
 直接修改子组件的写法：{ React.Children.map(；  React.cloneElement( ； } 过滤子组件类型Children.only Children.count。
-以前HOC如今要操纵传递ref的场合就上：React.RefForwardingComponent<> = React.forwardRef( 是能操控html的node真实物理元素；
+以前HOC如今要操纵传递ref的场合就上：React.RefForwardingComponent<> = React.forwardRef( 是能操控html的node真实物理元素，一般是子组件且被别人操纵的用这个。
 【与回调相反方向的函数操作模式】回调是父组件传给了子组件执行的。useImperativeHandle反向暴露机制=反过来，能允许子组件暴露自己的方法数据都给父组件去执行，有点怪，封装性遭破坏了。
 用const{ bounds }=useMeasure(ref)能获取窗口尺寸位置,实际用到ResizeObserver标准API；=嵌套组件的实际可显示的宽度，和CSS的media选择是不同的解决途径。
+多考虑用路由器，少用按钮点击触发形式。多用路由参数多页面逻辑切换，少用弹出形式对话框。
 
+外来useTouchable组件感觉有点小毛病。 这useTouchable其实是Touchable和Button核心，底下就是bind，也不用加ref的也可以触发。
 WeX5的IDE基于Eclipse，H5 App开发工具,用的是BootStrap加载H5有点慢，美团、爱奇艺、微信等应用，Hybrid App开发模式以JS+Native两者相互调用为主。
 input非react控制和uncontrolled切换报错只提示一次。<input>value={inp.x ||'' }加缺省值''，不能是未定义的</>
 父组件和子组件更新render次数没有一定必然关系，可以就重点组件部分做优化减少render重复次数。

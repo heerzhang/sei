@@ -31,8 +31,7 @@ import { IspDetail } from "../inspect/IspDetail";
 import { ReportSample } from "../inspect/ReportSample";
 import { BoundReports } from "../inspect/report/BoundReports";
 //潜入　嵌套在左边那　条
-import { PrintReport } from "./PrintReport";
-import { Branding } from "../Branding";
+
 import { InternalItemHandResult, TemplateViewProps } from "./comp/base";
 import { useCommitOriginalData } from "./db";
 import throttle from 'throttle-asynchronous'

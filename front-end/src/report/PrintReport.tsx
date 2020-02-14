@@ -2,6 +2,7 @@
 import { jsx,} from "@emotion/core";
 import * as React from "react";
 import {
+  Button,
   Collapse,
   Container,
   Divider,
@@ -701,7 +702,7 @@ export const PrintReport: React.FunctionComponent<PrintReportProps> = ({
   function onPress() {
     setRedundance(!redundance);
   }
-  //这个外来useTouchable组件感觉有点小毛病。
+  //这个外来useTouchable组件感觉有点小毛病。 这个useTouchable其实是Touchable和Button核心，底下就是bind，也不用加ref的也可以触发。
   const { bind, } = useTouchable({
     onPress,
    // terminateOnScroll: false,
@@ -1210,7 +1211,6 @@ export const PrintReport: React.FunctionComponent<PrintReportProps> = ({
               <CCell>符合</CCell>
             </TableRow>
 
-            <RouterLink key={69} href={`/report/item/gap/227/EL-DJ/ver/1`}>
               <TableRow >
                 <CCell component="th" scope="row" rowSpan={6}>6</CCell>
                 <CCell rowSpan={6}>B</CCell>
@@ -1220,7 +1220,7 @@ export const PrintReport: React.FunctionComponent<PrintReportProps> = ({
                 <CCell>符合</CCell>
                 <CCell rowSpan={6}></CCell>
               </TableRow>
-            </RouterLink>
+
               <TableRow >
                 <Cell>(4)紧急电动运行装置</Cell>
                 <CCell>／</CCell>
@@ -1233,12 +1233,13 @@ export const PrintReport: React.FunctionComponent<PrintReportProps> = ({
                 <Cell>☆(7)门回路检测功能</Cell>
                 <CCell>／</CCell>
               </TableRow>
-            <RouterLink key={60} href={`/report/item/6.3/227/EL-DJ/ver/1`}>
-              <TableRow >
-                <Cell>☆(8)制动器故障保护</Cell>
-                <CCell>／</CCell>
-              </TableRow>
-            </RouterLink>
+
+               <TableRow >
+                   <Cell>
+                      ☆(8)制动器故障保护
+                   </Cell>
+                    <CCell>／</CCell>
+               </TableRow>
 
               <TableRow >
                 <Cell>☆(9)自动救援操作装置</Cell>
