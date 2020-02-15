@@ -246,231 +246,449 @@ const OriginalView: React.RefForwardingComponent<InternalItemHandResult,Template
           {
            // item:2.11,
             procedure:  <div>
-
+              （1）动力电路、照明电路和电气安全装置电路的绝缘电阻应当符合下述要求：
+              <Table css={{borderCollapse:'collapse'}}>
+                <TableBody>
+                  <TableRow >
+                    <CCell >标称电压/V</CCell>
+                    <CCell >测试电压 (直流)/V  </CCell>
+                    <CCell>绝缘电阻/MΩ</CCell>
+                  </TableRow>
+                  <TableRow >
+                    <CCell>安全电压</CCell>
+                    <CCell>250</CCell>
+                    <CCell>≥0.25</CCell>
+                  </TableRow>
+                  <TableRow>
+                    <CCell>≤500</CCell>
+                    <CCell>500</CCell><CCell>≥0.50</CCell>
+                  </TableRow>
+                  <TableRow>
+                    <CCell>＞500</CCell>
+                    <CCell>1000</CCell><CCell>≥1.00</CCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </div>,
+            details:[(inp,setInp)=>{
+              return <React.Fragment>
+                数据测量
+                <InputGroupLine  label='动力电路' >
+                  <SuffixInput
+                    value={inp?.动力电阻 ||''}
+                    onChange={e => setInp({ ...inp, 动力电阻: e.currentTarget.value||undefined}) }
+                    inputSize="md"
+                    type="text"
+                    placeholder="请输入测量数"
+                  >MΩ
+                  </SuffixInput>
+                </InputGroupLine>
+                <InputGroupLine  label='照明电路' >
+                  <SuffixInput
+                    value={inp?.照明电阻 ||''}
+                    onChange={e => setInp({ ...inp, 照明电阻: e.currentTarget.value||undefined}) }
+                    inputSize="md"
+                    type="text"
+                    placeholder="请输入测量数"
+                  >MΩ
+                  </SuffixInput>
+                </InputGroupLine>
+                <InputGroupLine  label='安全装置电路' >
+                  <SuffixInput
+                    value={inp?.安全装置电阻 ||''}
+                    onChange={e => setInp({ ...inp, 安全装置电阻: e.currentTarget.value||undefined}) }
+                    inputSize="md"
+                    type="text"
+                    placeholder="请输入测量数"
+                  >MΩ
+                  </SuffixInput>
+                </InputGroupLine>
+              </React.Fragment>
+            }
+            ]
+          }
+        ]
+      },
+      {
+       // bigNo: 3,
+        items:[
+          null,null,null,
+          {
+            //item:3.4,
+            procedure:  <div>
+              （3）门上应当装设用钥匙开启的锁，当门开启后不用钥匙能够将其关闭和锁住，在门锁住后，不用钥匙能够从井道内将门打开；<br/>
+              （4）应当设置电气安全装置以验证门的关闭状态。
+            </div>,
+            details:[]
+          },
+          {
+            //item:3.5,
+            procedure:  <div>
+              （3）门上应当装设用钥匙开启的锁，当门开启后不用钥匙能够将其关闭和锁住，在门锁住后，不用钥匙能够从井道内将门打开；<br/>
+              （4）应当设置电气安全装置以验证门的关闭状态。
+            </div>,
+            details:[]
+          },
+          null,
+          {
+            //item:3.7,
+            procedure:  <div>
+              （1）轿厢与面对轿厢入口的井道壁的间距不大于0.15m，对于局部高度不大于0.50m或者采用垂直滑动门的载货电梯，该间距可以增加到0.20m。如果轿厢装有机械锁紧的门并且门只能在开锁区内打开时，则上述间距不受限制。
+            </div>,
+            details:[(inp,setInp)=>{
+              return <React.Fragment>
+                数据及测量
+                <InputGroupLine label={`间距`}>
+                  <SuffixInput
+                    placeholder="请输入测量数"
+                    value={ inp?.轿井间距 ||''}
+                    onChange={e => setInp({ ...inp, 轿井间距: e.currentTarget.value||undefined}) }
+                  >m</SuffixInput>
+                </InputGroupLine>
+              </React.Fragment>
+            }]
+          },
+          null,null,
+          {
+            //item:3.10,
+            procedure:  <div>
+              （1）井道上下两端应当装设极限开关，该开关在轿厢或者对重接触缓冲器前起作用，并且在缓冲器被压缩期间保持其动作状态。
+            </div>,
+            details:[]
+          },
+          {
+            //item:3.11,
+            procedure:  <div>
+              （1）井道应当装设永久性电气照明。对于部分封闭井道，如果井道附近有足够的电气照明，井道内可以不设照明
+            </div>,
+            details:[]
+          },
+          {
+           // item:3.12,
+            procedure:  <div>
+              （1）底坑底部应当光滑平整，不得渗水、漏水；<br/>
+              （3）底坑内应当设置在进入底坑时和底坑地面上均能方便操作的停止装置，停止装置的操作装置为双稳态、红色、标以“停止”字样，并且有防止误操作的保护
+            </div>,
+            details:[]
+          },
+          null,
+          {
+            //item:3.14,
+            procedure:  <div>
+              （2）当限速器绳断裂或者过分伸长时，应当通过一个电气安全装置的作用，使电梯停止运转
+            </div>,
+            details:[]
+          },
+          {
+            //item:3.15,
+            procedure:  <div>
+              （3）缓冲器应当固定可靠、无明显倾斜，并且无断裂、塑性变形、剥落、破损等现象；<br/>
+              （4）耗能型缓冲器液位应当正确，有验证柱塞复位的电气安全装置。<br/>
+              （5）对重缓冲器附近应当设置永久性的明显标识，标明当轿厢位于顶层端站平层位置时，对重装置撞板与其缓冲器顶面间的最大允许垂直距离；并且该垂直距离不超过最大允许值
+            </div>,
+            details:[null,null,
+              (inp,setInp)=>{
+                return <React.Fragment>
+                  (5)对重越程距离
+                  <InputGroupLine label={`最大允许值`}>
+                    <SuffixInput
+                      placeholder="请输入测量数"
+                      value={ inp?.对重越程最大 ||''}
+                      onChange={e => setInp({ ...inp, 对重越程最大: e.currentTarget.value||undefined}) }
+                    >mm</SuffixInput>
+                  </InputGroupLine>
+                  <InputGroupLine label={`测量值`}>
+                    <SuffixInput
+                      placeholder="请输入测量数"
+                      value={ inp?.对重越程 ||''}
+                      onChange={e => setInp({ ...inp, 对重越程: e.currentTarget.value||undefined}) }
+                    >mm</SuffixInput>
+                  </InputGroupLine>
+                </React.Fragment>
+              }
+            ]
+          },
+        ]
+      },
+      {
+        //bigNo: 4,
+        items:[
+          {
+            //item:4.1,
+            procedure:  <div>
+              （1）轿顶应当装设一个易于接近的检修运行控制装置，并且符合以下要求：<br/>
+              ①由一个符合电气安全装置要求，能够防止误操作的双稳态开关（检修开关）进行操作；<br/>
+              ②一经进入检修运行时，即取消正常运行（包括任何自动门操作）、紧急电动运行、对接操作运行，只有再一次操作检修开关，才能使电梯恢复正常工作；<br/>
+              ③依靠持续揿压按钮来控制轿厢运行，此按钮有防止误操作的保护，按钮上或其近旁标出相应的运行方向；<br/>
+              ④该装置上设有一个停止装置，停止装置的操作装置为双稳态、红色、并标以“停止”字样，并且有防止误操作的保护；<br/>
+              ⑤检修运行时，安全装置仍然起作用。<br/>
+              （2）轿顶应当装设一个从入口处易于接近的停止装置，停止装置的操作装置为双稳态、红色、并标以“停止”字样，并且有防止误操作的保护。如果检修运行控制装置设在从入口处易于接近的位置，该停止装置也可以设在检修运行控制装置上
+            </div>,
+            details:[]
+          },
+          null,
+          {
+            //item:4.3,
+            procedure:  <div>
+              如果轿厢设有安全窗（门），应当符合以下要求：<br/>
+              （3）其锁紧由电气安全装置予以验证。
+            </div>,
+            details:[]
+          },
+          null,
+          {
+            //item:4.5,
+            procedure:  <div>
+              （1）对重(平衡重)块可靠固定；<br/>
+              （2）具有能够快速识别对重(平衡重)块数量的措施(例如标明对重块的数量或者总高度)
+            </div>,
+            details:[]
+          },
+          {
+            //item:4.6,
+            procedure:  <div>
+              （2）对于为了满足使用要求而轿厢面积超出上述规定的载货电梯，必须满足以下条件：<br/>
+              ①在从层站装卸区域总可看见的位置上设置标志，表明该载货电梯的额定载重量；<br/>
+              ②该电梯专用于运送特定轻质货物，其体积可保证在装满轿厢情况下，该货物的总质量不会超过额定载重量；<br/>
+              ③该电梯由专职司机操作，并严格限制人员进入。
+            </div>,
+            details:[]
+          },
+          null,
+          {
+            //item:4.8,
+            procedure:  <div>
+              轿厢内应当装设符合下述要求的紧急报警装置和紧急照：<br/>
+              （1）正常照明电源中断时，能够自动接通紧急照明电源；<br/>
+              （2）紧急报警装置采用对讲系统以便与救援服务持续联系，当电梯行程大于30m时，在轿厢和机房（或者紧急操作地点）之间也设置对讲系统，紧急报警装置的供电来自本条（1）所述的紧急照明电源或者等效电源；在启动对讲系统后，被困乘客不必再做其他操作
+            </div>,
+            details:[]
+          },
+          {
+            //item:4.9,
+            procedure:  <div>
+              （1）轿厢地坎下应当装设护脚板，其垂直部分的高度不小于0.75m，宽度不小于层站入口宽度
+            </div>,
+            details:[(inp,setInp)=>{
+              return <React.Fragment>
+                数据及测量
+                <InputGroupLine label={`护脚板高度`}>
+                  <SuffixInput
+                    placeholder="请输入测量数"
+                    value={ inp?.护脚板高 ||''}
+                    onChange={e => setInp({ ...inp, 护脚板高: e.currentTarget.value||undefined}) }
+                  >m</SuffixInput>
+                </InputGroupLine>
+                <InputGroupLine  label='测量结果判定'>
+                  <SelectHookfork value={ inp?.护脚板高判定 ||''}
+                                  onChange={e => setInp({ ...inp, 护脚板高判定: e.currentTarget.value||undefined}) }
+                  />
+                </InputGroupLine>
+              </React.Fragment>
+            }
+            ]
+          },
+          {
+            //item:4.10,
+            procedure:  <div>
+              （1）设置当轿厢内的载荷超过额定载重量时，能够发出警示信号，并且使轿厢不能运行的超载保护装置。该装置最迟在轿厢内的载荷达到110％额定载重量(对于额定载重量小于750kg的电梯，最迟在超载量达到75kg)时动作，防止电梯正常启动及再平层，并且轿内有音响或者发光信号提示，动力驱动的自动门完全打开，手动门保持在未锁状态
             </div>,
             details:[]
           }
         ]
       },
       {
-        bigNo: 3,
-        bigLabel:'井道及相关设备',
-        cutLines:[6,7],
+        //bigNo: 5,
         items:[
           {
-            item:3.4,
-            label:'井道安全门',
-            iClass:'C',
-            subItems:['(3)门锁','(4)电气安全装置'],
-            names:['安全门门锁','安全门电安'],
+            //item:5.1,
+            procedure:  <div>
+              出现下列情况之一时，悬挂钢丝绳和补偿钢丝绳应当报废：<br/>
+              ①出现笼状畸变、绳股挤出、扭结、部分压扁、弯折；<br/>
+              ②一个捻距内出现的断丝数大于下表列出的数值时：
+              <Table minWidth={'140px'} css={{borderCollapse:'collapse'}}>
+                <TableBody>
+                  <TableRow>
+                    <CCell rowSpan={2}>断丝的形式</CCell>
+                    <CCell colSpan={3}>钢丝绳的类型</CCell>
+                  </TableRow>
+                  <TableRow>
+                    <CCell>6×19</CCell><CCell>8×9</CCell><CCell>9×19</CCell>
+                  </TableRow>
+                  <TableRow>
+                    <CCell>均布在外层绳股上</CCell>
+                    <CCell>24</CCell><CCell>30</CCell><CCell>34</CCell>
+                  </TableRow>
+                  <TableRow>
+                    <CCell>集中在一或者两根外层绳股上</CCell>
+                    <CCell>8</CCell><CCell>10</CCell><CCell>11</CCell>
+                  </TableRow>
+                  <TableRow>
+                    <CCell>一根外绳股上相邻的断丝</CCell>
+                    <CCell>4</CCell><CCell>4</CCell><CCell>4</CCell>
+                  </TableRow>
+                  <TableRow>
+                    <CCell>股谷（缝）断丝 </CCell>
+                    <CCell>1</CCell><CCell>1</CCell><CCell>1</CCell>
+                  </TableRow>
+                  <TableRow>
+                    <Cell colSpan={4}>注：上述断丝数参考长度为一个捻距，约为6d(d表示钢丝绳的公称直径，mm）</Cell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+              ③钢丝绳直径小于其公称直径的90%；<br/>
+              ④钢丝绳严重锈蚀，铁锈填满绳股间隙。<br/>
+              采用其他类型悬挂装置的，悬挂装置的磨损、变形等不得超过制造单位设定的报废指标
+            </div>,
+            details:[(inp,setInp)=>{
+              return <React.Fragment>
+                数据及测量
+                <InputGroupLine label={`②断丝数`}>
+                  <SuffixInput
+                    placeholder="请输入测量数"
+                    value={ inp?.断丝数 ||''}
+                    onChange={e => setInp({ ...inp, 断丝数: e.currentTarget.value||undefined}) }
+                  >根</SuffixInput>
+                </InputGroupLine>
+                <InputGroupLine  label='②一个捻距断丝数,结果判定'>
+                  <SelectHookfork value={ inp?.断丝判定  ||''}
+                                  onChange={e => setInp({ ...inp, 断丝判定: e.currentTarget.value||undefined}) }
+                  />
+                </InputGroupLine>
+                <InputGroupLine label={`③钢丝绳直径`}>
+                  <SuffixInput
+                    placeholder="请输入测量数"
+                    value={ inp?.钢绳直径 ||''}
+                    onChange={e => setInp({ ...inp, 钢绳直径: e.currentTarget.value||undefined}) }
+                  >mm</SuffixInput>
+                </InputGroupLine>
+                <InputGroupLine label={`③公称直径`}>
+                  <SuffixInput
+                    placeholder="请输入测量数"
+                    value={ inp?.钢绳公称 ||''}
+                    onChange={e => setInp({ ...inp, 钢绳公称: e.currentTarget.value||undefined}) }
+                  >mm</SuffixInput>
+                </InputGroupLine>
+                <InputGroupLine  label='③钢丝绳直径小于公称90%,结果判定'>
+                  <SelectHookfork value={ inp?.钢绳判定 ||''}
+                                  onChange={e => setInp({ ...inp, 钢绳判定: e.currentTarget.value||undefined}) }
+                  />
+                </InputGroupLine>
+              </React.Fragment>
+            }
+            ]
+          },
+          {
+            //item:5.2,
+            procedure:  <div>
+              （1）悬挂钢丝绳绳端固定应当可靠，弹簧、螺母、开口销等连接部件无缺损。<br/>
+              采用其他类型悬挂装置的，其端部固定应当符合制造单位的规定。
+            </div>,
             details:[]
           },
           {
-            item:3.5,
-            label:'井道检修门',
-            iClass:'C',
-            subItems:['(3)门锁','(4)电气安全装置'],
-            names:['检修门门锁','检修门电安'],
+            //item:5.3,
+            procedure:  <div>
+              （1）补偿绳（链）端固定应当可靠；<br/>
+              （2）应当使用电气安全装置来检查补偿绳的最小张紧位置；<br/>
+              （3）当电梯的额定速度大于3.5m/s时，还应当设置补偿绳防跳装置，该装置动作时应当有一个电气安全装置使电梯驱动主机停止运转。
+            </div>,
+            details:[]
+          },
+          null,
+          {
+            //item:5.5,
+            procedure:  <div>
+              （1）如果轿厢悬挂在两根钢丝绳或者链条上，则应当设置检查绳(链)松弛的电气安全装置，当其中一根钢丝绳(链条)发生异常相对伸长时，电梯应当停止运行
+            </div>,
             details:[]
           },
           {
-            item:3.7,
-            label:'轿厢与井道壁距离',
-            iClass:'B',
-            names:['轿井距离判定'],
-            details:[]
-          },
-          {
-            item:3.10,
-            label:'极限开关',
-            iClass:'B',
-            names:['极限开关'],
-            details:[]
-          },
-          {
-            item:3.11,
-            label:'井道照明',
-            iClass:'C',
-            names:['井道照明'],
-            details:[]
-          },
-          {
-            item:3.12,
-            label:'底坑设施与装置',
-            iClass:'C',
-            subItems:['(1)底坑底部','(3)停止装置'],
-            names:['底坑底部','停止装置'],
-            details:[]
-          },
-          {
-            item:3.14,
-            label:'(2)限速绳张紧装置的电气安全装置',
-            iClass:'B',
-            names:['限速绳电安'],
-            details:[]
-          },
-          {
-            item:3.15,
-            label:'缓冲器',
-            iClass:'B',
-            subItems:['(3)固定和完好情况','(4)液位和电气安全装置','(5)对重越程距离'],
-            names:['缓冲器固定','液位电安','对重越程判定'],
+            //item:5.6,
+            procedure:  <div>
+              （1）在机房（机器设备间）内的曳引轮、滑轮、链轮、限速器，在井道内的曳引轮、滑轮、链轮、限速器及张紧轮、补偿绳张紧轮，在轿厢上的滑轮、链轮等与钢丝绳、链条形成传动的旋转部件，均应当设置防护装置，以避免人身伤害、钢丝绳或链条因松弛而脱离绳槽或链轮、异物进入绳与绳槽或链与链轮之间；<br/>
+              对于允许按照GB 7588—1995及更早期标准生产的电梯，可以按照以下要求检验：<br/>
+              ①采用悬臂式曳引轮或者链轮时，有防止钢丝绳脱离绳槽或者链条脱离链轮的装置，并且当驱动主机不装设在井道上部时，有防止异物进入绳与绳槽之间或者链条与链轮之间的装置；<br/>
+              ②井道内的导向滑轮、曳引轮、轿架上固定的反绳轮和补偿绳张紧轮，有防止钢丝绳脱离绳槽和进入异物的防护装置
+            </div>,
             details:[]
           },
         ]
       },
       {
-        bigNo: 4,
-        bigLabel:'轿厢与对重',
-        cutLines:[10],
+        //bigNo: 6,
         items:[
+          null,null,
           {
-            item:4.1,
-            label:'轿顶电气装置',
-            iClass:'C',
-            subItems:['(1)检修装置','(2)停止装置'],
-            names:['检修装置','轿顶停止装置'],
+            //item:6.3,
+            procedure:  <div>
+              <IndentationLayText title={'门关闭后,应当符合以下要求:'}>
+                (1) 门扇之间及门扇与立柱、门楣和地坎之间的间的间隙,对于乘客电梯不大于6mm;对于载货电梯不大于8mm,使用过程中由于磨损,允许达10mm;<br />
+                (2) 在水平移动门和折叠门主动门扇的开启方向,以150N的人力施加在一个最不利的点，前条所述的间
+                隙允许增大，但对于旁开门不大于30mm，对于中分门其总和不大于45mm
+              </IndentationLayText>
+              <Table css={{borderCollapse:'collapse'}}>
+                <TableBody>
+                  <RouterLink key={99} to={`/report/item/gap/227/EL-DJ/ver/1`}>
+                    <TableRow >
+                      <CCell>层</CCell>
+                      <CCell>门扇隙</CCell>
+                      <CCell>门套隙</CCell>
+                      <CCell>地坎隙</CCell>
+                      <CCell>施力隙</CCell>
+                    </TableRow>
+                  </RouterLink>
+                  {storage?.层站?.map((a,i)=>{
+                    return <TableRow key={i}>
+                      <CCell>{a}</CCell>
+                      <CCell>{storage?.门扇隙?.[a]||''}</CCell>
+                      <CCell>{storage?.门套隙?.[a]||''}</CCell>
+                      <CCell>{storage?.地坎隙?.[a]||''}</CCell>
+                      <CCell>{storage?.施力隙?.[a]||''}</CCell>
+                    </TableRow>
+                  }) }
+                </TableBody>
+              </Table>
+            </div>,
             details:[]
           },
           {
-            item:4.3,
-            label:'(3)安全门(窗)电气安全装置',
-            iClass:'C',
-            names:['安全窗门'],
+            //item:6.4,
+            procedure:  <div>
+              （1）层门和轿门采用玻璃门时，应当有防止儿童的手被拖曳的措施
+            </div>,
             details:[]
           },
           {
-            item:4.5,
-            label:'对重(平衡重)块',
-            iClass:'B',
-            subItems:['(1)固定','(2)识别数量的措施'],
-            names:['对重固定','识别数量'],
+            //item:6.5,
+            procedure:  <div>
+              （1）动力驱动的自动水平滑动门应当设置防止门夹人的保护装置，当人员通过层门入口被正在关闭的门扇撞击或者将被撞击时，该装置应当自动使门重新开启
+            </div>,
             details:[]
           },
           {
-            item:4.6,
-            label:'(2)轿厢超面积载货电梯的控制条件',
-            iClass:'C',
-            names:['超面积载货'],
+            //item:6.6,
+            procedure:  <div>
+              （1）层门和轿门正常运行时不得出现脱轨、机械卡阻或者在行程终端时错位；由于磨损、锈蚀或者火灾可能造成层门导向装置失效时，应当设置应急导向装置，使层门保持在原有位置
+            </div>,
             details:[]
           },
           {
-            item:4.8,
-            label:'紧急照明和报警装置',
-            iClass:'B',
-            subItems:['(1)紧急照明','(2)紧急报警装置'],
-            names:['紧急照明','报警装置'],
+            //item:6.7,
+            procedure:  <div>
+              （1）在轿门驱动层门的情况下，当轿厢在开锁区域之外时，如果层门开启（无论何种原因），应当有一种装置能够确保该层门自动关闭。自动关闭装置采用重块时，应当有防止重块坠落的措施
+            </div>,
             details:[]
           },
           {
-            item:4.9,
-            label:'地坎护脚板',
-            iClass:'C',
-            names:['护脚板'],
+            //item:6.8,
+            procedure:  <div>
+              （1）每个层门均应当能够被一把符合要求的钥匙从外面开启；紧急开锁后，在层门闭合时门锁装置不应当保持开锁位置
+            </div>,
             details:[]
           },
           {
-            item:4.10,
-            label:'超载保护装置',
-            iClass:'C',
-            names:['超载保护'],
-            details:[]
-          }
-        ]
-      },
-      {
-        bigNo: 5,
-        bigLabel:'悬挂装置、补偿装置及旋转部件防护',
-        cutLines:[7],
-        items:[
-          {
-            item:5.1,
-            label:'悬挂装置、补偿装置的磨损、断丝、变形等情况',
-            iClass:'C',
-            names:['磨损变形'],
-            details:[]
-          },
-          {
-            item:5.2,
-            label:'绳端固定',
-            iClass:'C',
-            names:['绳端固定'],
-            details:[]
-          },
-          {
-            item:5.3,
-            label:'补偿装置',
-            iClass:'C',
-            subItems:['(1)绳(链)端固定','(2)电气安全装置','(3)补偿绳防跳装置'],
-            names:['补偿绳固定','补偿绳电安','补偿绳防跳'],
-            details:[]
-          },
-          {
-            item:5.5,
-            label:'松绳(链)保护',
-            iClass:'B',
-            names:['松绳保护'],
-            details:[]
-          },
-          {
-            item:5.6,
-            label:'旋转部件的防护',
-            iClass:'C',
-            names:['旋转部件'],
-            details:[]
-          },
-        ]
-      },
-      {
-        bigNo: 6,
-        bigLabel:'轿门与层门',
-        cutLines:[7,7],
-        items:[
-          {
-            item:6.3,
-            label:'门间隙',
-            iClass:'C',
-            subItems:['(1)门扇间隙','(2)人力施加在最不利点时间隙'],
-            names:['门扇间隙','最不利隙'],
-            details:[]
-          },
-          {
-            item:6.4,
-            label:'玻璃门防拖曳措施',
-            iClass:'C',
-            names:['玻门防拖曳'],
-            details:[]
-          },
-          {
-            item:6.5,
-            label:'防止门夹人的保护装置',
-            iClass:'B',
-            names:['门夹人'],
-            details:[]
-          },
-          {
-            item:6.6,
-            label:'门的运行与导向',
-            iClass:'B',
-            names:['门运行'],
-            details:[]
-          },
-          {
-            item:6.7,
-            label:'自动关闭层门装置',
-            iClass:'B',
-            names:['自动关门'],
-            details:[]
-          },
-          {
-            item:6.8,
-            label:'紧急开锁装置',
-            iClass:'B',
-            names:['紧急开锁'],
-            details:[]
-          },
-          {
-            item:6.9,
+            //item:6.9,
             label:'门的锁紧',
             iClass:'B',
             subItems:['(1)层门门锁装置[不含6.9(1)①]','(2)轿门门锁装置[不含6.9(1)①]'],
@@ -502,7 +720,7 @@ const OriginalView: React.RefForwardingComponent<InternalItemHandResult,Template
           }
         ]
       },
-      {},
+      null,
       {
         bigNo: 8,
         bigLabel:'试验',

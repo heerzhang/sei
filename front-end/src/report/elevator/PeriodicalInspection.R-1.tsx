@@ -207,12 +207,12 @@ export const inspectionContent=[
         label:'电气绝缘',
         iClass:'C',
         names:['绝缘判定'],
-        addNames:[]
+        addNames:['动力电阻','照明电阻','安全装置电阻']
       }
     ]
   },
   {
-    bigNo: 3,
+    //bigNo: 3,
     bigLabel:'井道及相关设备',
     splitLine:{'0': 6, '6': 7},
     items:[
@@ -239,7 +239,7 @@ export const inspectionContent=[
         label:'轿厢与井道壁距离',
         iClass:'B',
         names:['轿井距离判定'],
-        addNames:[]
+        addNames:['轿井间距']
       },
       null,null,
       {
@@ -278,7 +278,7 @@ export const inspectionContent=[
         iClass:'B',
         subItems:['(3)固定和完好情况','(4)液位和电气安全装置','(5)对重越程距离'],
         names:['缓冲器固定','液位电安','对重越程判定'],
-        addNames:[]
+        addNames:['对重越程最大','对重越程']
       },
     ]
   },
@@ -333,7 +333,7 @@ export const inspectionContent=[
         label:'地坎护脚板',
         iClass:'C',
         names:['护脚板'],
-        addNames:[]
+        addNames:['护脚板高','护脚板高判定']
       },
       {
         item:4.10,
@@ -354,7 +354,7 @@ export const inspectionContent=[
         label:'悬挂装置、补偿装置的磨损、断丝、变形等情况',
         iClass:'C',
         names:['磨损变形'],
-        addNames:[]
+        addNames:['断丝数','断丝判定','钢绳直径','钢绳公称','钢绳判定']
       },
       {
         item:5.2,
