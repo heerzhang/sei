@@ -24,6 +24,7 @@ import { inspectionContent, ReportView } from "./PeriodicalInspection.R-1";
 import { Link as RouterLink } from "wouter";
 import { EditStorageContext } from "../StorageContext";
 
+//模板的动态加载入口文件：  原始记录，一一对应的报告的录入编辑数据，可打印。
 
 let   id = 0;
 const genId = () => ++id;
@@ -2561,6 +2562,6 @@ const projectList = [
 //createItem(['8.10','8.11','8.12','8.13'], <InternalItem8d10/>),
 
 
-//模板入口
+//模板定义实例； 2个输出名字不能改。
 export  const  originalTemplate= <OriginalView inp={null} action='ALL'/>;
 export  const  reportTemplate= <ReportView source={null} action='ALL'/>;

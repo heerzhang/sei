@@ -23,7 +23,8 @@ import { InspectRecordTitle, InternalItemHandResult, TemplateViewProps } from ".
 import { safeBind } from "customize-easy-ui-component/esm/Hooks/compose-bind";
 import { string } from "prop-types";
 import { Link as RouterLink } from "wouter";
-import { ItemControlProps } from "../comp/base";
+
+//模板的配套正式报告的显示打印； 版本号要相同的。
 
 
 /*let id = 0;
@@ -584,7 +585,7 @@ const getInstrument = (instbl: [any]) => {
   return newT;
 }
 //单个项目进行转换
-const aItemTransform = (orc: any, iclass:string,  ...ns) => {
+const aItemTransform = (orc: any, iClass:string,  ...ns) => {
   let size=ns.length;
   let amazing=[];
   let fdesc='';
@@ -628,12 +629,12 @@ const aItemTransform = (orc: any, iclass:string,  ...ns) => {
     }
   }
   //神奇缝合了 amazing['result']='合格';
-  return {...amazing, result, iclass, fdesc};
+  return {...amazing, result, iClass, fdesc};
 }
 export interface ItemTransProps {
   item: string;
   orc: any;
-  iclass: string;
+  iClass: string;
 }
 
 //把原始记录的数据转换成报告的各个项目的结论。
@@ -655,51 +656,20 @@ const getItemTransform = (orc: any) => {
 
 //这个printing打印场景，实现比css更加强化CSS层面只能局限DOM节点，而JS操纵能力是在上层的逻辑。
 //这个printing修改成应用层面用户的指认：明确为了打印而启动页面，它就和css毫无关系了，和useMedia也无关了。
-interface PrintReportProps {
+interface ReportViewProps {
   source: any;
   printing?: boolean;
   action: string;
 }
 //viewAll是否是整个报表都一起显示。
 //export default function RecordView({printing, inp}:{printing?:boolean,inp:any },props) {
-export const ReportView: React.FunctionComponent<PrintReportProps> = ({
+export const ReportView: React.FunctionComponent<ReportViewProps> = ({
     printing=false,
     source: orc,
     action,
     ...other
     }) => {
   const theme = useTheme();
-
-  const ref = React.useRef();
-  const [items, setItems] = React.useState(
-    Array.from(new Array(3)).map(() => faker.name.firstName())
-  );
-
-  function fetchdata() {
-    return new Promise(resolve => {
-      setTimeout(() => {
-        resolve();
-      }, 500);
-    });
-  }
-
-
-  const [page, setPage] = React.useState(0);
-  //customize-easy-ui-component.useInfiniteScroll必须内容撑开才可以滚动触发函数。
-  const [fetching] = useInfiniteScroll({
-    container: ref,
-    hasMore: page <3,
-    onFetch: () => {
-      return fetchdata().then(() => {
-        setItems([
-          ...items,
-          ...Array.from(new Array(3)).map(() => faker.name.firstName())
-        ]);
-        setPage(page + 1);
-      });
-    }
-  });
-
   //针对较小屏幕优化显示效果； "@media (min-width:690px),print and (min-width:538px)":  "@media (min-width:690px),print and (min-width:538px)"
   //const smallScr = useMedia('only screen and (max-width:799px)');
   //useMedia实际上很可能有一个初始数值false然后才是新的，可能有两次render才会稳住；不能指望一次就能获取正确。打印预览实际是根据当前页面最新状态去打印的。
@@ -725,6 +695,43 @@ export const ReportView: React.FunctionComponent<PrintReportProps> = ({
   const itr =React.useMemo(() => getItemTransform(orc), [orc]);
 
   console.log("当前useMemo的 itr=",itr, "source=",orc);
+  const renderIspContent =React.useMemo(() => {
+    let seq = 0;
+    let text =[];
+    inspectionContent.forEach((rowBigItem, x) => {
+      if(x>=1) return;
+      rowBigItem && rowBigItem.items.forEach((item, y) => {
+        let bigItemRowCnt=0;
+        if(y>3) return;
+        if(item){
+          seq += 1;
+          let itemXY = `${x + 1}.${y + 1}`;
+          let subCnt =item.subItems?.length || 0;
+          let iRowSpan =subCnt? subCnt : 1;
+          bigItemRowCnt +=iRowSpan;
+          let lines=rowBigItem.cutLines[0];
+          const rowHead = <RouterLink key={seq} to={`/report/EL-DJ/ver/1/${itemXY}/227`}>
+            <TableRow>
+              <CCell component="th" scope="row" rowSpan={iRowSpan}>{seq}</CCell>
+              <CCell rowSpan={iRowSpan}>{item.iClass}</CCell>
+              <CCell rowSpan={lines}>{`${x+1}`}<br/>{`${rowBigItem.bigLabel}`}</CCell>
+              <CCell rowSpan={iRowSpan}>{itemXY}</CCell>
+              <CCell rowSpan={iRowSpan}>{item.label}</CCell>
+              <Cell>{item.subItems[y]}</Cell>
+              <CCell>{itr[itemXY][0]}</CCell>
+              <CCell rowSpan={iRowSpan}>{itr[itemXY].result}</CCell>
+            </TableRow>
+          </RouterLink>;
+          text.push(rowHead);
+        }
+      });
+    });
+    console.log("当前renderIspContent的 text=",text);
+    return ( <React.Fragment>
+          {text}
+      </React.Fragment> );
+   }, [orc]);
+
   //最多＝8列 <Table合计约1040px；原来PDF打印看着像是905px的。
   return (
     <React.Fragment>
@@ -1126,9 +1133,10 @@ export const ReportView: React.FunctionComponent<PrintReportProps> = ({
             </TableRow>
           </TableHead>
           <TableBody>
+            {renderIspContent}
             <TableRow>
               <CCell component="th" scope="row" rowSpan={5}>1</CCell>
-              <CCell rowSpan={5}>{itr[1.4].iclass}</CCell>
+              <CCell rowSpan={5}>{itr[1.4].iClass}</CCell>
               <CCell rowSpan={5}>1技术资料</CCell>
               <CCell rowSpan={5}>1.4</CCell>
               <CCell rowSpan={5}>使用资料</CCell>
@@ -1156,7 +1164,7 @@ export const ReportView: React.FunctionComponent<PrintReportProps> = ({
            <RouterLink key={35} to={`/report/EL-DJ/ver/1/2.1/227`}>
             <TableRow >
               <CCell component="th" scope="row" rowSpan={3}>2</CCell>
-              <CCell rowSpan={3}>{itr[2.1].iclass}</CCell>
+              <CCell rowSpan={3}>{itr[2.1].iClass}</CCell>
               <CCell rowSpan={20}>2机房(机器设备间)及相关设备</CCell>
               <CCell rowSpan={3}>2.1</CCell>
               <CCell rowSpan={3}>通道与通道门</CCell>
@@ -1178,7 +1186,7 @@ export const ReportView: React.FunctionComponent<PrintReportProps> = ({
 
             <TableRow >
               <CCell component="th" scope="row">3</CCell>
-              <CCell>{itr[2.5].iclass}</CCell>
+              <CCell>{itr[2.5].iClass}</CCell>
               <CCell>2.5</CCell>
               <Cell colSpan={2}>(1)照明、照明开关</Cell>
               <CCell>{itr[2.5][0]}</CCell>
@@ -1737,7 +1745,7 @@ export const ReportView: React.FunctionComponent<PrintReportProps> = ({
                 <RouterLink key={i} to={`/report/EL-DJ/ver/1/${ts}/227`}>
                   <TableRow>
                     <CCell component="th" scope="row">{i+1}</CCell>
-                    <CCell>{itr[ts].iclass}/{ts}</CCell>
+                    <CCell>{itr[ts].iClass}/{ts}</CCell>
                     <CCell>{itr[ts].fdesc}</CCell>
                     <CCell></CCell>
                     <CCell></CCell>
