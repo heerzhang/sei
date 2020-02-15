@@ -52,7 +52,7 @@ const OriginalView: React.RefForwardingComponent<InternalItemHandResult,Template
       refSize=3;
     }
     else refSize=3;
-   // const clRefs =useProjectListAs({count: projectList.length});  　//
+   // const clRefs =useProjectListAs({count: recordPrintList.length});  　//
     const clRefs =useProjectListAs({count: refSize});
     //? 单个项目独立保存可行吗，　非要全部都来，　项目全部显示时刻就不能修改保存了。?
     //同名字的字段：清除／整体清空／单项目独立保存＋合并。
@@ -632,7 +632,7 @@ const OriginalView: React.RefForwardingComponent<InternalItemHandResult,Template
               return <React.Fragment>
                 <Table css={{borderCollapse:'collapse'}}>
                   <TableBody>
-                    <RouterLink key={99} to={`/report/item/gap/227/EL-DJ/ver/1`}>
+                    <RouterLink key={99} to={`/report/EL-DJ/ver/1/gap/227`}>
                       <TableRow >
                         <CCell>层</CCell>
                         <CCell>门扇隙</CCell>
@@ -866,41 +866,70 @@ const OriginalView: React.RefForwardingComponent<InternalItemHandResult,Template
     ]
         ,[]);
 
+    const renderItemsContent =React.useMemo(() => {
+      let seq = 0;
+      let htmlTxts =[];
+      inspectionContent.forEach((rowBigItem, x) => {
+        let bigItemRowCnt=0;
+        rowBigItem && rowBigItem.items.forEach((item, y) => {
+          if(item){
+            seq += 1;
+            let itemXY = `${x + 1}.${y + 1}`;
+            let subCnt =item.subItems?.length || 0;
+            let iRowSpan =subCnt? subCnt : 1;
+            let bigLineCnt=rowBigItem.splitLine[bigItemRowCnt];
+            const rowHead = <RouterLink key={seq} to={`/report/EL-DJ/ver/1/${itemXY}/227`}>
+              <TableRow>
+                <CCell component="th" scope="row" rowSpan={iRowSpan}>{seq}</CCell>
+                <CCell rowSpan={iRowSpan}>{item.iClass}</CCell>
+                {bigLineCnt && <CCell rowSpan={bigLineCnt}>{x+1}<br/>{rowBigItem.bigLabel}</CCell> }
+                <CCell rowSpan={iRowSpan}>{itemXY}</CCell>
+                { subCnt?  ( <React.Fragment>
+                    <CCell rowSpan={iRowSpan}>{item.label}</CCell>
+                    <Cell>{item.subItems[0]}</Cell>
+                  </React.Fragment> )
+                  :
+                  <Cell colSpan={2}>{item.label}</Cell>
+                }
+                <CCell>{itr[itemXY][0]}</CCell>
+                <CCell rowSpan={iRowSpan}>{itr[itemXY].result}</CCell>
+              </TableRow>
+            </RouterLink>;
+            htmlTxts.push(rowHead);
+            bigItemRowCnt++;
+            for(let i=0; i<subCnt-1; i++){
+              let bigLineCnt=rowBigItem.splitLine[bigItemRowCnt];
+              const rowSub =<TableRow key={`${itemXY}-${i+1}`}>
+                {bigLineCnt && <CCell rowSpan={bigLineCnt}>{`${x+1}`}<br/>{`${rowBigItem.bigLabel}`}</CCell> }
+                <Cell>{item.subItems[i+1]}</Cell>
+                <CCell>{itr[itemXY][i+1]}</CCell>
+              </TableRow>;
+              htmlTxts.push(rowSub);
+              bigItemRowCnt++;
+            }
+          }
+        });
+      });
+
+      return ( <React.Fragment>
+        {htmlTxts}
+      </React.Fragment> );
+    }, []);
 
     const {isItemNo, x, y} =verifyAction(action,generalFormat);
     //这里action是 '2.1' ALL none printAll 这样的路由参数 ?readOnly=1&。
     const recordList= React.useMemo(() =>
-            {
-            /*    projectList.map((each, i) => {
-                 const itemView= isItemNo? <ItemUniversal key={i} ref={clRefs.current![i]}  x={x}  y={y}
-                                             procedure={generalFormat[x].items[y].procedure}  details={generalFormat[x].items[y].details}
-                   />
-                   :
-                 React.cloneElement(each.zoneContent as React.ReactElement<any>, {
-                   ref: clRefs.current![i],
-                   //procedure: generalFormat[1].items[0].procedure,
-                   //details: generalFormat[1].items[0].details,
-                   key: i
-                 });
-              f(each.items.indexOf(action)>=0 || action==='ALL') return <div key={i} css={{display:'none'}}>
-                 if(each.items.indexOf(action)>=0 || action==='ALL')
-                     return  itemView;
-                  else
-                    return <div key={i} css={{display:'none'}}>
-                           {itemView}
-                        </div>;
-                })
-              */
-            let resView;
-           if(isItemNo){ resView=
-              <React.Fragment>
+          {
+           if(isItemNo){
+             return <React.Fragment>
                 <ItemUniversal key={0} ref={null}  x={x}  y={y}
                       procedure={generalFormat[x].items[y].procedure}  details={generalFormat[x].items[y].details}
                  />
               </React.Fragment>;
            }else{
-              const itemA=projectList.find((one)=>one.itemArea===action);
-              resView= itemA && <React.Fragment>
+              const itemA=recordPrintList.find((one)=>one.itemArea===action);
+              if(itemA){
+                 return <React.Fragment>
                      {
                           React.cloneElement(itemA.zoneContent as React.ReactElement<any>, {
                            ref: null,
@@ -908,10 +937,22 @@ const OriginalView: React.RefForwardingComponent<InternalItemHandResult,Template
                          })
                      }
                  </React.Fragment>;
+              }else if(action==='ALL' || action==='printAll'){
+                return recordPrintList.map((each, i) => {
+                  if(each.itemArea==='item1.1')
+                    return  renderItemsContent;
+                  else
+                    return React.cloneElement(each.zoneContent as React.ReactElement<any>, {
+                      ref: clRefs.current![i],
+                      //procedure: generalFormat[1].items[0].procedure,
+                      //details: generalFormat[1].items[0].details,
+                      key: i
+                    });
+                });
+              }
             }
-
-            return  resView;
-          }
+          return  null;
+         }
                 ,[action, generalFormat,isItemNo,x,y]);
 
   //  console.log("公用配置对象--isItemNo=",isItemNo,"x=", x,"y=",y, generalFormat, "inspectionContent=", inspectionContent);
@@ -2831,7 +2872,8 @@ const ItemUniversal: React.RefForwardingComponent<InternalItemHandResult,ItemUni
 //項目標記符列表：不能用的ALL none printAll保留字；
 //可以考虑createItem这里Itemxx后面可以简化些通用性质组件只需要参数就搞定。
 //generalFormat配置里面设置，要不要特殊化，要不要从createItem/projectList提取特别定制版本的组件。
-const projectList =[
+//对应某个报告模板的底下所有的编辑修改的组件；原始记录打印展示项目的全部列表。
+const recordPrintList =[
   createItem('LinkMan', <ItemLinkManTel/>),
   createItem('item1.1', <ItemUniversal x={0} y={0}/>),
   createItem('gap', <ItemGapMeasure/>),

@@ -48,7 +48,7 @@ interface TemplateMainProps {
   id?: string;
   source?: any;
 }
-
+//首次render时刻template应该还没有获取到的，需要第二次render才能获得到template。
 function TemplateMain({id, source}: TemplateMainProps) {
   const [match, params] = useRoute("/report/:template/ver/:verId/:action/:repId");
   let action = params &&  params.action;
@@ -59,7 +59,7 @@ function TemplateMain({id, source}: TemplateMainProps) {
   //import参数变量，会被替换为【.*】；  不可这么写 import(path) 这是无效的。
   //useLayoutEffect
   React.useEffect(() => {
-    console.log("用useLayoutEffect来试一试template=", "path=", path);
+    //console.log("不会重复执行到这里的！ template=", "path=", path);
     import(`${path}`).then(module => {
       if(module.originalTemplate===undefined)
         throw new Error(`没找到O模板入口组件${path}`);
@@ -74,22 +74,22 @@ function TemplateMain({id, source}: TemplateMainProps) {
 
   }, [path]);
 
-  //console.log("来TemplateMain当前的match=",match ,"params=",params,"template=", template,"file=", typeAsRoute[params.template]);
-
   return (
     <React.Fragment>
-      <Switch>
-        <Route path="/report/:template/ver/:verId/preview/:repId">
-          {template && source &&
-              <ReportStarter id={'227'} action={action} source={source} template={template.report}/>
-          }
-        </Route>
-        <Route path="/report/:rest*">
-          { source &&
+      { template &&
+        <Switch>
+          <Route path="/report/:template/ver/:verId/preview/:repId">
+           { source &&
+               <ReportStarter id={'227'} action={action} source={source} template={template.report}/>
+           }
+          </Route>
+          <Route path="/report/:rest*">
+           { source &&
                <RecordEditorOrPrint source={source} action={action} templateSet={template}/>
-          }
-        </Route>
-      </Switch>
+           }
+          </Route>
+        </Switch>
+      }
     </React.Fragment>
   );
 }

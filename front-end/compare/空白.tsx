@@ -338,3 +338,22 @@ import * as React from "react";
 
 
 
+  recordPrintList.map((each, i) => {
+    const itemView= isItemNo? <ItemUniversal key={i} ref={clRefs.current![i]}  x={x}  y={y}
+                                             procedure={generalFormat[x].items[y].procedure}  details={generalFormat[x].items[y].details}
+      />
+      :
+      React.cloneElement(each.zoneContent as React.ReactElement<any>, {
+        ref: clRefs.current![i],
+        //procedure: generalFormat[1].items[0].procedure,
+        //details: generalFormat[1].items[0].details,
+        key: i
+      });
+      if(each.items.indexOf(action)>=0 || action==='ALL')
+        return  itemView;
+      else
+        return <div key={i} css={{display:'none'}}>
+             {itemView}
+        </div>;
+      })
+
