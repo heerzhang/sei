@@ -217,6 +217,7 @@ export const inspectionContent=[
     bigNo: 3,
     bigLabel:'井道及相关设备',
     cutLines:[6,7],
+    splitLine:{'0': 6, '6': 7},
     items:[
       null,null,null,
       {
@@ -288,6 +289,7 @@ export const inspectionContent=[
     bigNo: 4,
     bigLabel:'轿厢与对重',
     cutLines:[10],
+    splitLine:{'0': 10},
     items:[
       {
         item:4.1,
@@ -350,6 +352,7 @@ export const inspectionContent=[
     bigNo: 5,
     bigLabel:'悬挂装置、补偿装置及旋转部件防护',
     cutLines:[7],
+    splitLine:{'0': 7},
     items:[
       {
         item:5.1,
@@ -394,6 +397,7 @@ export const inspectionContent=[
     bigNo: 6,
     bigLabel:'轿门与层门',
     cutLines:[7,7],
+    splitLine:{'0': 7, '7': 7},
     items:[
       null,null,
       {
@@ -477,6 +481,7 @@ export const inspectionContent=[
     bigNo: 8,
     bigLabel:'试验',
     cutLines:[7,8],
+    splitLine:{'0': 7, '7': 8},
     items:[
       {
         item:8.1,
@@ -701,10 +706,8 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
     let seq = 0;
     let htmlTxts =[];
     inspectionContent.forEach((rowBigItem, x) => {
-      if(x>=2) return;
       rowBigItem && rowBigItem.items.forEach((item, y) => {
         let bigItemRowCnt=0;
-        if(y>3) return;
         if(item){
           seq += 1;
           let itemXY = `${x + 1}.${y + 1}`;
@@ -717,8 +720,13 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
               <CCell rowSpan={iRowSpan}>{item.iClass}</CCell>
               {bigLineCnt && <CCell rowSpan={bigLineCnt}>{`${x+1}`}<br/>{`${rowBigItem.bigLabel}`}</CCell> }
               <CCell rowSpan={iRowSpan}>{itemXY}</CCell>
-              <CCell rowSpan={iRowSpan}>{item.label}</CCell>
-              <Cell>{item.subItems[y]}</Cell>
+              { subCnt?  ( <React.Fragment>
+                          <CCell rowSpan={iRowSpan}>{item.label}</CCell>
+                        <Cell>{item.subItems[0]}</Cell>
+                      </React.Fragment> )
+                :
+                <Cell colSpan={2}>{item.label}</Cell>
+              }
               <CCell>{itr[itemXY][0]}</CCell>
               <CCell rowSpan={iRowSpan}>{itr[itemXY].result}</CCell>
             </TableRow>
@@ -1147,24 +1155,6 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
           <TableBody>
             {renderIspContent}
 
-            <TableRow >
-              <CCell component="th" scope="row">3</CCell>
-              <CCell>{itr[2.5].iClass}</CCell>
-              <CCell>2.5</CCell>
-              <Cell colSpan={2}>(1)照明、照明开关</Cell>
-              <CCell>{itr[2.5][0]}</CCell>
-              <CCell>{itr[2.5].result}</CCell>
-            </TableRow>
-          <RouterLink key={26} to={`/report/item/gap/227/EL-DJ/ver/1`}>
-            <TableRow >
-              <CCell component="th" scope="row">4</CCell>
-              <CCell>B</CCell>
-              <CCell>2.6</CCell>
-              <Cell colSpan={2}>(2)主开关与照明等电路的控制关系</Cell>
-              <CCell>符合</CCell>
-              <CCell></CCell>
-            </TableRow>
-          </RouterLink>
 
           <RouterLink key={57} to={`/report/item/6.3/227/EL-DJ/ver/1`}>
             <TableRow >
