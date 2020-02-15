@@ -35,7 +35,7 @@ import { BoundReports } from "../inspect/report/BoundReports";
 import { InternalItemHandResult, TemplateViewProps } from "./comp/base";
 import { useCommitOriginalData } from "./db";
 import throttle from 'throttle-asynchronous'
-import { loadTemplate } from "./template";
+//import { loadTemplate } from "./template";
 import typeAsRoute from "../typeAsRoute.json";
 import { Dispatch, SetStateAction } from "react";
 import { EditStorageContext } from "./StorageContext";

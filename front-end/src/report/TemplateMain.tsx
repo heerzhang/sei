@@ -52,15 +52,15 @@ interface TemplateMainProps {
 function TemplateMain({id, source}: TemplateMainProps) {
   const [match, params] = useRoute("/report/:template/ver/:verId/:action/:repId");
   let action = params &&  params.action;
-  const [template, setTemplate] = React.useState(null as any);
-  console.log("来TemplateMain当前的match=",match ,"params=",params);
+  //const [template, setTemplate] = React.useState(null as any);
   if(!match || !params || !params.template || !params.verId || !params.action)
       throw new Error(`没路由了`);
 
   //React.useEffect(() => {
-   loadTemplate(typeAsRoute[params &&params.template], setTemplate);
+  const template =loadTemplate(typeAsRoute[params.template], '1');
   //}, []);
-
+  console.log("来TemplateMain当前的match=",match ,"params=",params,"template=", template,"file=", typeAsRoute[params.template]);
+  if(!template) return null;
   return (
     <React.Fragment>
       <Switch>
