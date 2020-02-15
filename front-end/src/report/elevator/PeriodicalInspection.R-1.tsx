@@ -707,7 +707,6 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
           let subCnt =item.subItems?.length || 0;
           let iRowSpan =subCnt? subCnt : 1;
           let bigLineCnt=rowBigItem.splitLine[bigItemRowCnt];
-          console.log("奇怪了@@ bigItemRowCnt=",bigItemRowCnt, "bigLineCnt=",rowBigItem.splitLine[bigItemRowCnt]);
           const rowHead = <RouterLink key={seq} to={`/report/EL-DJ/ver/1/${itemXY}/227`}>
             <TableRow>
               <CCell component="th" scope="row" rowSpan={iRowSpan}>{seq}</CCell>
@@ -740,7 +739,7 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
         }
       });
     });
-    console.log("当前renderIspContent的 htmlTxts=",htmlTxts);
+
     return ( <React.Fragment>
           {htmlTxts}
       </React.Fragment> );

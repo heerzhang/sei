@@ -38,7 +38,8 @@ function verifyAction( action:  string, generalFormat: any[]) {
   let y=parseInt(itemNums[1]);
   if(generalFormat[x-1]?.items[y-1]?.procedure)
       return {isItemNo:true, x:x-1, y:y-1};
-  else  return {isItemNo: false};
+  else
+    return {isItemNo: false};
 }
 
 const OriginalView: React.RefForwardingComponent<InternalItemHandResult,TemplateViewProps>=
@@ -72,18 +73,32 @@ const OriginalView: React.RefForwardingComponent<InternalItemHandResult,Template
     const generalFormat= React.useMemo(() =>
      [
       {
-        bigNo: 1,
-        bigLabel:'技术资料',
-        cutLines:[5],
+        //bigNo: 1,
         items:[
-          {},{},{},
+          null,null,null,
           {
-            item:1.4,
-            label:'使用资料',
-            iClass:'B',
-            subItems:['(1)使用登记资料','(2)安全技术档案','(3)管理规章制度','(4)日常维护保养合同','(5)特种设备作业人员证'],
-            names:['登记资料','安全档案','管理制度','维保合同','作业人员证'],
-            details:[]
+           // item:1.4,
+            procedure:  <div>
+                使用单位提供了以下资料：<br/>
+               （1）使用登记资料，内容与实物相符；
+              <IndentationLayText title={'(2)安全技术档案至少包括：'}>
+                ①1.1、1.2、1.3所述文件资料[1.2的(3)项和1.3的(5)项除外];<br/>
+                ②监督检验报告;<br/>
+                ③定期检验报告;<br/>
+                ④日常检查与使用状况记录;<br/>
+                ⑤日常维护保养记录;<br/>
+                ⑥年度自行检查记录或者报告;<br/>
+                ⑦应急救援演习记录;<br/>
+                ⑧运行故障和事故记录等;保存完好（本规则实施前已经完成安装、改造或重大修理的，1.1、1.2、1.3项所述文件资料如有缺陷，应当由使用单位联系相关单位予以完善，可不作为本项审核结论的否决内容）；
+              </IndentationLayText>
+              <IndentationLayText title={'(3)以岗位责任制为核心的电梯运行管理规章制度，包括：'}>
+                ①事故与故障的应急措施和救援预案；<br/>
+                ②电梯钥匙使用管理制度等；
+              </IndentationLayText>
+               （4）与取得相应资质单位签订的日常维护保养合同；<br/>
+               （5）按照规定配备的电梯安全管理和作业人员的特种设备作业人员证。
+            </div>,
+            details:[],
           }
         ]
       },
@@ -127,7 +142,7 @@ const OriginalView: React.RefForwardingComponent<InternalItemHandResult,Template
                   </InputGroupLine>
                 </React.Fragment>
               },
-              '',
+              null,
               (inp,setInp)=>{
                 return  <React.Fragment>
                      机房通道门
@@ -154,56 +169,85 @@ const OriginalView: React.RefForwardingComponent<InternalItemHandResult,Template
               }
             ]
           },
+          null,null,null,
           {
-            item:2.5,
-            label:'(1)照明、照明开关',
-            iClass:'C',
-            names:['机房照明'],
+           // item:2.5,
+            procedure:  <div>
+              （1）机房(机器设备间)设有永久性电气照明；在靠近入口(或多个入口)处的适当高度设置一个开关，控制机房(机器设备间)照明
+            </div>,
             details:[]
           },
           {
-            item:2.6,
-            label:'(2)主开关与照明等电路的控制关系',
-            iClass:'B',
-            names:['开关电路关系'],
+            //item:2.6,
+            procedure:  <div>
+              （2）主开关不得切断轿厢照明和通风、机房（机器设备间）照明和电源插座、轿顶与底坑的电源插座、电梯井道照明、报警装置的供电电路
+            </div>,
             details:[]
           },
           {
-            item:2.7,
-            label:'驱动主机',
-            iClass:'B',
-            subItems:['(2)工作状况','(3)轮槽磨损','(4)制动器动作情况','★(5)手动紧急操作装置'],
-            names:['主机工况','轮槽磨损','制动器','手动紧急操作'],
+           // item:2.7,
+            procedure:  <div>
+              （2）驱动主机工作时无异常噪声和振动；<br/>
+              （3）曳引轮轮槽不得有缺损或者不正常磨损；如果轮槽的磨损可能影响曳引能力时，进行曳引能力验证试验；<br/>
+              （4）制动器动作灵活，制动时制动闸瓦(制动钳)紧密、均匀地贴合在制动轮(制动盘)上，电梯运行时制动闸瓦(制动钳)与制动轮(制动盘)不发生摩擦，制动闸瓦(制动钳)以及制动轮(制动盘)工作面上没有油污；<br/>
+              （5）手动紧急操作装置符合以下要求：<br/>
+              ①对于可拆卸盘车手轮，设有一个电气安全装置，最迟在盘车手轮装上电梯驱动主机时动作；<br/>
+              ②松闸扳手涂成红色，盘车手轮是无辐条的并且涂成黄色，可拆卸盘车手轮放置在机房内容易接近的明显部位；<br/>
+              ③在电梯驱动主机上接近盘车手轮处，明显标出轿厢运行方向，如果手轮是不可拆卸的，可以在手轮上标出；<br/>
+              ④能够通过操纵手动松闸装置松开制动器，并且需要以一个持续力保持其松开状态；<br/>
+              ⑤进行手动紧急操作时，易于观察到轿厢是否在开锁区
+            </div>,
             details:[]
           },
           {
-            item:2.8,
-            label:'控制柜、紧急操作和动态测试装置',
-            iClass:'B',
-            subItems:['(2)断错相保护','(4)紧急电动运行装置','☆(6)层门和轿门旁路装置','☆(7)门回路检测功能','☆(8)制动器故障保护','☆(9)自动救援操作装置'],
-            names:['错相保护','紧急电动','门旁路','门回路','制动故障保护','自动救援'],
+            //item:2.8,
+            procedure:  <div>
+              (2)断相、错相保护功能有效；电梯运行与相序无关时，可以不设错相保护。
+              <IndentationLayText title={'(4)紧急电动运行装置应当符合以下要求：'}>
+                ①依靠持续揿压按钮来控制轿厢运行，此按钮有防止误操作的保护，按钮上或其近旁标出 相应的运行方向<br/>
+                ②一旦进入检修运行，紧急电动运行装置控制轿厢运行的功能由检修控制装置所取代；<br/>
+                ③进行紧急电动运行操作时，易于观察到轿厢是否在开锁区。
+              </IndentationLayText>
+              <IndentationLayText title={'(6)层门和轿门旁路装置应当符合以下要求：'}>
+                ①在层门和轿门旁路装置上或者其附近标明“旁路”字样,并且标明旁路装置的“旁路”状态或者“关”状态;<br/>
+                ②旁路时取消正常运行(包括动力操作的自动门的任何运行);只有在检修运行或者紧急电动运行状态下,轿厢才能够运行;运行期间,轿厢上的听觉信号和轿底的闪烁灯起作用;<br/>
+                ③能够旁路层门关闭触点、层门门锁触点、轿门关闭触点、轿门门锁触点;不能同时旁路层门和轿门的触点;对于手动层门,不能同时旁路层门关闭触点和层门门锁触点;<br/>
+                ④提供独立的监控信号证实轿门处于关闭位置。
+              </IndentationLayText>
+              (7)应当具有门回路检测功能,当轿厢在开锁区域内、轿门开启并且层门门锁释放时,监测检查
+              轿门关闭位置的电气安全装置、检查层门门锁锁紧位置的电气安全装置和轿门监控信号的正确动
+              作;如果监测到上述装置的故障,能够防止电梯的正常运行。<br/>
+              (8)应当具有制动器故障保护功能,当监测到制动器的提起(或者释放)失效时,能够防止电梯的正常启动。
+              <IndentationLayText title={'(9)自动救援操作装置(如果有)应该符合以下要求:'}>
+                ①设有铭牌,标明制造单位名称、产品型号、产品编号、主要技术参数,加装的自动救援操作装置的铭牌和该装置的产品质量证明文件相符;<br/>
+                ②在外电网断电至少等待3s后自动投入救援运行,电梯自动平层并且开门;<br/>
+                ③当电梯处于检修运行、紧急电动运行、电气安全装置动作或者主开关断开时,不得投入救援运行;<br/>
+                ④设有一个非自动复位的开关,当该开关处于关闭状态时,该装置不能启动救援运行。
+              </IndentationLayText>
+            </div>,
             details:[]
           },
           {
-            item:2.9,
-            label:'限速器',
-            iClass:'B',
-            subItems:['(2)电气安全装置','(3)封记及运转情况','(4)动作速度校验'],
-            names:['限速器电安','封记','速度校验'],
+            //item:2.9,
+            procedure:  <div>
+              （2）限速器或者其他装置上设有在轿厢上行或者下行速度达到限速器动作速度之前动作的电气安全装置，以及验证限速器复位状态的电气安全装置<br/>
+              （3）限速器各调节部位封记完好，运转时不得出现碰擦、卡阻、转动不灵活等现象，动作正常<br/>
+              （4）受检电梯的维护保养单位应当每2年(对于使用年限不超过15年的限速器)或者每年(对于使用年限超过15年的限速器)进行一次限速器动作速度校验，校验结果应当符合要求
+            </div>,
             details:[]
           },
           {
-            item:2.10,
-            label:'(2)接地连接',
-            iClass:'C',
-            names:['接地连接'],
+           // item:2.10,
+            procedure:  <div>
+              （2）所有电气设备及线管、线槽的外露可以导电部分应当与保护导体（PE，地线）可靠连接
+            </div>,
             details:[]
           },
           {
-            item:2.11,
-            label:'电气绝缘',
-            iClass:'C',
-            names:['绝缘判定'],
+           // item:2.11,
+            procedure:  <div>
+
+            </div>,
             details:[]
           }
         ]
@@ -562,7 +606,7 @@ const OriginalView: React.RefForwardingComponent<InternalItemHandResult,Template
 
 
     const {isItemNo, x, y} =verifyAction(action,generalFormat);
-
+    //这里action是 '2.1' ALL none printAll 这样的路由参数 ?readOnly=1&。
     const recordList= React.useMemo(() =>
             {
             /*    projectList.map((each, i) => {
@@ -586,11 +630,11 @@ const OriginalView: React.RefForwardingComponent<InternalItemHandResult,Template
                 })
               */
             let resView;
-           if(action==='2.1'){ resView=
+           if(isItemNo){ resView=
               <React.Fragment>
-                  <ItemUniversal key={0} ref={null}  x={x}  y={y}
-                  procedure={generalFormat[x].items[y].procedure}  details={generalFormat[x].items[y].details}
-                  />
+                <ItemUniversal key={0} ref={null}  x={x}  y={y}
+                      procedure={generalFormat[x].items[y].procedure}  details={generalFormat[x].items[y].details}
+                 />
               </React.Fragment>;
            }
             else if(action==='gap'){
@@ -2489,28 +2533,50 @@ const ItemUniversal: React.RefForwardingComponent<InternalItemHandResult,ItemUni
         </Text>
         </RouterLink>
 
-
-        {inspectionContent[x].items[y].subItems?.map((a,i)=>{
-          const namex =`${inspectionContent[x].items[y].names[i]}`;
-          const namexD =`${inspectionContent[x].items[y].names[i]}_D`;
-          return <React.Fragment key={i}>
-            {details[i] && details[i](inp,setInp)}
-            <InputGroupLine  label={inspectionContent[x].items[y].subItems[i]}>
-              <SelectHookfork value={ (inp?.[namex]) ||''}  onChange={e => {
-                inp[namex]=e.currentTarget.value||undefined;
-                setInp({ ...inp});
-              } }
-              />
-            </InputGroupLine>
-            <InputGroupLine label='描述或问题'>
-              <Input value={ (inp?.[namexD]) ||''}  onChange={e => {
-                inp[namexD]=e.currentTarget.value||undefined;
-                setInp({ ...inp});
-              } }
-              />
-            </InputGroupLine>
-          </React.Fragment>;
-        }) }
+        { inspectionContent[x].items[y].subItems?  ( inspectionContent[x].items[y].subItems?.map((a,i)=>{
+            const namex =`${inspectionContent[x].items[y].names[i]}`;
+            const namexD =`${inspectionContent[x].items[y].names[i]}_D`;
+            return <React.Fragment key={i}>
+              {details[i] && details[i](inp,setInp)}
+              <InputGroupLine  label={inspectionContent[x].items[y].subItems[i]}>
+                <SelectHookfork value={ (inp?.[namex]) ||''}  onChange={e => {
+                  inp[namex]=e.currentTarget.value||undefined;
+                  setInp({ ...inp});
+                } }
+                />
+              </InputGroupLine>
+              <InputGroupLine label='描述或问题'>
+                <Input value={ (inp?.[namexD]) ||''}  onChange={e => {
+                  inp[namexD]=e.currentTarget.value||undefined;
+                  setInp({ ...inp});
+                } }
+                />
+              </InputGroupLine>
+            </React.Fragment>;
+          } )  )
+          :
+          ( inspectionContent[x].items[y].names?.map((a,i)=>{
+            const namex =`${inspectionContent[x].items[y].names[i]}`;
+            const namexD =`${inspectionContent[x].items[y].names[i]}_D`;
+            return <React.Fragment key={i}>
+              {details[i] && details[i](inp,setInp)}
+              <InputGroupLine  label={inspectionContent[x].items[y].label}>
+                <SelectHookfork value={ (inp?.[namex]) ||''}  onChange={e => {
+                  inp[namex]=e.currentTarget.value||undefined;
+                  setInp({ ...inp});
+                } }
+                />
+              </InputGroupLine>
+              <InputGroupLine label='描述或问题'>
+                <Input value={ (inp?.[namexD]) ||''}  onChange={e => {
+                  inp[namexD]=e.currentTarget.value||undefined;
+                  setInp({ ...inp});
+                } }
+                />
+              </InputGroupLine>
+            </React.Fragment>;
+          })  )
+        }
 
         <Button size="lg" intent={'primary'} onPress={() =>{ setStorage({...storage, ...inp}) }}>
           修改确认
@@ -2523,38 +2589,35 @@ const ItemUniversal: React.RefForwardingComponent<InternalItemHandResult,ItemUni
 //項目標記符列表：不能用的ALL None zoneContent保留字；
 //可以考虑createItem这里Itemxx后面可以简化些通用性质组件只需要参数就搞定。
 //generalFormat配置里面设置，要不要特殊化，要不要从createItem/projectList提取特别定制版本的组件。
-const projectList = [
-  /*createItem(['LinkMan'], <ItemLinkManTel/>),
-  createItem(['1.4'], <InternalItem1/>),
-  */
+const projectList =[
+  createItem(['LinkMan'], <ItemLinkManTel/>),
+  //createItem(['1.4'], <InternalItem1/>),
+  createItem(['item1.1'], <ItemUniversal x={0} y={0}/>),
   createItem(['2.1','2.5','2.6'], <InternalItem2t4/>),
   //createItem(['2.1','2.5','2.6'], <ItemUniversal x={1} y={0}/>),
   createItem(['gap'], <ItemGapMeasure/>),
-  createItem(['6.3','6.9','6.12'], <InternalItem6d3/>),
-  /*createItem(['2.7'], <InternalItem5/>),
-  createItem(['2.8'], <InternalItem2d8/>),
-  createItem(['2.9','2.10','2.11'], <InternalItem2d9/>),
-  createItem(['3.4','3.5','3.7'], <InternalItem3d4/>),
-  createItem(['3.10','3.11','3.12'], <InternalItem13/>),
-  createItem(['3.14','3.15'], <InternalItem16/>),
-  createItem(['4.1','4.3','4.5','4.6'], <InternalItem18/>),
-  createItem(['4.8','4.9','4.10'], <InternalItem22/>),
-  createItem(['5.1','5.2'], <InternalItem25/>),
-  createItem(['5.3','5.5','5.6'], <InternalItem27/>),
-
-
-  createItem(['6.4','6.5','6.6','6.7'], <InternalItem31/>),
-  createItem(['6.8','6.10','6.11'], <InternalItem35/>),
-  createItem(['8.1','8.2','8.3','8.4'], <InternalItem8d1/>),
-  createItem(['8.5','8.6','8.7','8.9'], <InternalItem8d5/>),
-
-  createItem(['8.10','8.11','8.12','8.13'], <ItemUniversal/>),
+  /* createItem(['6.3','6.9','6.12'], <InternalItem6d3/>),
+  createItem(['2.7'], <InternalItem5/>),
+ createItem(['2.8'], <InternalItem2d8/>),
+ createItem(['2.9','2.10','2.11'], <InternalItem2d9/>),
+ createItem(['3.4','3.5','3.7'], <InternalItem3d4/>),
+ createItem(['3.10','3.11','3.12'], <InternalItem13/>),
+ createItem(['3.14','3.15'], <InternalItem16/>),
+ createItem(['4.1','4.3','4.5','4.6'], <InternalItem18/>),
+ createItem(['4.8','4.9','4.10'], <InternalItem22/>),
+ createItem(['5.1','5.2'], <InternalItem25/>),
+ createItem(['5.3','5.5','5.6'], <InternalItem27/>),
+ createItem(['6.4','6.5','6.6','6.7'], <InternalItem31/>),
+ createItem(['6.8','6.10','6.11'], <InternalItem35/>),
+ createItem(['8.1','8.2','8.3','8.4'], <InternalItem8d1/>),
+ createItem(['8.5','8.6','8.7','8.9'], <InternalItem8d5/>),
+ createItem(['8.10','8.11','8.12','8.13'], <ItemUniversal/>),
+   */
   createItem(['Instrument'], <ItemInstrumentTable/>),
   createItem(['ReCheck'], <ItemRecheckResult/>),
   createItem(['Appendix'], <ItemAppendixB/>),
   createItem(['Remark'], <ItemRemarks/>),
-  createItem(['Conclusion'], <ItemConclusion/>)
-  */
+  createItem(['Conclusion'], <ItemConclusion/>),
 ];
 
 
