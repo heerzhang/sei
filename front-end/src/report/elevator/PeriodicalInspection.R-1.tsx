@@ -128,14 +128,13 @@ const rows = [
 //names是要修改并保存的控制字段，一个字段只能被一个分区项目编辑组件内操纵，多头控制只听最后那个。
 export const inspectionContent=[
   {
-    bigNo: 1,
+    //bigNo: 1,
     bigLabel:'技术资料',
-    cutLines:[5],
     splitLine:{'0': 5},
     items:[
       null,null,null,
       {
-        item:1.4,
+        //item:1.4,
         label:'使用资料',
         iClass:'B',
         subItems:['(1)使用登记资料','(2)安全技术档案','(3)管理规章制度','(4)日常维护保养合同','(5)特种设备作业人员证'],
@@ -145,13 +144,12 @@ export const inspectionContent=[
     ]
   },
   {
-    bigNo: 2,
+    //bigNo: 2,
     bigLabel:'机房(机器设备间)及相关设备',
-    cutLines:[10,11],
-    splitLine:{'0': 10, '10': 11},
+    splitLine:{'0': 10, '10': 10},
     items:[
       {
-        item:2.1,
+        //item:2.1,
         label:'通道与通道门',
         iClass:'C',
         subItems:['(1)通道设置','(2)通道照明','(3)通道门'],
@@ -160,7 +158,7 @@ export const inspectionContent=[
       },
       null,null,null,
       {
-        item:2.5,
+        //item:2.5,
         label:'(1)照明、照明开关',
         iClass:'C',
         names:['机房照明'],
@@ -216,7 +214,6 @@ export const inspectionContent=[
   {
     bigNo: 3,
     bigLabel:'井道及相关设备',
-    cutLines:[6,7],
     splitLine:{'0': 6, '6': 7},
     items:[
       null,null,null,
@@ -288,7 +285,6 @@ export const inspectionContent=[
   {
     bigNo: 4,
     bigLabel:'轿厢与对重',
-    cutLines:[10],
     splitLine:{'0': 10},
     items:[
       {
@@ -351,7 +347,6 @@ export const inspectionContent=[
   {
     bigNo: 5,
     bigLabel:'悬挂装置、补偿装置及旋转部件防护',
-    cutLines:[7],
     splitLine:{'0': 7},
     items:[
       {
@@ -396,7 +391,6 @@ export const inspectionContent=[
   {
     bigNo: 6,
     bigLabel:'轿门与层门',
-    cutLines:[7,7],
     splitLine:{'0': 7, '7': 7},
     items:[
       null,null,
@@ -480,7 +474,6 @@ export const inspectionContent=[
   {
     bigNo: 8,
     bigLabel:'试验',
-    cutLines:[7,8],
     splitLine:{'0': 7, '7': 8},
     items:[
       {
@@ -706,14 +699,15 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
     let seq = 0;
     let htmlTxts =[];
     inspectionContent.forEach((rowBigItem, x) => {
+      let bigItemRowCnt=0;
       rowBigItem && rowBigItem.items.forEach((item, y) => {
-        let bigItemRowCnt=0;
         if(item){
           seq += 1;
           let itemXY = `${x + 1}.${y + 1}`;
           let subCnt =item.subItems?.length || 0;
           let iRowSpan =subCnt? subCnt : 1;
           let bigLineCnt=rowBigItem.splitLine[bigItemRowCnt];
+          console.log("奇怪了@@ bigItemRowCnt=",bigItemRowCnt, "bigLineCnt=",rowBigItem.splitLine[bigItemRowCnt]);
           const rowHead = <RouterLink key={seq} to={`/report/EL-DJ/ver/1/${itemXY}/227`}>
             <TableRow>
               <CCell component="th" scope="row" rowSpan={iRowSpan}>{seq}</CCell>
@@ -735,7 +729,7 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
           bigItemRowCnt++;
           for(let i=0; i<subCnt-1; i++){
             let bigLineCnt=rowBigItem.splitLine[bigItemRowCnt];
-            const rowSub =<TableRow>
+            const rowSub =<TableRow key={`${itemXY}-${i+1}`}>
                  {bigLineCnt && <CCell rowSpan={bigLineCnt}>{`${x+1}`}<br/>{`${rowBigItem.bigLabel}`}</CCell> }
                   <Cell>{item.subItems[i+1]}</Cell>
                   <CCell>{itr[itemXY][i+1]}</CCell>
@@ -1154,528 +1148,6 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
           </TableHead>
           <TableBody>
             {renderIspContent}
-
-
-          <RouterLink key={57} to={`/report/item/6.3/227/EL-DJ/ver/1`}>
-            <TableRow >
-              <CCell component="th" scope="row" rowSpan={4}>5</CCell>
-              <CCell rowSpan={4}>B</CCell>
-              <CCell rowSpan={4}>2.7</CCell>
-              <CCell rowSpan={4}>驱动主机</CCell>
-              <Cell>(2)工作状况</Cell>
-              <CCell>符合</CCell>
-              <CCell rowSpan={4}>合格</CCell>
-            </TableRow>
-          </RouterLink>
-
-            <TableRow >
-              <Cell>(3)轮槽磨损</Cell>
-              <CCell>符合</CCell>
-            </TableRow>
-            <TableRow >
-              <Cell>(4)制动器动作情况</Cell>
-              <CCell>符合</CCell>
-            </TableRow>
-            <TableRow >
-              <Cell>★(5)手动紧急操作装置</Cell>
-              <CCell>符合</CCell>
-            </TableRow>
-
-              <TableRow >
-                <CCell component="th" scope="row" rowSpan={6}>6</CCell>
-                <CCell rowSpan={6}>B</CCell>
-                <CCell rowSpan={6}>2.8</CCell>
-                <CCell rowSpan={6}>控制柜、紧急操作和动态测试装置</CCell>
-                <Cell>(2)断错相保护</Cell>
-                <CCell>符合</CCell>
-                <CCell rowSpan={6}></CCell>
-              </TableRow>
-
-              <TableRow >
-                <Cell>(4)紧急电动运行装置</Cell>
-                <CCell>／</CCell>
-              </TableRow>
-              <TableRow >
-                <Cell>☆(6)层门和轿门旁路装置</Cell>
-                <CCell>／</CCell>
-              </TableRow>
-              <TableRow >
-                <Cell>☆(7)门回路检测功能</Cell>
-                <CCell>／</CCell>
-              </TableRow>
-
-               <TableRow >
-                   <Cell>
-                      ☆(8)制动器故障保护
-                   </Cell>
-                    <CCell>／</CCell>
-               </TableRow>
-
-              <TableRow >
-                <Cell>☆(9)自动救援操作装置</Cell>
-                <CCell>／</CCell>
-              </TableRow>
-
-
-            <TableRow>
-              <CCell component="th" scope="row" rowSpan={3}>7</CCell>
-              <CCell rowSpan={3}>B</CCell>
-              <CCell rowSpan={3}>2.9</CCell>
-              <CCell rowSpan={3}>限速器</CCell>
-              <Cell>(2)电气安全装置</Cell>
-              <CCell>符合</CCell>
-              <CCell rowSpan={3}>合格</CCell>
-            </TableRow>
-            <TableRow >
-              <Cell>(3)封记及运转情况</Cell>
-              <CCell>符合</CCell>
-            </TableRow>
-            <TableRow >
-              <Cell>(4)动作速度校验</Cell>
-              <CCell>资料确认符合</CCell>
-            </TableRow>
-            <TableRow >
-              <CCell component="th" scope="row">8</CCell>
-              <CCell>C</CCell>
-              <CCell>2.10</CCell>
-              <Cell colSpan={2}>(2)接地连接</Cell>
-              <CCell>符合</CCell>
-              <CCell></CCell>
-            </TableRow>
-            <TableRow >
-              <CCell component="th" scope="row">9</CCell>
-              <CCell>C</CCell>
-              <CCell>2.11</CCell>
-              <Cell colSpan={2}>电气绝缘</Cell>
-              <CCell>资料确认符合</CCell>
-              <CCell></CCell>
-            </TableRow>
-            <TableRow >
-              <CCell component="th" scope="row" rowSpan={2}>10</CCell>
-              <CCell rowSpan={2}>C</CCell>
-              <CCell rowSpan={6}>3井道及相关设备</CCell>
-              <CCell rowSpan={2}>3.4</CCell>
-              <Cell rowSpan={2}>井道安全门</Cell>
-              <Cell>(3)门锁</Cell>
-              <CCell>／</CCell>
-              <CCell rowSpan={2}>／</CCell>
-            </TableRow>
-            <TableRow >
-              <Cell>(4)电气安全装置</Cell>
-              <CCell>／</CCell>
-            </TableRow>
-            <TableRow >
-              <CCell component="th" scope="row" rowSpan={2}>11</CCell>
-              <CCell rowSpan={2}>C</CCell>
-              <CCell rowSpan={2}>3.5</CCell>
-              <Cell rowSpan={2}>井道检修门</Cell>
-              <Cell>(3)门锁</Cell>
-              <CCell>／</CCell>
-              <CCell rowSpan={2}>／</CCell>
-            </TableRow>
-            <TableRow >
-              <Cell>(4)电气安全装置</Cell>
-              <CCell>／</CCell>
-            </TableRow>
-            <TableRow >
-              <CCell component="th" scope="row">12</CCell>
-              <CCell>B</CCell>
-              <CCell>3.7</CCell>
-              <Cell colSpan={2}>轿厢与井道壁距离</Cell>
-              <CCell>间距0.14m</CCell>
-              <CCell></CCell>
-            </TableRow>
-            <TableRow >
-              <CCell component="th" scope="row">13</CCell>
-              <CCell>B</CCell>
-              <CCell>3.10</CCell>
-              <Cell colSpan={2}>极限开关</Cell>
-              <CCell>符合</CCell>
-              <CCell></CCell>
-            </TableRow>
-            <TableRow >
-              <CCell component="th" scope="row">14</CCell>
-              <CCell>C</CCell>
-              <CCell rowSpan={7}>3井道及相关设备</CCell>
-              <CCell>3.11</CCell>
-              <Cell colSpan={2}>井道照明</Cell>
-              <CCell>符合</CCell>
-              <CCell></CCell>
-            </TableRow>
-            <TableRow >
-              <CCell component="th" scope="row" rowSpan={2}>15</CCell>
-              <CCell rowSpan={2}>C</CCell>
-              <CCell rowSpan={2}>3.12</CCell>
-              <CCell rowSpan={2}>底坑设施与装置</CCell>
-              <Cell>(1)底坑底部</Cell>
-              <CCell>符合</CCell>
-              <CCell rowSpan={2}>合格</CCell>
-            </TableRow>
-            <TableRow >
-              <Cell>(3)停止装置</Cell>
-              <CCell>符合</CCell>
-            </TableRow>
-            <TableRow >
-              <CCell component="th" scope="row">16</CCell>
-              <CCell>B</CCell>
-              <CCell>3.14</CCell>
-              <Cell colSpan={2}>(2)限速绳张紧装置的电气安全装置</Cell>
-              <CCell>符合</CCell>
-              <CCell></CCell>
-            </TableRow>
-            <TableRow >
-              <CCell component="th" scope="row" rowSpan={3}>17</CCell>
-              <CCell rowSpan={3}>B</CCell>
-              <CCell rowSpan={3}>3.15</CCell>
-              <CCell rowSpan={3}>缓冲器</CCell>
-              <Cell>(3)固定和完好情况</Cell>
-              <CCell>符合</CCell>
-              <CCell rowSpan={3}>合格</CCell>
-            </TableRow>
-            <TableRow >
-              <Cell>(4)液位和电气安全装置</Cell>
-              <CCell>符合</CCell>
-            </TableRow>
-            <TableRow >
-              <Cell>(5)对重越程距离</Cell>
-              <CCell>最大允许值400mm; 测量值260mm</CCell>
-            </TableRow>
-            <TableRow >
-              <CCell component="th" scope="row" rowSpan={2}>18</CCell>
-              <CCell rowSpan={2}>C</CCell>
-              <CCell rowSpan={10}>4轿厢与对重</CCell>
-              <CCell rowSpan={2}>4.1</CCell>
-              <CCell rowSpan={2}>轿顶电气装置</CCell>
-              <Cell>(1)检修装置</Cell>
-              <CCell>符合</CCell>
-              <CCell rowSpan={2}>合格</CCell>
-            </TableRow>
-            <TableRow >
-              <Cell>(2)停止装置</Cell>
-              <CCell>符合</CCell>
-            </TableRow>
-            <TableRow >
-              <CCell component="th" scope="row" >19</CCell>
-              <CCell>C</CCell>
-              <CCell>4.3</CCell>
-              <Cell colSpan={2}>(3)安全门(窗)电气安全装置</Cell>
-              <CCell>／</CCell>
-              <CCell>／</CCell>
-            </TableRow>
-            <TableRow >
-              <CCell component="th" scope="row" rowSpan={2}>20</CCell>
-              <CCell rowSpan={2}>B</CCell>
-              <CCell rowSpan={2}>4.5</CCell>
-              <CCell rowSpan={2}>对重(平衡重)块</CCell>
-              <Cell>(1)固定</Cell>
-              <CCell>符合</CCell>
-              <CCell rowSpan={2}>合格</CCell>
-            </TableRow>
-            <TableRow >
-              <Cell>(2)识别数量的措施</Cell>
-              <CCell>符合</CCell>
-            </TableRow>
-            <TableRow >
-              <CCell component="th" scope="row" >21</CCell>
-              <CCell>C</CCell>
-              <CCell>4.6</CCell>
-              <Cell colSpan={2}>(2)轿厢超面积载货电梯的控制条件</Cell>
-              <CCell>／</CCell>
-              <CCell>／</CCell>
-            </TableRow>
-            <TableRow >
-              <CCell component="th" scope="row" rowSpan={2}>22</CCell>
-              <CCell rowSpan={2}>B</CCell>
-              <CCell rowSpan={2}>4.8</CCell>
-              <CCell rowSpan={2}>紧急照明和报警装置</CCell>
-              <Cell>(1)紧急照明</Cell>
-              <CCell>符合</CCell>
-              <CCell rowSpan={2}>不合格</CCell>
-            </TableRow>
-            <TableRow >
-              <Cell>(2)紧急报警装置</Cell>
-              <CCell>不符合</CCell>
-            </TableRow>
-            <TableRow >
-              <CCell component="th" scope="row" >23</CCell>
-              <CCell>C</CCell>
-              <CCell>4.9</CCell>
-              <Cell colSpan={2}>地坎护脚板</Cell>
-              <CCell>资料确认符合</CCell>
-              <CCell>合格</CCell>
-            </TableRow>
-            <TableRow >
-              <CCell component="th" scope="row" >24</CCell>
-              <CCell>C</CCell>
-              <CCell>4.10</CCell>
-              <Cell colSpan={2}>超载保护装置</Cell>
-              <CCell>资料确认符合</CCell>
-              <CCell>合格</CCell>
-            </TableRow>
-            <TableRow >
-              <CCell component="th" scope="row" >25</CCell>
-              <CCell>C</CCell>
-              <CCell rowSpan={7}>5<br/>悬挂装置、补偿装置及旋转部件防护</CCell>
-              <CCell>5.1</CCell>
-              <Cell colSpan={2}>悬挂装置、补偿装置的磨损、断丝、变形等情况</Cell>
-              <CCell>符合</CCell>
-              <CCell>合格</CCell>
-            </TableRow>
-            <TableRow >
-              <CCell component="th" scope="row" >26</CCell>
-              <CCell>C</CCell>
-              <CCell>5.2</CCell>
-              <Cell colSpan={2}>绳端固定</Cell>
-              <CCell>符合</CCell>
-              <CCell>合格</CCell>
-            </TableRow>
-            <TableRow >
-              <CCell component="th" scope="row" rowSpan={3}>27</CCell>
-              <CCell rowSpan={3}>C</CCell>
-              <CCell rowSpan={3}>5.3</CCell>
-              <CCell rowSpan={3}>补偿装置</CCell>
-              <Cell>(1)绳(链)端固定</Cell>
-              <CCell>符合</CCell>
-              <CCell rowSpan={3}>合格</CCell>
-            </TableRow>
-            <TableRow >
-              <Cell>(2)电气安全装置</Cell>
-              <CCell>／</CCell>
-            </TableRow>
-            <TableRow >
-              <Cell>(3)补偿绳防跳装置</Cell>
-              <CCell>／</CCell>
-            </TableRow>
-            <TableRow >
-              <CCell component="th" scope="row" >28</CCell>
-              <CCell>B</CCell>
-              <CCell>5.5</CCell>
-              <Cell colSpan={2}>松绳(链)保护</Cell>
-              <CCell>／</CCell>
-              <CCell>／</CCell>
-            </TableRow>
-            <TableRow >
-              <CCell component="th" scope="row" >29</CCell>
-              <CCell>C</CCell>
-              <CCell>5.6</CCell>
-              <Cell colSpan={2}>旋转部件的防护</Cell>
-              <CCell>符合</CCell>
-              <CCell>合格</CCell>
-            </TableRow>
-            <TableRow >
-              <CCell component="th" scope="row" rowSpan={2}>30</CCell>
-              <CCell rowSpan={2}>C</CCell>
-              <CCell rowSpan={7}>6<br/>轿门与层门</CCell>
-              <CCell rowSpan={2}>6.3</CCell>
-              <CCell rowSpan={2}>门间隙</CCell>
-              <Cell>(1)门扇间隙</Cell>
-              <CCell>符合</CCell>
-              <CCell rowSpan={2}>合格</CCell>
-            </TableRow>
-            <TableRow >
-              <Cell>(2)人力施加在最不利点时间隙</Cell>
-              <CCell>符合</CCell>
-            </TableRow>
-            <TableRow >
-              <CCell component="th" scope="row" >31</CCell>
-              <CCell>C</CCell>
-              <CCell>6.4</CCell>
-              <Cell colSpan={2}>玻璃门防拖曳措施</Cell>
-              <CCell>／</CCell>
-              <CCell>／</CCell>
-            </TableRow>
-            <TableRow >
-              <CCell component="th" scope="row" >32</CCell>
-              <CCell>B</CCell>
-              <CCell>6.5</CCell>
-              <Cell colSpan={2}>防止门夹人的保护装置</Cell>
-              <CCell>符合</CCell>
-              <CCell>合格</CCell>
-            </TableRow>
-            <TableRow >
-              <CCell component="th" scope="row" >33</CCell>
-              <CCell>B</CCell>
-              <CCell>6.6</CCell>
-              <Cell colSpan={2}>门的运行与导向</Cell>
-              <CCell>符合</CCell>
-              <CCell>合格</CCell>
-            </TableRow>
-            <TableRow >
-              <CCell component="th" scope="row" >34</CCell>
-              <CCell>B</CCell>
-              <CCell>6.7</CCell>
-              <Cell colSpan={2}>自动关闭层门装置</Cell>
-              <CCell>符合</CCell>
-              <CCell>合格</CCell>
-            </TableRow>
-            <TableRow >
-              <CCell component="th" scope="row" >35</CCell>
-              <CCell>B</CCell>
-              <CCell>6.8</CCell>
-              <Cell colSpan={2}>紧急开锁装置</Cell>
-              <CCell>符合</CCell>
-              <CCell>合格</CCell>
-            </TableRow>
-            <TableRow >
-              <CCell component="th" scope="row" rowSpan={2}>36</CCell>
-              <CCell rowSpan={2}>B</CCell>
-              <CCell rowSpan={7}>6<br/>轿门与层门</CCell>
-              <CCell rowSpan={2}>6.9</CCell>
-              <CCell rowSpan={2}>门的锁紧</CCell>
-              <Cell>(1)层门门锁装置[不含6.9(1)①]</Cell>
-              <CCell>符合</CCell>
-              <CCell rowSpan={2}>合格</CCell>
-            </TableRow>
-            <TableRow >
-              <Cell>(2)轿门门锁装置[不含6.9(1)①]</Cell>
-              <CCell>符合</CCell>
-            </TableRow>
-            <TableRow >
-              <CCell component="th" scope="row" rowSpan={2}>37</CCell>
-              <CCell rowSpan={2}>B</CCell>
-              <CCell rowSpan={2}>6.10</CCell>
-              <CCell rowSpan={2}>门的闭合</CCell>
-              <Cell>(1)机电联锁</Cell>
-              <CCell>符合</CCell>
-              <CCell rowSpan={2}>合格</CCell>
-            </TableRow>
-            <TableRow >
-              <Cell>(2)电气安全装置</Cell>
-              <CCell>符合</CCell>
-            </TableRow>
-            <TableRow >
-              <CCell component="th" scope="row" rowSpan={2}>38</CCell>
-              <CCell rowSpan={2}>B</CCell>
-              <CCell rowSpan={2}>☆<br/>6.11</CCell>
-              <CCell rowSpan={2}>轿门开门限制装置及轿门的开启</CCell>
-              <Cell>(1)轿门开门限制装置</Cell>
-              <CCell>／</CCell>
-              <CCell rowSpan={2}>／</CCell>
-            </TableRow>
-            <TableRow >
-              <Cell>(2)轿门的开启</Cell>
-              <CCell>／</CCell>
-            </TableRow>
-            <TableRow >
-              <CCell component="th" scope="row" >39</CCell>
-              <CCell>C</CCell>
-              <CCell>6.12</CCell>
-              <Cell colSpan={2}>门刀、门锁滚轮与地坎间隙</Cell>
-              <CCell>符合</CCell>
-              <CCell>合格</CCell>
-            </TableRow>
-            <TableRow >
-              <CCell component="th" scope="row" >40</CCell>
-              <CCell>C</CCell>
-              <CCell rowSpan={7}>8<br/>试验</CCell>
-              <CCell>8.1</CCell>
-              <Cell colSpan={2}>平衡系数试验</Cell>
-              <CCell>资料确认符合</CCell>
-              <CCell>合格</CCell>
-            </TableRow>
-            <TableRow >
-              <CCell component="th" scope="row" >41</CCell>
-              <CCell>C</CCell>
-              <CCell>8.2</CCell>
-              <Cell colSpan={2}>★轿厢上行超速保护装置试验</Cell>
-              <CCell>符合</CCell>
-              <CCell>合格</CCell>
-            </TableRow>
-            <TableRow >
-              <CCell component="th" scope="row" rowSpan={2}>42</CCell>
-              <CCell rowSpan={2}>B</CCell>
-              <CCell rowSpan={2}>☆<br/>8.3</CCell>
-              <CCell rowSpan={2}>轿厢意外移动保护装置试验</CCell>
-              <Cell>(1)制停情况</Cell>
-              <CCell>／</CCell>
-              <CCell rowSpan={2}>／</CCell>
-            </TableRow>
-            <TableRow >
-              <Cell>(2)自监测功能</Cell>
-              <CCell>／</CCell>
-            </TableRow>
-            <TableRow >
-              <CCell component="th" scope="row" >43</CCell>
-              <CCell>B</CCell>
-              <CCell>8.4</CCell>
-              <Cell colSpan={2}>轿厢限速器－安全钳试验</Cell>
-              <CCell>符合</CCell>
-              <CCell>合格</CCell>
-            </TableRow>
-            <TableRow >
-              <CCell component="th" scope="row" >44</CCell>
-              <CCell>B</CCell>
-              <CCell>8.5</CCell>
-              <Cell colSpan={2}>对重(平衡重)限速器—安全钳试验</Cell>
-              <CCell>／</CCell>
-              <CCell>／</CCell>
-            </TableRow>
-            <TableRow >
-              <CCell component="th" scope="row" >45</CCell>
-              <CCell>C</CCell>
-              <CCell>8.6</CCell>
-              <Cell colSpan={2}>运行试验</Cell>
-              <CCell>符合</CCell>
-              <CCell>合格</CCell>
-            </TableRow>
-            <TableRow >
-              <CCell component="th" scope="row" rowSpan={3}>46</CCell>
-              <CCell rowSpan={3}>B</CCell>
-              <CCell rowSpan={8}>8<br/>试验</CCell>
-              <CCell rowSpan={3}>8.7</CCell>
-              <CCell rowSpan={3}>应急救援试验</CCell>
-              <Cell>(1)救援程序</Cell>
-              <CCell>符合</CCell>
-              <CCell rowSpan={3}>合格</CCell>
-            </TableRow>
-            <TableRow >
-              <Cell>(2)救援通道</Cell>
-              <CCell>符合</CCell>
-            </TableRow>
-            <TableRow >
-              <Cell>(3)救援操作</Cell>
-              <CCell>符合</CCell>
-            </TableRow>
-            <TableRow >
-              <CCell component="th" scope="row" >47</CCell>
-              <CCell>B</CCell>
-              <CCell>8.9</CCell>
-              <Cell colSpan={2}>空载曳引检查</Cell>
-              <CCell>符合</CCell>
-              <CCell>合格</CCell>
-            </TableRow>
-            <TableRow >
-              <CCell component="th" scope="row" >48</CCell>
-              <CCell>B</CCell>
-              <CCell>8.10</CCell>
-              <Cell colSpan={2}>上行制动工况曳引检查</Cell>
-              <CCell>符合</CCell>
-              <CCell>合格</CCell>
-            </TableRow>
-            <TableRow >
-              <CCell component="th" scope="row" >49</CCell>
-              <CCell>B</CCell>
-              <CCell>8.11</CCell>
-              <Cell colSpan={2}>▲下行制动工况曳引检查</Cell>
-              <CCell>／</CCell>
-              <CCell>／</CCell>
-            </TableRow>
-            <TableRow >
-              <CCell component="th" scope="row" >50</CCell>
-              <CCell>B</CCell>
-              <CCell>8.12</CCell>
-              <Cell colSpan={2}>▲静态曳引试验</Cell>
-              <CCell>／</CCell>
-              <CCell>／</CCell>
-            </TableRow>
-            <TableRow >
-              <CCell component="th" scope="row" >51</CCell>
-              <CCell>B</CCell>
-              <CCell>8.13</CCell>
-              <Cell colSpan={2}>制动试验</Cell>
-              <CCell>／</CCell>
-              <CCell>／</CCell>
-            </TableRow>
           </TableBody>
         </Table>
         检验不合格项目内容及复检结果
