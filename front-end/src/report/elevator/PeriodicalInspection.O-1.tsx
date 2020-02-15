@@ -28,8 +28,8 @@ import { EditStorageContext } from "../StorageContext";
 
 let   id = 0;
 const genId = () => ++id;
-function createItem( items: string[], zoneContent: React.ReactNode) {
-  return {items,  zoneContent};
+function createItem( itemArea: string, zoneContent: React.ReactNode) {
+  return {itemArea,  zoneContent};
 }
 function verifyAction( action:  string, generalFormat: any[]) {
   let itemNums=action.split(".");
@@ -44,7 +44,7 @@ function verifyAction( action:  string, generalFormat: any[]) {
 
 const OriginalView: React.RefForwardingComponent<InternalItemHandResult,TemplateViewProps>=
   React.forwardRef((
-     {inp:oldWay, action='None', children},   ref
+     {inp:oldWay, action='none', children},   ref
   ) => {
     const {storage, setStorage} =React.useContext(EditStorageContext);
     let refSize=0;     //项目可独立编辑，其它没有界面显示的项目部分可以省略inp的传回ref等。动态的可独立编辑项目区的数量。
@@ -898,38 +898,18 @@ const OriginalView: React.RefForwardingComponent<InternalItemHandResult,Template
                       procedure={generalFormat[x].items[y].procedure}  details={generalFormat[x].items[y].details}
                  />
               </React.Fragment>;
-           }
-            else if(action==='gap'){
-             // x=1; y=0;
-              resView=
-               <React.Fragment>
-                 {
-                   [1].map((each, i) => {
-                     return React.cloneElement(projectList[1].zoneContent as React.ReactElement<any>, {
-                       ref: null,
-                       key: i
-                     });
-                   })
-                 }
-             </React.Fragment>;
+           }else{
+              const itemA=projectList.find((one)=>one.itemArea===action);
+              resView= itemA && <React.Fragment>
+                     {
+                          React.cloneElement(itemA.zoneContent as React.ReactElement<any>, {
+                           ref: null,
+                           key: itemA.itemArea
+                         })
+                     }
+                 </React.Fragment>;
             }
-           else if(action==='6.3'){
-             // x=1; y=0;
-             resView=
-               <React.Fragment>
-                 {
-                   [1].map((each, i) => {
-                     return React.cloneElement(projectList[2].zoneContent as React.ReactElement<any>, {
-                       ref: null,
-                       key: i
-                     });
-                   })
-                 }
-               </React.Fragment>;
-           }
-            else resView= <div key={0}>
-               士大夫辜负了所发生的
-             </div>;
+
             return  resView;
           }
                 ,[action, generalFormat,isItemNo,x,y]);
@@ -2848,43 +2828,21 @@ const ItemUniversal: React.RefForwardingComponent<InternalItemHandResult,ItemUni
   } );
 
 
-//項目標記符列表：不能用的ALL None zoneContent保留字；
+//項目標記符列表：不能用的ALL none printAll保留字；
 //可以考虑createItem这里Itemxx后面可以简化些通用性质组件只需要参数就搞定。
 //generalFormat配置里面设置，要不要特殊化，要不要从createItem/projectList提取特别定制版本的组件。
 const projectList =[
-  createItem(['LinkMan'], <ItemLinkManTel/>),
-  //createItem(['1.4'], <InternalItem1/>),
-  createItem(['item1.1'], <ItemUniversal x={0} y={0}/>),
-  createItem(['2.1','2.5','2.6'], <InternalItem2t4/>),
-  //createItem(['2.1','2.5','2.6'], <ItemUniversal x={1} y={0}/>),
-  createItem(['gap'], <ItemGapMeasure/>),
-  /* createItem(['6.3','6.9','6.12'], <InternalItem6d3/>),
-  createItem(['2.7'], <InternalItem5/>),
- createItem(['2.8'], <InternalItem2d8/>),
- createItem(['2.9','2.10','2.11'], <InternalItem2d9/>),
- createItem(['3.4','3.5','3.7'], <InternalItem3d4/>),
- createItem(['3.10','3.11','3.12'], <InternalItem13/>),
- createItem(['3.14','3.15'], <InternalItem16/>),
- createItem(['4.1','4.3','4.5','4.6'], <InternalItem18/>),
- createItem(['4.8','4.9','4.10'], <InternalItem22/>),
- createItem(['5.1','5.2'], <InternalItem25/>),
- createItem(['5.3','5.5','5.6'], <InternalItem27/>),
- createItem(['6.4','6.5','6.6','6.7'], <InternalItem31/>),
- createItem(['6.8','6.10','6.11'], <InternalItem35/>),
- createItem(['8.1','8.2','8.3','8.4'], <InternalItem8d1/>),
- createItem(['8.5','8.6','8.7','8.9'], <InternalItem8d5/>),
- createItem(['8.10','8.11','8.12','8.13'], <ItemUniversal/>),
-   */
-  createItem(['Instrument'], <ItemInstrumentTable/>),
-  createItem(['ReCheck'], <ItemRecheckResult/>),
-  createItem(['Appendix'], <ItemAppendixB/>),
-  createItem(['Remark'], <ItemRemarks/>),
-  createItem(['Conclusion'], <ItemConclusion/>),
+  createItem('LinkMan', <ItemLinkManTel/>),
+  createItem('item1.1', <ItemUniversal x={0} y={0}/>),
+  createItem('gap', <ItemGapMeasure/>),
+  createItem('Instrument', <ItemInstrumentTable/>),
+  createItem('ReCheck', <ItemRecheckResult/>),
+  createItem('Appendix', <ItemAppendixB/>),
+  createItem('Remark', <ItemRemarks/>),
+  createItem('Conclusion', <ItemConclusion/>),
 ];
 
-
 //'附录A 层门间隙、啮合长度' 这7个测量数据，单独放一个编辑组件。而原本'6.3','6.9','6.12'只读和跳转连接。
-//createItem(['8.10','8.11','8.12','8.13'], <InternalItem8d10/>),
 
 
 //模板定义实例； 2个输出名字不能改。

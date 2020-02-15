@@ -400,7 +400,7 @@ export const inspectionContent=[
         iClass:'C',
         subItems:['(1)门扇间隙','(2)人力施加在最不利点时间隙'],
         names:['门扇间隙','最不利隙'],
-        addNames:[]
+        addNames:['层站','门扇隙','门套隙','地坎隙','施力隙']
       },
       {
         item:6.4,
@@ -443,7 +443,7 @@ export const inspectionContent=[
         iClass:'B',
         subItems:['(1)层门门锁装置[不含6.9(1)①]','(2)轿门门锁装置[不含6.9(1)①]'],
         names:['层门锁','轿门锁'],
-        addNames:[]
+        addNames:['层站','门锁啮长']
       },
       {
         item:6.10,
@@ -466,7 +466,7 @@ export const inspectionContent=[
         label:'门刀、门锁滚轮与地坎间隙',
         iClass:'C',
         names:['刀轮地隙'],
-        addNames:[]
+        addNames:['层站','刀坎距','轮坎距']
       }
     ]
   },

@@ -36,7 +36,7 @@ import { Branding } from "../Branding";
 import { InternalItemHandResult, TemplateViewProps } from "./comp/base";
 import { useCommitOriginalData } from "./db";
 import throttle from 'throttle-asynchronous'
-import { loadTemplate } from "./template";
+//import { loadTemplate } from "./template";
 import typeAsRoute from "../typeAsRoute.json";
 //import { RecordView } from "./RecordView";
 import { RecordStarter, ReportStarter } from "./TemplateLoader";
@@ -55,9 +55,9 @@ function TemplateMain({id, source}: TemplateMainProps) {
   const [template, setTemplate] = React.useState(null as any);
   if(!match || !params || !params.template || !params.verId || !params.action)
       throw new Error(`没路由了`);
-  let path =typeAsRoute[params.template] +".O-1";
-
-  React.useLayoutEffect(() => {
+  const path =typeAsRoute[params.template] +".O-" +params.verId;
+  //useLayoutEffect
+  React.useEffect(() => {
     import(`${path}`).then(module => {
       if(module.originalTemplate===undefined)
         throw new Error(`没找到O模板入口组件${path}`);
@@ -71,11 +71,8 @@ function TemplateMain({id, source}: TemplateMainProps) {
       });
   }, [path]);
 
-  //React.useEffect(() => {
-  //const template =loadTemplate(typeAsRoute[params.template], '1');
-  //}, []);
-  console.log("来TemplateMain当前的match=",match ,"params=",params,"template=", template,"file=", typeAsRoute[params.template]);
-  if(!template) return null;
+  //console.log("来TemplateMain当前的match=",match ,"params=",params,"template=", template,"file=", typeAsRoute[params.template]);
+
   return (
     <React.Fragment>
       <Switch>
