@@ -56,8 +56,10 @@ function TemplateMain({id, source}: TemplateMainProps) {
   if(!match || !params || !params.template || !params.verId || !params.action)
       throw new Error(`没路由了`);
   const path =typeAsRoute[params.template] +".O-" +params.verId;
+  //import参数变量，会被替换为【.*】；  不可这么写 import(path) 这是无效的。
   //useLayoutEffect
   React.useEffect(() => {
+    console.log("用useLayoutEffect来试一试template=", "path=", path);
     import(`${path}`).then(module => {
       if(module.originalTemplate===undefined)
         throw new Error(`没找到O模板入口组件${path}`);
@@ -69,6 +71,7 @@ function TemplateMain({id, source}: TemplateMainProps) {
       .catch(error => {
         throw new Error(`错误导致后续操作模板查找失败${error}`);
       });
+
   }, [path]);
 
   //console.log("来TemplateMain当前的match=",match ,"params=",params,"template=", template,"file=", typeAsRoute[params.template]);
