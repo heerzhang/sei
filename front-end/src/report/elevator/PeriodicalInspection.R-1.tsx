@@ -743,7 +743,7 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
     return ( <React.Fragment>
           {htmlTxts}
       </React.Fragment> );
-   }, [orc]);
+   }, [itr]);
 
   //最多＝8列 <Table合计约1040px；原来PDF打印看着像是905px的。
   return (

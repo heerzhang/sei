@@ -57,9 +57,9 @@ function TemplateMain({id, source}: TemplateMainProps) {
   if(!match || !params || !params.template || !params.verId || !params.action)
       throw new Error(`没路由了`);
 
-  React.useEffect(() => {
-    loadTemplate(typeAsRoute[params &&params.template], setTemplate);
-  }, []);
+  //React.useEffect(() => {
+   loadTemplate(typeAsRoute[params &&params.template], setTemplate);
+  //}, []);
 
   return (
     <React.Fragment>

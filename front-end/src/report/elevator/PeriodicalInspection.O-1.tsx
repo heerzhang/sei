@@ -627,30 +627,34 @@ const OriginalView: React.RefForwardingComponent<InternalItemHandResult,Template
                 (2) 在水平移动门和折叠门主动门扇的开启方向,以150N的人力施加在一个最不利的点，前条所述的间
                 隙允许增大，但对于旁开门不大于30mm，对于中分门其总和不大于45mm
               </IndentationLayText>
-              <Table css={{borderCollapse:'collapse'}}>
-                <TableBody>
-                  <RouterLink key={99} to={`/report/item/gap/227/EL-DJ/ver/1`}>
-                    <TableRow >
-                      <CCell>层</CCell>
-                      <CCell>门扇隙</CCell>
-                      <CCell>门套隙</CCell>
-                      <CCell>地坎隙</CCell>
-                      <CCell>施力隙</CCell>
-                    </TableRow>
-                  </RouterLink>
-                  {storage?.层站?.map((a,i)=>{
-                    return <TableRow key={i}>
-                      <CCell>{a}</CCell>
-                      <CCell>{storage?.门扇隙?.[a]||''}</CCell>
-                      <CCell>{storage?.门套隙?.[a]||''}</CCell>
-                      <CCell>{storage?.地坎隙?.[a]||''}</CCell>
-                      <CCell>{storage?.施力隙?.[a]||''}</CCell>
-                    </TableRow>
-                  }) }
-                </TableBody>
-              </Table>
             </div>,
-            details:[]
+            details:[(inp,setInp)=>{
+              return <React.Fragment>
+                <Table css={{borderCollapse:'collapse'}}>
+                  <TableBody>
+                    <RouterLink key={99} to={`/report/item/gap/227/EL-DJ/ver/1`}>
+                      <TableRow >
+                        <CCell>层</CCell>
+                        <CCell>门扇隙</CCell>
+                        <CCell>门套隙</CCell>
+                        <CCell>地坎隙</CCell>
+                        <CCell>施力隙</CCell>
+                      </TableRow>
+                    </RouterLink>
+                    {inp?.层站?.map((a,i)=>{
+                      return <TableRow key={i}>
+                        <CCell>{a}</CCell>
+                        <CCell>{inp?.门扇隙?.[a]||''}</CCell>
+                        <CCell>{inp?.门套隙?.[a]||''}</CCell>
+                        <CCell>{inp?.地坎隙?.[a]||''}</CCell>
+                        <CCell>{inp?.施力隙?.[a]||''}</CCell>
+                      </TableRow>
+                    }) }
+                  </TableBody>
+                </Table>
+              </React.Fragment>
+            }, null
+            ]
           },
           {
             //item:6.4,
@@ -928,7 +932,7 @@ const OriginalView: React.RefForwardingComponent<InternalItemHandResult,Template
              </div>;
             return  resView;
           }
-                ,[action, clRefs ,generalFormat,x,y]);
+                ,[action, generalFormat,isItemNo,x,y]);
 
   //  console.log("公用配置对象--isItemNo=",isItemNo,"x=", x,"y=",y, generalFormat, "inspectionContent=", inspectionContent);
     console.log("公用配置对象--action=",action,"recordList=", recordList);
