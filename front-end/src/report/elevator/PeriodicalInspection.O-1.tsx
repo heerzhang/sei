@@ -689,132 +689,172 @@ const OriginalView: React.RefForwardingComponent<InternalItemHandResult,Template
           },
           {
             //item:6.9,
-            label:'门的锁紧',
-            iClass:'B',
-            subItems:['(1)层门门锁装置[不含6.9(1)①]','(2)轿门门锁装置[不含6.9(1)①]'],
-            names:['层门锁','轿门锁'],
+            procedure:  <div>
+              <IndentationLayText title={'(1)每个层门都应当设有符合下述要求的门锁装置:'}>
+                ②锁紧动作由重力、永久磁铁或者弹簧来产生和保持，即使永久磁铁或者弹簧失效，重力亦不能导致开锁；<br/>
+                ③轿厢在锁紧元件啮合不小于7mm时才能启动；<br/>
+                ④门的锁紧由一个电气安全装置来验证，该装置由锁紧元件强制操作而没有任何中间机构，并且能够防止误动作；
+              </IndentationLayText>
+              (2)如果轿门采用了门锁装置,该装置也应当符合本条(1)的要求。
+            </div>,
+            details:[(inp,setInp)=>{
+              let  toothUnquf=inp?.层站?.find((f,i)=>{
+                return parseFloat(inp?.门锁啮长?.[f])<7;
+              });
+              return <React.Fragment>
+                <div>
+                  已检门锁啮合长度:
+                  {inp?.层站?.map(a=>{
+                    return ` ${a}层:${inp?.门锁啮长?.[a]||''};`
+                  }) }
+                </div>
+                <InputGroupLine  label='(1)③门锁啮合长度{自动填}'>
+                  <SelectHookfork value={toothUnquf? '×': inp?.层站?.length>=1? '√':''} disabled/>
+                </InputGroupLine>
+              </React.Fragment>
+            }, null
+            ]
+          },
+          {
+            //item:6.10,
+            procedure:  <div>
+              （1）正常运行时应当不能打开层门，除非轿厢在该层门的开锁区域内停止或停站；如果一个层门或者轿门（或者多扇门中的任何一扇门）开着，在正常操作情况下，应当不能启动电梯或者不能保持继续运行；<br/>
+              （2）每个层门和轿门的闭合都应当由电气安全装置来验证，如果滑动门是由数个间接机械连接的门扇组成，则未被锁住的门扇上也应当设置电气安全装置以验证其闭合状态
+             </div>,
             details:[]
           },
           {
-            item:6.10,
-            label:'门的闭合',
-            iClass:'B',
-            subItems:['(1)机电联锁','(2)电气安全装置'],
-            names:['机电联锁','门闭合电安'],
+            //item:6.11,
+            procedure:  <div>
+              （1）应当设置轿门开门限制装置，当轿厢停在开锁区域外时，能够防止轿厢内的人员打开轿门离开轿厢；<br/>
+              （2）在轿厢意外移动保护装置允许的最大制停距离范围内，打开对应的层门后，能够不用工具(三角钥匙或者永久性设置在现场的工具除外)从层站处打开轿门
+            </div>,
             details:[]
           },
           {
-            item:6.11,
-            label:'☆轿门开门限制装置及轿门的开启',
-            iClass:'B',
-            subItems:['(1)轿门开门限制装置','(2)轿门的开启'],
-            names:['开门限制','门开启'],
-            details:[]
-          },
-          {
-            item:6.12,
-            label:'门刀、门锁滚轮与地坎间隙',
-            iClass:'C',
-            names:['刀轮地隙'],
-            details:[]
+            //item:6.12,
+            procedure:  <div>
+              1）轿门门刀与层门地坎，层门锁滚轮与轿厢地坎的间隙应当不小于5mm；电梯运行时不得互相碰擦
+            </div>,
+            details:[(inp,setInp)=>{
+                let  knifeUnquf=inp?.层站?.find((f,i)=>{
+                  return parseFloat(inp?.刀坎距?.[f])<5;
+                });
+                let  rollerUnquf=inp?.层站?.find((f,i)=>{
+                  return parseFloat(inp?.轮坎距?.[f])<5;
+                });
+                return <React.Fragment>
+                  <div>
+                    轿门门刀与层门地坎间距:
+                    {inp?.层站?.map(a=>{
+                      return ` ${a}层:${inp?.刀坎距?.[a]||''};`
+                    }) }
+                  </div>
+                  <div>
+                    门锁滚轮与轿门地坎间距:
+                    {inp?.层站?.map(a=>{
+                      return ` ${a}层:${inp?.轮坎距?.[a]||''};`
+                    }) }
+                  </div>
+                  <InputGroupLine  label='间隙应当不小于5mm{自动填}'>
+                    <SelectHookfork value={knifeUnquf||rollerUnquf? '×': inp?.层站?.length>=1? '√':''} disabled/>
+                  </InputGroupLine>
+                </React.Fragment>
+              }
+            ]
           }
         ]
       },
       null,
       {
-        bigNo: 8,
-        bigLabel:'试验',
-        cutLines:[7,8],
+        //bigNo: 8,
         items:[
           {
-            item:8.1,
-            label:'平衡系数试验',
-            iClass:'C',
-            names:['平衡系数'],
+            //item:8.1,
+            procedure:  <div>
+              （1）曳引电梯的平衡系数应当在0.40～0.50之间，或者符合制造（改造）单位的设计值
+            </div>,
             details:[]
           },
           {
-            item:8.2,
-            label:'★轿厢上行超速保护装置试验',
-            iClass:'C',
-            names:['超速保护'],
+            //item:8.2,
+            procedure:  <div>
+              （1）当轿厢上行速度失控时，轿厢上行超速保护装置应当动作，使轿厢制停或者至少使其速度降低至对重缓冲器的设计范围；该装置动作时，应当使一个电气安全装置动作
+            </div>,
             details:[]
           },
           {
-            item:8.3,
-            label:'☆轿厢意外移动保护装置试验',
-            iClass:'B',
-            subItems:['(1)制停情况','(2)自监测功能'],
-            names:['制停情况','自监测'],
+            //item:8.3,
+            procedure:  <div>
+              （1）轿厢在井道上部空载，以型式试验证书所给出的试验速度上行并触发制停部件，仅使用制停部件能够使电梯停止，轿厢的移动距离在型式试验证书给出的范围内；
+              （2）如果电梯采用存在内部冗余的制动器作为制停部件，则当制动器提起(或者释放)失效，或者制动力不足时，应当关闭轿门和层门，并且防止电梯的正常启动
+            </div>,
             details:[]
           },
           {
-            item:8.4,
-            label:'轿厢限速器－安全钳试验',
-            iClass:'B',
-            names:['限速安全钳'],
+            //item:8.4,
+            procedure:  <div>
+              （2）定期检验：轿厢空载，以检修速度下行，进行限速器-安全钳联动试验，限速器－安全钳动作应当可靠
+            </div>,
             details:[]
           },
           {
-            item:8.5,
-            label:'对重(平衡重)限速器—安全钳试验',
-            iClass:'B',
-            names:['对重限速试验'],
+            //item:8.5,
+            procedure:  <div>
+              （1）轿厢空载，以检修速度上行，进行限速器-安全钳联动试验，限速器－安全钳动作应当可靠
+            </div>,
             details:[]
           },
           {
-            item:8.6,
-            label:'运行试验',
-            iClass:'C',
-            names:['运行试验'],
+            //item:8.6,
+            procedure:  <div>
+             （1）轿厢空载，以正常运行速度上、下运行，呼梯、楼层显示等信号系统功能有效、指示正确、动作无误，轿厢平层良好，无异常现象发生；对于设有IC卡系统的电梯，轿厢内的人员无需通过IC卡系统即可到达建筑物的出口层，并且在电梯退出正常服务时，自动退出IC卡功能
+            </div>,
             details:[]
           },
           {
-            item:8.7,
-            label:'应急救援试验',
-            iClass:'B',
-            subItems:['(1)救援程序','(2)救援通道','(3)救援操作'],
-            names:['救援程序','救援通道','救援操作'],
+            //item:8.7,
+            procedure:  <div>
+              （1）在机房内或者紧急操作和动态测试装置上设有明晰的应急救援程序；<br/>
+              （2）建筑物内的救援通道保持通畅，以便相关人员无阻碍地抵达实施紧急操作的位置和层站等处；<br/>
+              （3）在各种载荷工况下，按照本条(1)所述的应急救援程序实施操作，能够安全、及时地解救被困人员
+            </div>,
             details:[]
           },
-          {},
+          null,
           {
-            item:8.9,
-            label:'空载曳引检查',
-            iClass:'B',
-            names:['空载曳引'],
-            details:[]
-          },
-          {
-            item:8.10,
-            label:'上行制动工况曳引检查',
-            iClass:'B',
-            names:['上行制动'],
-            procedure: <p> （1）轿厢空载以<span>正常运行速度
-                  </span>上行至行程上部，<br/> 切断电动机与制动器供电，轿厢<ItemLinkManTel/>
-              <br/>应当完全停止
-            </p>,
+            //item:8.9,
+            procedure:  <div>
+              （1）当对重压在缓冲器上而曳引机按电梯上行方向旋转时，应当不能提升空载轿厢
+            </div>,
             details:[]
           },
           {
-            item:8.11,
-            label:'▲下行制动工况曳引检查',
-            iClass:'B',
-            names:['下行制动'],
+            //item:8.10,
+            procedure:  <div>
+              （1）轿厢空载以正常运行速度上行至行程上部，切断电动机与制动器供电，轿厢应当完全停止
+            </div>,
             details:[]
           },
           {
-            item:8.12,
-            label:'▲静态曳引试验',
-            iClass:'B',
-            names:['静态曳引'],
+            //item:8.11,
+            procedure:  <div>
+              （1）轿厢装载125%额定载重量，以正常运行速度下行至行程下部，切断电动机与制动器供电，轿厢应当完全停止
+            </div>,
             details:[]
           },
           {
-            item:8.13,
-            label:'制动试验',
-            iClass:'B',
-            names:['制动试验'],
+            //item:8.12,
+            procedure:  <div>
+               （1）对于轿厢面积超过规定的载货电梯，以轿厢实际面积所对应的125%额定载重量进行静态曳引试验；对于额定载重量按照单位轿厢有效面积不小于200kg/m2计算的汽车电梯，以150%额定载重量做静态曳引试验；历时10min，曳引绳应当没有打滑现象
+            </div>,
+            details:[]
+          },
+          {
+            //item:8.13,
+            procedure:  <div>
+              （1）轿厢装载125%额定载重量，以正常运行速度下行时，切断电动机和制动器供电，制动器应当能够使驱动主机停止运转，试验后轿厢应无明显变形和损坏
+            </div>,
             details:[]
           }
         ]
