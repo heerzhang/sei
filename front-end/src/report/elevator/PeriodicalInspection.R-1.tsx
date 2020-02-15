@@ -131,6 +131,7 @@ export const inspectionContent=[
     bigNo: 1,
     bigLabel:'技术资料',
     cutLines:[5],
+    splitLine:{'0': 5},
     items:[
       null,null,null,
       {
@@ -147,6 +148,7 @@ export const inspectionContent=[
     bigNo: 2,
     bigLabel:'机房(机器设备间)及相关设备',
     cutLines:[10,11],
+    splitLine:{'0': 10, '10': 11},
     items:[
       {
         item:2.1,
@@ -697,9 +699,9 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
   console.log("当前useMemo的 itr=",itr, "source=",orc);
   const renderIspContent =React.useMemo(() => {
     let seq = 0;
-    let text =[];
+    let htmlTxts =[];
     inspectionContent.forEach((rowBigItem, x) => {
-      if(x>=1) return;
+      if(x>=2) return;
       rowBigItem && rowBigItem.items.forEach((item, y) => {
         let bigItemRowCnt=0;
         if(y>3) return;
@@ -708,13 +710,12 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
           let itemXY = `${x + 1}.${y + 1}`;
           let subCnt =item.subItems?.length || 0;
           let iRowSpan =subCnt? subCnt : 1;
-          bigItemRowCnt +=iRowSpan;
-          let lines=rowBigItem.cutLines[0];
+          let bigLineCnt=rowBigItem.splitLine[bigItemRowCnt];
           const rowHead = <RouterLink key={seq} to={`/report/EL-DJ/ver/1/${itemXY}/227`}>
             <TableRow>
               <CCell component="th" scope="row" rowSpan={iRowSpan}>{seq}</CCell>
               <CCell rowSpan={iRowSpan}>{item.iClass}</CCell>
-              <CCell rowSpan={lines}>{`${x+1}`}<br/>{`${rowBigItem.bigLabel}`}</CCell>
+              {bigLineCnt && <CCell rowSpan={bigLineCnt}>{`${x+1}`}<br/>{`${rowBigItem.bigLabel}`}</CCell> }
               <CCell rowSpan={iRowSpan}>{itemXY}</CCell>
               <CCell rowSpan={iRowSpan}>{item.label}</CCell>
               <Cell>{item.subItems[y]}</Cell>
@@ -722,13 +723,24 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
               <CCell rowSpan={iRowSpan}>{itr[itemXY].result}</CCell>
             </TableRow>
           </RouterLink>;
-          text.push(rowHead);
+          htmlTxts.push(rowHead);
+          bigItemRowCnt++;
+          for(let i=0; i<subCnt-1; i++){
+            let bigLineCnt=rowBigItem.splitLine[bigItemRowCnt];
+            const rowSub =<TableRow>
+                 {bigLineCnt && <CCell rowSpan={bigLineCnt}>{`${x+1}`}<br/>{`${rowBigItem.bigLabel}`}</CCell> }
+                  <Cell>{item.subItems[i+1]}</Cell>
+                  <CCell>{itr[itemXY][i+1]}</CCell>
+                </TableRow>;
+            htmlTxts.push(rowSub);
+            bigItemRowCnt++;
+          }
         }
       });
     });
-    console.log("当前renderIspContent的 text=",text);
+    console.log("当前renderIspContent的 htmlTxts=",htmlTxts);
     return ( <React.Fragment>
-          {text}
+          {htmlTxts}
       </React.Fragment> );
    }, [orc]);
 
@@ -1134,55 +1146,6 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
           </TableHead>
           <TableBody>
             {renderIspContent}
-            <TableRow>
-              <CCell component="th" scope="row" rowSpan={5}>1</CCell>
-              <CCell rowSpan={5}>{itr[1.4].iClass}</CCell>
-              <CCell rowSpan={5}>1技术资料</CCell>
-              <CCell rowSpan={5}>1.4</CCell>
-              <CCell rowSpan={5}>使用资料</CCell>
-              <Cell>(1)使用登记资料</Cell>
-              <CCell>{itr[1.4][0]}</CCell>
-              <CCell rowSpan={5}>{itr[1.4].result}</CCell>
-            </TableRow>
-            <TableRow key={2}>
-              <Cell>(2)安全技术档案</Cell>
-              <CCell>{itr[1.4][1]}</CCell>
-            </TableRow>
-            <TableRow >
-              <Cell>(3)管理规章制度</Cell>
-              <CCell>{itr[1.4][2]}</CCell>
-            </TableRow>
-            <TableRow >
-              <Cell>(4)日常维护保养合同</Cell>
-              <CCell>{itr[1.4][3]}</CCell>
-            </TableRow>
-            <TableRow >
-              <Cell>(5)特种设备作业人员证</Cell>
-              <CCell>{itr[1.4][4]}</CCell>
-            </TableRow>
-
-           <RouterLink key={35} to={`/report/EL-DJ/ver/1/2.1/227`}>
-            <TableRow >
-              <CCell component="th" scope="row" rowSpan={3}>2</CCell>
-              <CCell rowSpan={3}>{itr[2.1].iClass}</CCell>
-              <CCell rowSpan={20}>2机房(机器设备间)及相关设备</CCell>
-              <CCell rowSpan={3}>2.1</CCell>
-              <CCell rowSpan={3}>通道与通道门</CCell>
-              <Cell>(1)通道设置</Cell>
-              <CCell>{itr[2.1][0]}</CCell>
-              <CCell rowSpan={3}>{itr[2.1].result}</CCell>
-            </TableRow>
-           </RouterLink>
-
-            <TableRow >
-              <Cell>(2)通道照明</Cell>
-              <CCell>{itr[2.1][1]}</CCell>
-            </TableRow>
-            <TableRow>
-              <Cell>(3)通道门</Cell>
-              <CCell>{itr[2.1][2]}</CCell>
-            </TableRow>
-
 
             <TableRow >
               <CCell component="th" scope="row">3</CCell>
