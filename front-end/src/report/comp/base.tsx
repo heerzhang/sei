@@ -137,21 +137,27 @@ export const InspectItemHeadColumn: React.FunctionComponent<InspectItemHeadColum
 export interface InspectRecordTitleProps {
   //control参数实际是 useCollapse(show,true) 返回值。
   //底下的?号是必不可少的。
-  control:  {　show?:boolean , buttonProps?: any , collapseProps?:{id:string,　show:boolean} 　};　
+  control:  {　show?:boolean,
+              setShow?: React.Dispatch<React.SetStateAction<boolean>>,
+              buttonProps?: any ,
+              collapseProps?:{id:string,　show:boolean} 　
+            };　
   label: string;
   children: React.ReactNode;
-  collapseNoLazy?:boolean;
+  collapseNoLazy?: boolean;
+  onPullUp?: () => void;
 }
 //原始记录的列表项，很像菜单列表标题；　　包装成一个组件，以便　修改和复用。
 export const InspectRecordTitle: React.FunctionComponent<InspectRecordTitleProps> = ({
          control,
          label,
+         onPullUp,
          collapseNoLazy=false,
          children,
          ...other
       }) => {
   const theme = useTheme();
-
+  //点击最底下的按钮，可以触发编辑器的确认临时存储的功能。
   return (
     <Layer elevation={"sm"}     css={{ padding: '0.25rem' }}>
       <div>
@@ -172,6 +178,10 @@ export const InspectRecordTitle: React.FunctionComponent<InspectRecordTitleProps
                 intent="primary"
                 iconAfter={control.show  ? <IconChevronUp /> : <IconChevronDown />}
                 {...control.buttonProps}
+                onPress={() =>{
+                    onPullUp&&onPullUp();
+                    control.setShow(!control.show);
+                } }
               >
                 {control.show ? "收起" : "更多"}
               </Button>
@@ -187,6 +197,7 @@ InspectRecordTitle.propTypes = {
   children: PropTypes.node,
   control: PropTypes.shape({
       show: PropTypes.bool.isRequired,
+      setShow: PropTypes.func,
       buttonProps: PropTypes.any.isRequired,
       collapseProps: PropTypes.any.isRequired,
   }).isRequired,　

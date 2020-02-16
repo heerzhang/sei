@@ -1047,14 +1047,16 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
                 printColWidth={ ["46","46","55","55","130","405","175","120"] }
                css={ {borderCollapse: 'collapse' } }
         >
-          <TableHead >
-            <TableRow>
-              <CCell>序号</CCell>
-              <CCell>检验类别</CCell>
-              <CCell colSpan={4}>检验项目及内容</CCell>
-              <CCell>检验结果</CCell>
-              <CCell>检验结论</CCell>
-            </TableRow>
+          <TableHead>
+            <RouterLink  to={`/report/EL-DJ/ver/1/ALL/227`}>
+              <TableRow>
+                <CCell>序号</CCell>
+                <CCell>检验类别</CCell>
+                <CCell colSpan={4}>检验项目及内容</CCell>
+                <CCell>检验结果</CCell>
+                <CCell>检验结论</CCell>
+              </TableRow>
+            </RouterLink>
           </TableHead>
           <TableBody>
             {renderIspContent}

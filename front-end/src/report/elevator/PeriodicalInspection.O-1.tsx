@@ -1490,13 +1490,17 @@ const ItemUniversal: React.RefForwardingComponent<InternalItemHandResult,ItemUni
     }, [x,y]);
     const { eos, setInp, inp , } = useItemControlAs({ref,  filter: getInpFilter, show});
     React.useEffect(() => {
-      storage&&setInp(getInpFilter(storage));
-    }, [storage, setInp, getInpFilter] );
-    //const cAppendix =useCollapse(false,true);
+      eos.show&&storage&&setInp(getInpFilter(storage));
+    }, [eos.show, storage, setInp, getInpFilter] );
+    const onPullUp = React.useCallback(() => {
+      setStorage({...storage, ...inp});
+    }, [inp,storage,setStorage]);
+
     //下拉列表标题=检验类别+项目内容；
     return (
       <React.Fragment>
-        <InspectRecordTitle  control={eos} label={`${inspectionContent[x].items[y].iClass}${inspectionContent[x].items[y].label}`}>
+        <InspectRecordTitle  control={eos}  onPullUp={onPullUp}
+                             label={`${inspectionContent[x].items[y].iClass}${inspectionContent[x].items[y].label}`}>
 
         <div css={{ display: 'flex', justifyContent: 'space-around'}}>
           <Text  variant="h6">检验项目: {`${x+1}.${y+1}`}</Text>
