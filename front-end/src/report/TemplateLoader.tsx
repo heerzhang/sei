@@ -84,7 +84,7 @@ export const RecordStarter: React.FunctionComponent<RecordStarterProps> = ({
     deduction:{emergencyElectric:'45,423'}
   });
 
-  console.log("RecordView捕获,切花source=", source,"新storage=",storage);
+  //console.log("RecordView捕获,切花source=", source,"新storage=",storage);
 
   async function updateRecipe(
     id: string ) {
@@ -179,7 +179,7 @@ export const ReportStarter: React.FunctionComponent<ReportStarterProps> = ({
   //初始化不可以直接取React.useState(source || {})，不然路由器切换就变成旧source。新修改被抛弃了。
   const {storage, setStorage} =React.useContext(EditStorageContext);
 
-  console.log("ReportStarter捕获,切花source=", source,"新storage=",storage);
+  //console.log("ReportStarter捕获,切花source=", source,"新storage=",storage);
 
   if (!id) {
     return null;

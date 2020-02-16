@@ -541,7 +541,7 @@ export interface ItemTransProps {
 }
 
 //把原始记录的数据转换成报告的各个项目的结论。
-//特殊处理也在这里。
+//特殊处理也在这里。数据测量字段的显示，项目级别B以上的测量数才需要显示。
 const getItemTransform = (orc: any) => {
   let out={};
   inspectionContent.forEach((rowBigItem, x) => {
@@ -553,6 +553,11 @@ const getItemTransform = (orc: any) => {
   for(let key  in out){
     if(out[key].result==='不合格')  failure.push(key);
   }
+  //特殊：个别测量字段要替换，实际测量数据展示 在’检验结果‘。
+  if(orc['轿井间距'])   out[3.7][0]=`间距${orc['轿井间距']}m`;
+  if(orc['对重越程'] && orc['对重越程最大'])   out[3.15][2]=`最大允许值${orc['对重越程最大']}mm;测量值${orc['对重越程']}mm`;
+
+  //console.log("轿井间距 sha什么鸟？=",orc['轿井间距'], "out[3.7x]=",out[3.15]);
   //特别的转型！都转成key/value;
   return {...out, failure};
 }
@@ -595,9 +600,9 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
   }, [notSmallScr, printing] );
 
   const ins2Table =React.useMemo(() => getInstrument(orc.仪器表), [orc.仪器表]);
-  const itr =React.useMemo(() => getItemTransform(orc), [orc]);
+  const itRes =React.useMemo(() => getItemTransform(orc), [orc]);
 
-  console.log("当前useMemo的 itr=",itr, "source=",orc);
+  console.log("renderIspContent当前 itRes=",itRes);
   const renderIspContent =React.useMemo(() => {
     let seq = 0;
     let htmlTxts =[];
@@ -623,8 +628,8 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
                 :
                 <Cell colSpan={2}>{item.label}</Cell>
               }
-              <CCell>{itr[itemXY][0]}</CCell>
-              <CCell rowSpan={iRowSpan}>{itr[itemXY].result}</CCell>
+              <CCell>{itRes[itemXY][0]}</CCell>
+              <CCell rowSpan={iRowSpan}>{itRes[itemXY].result}</CCell>
             </TableRow>
           </RouterLink>;
           htmlTxts.push(rowHead);
@@ -634,7 +639,7 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
             const rowSub =<TableRow key={`${itemXY}-${i+1}`}>
                  {bigLineCnt && <CCell rowSpan={bigLineCnt}>{`${x+1}`}<br/>{`${rowBigItem.bigLabel}`}</CCell> }
                   <Cell>{item.subItems[i+1]}</Cell>
-                  <CCell>{itr[itemXY][i+1]}</CCell>
+                  <CCell>{itRes[itemXY][i+1]}</CCell>
                 </TableRow>;
             htmlTxts.push(rowSub);
             bigItemRowCnt++;
@@ -646,7 +651,7 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
     return ( <React.Fragment>
           {htmlTxts}
       </React.Fragment> );
-   }, [itr]);
+   }, [itRes]);
 
   //最多＝8列 <Table合计约1040px；原来PDF打印看着像是905px的。
   return (
@@ -1070,13 +1075,13 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
             </TableRow>
           </TableHead>
           <TableBody>
-            {itr.failure.map((ts, i) => {
+            {itRes.failure.map((ts, i) => {
               return (
                 <RouterLink key={i} to={`/report/EL-DJ/ver/1/${ts}/227`}>
                   <TableRow>
                     <CCell component="th" scope="row">{i+1}</CCell>
-                    <CCell>{itr[ts].iClass}/{ts}</CCell>
-                    <CCell>{itr[ts].fdesc}</CCell>
+                    <CCell>{itRes[ts].iClass}/{ts}</CCell>
+                    <CCell>{itRes[ts].fdesc}</CCell>
                     <CCell></CCell>
                     <CCell></CCell>
                   </TableRow>

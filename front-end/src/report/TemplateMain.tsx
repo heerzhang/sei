@@ -120,7 +120,7 @@ export const RecordEditorOrPrint: React.FunctionComponent<RecordEditorOrPrintPro
   const { submitfunc:signOut,  } = useSignOut(onLogoutDo);
 
   if(!templateSet)   throw new Error(`没模板哦`);
-  console.log("来TemplateMain当前的params action=",action ,"showingRecipe=",showingRecipe);
+  //console.log("来TemplateMain当前的params action=",action ,"showingRecipe=",showingRecipe);
 
   return (
     <Layout>

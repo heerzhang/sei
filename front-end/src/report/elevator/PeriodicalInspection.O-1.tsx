@@ -61,7 +61,7 @@ const OriginalView: React.RefForwardingComponent<InternalItemHandResult,Template
  //   React.useImperativeHandle( ref,() => ({ inp: outCome }), [outCome] );
      //触发方式？了
      // setInp(outCome);
-    console.log("实验进行时６３６３　-storage=",storage,"outCome=" );
+    //console.log("实验进行时６３６３　-storage=",storage,"outCome=" );
 
 
   //  React.useEffect(() => {
@@ -870,51 +870,20 @@ const OriginalView: React.RefForwardingComponent<InternalItemHandResult,Template
       let seq = 0;
       let htmlTxts =[];
       inspectionContent.forEach((rowBigItem, x) => {
-        let bigItemRowCnt=0;
         rowBigItem && rowBigItem.items.forEach((item, y) => {
           if(item){
             seq += 1;
-            let itemXY = `${x + 1}.${y + 1}`;
-            let subCnt =item.subItems?.length || 0;
-            let iRowSpan =subCnt? subCnt : 1;
-            let bigLineCnt=rowBigItem.splitLine[bigItemRowCnt];
-            const rowHead = <RouterLink key={seq} to={`/report/EL-DJ/ver/1/${itemXY}/227`}>
-              <TableRow>
-                <CCell component="th" scope="row" rowSpan={iRowSpan}>{seq}</CCell>
-                <CCell rowSpan={iRowSpan}>{item.iClass}</CCell>
-                {bigLineCnt && <CCell rowSpan={bigLineCnt}>{x+1}<br/>{rowBigItem.bigLabel}</CCell> }
-                <CCell rowSpan={iRowSpan}>{itemXY}</CCell>
-                { subCnt?  ( <React.Fragment>
-                    <CCell rowSpan={iRowSpan}>{item.label}</CCell>
-                    <Cell>{item.subItems[0]}</Cell>
-                  </React.Fragment> )
-                  :
-                  <Cell colSpan={2}>{item.label}</Cell>
-                }
-                <CCell>{itr[itemXY][0]}</CCell>
-                <CCell rowSpan={iRowSpan}>{itr[itemXY].result}</CCell>
-              </TableRow>
-            </RouterLink>;
+            const rowHead =<ItemUniversal key={seq} ref={null}  x={x}  y={y}
+                                procedure={generalFormat[x].items[y].procedure}  details={generalFormat[x].items[y].details}
+                           />;
             htmlTxts.push(rowHead);
-            bigItemRowCnt++;
-            for(let i=0; i<subCnt-1; i++){
-              let bigLineCnt=rowBigItem.splitLine[bigItemRowCnt];
-              const rowSub =<TableRow key={`${itemXY}-${i+1}`}>
-                {bigLineCnt && <CCell rowSpan={bigLineCnt}>{`${x+1}`}<br/>{`${rowBigItem.bigLabel}`}</CCell> }
-                <Cell>{item.subItems[i+1]}</Cell>
-                <CCell>{itr[itemXY][i+1]}</CCell>
-              </TableRow>;
-              htmlTxts.push(rowSub);
-              bigItemRowCnt++;
-            }
           }
         });
       });
-
-      return ( <React.Fragment>
+      return ( <React.Fragment key={'item1.1'}>
         {htmlTxts}
       </React.Fragment> );
-    }, []);
+    }, [generalFormat]);
 
     const {isItemNo, x, y} =verifyAction(action,generalFormat);
     //这里action是 '2.1' ALL none printAll 这样的路由参数 ?readOnly=1&。
@@ -953,10 +922,10 @@ const OriginalView: React.RefForwardingComponent<InternalItemHandResult,Template
             }
           return  null;
          }
-                ,[action, generalFormat,isItemNo,x,y]);
+                ,[action, generalFormat,isItemNo,x,y,clRefs,renderItemsContent]);
 
   //  console.log("公用配置对象--isItemNo=",isItemNo,"x=", x,"y=",y, generalFormat, "inspectionContent=", inspectionContent);
-    console.log("公用配置对象--action=",action,"recordList=", recordList);
+
     return <React.Fragment>
           {recordList}
 
@@ -2660,7 +2629,8 @@ const ItemGapMeasure: React.RefForwardingComponent<InternalItemHandResult,Intern
     let  rollerUnquf=inp?.层站?.find((f,i)=>{
       return parseFloat(inp?.轮坎距?.[f])<5;
     });
-    console.log("通ＧＡＰ－ｇａｐ部件　par=",par, "storage=", storage);
+
+    //console.log("通ＧＡＰ－ｇａｐ部件　par=",par, "storage=", storage);
 
     return (
       <React.Fragment>
@@ -2777,7 +2747,7 @@ const ItemUniversal: React.RefForwardingComponent<InternalItemHandResult,ItemUni
     { children, procedure, details, x, y },  ref
   ) => {
     const {storage, setStorage} =React.useContext(EditStorageContext);
-    console.log("通用检验内容部件 x=", x,"y=",y, "storage=", storage);
+    //console.log("通用检验内容部件 x=", x,"y=",y, "storage=", storage);
     const getInpFilter = React.useCallback((par) => {
       //const {} =par||{};
       let fields={};
@@ -2810,11 +2780,9 @@ const ItemUniversal: React.RefForwardingComponent<InternalItemHandResult,ItemUni
         <hr/>
         {procedure}
 
-        <RouterLink key={99} to={`/report/EL-DJ/ver/1/gap/227`}>
         <Text  variant="h5"　>
           查验结果
         </Text>
-        </RouterLink>
 
         { inspectionContent[x].items[y].subItems?  ( inspectionContent[x].items[y].subItems?.map((a,i)=>{
             const namex =`${inspectionContent[x].items[y].names[i]}`;
@@ -2869,7 +2837,7 @@ const ItemUniversal: React.RefForwardingComponent<InternalItemHandResult,ItemUni
   } );
 
 
-//項目標記符列表：不能用的ALL none printAll保留字；
+//項目標記符列表：不能用ALL none preview printAll item1.1 保留字；
 //可以考虑createItem这里Itemxx后面可以简化些通用性质组件只需要参数就搞定。
 //generalFormat配置里面设置，要不要特殊化，要不要从createItem/projectList提取特别定制版本的组件。
 //对应某个报告模板的底下所有的编辑修改的组件；原始记录打印展示项目的全部列表。
