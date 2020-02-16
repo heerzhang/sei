@@ -325,7 +325,7 @@ const OriginalView: React.RefForwardingComponent<InternalItemHandResult,Template
           {
             //item:3.5,
             procedure:  <div>
-              （3）门上应当装设用钥匙开启的锁，当门开启后不用钥匙能够将其关闭和锁住，在门锁住后，不用钥匙能够从井道内将门打开；<br/>
+              （3）应当装设用钥匙开启的锁，当门开启后不用钥匙能够将其关闭和锁住，在门锁住后，不用钥匙能够从井道内将门打开；<br/>
               （4）应当设置电气安全装置以验证门的关闭状态。
             </div>,
             details:[]
@@ -882,7 +882,7 @@ const OriginalView: React.RefForwardingComponent<InternalItemHandResult,Template
         rowBigItem && rowBigItem.items.forEach((item, y) => {
           if(item){
             seq += 1;
-            const rowHead =<ItemUniversal key={seq} ref={null}  x={x}  y={y}
+            const rowHead =<ItemUniversal key={seq} ref={null}  x={x}  y={y}  show={action==='printAll'}
                                 procedure={generalFormat[x].items[y].procedure}  details={generalFormat[x].items[y].details}
                            />;
             htmlTxts.push(rowHead);
@@ -892,7 +892,7 @@ const OriginalView: React.RefForwardingComponent<InternalItemHandResult,Template
       return ( <React.Fragment key={'item1.1'}>
         {htmlTxts}
       </React.Fragment> );
-    }, [generalFormat]);
+    }, [action, generalFormat]);
 
     const {isItemNo, x, y} =verifyAction(action,generalFormat);
     //这里action是 '2.1' ALL none printAll 这样的路由参数 ?readOnly=1&。
@@ -900,7 +900,7 @@ const OriginalView: React.RefForwardingComponent<InternalItemHandResult,Template
           {
            if(isItemNo){
              return <React.Fragment>
-                <ItemUniversal key={0} ref={null}  x={x}  y={y}
+                <ItemUniversal key={0} ref={null}  x={x}  y={y} show={true}
                       procedure={generalFormat[x].items[y].procedure}  details={generalFormat[x].items[y].details}
                  />
               </React.Fragment>;
@@ -911,7 +911,8 @@ const OriginalView: React.RefForwardingComponent<InternalItemHandResult,Template
                      {
                           React.cloneElement(itemA.zoneContent as React.ReactElement<any>, {
                            ref: null,
-                           key: itemA.itemArea
+                           key: itemA.itemArea,
+                           show: true
                          })
                      }
                  </React.Fragment>;
@@ -922,8 +923,7 @@ const OriginalView: React.RefForwardingComponent<InternalItemHandResult,Template
                   else
                     return React.cloneElement(each.zoneContent as React.ReactElement<any>, {
                       ref: clRefs.current![i],
-                      //procedure: generalFormat[1].items[0].procedure,
-                      //details: generalFormat[1].items[0].details,
+                      show: action==='printAll',
                       key: i
                     });
                 });
@@ -1350,7 +1350,7 @@ const ItemGapMeasure: React.RefForwardingComponent<InternalItemHandResult,Intern
 
     const theme = useTheme();
     const [floor, setFloor] = React.useState(null);
-    const cAppendix =useCollapse(true,true);
+    //const cAppendix =useCollapse(true,true);
     let  toothUnquf=inp?.层站?.find((f,i)=>{
       return parseFloat(inp?.门锁啮长?.[f])<7;
     });
@@ -1363,10 +1363,9 @@ const ItemGapMeasure: React.RefForwardingComponent<InternalItemHandResult,Intern
     const qs= queryString.parse(window.location.search);
     console.log("参数第三层路由mathched qs=",qs);
     return (
-      <React.Fragment>
-      <InspectRecordTitle  control={cAppendix} label={'附录A 层门间隙、啮合长度'}>
+     <InspectRecordTitle  control={eos} label={'附录A 层门间隙、啮合长度'}>
         <div>
-          <RouterLink  to={`/report/EL-DJ/ver/1/${qs.from}/227`}>
+          <RouterLink  to={`/report/EL-DJ/ver/1/${qs.from?qs.from:'6.3'}/227`}>
           (点击回检验项)已检记录,每层七个尺寸:
            </RouterLink>
           {inp?.层站?.map((a,i)=>{
@@ -1450,11 +1449,10 @@ const ItemGapMeasure: React.RefForwardingComponent<InternalItemHandResult,Intern
             onChange={e => floor&&setInp({ ...inp, 轮坎距:{...inp?.轮坎距,[floor]:e.currentTarget.value||undefined} }) }
           >mm</SuffixInput>
         </InputGroupLine>
-      </InspectRecordTitle>
         <Button size="lg" intent={'primary'} onPress={() =>{ setStorage({...storage, ...inp}) }}>
           修改确认
         </Button>
-      </React.Fragment>
+      </InspectRecordTitle>
     );
   } );
 
@@ -1494,11 +1492,11 @@ const ItemUniversal: React.RefForwardingComponent<InternalItemHandResult,ItemUni
     React.useEffect(() => {
       storage&&setInp(getInpFilter(storage));
     }, [storage, setInp, getInpFilter] );
-    const cAppendix =useCollapse(false,true);
+    //const cAppendix =useCollapse(false,true);
     //下拉列表标题=检验类别+项目内容；
     return (
       <React.Fragment>
-        <InspectRecordTitle  control={cAppendix} label={`${inspectionContent[x].items[y].iClass}${inspectionContent[x].items[y].label}`}>
+        <InspectRecordTitle  control={eos} label={`${inspectionContent[x].items[y].iClass}${inspectionContent[x].items[y].label}`}>
 
         <div css={{ display: 'flex', justifyContent: 'space-around'}}>
           <Text  variant="h6">检验项目: {`${x+1}.${y+1}`}</Text>
