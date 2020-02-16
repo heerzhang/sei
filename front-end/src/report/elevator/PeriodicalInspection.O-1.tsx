@@ -2437,13 +2437,13 @@ const ItemConclusion: React.RefForwardingComponent<InternalItemHandResult,Intern
 
 const ItemRecheckResult: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
   React.forwardRef((
-    props:{ children },  ref
+    { children, show },  ref
   ) => {
     const getInpFilter = React.useCallback((par) => {
       const {unq} =par||{};
       return {unq};
     }, []);
-    const { eos, setInp, inp } = useItemControlAs({ref,  filter: getInpFilter});
+    const { eos, setInp, inp } = useItemControlAs({ref,  filter: getInpFilter, show});
     const [seq, setSeq] = React.useState(null);   //表對象的當前一條。
     const [obj, setObj] = React.useState({no:'',desc:'',rres:'',rdate:''});
     React.useEffect(() => {
@@ -2545,7 +2545,7 @@ const ItemAppendixB: React.RefForwardingComponent<InternalItemHandResult,Interna
       const {检验条件,温度,电压值} =par||{};
       return {检验条件,温度,电压值};
     }, []);
-    const { eos, setInp, inp } = useItemControlAs({ref,  filter: getInpFilter});
+    const { eos, setInp, inp } = useItemControlAs({ref,  filter: getInpFilter, show});
     const theme = useTheme();
     const [floor, setFloor] = React.useState(null);
 
@@ -2621,7 +2621,7 @@ const ItemGapMeasure: React.RefForwardingComponent<InternalItemHandResult,Intern
       const {层站,门扇隙,门套隙,地坎隙,施力隙,门锁啮长,刀坎距,轮坎距,门扇间隙,最不利隙,层门锁,轿门锁,刀轮地隙} =par||{};
       return {层站,门扇隙,门套隙,地坎隙,施力隙,门锁啮长,刀坎距,轮坎距,门扇间隙,最不利隙,层门锁,轿门锁,刀轮地隙};
     }, []);
-    const { eos, setInp, inp, par } = useItemControlAs({ref,  filter: getInpFilter});
+    const { eos, setInp, inp, par } = useItemControlAs({ref,  filter: getInpFilter, show});
     React.useEffect(() => {
       storage&&setInp(getInpFilter(storage));
     }, [storage, setInp, getInpFilter] );
@@ -2769,15 +2769,15 @@ const ItemUniversal: React.RefForwardingComponent<InternalItemHandResult,ItemUni
       );
       return fields;
     }, [x,y]);
-    const { eos, setInp, inp , } = useItemControlAs({ref,  filter: getInpFilter});
+    const { eos, setInp, inp , } = useItemControlAs({ref,  filter: getInpFilter, show});
     React.useEffect(() => {
       storage&&setInp(getInpFilter(storage));
     }, [storage, setInp, getInpFilter] );
     const cAppendix =useCollapse(false,true);
-
+    //下拉列表标题=检验类别+项目内容；
     return (
       <React.Fragment>
-        <InspectRecordTitle  control={cAppendix} label={'附录A 层门间隙、啮合长度'}>
+        <InspectRecordTitle  control={cAppendix} label={`${inspectionContent[x].items[y].iClass}${inspectionContent[x].items[y].label}`}>
 
         <div css={{ display: 'flex', justifyContent: 'space-around'}}>
           <Text  variant="h6">检验项目: {`${x+1}.${y+1}`}</Text>
@@ -2790,7 +2790,7 @@ const ItemUniversal: React.RefForwardingComponent<InternalItemHandResult,ItemUni
         <hr/>
         {procedure}
 
-        <Text  variant="h5"　>
+        <Text  variant="h5">
           查验结果
         </Text>
 

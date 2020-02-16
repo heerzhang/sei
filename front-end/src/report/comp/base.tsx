@@ -311,7 +311,7 @@ export const IndentationLayText: React.FunctionComponent<IndentationLayTextProps
 //总的show按钮各分区项目show的控制，以单一个逻辑变量无法完全正确操纵！必须传递然后合并成独立一个show逻辑。
 export interface ItemControlProps {
   ref: React.Ref<any>;
-  //  show: boolean;
+  show: boolean;
   //par: any;   改成回调模式，上级深度控制下级，去除组件参数，避免多头受控，可能死循环。   par={},
   //接受par输入的过滤器，回调 过滤有用数据。
   filter: (par: any) => {};
@@ -320,10 +320,11 @@ export interface ItemControlProps {
 //par被上级组件利用回调钩子模式接管控制后，就不能在这里多头设置，否则死循环。
 export　function useItemControlAs({
                              ref=null,
-                             filter=null }
-                          : ItemControlProps
+                             filter=null,
+                             show=false
+                            } : ItemControlProps
 ) {
-  const eos =useCollapse(true,true);
+  const eos =useCollapse(show,true);
   const [inp, setInp] = React.useState(null);
   const [par, setPar] = React.useState(null);
   //用回调钩子setShow来替换；原先的show参数下传配合在useCollapse内部useEffect(() [defaultShow] 做修正方式。
@@ -353,7 +354,7 @@ export interface InternalItemHandResult {
 //各个检验单项
 export interface InternalItemProps  extends React.HTMLAttributes<HTMLDivElement>{
   //par?: any;        //父组件往子组件传数据
-  //show?: boolean;
+  show?: boolean;
 //  layout?: any;     //传递一个检验项目开头流程性内容，显示的格式等。
   ref?: any;
  // details?: any[];    //传递各个子项目(若没有子项目的，就算项目本身[0])的定制，测量数据细节内容。
