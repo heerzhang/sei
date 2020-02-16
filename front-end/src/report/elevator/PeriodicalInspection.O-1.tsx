@@ -2222,13 +2222,13 @@ const InternalItem8d10: React.RefForwardingComponent<InternalItemHandResult,Inte
 
 const ItemInstrumentTable: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
   React.forwardRef((
-    props:{ children },  ref
+    { children, show },  ref
   ) => {
     const getInpFilter = React.useCallback((par) => {
       const {仪器表} =par||{};
       return {仪器表};
     }, []);
-    const { eos, setInp, inp } = useItemControlAs({ref,  filter: getInpFilter});
+    const { eos, setInp, inp } = useItemControlAs({ref,  filter: getInpFilter, show});
     const [seq, setSeq] = React.useState(null);   //表對象的當前一條。
     const [obj, setObj] = React.useState({no:'',name:'',type:'',powerOn:'',shutDown:''});
     React.useEffect(() => {
@@ -2322,7 +2322,7 @@ const ItemInstrumentTable: React.RefForwardingComponent<InternalItemHandResult,I
 
 const ItemLinkManTel: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
   React.forwardRef((
-    props:{ children },  ref
+    { children, show },  ref
   ) => {
     const getInpFilter = React.useCallback((par) => {
       //devCod,检验日期：这些字段要提升到关系数据库表中，json半结构化数据的就不做保留。
@@ -2330,7 +2330,7 @@ const ItemLinkManTel: React.RefForwardingComponent<InternalItemHandResult,Intern
       const {devCod,检验日期,安全人员,联系电话} =par||{};
       return {devCod,检验日期,安全人员,联系电话};
     }, []);
-    const { eos, setInp, inp } = useItemControlAs({ref,  filter: getInpFilter});
+    const { eos, setInp, inp } = useItemControlAs({ref,  filter: getInpFilter, show});
 
     return (
       <InspectRecordTitle  control={eos}   label={'一、设备概况'}>
@@ -2358,13 +2358,13 @@ const ItemLinkManTel: React.RefForwardingComponent<InternalItemHandResult,Intern
 
 const ItemRemarks: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
   React.forwardRef((
-    props:{ children },  ref
+    { children, show },  ref
   ) => {
     const getInpFilter = React.useCallback((par) => {
       const {自检材料,校验材料,整改材料,资料及编号,memo} =par||{};
       return {自检材料,校验材料,整改材料,资料及编号,memo};
     }, []);
-    const { eos, setInp, inp } = useItemControlAs({ref,  filter: getInpFilter});
+    const { eos, setInp, inp } = useItemControlAs({ref,  filter: getInpFilter, show});
 
     return (
       <InspectRecordTitle  control={eos}   label={'见证材料或问题备注'}>
@@ -2395,14 +2395,14 @@ const ItemRemarks: React.RefForwardingComponent<InternalItemHandResult,InternalI
 
 const ItemConclusion: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
   React.forwardRef((
-    props:{ children },  ref
+    { children, show },  ref
   ) => {
     const getInpFilter = React.useCallback((par) => {
      //检验人IDs编制日期编制人结论：这些字段要提升到关系数据库表中，而不是json字段里面。只能保留上级语义更强的，json半结构化数据的就不做保留。
       const {检验结论,编制日期,编制人,检验人IDs} =par||{};
       return {检验结论,编制日期,编制人,检验人IDs};
     }, []);
-    const { eos, setInp, inp } = useItemControlAs({ref,  filter: getInpFilter});
+    const { eos, setInp, inp } = useItemControlAs({ref,  filter: getInpFilter, show});
 
     return (
       <InspectRecordTitle  control={eos}   label={'下结论!'}>
@@ -2539,7 +2539,7 @@ const ItemRecheckResult: React.RefForwardingComponent<InternalItemHandResult,Int
 
 const ItemAppendixB: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
   React.forwardRef((
-    props:{ children },  ref
+    { children, show },  ref
   ) => {
     const getInpFilter = React.useCallback((par) => {
       const {检验条件,温度,电压值} =par||{};
@@ -2614,7 +2614,7 @@ const ItemAppendixB: React.RefForwardingComponent<InternalItemHandResult,Interna
 //提供給6.3 6.9 6.12項目公用的部分。
 const ItemGapMeasure: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
   React.forwardRef((
-    { children },  ref
+    { children, show },  ref
   ) => {
     const {storage, setStorage} =React.useContext(EditStorageContext);
     const getInpFilter = React.useCallback((par) => {
@@ -2740,6 +2740,7 @@ const ItemGapMeasure: React.RefForwardingComponent<InternalItemHandResult,Intern
 
 //检验项目的标准化展示组件
 export interface ItemUniversalProps  extends React.HTMLAttributes<HTMLDivElement>{
+  show: boolean;
   //检验项目配置对象标准的索引.[x].[y] ； 这里x是大项目；y是检验项目{还可拆分成几个更小项目的}。比如对应action="2.1"就是x=1,y=0的配置。
   x: number;
   y: number;
@@ -2751,7 +2752,7 @@ export interface ItemUniversalProps  extends React.HTMLAttributes<HTMLDivElement
 //forwardRef实际上已经没用了　ref，可改成简易的组件模式。
 const ItemUniversal: React.RefForwardingComponent<InternalItemHandResult,ItemUniversalProps>=
   React.forwardRef((
-    { children, procedure, details, x, y },  ref
+    { children, show=true, procedure, details, x, y },  ref
   ) => {
     const {storage, setStorage} =React.useContext(EditStorageContext);
     //console.log("通用检验内容部件 x=", x,"y=",y, "storage=", storage);
@@ -2856,7 +2857,7 @@ const ItemUniversal: React.RefForwardingComponent<InternalItemHandResult,ItemUni
 const recordPrintList =[
   createItem('LinkMan', <ItemLinkManTel/>),
   createItem('Instrument', <ItemInstrumentTable/>),
-  createItem('item1.1', <ItemUniversal x={0} y={0}/>),
+  createItem('item1.1', <ItemUniversal x={0} y={0} show={true}/>),
   createItem('gap', <ItemGapMeasure/>),
   createItem('Appendix', <ItemAppendixB/>),
   createItem('Remark', <ItemRemarks/>),
