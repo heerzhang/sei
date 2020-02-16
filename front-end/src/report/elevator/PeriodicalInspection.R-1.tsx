@@ -1089,25 +1089,6 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
               );
             })
             }
-
-            <RouterLink key={99} to={`/report/EL-DJ/ver/1/gap/227`}>
-            <TableRow>
-              <CCell component="th" scope="row">{99}</CCell>
-              <CCell>gap</CCell>
-              <CCell>{'实验GAP'}</CCell>
-              <CCell>ahshd的话as</CCell>
-              <CCell>发了的方式</CCell>
-            </TableRow>
-          </RouterLink>
-            <RouterLink key={92} to={`/report/EL-DJ/ver/1/6.3/227`}>
-              <TableRow>
-                <CCell component="th" scope="row">{99}</CCell>
-                <CCell>gap</CCell>
-                <CCell>{'看看6.3实验'}</CCell>
-                <CCell>a 6。3 话as</CCell>
-                <CCell>发了的方式</CCell>
-              </TableRow>
-            </RouterLink>
           </TableBody>
         </Table>
       </div>

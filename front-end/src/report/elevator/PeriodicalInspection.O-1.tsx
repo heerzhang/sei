@@ -6,7 +6,7 @@ import {
   useTheme,
   Button, MenuItem, MenuList,
   InputGroupLine,
-  SuffixInput, useCollapse, Input, ResponsivePopover, IconChevronDown, Layer, TextArea, Select
+  SuffixInput, useCollapse, Input, ResponsivePopover, IconChevronDown, Layer, TextArea, Select, Touchable
 } from "customize-easy-ui-component";
 import {Table, TableBody,  TableRow, Cell, CCell} from "../../comp/TableExt";
 import {
@@ -23,6 +23,7 @@ import { string } from "prop-types";
 import { inspectionContent, ReportView } from "./PeriodicalInspection.R-1";
 import { Link as RouterLink } from "wouter";
 import { EditStorageContext } from "../StorageContext";
+import queryString from "query-string";
 
 //模板的动态加载入口文件：  原始记录，一一对应的报告的录入编辑数据，可打印。
 
@@ -630,9 +631,10 @@ const OriginalView: React.RefForwardingComponent<InternalItemHandResult,Template
             </div>,
             details:[(inp,setInp)=>{
               return <React.Fragment>
+                点击下方标题修改
                 <Table css={{borderCollapse:'collapse'}}>
                   <TableBody>
-                    <RouterLink key={99} to={`/report/EL-DJ/ver/1/gap/227`}>
+                    <RouterLink to={`/report/EL-DJ/ver/1/gap/227?from=6.3`}>
                       <TableRow >
                         <CCell>层</CCell>
                         <CCell>门扇隙</CCell>
@@ -706,12 +708,14 @@ const OriginalView: React.RefForwardingComponent<InternalItemHandResult,Template
                 return parseFloat(inp?.门锁啮长?.[f])<7;
               });
               return <React.Fragment>
-                <div>
-                  已检门锁啮合长度:
-                  {inp?.层站?.map(a=>{
-                    return ` ${a}层:${inp?.门锁啮长?.[a]||''};`
-                  }) }
-                </div>
+                <RouterLink  to={`/report/EL-DJ/ver/1/gap/227?from=6.9`}>
+                 (点击修改)已检门锁啮合长度:
+                </RouterLink>
+                   <div>
+                    {inp?.层站?.map(a=>{
+                      return ` ${a}层:${inp?.门锁啮长?.[a]||''};`
+                    }) }
+                  </div>
                 <InputGroupLine  label='(1)③门锁啮合长度{自动填}'>
                   <SelectHookfork value={toothUnquf? '×': inp?.层站?.length>=1? '√':''} disabled/>
                 </InputGroupLine>
@@ -748,18 +752,23 @@ const OriginalView: React.RefForwardingComponent<InternalItemHandResult,Template
                   return parseFloat(inp?.轮坎距?.[f])<5;
                 });
                 return <React.Fragment>
-                  <div>
-                    轿门门刀与层门地坎间距:
-                    {inp?.层站?.map(a=>{
-                      return ` ${a}层:${inp?.刀坎距?.[a]||''};`
-                    }) }
-                  </div>
-                  <div>
-                    门锁滚轮与轿门地坎间距:
-                    {inp?.层站?.map(a=>{
-                      return ` ${a}层:${inp?.轮坎距?.[a]||''};`
-                    }) }
-                  </div>
+                  <RouterLink  to={`/report/EL-DJ/ver/1/gap/227?from=6.12`}>
+                   <Touchable  component={'div'} >
+                     (点击修改):
+                    <div>
+                      轿门门刀与层门地坎间距:
+                      {inp?.层站?.map(a=>{
+                        return ` ${a}层:${inp?.刀坎距?.[a]||''};`
+                      }) }
+                    </div>
+                    <div>
+                      门锁滚轮与轿门地坎间距:
+                      {inp?.层站?.map(a=>{
+                        return ` ${a}层:${inp?.轮坎距?.[a]||''};`
+                      }) }
+                    </div>
+                   </Touchable>
+                  </RouterLink>
                   <InputGroupLine  label='间隙应当不小于5mm{自动填}'>
                     <SelectHookfork value={knifeUnquf||rollerUnquf? '×': inp?.层站?.length>=1? '√':''} disabled/>
                   </InputGroupLine>
@@ -2629,16 +2638,17 @@ const ItemGapMeasure: React.RefForwardingComponent<InternalItemHandResult,Intern
     let  rollerUnquf=inp?.层站?.find((f,i)=>{
       return parseFloat(inp?.轮坎距?.[f])<5;
     });
-
+    const qs= queryString.parse(window.location.search);
+    console.log("参数第三层路由mathched qs=",qs);
     //console.log("通ＧＡＰ－ｇａｐ部件　par=",par, "storage=", storage);
 
     return (
       <React.Fragment>
       <InspectRecordTitle  control={cAppendix} label={'附录A 层门间隙、啮合长度'}>
-
-        <RouterLink key={99} to={`/report/EL-DJ/ver/1/6.3/227`}>
         <div>
-          已检记录,每层七个尺寸:
+          <RouterLink  to={`/report/EL-DJ/ver/1/${qs.from}/227`}>
+          (点击回检验项)已检记录,每层七个尺寸:
+           </RouterLink>
           {inp?.层站?.map((a,i)=>{
             return <React.Fragment key={i}>
               <br/>{
@@ -2648,9 +2658,6 @@ const ItemGapMeasure: React.RefForwardingComponent<InternalItemHandResult,Intern
           }) }
         </div>
         新增检查=>
-
-        </RouterLink>
-
         <InputGroupLine  label='首先设置当前层站号'>
           <SuffixInput
             value={floor||''}
@@ -2766,9 +2773,12 @@ const ItemUniversal: React.RefForwardingComponent<InternalItemHandResult,ItemUni
     React.useEffect(() => {
       storage&&setInp(getInpFilter(storage));
     }, [storage, setInp, getInpFilter] );
+    const cAppendix =useCollapse(false,true);
 
     return (
       <React.Fragment>
+        <InspectRecordTitle  control={cAppendix} label={'附录A 层门间隙、啮合长度'}>
+
         <div css={{ display: 'flex', justifyContent: 'space-around'}}>
           <Text  variant="h6">检验项目: {`${x+1}.${y+1}`}</Text>
           <Text  variant="h6">{`${x+1} ${inspectionContent[x].bigLabel}`}</Text>
@@ -2832,6 +2842,8 @@ const ItemUniversal: React.RefForwardingComponent<InternalItemHandResult,ItemUni
         <Button size="lg" intent={'primary'} onPress={() =>{ setStorage({...storage, ...inp}) }}>
           修改确认
         </Button>
+
+      </InspectRecordTitle>
       </React.Fragment>
     );
   } );
@@ -2843,12 +2855,12 @@ const ItemUniversal: React.RefForwardingComponent<InternalItemHandResult,ItemUni
 //对应某个报告模板的底下所有的编辑修改的组件；原始记录打印展示项目的全部列表。
 const recordPrintList =[
   createItem('LinkMan', <ItemLinkManTel/>),
+  createItem('Instrument', <ItemInstrumentTable/>),
   createItem('item1.1', <ItemUniversal x={0} y={0}/>),
   createItem('gap', <ItemGapMeasure/>),
-  createItem('Instrument', <ItemInstrumentTable/>),
-  createItem('ReCheck', <ItemRecheckResult/>),
   createItem('Appendix', <ItemAppendixB/>),
   createItem('Remark', <ItemRemarks/>),
+  createItem('ReCheck', <ItemRecheckResult/>),
   createItem('Conclusion', <ItemConclusion/>),
 ];
 
