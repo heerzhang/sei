@@ -11,10 +11,10 @@ import {
 import {Table, TableBody,  TableRow, Cell, CCell} from "../../comp/TableExt";
 import {
   IndentationLayText, InspectItemHeadColumn, InspectRecordCollapse, InspectRecordDialog,
-  InspectRecordHeadColumn,
+  InspectRecordHeadColumn, InspectRecordLayout,
   InspectRecordTitle, InspectZoneHeadColumn,
   SelectHookfork, TemplateViewProps,
-  useItemControlAs, useItemInputControl, useProjectListAs
+  useItemInputControl, useProjectListAs
 } from "../comp/base";
 import {  InternalItemHandResult, InternalItemProps } from "../comp/base";
 import { callSubitemChangePar, callSubitemShow, mergeSubitemRefs } from "../../utils/tools";
@@ -936,13 +936,13 @@ const OriginalView: React.RefForwardingComponent<InternalItemHandResult,Template
 
 const ItemInstrumentTable: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
   React.forwardRef((
-    { children, show },  ref
+    { children, show ,alone=true},  ref
   ) => {
     const getInpFilter = React.useCallback((par) => {
       const {仪器表} =par||{};
       return {仪器表};
     }, []);
-    const { eos, setInp, inp } = useItemControlAs({ref,  filter: getInpFilter, show});
+    const {inp, setInp} = useItemInputControl({ ref });
     const [seq, setSeq] = React.useState(null);   //表對象的當前一條。
     const [obj, setObj] = React.useState({no:'',name:'',type:'',powerOn:'',shutDown:''});
     React.useEffect(() => {
@@ -1022,7 +1022,8 @@ const ItemInstrumentTable: React.RefForwardingComponent<InternalItemHandResult,I
     </div>;
 
     return (
-      <InspectRecordTitle  control={eos} label={'主要检验仪器设备'}>
+      <InspectRecordLayout inp={inp} setInp={setInp}  getInpFilter={getInpFilter} show={show}
+                           alone={alone}  label={'主要检验仪器设备'}>
         <Text  variant="h5">
           二、主要测量设备性能检查
         </Text>
@@ -1030,7 +1031,7 @@ const ItemInstrumentTable: React.RefForwardingComponent<InternalItemHandResult,I
         <hr/>
         {instrumentTable}
         {seq===null && editor}
-      </InspectRecordTitle>
+      </InspectRecordLayout>
     );
   } );
 
@@ -1044,88 +1045,82 @@ const ItemSurveyLinkMan: React.RefForwardingComponent<InternalItemHandResult,Int
       const {devCod,检验日期,安全人员,联系电话} =par||{};
       return {devCod,检验日期,安全人员,联系电话};
     }, []);
-    const [inp, setInp] = React.useState(null);
-    const mainContent =<React.Fragment>
-      允许直接修改部分
-      <InputGroupLine  label='设备号{将来是点击链接自动获得}' >
-        <Input  value={inp?.devCod ||''}  placeholder="那一台电梯？暂时要求，将来是点击链接自动获得"
-                onChange={e => setInp({ ...inp, devCod: e.currentTarget.value||undefined}) } />
-      </InputGroupLine>
-      <InputGroupLine  label='检验日期{将来提升到创立原始记录的前置输入}' >
-        <Input value={inp?.检验日期 ||''}  placeholder="基准日" type='date'
-               onChange={e => setInp({ ...inp, 检验日期: e.currentTarget.value}) } />
-      </InputGroupLine>
-      <InputGroupLine  label='安全管理人员' >
-        <Input  value={inp?.安全人员 ||''}
-                onChange={e => setInp({ ...inp, 安全人员: e.currentTarget.value||undefined}) } />
-      </InputGroupLine>
-      <InputGroupLine  label='联系电话1' >
-        <Input  value={inp?.联系电话 ||''}
-                onChange={e => setInp({ ...inp, 联系电话: e.currentTarget.value||undefined}) } />
-      </InputGroupLine>
-      不可修改的明细：待续或点外部链接。
-    </React.Fragment>;
-    if(alone)
-      return ( <InspectRecordDialog inp={inp} setInp={setInp} getInpFilter={getInpFilter} >
-                      {mainContent}
-         </InspectRecordDialog> );
-    else
-      return <InspectRecordCollapse inp={inp} setInp={setInp}  getInpFilter={getInpFilter} show={show}
-                                        label={'一、设备概况'} >
-                  {mainContent}
-          </InspectRecordCollapse>;
+    const {inp, setInp} = useItemInputControl({ ref });
+    return (
+      <InspectRecordLayout inp={inp} setInp={setInp}  getInpFilter={getInpFilter} show={show}
+                           alone={alone}  label={'一、设备概况'} >
+        允许直接修改部分
+        <InputGroupLine  label='设备号{将来是点击链接自动获得}' >
+          <Input  value={inp?.devCod ||''}  placeholder="那一台电梯？暂时要求，将来是点击链接自动获得"
+                  onChange={e => setInp({ ...inp, devCod: e.currentTarget.value||undefined}) } />
+        </InputGroupLine>
+        <InputGroupLine  label='检验日期{将来提升到创立原始记录的前置输入}' >
+          <Input value={inp?.检验日期 ||''}  placeholder="基准日" type='date'
+                 onChange={e => setInp({ ...inp, 检验日期: e.currentTarget.value}) } />
+        </InputGroupLine>
+        <InputGroupLine  label='安全管理人员' >
+          <Input  value={inp?.安全人员 ||''}
+                  onChange={e => setInp({ ...inp, 安全人员: e.currentTarget.value||undefined}) } />
+        </InputGroupLine>
+        <InputGroupLine  label='联系电话1' >
+          <Input  value={inp?.联系电话 ||''}
+                  onChange={e => setInp({ ...inp, 联系电话: e.currentTarget.value||undefined}) } />
+        </InputGroupLine>
+        不可修改的明细：待续或点外部链接。
+    </InspectRecordLayout>
+    );
   } );
 
 const ItemRemarks: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
   React.forwardRef((
-    { children, show },  ref
+    { children, show ,alone=true},  ref
   ) => {
     const getInpFilter = React.useCallback((par) => {
       const {自检材料,校验材料,整改材料,资料及编号,memo} =par||{};
       return {自检材料,校验材料,整改材料,资料及编号,memo};
     }, []);
-    const { eos, setInp, inp } = useItemControlAs({ref,  filter: getInpFilter, show});
-
+    const {inp, setInp} = useItemInputControl({ ref });
     return (
-      <InspectRecordTitle  control={eos}   label={'见证材料或问题备注'}>
+      <InspectRecordLayout inp={inp} setInp={setInp}  getInpFilter={getInpFilter} show={show}
+                           alone={alone}  label={'见证材料或问题备注'}>
         六、见证材料{`{将来可能只需输入编号链接即可}`}
         <InputGroupLine  label='1、维保自检材料' >
           <Input  value={inp?.自检材料 ||''}  placeholder="使用默认规则，缺省编号情况的可不填"
-                 onChange={e => setInp({ ...inp, 自检材料: e.currentTarget.value||undefined}) } />
+                  onChange={e => setInp({ ...inp, 自检材料: e.currentTarget.value||undefined}) } />
         </InputGroupLine>
         <InputGroupLine  label='2、限速器动作速度校验材料' >
           <Input  value={inp?.校验材料 ||''}
-                 onChange={e => setInp({ ...inp, 校验材料: e.currentTarget.value||undefined}) } />
+                  onChange={e => setInp({ ...inp, 校验材料: e.currentTarget.value||undefined}) } />
         </InputGroupLine>
         <InputGroupLine  label='3、使用单位整改反馈材料' >
           <Input  value={inp?.整改材料 ||''}
-                 onChange={e => setInp({ ...inp, 整改材料: e.currentTarget.value||undefined}) } />
+                  onChange={e => setInp({ ...inp, 整改材料: e.currentTarget.value||undefined}) } />
         </InputGroupLine>
         <InputGroupLine  label='4、其他资料及编号' >
           <Input  value={inp?.资料及编号 ||''}
-                 onChange={e => setInp({ ...inp, 资料及编号: e.currentTarget.value||undefined}) } />
+                  onChange={e => setInp({ ...inp, 资料及编号: e.currentTarget.value||undefined}) } />
         </InputGroupLine>
         七、备注<br/><br/>
         纸质正式报告备注可能只取前几行
-         <TextArea  value={inp?.memo ||''} rows={10} placeholder="网页版本正式报告备注可随意多写"
-                    onChange={e => setInp({ ...inp, memo: e.currentTarget.value||undefined}) } />
-      </InspectRecordTitle>
+        <TextArea  value={inp?.memo ||''} rows={10} placeholder="网页版本正式报告备注可随意多写"
+                   onChange={e => setInp({ ...inp, memo: e.currentTarget.value||undefined}) } />
+      </InspectRecordLayout>
     );
   } );
 
 const ItemConclusion: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
   React.forwardRef((
-    { children, show },  ref
+    { children, show ,alone=true},  ref
   ) => {
     const getInpFilter = React.useCallback((par) => {
      //检验人IDs编制日期编制人结论：这些字段要提升到关系数据库表中，而不是json字段里面。只能保留上级语义更强的，json半结构化数据的就不做保留。
       const {检验结论,编制日期,编制人,检验人IDs} =par||{};
       return {检验结论,编制日期,编制人,检验人IDs};
     }, []);
-    const { eos, setInp, inp } = useItemControlAs({ref,  filter: getInpFilter, show});
-
+    const {inp, setInp} = useItemInputControl({ ref });
     return (
-      <InspectRecordTitle  control={eos}   label={'下结论!'}>
+      <InspectRecordLayout inp={inp} setInp={setInp}  getInpFilter={getInpFilter} show={show}
+                           alone={alone}  label={'下结论!'}>
         五、现场检验意见
         <InputGroupLine  label='检验结论{签名后结论不能再改}' >
           <Select inputSize="md" css={{minWidth:'140px',fontSize:'2rem',padding:'0 1rem'}}
@@ -1141,29 +1136,29 @@ const ItemConclusion: React.RefForwardingComponent<InternalItemHandResult,Intern
         </InputGroupLine>
         <InputGroupLine  label='检验人员{用户ID列表,将来签名，登录来签注}' >
           <Input  value={inp?.检验人IDs ||''} placeholder="输入本系统用户ID，将来签名后结论不能再改，多人签名：以 分割"
-                 onChange={e => setInp({ ...inp, 检验人IDs: e.currentTarget.value||undefined}) } />
+                  onChange={e => setInp({ ...inp, 检验人IDs: e.currentTarget.value||undefined}) } />
         </InputGroupLine>
         <InputGroupLine  label='编制人员{将来是提交人员，自动的}' >
           <Input  value={inp?.编制人 ||''} placeholder="目前直接输入名字，一个人"
-                 onChange={e => setInp({ ...inp, 编制人: e.currentTarget.value||undefined}) } />
+                  onChange={e => setInp({ ...inp, 编制人: e.currentTarget.value||undefined}) } />
         </InputGroupLine>
         <InputGroupLine  label='编制日期{将来等于提交日，自动的}' >
           <Input  value={inp?.编制日期 ||''}  type='date'
-                 onChange={e => setInp({ ...inp, 编制日期: e.currentTarget.value}) } />
+                  onChange={e => setInp({ ...inp, 编制日期: e.currentTarget.value}) } />
         </InputGroupLine>
-      </InspectRecordTitle>
+      </InspectRecordLayout>
     );
   } );
 
 const ItemRecheckResult: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
   React.forwardRef((
-    { children, show },  ref
+    { children, show ,alone=true},  ref
   ) => {
     const getInpFilter = React.useCallback((par) => {
       const {unq} =par||{};
       return {unq};
     }, []);
-    const { eos, setInp, inp } = useItemControlAs({ref,  filter: getInpFilter, show});
+    const {inp, setInp} = useItemInputControl({ ref });
     const [seq, setSeq] = React.useState(null);   //表對象的當前一條。
     const [obj, setObj] = React.useState({no:'',desc:'',rres:'',rdate:''});
     React.useEffect(() => {
@@ -1245,7 +1240,8 @@ const ItemRecheckResult: React.RefForwardingComponent<InternalItemHandResult,Int
     </div>;
   //不合格unq表数据生成时机：复检编制开始时初始化来的。在初检场景看到是动态校验目的前端显示表还未存储到后端数据库。
     return (
-      <InspectRecordTitle  control={eos} label={'不合格复检结果记录'}>
+      <InspectRecordLayout inp={inp} setInp={setInp}  getInpFilter={getInpFilter} show={show}
+                           alone={alone}  label={'不合格复检结果记录'}>
         <Text  variant="h5">
           四、检验不合格记录及复检结果
         </Text>
@@ -1253,81 +1249,79 @@ const ItemRecheckResult: React.RefForwardingComponent<InternalItemHandResult,Int
         <hr/>
         {myTable}
         {seq===null && editor}
-      </InspectRecordTitle>
+      </InspectRecordLayout>
     );
   } );
 
 const ItemAppendixB: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
   React.forwardRef((
-    { children, show },  ref
+    { children, show ,alone=true},  ref
   ) => {
     const getInpFilter = React.useCallback((par) => {
       const {检验条件,温度,电压值} =par||{};
       return {检验条件,温度,电压值};
     }, []);
-    const { eos, setInp, inp } = useItemControlAs({ref,  filter: getInpFilter, show});
+    const {inp, setInp} = useItemInputControl({ ref });
     const theme = useTheme();
     const [floor, setFloor] = React.useState(null);
-
     return (
-      <React.Fragment>
-        <InspectRecordTitle  control={eos} label={'附录B：现场检验条件'}>
-          1、机房或者机器设备间的空气温度保持在5℃～40℃之间；<br/>
-          2、电源输入电压波动在额定电压值±7％的范围内；<br/>
-          3、环境空气中没有腐蚀性和易燃性气体及导电尘埃； <br/>
-          4、检验现场（主要指机房或者机器设备间、井道、轿顶、底坑）清洁，没有与电梯工作无关的物品和设备，基站、相关层站等检验现场放置表明正在进行检验的警示牌；<br/>
-          5、对井道进行了必要的封闭。 <br/>
-          特殊情况下，电梯设计文件对温度、湿度、电压、环境空气条件等进行了专门规定的，检验现场的温度、湿度、电压、环境空气条件等应当符合电梯设计文件的规定。
-          <hr/>
-          <div>
-            确认过的记录:
-            {inp?.检验条件?.map((a,i)=>{
-              return <React.Fragment key={i}>
-                <br/>{
-                `[${a}]日: ${inp?.温度?.[a]||''} ℃, ${inp?.电压值?.[a]||''} V;`
-              }
-              </React.Fragment>;
-            }) }
-          </div>
-          新增检查=>
-          <InputGroupLine  label='首先设置当前检验日期'>
-            <SuffixInput
-                type='date'
-              value={floor||''}
-              onChange={e => {setFloor( e.currentTarget.value) }}
-            >
-              <Button onPress={() =>floor&&(inp?.检验条件?.includes(floor)? null:
-                  setInp( (inp?.检验条件&&{...inp,检验条件:[...inp?.检验条件,floor] } )
-                    || {...inp,检验条件:[floor] } )
-              )}
-              >新增</Button>
-            </SuffixInput>
-          </InputGroupLine>
-          <div css={{ textAlign: 'center' }}>
-            <Button css={{ marginTop: theme.spaces.sm }} size="sm"
-                    onPress={() => floor&&inp?.检验条件?.includes(floor) &&(
-                      setInp({...inp,检验条件:[...inp.检验条件.filter(a => a!==floor )],
-                        温度:{...inp?.温度,[floor]:undefined}, 电压值:{...inp?.电压值,[floor]:undefined}
-                      })
-                    )}
-            >刪除</Button>
-          </div>
-          <InputGroupLine label={`机房空气温度(${floor}):`}>
-            <SuffixInput
-              placeholder="请输入测量数"
-              value={ (inp?.温度?.[floor] ) || ''}
-              onChange={e => floor&&setInp({ ...inp, 温度:{...inp?.温度,[floor]:e.currentTarget.value||undefined} }) }
-            >℃</SuffixInput>
-          </InputGroupLine>
-          <InputGroupLine label={`电源输入电压(${floor}):`}>
-            <SuffixInput
-              placeholder="请输入测量数"
-              value={ (inp?.电压值?.[floor] ) || ''}
-              onChange={e => floor&&setInp({ ...inp, 电压值:{...inp?.电压值,[floor]:e.currentTarget.value||undefined} }) }
-            >V</SuffixInput>
-          </InputGroupLine>
-        </InspectRecordTitle>
-      </React.Fragment>
+      <InspectRecordLayout inp={inp} setInp={setInp}  getInpFilter={getInpFilter} show={show}
+                           alone={alone}  label={'附录B：现场检验条件'}>
+        1、机房或者机器设备间的空气温度保持在5℃～40℃之间；<br/>
+        2、电源输入电压波动在额定电压值±7％的范围内；<br/>
+        3、环境空气中没有腐蚀性和易燃性气体及导电尘埃； <br/>
+        4、检验现场（主要指机房或者机器设备间、井道、轿顶、底坑）清洁，没有与电梯工作无关的物品和设备，基站、相关层站等检验现场放置表明正在进行检验的警示牌；<br/>
+        5、对井道进行了必要的封闭。 <br/>
+        特殊情况下，电梯设计文件对温度、湿度、电压、环境空气条件等进行了专门规定的，检验现场的温度、湿度、电压、环境空气条件等应当符合电梯设计文件的规定。
+        <hr/>
+        <div>
+          确认过的记录:
+          {inp?.检验条件?.map((a,i)=>{
+            return <React.Fragment key={i}>
+              <br/>{
+              `[${a}]日: ${inp?.温度?.[a]||''} ℃, ${inp?.电压值?.[a]||''} V;`
+            }
+            </React.Fragment>;
+          }) }
+        </div>
+        新增检查=>
+        <InputGroupLine  label='首先设置当前检验日期'>
+          <SuffixInput
+            type='date'
+            value={floor||''}
+            onChange={e => {setFloor( e.currentTarget.value) }}
+          >
+            <Button onPress={() =>floor&&(inp?.检验条件?.includes(floor)? null:
+                setInp( (inp?.检验条件&&{...inp,检验条件:[...inp?.检验条件,floor] } )
+                  || {...inp,检验条件:[floor] } )
+            )}
+            >新增</Button>
+          </SuffixInput>
+        </InputGroupLine>
+        <div css={{ textAlign: 'center' }}>
+          <Button css={{ marginTop: theme.spaces.sm }} size="sm"
+                  onPress={() => floor&&inp?.检验条件?.includes(floor) &&(
+                    setInp({...inp,检验条件:[...inp.检验条件.filter(a => a!==floor )],
+                      温度:{...inp?.温度,[floor]:undefined}, 电压值:{...inp?.电压值,[floor]:undefined}
+                    })
+                  )}
+          >刪除</Button>
+        </div>
+        <InputGroupLine label={`机房空气温度(${floor}):`}>
+          <SuffixInput
+            placeholder="请输入测量数"
+            value={ (inp?.温度?.[floor] ) || ''}
+            onChange={e => floor&&setInp({ ...inp, 温度:{...inp?.温度,[floor]:e.currentTarget.value||undefined} }) }
+          >℃</SuffixInput>
+        </InputGroupLine>
+        <InputGroupLine label={`电源输入电压(${floor}):`}>
+          <SuffixInput
+            placeholder="请输入测量数"
+            value={ (inp?.电压值?.[floor] ) || ''}
+            onChange={e => floor&&setInp({ ...inp, 电压值:{...inp?.电压值,[floor]:e.currentTarget.value||undefined} }) }
+          >V</SuffixInput>
+        </InputGroupLine>
+      </InspectRecordLayout>
     );
   } );
 
@@ -1335,18 +1329,13 @@ const ItemAppendixB: React.RefForwardingComponent<InternalItemHandResult,Interna
 //'附录A 层门间隙、啮合长度' 这7个测量数据，单独放一个编辑组件。而原本'6.3','6.9','6.12'只读和跳转连接。
 const ItemGapMeasure: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
   React.forwardRef((
-    { children, show },  ref
+    { children, show ,alone=true},  ref
   ) => {
-    const {storage, setStorage} =React.useContext(EditStorageContext);
     const getInpFilter = React.useCallback((par) => {
       const {层站,门扇隙,门套隙,地坎隙,施力隙,门锁啮长,刀坎距,轮坎距,门扇间隙,最不利隙,层门锁,轿门锁,刀轮地隙} =par||{};
       return {层站,门扇隙,门套隙,地坎隙,施力隙,门锁啮长,刀坎距,轮坎距,门扇间隙,最不利隙,层门锁,轿门锁,刀轮地隙};
     }, []);
-    const { eos, setInp, inp, par } = useItemControlAs({ref,  filter: getInpFilter, show});
-    React.useEffect(() => {
-      storage&&setInp(getInpFilter(storage));
-    }, [storage, setInp, getInpFilter] );
-
+    const {inp, setInp} = useItemInputControl({ ref });
     const theme = useTheme();
     const [floor, setFloor] = React.useState(null);
     //const cAppendix =useCollapse(true,true);
@@ -1360,13 +1349,14 @@ const ItemGapMeasure: React.RefForwardingComponent<InternalItemHandResult,Intern
       return parseFloat(inp?.轮坎距?.[f])<5;
     });
     const qs= queryString.parse(window.location.search);
-    console.log("参数第三层路由mathched qs=",qs);
+    //console.log("参数第三层路由mathched qs=",qs);
     return (
-     <InspectRecordTitle  control={eos} label={'附录A 层门间隙、啮合长度'}>
+      <InspectRecordLayout inp={inp} setInp={setInp}  getInpFilter={getInpFilter} show={show}
+                           alone={alone}  label={'附录A 层门间隙、啮合长度'}>
         <div>
           <RouterLink  to={`/report/EL-DJ/ver/1/${qs.from?qs.from:'6.3'}/227`}>
-          (点击回检验项)已检记录,每层七个尺寸:
-           </RouterLink>
+            (点击回检验项)已检记录,每层七个尺寸:
+          </RouterLink>
           {inp?.层站?.map((a,i)=>{
             return <React.Fragment key={i}>
               <br/>{
@@ -1448,10 +1438,7 @@ const ItemGapMeasure: React.RefForwardingComponent<InternalItemHandResult,Intern
             onChange={e => floor&&setInp({ ...inp, 轮坎距:{...inp?.轮坎距,[floor]:e.currentTarget.value||undefined} }) }
           >mm</SuffixInput>
         </InputGroupLine>
-        <Button size="lg" intent={'primary'} onPress={() =>{ setStorage({...storage, ...inp}) }}>
-          修改确认
-        </Button>
-      </InspectRecordTitle>
+      </InspectRecordLayout>
     );
   } );
 
@@ -1485,86 +1472,75 @@ const ItemUniversal: React.RefForwardingComponent<InternalItemHandResult,ItemUni
       );
       return fields;
     }, [x,y]);
-    //旧的模式： const {inp, setInp} = useItemInputControl({ref,  filter: getInpFilter, show});
-    const [inp, setInp] = React.useState(null);
+    const {inp, setInp} = useItemInputControl({ ref });
  /*   React.useEffect(() => {
       eos.show&& storage&& setInp(getInpFilter(storage));
     }, [eos.show, storage, setInp, getInpFilter] );
 */
     //因为Hook不能用逻辑条件，只能上组件分解了，按条件分解两个组件。
-    const mainContent =<React.Fragment>
-          <div css={{ display: 'flex', justifyContent: 'space-around' }}>
-            <Text variant="h6">检验项目: {`${x + 1}.${y + 1}`}</Text>
-            <Text variant="h6">{`${x + 1} ${inspectionContent[x].bigLabel}`}</Text>
-          </div>
-          <div css={{ display: 'flex', justifyContent: 'space-around' }}>
-            <Text variant="h6">{`${x + 1}.${y + 1} ${inspectionContent[x].items[y].label}`}</Text>
-            <Text variant="h6">检验类别 {`${inspectionContent[x].items[y].iClass}`}  </Text>
-          </div>
-          <hr/>
-          {procedure}
-          <Text variant="h5">
-            查验结果
-          </Text>
-          {inspectionContent[x].items[y].subItems ? (inspectionContent[x].items[y].subItems?.map((a, i) => {
-              const namex = `${inspectionContent[x].items[y].names[i]}`;
-              const namexD = `${inspectionContent[x].items[y].names[i]}_D`;
-              return <React.Fragment key={i}>
-                {details[i] && details[i](inp, setInp)}
-                <InputGroupLine label={inspectionContent[x].items[y].subItems[i]}>
-                  <SelectHookfork value={(inp?.[namex]) || ''} onChange={e => {
-                    inp[namex] = e.currentTarget.value || undefined;
-                    setInp({ ...inp });
-                  }}
-                  />
-                </InputGroupLine>
-                <InputGroupLine label='描述或问题'>
-                  <Input value={(inp?.[namexD]) || ''} onChange={e => {
-                    inp[namexD] = e.currentTarget.value || undefined;
-                    setInp({ ...inp });
-                  }}
-                  />
-                </InputGroupLine>
-              </React.Fragment>;
-            }))
-            :
-            (inspectionContent[x].items[y].names?.map((a, i) => {
-              const namex = `${inspectionContent[x].items[y].names[i]}`;
-              const namexD = `${inspectionContent[x].items[y].names[i]}_D`;
-              return <React.Fragment key={i}>
-                {details[i] && details[i](inp, setInp)}
-                <InputGroupLine label={inspectionContent[x].items[y].label}>
-                  <SelectHookfork value={(inp?.[namex]) || ''} onChange={e => {
-                    inp[namex] = e.currentTarget.value || undefined;
-                    setInp({ ...inp });
-                  }}
-                  />
-                </InputGroupLine>
-                <InputGroupLine label='描述或问题'>
-                  <Input value={(inp?.[namexD]) || ''} onChange={e => {
-                    inp[namexD] = e.currentTarget.value || undefined;
-                    setInp({ ...inp });
-                  }}
-                  />
-                </InputGroupLine>
-              </React.Fragment>;
-            }))
-          }
-         </React.Fragment>;
     //下拉列表标题=检验类别+项目内容；
     //逻辑组件内部的钩子Hook有差异需求。分解成两个组件逻辑合并后，性能是有提升。
     return (
-      <React.Fragment>
-        {!alone && <InspectRecordCollapse inp={inp} setInp={setInp}  getInpFilter={getInpFilter} show={show}
-                            label={`${inspectionContent[x].items[y].iClass}${inspectionContent[x].items[y].label}`}>
-                 {mainContent}
-             </InspectRecordCollapse>
+      <InspectRecordLayout inp={inp} setInp={setInp}  getInpFilter={getInpFilter} show={show}
+                 alone={alone} label={`${inspectionContent[x].items[y].iClass}${inspectionContent[x].items[y].label}`}>
+        <div css={{ display: 'flex', justifyContent: 'space-around' }}>
+          <Text variant="h6">检验项目: {`${x + 1}.${y + 1}`}</Text>
+          <Text variant="h6">{`${x + 1} ${inspectionContent[x].bigLabel}`}</Text>
+        </div>
+        <div css={{ display: 'flex', justifyContent: 'space-around' }}>
+          <Text variant="h6">{`${x + 1}.${y + 1} ${inspectionContent[x].items[y].label}`}</Text>
+          <Text variant="h6">检验类别 {`${inspectionContent[x].items[y].iClass}`}  </Text>
+        </div>
+        <hr/>
+        {procedure}
+        <Text variant="h5">
+          查验结果
+        </Text>
+        {inspectionContent[x].items[y].subItems ? (inspectionContent[x].items[y].subItems?.map((a, i) => {
+            const namex = `${inspectionContent[x].items[y].names[i]}`;
+            const namexD = `${inspectionContent[x].items[y].names[i]}_D`;
+            return <React.Fragment key={i}>
+              {details[i] && details[i](inp, setInp)}
+              <InputGroupLine label={inspectionContent[x].items[y].subItems[i]}>
+                <SelectHookfork value={(inp?.[namex]) || ''} onChange={e => {
+                  inp[namex] = e.currentTarget.value || undefined;
+                  setInp({ ...inp });
+                }}
+                />
+              </InputGroupLine>
+              <InputGroupLine label='描述或问题'>
+                <Input value={(inp?.[namexD]) || ''} onChange={e => {
+                  inp[namexD] = e.currentTarget.value || undefined;
+                  setInp({ ...inp });
+                }}
+                />
+              </InputGroupLine>
+            </React.Fragment>;
+          }))
+          :
+          (inspectionContent[x].items[y].names?.map((a, i) => {
+            const namex = `${inspectionContent[x].items[y].names[i]}`;
+            const namexD = `${inspectionContent[x].items[y].names[i]}_D`;
+            return <React.Fragment key={i}>
+              {details[i] && details[i](inp, setInp)}
+              <InputGroupLine label={inspectionContent[x].items[y].label}>
+                <SelectHookfork value={(inp?.[namex]) || ''} onChange={e => {
+                  inp[namex] = e.currentTarget.value || undefined;
+                  setInp({ ...inp });
+                }}
+                />
+              </InputGroupLine>
+              <InputGroupLine label='描述或问题'>
+                <Input value={(inp?.[namexD]) || ''} onChange={e => {
+                  inp[namexD] = e.currentTarget.value || undefined;
+                  setInp({ ...inp });
+                }}
+                />
+              </InputGroupLine>
+            </React.Fragment>;
+          }))
         }
-        {alone && <InspectRecordDialog inp={inp} setInp={setInp} getInpFilter={getInpFilter} >
-                  {mainContent}
-              </InspectRecordDialog>
-        }
-      </React.Fragment>
+      </InspectRecordLayout>
     );
   } );
 

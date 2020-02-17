@@ -26,3 +26,7 @@ yarn-error.log*
 .firebaserc
 firebase-config.ts
 .runtimeconfig.json
+
+.env
+.idea/workspace.xml
+/front-end/.idea/workspace.xml

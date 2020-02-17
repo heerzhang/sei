@@ -27,3 +27,8 @@ out/production/classes/generated/
 out/test/classes/generated_tests/
 /cache/
 /transaction-logs/
+
+src/main/resources/application.yml
+
+.idea/workspace.xml
+/front-end/.idea/workspace.xml

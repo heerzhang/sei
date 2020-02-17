@@ -6,7 +6,7 @@ import {
   Collapse,
   Container,
   Divider,
-  Embed, Link,
+  Embed, IconArrowRight, Link,
   ScrollView, Select, Text, useCollapse,
   useInfiniteScroll, useTheme
 } from "customize-easy-ui-component";
@@ -1103,7 +1103,10 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
         textAlign:'center'
       }}
       >
-        - 报告完毕 -
+        - 报告完毕 -<br/>
+        <RouterLink to={`/report/EL-DJ/ver/1/printAll/227`}>
+           看完整的原始记录
+        </RouterLink>
       </div>
     </React.Fragment>
   );

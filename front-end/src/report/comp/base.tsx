@@ -426,7 +426,7 @@ export interface ItemControlProps {
 //后端数据没有变化的，前端输入正在导致记录变化的，要维持以正在交互的输入为准，等待保存给后端。
 //par被上级组件利用回调钩子模式接管控制后，就不能在这里多头设置，否则死循环。
 //useXXX钩子函数，每次render调用次数顺序需要保证一致性。规则限制！不能用逻辑{&&}套住它。
-export　function useItemControlAs({
+export　function useItemControlAs_del({
                              ref=null,
                              filter=null,
                              show=false
@@ -455,36 +455,20 @@ export　function useItemControlAs({
 
 export interface ItemInputControlProps {
   ref: React.Ref<any>;
-  show: boolean;
-  //par: any;   改成回调模式，上级深度控制下级，去除组件参数，避免多头受控，可能死循环。   par={},
   //接受par输入的过滤器，回调 过滤有用数据。
-  filter: (par: any) => {};
+  //filter: (par: any) => {};
 }
 export　function useItemInputControl({
-                                   ref=null,
-                                   filter=null,
-                                   show=false
+                                   ref,
+                                   //filter=null,
                                  } : ItemInputControlProps
 ) {
-  const eos =useCollapse(show,true);
   const [inp, setInp] = React.useState(null);
-  const [par, setPar] = React.useState(null);
   //用回调钩子setShow来替换；原先的show参数下传配合在useCollapse内部useEffect(() [defaultShow] 做修正方式。
   //回调钩子的模式。在上层父组件去统一调用本函数的，这里仅仅生成函数的代码但还未执行。
-
-
-  const onParChange = React.useCallback(function (par) {
-    //            setPar(par);
-    //            setInp(filter(par));
-  }, [  ]);
-
-
   //【廢棄】setShow功能，無需排序和全部開或拉上。
-
-  //旧的模式,子组件把自己的东西暴露给了父组件；，准备废弃了！
-//  React.useImperativeHandle( ref,() => ({ inp ,setShow:eos.setShow, onParChange}), [inp, onParChange,eos.setShow] );
-  //不直接用import { usePrevious } from "./Hooks/previous" 减少render次数。
-  return {eos, setInp, inp, par};
+  React.useImperativeHandle( ref,() => ({ inp }), [inp] );
+  return {inp, setInp};
 }
 
 
@@ -519,6 +503,42 @@ export function useProjectListAs({count}) {
   };
   return React.useRef<MutableRefObject<InternalItemHandResult>[] | null>(array.map((i) => WrappedComp(i) ) );
 }
+
+
+
+export interface InspectRecordLayoutProps {
+  alone: boolean;
+  label: string;
+  show?: boolean;
+  children: React.ReactNode;
+  inp:  any;
+  setInp:  React.Dispatch<React.SetStateAction<any>>;
+  getInpFilter: ( any ) => any;
+}
+//继续复用，组合来节省冗余代码量。
+export const InspectRecordLayout: React.FunctionComponent<InspectRecordLayoutProps> = ({
+    alone,
+    label,
+    show=true,
+    inp,
+    setInp,
+    getInpFilter,
+    children,
+    ...other
+ }) => {
+  if(alone)  return (
+       <InspectRecordDialog inp={inp} setInp={setInp} getInpFilter={getInpFilter} >
+          {children}
+       </InspectRecordDialog>
+      );
+  else
+      return <InspectRecordCollapse inp={inp} setInp={setInp}  getInpFilter={getInpFilter}
+                                    show={show}  label={label} >
+            {children}
+    </InspectRecordCollapse>;
+};
+
+
 
 //自定义Ｈｏｏｋ的 例子。
 /*const useValues = () => {
