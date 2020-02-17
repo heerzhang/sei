@@ -48,7 +48,7 @@ const OriginalView: React.RefForwardingComponent<InternalItemHandResult,Template
      {inp:oldWay, action='none', children},   ref
   ) => {
     const {storage, setStorage} =React.useContext(EditStorageContext);
-    let refSize=0;     //项目可独立编辑，其它没有界面显示的项目部分可以省略inp的传回ref等。动态的可独立编辑项目区的数量。
+    let refSize=900;     //项目可独立编辑，其它没有界面显示的项目部分可以省略inp的传回ref等。动态的可独立编辑项目区的数量。
    // const clRefs =useProjectListAs({count: recordPrintList.length});  　//
     const clRefs =useProjectListAs({count: refSize});
     //? 单个项目独立保存可行吗，　非要全部都来，　项目全部显示时刻就不能修改保存了。?
@@ -57,7 +57,7 @@ const OriginalView: React.RefForwardingComponent<InternalItemHandResult,Template
     //旧的模式：两次暴露传递，返回给了爷爷辈组件。
     //React.useImperativeHandle( ref,() => ({ inp: outCome }), [outCome] );
 
-    //console.log("实验进行时６３６３　-storage=",storage,"outCome=" );
+    console.log("实验进行时６３６３　-storage=",storage,"outCome=",outCome);
     //原始记录检验内容通用格式部分：这个是可以跟随检验记录数据变化的可配置部分。
     const generalFormat= React.useMemo(() =>
      [
@@ -870,7 +870,7 @@ const OriginalView: React.RefForwardingComponent<InternalItemHandResult,Template
         rowBigItem && rowBigItem.items.forEach((item, y) => {
           if(item){
             seq += 1;
-            const rowHead =<ItemUniversal key={seq} ref={null}  x={x}  y={y}  show={action==='printAll'} alone={false}
+            const rowHead =<ItemUniversal key={seq} ref={clRefs.current![100+seq]}  x={x}  y={y}  show={action==='printAll'} alone={false}
                                 procedure={generalFormat[x].items[y].procedure}  details={generalFormat[x].items[y].details}
                            />;
             htmlTxts.push(rowHead);
@@ -927,8 +927,13 @@ const OriginalView: React.RefForwardingComponent<InternalItemHandResult,Template
     return <React.Fragment>
           {recordList}
           { (action==='ALL' || action==='printAll') &&
-            <Button size="lg" intent={'primary'} onPress={() =>{ setStorage({...storage, ...outCome}) }}>
-            全部输入一起确认
+            <Button size="lg" intent={'primary'} onPress={() =>{
+              //按钮看见的数据是滞后的，并不是最新的！！。
+              console.log("触发 看见却是=",storage,"outCome=",outCome);
+              setStorage({...storage, ...outCome});
+              }
+            }>
+              全部输入一起确认
             </Button>
           }
         </React.Fragment>;

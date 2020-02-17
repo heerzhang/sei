@@ -602,7 +602,7 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
   const ins2Table =React.useMemo(() => getInstrument(orc.仪器表), [orc.仪器表]);
   const itRes =React.useMemo(() => getItemTransform(orc), [orc]);
 
-  console.log("renderIspContent当前 itRes=",itRes);
+  //console.log("renderIspContent当前 itRes=",itRes);
   const renderIspContent =React.useMemo(() => {
     let seq = 0;
     let htmlTxts =[];
