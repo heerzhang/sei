@@ -183,7 +183,7 @@ export const InspectRecordTitle: React.FunctionComponent<InspectRecordTitleProps
                     control.setShow(!control.show);
                 } }
               >
-                {control.show ? "收起" : "更多"}
+                {control.show ? "确认修改并收起" : "更多"}
               </Button>
              </div>
           </Collapse>
@@ -329,6 +329,7 @@ export interface ItemControlProps {
 }
 //后端数据没有变化的，前端输入正在导致记录变化的，要维持以正在交互的输入为准，等待保存给后端。
 //par被上级组件利用回调钩子模式接管控制后，就不能在这里多头设置，否则死循环。
+//useXXX钩子函数，每次render调用次数顺序需要保证一致性。规则限制！不能用逻辑{&&}套住它。
 export　function useItemControlAs({
                              ref=null,
                              filter=null,

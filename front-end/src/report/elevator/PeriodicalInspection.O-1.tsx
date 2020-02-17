@@ -49,27 +49,15 @@ const OriginalView: React.RefForwardingComponent<InternalItemHandResult,Template
   ) => {
     const {storage, setStorage} =React.useContext(EditStorageContext);
     let refSize=0;     //项目可独立编辑，其它没有界面显示的项目部分可以省略inp的传回ref等。动态的可独立编辑项目区的数量。
-    if(action==='2.1'){
-      refSize=3;
-    }
-    else refSize=3;
    // const clRefs =useProjectListAs({count: recordPrintList.length});  　//
     const clRefs =useProjectListAs({count: refSize});
     //? 单个项目独立保存可行吗，　非要全部都来，　项目全部显示时刻就不能修改保存了。?
     //同名字的字段：清除／整体清空／单项目独立保存＋合并。
- //   const outCome=mergeSubitemRefs( ...clRefs.current! );
-    //旧的模式
- //   React.useImperativeHandle( ref,() => ({ inp: outCome }), [outCome] );
-     //触发方式？了
-     // setInp(outCome);
+    const outCome=mergeSubitemRefs( ...clRefs.current! );
+    //旧的模式：两次暴露传递，返回给了爷爷辈组件。
+    //React.useImperativeHandle( ref,() => ({ inp: outCome }), [outCome] );
+
     //console.log("实验进行时６３６３　-storage=",storage,"outCome=" );
-
-
-  //  React.useEffect(() => {
-  //    callSubitemChangePar(oldWay,  ...clRefs.current! );
- //   }, [oldWay, clRefs] );
-
-
     //原始记录检验内容通用格式部分：这个是可以跟随检验记录数据变化的可配置部分。
     const generalFormat= React.useMemo(() =>
      [
@@ -882,7 +870,7 @@ const OriginalView: React.RefForwardingComponent<InternalItemHandResult,Template
         rowBigItem && rowBigItem.items.forEach((item, y) => {
           if(item){
             seq += 1;
-            const rowHead =<ItemUniversal key={seq} ref={null}  x={x}  y={y}  show={action==='printAll'}
+            const rowHead =<ItemUniversal key={seq} ref={null}  x={x}  y={y}  show={action==='printAll'} alone={false}
                                 procedure={generalFormat[x].items[y].procedure}  details={generalFormat[x].items[y].details}
                            />;
             htmlTxts.push(rowHead);
@@ -937,7 +925,11 @@ const OriginalView: React.RefForwardingComponent<InternalItemHandResult,Template
 
     return <React.Fragment>
           {recordList}
-
+          { (action==='ALL' || action==='printAll') &&
+            <Button size="lg" intent={'primary'} onPress={() =>{ setStorage({...storage, ...outCome}) }}>
+            全部输入一起确认
+            </Button>
+          }
         </React.Fragment>;
   } );
 
@@ -1041,7 +1033,7 @@ const ItemInstrumentTable: React.RefForwardingComponent<InternalItemHandResult,I
     );
   } );
 
-const ItemLinkManTel: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+const ItemSurveyLinkMan: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
   React.forwardRef((
     { children, show },  ref
   ) => {
@@ -1459,6 +1451,7 @@ const ItemGapMeasure: React.RefForwardingComponent<InternalItemHandResult,Intern
 //检验项目的标准化展示组件
 export interface ItemUniversalProps  extends React.HTMLAttributes<HTMLDivElement>{
   show?: boolean;
+  alone?: boolean;
   //检验项目配置对象标准的索引.[x].[y] ； 这里x是大项目；y是检验项目{还可拆分成几个更小项目的}。比如对应action="2.1"就是x=1,y=0的配置。
   x: number;
   y: number;
@@ -1470,7 +1463,7 @@ export interface ItemUniversalProps  extends React.HTMLAttributes<HTMLDivElement
 //forwardRef实际上已经没用了　ref，可改成简易的组件模式。
 const ItemUniversal: React.RefForwardingComponent<InternalItemHandResult,ItemUniversalProps>=
   React.forwardRef((
-    { children, show=true, procedure, details, x, y },  ref
+    { children, show=true, procedure, details, x, y ,alone=true},  ref
   ) => {
     const {storage, setStorage} =React.useContext(EditStorageContext);
     //console.log("通用检验内容部件 x=", x,"y=",y, "storage=", storage);
@@ -1490,83 +1483,87 @@ const ItemUniversal: React.RefForwardingComponent<InternalItemHandResult,ItemUni
     }, [x,y]);
     const { eos, setInp, inp , } = useItemControlAs({ref,  filter: getInpFilter, show});
     React.useEffect(() => {
-      eos.show&&storage&&setInp(getInpFilter(storage));
+      eos.show&& storage&& setInp(getInpFilter(storage));
     }, [eos.show, storage, setInp, getInpFilter] );
     const onPullUp = React.useCallback(() => {
-      setStorage({...storage, ...inp});
-    }, [inp,storage,setStorage]);
+      eos.show && setStorage({...storage, ...inp});
+    }, [eos.show, inp,storage,setStorage]);
 
+    const mainContent =<React.Fragment>
+          <div css={{ display: 'flex', justifyContent: 'space-around' }}>
+            <Text variant="h6">检验项目: {`${x + 1}.${y + 1}`}</Text>
+            <Text variant="h6">{`${x + 1} ${inspectionContent[x].bigLabel}`}</Text>
+          </div>
+          <div css={{ display: 'flex', justifyContent: 'space-around' }}>
+            <Text variant="h6">{`${x + 1}.${y + 1} ${inspectionContent[x].items[y].label}`}</Text>
+            <Text variant="h6">检验类别 {`${inspectionContent[x].items[y].iClass}`}  </Text>
+          </div>
+          <hr/>
+          {procedure}
+          <Text variant="h5">
+            查验结果
+          </Text>
+          {inspectionContent[x].items[y].subItems ? (inspectionContent[x].items[y].subItems?.map((a, i) => {
+              const namex = `${inspectionContent[x].items[y].names[i]}`;
+              const namexD = `${inspectionContent[x].items[y].names[i]}_D`;
+              return <React.Fragment key={i}>
+                {details[i] && details[i](inp, setInp)}
+                <InputGroupLine label={inspectionContent[x].items[y].subItems[i]}>
+                  <SelectHookfork value={(inp?.[namex]) || ''} onChange={e => {
+                    inp[namex] = e.currentTarget.value || undefined;
+                    setInp({ ...inp });
+                  }}
+                  />
+                </InputGroupLine>
+                <InputGroupLine label='描述或问题'>
+                  <Input value={(inp?.[namexD]) || ''} onChange={e => {
+                    inp[namexD] = e.currentTarget.value || undefined;
+                    setInp({ ...inp });
+                  }}
+                  />
+                </InputGroupLine>
+              </React.Fragment>;
+            }))
+            :
+            (inspectionContent[x].items[y].names?.map((a, i) => {
+              const namex = `${inspectionContent[x].items[y].names[i]}`;
+              const namexD = `${inspectionContent[x].items[y].names[i]}_D`;
+              return <React.Fragment key={i}>
+                {details[i] && details[i](inp, setInp)}
+                <InputGroupLine label={inspectionContent[x].items[y].label}>
+                  <SelectHookfork value={(inp?.[namex]) || ''} onChange={e => {
+                    inp[namex] = e.currentTarget.value || undefined;
+                    setInp({ ...inp });
+                  }}
+                  />
+                </InputGroupLine>
+                <InputGroupLine label='描述或问题'>
+                  <Input value={(inp?.[namexD]) || ''} onChange={e => {
+                    inp[namexD] = e.currentTarget.value || undefined;
+                    setInp({ ...inp });
+                  }}
+                  />
+                </InputGroupLine>
+              </React.Fragment>;
+            }))
+          }
+         </React.Fragment>;
     //下拉列表标题=检验类别+项目内容；
     return (
       <React.Fragment>
-        <InspectRecordTitle  control={eos}  onPullUp={onPullUp}
-                             label={`${inspectionContent[x].items[y].iClass}${inspectionContent[x].items[y].label}`}>
-
-        <div css={{ display: 'flex', justifyContent: 'space-around'}}>
-          <Text  variant="h6">检验项目: {`${x+1}.${y+1}`}</Text>
-          <Text  variant="h6">{`${x+1} ${inspectionContent[x].bigLabel}`}</Text>
-        </div>
-        <div css={{ display: 'flex',justifyContent: 'space-around'}}>
-          <Text  variant="h6">{`${x+1}.${y+1} ${inspectionContent[x].items[y].label}`}</Text>
-          <Text  variant="h6">检验类别 {`${inspectionContent[x].items[y].iClass}`}  </Text>
-        </div>
-        <hr/>
-        {procedure}
-
-        <Text  variant="h5">
-          查验结果
-        </Text>
-
-        { inspectionContent[x].items[y].subItems?  ( inspectionContent[x].items[y].subItems?.map((a,i)=>{
-            const namex =`${inspectionContent[x].items[y].names[i]}`;
-            const namexD =`${inspectionContent[x].items[y].names[i]}_D`;
-            return <React.Fragment key={i}>
-              {details[i] && details[i](inp,setInp)}
-              <InputGroupLine  label={inspectionContent[x].items[y].subItems[i]}>
-                <SelectHookfork value={ (inp?.[namex]) ||''}  onChange={e => {
-                  inp[namex]=e.currentTarget.value||undefined;
-                  setInp({ ...inp});
-                } }
-                />
-              </InputGroupLine>
-              <InputGroupLine label='描述或问题'>
-                <Input value={ (inp?.[namexD]) ||''}  onChange={e => {
-                  inp[namexD]=e.currentTarget.value||undefined;
-                  setInp({ ...inp});
-                } }
-                />
-              </InputGroupLine>
-            </React.Fragment>;
-          } )  )
-          :
-          ( inspectionContent[x].items[y].names?.map((a,i)=>{
-            const namex =`${inspectionContent[x].items[y].names[i]}`;
-            const namexD =`${inspectionContent[x].items[y].names[i]}_D`;
-            return <React.Fragment key={i}>
-              {details[i] && details[i](inp,setInp)}
-              <InputGroupLine  label={inspectionContent[x].items[y].label}>
-                <SelectHookfork value={ (inp?.[namex]) ||''}  onChange={e => {
-                  inp[namex]=e.currentTarget.value||undefined;
-                  setInp({ ...inp});
-                } }
-                />
-              </InputGroupLine>
-              <InputGroupLine label='描述或问题'>
-                <Input value={ (inp?.[namexD]) ||''}  onChange={e => {
-                  inp[namexD]=e.currentTarget.value||undefined;
-                  setInp({ ...inp});
-                } }
-                />
-              </InputGroupLine>
-            </React.Fragment>;
-          })  )
+        {!alone && <InspectRecordTitle control={eos} onPullUp={eos.show && onPullUp}
+                            label={`${inspectionContent[x].items[y].iClass}${inspectionContent[x].items[y].label}`}>
+                {mainContent}
+           </InspectRecordTitle>
         }
-
-        <Button size="lg" intent={'primary'} onPress={() =>{ setStorage({...storage, ...inp}) }}>
-          修改确认
-        </Button>
-
-      </InspectRecordTitle>
+        {alone && <React.Fragment>
+                  {mainContent}
+                    <Button size="lg" intent={'primary'} onPress={() => {
+                                  setStorage({ ...storage, ...inp }) }}>
+                     修改确认
+                    </Button>
+              </React.Fragment>
+        }
       </React.Fragment>
     );
   } );
@@ -1574,7 +1571,7 @@ const ItemUniversal: React.RefForwardingComponent<InternalItemHandResult,ItemUni
 //項目標記符列表：不能用ALL none preview printAll item1.1 保留字；
 //对应某个报告模板的底下所有的编辑修改的组件；原始记录打印展示项目的全部列表。
 const recordPrintList =[
-  createItem('LinkMan', <ItemLinkManTel/>),
+  createItem('Survey', <ItemSurveyLinkMan/>),
   createItem('Instrument', <ItemInstrumentTable/>),
   createItem('item1.1', <ItemUniversal x={0} y={0}/>),
   createItem('gap', <ItemGapMeasure/>),

@@ -844,7 +844,8 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
         <Table  fixed={ ["15%","34%","16%","%"]  }
                 printColWidth={ ["95","210","110","300"] }
                 css={ {borderCollapse: 'collapse' } }
-        >
+         >
+          <RouterLink  to={`/report/EL-DJ/ver/1/Survey/227`}>
           <TableBody>
             <TableRow>
               <CCell component="th" scope="row">设备品种</CCell>
@@ -915,8 +916,9 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
               <CCell colSpan={3}>福州新奥电梯工程有限公司</CCell>
             </TableRow>
           </TableBody>
-        </Table>
-        <Table  fixed={ ["6%","8%","26%","14%","8%","%","14%"]  }
+        </RouterLink>
+       </Table>
+       <Table  fixed={ ["6%","8%","26%","14%","8%","%","14%"]  }
                 printColWidth={ ["46","70","240","160","70","240","160"] }
                 css={ {borderCollapse: 'collapse' } }
         >
