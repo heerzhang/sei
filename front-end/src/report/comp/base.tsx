@@ -203,6 +203,66 @@ InspectRecordTitle.propTypes = {
   }).isRequired,　
 };
 
+
+export interface InspectRecordDialogProps {
+  //control参数实际是 useCollapse(show,true) 返回值。
+  //底下的?号是必不可少的。
+  control:  {　show?:boolean,
+    setShow?: React.Dispatch<React.SetStateAction<boolean>>,
+    buttonProps?: any ,
+    collapseProps?:{id:string,　show:boolean}
+  };
+  label: string;
+  children: React.ReactNode;
+  collapseNoLazy?: boolean;
+  onPullUp?: () => void;
+}
+
+export const InspectRecordDialog: React.FunctionComponent<InspectRecordDialogProps> = ({
+                                                                                       control,
+                                                                                       label,
+                                                                                       onPullUp,
+                                                                                       collapseNoLazy=false,
+                                                                                       children,
+                                                                                       ...other
+                                                                                     }) => {
+  const theme = useTheme();
+  //点击最底下的按钮，可以触发编辑器的确认临时存储的功能。
+  return (
+    <Layer elevation={"sm"}     css={{ padding: '0.25rem' }}>
+      <div>
+        <Button
+          variant="ghost"
+          intent="primary"
+          iconAfter={control.show  ? <IconChevronUp /> : <IconChevronDown />}
+          {...control.buttonProps}
+        >
+          {<Text variant="h5" css={{color: control.show ? theme.colors.palette.red.base:undefined}}>{label}</Text>}
+        </Button>
+
+        <Collapse {...control.collapseProps}  noAnimated>
+          {children}
+          <div css={{textAlign: 'right',padding:'0.2rem'}}>
+            <Button
+              variant="ghost"
+              intent="primary"
+              iconAfter={control.show  ? <IconChevronUp /> : <IconChevronDown />}
+              {...control.buttonProps}
+              onPress={() =>{
+                onPullUp&&onPullUp();
+                control.setShow(!control.show);
+              } }
+            >
+              {control.show ? "确认修改并收起" : "更多"}
+            </Button>
+          </div>
+        </Collapse>
+      </div>
+    </Layer>
+  );
+};
+
+
 export interface SelectHookforkProps extends SelectProps {
   topDivStyle?: SerializedStyles;
 }
@@ -357,6 +417,39 @@ export　function useItemControlAs({
   return {eos, setInp, inp, par};
 }
 
+export interface ItemInputControlProps {
+  ref: React.Ref<any>;
+  show: boolean;
+  //par: any;   改成回调模式，上级深度控制下级，去除组件参数，避免多头受控，可能死循环。   par={},
+  //接受par输入的过滤器，回调 过滤有用数据。
+  filter: (par: any) => {};
+}
+export　function useItemInputControl({
+                                   ref=null,
+                                   filter=null,
+                                   show=false
+                                 } : ItemInputControlProps
+) {
+  const eos =useCollapse(show,true);
+  const [inp, setInp] = React.useState(null);
+  const [par, setPar] = React.useState(null);
+  //用回调钩子setShow来替换；原先的show参数下传配合在useCollapse内部useEffect(() [defaultShow] 做修正方式。
+  //回调钩子的模式。在上层父组件去统一调用本函数的，这里仅仅生成函数的代码但还未执行。
+
+
+  const onParChange = React.useCallback(function (par) {
+    //            setPar(par);
+    //            setInp(filter(par));
+  }, [  ]);
+
+
+  //【廢棄】setShow功能，無需排序和全部開或拉上。
+
+  //旧的模式,子组件把自己的东西暴露给了父组件；，准备废弃了！
+//  React.useImperativeHandle( ref,() => ({ inp ,setShow:eos.setShow, onParChange}), [inp, onParChange,eos.setShow] );
+  //不直接用import { usePrevious } from "./Hooks/previous" 减少render次数。
+  return {eos, setInp, inp, par};
+}
 
 
 //各个检验单项子组件暴露给父组件的接口数据。

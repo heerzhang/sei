@@ -10,11 +10,11 @@ import {
 } from "customize-easy-ui-component";
 import {Table, TableBody,  TableRow, Cell, CCell} from "../../comp/TableExt";
 import {
-  IndentationLayText, InspectItemHeadColumn,
+  IndentationLayText, InspectItemHeadColumn, InspectRecordDialog,
   InspectRecordHeadColumn,
   InspectRecordTitle, InspectZoneHeadColumn,
   SelectHookfork, TemplateViewProps,
-  useItemControlAs, useProjectListAs
+  useItemControlAs, useItemInputControl, useProjectListAs
 } from "../comp/base";
 import {  InternalItemHandResult, InternalItemProps } from "../comp/base";
 import { callSubitemChangePar, callSubitemShow, mergeSubitemRefs } from "../../utils/tools";
@@ -1481,7 +1481,7 @@ const ItemUniversal: React.RefForwardingComponent<InternalItemHandResult,ItemUni
       );
       return fields;
     }, [x,y]);
-    const { eos, setInp, inp , } = useItemControlAs({ref,  filter: getInpFilter, show});
+    const { eos, setInp, inp , } = useItemInputControl({ref,  filter: getInpFilter, show});
     React.useEffect(() => {
       eos.show&& storage&& setInp(getInpFilter(storage));
     }, [eos.show, storage, setInp, getInpFilter] );
@@ -1551,10 +1551,10 @@ const ItemUniversal: React.RefForwardingComponent<InternalItemHandResult,ItemUni
     //下拉列表标题=检验类别+项目内容；
     return (
       <React.Fragment>
-        {!alone && <InspectRecordTitle control={eos} onPullUp={eos.show && onPullUp}
+        {!alone && <InspectRecordDialog control={eos} onPullUp={eos.show && onPullUp}
                             label={`${inspectionContent[x].items[y].iClass}${inspectionContent[x].items[y].label}`}>
                 {mainContent}
-           </InspectRecordTitle>
+           </InspectRecordDialog>
         }
         {alone && <React.Fragment>
                   {mainContent}
