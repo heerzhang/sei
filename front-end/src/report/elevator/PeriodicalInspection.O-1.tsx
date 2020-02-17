@@ -912,6 +912,7 @@ const OriginalView: React.RefForwardingComponent<InternalItemHandResult,Template
                     return React.cloneElement(each.zoneContent as React.ReactElement<any>, {
                       ref: clRefs.current![i],
                       show: action==='printAll',
+                      alone: false,
                       key: i
                     });
                 });
@@ -1035,7 +1036,7 @@ const ItemInstrumentTable: React.RefForwardingComponent<InternalItemHandResult,I
 
 const ItemSurveyLinkMan: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
   React.forwardRef((
-    { children, show },  ref
+    { children, show ,alone=true},  ref
   ) => {
     const getInpFilter = React.useCallback((par) => {
       //devCod,检验日期：这些字段要提升到关系数据库表中，json半结构化数据的就不做保留。
@@ -1043,30 +1044,36 @@ const ItemSurveyLinkMan: React.RefForwardingComponent<InternalItemHandResult,Int
       const {devCod,检验日期,安全人员,联系电话} =par||{};
       return {devCod,检验日期,安全人员,联系电话};
     }, []);
-    const { eos, setInp, inp } = useItemControlAs({ref,  filter: getInpFilter, show});
-
-    return (
-      <InspectRecordTitle  control={eos}   label={'一、设备概况'}>
-        允许直接修改部分
-        <InputGroupLine  label='设备号{将来是点击链接自动获得}' >
-          <Input  value={inp?.devCod ||''}  placeholder="那一台电梯？暂时要求，将来是点击链接自动获得"
-                 onChange={e => setInp({ ...inp, devCod: e.currentTarget.value||undefined}) } />
-        </InputGroupLine>
-        <InputGroupLine  label='检验日期{将来提升到创立原始记录的前置输入}' >
-          <Input value={inp?.检验日期 ||''}  placeholder="基准日" type='date'
-                 onChange={e => setInp({ ...inp, 检验日期: e.currentTarget.value}) } />
-        </InputGroupLine>
-        <InputGroupLine  label='安全管理人员' >
-          <Input  value={inp?.安全人员 ||''}
-                 onChange={e => setInp({ ...inp, 安全人员: e.currentTarget.value||undefined}) } />
-        </InputGroupLine>
-        <InputGroupLine  label='联系电话1' >
-          <Input  value={inp?.联系电话 ||''}
-                 onChange={e => setInp({ ...inp, 联系电话: e.currentTarget.value||undefined}) } />
-        </InputGroupLine>
-        不可修改的明细：待续或点外部链接。
-      </InspectRecordTitle>
-    );
+    const [inp, setInp] = React.useState(null);
+    const mainContent =<React.Fragment>
+      允许直接修改部分
+      <InputGroupLine  label='设备号{将来是点击链接自动获得}' >
+        <Input  value={inp?.devCod ||''}  placeholder="那一台电梯？暂时要求，将来是点击链接自动获得"
+                onChange={e => setInp({ ...inp, devCod: e.currentTarget.value||undefined}) } />
+      </InputGroupLine>
+      <InputGroupLine  label='检验日期{将来提升到创立原始记录的前置输入}' >
+        <Input value={inp?.检验日期 ||''}  placeholder="基准日" type='date'
+               onChange={e => setInp({ ...inp, 检验日期: e.currentTarget.value}) } />
+      </InputGroupLine>
+      <InputGroupLine  label='安全管理人员' >
+        <Input  value={inp?.安全人员 ||''}
+                onChange={e => setInp({ ...inp, 安全人员: e.currentTarget.value||undefined}) } />
+      </InputGroupLine>
+      <InputGroupLine  label='联系电话1' >
+        <Input  value={inp?.联系电话 ||''}
+                onChange={e => setInp({ ...inp, 联系电话: e.currentTarget.value||undefined}) } />
+      </InputGroupLine>
+      不可修改的明细：待续或点外部链接。
+    </React.Fragment>;
+    if(alone)
+      return ( <InspectRecordDialog inp={inp} setInp={setInp} getInpFilter={getInpFilter} >
+                      {mainContent}
+         </InspectRecordDialog> );
+    else
+      return <InspectRecordCollapse inp={inp} setInp={setInp}  getInpFilter={getInpFilter} show={show}
+                                        label={'一、设备概况'} >
+                  {mainContent}
+          </InspectRecordCollapse>;
   } );
 
 const ItemRemarks: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
