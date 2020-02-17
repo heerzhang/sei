@@ -15,6 +15,7 @@ import { Dispatch, SetStateAction } from "react";
 //import isEqual from "lodash.isequal";
 import { MutableRefObject } from "react";
 import { Ref } from "react";
+import { EditStorageContext } from "../StorageContext";
 //import { Collapse, useCollapse } from "../../comp/Collapse";
 //import { useUid } from "customize-easy-ui-component/src/Hooks/use-uid";
 
@@ -204,64 +205,99 @@ InspectRecordTitle.propTypes = {
 };
 
 
-export interface InspectRecordDialogProps {
-  //control参数实际是 useCollapse(show,true) 返回值。
-  //底下的?号是必不可少的。
-  control:  {　show?:boolean,
-    setShow?: React.Dispatch<React.SetStateAction<boolean>>,
-    buttonProps?: any ,
-    collapseProps?:{id:string,　show:boolean}
-  };
+export interface InspectRecordCollapseProps {
   label: string;
+  show?: boolean;
   children: React.ReactNode;
-  collapseNoLazy?: boolean;
-  onPullUp?: () => void;
+  inp:  any;
+  setInp:  React.Dispatch<React.SetStateAction<any>>;
+  getInpFilter: ( any ) => any;
 }
 
-export const InspectRecordDialog: React.FunctionComponent<InspectRecordDialogProps> = ({
-                                                                                       control,
-                                                                                       label,
-                                                                                       onPullUp,
-                                                                                       collapseNoLazy=false,
-                                                                                       children,
-                                                                                       ...other
-                                                                                     }) => {
+export const InspectRecordCollapse: React.FunctionComponent<InspectRecordCollapseProps> = ({
+    label,
+    show=true,
+    inp,
+    setInp,
+    getInpFilter,
+    children,
+    ...other
+ }) => {
   const theme = useTheme();
+  const {storage, setStorage} =React.useContext(EditStorageContext);
+  const eos =useCollapse(show,true);
+  React.useEffect(() => {
+    eos.show&& storage&& setInp(getInpFilter(storage));
+  }, [eos.show, storage, setInp, getInpFilter] );
+  const onPullUp = React.useCallback(() => {
+    eos.show && setStorage({...storage, ...inp});
+  }, [eos.show, inp,storage,setStorage]);
   //点击最底下的按钮，可以触发编辑器的确认临时存储的功能。
   return (
     <Layer elevation={"sm"}     css={{ padding: '0.25rem' }}>
-      <div>
         <Button
           variant="ghost"
           intent="primary"
-          iconAfter={control.show  ? <IconChevronUp /> : <IconChevronDown />}
-          {...control.buttonProps}
+          iconAfter={eos.show  ? <IconChevronUp /> : <IconChevronDown />}
+          {...eos.buttonProps}
         >
-          {<Text variant="h5" css={{color: control.show ? theme.colors.palette.red.base:undefined}}>{label}</Text>}
+          {<Text variant="h5" css={{color: eos.show ? theme.colors.palette.red.base:undefined}}>{label}</Text>}
         </Button>
-
-        <Collapse {...control.collapseProps}  noAnimated>
-          {children}
-          <div css={{textAlign: 'right',padding:'0.2rem'}}>
-            <Button
-              variant="ghost"
-              intent="primary"
-              iconAfter={control.show  ? <IconChevronUp /> : <IconChevronDown />}
-              {...control.buttonProps}
-              onPress={() =>{
-                onPullUp&&onPullUp();
-                control.setShow(!control.show);
-              } }
-            >
-              {control.show ? "确认修改并收起" : "更多"}
-            </Button>
-          </div>
+        <Collapse {...eos.collapseProps}  noAnimated>
+          {eos.show && <React.Fragment>
+                  {children}
+                 <div css={{textAlign: 'right',padding:'0.2rem'}}>
+                  <Button
+                    variant="ghost"
+                    intent="primary"
+                    iconAfter={eos.show  ? <IconChevronUp /> : <IconChevronDown />}
+                    {...eos.buttonProps}
+                    onPress={() =>{
+                      onPullUp&&onPullUp();
+                      eos.setShow(!eos.show);
+                    } }
+                  >
+                    修改确认收起
+                  </Button>
+                </div>
+              </React.Fragment>
+          }
         </Collapse>
-      </div>
     </Layer>
   );
 };
 
+export interface InspectRecordDialogProps {
+  children: React.ReactNode;
+  inp:  any;
+  setInp:  React.Dispatch<React.SetStateAction<any>>;
+  getInpFilter: ( any ) => any;
+}
+//独立编辑形式的。
+export const InspectRecordDialog: React.FunctionComponent<InspectRecordDialogProps> = ({
+     inp,
+     setInp,
+     getInpFilter,
+     children,
+     ...other
+ }) => {
+  const {storage, setStorage} =React.useContext(EditStorageContext);
+  React.useEffect(() => {
+      storage&& setInp(getInpFilter(storage));
+  }, [storage, setInp, getInpFilter] );
+  //点击最底下的按钮，可以触发编辑器的确认临时存储的功能。
+  return (
+    <Layer elevation={"sm"}  css={{ padding: '0.25rem' }}>
+       {children}
+        <div css={{textAlign: 'right',padding:'0.2rem'}}>
+          <Button size="lg" intent={'primary'} onPress={() => {
+            setStorage({ ...storage, ...inp }) }}>
+            修改确认
+          </Button>
+        </div>
+    </Layer>
+  );
+};
 
 export interface SelectHookforkProps extends SelectProps {
   topDivStyle?: SerializedStyles;

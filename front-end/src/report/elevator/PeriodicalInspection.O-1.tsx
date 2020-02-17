@@ -10,7 +10,7 @@ import {
 } from "customize-easy-ui-component";
 import {Table, TableBody,  TableRow, Cell, CCell} from "../../comp/TableExt";
 import {
-  IndentationLayText, InspectItemHeadColumn, InspectRecordDialog,
+  IndentationLayText, InspectItemHeadColumn, InspectRecordCollapse, InspectRecordDialog,
   InspectRecordHeadColumn,
   InspectRecordTitle, InspectZoneHeadColumn,
   SelectHookfork, TemplateViewProps,
@@ -1465,10 +1465,7 @@ const ItemUniversal: React.RefForwardingComponent<InternalItemHandResult,ItemUni
   React.forwardRef((
     { children, show=true, procedure, details, x, y ,alone=true},  ref
   ) => {
-    const {storage, setStorage} =React.useContext(EditStorageContext);
-    //console.log("通用检验内容部件 x=", x,"y=",y, "storage=", storage);
     const getInpFilter = React.useCallback((par) => {
-      //const {} =par||{};
       let fields={};
       //配置动态命名的字段获取旧的值，还想保存修改数据，还要界面同步显示变化数值的场景，就按这里做法。
       inspectionContent[x].items[y].names?.map((aName,i)=> {
@@ -1481,14 +1478,13 @@ const ItemUniversal: React.RefForwardingComponent<InternalItemHandResult,ItemUni
       );
       return fields;
     }, [x,y]);
-    const { eos, setInp, inp , } = useItemInputControl({ref,  filter: getInpFilter, show});
-    React.useEffect(() => {
+    //旧的模式： const {inp, setInp} = useItemInputControl({ref,  filter: getInpFilter, show});
+    const [inp, setInp] = React.useState(null);
+ /*   React.useEffect(() => {
       eos.show&& storage&& setInp(getInpFilter(storage));
     }, [eos.show, storage, setInp, getInpFilter] );
-    const onPullUp = React.useCallback(() => {
-      eos.show && setStorage({...storage, ...inp});
-    }, [eos.show, inp,storage,setStorage]);
-
+*/
+    //因为Hook不能用逻辑条件，只能上组件分解了，按条件分解两个组件。
     const mainContent =<React.Fragment>
           <div css={{ display: 'flex', justifyContent: 'space-around' }}>
             <Text variant="h6">检验项目: {`${x + 1}.${y + 1}`}</Text>
@@ -1549,20 +1545,17 @@ const ItemUniversal: React.RefForwardingComponent<InternalItemHandResult,ItemUni
           }
          </React.Fragment>;
     //下拉列表标题=检验类别+项目内容；
+    //逻辑组件内部的钩子Hook有差异需求。分解成两个组件逻辑合并后，性能是有提升。
     return (
       <React.Fragment>
-        {!alone && <InspectRecordDialog control={eos} onPullUp={eos.show && onPullUp}
+        {!alone && <InspectRecordCollapse inp={inp} setInp={setInp}  getInpFilter={getInpFilter} show={show}
                             label={`${inspectionContent[x].items[y].iClass}${inspectionContent[x].items[y].label}`}>
-                {mainContent}
-           </InspectRecordDialog>
+                 {mainContent}
+             </InspectRecordCollapse>
         }
-        {alone && <React.Fragment>
+        {alone && <InspectRecordDialog inp={inp} setInp={setInp} getInpFilter={getInpFilter} >
                   {mainContent}
-                    <Button size="lg" intent={'primary'} onPress={() => {
-                                  setStorage({ ...storage, ...inp }) }}>
-                     修改确认
-                    </Button>
-              </React.Fragment>
+              </InspectRecordDialog>
         }
       </React.Fragment>
     );
