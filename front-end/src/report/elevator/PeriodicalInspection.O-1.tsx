@@ -29,18 +29,16 @@ function createItem( itemArea: string, zoneContent: React.ReactNode) {
   return {itemArea,  zoneContent};
 }
 
-function getItemsLength(){
+function getInspectionItemsLength(inspectionContent){
   let seq = 0;
   inspectionContent.forEach((rowBigItem, x) => {
     rowBigItem && rowBigItem.items.forEach((item, y) => {
-      if(item){
-        seq += 1;
-      }
+      if(item)   seq += 1;
     });
   });
   return seq;
 };
-const maxItemsSeq=getItemsLength();
+const maxItemsSeq=getInspectionItemsLength(inspectionContent);
 
 function verifyAction( action:  string, generalFormat: any[]) {
   let itemNums=action.split(".");

@@ -166,16 +166,18 @@ export const InspectRecordTitle: React.FunctionComponent<InspectRecordTitleProps
 
           <Collapse {...control.collapseProps}  noAnimated>
               {children}
-             <div css={{textAlign: 'right',padding:'0.2rem'}}>
+
+              <div css={{textAlign: 'right',padding:'0.2rem'}}>
               <Button
                 variant="ghost"
                 intent="primary"
                 iconAfter={control.show  ? <IconChevronUp /> : <IconChevronDown />}
                 {...control.buttonProps}
               >
-                {control.show ? "收起" : "更多"}
+                {control.show ? "收起来" : "更多"}
               </Button>
              </div>
+
           </Collapse>
       </div>
     </Layer>

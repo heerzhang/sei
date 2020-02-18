@@ -233,6 +233,7 @@ export const InspectRecordCollapse: React.FunctionComponent<InspectRecordCollaps
     eos.show && setStorage({...storage, ...inp});
   }, [eos.show, inp,storage,setStorage]);
   //点击最底下的按钮，可以触发编辑器的确认临时存储的功能。
+  //不可以把<Button> 再用eos.show外加逻辑 &&隐藏，报错！。
   return (
     <Layer elevation={"sm"}     css={{ padding: '0.25rem' }}>
         <Button
@@ -243,34 +244,23 @@ export const InspectRecordCollapse: React.FunctionComponent<InspectRecordCollaps
         >
           {<Text variant="h5" css={{color: eos.show ? theme.colors.palette.red.base:undefined}}>{label}</Text>}
         </Button>
-        <Collapse {...eos.collapseProps}  noAnimated>
-          {eos.show && <React.Fragment>
-                  {children}
-                 <div css={{textAlign: 'right',padding:'0.2rem'}}>
-                  <Button
-                    variant="ghost"
-                    intent="primary"
-                    iconAfter={eos.show  ? <IconChevronUp /> : <IconChevronDown />}
-                    {...eos.buttonProps}
-                    onPress={() =>{
-                      onPullUp&&onPullUp();
-                    } }
-                  >
-                    修改确认收起
-                  </Button>
-                   <Button
-                     variant="ghost"
-                     intent="primary"
-                     noBind
-                     iconAfter={eos.show  ? <IconChevronUp /> : <IconChevronDown />}
-                     {...eos.buttonProps}
-                   >
-                     收起
-                   </Button>
-                </div>
-              </React.Fragment>
-          }
-        </Collapse>
+      <Collapse {...eos.collapseProps}  noAnimated>
+          {children}
+          <div css={{textAlign: 'right',padding:'0.2rem'}}>
+            <Button
+              variant="ghost"
+              intent="primary"
+              iconAfter={eos.show  ? <IconChevronUp /> : <IconChevronDown />}
+              {...eos.buttonProps}
+              onPress={() =>{
+                onPullUp&&onPullUp();
+                eos.setShow(!eos.show);
+              } }
+            >
+              修改确认收起
+            </Button>
+          </div>
+      </Collapse>
     </Layer>
   );
 };
