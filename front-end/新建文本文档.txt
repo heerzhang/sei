@@ -193,6 +193,7 @@ useContext：访问全局状态，跨级传递数据=还能代替redux的存取�
 组件内置式useReducer会根据render页面变动而重做＝相当于自动２次执行某个动作。
 交互useState，useReducer；传送门createContext+<.Provider+useContext，useRef,useImperativeHandle,forwardRef；性能优化useMemo,useCallback；副作用useEffect,useLayoutEffect；useDebugValue。
 一般回调和useContext机制是子组件触发的操作；但若是反方向父辈组件来触发的调用多个子组件的函数。
+useReducer的参数reducer必须useCallback(((state, action) => {}包裹，或者是把reducer函数独立放在全局亦即引用组件的外部；但有副作用影响场景也无法避免2次执行同一个Action{副作用render2回}。
 useRef两个用途：1=传统ref的真DOM实例操控，safeBind；2=保存不可变对象refs = React.useRef<Map<number, HTMLButtonElement | null>>(new Map())可以免除遭受render制约的保存信息用;跨越生命周期保存。
 直接修改子组件的写法：{ React.Children.map(；  React.cloneElement( ； } 过滤子组件类型Children.only Children.count。
 代替以前的HOC如今要操纵传递ref的场合就该用上：React.forwardRef(）这样 ： 是能操控html的node真实物理元素，一般是子组件且被别人操纵的用这个。
