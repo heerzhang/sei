@@ -254,11 +254,19 @@ export const InspectRecordCollapse: React.FunctionComponent<InspectRecordCollaps
                     {...eos.buttonProps}
                     onPress={() =>{
                       onPullUp&&onPullUp();
-                      eos.setShow(!eos.show);
                     } }
                   >
                     修改确认收起
                   </Button>
+                   <Button
+                     variant="ghost"
+                     intent="primary"
+                     noBind
+                     iconAfter={eos.show  ? <IconChevronUp /> : <IconChevronDown />}
+                     {...eos.buttonProps}
+                   >
+                     收起
+                   </Button>
                 </div>
               </React.Fragment>
           }
@@ -426,7 +434,7 @@ export interface ItemControlProps {
 //后端数据没有变化的，前端输入正在导致记录变化的，要维持以正在交互的输入为准，等待保存给后端。
 //par被上级组件利用回调钩子模式接管控制后，就不能在这里多头设置，否则死循环。
 //useXXX钩子函数，每次render调用次数顺序需要保证一致性。规则限制！不能用逻辑{&&}套住它。
-export　function useItemControlAs_del({
+export　function useItemControlAs_delete({
                              ref=null,
                              filter=null,
                              show=false
@@ -437,18 +445,13 @@ export　function useItemControlAs_del({
   const [par, setPar] = React.useState(null);
   //用回调钩子setShow来替换；原先的show参数下传配合在useCollapse内部useEffect(() [defaultShow] 做修正方式。
   //回调钩子的模式。在上层父组件去统一调用本函数的，这里仅仅生成函数的代码但还未执行。
-
-
   const onParChange = React.useCallback(function (par) {
-        //            setPar(par);
-        //            setInp(filter(par));
-                }, [  ]);
-
-
+                    setPar(par);
+                    setInp(filter(par));
+                }, [ filter]);
   //【廢棄】setShow功能，無需排序和全部開或拉上。
-
   //旧的模式,子组件把自己的东西暴露给了父组件；，准备废弃了！
-//  React.useImperativeHandle( ref,() => ({ inp ,setShow:eos.setShow, onParChange}), [inp, onParChange,eos.setShow] );
+   React.useImperativeHandle( ref,() => ({ inp ,setShow:eos.setShow, onParChange}), [inp, onParChange,eos.setShow] );
     //不直接用import { usePrevious } from "./Hooks/previous" 减少render次数。
   return {eos, setInp, inp, par};
 }

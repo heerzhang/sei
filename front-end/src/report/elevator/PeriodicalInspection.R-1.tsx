@@ -2,26 +2,16 @@
 import { jsx,} from "@emotion/core";
 import * as React from "react";
 import {
-  Button,
   Collapse,
-  Container,
   Divider,
-  Embed, IconArrowRight, Link,
-  ScrollView, Select, Text, useCollapse,
-  useInfiniteScroll, useTheme
+  Embed,  Link,  Text,  useTheme
 } from "customize-easy-ui-component";
 import { Table, TableBody, TableHead, TableRow, Cell, CCell, RCell } from "../../comp/TableExt";
-import { useTouchable, OnPressFunction } from "touchable-hook";
+import { useTouchable, } from "touchable-hook";
 import { Helmet } from "react-helmet";
-
-//import { globalHistory  } from "@reach/router";
 import { useMedia } from "use-media";
 //import { FadeImage } from "../FadeImage";
-import faker from "faker/locale/zh_CN";
 import { FadeImage } from "../../FadeImage";
-import { InspectRecordTitle, InternalItemHandResult, TemplateViewProps } from "../comp/base";
-import { safeBind } from "customize-easy-ui-component/esm/Hooks/compose-bind";
-import { string } from "prop-types";
 import { Link as RouterLink } from "wouter";
 
 //模板的配套正式报告的显示打印； 版本号要相同的。

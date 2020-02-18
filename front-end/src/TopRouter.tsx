@@ -171,7 +171,7 @@ function TopRouter() {
   //报告和原始记录用的临时内存存储！，避免太多次数保存发送给后端服务器。
   const [storage, setStorage] = React.useState(null);
     //强制URL输入框去刷新才执行的；若是浏览器后退前进的不会执行到这，该场景直接执行NestingtRoute代码。
-  console.log("PageRouters入=",user,"storage=",storage );
+  console.log("PageRouters入=",user,"loading=",loading );
   //<Router>套在<GlobalState>底下，所以鼠标点击在网页内切换页面不会再次运行GlobalState，除非是浏览器地址栏录入和手动刷新才会重新获取后端授权信息。
   //这下面第一个<div>不能改成<>报错。
   return (

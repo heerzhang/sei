@@ -1,18 +1,11 @@
 /** @jsx jsx */
 import { jsx} from "@emotion/core";
 import * as React from "react";
-//import {  useTheme } from "customize-easy-ui-component";
-
 //import { globalHistory  } from "@reach/router";
-//import omit from "lodash.omit";
-import {PrintReport} from "./PrintReport";
-import { useMedia } from "use-media";
 import { useQueryOriginalRecord } from "./db";
 import { LayerLoading } from "customize-easy-ui-component";
 import { lazy } from "react";
 import { WaitingComponent } from "../TopRouter";
-import { Route, Switch } from "wouter";
-import { ReportSample } from "../inspect/ReportSample";
 import { EditStorageContext } from "./StorageContext";
 
 
@@ -23,7 +16,7 @@ export default function ReportEntrance({name},props) {
   let filtercomp={ id:227 };
   //refetch() 引起 loading= True/False变化，从而需要组件范围render重做搞2次。
   //若是浏览器后退前进的场景不会执行useQueryOriginalRecord代码，item已经有数据了，loading不会变化。
-  const {loading,items, refetch } =useQueryOriginalRecord(filtercomp);
+  const {loading,items,  } =useQueryOriginalRecord(filtercomp);
   //旧的模式废弃！  const [inp, setInp] = React.useState(null);
   const {storage, setStorage} =React.useContext(EditStorageContext);
 

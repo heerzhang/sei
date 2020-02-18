@@ -19,7 +19,7 @@ import {
   IconPlus,
   DarkMode,
   LightMode,
-  Pager, IconArchive, ScrollView, Stack, useToast, LayerLoading, Text
+  Pager, IconArchive, ScrollView,
 } from "customize-easy-ui-component";
 
 import { useSession,  useSignOut } from "../auth";
@@ -27,18 +27,7 @@ import { Link, useRoute, useLocation, Switch, Route } from "wouter";
 import { useMedia } from "use-media";
 import { Layout } from "./Layout";
 import { RelationList } from "../inspect/RelationList";
-import { IspDetail } from "../inspect/IspDetail";
-import { ReportSample } from "../inspect/ReportSample";
-import { BoundReports } from "../inspect/report/BoundReports";
-//潜入　嵌套在左边那　条
-import { PrintReport } from "./PrintReport";
-import { Branding } from "../Branding";
-import { InternalItemHandResult, TemplateViewProps } from "./comp/base";
-import { useCommitOriginalData } from "./db";
-import throttle from 'throttle-asynchronous'
-//import { loadTemplate } from "./template";
 import typeAsRoute from "../typeAsRoute.json";
-//import { RecordView } from "./RecordView";
 import { RecordStarter, ReportStarter } from "./TemplateLoader";
 
 

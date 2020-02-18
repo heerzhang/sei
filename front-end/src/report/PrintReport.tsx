@@ -2,125 +2,20 @@
 import { jsx,} from "@emotion/core";
 import * as React from "react";
 import {
-  Button,
   Collapse,
-  Container,
   Divider,
   Embed, Link,
-  ScrollView, Select, Text, useCollapse,
-  useInfiniteScroll, useTheme
+  Text,  useTheme
 } from "customize-easy-ui-component";
 import { Table, TableBody, TableHead, TableRow, Cell, CCell, RCell } from "../comp/TableExt";
-import { useTouchable, OnPressFunction } from "touchable-hook";
+import { useTouchable, } from "touchable-hook";
 import { Helmet } from "react-helmet";
-
-//import { globalHistory  } from "@reach/router";
 import { useMedia } from "use-media";
-//import { FadeImage } from "../FadeImage";
-import faker from "faker/locale/zh_CN";
+//import faker from "faker/locale/zh_CN";
 import { FadeImage } from "../FadeImage";
-import { InspectRecordTitle, InternalItemHandResult, TemplateViewProps } from "../original/comp/base";
-import { safeBind } from "customize-easy-ui-component/esm/Hooks/compose-bind";
-import { string } from "prop-types";
+import {  InternalItemHandResult, TemplateViewProps } from "../original/comp/base";
 import { Link as RouterLink } from "wouter";
-import { ItemControlProps } from "./comp/base";
 
-
-/*let id = 0;
-function createData(
-  name: string,
-  calories: string | number,
-  fat:  ReactNode |string | number,
-  carbs: ReactNode |string |number,
-  protein: ReactNode | string | number
-) {
-  id += 1;
-  return { id, name, calories, fat, carbs, protein };
-} */
-
-/*
-const rows = [
-  createData(faker.name.findName(), 159, 6.0, 24, '网站发布福州市工业和信息化局福州网站发布福网站发布福州市工州市工市财政局关于调整新能源汽车推广应用补助办法的通知对新能源汽车购置补贴新能源汽车推广应用补助'),
-  createData("Ice cream sandwich", 237, <Embed width={1000} height={490}>
-    <FadeImage src={"http://g1.dfcfw.com/g3/201910/20191025193912.jpg"} alt={"93.77"} />
-  </Embed>, "分离福史蒂使用单位福史蒂器恶化伺服", 4.3),
-  createData(faker.name.findName(), 262, "分离34f阿什福史蒂芬森大法师多福多寿何器恶化7伺服", 24, "士大夫拔刀术，分离345345fasdfs345345器恶化567伺服5676vr<br>" +
-    "<hr>bcvbcv57亲卫队不是大dsf城市vbvbn12"),
-  createData("Cupcake", "1高浮雕", <span>（1）应当在任何情况下均能够安全方便地使用通道。采用梯子作为通道时，必须符合以下条件：<br/>①通往机房(机器设备间)的通道不应当高出楼梯所到平面4m； <br/>②梯子必须固定在通道上而不能被移动；<br/>③梯子高度超过1.50m时，其与水平方向的夹角应当在65°
-   ～75°之间，并不易滑动或者翻转；<br/>④靠近梯子顶端应当设置容易握到的把手。</span>, 67, "士大夫拔刀术分离345345fasdfs345345器恶化567伺服5676vr"),
-  createData("henchandsfasf分散对方", '福史蒂芬森大法师多大法师多福多寿何器', 16.0, 49, <span>sjdfl表<hr/>现出<p>vwe</p></span>),
-  createData("henchandsfasf分散对方", '福史蒂芬森大法师多福多寿何器', 16.0, <Embed width={1000} height={490}>
-    <FadeImage src={"https://z1.dfcfw.com/2019/11/6/20191106064635702113607.jpg"} alt={"97"} />
-  </Embed>, <span>sjdfl表<hr/>现出<p>vwe</p></span>),
-  createData("henchandsfasf分散对方", '福史蒂芬5cvds大法师多5646f福多寿何器', 16.0, 49, <span>sjdfl表<hr/>现出<p>vwe</p></span>),
-  createData("henchandsfasf分散对方", 3006,
-    <span>（1）应当在任何情况下均能够安全方便地使用通道。采用梯子作为通道时，必须符合以下条件：<br/>①通往机房(机器设备间)的通道不应当高出楼梯所到平面4m； <br/>②梯子必须固定在通道上而不能被移动；<br/>③梯子高度超过1.50m时，其与水平方向的夹角应当在65°
-   ～75°之间，并不易滑动或者翻转；<br/>④靠近梯子顶端应当设置容易握到的把手。</span>,
-    49, <span>sjdfl表<hr/>现出<p>vwe</p></span>),
-  createData("Cupcake", "6高浮雕", <Embed width={1000} height={490}>
-      <FadeImage src={"http://g1.dfcfw.com/g3/201911/20191102142631.jpg"} alt={"3.77"} />
-    </Embed>, 67,
-    <div>
-      <div  css={{padding:"6px 0"}}>出现下列情况之一时，悬挂钢丝绳和补偿钢丝绳应当报废：<br/>
-        ①出现笼状畸变、绳股挤出、扭结、部分压扁、弯折；<br/>②一个捻距内出现的断丝数大于下表列出的数值时：
-      </div>
-                    <Table  minWidth={'90px'}　css={{borderCollapse:'collapse'}}>
-                      <TableRow css={{height:"20"}}>
-                        <CCell rowSpan={2}>断丝的形式</CCell>
-                        <CCell colSpan={3}>钢丝绳的类型
-                        </CCell>
-                      </TableRow>
-                      <TableRow css={{height:"19 px"}}>
-                        <CCell>6×19</CCell>
-                        <CCell>13×14</CCell>
-                        <CCell>9×19</CCell>
-                      </TableRow>
-                      <TableRow>
-                        <CCell>均布在外层绳股上</CCell>
-                        <CCell>24</CCell><CCell>30</CCell><CCell>34</CCell>
-                      </TableRow>
-                      <TableRow>
-                        <CCell>集中在一或者{items&&items[0].upLoadDate}两根外层绳股上</CCell>
-                        <CCell>24</CCell><CCell>30</CCell><CCell>34</CCell>
-                      </TableRow>
-                      <TableRow>
-                        <CCell>一根外绳股上相邻的断丝</CCell>
-                        <CCell>4</CCell><CCell>4</CCell><CCell>4</CCell>
-                      </TableRow>
-                      <TableRow>
-                        <CCell>股谷（缝）断丝 </CCell>
-                        {
-                          items? ( items.map(hit => {
-                              //const myurl ='/inspect/'+hit.id;
-                              return (
-                                <CCell>
-                                    {hit.no}
-                                </CCell>
-                              );
-                            } ) )
-                            :
-                            (<React.Fragment>
-                              <CCell>2</CCell> <CCell>3</CCell> <CCell>6</CCell>
-                            </React.Fragment>)
-                        }
-
-                      </TableRow>
-                      <TableRow>
-                <CCell rowSpan={3} css={{backgroundImage: `url(http://g1.dfcfw.com/g3/201910/20191025193912.jpg)`,backgroundSize:"cover"}}>
-                  机构核准证号：TS7110236-2022  （机构公章或检验专用章 ）
-                  <Embed width={4} height={4} css={{ maxWidth: '40vmin' }}>
-                  </Embed>
-                  签发日期：2020-04-22
-                </CCell>
-                      </TableRow>
-                    </Table>
-      <div css={{padding:"19px 12px"}}>③钢丝绳直径小于其公称直径的90%；<br/>
-        ④钢丝绳严重锈蚀，铁锈填满绳股间隙。<br/>
-        采用其他类型悬挂装置的，悬挂装置的磨损、变形等不得超过制造单位设定的报废指标
-      </div>
-    </div>),
-];
-*/
 
 //尝试通用模型作配置看看：这个是不可变动的数据部分。
 //item:8.10, item:8.1, 看起来是数字的一样！非字符串啊；
@@ -660,36 +555,7 @@ export const PrintReport: React.FunctionComponent<PrintReportProps> = ({
     ...other
     }) => {
   const theme = useTheme();
-
-  const ref = React.useRef();
-  const [items, setItems] = React.useState(
-    Array.from(new Array(3)).map(() => faker.name.firstName())
-  );
-
-  function fetchdata() {
-    return new Promise(resolve => {
-      setTimeout(() => {
-        resolve();
-      }, 500);
-    });
-  }
-
-
-  const [page, setPage] = React.useState(0);
   //customize-easy-ui-component.useInfiniteScroll必须内容撑开才可以滚动触发函数。
-  const [fetching] = useInfiniteScroll({
-    container: ref,
-    hasMore: page <3,
-    onFetch: () => {
-      return fetchdata().then(() => {
-        setItems([
-          ...items,
-          ...Array.from(new Array(3)).map(() => faker.name.firstName())
-        ]);
-        setPage(page + 1);
-      });
-    }
-  });
 
   //针对较小屏幕优化显示效果； "@media (min-width:690px),print and (min-width:538px)":  "@media (min-width:690px),print and (min-width:538px)"
   //const smallScr = useMedia('only screen and (max-width:799px)');

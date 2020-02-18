@@ -282,5 +282,13 @@ const InternalItem2d8: React.RefForwardingComponent<InternalItemHandResult,Inter
     { children, show },  ref
   ) => {
   } );
-
-
+//useReducer是状态管理用的，并不是用来做事件触发使用的，副作用导致两个2次触发。
+    const [{ ConfirmModifyStorage }, dispatchUpdate] =React.useReducer((state, action) => {
+      switch (action.type) {
+        case '一起都确认':
+          return { ...state, ConfirmModifyStorage:true }
+        case '修改确认完毕':
+          return { ...state, ConfirmModifyStorage:false }
+        default:  return state;
+      }
+    }, { ConfirmModifyStorage:false } );

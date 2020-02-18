@@ -184,13 +184,13 @@ Hooks的调用只能放在function component(首字母大写的function),const()
 死循环useEffect(()=>{ setInterval(() => { setCount(}, ) }, [count]); 放setTimeout/Interval/回调函数做就能解除死循环！
 副作用钩子 useEffect[]   (,)第二参数null是每次都要做的， 第二参数若是[]数组的就是只做一次的。
 Failed to compile.编译错误了，客户端没报错，这时前端可正常运行错误代码。若前端服务器关机，浏览器照样可以请求后端服务器，前端代码已经加载部分页面都能正常运作。
-
+useLayoutEffect和useReducer是比较没用处的。用useState+useEffect配合能代替useReducer做很多。
 装载后不在需要更新的testRenderLoad= React.useMemo(() =><TestRenderLoad/>,[ ] );就基本不会对后续操作性能添堵的，多次render重新来也能保持TestRenderLoad无负担的。
 // eslint-disable-next-line no-alert, react-hooks/exhaustive-deps     强制去除编译时的告警，当然首先确保运行真正正常且运行时都不出现告警的。
 useRef()构造的变量，比如options.current=可以被子组件直接修改。还可以安全添加到依赖项数组( ，[options, ]）。
 useContext接收context对象（createContext的值）返回该context当前值。context值由上层组件距离当前组件最近<CountContext.Provider>的value决定。用useContext的组件总会在context值变化时重新渲染。
 useContext：访问全局状态，跨级传递数据=还能代替redux的存取功能。
-组件内置式useReducer会根据render页面变动而重做＝相当于自动２次执行某个动作。
+组件内置式useReducer会根据render页面变动而重做＝相当于自动２次执行某个动作。 useReducer是状态管理用的，并不是用来做事件触发使用的，副作用导致两个2次触发。
 交互useState，useReducer；传送门createContext+<.Provider+useContext，useRef,useImperativeHandle,forwardRef；性能优化useMemo,useCallback；副作用useEffect,useLayoutEffect；useDebugValue。
 一般回调和useContext机制是子组件触发的操作；但若是反方向父辈组件来触发的调用多个子组件的函数。
 useReducer的参数reducer必须useCallback(((state, action) => {}包裹，或者是把reducer函数独立放在全局亦即引用组件的外部；但有副作用影响场景也无法避免2次执行同一个Action{副作用render2回}。
