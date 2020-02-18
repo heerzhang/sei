@@ -60,7 +60,8 @@ const OriginalView: React.RefForwardingComponent<InternalItemHandResult,Template
       switch (action.type) {
         case '一起都确认':
           //点击一次按钮后，一个render内就会到这里运行两次，第一次outCome看到数据旧的，而outCome第二次是最新数据。
-          console.log("useReducer一起都确认action=",action,"outCome=",outCome, "state=",state);
+          //console.log("useReducer一起都确认action=",action,"outCome=",outCome, "state=",state);
+          console.log("useReducer一起都确认action=");
           //setStorage({...storage, ...outCome});
           return {
             ...state,
@@ -945,7 +946,8 @@ const OriginalView: React.RefForwardingComponent<InternalItemHandResult,Template
             <Button size="lg" intent={'primary'} onPress={() =>{
               //按钮看见的数据是滞后的，并不是最新的！！。
               console.log("触发 看见却是=",storage,"outCome=",outCome);
-              dispatchUpdate({ type: '一起都确认', editorSnapshot: `${outCome}` } );
+              //这里派发出去editorSnapshot: outCome都是按钮捕获的值，还要经过一轮render才会有最新值。
+              dispatchUpdate({ type: '一起都确认', editorSnapshot: outCome } );
               //setStorage({...storage, ...outCome});
               }
             }>
