@@ -174,7 +174,7 @@ React16.12版本以前的生命周期类组件HOC被弃用，基于Fiber协程�
 java还未支持协程Fiber；js其实单线程。Spring WebFlux既支持Tomcat、Jetty容器（Servlet3.1+）,又支持Netty、Undertow等异步容器。使用 Undertow 替换掉 Tomcat;
 babel 转译各种 es6 语法，webpack 负责打包。浏览器跑的代码一般用bable去转成es5的;
 tsconfig.json 详解    https://blog.csdn.net/weixin_34319111/article/details/91375440
-某些场景useReducer比useState更适用，如state逻辑较复杂且包含多个子值，或下一个state依赖于之前state。
+某些场景useReducer对付很复杂情况时比useState更适用，如state逻辑较复杂且包含多个子值，或下一个state依赖于之前的state！。
 useState实际就是useReducer的特例版本。[state，dispatch:setState] =useReducer((state,action:state)=>{ switch(action.){return{...state, ...action}}},{});
 useMemo、useCallback就是解决性能问题的杀手锏，useMemo返回缓存组件/计算结果，useCallback(()=>{ }返回缓存回调函数。 useContext实际代替逐级向下传递props的。
 useRef()是createRef()的升级版本; useRef不仅可做DOM的引用，还可做类class的实例属性，相同位置的useRef()每次返回的都是同一个对象;有单个可变值的不可变对象。用useRef获取previous props/state：获取ＤＯＭ实例 / 数据保存。

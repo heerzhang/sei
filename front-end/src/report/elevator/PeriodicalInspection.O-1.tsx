@@ -56,7 +56,22 @@ const OriginalView: React.RefForwardingComponent<InternalItemHandResult,Template
     const outCome=mergeSubitemRefs( ...clRefs.current! );
     //旧的模式：两次暴露传递，返回给了爷爷辈组件。
     //React.useImperativeHandle( ref,() => ({ inp: outCome }), [outCome] );
-
+    const [{ editorSnapshot }, dispatchUpdate] = React.useReducer( (state, action) => {
+      switch (action.type) {
+        case '一起都确认':
+          //点击一次按钮后，一个render内就会到这里运行两次，第一次outCome看到数据旧的，而outCome第二次是最新数据。
+          console.log("useReducer一起都确认action=",action,"outCome=",outCome, "state=",state);
+          //setStorage({...storage, ...outCome});
+          return {
+            ...state,
+            editorSnapshot: {...state.editorSnapshot, ...action.editorSnapshot},
+          }
+        default:
+          return state;
+      }
+    }, {
+      editorSnapshot: {} as any,
+    });
     console.log("实验进行时６３６３　-storage=",storage,"outCome=",outCome);
     //原始记录检验内容通用格式部分：这个是可以跟随检验记录数据变化的可配置部分。
     const generalFormat= React.useMemo(() =>
@@ -930,7 +945,8 @@ const OriginalView: React.RefForwardingComponent<InternalItemHandResult,Template
             <Button size="lg" intent={'primary'} onPress={() =>{
               //按钮看见的数据是滞后的，并不是最新的！！。
               console.log("触发 看见却是=",storage,"outCome=",outCome);
-              setStorage({...storage, ...outCome});
+              dispatchUpdate({ type: '一起都确认', editorSnapshot: `${outCome}` } );
+              //setStorage({...storage, ...outCome});
               }
             }>
               全部输入一起确认
