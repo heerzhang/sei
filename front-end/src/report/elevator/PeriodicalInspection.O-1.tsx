@@ -60,7 +60,9 @@ const OriginalView: React.RefForwardingComponent<InternalItemHandResult,Template
     const [ , dispatchUpdate] =React.useReducer( (state, action) => {
       switch (action.type) {
         case '一起都确认':
-          //若是旧的不干：点击一次按钮后，一个render内就会到这里运行两次，第一次outCome看到数据旧的，而outCome第二次是最新数据。
+          console.log("一起都确认=");
+          //第一次null导致执行２次，上级组件的保存按钮，有可能性导致会执行这里!!＝render稀奇？useReducer内置这里问题？。
+          //若是旧的不干：点击一次按钮后，一个render内outCome变化就会到这里运行两次，第一次outCome看到数据旧的，而outCome第二次是最新数据。
           if(outCome && !isEqual(outCome,action.outCome)){
             setStorage({...storage, ...outCome});
           }
@@ -937,11 +939,8 @@ const OriginalView: React.RefForwardingComponent<InternalItemHandResult,Template
           {recordList}
           { (action==='ALL' || action==='printAll') &&
             <Button size="lg" intent={'primary'} onPress={() =>{
-              //按钮看见的数据是滞后的，并不是最新的！！。
-              console.log("触发 看见却是=",storage,"outCome=",outCome);
-              //这里派发出去editorSnapshot: outCome都是按钮捕获的值，还要经过一轮render才会有最新值。
-              dispatchUpdate({ type: '一起都确认',　outCome } );
-              //setStorage({...storage, ...outCome});
+              　//不可直接setStorage；这里派发出去outCome都是按钮捕获的上次值，还要经过一轮render才会有子组件useImperativeHandle暴露的最新值！
+                dispatchUpdate({ type: '一起都确认',　outCome } );
               }
             }>
               全部输入一起确认
