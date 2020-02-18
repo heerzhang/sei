@@ -906,7 +906,7 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
           </TableBody>
         </RouterLink>
        </Table>
-       <Table  fixed={ ["9%","8%","26%","14%","8%","%","14%"]  }
+       <Table  fixed={ ["6%","8%","26%","14%","8%","%","14%"]  }
                 printColWidth={ ["46","70","240","160","70","240","160"] }
                 css={ {borderCollapse: 'collapse' } }
         >
