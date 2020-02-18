@@ -190,7 +190,7 @@ Failed to compile.编译错误了，客户端没报错，这时前端可正常�
 useRef()构造的变量，比如options.current=可以被子组件直接修改。还可以安全添加到依赖项数组( ，[options, ]）。
 useContext接收context对象（createContext的值）返回该context当前值。context值由上层组件距离当前组件最近<CountContext.Provider>的value决定。用useContext的组件总会在context值变化时重新渲染。
 useContext：访问全局状态，跨级传递数据=还能代替redux的存取功能。
-多次点击按钮useReducer这里却不会多次触发的，只有在状态修改了才能触发执行？组件内置式useReducer会根据render页面变动而重做＝相当于自动２次执行某个动作。
+组件内置式useReducer会根据render页面变动而重做＝相当于自动２次执行某个动作。
 交互useState，useReducer；传送门createContext+<.Provider+useContext，useRef,useImperativeHandle,forwardRef；性能优化useMemo,useCallback；副作用useEffect,useLayoutEffect；useDebugValue。
 一般回调和useContext机制是子组件触发的操作；但若是反方向父辈组件来触发的调用多个子组件的函数。
 useRef两个用途：1=传统ref的真DOM实例操控，safeBind；2=保存不可变对象refs = React.useRef<Map<number, HTMLButtonElement | null>>(new Map())可以免除遭受render制约的保存信息用;跨越生命周期保存。
