@@ -12,6 +12,15 @@ export const mergeSubitemRefs = <T>(...refs: Array<Ref<T>>) => {
   return all;
 };
 
+export const mergeEditorItemRefs = <T>(...refs: Array<Ref<T>>) => {
+  let all=null;
+  refs.forEach(resolvableRef => {
+    if ((resolvableRef as any).current) {
+      all = {...all,   ...(resolvableRef as any).current.inp };
+    }
+  });
+  return all;
+};
 
 //执行回调 所有项目 都显示的。
 

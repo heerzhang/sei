@@ -17,8 +17,8 @@ import {
   useItemInputControl, useProjectListAs
 } from "../comp/base";
 import {  InternalItemHandResult, InternalItemProps } from "../comp/base";
-import { callSubitemChangePar, callSubitemShow, mergeSubitemRefs } from "../../utils/tools";
-import orderBy from "lodash.orderby";
+import { callSubitemChangePar, callSubitemShow, mergeEditorItemRefs, mergeSubitemRefs } from "../../utils/tools";
+import isEqual from "lodash.isequal";
 import { string } from "prop-types";
 import { inspectionContent, ReportView } from "./PeriodicalInspection.R-1";
 import { Link as RouterLink } from "wouter";
@@ -52,26 +52,27 @@ const OriginalView: React.RefForwardingComponent<InternalItemHandResult,Template
    // const clRefs =useProjectListAs({count: recordPrintList.length});  　//
     const clRefs =useProjectListAs({count: refSize});
     //? 单个项目独立保存可行吗，　非要全部都来，　项目全部显示时刻就不能修改保存了。?
-    //同名字的字段：清除／整体清空／单项目独立保存＋合并。
-    const outCome=mergeSubitemRefs( ...clRefs.current! );
+    //同名字的字段：清除／覆盖，编辑器未定义的字段数据可保留。
+    const outCome=mergeEditorItemRefs( ...clRefs.current! );
     //旧的模式：两次暴露传递，返回给了爷爷辈组件。
     //React.useImperativeHandle( ref,() => ({ inp: outCome }), [outCome] );
-    const [{ editorSnapshot }, dispatchUpdate] = React.useReducer( (state, action) => {
+    //useReducer我这里不用它的state，只用action，简化变成消息通知或异步的命令。
+    //多次点击按钮useReducer这里却不会多次触发的，只有在状态修改了才能触发执行？。
+    const [{  }, dispatchUpdate] = React.useReducer( (state, action) => {
       switch (action.type) {
         case '一起都确认':
-          //点击一次按钮后，一个render内就会到这里运行两次，第一次outCome看到数据旧的，而outCome第二次是最新数据。
-          //console.log("useReducer一起都确认action=",action,"outCome=",outCome, "state=",state);
-          console.log("useReducer一起都确认action=");
-          //setStorage({...storage, ...outCome});
+          //若是旧的不干：点击一次按钮后，一个render内就会到这里运行两次，第一次outCome看到数据旧的，而outCome第二次是最新数据。
+          if(outCome && !isEqual(outCome,action.outCome)){
+            console.log("useReducer一起都确认action=",action);
+            setStorage({...storage, ...outCome});
+          }
           return {
             ...state,
-            editorSnapshot: {...state.editorSnapshot, ...action.editorSnapshot},
           }
         default:
           return state;
       }
     }, {
-      editorSnapshot: {} as any,
     });
     console.log("实验进行时６３６３　-storage=",storage,"outCome=",outCome);
     //原始记录检验内容通用格式部分：这个是可以跟随检验记录数据变化的可配置部分。
@@ -896,7 +897,7 @@ const OriginalView: React.RefForwardingComponent<InternalItemHandResult,Template
       return ( <React.Fragment key={'item1.1'}>
         {htmlTxts}
       </React.Fragment> );
-    }, [action, generalFormat]);
+    }, [action, generalFormat, clRefs]);
 
     const {isItemNo, x, y} =verifyAction(action,generalFormat);
     //这里action是 '2.1' ALL none printAll 这样的路由参数 ?readOnly=1&。
@@ -947,7 +948,7 @@ const OriginalView: React.RefForwardingComponent<InternalItemHandResult,Template
               //按钮看见的数据是滞后的，并不是最新的！！。
               console.log("触发 看见却是=",storage,"outCome=",outCome);
               //这里派发出去editorSnapshot: outCome都是按钮捕获的值，还要经过一轮render才会有最新值。
-              dispatchUpdate({ type: '一起都确认', editorSnapshot: outCome } );
+              dispatchUpdate({ type: '一起都确认',　outCome } );
               //setStorage({...storage, ...outCome});
               }
             }>
