@@ -56,22 +56,16 @@ const OriginalView: React.RefForwardingComponent<InternalItemHandResult,Template
     const outCome=mergeEditorItemRefs( ...clRefs.current! );
     //旧的模式：两次暴露传递，返回给了爷爷辈组件。
     //React.useImperativeHandle( ref,() => ({ inp: outCome }), [outCome] );
-    //useReducer我这里不用它的state，只用action，简化变成消息通知或异步的命令。
-    const [{  }, dispatchUpdate] = React.useReducer( (state, action) => {
+    //useReducer我这里不用它的state，只用action，简化变成消息通知或异步命令。
+    const [ , dispatchUpdate] =React.useReducer( (state, action) => {
       switch (action.type) {
         case '一起都确认':
           //若是旧的不干：点击一次按钮后，一个render内就会到这里运行两次，第一次outCome看到数据旧的，而outCome第二次是最新数据。
           if(outCome && !isEqual(outCome,action.outCome)){
             setStorage({...storage, ...outCome});
           }
-          return {
-            ...state,
-          }
-        default:
-          return state;
       }
-    }, {
-    });
+    },null);
     console.log("实验进行时６３６３　-storage=",storage,"outCome=",outCome);
     //原始记录检验内容通用格式部分：这个是可以跟随检验记录数据变化的可配置部分。
     const generalFormat= React.useMemo(() =>
