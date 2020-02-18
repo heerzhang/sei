@@ -53,7 +53,7 @@ function verifyAction( action:  string, generalFormat: any[]) {
 
 const OriginalView: React.RefForwardingComponent<InternalItemHandResult,TemplateViewProps>=
   React.forwardRef((
-    { action='none', children}, ref
+    { action, children}, ref
   ) => {
     const {storage, setStorage} =React.useContext(EditStorageContext);
     let editorRefCount=recordPrintList.length+maxItemsSeq;
@@ -1572,5 +1572,5 @@ const recordPrintList =[
 ];
 
 //模板定义实例； 2个输出名字不能改。
-export  const  originalTemplate= <OriginalView inp={null} action='ALL'/>;
-export  const  reportTemplate= <ReportView source={null} action='ALL'/>;
+export  const  originalTemplate= <OriginalView inp={null} action='none'/>;
+export  const  reportTemplate= <ReportView source={null} />;

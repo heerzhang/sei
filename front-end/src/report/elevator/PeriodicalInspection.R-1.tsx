@@ -557,14 +557,12 @@ const getItemTransform = (orc: any) => {
 interface ReportViewProps {
   source: any;
   printing?: boolean;
-  action: string;
 }
 //viewAll是否是整个报表都一起显示。
 //export default function RecordView({printing, inp}:{printing?:boolean,inp:any },props) {
 export const ReportView: React.FunctionComponent<ReportViewProps> = ({
     printing=false,
     source: orc,
-    action,
     ...other
     }) => {
   const theme = useTheme();
@@ -835,7 +833,7 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
                 printColWidth={ ["95","210","110","300"] }
                 css={ {borderCollapse: 'collapse' } }
          >
-          <RouterLink  to={`/report/EL-DJ/ver/1/Survey/227`}>
+         <RouterLink  to={`/report/EL-DJ/ver/1/Survey/227`}>
           <TableBody>
             <TableRow>
               <CCell component="th" scope="row">设备品种</CCell>
@@ -908,7 +906,7 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
           </TableBody>
         </RouterLink>
        </Table>
-       <Table  fixed={ ["6%","8%","26%","14%","8%","%","14%"]  }
+       <Table  fixed={ ["9%","8%","26%","14%","8%","%","14%"]  }
                 printColWidth={ ["46","70","240","160","70","240","160"] }
                 css={ {borderCollapse: 'collapse' } }
         >
@@ -918,8 +916,8 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
               <CCell colSpan={6} css={{padding:0}}>
                 <Table  fixed={ ["17%","33%","16%","%"]  }
                         printColWidth={ ["95","210","110","300"] }
-                        css={ {borderCollapse: 'collapse' } }
-                >
+                        css={ {borderCollapse: 'collapse', height:'fill-available'} }
+                  >
                   <TableBody>
                     <TableRow >
                       <CCell>额定载重量</CCell>
@@ -966,14 +964,18 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
                 );
               } )
             }
+            <RouterLink  to={`/report/EL-DJ/ver/1/Conclusion/227`}>
              <TableRow>
               <CCell component="th" scope="row">检验结论</CCell>
               <CCell colSpan={6}><Text variant="h1" css={{fontSize:'4rem'}}>{orc.检验结论}</Text></CCell>
             </TableRow>
+            </RouterLink>
+            <RouterLink  to={`/report/EL-DJ/ver/1/Remark/227`}>
             <TableRow>
               <CCell component="th" scope="row">备注</CCell>
               <Cell colSpan={6}>{orc.memo}</Cell>
             </TableRow>
+            </RouterLink>
           </TableBody>
         </Table>
         <Table  fixed={ ["11%","23%","6%","12%","%"]  }
@@ -981,12 +983,14 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
                 css={ {borderCollapse: 'collapse' } }
         >
           <TableBody>
+            <RouterLink  to={`/report/EL-DJ/ver/1/Appendix/227`}>
             <TableRow>
               <CCell component="th" scope="row">检验日期</CCell>
               <CCell colSpan={2}>{orc.检验日期}</CCell>
               <CCell>下次检验日期</CCell>
               <CCell>/</CCell>
             </TableRow>
+            </RouterLink>
             <TableRow>
               <CCell component="th" scope="row">检验人员</CCell>
               <Cell colSpan={4}>{orc.检验人IDs}</Cell>
@@ -1059,7 +1063,8 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
                 printColWidth={ ["35","66","700","70","95"] }
                 css={ {borderCollapse: 'collapse' } }
         >
-          <TableHead >
+          <TableHead>
+           <RouterLink  to={`/report/EL-DJ/ver/1/ReCheck/227`}>
             <TableRow>
               <CCell>序号</CCell>
               <CCell>类别/编号</CCell>
@@ -1067,6 +1072,7 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
               <CCell>复检结果</CCell>
               <CCell>复检日期</CCell>
             </TableRow>
+           </RouterLink>
           </TableHead>
           <TableBody>
             {itRes.failure.map((ts, i) => {
@@ -1103,55 +1109,4 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
 }
 
 
-
-/* function getUser() {
-  faker.seed(0);
-  return {
-    name: faker.name.firstName() + " " + faker.name.lastName(),
-    uid: faker.random.uuid(),
-    description: faker.lorem.sentence()
-  };
-}*/
-
-
-/*
-在<React.Fragment> 加css是没有用的。
-制作模板尺寸格式 <Table fixed={isPrint? ["150px", "300px", "15%", "15%", "50px"] : undefined}> 打印文书需要固定的列宽度/不要能自动调节的。
-   实际表格尺寸会被调整；其中x%部分会优先分配的，150px实际也会被调小调大，不限定的"%"的{可变动很大！,最多用在某个列}。
-   固定数100px会导致适应不同纸张和缩放比例后打印表格的各列尺寸变化较大！最好统一用％的相对尺寸设置。
-html网页最小12px字体，再按照缩放70%打印到纸张，是人眼视力极限最小字，以此敲定70%打印缩放。
-这样有一个固定px的<Table fixed={["15%", "40%", "20%", "300px", "15%"]} >导致合计px超出打印默认px，引起实际上自动缩放！
-  就算没有超出<Table fixed={["15%", "40%", "20%", "30px", "15%"]}>因为的%自主调整，也会稍有点收缩打印。
-  这样的<Table fixed={["1", "2", "3", "1", "1"] }> 都能自动调整(这里数字1其实是1px省略的)，也会有点收缩打印。
-  最大情况<Table fixed={printing&&["200px", "200px", "275px", "200px", "200px"] ||undefined}>超过1075px的不设定缩放A4打印就会被修剪掉。
-  纯粹用百分比<Table fixed={["16%", "15%", "8%", "25%", "%"] }>或可带点px,就会较好，较少发生收缩打印。
-  这样<Table fixed={["100", "30%", "50%", "15%", "25%"] }>也会稍有点收缩打印。
-*/
-
-/* useMedia日志：：预览-真实打印-真实打印缩放-预览缩放-回到屏幕; ? 那为什么在css[]内部使用确能做到的；外在hook办不到。
-          <Table fixed={printing&&["46","46","55","55","130","405","175","120"] ||undefined}
-                 css={ {borderCollapse: 'collapse' } }
-          >
-Collapse-捕获bounds = DOMRectReadOnly?{x: 0, y: 0, width: 413.59375, height: 3380.796875, top: 0,?…} ; isPrint= false
-Collapse-捕获bounds = DOMRectReadOnly?{x: 0, y: 0, width: 413.59375, height: 3380.796875, top: 0,?…} ; isPrint= true
-Collapse-捕获bounds = DOMRectReadOnly?{x: 0, y: 0, width: 717, height: 3685, top: 0,?…} ; isPrint= true
-Collapse-捕获bounds = DOMRectReadOnly?{x: 0, y: 0, width: 717, height: 3685, top: 0,?…} ; isPrint= false
-Collapse-捕获bounds = DOMRectReadOnly?{x: 0, y: 0, width: 759.1875, height: 2538.390625, top: 0,?…} ; isPrint= false
-          <Table fixed={printing&&["46","46","55","55","130","405","175","120"]
-          || ["5%","5%","6%","6%","10%","%","175","10%"] }
-                 css={ {borderCollapse: 'collapse' } }
-          >
-  media queries查询条件的使用 Query的语法只有四项：and、or、not、only ;
-小屏幕非打印的：简化显示。
-      <div role="link" tabIndex={0} {...bind}>
-            {!(redundance||printing) && `No：JD2020FTC00004   更多...`}
-      </div>
-      <Collapse id={'1'} show={redundance||printing} noAnimated>
-        <div role="link" {...bind}>
-        </div>
-      </Collapse>
-*/
-
-//CSS height: fill-available;最大满屏幕，打印不超一张，用火狐不行！ 不可以加maxHeight:'35vw'高度限制；限制最小不限最大。
-//利用fill-available可以轻松地实现等高布局；width:min-content，默认英文单词不换行，最小宽度是里面最长的英文单词的宽度，超小屏幕会超出。
 
