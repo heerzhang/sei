@@ -30,3 +30,5 @@ firebase-config.ts
 .env
 .idea/workspace.xml
 /front-end/.idea/workspace.xml
+/front-end/.idea/
+/front-end/.env
