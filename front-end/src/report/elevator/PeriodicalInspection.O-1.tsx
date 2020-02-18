@@ -58,18 +58,21 @@ const OriginalView: React.RefForwardingComponent<InternalItemHandResult,Template
     //React.useImperativeHandle( ref,() => ({ inp: outCome }), [outCome] );
     //useReducer我这里不用它的state，只用action，简化变成消息通知或异步的命令。
     //多次点击按钮useReducer这里却不会多次触发的，只有在状态修改了才能触发执行？。
+    //useReducer底下state不能简化和省略，会导致不正常。
     const [{  }, dispatchUpdate] = React.useReducer( (state, action) => {
       switch (action.type) {
         case '一起都确认':
+          console.log("use一起都确认");
           //若是旧的不干：点击一次按钮后，一个render内就会到这里运行两次，第一次outCome看到数据旧的，而outCome第二次是最新数据。
           if(outCome && !isEqual(outCome,action.outCome)){
-            console.log("useReducer一起都确认action=",action);
+            console.log("useReducer一起都确认action=setStorage");
             setStorage({...storage, ...outCome});
           }
           return {
             ...state,
           }
         default:
+          console.log("useReducer     缺省的");
           return state;
       }
     }, {
