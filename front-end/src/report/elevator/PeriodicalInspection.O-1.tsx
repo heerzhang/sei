@@ -32,6 +32,20 @@ const genId = () => ++id;
 function createItem( itemArea: string, zoneContent: React.ReactNode) {
   return {itemArea,  zoneContent};
 }
+
+function getItemsLength(){
+  let seq = 0;
+  inspectionContent.forEach((rowBigItem, x) => {
+    rowBigItem && rowBigItem.items.forEach((item, y) => {
+      if(item){
+        seq += 1;
+      }
+    });
+  });
+  return seq;
+};
+const maxItemsSeq=getItemsLength();
+
 function verifyAction( action:  string, generalFormat: any[]) {
   let itemNums=action.split(".");
   if(itemNums.length!==2)   return {isItemNo: false};
@@ -48,9 +62,9 @@ const OriginalView: React.RefForwardingComponent<InternalItemHandResult,Template
     {inp:oldWay, action='none', children},   ref
   ) => {
     const {storage, setStorage} =React.useContext(EditStorageContext);
-    let refSize=900;     //项目可独立编辑，其它没有界面显示的项目部分可以省略inp的传回ref等。动态的可独立编辑项目区的数量。
+    let editorRefCount=recordPrintList.length+maxItemsSeq;     //项目可独立编辑，其它没有界面显示的项目部分可以省略inp的传回ref等。动态的可独立编辑项目区的数量。
     // const clRefs =useProjectListAs({count: recordPrintList.length});  　//
-    const clRefs =useProjectListAs({count: refSize});
+    const clRefs =useProjectListAs({count: editorRefCount});
     //? 单个项目独立保存可行吗，　非要全部都来，　项目全部显示时刻就不能修改保存了。?
     //同名字的字段：清除／覆盖，编辑器未定义的字段数据可保留。
     const outCome=mergeEditorItemRefs( ...clRefs.current! );
@@ -58,25 +72,23 @@ const OriginalView: React.RefForwardingComponent<InternalItemHandResult,Template
     //React.useImperativeHandle( ref,() => ({ inp: outCome }), [outCome] );
     //useReducer我这里不用它的state，只用action，简化变成消息通知或异步的命令。
     //多次点击按钮useReducer这里却不会多次触发的，只有在状态修改了才能触发执行？。
-    //useReducer底下state不能简化和省略，会导致不正常。
-    const [{  }, dispatchUpdate] = React.useReducer( (state, action) => {
+    //useReducer底下state不能简化和省略，会导致不正常。为什么按钮点击会触发了两次一样action？
+    const [{ ConfirmModifyStorage }, dispatchUpdate] =React.useReducer((state, action) => {
       switch (action.type) {
         case '一起都确认':
-          console.log("use一起都确认");
-          //若是旧的不干：点击一次按钮后，一个render内就会到这里运行两次，第一次outCome看到数据旧的，而outCome第二次是最新数据。
-          if(outCome && !isEqual(outCome,action.outCome)){
-            console.log("useReducer一起都确认action=setStorage");
-            setStorage({...storage, ...outCome});
-          }
-          return {
-            ...state,
-          }
-        default:
-          console.log("useReducer     缺省的");
-          return state;
+          return { ...state, ConfirmModifyStorage:true }
+        case '修改确认完毕':
+          return { ...state, ConfirmModifyStorage:false }
+        default:  return state;
       }
-    }, {
-    });
+    }, { ConfirmModifyStorage:false } );
+    //必须从false到true的变化才能触发执行。 true->true不能执行的。
+    React.useEffect(() => {
+      if(ConfirmModifyStorage) {
+        setStorage({...storage, ...outCome});
+        dispatchUpdate({ type: '修改确认完毕' } );
+      }
+    }, [ConfirmModifyStorage, outCome, storage, setStorage] );
     console.log("实验进行时６３６３　-storage=",storage,"outCome=",outCome);
     //原始记录检验内容通用格式部分：这个是可以跟随检验记录数据变化的可配置部分。
     const generalFormat= React.useMemo(() =>
@@ -890,8 +902,8 @@ const OriginalView: React.RefForwardingComponent<InternalItemHandResult,Template
         rowBigItem && rowBigItem.items.forEach((item, y) => {
           if(item){
             seq += 1;
-            const rowHead =<ItemUniversal key={seq} ref={clRefs.current![100+seq]}  x={x}  y={y}  show={action==='printAll'} alone={false}
-                                          procedure={generalFormat[x].items[y].procedure}  details={generalFormat[x].items[y].details}
+            const rowHead =<ItemUniversal key={seq} ref={clRefs.current![recordPrintList.length+seq-1]}  x={x}  y={y} show={action==='printAll'}
+                                   alone={false}  procedure={generalFormat[x].items[y].procedure}  details={generalFormat[x].items[y].details}
             />;
             htmlTxts.push(rowHead);
           }
@@ -947,16 +959,14 @@ const OriginalView: React.RefForwardingComponent<InternalItemHandResult,Template
     return <React.Fragment>
       {recordList}
       { (action==='ALL' || action==='printAll') &&
-      <Button size="lg" intent={'primary'} onPress={() =>{
-        //按钮看见的数据是滞后的，并不是最新的！！。
-        console.log("触发 看见却是=",storage,"outCome=",outCome);
-        //这里派发出去editorSnapshot: outCome都是按钮捕获的值，还要经过一轮render才会有最新值。
-        dispatchUpdate({ type: '一起都确认',　outCome } );
-        //setStorage({...storage, ...outCome});
-      }
-      }>
-        全部输入一起确认
-      </Button>
+          <Button size="lg" intent={'primary'} onPress={() =>{
+              //这里派发出去editorSnapshot: outCome都是按钮捕获的值，还要经过一轮render才会有最新值。
+              console.log("onPress--都确认");
+              dispatchUpdate({ type: '一起都确认' } );
+            }
+            }>
+            全部输入一起确认
+          </Button>
       }
     </React.Fragment>;
   } );
