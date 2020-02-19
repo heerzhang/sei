@@ -13,6 +13,8 @@ import { useMedia } from "use-media";
 import { FadeImage } from "../../FadeImage";
 import { Link as RouterLink } from "wouter";
 import { aItemTransform, getInstrument2xColumn } from "../comp/helper";
+import { useIspNormalizeContent } from "../comp/base";
+import { 注意事项, } from "../comp/rarelyVary";
 
 //模板的配套正式报告的显示打印； 版本号要相同的。
 export const inspectionContent=[
@@ -494,52 +496,7 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
   }, [notSmallScr, printing] );
   const instrumentTable =React.useMemo(() => getInstrument2xColumn(orc.仪器表), [orc.仪器表]);
   const itRes =React.useMemo(() => getItemTransform(orc), [orc]);
-  const renderIspContent =React.useMemo(() => {
-      let seq = 0;
-      let htmlTxts =[];
-      inspectionContent.forEach((rowBigItem, x) => {
-        let bigItemRowCnt=0;
-        rowBigItem && rowBigItem.items.forEach((item, y) => {
-          if(item){
-            seq += 1;
-            let itemXY = `${x + 1}.${y + 1}`;
-            let subCnt =item.subItems?.length || 0;
-            let iRowSpan =subCnt? subCnt : 1;
-            let bigLineCnt=rowBigItem.splitLine[bigItemRowCnt];
-            const rowHead = <RouterLink key={seq} to={`/report/EL-DJ/ver/1/${itemXY}/227`}>
-              <TableRow>
-                <CCell component="th" scope="row" rowSpan={iRowSpan}>{seq}</CCell>
-                <CCell rowSpan={iRowSpan}>{item.iClass}</CCell>
-                {bigLineCnt && <CCell rowSpan={bigLineCnt}>{x+1}<br/>{rowBigItem.bigLabel}</CCell> }
-                <CCell rowSpan={iRowSpan}>{itemXY}</CCell>
-                { subCnt?  ( <React.Fragment>
-                            <CCell rowSpan={iRowSpan}>{item.label}</CCell>
-                          <Cell>{item.subItems[0]}</Cell>
-                        </React.Fragment> )
-                  :
-                  <Cell colSpan={2}>{item.label}</Cell>
-                }
-                <CCell>{itRes[itemXY][0]}</CCell>
-                <CCell rowSpan={iRowSpan}>{itRes[itemXY].result}</CCell>
-              </TableRow>
-            </RouterLink>;
-            htmlTxts.push(rowHead);
-            bigItemRowCnt++;
-            for(let i=0; i<subCnt-1; i++){
-              let bigLineCnt=rowBigItem.splitLine[bigItemRowCnt];
-              const rowSub =<TableRow key={`${itemXY}-${i+1}`}>
-                   {bigLineCnt && <CCell rowSpan={bigLineCnt}>{`${x+1}`}<br/>{`${rowBigItem.bigLabel}`}</CCell> }
-                    <Cell>{item.subItems[i+1]}</Cell>
-                    <CCell>{itRes[itemXY][i+1]}</CCell>
-                  </TableRow>;
-              htmlTxts.push(rowSub);
-              bigItemRowCnt++;
-            }
-          }
-        });
-      });
-    return  htmlTxts;
-   }, [itRes]);
+  const {renderIspContent} =useIspNormalizeContent({itRes, inspectionContent, modelPath:'EL-DJ/ver/1', repNo:'227'});
 
   return (
     <React.Fragment>
@@ -705,21 +662,7 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
           </div>
             <Text variant="h4"><br/>
               1. 本报告依据《电梯监督检验和定期检验规则——曳引与强制驱动电梯》（TSG T7001-2009）及1号、2号修改单制定，适用于有机房曳引驱动电梯定期检验。<br/>
-              <br/>
-              2. 本报告应当由计算机打印输出，或者用钢笔、签字笔填写，字迹应当工整，修改无效。<br/>
-              <br/>
-              3. 本报告无检验、编制、审核、批准人员签字和检验机构的核准证号、检验专用章或者公章无效。<br/>
-              <br/>
-              4. 本报告一式三份，由检验机构、施工单位和使用单位分别保存。<br/>
-              <br/>
-              5. 受检单位对本报告结论如有异议，请在收到报告书之日起15日内，向检验机构提出书面意见。<br/>
-              <br/>
-              6. 根据《中华人民共和国特种设备安全法》，使用单位应于下次检验日期届满前1个月向检验机构提出定期检验申请。<br/>
-              <br/>
-              7. 有关检测数据未经允许，施工、使用单位不得擅自向社会发布信息。<br/>
-              <br/>
-              8. 报检电话：968829，网址：<Link href="http://27.151.117.65:9999/sdn" title="报检">http:// 27.151.117.65:9999 /sdn</Link>
-              <br/><br/>
+              {注意事项}
             </Text>
           <div role="button" {...bindRedund}>
             <Text variant="h2" css={{textAlign:'center'}}>有机房曳引驱动电梯定期检验报告</Text>

@@ -18,7 +18,7 @@ import { Ref } from "react";
 import { EditStorageContext } from "../StorageContext";
 import { Link as RouterLink } from "wouter";
 import { CCell, Cell, TableRow } from "../../comp/TableExt";
-import { inspectionContent } from "../elevator/PeriodicalInspection.R-1";
+
 //import { Collapse, useCollapse } from "../../comp/Collapse";
 //import { useUid } from "customize-easy-ui-component/src/Hooks/use-uid";
 
@@ -547,10 +547,9 @@ export const InspectRecordLayout: React.FunctionComponent<InspectRecordLayoutPro
 };
 */
 
-const useValues = ({itRes, }) => {
-  const [values, setValues] = React.useState({  });
-
-
+//通用的格式显示。
+export const useIspNormalizeContent= ( {itRes, inspectionContent, modelPath, repNo}
+) => {
   const renderIspContent =React.useMemo(() => {
     let seq = 0;
     let htmlTxts =[];
@@ -563,7 +562,7 @@ const useValues = ({itRes, }) => {
           let subCnt =item.subItems?.length || 0;
           let iRowSpan =subCnt? subCnt : 1;
           let bigLineCnt=rowBigItem.splitLine[bigItemRowCnt];
-          const rowHead = <RouterLink key={seq} to={`/report/EL-DJ/ver/1/${itemXY}/227`}>
+          const rowHead = <RouterLink key={seq} to={`/report/${modelPath}/${itemXY}/${repNo}`}>
             <TableRow>
               <CCell component="th" scope="row" rowSpan={iRowSpan}>{seq}</CCell>
               <CCell rowSpan={iRowSpan}>{item.iClass}</CCell>
@@ -596,9 +595,9 @@ const useValues = ({itRes, }) => {
       });
     });
     return  htmlTxts;
-  }, [itRes]);
-
-
-  return {values, renderIspContent};
+  }, [itRes,repNo,modelPath,inspectionContent]);
+  return { renderIspContent };
 };
+
+
 
