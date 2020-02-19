@@ -309,3 +309,5 @@ html网页最小12px字体，再按照缩放70%打印到纸张，是人眼视力
 media queries查询条件的使用 Query的语法只有四项：and、or、not、only ;useMedia日志：：预览-真实打印-真实打印缩放-预览缩放-回到屏幕; ? 那为什么在css[]内部使用确能做到的；外在hook办不到。
 //利用fill-available可以轻松地实现等高布局；width:min-content，默认英文单词不换行，最小宽度是里面最长的英文单词的宽度，超小屏幕会超出。
 
+useTouchable这个外来useTouchable组件感觉有点小毛病。 这个useTouchable其实是Touchable和Button核心，底下就是bind，也不用加ref的也可以触发。
+
