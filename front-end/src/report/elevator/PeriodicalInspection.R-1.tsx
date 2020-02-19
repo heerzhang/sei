@@ -10,6 +10,7 @@ import { Link as RouterLink } from "wouter";
 import { getInstrument2xColumn, itemResultTransform } from "../comp/helper";
 import { useIspNormalizeContent } from "../comp/base";
 import { reportFirstPageHead, 注意事项, 落款单位地址, 首页设备概况 } from "../comp/rarelyVary";
+import { 检验编制核准, 检验设备情况 } from "./rarelyVary";
 
 //模板的配套正式报告的显示打印； 版本号要相同的。
 //下一个版本实际可以和这版本共用大部分配置，可直接引入inspectionContent再做动态修改的方案也可考虑，在差别不大的情况？。
@@ -554,83 +555,14 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
             <Text variant="h2" css={{textAlign:'center'}}>有机房曳引驱动电梯定期检验报告</Text>
           </div>
         </Collapse>
-        <Table  fixed={ ["15%","34%","16%","%"]  }
+        <RouterLink  to={`/report/EL-DJ/ver/1/Survey/227`}>
+         <Table  fixed={ ["15%","34%","16%","%"]  }
                 printColWidth={ ["95","210","110","300"] }
                 css={ {borderCollapse: 'collapse' } }
-         >
-         <RouterLink  to={`/report/EL-DJ/ver/1/Survey/227`}>
-          <TableBody>
-            <TableRow>
-              <CCell component="th" scope="row">设备品种</CCell>
-              <CCell>曳引驱动乘客电梯</CCell>
-              <CCell>使用登记证编号</CCell>
-              <CCell>梯11闽AB139(17)</CCell>
-            </TableRow>
-            <TableRow >
-              <CCell component="th" scope="row">使用单位名称</CCell>
-              <CCell colSpan={3}>林钦全</CCell>
-            </TableRow>
-            <TableRow >
-              <CCell component="th" scope="row">使用单位地址</CCell>
-              <CCell colSpan={3}>福建省连江县马鼻镇南门村岐尾69号</CCell>
-            </TableRow>
-            <TableRow >
-              <CCell component="th" scope="row">楼盘名称</CCell>
-              <CCell colSpan={3}>/</CCell>
-            </TableRow>
-            <TableRow >
-              <CCell component="th" scope="row">楼盘地址</CCell>
-              <CCell colSpan={3}>/</CCell>
-            </TableRow>
-            <TableRow >
-              <CCell component="th" scope="row">分支机构名称</CCell>
-              <CCell colSpan={3}>/</CCell>
-            </TableRow>
-            <TableRow >
-              <CCell component="th" scope="row">分支机构地址</CCell>
-              <CCell colSpan={3}>/</CCell>
-            </TableRow>
-            <TableRow>
-              <CCell component="th" scope="row">设备使用地点</CCell>
-              <CCell colSpan={3}>连江县马鼻镇南门村岐尾69号</CCell>
-            </TableRow>
-            <TableRow>
-              <CCell component="th" scope="row">使用单位代码</CCell>
-              <CCell colSpan={3}>350122197109084531</CCell>
-            </TableRow>
-            <TableRow>
-              <CCell component="th" scope="row">安全管理人员</CCell>
-              <CCell>{orc.安全人员}</CCell>
-              <CCell>使用单位设备编号</CCell>
-              <CCell>1#</CCell>
-            </TableRow>
-            <TableRow>
-              <CCell component="th" scope="row">制造日期</CCell>
-              <CCell>2016-11-22</CCell>
-              <CCell>改造日期</CCell>
-              <CCell>/</CCell>
-            </TableRow>
-            <TableRow>
-              <CCell component="th" scope="row">制造单位名称</CCell>
-              <CCell colSpan={3}>快意电梯股份有限公司</CCell>
-            </TableRow>
-            <TableRow>
-              <CCell component="th" scope="row">改造单位名称</CCell>
-              <CCell colSpan={3}>/</CCell>
-            </TableRow>
-            <TableRow>
-              <CCell component="th" scope="row">产品编号</CCell>
-              <CCell>ZT1600005085</CCell>
-              <CCell>型号</CCell>
-              <CCell>METIS</CCell>
-            </TableRow>
-            <TableRow>
-              <CCell component="th" scope="row">维护保养单位名称</CCell>
-              <CCell colSpan={3}>福州新奥电梯工程有限公司</CCell>
-            </TableRow>
-          </TableBody>
-        </RouterLink>
-       </Table>
+           >
+         {检验设备情况({orc})}
+        </Table>
+       </RouterLink>
        <Table  fixed={ ["6%","8%","26%","14%","8%","%","14%"]  }
                 printColWidth={ ["46","70","240","160","70","240","160"] }
                 css={ {borderCollapse: 'collapse' } }
@@ -715,38 +647,7 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
               <CCell>/</CCell>
             </TableRow>
             </RouterLink>
-            <TableRow>
-              <CCell component="th" scope="row">检验人员</CCell>
-              <Cell colSpan={4}>{orc.检验人IDs}</Cell>
-            </TableRow>
-            <TableRow>
-              <CCell component="th" scope="row">编制</CCell>
-              <CCell>{orc.编制人}</CCell>
-              <CCell>日期</CCell>
-              <CCell>{orc.编制日期}</CCell>
-              <CCell rowSpan={3}>
-                <div css={{backgroundImage:`url(${require("../../images/seal.png")})`,backgroundSize:"cover",backgroundPosition:"center",minHeight:'30vmin'}}>
-                  <Table  fixed={ ["40%","%"]  }
-                          printColWidth={ ["170","230"] }
-                          css={ {borderCollapse: 'collapse',height:'fill-available'} }
-                  >
-                    <TableBody>
-                      <TableRow>
-                        <CCell css={{border:'none'}}>机构核准证号：</CCell>
-                        <CCell css={{border:'none'}}>TS7110236-2022</CCell>
-                      </TableRow>
-                      <TableRow>
-                        <CCell css={{border:'none'}} colSpan={2}>（机构公章或检验专用章）</CCell>
-                      </TableRow>
-                      <TableRow>
-                        <CCell css={{border:'none'}}>签发日期：</CCell>
-                        <CCell css={{border:'none'}}>2020-04-22</CCell>
-                      </TableRow>
-                    </TableBody>
-                  </Table>
-                </div>
-              </CCell>
-            </TableRow>
+           {检验编制核准({orc})}
             <TableRow >
               <CCell component="th" scope="row">审核</CCell>
               <CCell></CCell>

@@ -5,7 +5,7 @@ import {
   Text, Link, Divider, Embed, useTheme, InputGroupLine, SuffixInput, Button, Input
 } from "customize-easy-ui-component";
 
-import { CCell, RCell, Table, TableBody, TableRow } from "../../comp/TableExt";
+import { CCell, Cell, RCell, Table, TableBody, TableRow } from "../../comp/TableExt";
 import { FadeImage } from "../../FadeImage";
 import { InspectRecordLayout, InternalItemHandResult, InternalItemProps, useItemInputControl } from "../comp/base";
 import { Link as RouterLink } from "wouter";
@@ -156,5 +156,123 @@ export const ItemGapMeasure: React.RefForwardingComponent<InternalItemHandResult
       </InspectRecordLayout>
     );
   } );
+
+
+export const 检验编制核准= ( { orc }
+) => {
+  return <React.Fragment>
+    <TableRow>
+      <CCell component="th" scope="row">检验人员</CCell>
+      <Cell colSpan={4}>{orc.检验人IDs}</Cell>
+    </TableRow>
+    <TableRow>
+      <CCell component="th" scope="row">编制</CCell>
+      <CCell>{orc.编制人}</CCell>
+      <CCell>日期</CCell>
+      <CCell>{orc.编制日期}</CCell>
+      <CCell rowSpan={3}>
+        <div css={{backgroundImage:`url(${require("../../images/seal.png")})`,backgroundSize:"cover",backgroundPosition:"center",minHeight:'30vmin'}}>
+          <Table  fixed={ ["40%","%"]  }
+                  printColWidth={ ["170","230"] }
+                  css={ {borderCollapse: 'collapse',height:'fill-available'} }
+          >
+            <TableBody>
+              <TableRow>
+                <CCell css={{border:'none'}}>机构核准证号：</CCell>
+                <CCell css={{border:'none'}}>TS7110236-2022</CCell>
+              </TableRow>
+              <TableRow>
+                <CCell css={{border:'none'}} colSpan={2}>（机构公章或检验专用章）</CCell>
+              </TableRow>
+              <TableRow>
+                <CCell css={{border:'none'}}>签发日期：</CCell>
+                <CCell css={{border:'none'}}>2020-04-22</CCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </div>
+      </CCell>
+    </TableRow>
+  </React.Fragment>;
+};
+
+//注意<RouterLink to={`/report/`}>不能直接套在函数上面，其底下必须见到<>。
+export const 检验设备情况= ( { orc }
+) => {
+  return <React.Fragment>
+    <TableBody>
+      <TableRow>
+        <CCell component="th" scope="row">设备品种</CCell>
+        <CCell>曳引驱动乘客电梯</CCell>
+        <CCell>使用登记证编号</CCell>
+        <CCell>梯11闽AB139(17)</CCell>
+      </TableRow>
+      <TableRow >
+        <CCell component="th" scope="row">使用单位名称</CCell>
+        <CCell colSpan={3}>林钦全</CCell>
+      </TableRow>
+      <TableRow >
+        <CCell component="th" scope="row">使用单位地址</CCell>
+        <CCell colSpan={3}>福建省连江县马鼻镇南门村岐尾69号</CCell>
+      </TableRow>
+      <TableRow >
+        <CCell component="th" scope="row">楼盘名称</CCell>
+        <CCell colSpan={3}>/</CCell>
+      </TableRow>
+      <TableRow >
+        <CCell component="th" scope="row">楼盘地址</CCell>
+        <CCell colSpan={3}>/</CCell>
+      </TableRow>
+      <TableRow >
+        <CCell component="th" scope="row">分支机构名称</CCell>
+        <CCell colSpan={3}>/</CCell>
+      </TableRow>
+      <TableRow >
+        <CCell component="th" scope="row">分支机构地址</CCell>
+        <CCell colSpan={3}>/</CCell>
+      </TableRow>
+      <TableRow>
+        <CCell component="th" scope="row">设备使用地点</CCell>
+        <CCell colSpan={3}>连江县马鼻镇南门村岐尾69号</CCell>
+      </TableRow>
+      <TableRow>
+        <CCell component="th" scope="row">使用单位代码</CCell>
+        <CCell colSpan={3}>350122197109084531</CCell>
+      </TableRow>
+      <TableRow>
+        <CCell component="th" scope="row">安全管理人员</CCell>
+        <CCell>{orc.安全人员}</CCell>
+        <CCell>使用单位设备编号</CCell>
+        <CCell>1#</CCell>
+      </TableRow>
+      <TableRow>
+        <CCell component="th" scope="row">制造日期</CCell>
+        <CCell>2016-11-22</CCell>
+        <CCell>改造日期</CCell>
+        <CCell>/</CCell>
+      </TableRow>
+      <TableRow>
+        <CCell component="th" scope="row">制造单位名称</CCell>
+        <CCell colSpan={3}>快意电梯股份有限公司</CCell>
+      </TableRow>
+      <TableRow>
+        <CCell component="th" scope="row">改造单位名称</CCell>
+        <CCell colSpan={3}>/</CCell>
+      </TableRow>
+      <TableRow>
+        <CCell component="th" scope="row">产品编号</CCell>
+        <CCell>ZT1600005085</CCell>
+        <CCell>型号</CCell>
+        <CCell>METIS</CCell>
+      </TableRow>
+      <TableRow>
+        <CCell component="th" scope="row">维护保养单位名称</CCell>
+        <CCell colSpan={3}>福州新奥电梯工程有限公司</CCell>
+      </TableRow>
+    </TableBody>
+  </React.Fragment>;
+};
+
+
 
 
