@@ -1,21 +1,15 @@
 /** @jsx jsx */
-import { jsx, css, SerializedStyles } from "@emotion/core";
+import { jsx,  } from "@emotion/core";
 import * as React from "react";
 import {
-  useTheme,
-  Text,
-  Button, SelectProps,
-  IconChevronUp,
-  IconChevronDown, Collapse, useCollapse,
-  Select, Layer, Check, Link, Divider, Embed
+ Text, Link, Divider, Embed
 } from "customize-easy-ui-component";
-import PropTypes from "prop-types";
-import { Ref } from "react";
-import { Link as RouterLink } from "wouter";
-import { CCell, Cell, TableRow } from "../../comp/TableExt";
+
+import { CCell, RCell, Table, TableBody, TableRow } from "../../comp/TableExt";
 import { FadeImage } from "../../FadeImage";
 
-//很多显示内容相对固定重复，这里提供复用的小组件。
+//很多内容相对重复，这里是报告较高层范围复用的组件；专门报告类型的可以安排在下一层次分开目录去做。
+
 
 export interface InspectZoneHeadColumnProps {
   label: string;
@@ -110,7 +104,7 @@ export const 落款单位地址=<React.Fragment>
     <br/>
 </React.Fragment>;
 
-export const reportFirstPageHead= ( {theme, repNo }
+export const reportFirstPageHead= ( {theme, No }
 ) => {
   return <React.Fragment>
       <div css={{
@@ -149,10 +143,58 @@ export const reportFirstPageHead= ( {theme, repNo }
               marginRight: "1rem"
             }
           }}
-          >No：JD2020FTC00004
+          >No：{No}
           </Text>
         </div>
       </div>
+  </React.Fragment>;
+};
+
+
+export const 首页设备概况= ( {theme, orc }
+) => {
+  return <React.Fragment>
+    <Table fixed={ ["20%","%"] }   printColWidth={ ["210","750"] }   css={ {borderCollapse: 'collapse'} }  >
+      <TableBody>
+        <TableRow>
+          <RCell css={{border:'none'}}>使用单位</RCell>
+          <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>林钦全</CCell>
+        </TableRow>
+        <TableRow>
+          <RCell css={{border:'none'}}>分支机构</RCell>
+          <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>/</CCell>
+        </TableRow>
+        <TableRow>
+          <RCell css={{border:'none'}}>楼盘名称</RCell>
+          <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>/</CCell>
+        </TableRow>
+        <TableRow>
+          <RCell css={{border:'none'}}>设备类别</RCell>
+          <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>曳引与强制驱动电梯</CCell>
+        </TableRow>
+        <TableRow>
+          <RCell css={{border:'none'}}>设备品种</RCell>
+          <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>曳引驱动乘客电梯</CCell>
+        </TableRow>
+        <TableRow>
+          <RCell css={{border:'none'}}>检验日期</RCell>
+          <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>{orc.检验日期}</CCell>
+        </TableRow>
+        <TableRow>
+          <RCell css={{border:'none'}}>监察识别码</RCell>
+          <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>TA74507</CCell>
+        </TableRow>
+        <TableRow>
+          <RCell css={{border:'none'}}>设备号</RCell>
+          <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>3501T104807</CCell>
+        </TableRow>
+        <TableRow>
+          <RCell css={{border:'none'}}>设备代码</RCell>
+          <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>/</CCell>
+        </TableRow>
+      </TableBody>
+    </Table>
+    <br/>
   </React.Fragment>;
 };
 

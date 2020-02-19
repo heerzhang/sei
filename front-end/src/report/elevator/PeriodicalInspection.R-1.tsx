@@ -1,20 +1,15 @@
 /** @jsx jsx */
 import { jsx,} from "@emotion/core";
 import * as React from "react";
-import {
-  Collapse,
-  Divider,
-  Embed,  Link,  Text,  useTheme
-} from "customize-easy-ui-component";
-import { Table, TableBody, TableHead, TableRow, Cell, CCell, RCell } from "../../comp/TableExt";
+import { Collapse,  Text,  useTheme } from "customize-easy-ui-component";
+import { Table, TableBody, TableHead, TableRow, Cell, CCell } from "../../comp/TableExt";
 import { useTouchable, } from "touchable-hook";
 import { Helmet } from "react-helmet";
 import { useMedia } from "use-media";
-import { FadeImage } from "../../FadeImage";
 import { Link as RouterLink } from "wouter";
-import { aItemTransform, getInstrument2xColumn } from "../comp/helper";
+import { getInstrument2xColumn, itemResultTransform } from "../comp/helper";
 import { useIspNormalizeContent } from "../comp/base";
-import { reportFirstPageHead, 注意事项, 落款单位地址 } from "../comp/rarelyVary";
+import { reportFirstPageHead, 注意事项, 落款单位地址, 首页设备概况 } from "../comp/rarelyVary";
 
 //模板的配套正式报告的显示打印； 版本号要相同的。
 export const inspectionContent=[
@@ -458,24 +453,6 @@ export const inspectionContent=[
   }
 ];
 
-//把原始记录的数据转换成报告的各个项目的结论。测量字段项目级别B以上的测量数才需要显示。
-const getItemTransform = (orc: any) => {
-  let out={};
-  inspectionContent.forEach((rowBigItem, x) => {
-    rowBigItem && rowBigItem.items.forEach((item, y)=> {
-      if(item)   out[`${x+1}.${y+1}`] =aItemTransform(orc, item.iClass,  ...item.names);
-    });
-  });
-  let failure=[];
-  for(let key  in out){
-    if(out[key].result==='不合格')  failure.push(key);
-  }
-  //特殊：个别测量字段要替换，实际测量数据展示 在’检验结果‘。
-  if(orc['轿井间距'])   out[3.7][0]=`间距${orc['轿井间距']}m`;
-  if(orc['对重越程'] && orc['对重越程最大'])   out[3.15][2]=`最大允许值${orc['对重越程最大']}mm;测量值${orc['对重越程']}mm`;
-  return {...out, failure};
-}
-
 interface ReportViewProps {
   source: any;
   printing?: boolean;
@@ -495,7 +472,11 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
      setRedundance(notSmallScr||printing);
   }, [notSmallScr, printing] );
   const instrumentTable =React.useMemo(() => getInstrument2xColumn(orc.仪器表), [orc.仪器表]);
-  const itRes =React.useMemo(() => getItemTransform(orc), [orc]);
+  const 检验结果替换 =React.useCallback((orc, out) => {
+    if(orc['轿井间距'])   out[3.7][0]=`间距${orc['轿井间距']}m`;
+    if(orc['对重越程'] && orc['对重越程最大'])   out[3.15][2]=`最大允许值${orc['对重越程最大']}mm;测量值${orc['对重越程']}mm`;
+  }, []);
+  const itRes =React.useMemo(()=>itemResultTransform(orc,inspectionContent,检验结果替换), [orc,检验结果替换]);
   const {renderIspContent} =useIspNormalizeContent({itRes, inspectionContent, modelPath:'EL-DJ/ver/1', repNo:'227'});
 
   return (
@@ -516,7 +497,7 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
        </div>
         <Collapse id={'1'} show={redundance} noAnimated>
           <div role="button" {...bindRedund}>
-            { reportFirstPageHead({theme, repNo: '227'}) }
+            { reportFirstPageHead({theme, No: 'JD2020FTC00004'}) }
             <div css={{
                 "@media print": {
                   height:'110px'
@@ -539,47 +520,7 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
             }
           }}>
         </div>
-      <Table fixed={ ["20%","%"] }   printColWidth={ ["210","750"] }   css={ {borderCollapse: 'collapse'} }  >
-        <TableBody>
-          <TableRow>
-            <RCell css={{border:'none'}}>使用单位</RCell>
-            <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>林钦全</CCell>
-          </TableRow>
-          <TableRow>
-            <RCell css={{border:'none'}}>分支机构</RCell>
-            <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>/</CCell>
-          </TableRow>
-          <TableRow>
-            <RCell css={{border:'none'}}>楼盘名称</RCell>
-            <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>/</CCell>
-          </TableRow>
-          <TableRow>
-            <RCell css={{border:'none'}}>设备类别</RCell>
-            <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>曳引与强制驱动电梯</CCell>
-          </TableRow>
-          <TableRow>
-            <RCell css={{border:'none'}}>设备品种</RCell>
-            <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>曳引驱动乘客电梯</CCell>
-          </TableRow>
-          <TableRow>
-            <RCell css={{border:'none'}}>检验日期</RCell>
-            <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>{orc.检验日期}</CCell>
-          </TableRow>
-          <TableRow>
-            <RCell css={{border:'none'}}>监察识别码</RCell>
-            <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>TA74507</CCell>
-          </TableRow>
-          <TableRow>
-            <RCell css={{border:'none'}}>设备号</RCell>
-            <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>3501T104807</CCell>
-          </TableRow>
-          <TableRow>
-            <RCell css={{border:'none'}}>设备代码</RCell>
-            <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>/</CCell>
-          </TableRow>
-        </TableBody>
-      </Table>
-        <br/>
+        { 首页设备概况( {theme, orc} ) }
         <div role="button" tabIndex={1} {...bindRedund}>
           {!(redundance) && <Text variant="h4">
                 福建省特种设备检验研究院 更多...
@@ -888,6 +829,4 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
     </React.Fragment>
   );
 }
-
-
 

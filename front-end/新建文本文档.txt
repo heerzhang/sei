@@ -190,6 +190,7 @@ useLayoutEffect和useReducer是比较没用处的。用useState+useEffect配合�
 useRef()构造的变量，比如options.current=可以被子组件直接修改。还可以安全添加到依赖项数组( ，[options, ]）。
 useContext接收context对象（createContext的值）返回该context当前值。context值由上层组件距离当前组件最近<CountContext.Provider>的value决定。用useContext的组件总会在context值变化时重新渲染。
 useContext：访问全局状态，跨级传递数据=还能代替redux的存取功能。
+Context导致上级组件对底下子组件无感觉=神鬼不知啊，上层并不知道底下组件使用了context操作，很大地破坏封装性！=实在没办法才会采用的。
 组件内置式useReducer会根据render页面变动而重做＝相当于自动２次执行某个动作。 useReducer是状态管理用的，并不是用来做事件触发使用的，副作用导致两个2次触发。
 交互useState，useReducer；传送门createContext+<.Provider+useContext，useRef,useImperativeHandle,forwardRef；性能优化useMemo,useCallback；副作用useEffect,useLayoutEffect；useDebugValue。
 一般回调和useContext机制是子组件触发的操作；但若是反方向父辈组件来触发的调用多个子组件的函数。

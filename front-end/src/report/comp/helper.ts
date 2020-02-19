@@ -1,5 +1,6 @@
-import * as React from "react";
-//import { Dispatch,  SetStateAction } from "react";
+//import * as React from "react";
+
+//通用处理函数。
 
 
 //单个项目整体检验结论；没输入的也算不合格， 但是：无此项／如都是／合并也是／。多个小项统筹判定。
@@ -61,5 +62,22 @@ export const getInstrument2xColumn = (instbl: [any]) => {
   return newT;
 }
 
+//把原始记录的数据转换成报告的各个项目的结论。测量字段项目级别B以上的测量数才需要显示。
+export const itemResultTransform =(orc: any, inspectionContent, 特殊替换
+) => {
+  let out={};
+  inspectionContent.forEach((rowBigItem, x) => {
+    rowBigItem && rowBigItem.items.forEach((item, y)=> {
+      if(item)   out[`${x+1}.${y+1}`] =aItemTransform(orc, item.iClass,  ...item.names);
+    });
+  });
+  let failure=[];
+  for(let key  in out){
+    if(out[key].result==='不合格')  failure.push(key);
+  }
+  特殊替换(orc, out);
+  return {...out, failure};
+}
 
+//console.log("特殊替换-  -out=",out);
 

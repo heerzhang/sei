@@ -19,9 +19,7 @@ import { EditStorageContext } from "../StorageContext";
 import { Link as RouterLink } from "wouter";
 import { CCell, Cell, TableRow } from "../../comp/TableExt";
 
-//import { Collapse, useCollapse } from "../../comp/Collapse";
-//import { useUid } from "customize-easy-ui-component/src/Hooks/use-uid";
-
+//公共的复用性好的组件。
 
 export interface InspectRecordHeadColumnProps {
   level: string;
@@ -216,7 +214,7 @@ export interface InspectRecordCollapseProps {
   setInp:  React.Dispatch<React.SetStateAction<any>>;
   getInpFilter: ( any ) => any;
 }
-
+//EditStorageContext导致上级组件对底下子组件无感觉，上层并不知道底下使用了context操作，很大地破坏封装性。
 export const InspectRecordCollapse: React.FunctionComponent<InspectRecordCollapseProps> = ({
     label,
     show=true,
@@ -227,7 +225,9 @@ export const InspectRecordCollapse: React.FunctionComponent<InspectRecordCollaps
     ...other
  }) => {
   const theme = useTheme();
-  const {storage, setStorage} =React.useContext(EditStorageContext);
+  const context =React.useContext(EditStorageContext);
+  if(!context)  throw new Error("需context下");
+  const {storage, setStorage} =context;
   const eos =useCollapse(show,true);
   React.useEffect(() => {
     eos.show&& storage&& setInp(getInpFilter(storage));
