@@ -7,12 +7,13 @@ import {
   Button, SelectProps,
   IconChevronUp,
   IconChevronDown, Collapse, useCollapse,
-  Select, Layer, Check, Link
+  Select, Layer, Check, Link, Divider, Embed
 } from "customize-easy-ui-component";
 import PropTypes from "prop-types";
 import { Ref } from "react";
 import { Link as RouterLink } from "wouter";
 import { CCell, Cell, TableRow } from "../../comp/TableExt";
+import { FadeImage } from "../../FadeImage";
 
 //很多显示内容相对固定重复，这里提供复用的小组件。
 
@@ -87,6 +88,73 @@ export const 注意事项=<React.Fragment>
   8. 报检电话：968829，网址：<Link href="http://27.151.117.65:9999/sdn" title="报检">http:// 27.151.117.65:9999 /sdn</Link>
   <br/><br/>
 </React.Fragment>;
+
+export const 落款单位地址=<React.Fragment>
+    <Text variant="h4" css={{textAlign:'center'}}>福建省特种设备检验研究院</Text>
+    <Text variant="h6" css={{textAlign:'center'}}>
+      FUJIAN SPECIAL EQUIPMENT INSPECTION AND RESEARCH INSTITUTE
+    </Text>
+    <Divider css={{borderTopColor: 'black'}}/>
+    <Text variant="h5" >
+      地址（Add.）：福建省福州市仓山区卢滨路370号
+    </Text>
+    <div css={{display:'flex'}}>
+      <span css={{flex:'1'}}>电话（Tel.）：0591-968829</span>
+      <span css={{flex:'1'}}>	传真（Fax）：0591-88700509</span>
+      <span css={{flex:'1'}}>邮政编码：350008</span>
+    </div>
+    <div css={{display:'flex'}}>
+      <span css={{flex:'1'}}>网址（Website）：www.fjtj.com</span>
+      <span css={{flex:'1'}}>	电子邮箱（Email）：fjtj@fjtj.org</span>
+    </div>
+    <br/>
+</React.Fragment>;
+
+export const reportFirstPageHead= ( {theme, repNo }
+) => {
+  return <React.Fragment>
+      <div css={{
+        textAlign: "center",
+        "& > div": {
+          marginLeft: "auto",
+          marginRight: "auto"
+        },
+        "@media (min-width:690px),print and (min-width:538px)": {
+          display: "flex",
+          justifyContent: "space-between",
+          flexWrap: 'wrap',
+          "& > div": {
+            margin: theme.spaces.sm,
+          }
+        }
+      }}
+      >
+        <div>
+          <Embed css={{width: "190px",margin: "auto"}} width={95} height={45}>
+            <FadeImage src={`${require("../../images/MA.png")}`}/>
+          </Embed>
+          <br/>
+          <Text variant="h5">181320110160</Text>
+        </div>
+        <div>
+          <Embed css={{width: "140px",margin: "auto"}} width={10} height={10}>
+            <FadeImage src={`${require("../../images/reportNoQR.png")}`}/>
+          </Embed>
+        </div>
+        <div>
+          <Text variant="h5">FJB/TC-1001-1-0-2017</Text>
+          <br/><br/>
+          <Text variant="h5" css={{
+            "@media (min-width:690px),print and (min-width:538px)": {
+              marginRight: "1rem"
+            }
+          }}
+          >No：JD2020FTC00004
+          </Text>
+        </div>
+      </div>
+  </React.Fragment>;
+};
 
 
 

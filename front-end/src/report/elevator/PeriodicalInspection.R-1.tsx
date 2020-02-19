@@ -14,7 +14,7 @@ import { FadeImage } from "../../FadeImage";
 import { Link as RouterLink } from "wouter";
 import { aItemTransform, getInstrument2xColumn } from "../comp/helper";
 import { useIspNormalizeContent } from "../comp/base";
-import { 注意事项, } from "../comp/rarelyVary";
+import { reportFirstPageHead, 注意事项, 落款单位地址 } from "../comp/rarelyVary";
 
 //模板的配套正式报告的显示打印； 版本号要相同的。
 export const inspectionContent=[
@@ -516,46 +516,7 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
        </div>
         <Collapse id={'1'} show={redundance} noAnimated>
           <div role="button" {...bindRedund}>
-            <div css={{
-                textAlign: "center",
-                "& > div": {
-                  marginLeft: "auto",
-                  marginRight: "auto"
-                },
-                "@media (min-width:690px),print and (min-width:538px)": {
-                  display: "flex",
-                  justifyContent: "space-between",
-                  flexWrap: 'wrap',
-                  "& > div": {
-                    margin: theme.spaces.sm,
-                  }
-                }
-              }}
-            >
-              <div>
-                <Embed css={{width: "190px",margin: "auto"}} width={95} height={45}>
-                  <FadeImage src={`${require("../../images/MA.png")}`}/>
-                </Embed>
-                <br/>
-                <Text variant="h5">181320110160</Text>
-              </div>
-              <div>
-                <Embed css={{width: "140px",margin: "auto"}} width={10} height={10}>
-                  <FadeImage src={`${require("../../images/reportNoQR.png")}`}/>
-                </Embed>
-              </div>
-              <div>
-                <Text variant="h5">FJB/TC-1001-1-0-2017</Text>
-                <br/><br/>
-                <Text variant="h5" css={{
-                    "@media (min-width:690px),print and (min-width:538px)": {
-                      marginRight: "1rem"
-                    }
-                }}
-                >No：JD2020FTC00004
-                </Text>
-              </div>
-            </div>
+            { reportFirstPageHead({theme, repNo: '227'}) }
             <div css={{
                 "@media print": {
                   height:'110px'
@@ -638,24 +599,7 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
                 pageBreakAfter:'always'
               }
             }}>
-              <Text variant="h4" css={{textAlign:'center'}}>福建省特种设备检验研究院</Text>
-              <Text variant="h6" css={{textAlign:'center'}}>
-                FUJIAN SPECIAL EQUIPMENT INSPECTION AND RESEARCH INSTITUTE
-              </Text>
-              <Divider css={{borderTopColor: 'black'}}/>
-              <Text variant="h5" >
-                地址（Add.）：福建省福州市仓山区卢滨路370号
-              </Text>
-              <div css={{display:'flex'}}>
-                <span css={{flex:'1'}}>电话（Tel.）：0591-968829</span>
-                <span css={{flex:'1'}}>	传真（Fax）：0591-88700509</span>
-                <span css={{flex:'1'}}>邮政编码：350008</span>
-              </div>
-              <div css={{display:'flex'}}>
-                <span css={{flex:'1'}}>网址（Website）：www.fjtj.com</span>
-                <span css={{flex:'1'}}>	电子邮箱（Email）：fjtj@fjtj.org</span>
-              </div>
-              <br/>
+              {落款单位地址}
             </div>
           <div role="button" {...bindRedund}>
             <Text variant="h1" css={{textAlign:'center'}}>注意事项</Text>
