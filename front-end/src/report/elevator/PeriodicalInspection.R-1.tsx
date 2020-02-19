@@ -12,6 +12,7 @@ import { Helmet } from "react-helmet";
 import { useMedia } from "use-media";
 import { FadeImage } from "../../FadeImage";
 import { Link as RouterLink } from "wouter";
+import { aItemTransform, getInstrument2xColumn } from "../comp/helper";
 
 //模板的配套正式报告的显示打印； 版本号要相同的。
 export const inspectionContent=[
@@ -455,64 +456,7 @@ export const inspectionContent=[
   }
 ];
 
-//生成临时的一行2列并排风格的儀器表。
-const getInstrument2xColumn = (instbl: [any]) => {
-  let newT=[];
-  if(!instbl)  return newT;
-  let size=instbl.length;
-  let lines=size/2, i=0;
-  if(lines===0)  newT[0]={s1:'', name1:'', no1:'', s2:'', name2:'', no2:''};
-  for(; i<lines; i++){
-    if(2*i+2 <= size)
-      newT[i]={s1:2*i+1, name1:instbl[2*i].name, no1:instbl[2*i].no, s2:2*(i+1), name2:instbl[2*i+1].name, no2:instbl[2*i+1].no};
-    else
-      newT[i]={s1:2*i+1, name1:instbl[2*i].name, no1:instbl[2*i].no, s2:'', name2:'', no2:''};
-  }
-  return newT;
-}
-//单个项目整体检验结论；没输入的也算不合格， 但是：无此项／如都是／合并也是／。多个小项统筹判定。
-const aItemTransform = (orc: any, iClass:string,  ...ns) => {
-  let size=ns.length;
-  let amazing=[];
-  let fdesc='';
-  if(size<1)  throw new Error(`没项目参数`);
-  let result='合格';
-  let i=0;
-  for(; i<size; i++){
-    if(!orc[ns[i]] || orc[ns[i]]==='' || orc[ns[i]]==='△'){
-      amazing[i]='未检测';
-      if(result!=='不合格')  result='不合格';
-    }
-    else if(orc[ns[i]]==='×'){
-      amazing[i]='不符合';
-      if(result!=='不合格')  result='不合格';
-    }
-    else if(orc[ns[i]]==='√'){
-      amazing[i]='符合';
-    }
-    else if(orc[ns[i]]==='／'){
-      amazing[i]='／';
-      if(result!=='不合格' && result!=='／')   result='／';
-    }
-    else if(orc[ns[i]]==='▽'){
-      amazing[i]='资料确认符合';
-    }
-    else
-      throw new Error(`非法结果${orc[ns[i]]}`);
-    if(orc[ns[i]]==='×' || orc[ns[i]]==='△'){
-      let objKey = ns[i]+'_D';
-      if(orc[objKey])
-        fdesc += orc[objKey] +'; ';
-    }
-  }
-  if(result==='／'){
-    for(i=0; i<size; i++){
-      if(orc[ns[i]]==='√')   result='合格';
-    }
-  }
-  return {...amazing, result, iClass, fdesc};
-}
-//把原始记录的数据转换成报告的各个项目的结论。特殊处理也在这里。数据测量字段的显示，项目级别B以上的测量数才需要显示。
+//把原始记录的数据转换成报告的各个项目的结论。测量字段项目级别B以上的测量数才需要显示。
 const getItemTransform = (orc: any) => {
   let out={};
   inspectionContent.forEach((rowBigItem, x) => {
@@ -530,7 +474,6 @@ const getItemTransform = (orc: any) => {
   return {...out, failure};
 }
 
-//这个printing修改成应用层面用户的指认：明确为了打印而启动页面，它就和css毫无关系了，和useMedia也无关了。
 interface ReportViewProps {
   source: any;
   printing?: boolean;
@@ -538,29 +481,17 @@ interface ReportViewProps {
 export const ReportView: React.FunctionComponent<ReportViewProps> = ({
     printing=false,
     source: orc,
-    ...other
-    }) => {
+}) => {
   const theme = useTheme();
-  //针对较小屏幕优化显示效果； "@media (min-width:690px),print and (min-width:538px)":  "@media (min-width:690px),print and (min-width:538px)"
-  //const smallScr = useMedia('only screen and (max-width:799px)');
-  //useMedia实际上很可能有一个初始数值false然后才是新的，可能有两次render才会稳住；不能指望一次就能获取正确。打印预览实际是根据当前页面最新状态去打印的。
-  //useMedia('print')这个在打印场景时会摇摆，先是=true然后变=false。打印预览useMedia最终竟然是false了，有2次的render。因为打印预览不仅打印，还同时会更新网页；无法！。
   const notSmallScr = useMedia('(min-width:800px),print');
-
-  //小屏幕缺省可隐藏些不重要的内容。
   const [redundance, setRedundance] =React.useState(notSmallScr||printing);
   function onPress() {
-    setRedundance(!redundance);
+      setRedundance(!redundance);
   }
-  const { bind, } = useTouchable({
-    onPress,
-     // terminateOnScroll: false,
-    behavior: "button"
-  });
+  const {bind:bindRedund ,} =useTouchable({ onPress,  behavior: "button" });
   React.useEffect(() => {
-    setRedundance(notSmallScr||printing);
+     setRedundance(notSmallScr||printing);
   }, [notSmallScr, printing] );
-
   const instrumentTable =React.useMemo(() => getInstrument2xColumn(orc.仪器表), [orc.仪器表]);
   const itRes =React.useMemo(() => getItemTransform(orc), [orc]);
   const renderIspContent =React.useMemo(() => {
@@ -607,9 +538,7 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
           }
         });
       });
-    return ( <React.Fragment>
-          {htmlTxts}
-      </React.Fragment> );
+    return  htmlTxts;
    }, [itRes]);
 
   return (
@@ -622,14 +551,14 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
             }
           }}
       >
-       <div role="button" tabIndex={0} {...bind}>
+       <div role="button" tabIndex={0} {...bindRedund}>
           {!(redundance) && <Text variant="h4">
                {`No：JD2020FTC00004 更多...`}
              </Text>
           }
        </div>
         <Collapse id={'1'} show={redundance} noAnimated>
-          <div role="button" {...bind}>
+          <div role="button" {...bindRedund}>
             <div css={{
                 textAlign: "center",
                 "& > div": {
@@ -679,11 +608,11 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
           </div>
         </Collapse>
         <Text variant="h3" css={{
-                textAlign:'center',
-                "@media (min-width:690px),print and (min-width:538px)": {
-                  fontSize: theme.fontSizes[6],
-                }
-              }}>
+              textAlign:'center',
+              "@media (min-width:690px),print and (min-width:538px)": {
+                fontSize: theme.fontSizes[6],
+              }
+            }}>
         有机房曳引驱动电梯定期检验报告
         </Text>
         <div css={{
@@ -733,7 +662,7 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
         </TableBody>
       </Table>
         <br/>
-        <div role="button" tabIndex={1} {...bind}>
+        <div role="button" tabIndex={1} {...bindRedund}>
           {!(redundance) && <Text variant="h4">
                 福建省特种设备检验研究院 更多...
               </Text>
@@ -771,7 +700,7 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
               </div>
               <br/>
             </div>
-          <div role="button" {...bind}>
+          <div role="button" {...bindRedund}>
             <Text variant="h1" css={{textAlign:'center'}}>注意事项</Text>
           </div>
             <Text variant="h4"><br/>
@@ -792,7 +721,7 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
               8. 报检电话：968829，网址：<Link href="http://27.151.117.65:9999/sdn" title="报检">http:// 27.151.117.65:9999 /sdn</Link>
               <br/><br/>
             </Text>
-          <div role="button" {...bind}>
+          <div role="button" {...bindRedund}>
             <Text variant="h2" css={{textAlign:'center'}}>有机房曳引驱动电梯定期检验报告</Text>
           </div>
         </Collapse>

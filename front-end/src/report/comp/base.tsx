@@ -16,6 +16,9 @@ import { Dispatch, SetStateAction } from "react";
 import { MutableRefObject } from "react";
 import { Ref } from "react";
 import { EditStorageContext } from "../StorageContext";
+import { Link as RouterLink } from "wouter";
+import { CCell, Cell, TableRow } from "../../comp/TableExt";
+import { inspectionContent } from "../elevator/PeriodicalInspection.R-1";
 //import { Collapse, useCollapse } from "../../comp/Collapse";
 //import { useUid } from "customize-easy-ui-component/src/Hooks/use-uid";
 
@@ -543,4 +546,59 @@ export const InspectRecordLayout: React.FunctionComponent<InspectRecordLayoutPro
   return [values, updateData, itBinds];
 };
 */
+
+const useValues = ({itRes, }) => {
+  const [values, setValues] = React.useState({  });
+
+
+  const renderIspContent =React.useMemo(() => {
+    let seq = 0;
+    let htmlTxts =[];
+    inspectionContent.forEach((rowBigItem, x) => {
+      let bigItemRowCnt=0;
+      rowBigItem && rowBigItem.items.forEach((item, y) => {
+        if(item){
+          seq += 1;
+          let itemXY = `${x + 1}.${y + 1}`;
+          let subCnt =item.subItems?.length || 0;
+          let iRowSpan =subCnt? subCnt : 1;
+          let bigLineCnt=rowBigItem.splitLine[bigItemRowCnt];
+          const rowHead = <RouterLink key={seq} to={`/report/EL-DJ/ver/1/${itemXY}/227`}>
+            <TableRow>
+              <CCell component="th" scope="row" rowSpan={iRowSpan}>{seq}</CCell>
+              <CCell rowSpan={iRowSpan}>{item.iClass}</CCell>
+              {bigLineCnt && <CCell rowSpan={bigLineCnt}>{x+1}<br/>{rowBigItem.bigLabel}</CCell> }
+              <CCell rowSpan={iRowSpan}>{itemXY}</CCell>
+              { subCnt?  ( <React.Fragment>
+                  <CCell rowSpan={iRowSpan}>{item.label}</CCell>
+                  <Cell>{item.subItems[0]}</Cell>
+                </React.Fragment> )
+                :
+                <Cell colSpan={2}>{item.label}</Cell>
+              }
+              <CCell>{itRes[itemXY][0]}</CCell>
+              <CCell rowSpan={iRowSpan}>{itRes[itemXY].result}</CCell>
+            </TableRow>
+          </RouterLink>;
+          htmlTxts.push(rowHead);
+          bigItemRowCnt++;
+          for(let i=0; i<subCnt-1; i++){
+            let bigLineCnt=rowBigItem.splitLine[bigItemRowCnt];
+            const rowSub =<TableRow key={`${itemXY}-${i+1}`}>
+              {bigLineCnt && <CCell rowSpan={bigLineCnt}>{`${x+1}`}<br/>{`${rowBigItem.bigLabel}`}</CCell> }
+              <Cell>{item.subItems[i+1]}</Cell>
+              <CCell>{itRes[itemXY][i+1]}</CCell>
+            </TableRow>;
+            htmlTxts.push(rowSub);
+            bigItemRowCnt++;
+          }
+        }
+      });
+    });
+    return  htmlTxts;
+  }, [itRes]);
+
+
+  return {values, renderIspContent};
+};
 

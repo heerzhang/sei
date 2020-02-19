@@ -250,4 +250,7 @@ localhost:9229
 打包发布的3格式：首选esm对应import；；umd对应<script src=>；cjs对应require()语法的。
 
 【报告打印px配置】最多＝8列 <Table合计约1040px；原来PDF打印看着像是905px的。
-
+  //针对较小屏幕优化显示效果； "@media (min-width:690px),print and (min-width:538px)":  "@media (min-width:690px),print and (min-width:538px)"
+  //const smallScr = useMedia('only screen and (max-width:799px)');
+  //useMedia实际上很可能有一个初始数值false然后才是新的，可能有两次render才会稳住；不能指望一次就能获取正确。打印预览实际是根据当前页面最新状态去打印的。
+  //useMedia('print')这个在打印场景时会摇摆，先是=true然后变=false。打印预览useMedia最终竟然是false了，有2次的render。因为打印预览不仅打印，还同时会更新网页；无法！。
