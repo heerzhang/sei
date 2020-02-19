@@ -249,3 +249,5 @@ localhost:9229
 测试someoneInp={ "仪器表": undefined} outCome={...outCome , ...someoneInp} ！会覆盖前面的=清空；"仪器表": []等效。
 打包发布的3格式：首选esm对应import；；umd对应<script src=>；cjs对应require()语法的。
 
+【报告打印px配置】最多＝8列 <Table合计约1040px；原来PDF打印看着像是905px的。
+

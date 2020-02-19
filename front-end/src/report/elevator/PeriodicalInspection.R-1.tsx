@@ -455,8 +455,7 @@ export const inspectionContent=[
   }
 ];
 
-
-//生成臨時2列一行儀器表
+//生成临时的一行2列并排风格的儀器表。
 const getInstrument2xColumn = (instbl: [any]) => {
   let newT=[];
   if(!instbl)  return newT;
@@ -471,15 +470,13 @@ const getInstrument2xColumn = (instbl: [any]) => {
   }
   return newT;
 }
-//单个项目进行转换
+//单个项目整体检验结论；没输入的也算不合格， 但是：无此项／如都是／合并也是／。多个小项统筹判定。
 const aItemTransform = (orc: any, iClass:string,  ...ns) => {
   let size=ns.length;
   let amazing=[];
   let fdesc='';
   if(size<1)  throw new Error(`没项目参数`);
-  //整体检验结论：不合格{未输入的也算不合格结论} '／' 合格
   let result='合格';
-  //失败 优先，没输入的也算不合格， 但是：无此项／如都是／合并也是／。多个小项统筹判定。
   let i=0;
   for(; i<size; i++){
     if(!orc[ns[i]] || orc[ns[i]]==='' || orc[ns[i]]==='△'){
@@ -503,19 +500,16 @@ const aItemTransform = (orc: any, iClass:string,  ...ns) => {
     else
       throw new Error(`非法结果${orc[ns[i]]}`);
     if(orc[ns[i]]==='×' || orc[ns[i]]==='△'){
-        //【应用保留字】描述字段特征：xxxx_D 这样的属性名。
       let objKey = ns[i]+'_D';
       if(orc[objKey])
         fdesc += orc[objKey] +'; ';
     }
   }
-  //例外的 修正。
   if(result==='／'){
     for(i=0; i<size; i++){
       if(orc[ns[i]]==='√')   result='合格';
     }
   }
-  //神奇缝合了 amazing['result']='合格';
   return {...amazing, result, iClass, fdesc};
 }
 //把原始记录的数据转换成报告的各个项目的结论。特殊处理也在这里。数据测量字段的显示，项目级别B以上的测量数才需要显示。
@@ -536,14 +530,11 @@ const getItemTransform = (orc: any) => {
   return {...out, failure};
 }
 
-//这个printing打印场景，实现比css更加强化CSS层面只能局限DOM节点，而JS操纵能力是在上层的逻辑。
 //这个printing修改成应用层面用户的指认：明确为了打印而启动页面，它就和css毫无关系了，和useMedia也无关了。
 interface ReportViewProps {
   source: any;
   printing?: boolean;
 }
-//viewAll是否是整个报表都一起显示。
-//export default function RecordView({printing, inp}:{printing?:boolean,inp:any },props) {
 export const ReportView: React.FunctionComponent<ReportViewProps> = ({
     printing=false,
     source: orc,
@@ -621,40 +612,39 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
       </React.Fragment> );
    }, [itRes]);
 
-  //最多＝8列 <Table合计约1040px；原来PDF打印看着像是905px的。
   return (
     <React.Fragment>
       <Helmet title={`JD2020FTC00004`}/>
       <div css={{
-        "@media not print": {
-          marginTop:'1rem',
-          marginBottom: '1rem'
-        }
-      }}
+            "@media not print": {
+              marginTop:'1rem',
+              marginBottom: '1rem'
+            }
+          }}
       >
-        <div role="button" tabIndex={0} {...bind}>
+       <div role="button" tabIndex={0} {...bind}>
           {!(redundance) && <Text variant="h4">
                {`No：JD2020FTC00004 更多...`}
              </Text>
           }
-        </div>
+       </div>
         <Collapse id={'1'} show={redundance} noAnimated>
           <div role="button" {...bind}>
             <div css={{
-              textAlign: "center",
-              "& > div": {
-                marginLeft: "auto",
-                marginRight: "auto"
-              },
-              "@media (min-width:690px),print and (min-width:538px)": {
-                display: "flex",
-                justifyContent: "space-between",
-                flexWrap: 'wrap',
+                textAlign: "center",
                 "& > div": {
-                  margin: theme.spaces.sm,
+                  marginLeft: "auto",
+                  marginRight: "auto"
+                },
+                "@media (min-width:690px),print and (min-width:538px)": {
+                  display: "flex",
+                  justifyContent: "space-between",
+                  flexWrap: 'wrap',
+                  "& > div": {
+                    margin: theme.spaces.sm,
+                  }
                 }
-              }
-            }}
+              }}
             >
               <div>
                 <Embed css={{width: "190px",margin: "auto"}} width={95} height={45}>
@@ -672,18 +662,18 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
                 <Text variant="h5">FJB/TC-1001-1-0-2017</Text>
                 <br/><br/>
                 <Text variant="h5" css={{
-                  "@media (min-width:690px),print and (min-width:538px)": {
-                    marginRight: "1rem"
-                  }
+                    "@media (min-width:690px),print and (min-width:538px)": {
+                      marginRight: "1rem"
+                    }
                 }}
                 >No：JD2020FTC00004
                 </Text>
               </div>
             </div>
             <div css={{
-              "@media print": {
-                height:'110px'
-              }
+                "@media print": {
+                  height:'110px'
+                }
             }}>
             </div>
           </div>
@@ -697,54 +687,51 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
         有机房曳引驱动电梯定期检验报告
         </Text>
         <div css={{
-          "@media print": {
-            height:'200px'
-          }
-        }}>
+            "@media print": {
+              height:'200px'
+            }
+          }}>
         </div>
-        <Table  fixed={ ["20%","%"]  }
-                printColWidth={ ["210","750"] }
-                css={ {borderCollapse: 'collapse'} }
-        >
-          <TableBody>
-            <TableRow>
-              <RCell css={{border:'none'}}>使用单位</RCell>
-              <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>林钦全</CCell>
-            </TableRow>
-            <TableRow>
-              <RCell css={{border:'none'}}>分支机构</RCell>
-              <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>/</CCell>
-            </TableRow>
-            <TableRow>
-              <RCell css={{border:'none'}}>楼盘名称</RCell>
-              <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>/</CCell>
-            </TableRow>
-            <TableRow>
-              <RCell css={{border:'none'}}>设备类别</RCell>
-              <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>曳引与强制驱动电梯</CCell>
-            </TableRow>
-            <TableRow>
-              <RCell css={{border:'none'}}>设备品种</RCell>
-              <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>曳引驱动乘客电梯</CCell>
-            </TableRow>
-            <TableRow>
-              <RCell css={{border:'none'}}>检验日期</RCell>
-              <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>{orc.检验日期}</CCell>
-            </TableRow>
-            <TableRow>
-              <RCell css={{border:'none'}}>监察识别码</RCell>
-              <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>TA74507</CCell>
-            </TableRow>
-            <TableRow>
-              <RCell css={{border:'none'}}>设备号</RCell>
-              <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>3501T104807</CCell>
-            </TableRow>
-            <TableRow>
-              <RCell css={{border:'none'}}>设备代码</RCell>
-              <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>/</CCell>
-            </TableRow>
-          </TableBody>
-        </Table>
+      <Table fixed={ ["20%","%"] }   printColWidth={ ["210","750"] }   css={ {borderCollapse: 'collapse'} }  >
+        <TableBody>
+          <TableRow>
+            <RCell css={{border:'none'}}>使用单位</RCell>
+            <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>林钦全</CCell>
+          </TableRow>
+          <TableRow>
+            <RCell css={{border:'none'}}>分支机构</RCell>
+            <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>/</CCell>
+          </TableRow>
+          <TableRow>
+            <RCell css={{border:'none'}}>楼盘名称</RCell>
+            <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>/</CCell>
+          </TableRow>
+          <TableRow>
+            <RCell css={{border:'none'}}>设备类别</RCell>
+            <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>曳引与强制驱动电梯</CCell>
+          </TableRow>
+          <TableRow>
+            <RCell css={{border:'none'}}>设备品种</RCell>
+            <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>曳引驱动乘客电梯</CCell>
+          </TableRow>
+          <TableRow>
+            <RCell css={{border:'none'}}>检验日期</RCell>
+            <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>{orc.检验日期}</CCell>
+          </TableRow>
+          <TableRow>
+            <RCell css={{border:'none'}}>监察识别码</RCell>
+            <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>TA74507</CCell>
+          </TableRow>
+          <TableRow>
+            <RCell css={{border:'none'}}>设备号</RCell>
+            <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>3501T104807</CCell>
+          </TableRow>
+          <TableRow>
+            <RCell css={{border:'none'}}>设备代码</RCell>
+            <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>/</CCell>
+          </TableRow>
+        </TableBody>
+      </Table>
         <br/>
         <div role="button" tabIndex={1} {...bind}>
           {!(redundance) && <Text variant="h4">
@@ -919,7 +906,6 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
               <CCell component="th" scope="row">检验依据</CCell>
               <Cell colSpan={6}>《电梯监督检验和定期检验规则——曳引与强制驱动电梯》（TSG T7001-2009）及1号、2号修改单</Cell>
             </TableRow>
-
             <RouterLink  to={`/report/EL-DJ/ver/1/Instrument/227`}>
               <TableRow >
                 <CCell component="th" scope="row" rowSpan={1+instrumentTable.length}>主要检验仪器设备</CCell>
@@ -1017,8 +1003,7 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
             </TableRow>
           </TableBody>
         </Table>
-
-        <br/>
+       <br/>
         <Table  fixed={ ["6%","7%","7%","9%","10%","%","17%","9%"]  }
                 printColWidth={ ["46","46","55","55","130","405","175","120"] }
                css={ {borderCollapse: 'collapse' } }
@@ -1073,16 +1058,16 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
         </Table>
       </div>
       <div css={{
-        "@media print": {
-          display:'none'
-        },
-        textAlign:'center'
-      }}
-      >
-        - 报告完毕 -<br/>
-        <RouterLink to={`/report/EL-DJ/ver/1/printAll/227`}>
-           看完整的原始记录
-        </RouterLink>
+            "@media print": {
+              display:'none'
+            },
+            textAlign:'center'
+          }}
+       >
+       - 报告完毕 -<br/>
+       <RouterLink to={`/report/EL-DJ/ver/1/printAll/227`}>
+         看完整的原始记录
+       </RouterLink>
       </div>
     </React.Fragment>
   );
