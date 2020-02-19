@@ -12,6 +12,7 @@ import { useIspNormalizeContent } from "../comp/base";
 import { reportFirstPageHead, 注意事项, 落款单位地址, 首页设备概况 } from "../comp/rarelyVary";
 
 //模板的配套正式报告的显示打印； 版本号要相同的。
+//下一个版本实际可以和这版本共用大部分配置，可直接引入inspectionContent再做动态修改的方案也可考虑，在差别不大的情况？。
 export const inspectionContent=[
   {
     //bigNo: 1,

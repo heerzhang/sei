@@ -474,10 +474,11 @@ export interface InternalItemHandResult {
 }
 //各个检验单项
 export interface InternalItemProps  extends React.HTMLAttributes<HTMLDivElement>{
-  //par?: any;        //父组件往子组件传数据
   show?: boolean;
   alone?: boolean;
   ref?: any;
+  //报告ID号；数据库最大19位 number 大坑17位以后的Number类型数值精度丢失。
+  repId?: string;
 }
 //动态载入的模板组件, 所有参数都必须？可选的，否则报错。
 export interface TemplateViewProps {

@@ -11,60 +11,6 @@ import { FadeImage } from "../../FadeImage";
 //很多内容相对重复，这里是报告较高层范围复用的组件；专门报告类型的可以安排在下一层次分开目录去做。
 
 
-export interface InspectZoneHeadColumnProps {
-  label: string;
-  projects: string[];
-  children?: React.ReactNode;
-}
-//几个检验项目的聚合模式，1个下拉的分区装入多个项目。
-export const InspectZoneHeadColumn22: React.FunctionComponent<InspectZoneHeadColumnProps> = ({
-      label,
-      projects,
-      children,
-      ...other
-   }) => {
-
-  return (
-    <React.Fragment>
-      <div css={{ display: 'flex', justifyContent: 'space-around'}}>
-        <Text  variant="h6">项目: {projects.join(',')}</Text>
-        <Text  variant="h6">{label}</Text>
-      </div>
-      {children}
-    </React.Fragment>
-  );
-};
-
-
-export interface InspectItemHeadColumnProps {
-  level: string;
-  label: string;
-  children: React.ReactNode;
-}
-//下拉的分区装入多个项目, 之后单一个检验项目的开头
-export const InspectItemHeadColumn33: React.FunctionComponent<InspectItemHeadColumnProps> = ({
-      level,
-      label,
-      children,
-      ...other
-      }) => {
-
-  return (
-    <React.Fragment>
-      <div css={{ display: 'flex',justifyContent: 'space-around',marginTop:'1rem'}}>
-        <Text  variant="h6">{label}</Text>
-        <Text  variant="h6">检验类别 {level}  </Text>
-      </div>
-        <hr/>
-        {children}
-      <Text  variant="h4"　>
-        查验结果
-      </Text>
-    </React.Fragment>
-  );
-};
-
-
 export const 注意事项=<React.Fragment>
   <br/>
   2. 本报告应当由计算机打印输出，或者用钢笔、签字笔填写，字迹应当工整，修改无效。<br/>
