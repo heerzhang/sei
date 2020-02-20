@@ -32,7 +32,7 @@ import { RecordStarter, ReportStarter } from "./TemplateLoader";
 
 
 
-
+//模板类型：支持主报告类型1个+分报告类型多个的情况，报告展示入口管理。模板版本号由后端管理。
 interface TemplateMainProps {
   id?: string;
   source?: any;
@@ -44,16 +44,16 @@ function TemplateMain({id, source}: TemplateMainProps) {
   const [template, setTemplate] = React.useState(null as any);
   if(!match || !params || !params.template || !params.verId || !params.action)
       throw new Error(`没路由了`);
-  const path =typeAsRoute[params.template] +".O-" +params.verId;
+  const path =typeAsRoute[params.template] +".E-" +params.verId;
   //import参数变量，会被替换为【.*】；  不可这么写 import(path) 这是无效的。
   //useLayoutEffect
   React.useEffect(() => {
     //console.log("不会重复执行到这里的！ template=", "path=", path);
     import(`${path}`).then(module => {
       if(module.originalTemplate===undefined)
-        throw new Error(`没找到O模板入口组件${path}`);
+        throw new Error(`没找到模板入口O组件${path}`);
       if(module.reportTemplate===undefined)
-        throw new Error(`没找到R模板入口组件${path}`);
+        throw new Error(`没找到模板入口R组件${path}`);
 
       setTemplate({original: module.originalTemplate, report: module.reportTemplate});
     })

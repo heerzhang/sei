@@ -32,7 +32,7 @@ import { createItem, getInspectionItemsLength, verifyAction } from "../editor/he
 const maxItemsSeq=getInspectionItemsLength(inspectionContent);
 
 //forwardRef实际上已经没用了，ref，也可改成简易组件模式。
-const OriginalView: React.RefForwardingComponent<InternalItemHandResult,TemplateViewProps>=
+export const OriginalView: React.RefForwardingComponent<InternalItemHandResult,TemplateViewProps>=
   React.forwardRef((
     { action, children}, ref
   ) => {
