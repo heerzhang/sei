@@ -286,7 +286,7 @@ export const RecordEditorOrPrint: React.FunctionComponent<RecordEditorOrPrintPro
                           }}
               >
                 {templateSet?.report &&
-                  <ReportStarter id={id} action={action} source={source} template={templateSet.report}/>
+                  <ReportStarter id={id}  source={source} template={templateSet.report}/>
                 }
 
               </ScrollView>
