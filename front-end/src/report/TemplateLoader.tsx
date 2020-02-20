@@ -7,7 +7,7 @@ import {
   useToast, LayerLoading, Text
 } from "customize-easy-ui-component";
 
-import { InternalItemHandResult, TemplateViewProps } from "./comp/base";
+import { InternalItemHandResult, OriginalViewProps, ReportViewProps } from "./comp/base";
 import { useCommitOriginalData } from "./db";
 import throttle from 'throttle-asynchronous'
 import { EditStorageContext } from "./StorageContext";
@@ -24,7 +24,7 @@ interface RecordStarterProps {
   id: string;
   action: string;
   source: any;
-  template: React.ReactElement<React.RefForwardingComponent<InternalItemHandResult,TemplateViewProps>>;
+  template: React.ReactElement<React.RefForwardingComponent<InternalItemHandResult,OriginalViewProps>>;
 }
 //这才是右边的！，编辑，或原始记录的查看：
 export const RecordStarter: React.FunctionComponent<RecordStarterProps> = ({
@@ -104,9 +104,9 @@ export const RecordStarter: React.FunctionComponent<RecordStarterProps> = ({
         //useMemo使用后：各分区项目子组件inp各自独立的，分区项目子组件内若使用setInp(null) 清空重置后，无法靠重新拉取后端数据来保证恢复显示。
         //项目子组件使用setInp(null) 重置后，若上级组件重新取后端数据没变化的，也必须再次路由后再进入才可以让各分区项目子组件render恢复显示数据。
         React.cloneElement(template as React.ReactElement<any>, {
-          ref: null,
           inp: source,
-          action
+          action,
+          repId: id,
         })
       }
 
@@ -134,14 +134,12 @@ export const RecordStarter: React.FunctionComponent<RecordStarterProps> = ({
 
 interface ReportStarterProps {
   id: string;
-  action: string;
   source: any;
-  template: React.ReactElement<React.RefForwardingComponent<InternalItemHandResult,TemplateViewProps>>;
+  template: React.ReactElement<React.RefForwardingComponent<InternalItemHandResult,ReportViewProps>>;
 }
 //这才是右边的！，编辑，或原始记录的查看：
 export const ReportStarter: React.FunctionComponent<ReportStarterProps> = ({
                                                                              id,
-                                                                             action,
                                                                              source,
                                                                              template,
                                                                              ...other
@@ -161,7 +159,7 @@ export const ReportStarter: React.FunctionComponent<ReportStarterProps> = ({
         //项目子组件使用setInp(null) 重置后，若上级组件重新取后端数据没变化的，也必须再次路由后再进入才可以让各分区项目子组件render恢复显示数据。
         React.cloneElement(template as React.ReactElement<any>, {
           source,
-          action
+          repId: id,
         })
       }
       <Text  css={{wordWrap: 'break-word'}}>{false && `当前(${JSON.stringify(storage)})`}</Text>

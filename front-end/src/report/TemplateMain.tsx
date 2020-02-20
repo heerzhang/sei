@@ -30,9 +30,9 @@ import { RelationList } from "../inspect/RelationList";
 import typeAsRoute from "../typeAsRoute.json";
 import { RecordStarter, ReportStarter } from "./TemplateLoader";
 
-
-
+//模板的版本号和相应代码维护管理是个问题；不是下载离线的，而是时刻web在线的文档格式；配套数据库数据加上配套模板才能拼凑出正式文档。要保留维护几年？有人还在用旧的。
 //模板类型：支持主报告类型1个+分报告类型多个的情况，报告展示入口管理。模板版本号由后端管理。
+
 interface TemplateMainProps {
   id?: string;
   source?: any;
@@ -69,12 +69,12 @@ function TemplateMain({id, source}: TemplateMainProps) {
         <Switch>
           <Route path="/report/:template/ver/:verId/preview/:repId">
            { source &&
-               <ReportStarter id={'227'} action={action} source={source} template={template.report}/>
+               <ReportStarter id={params.repId} source={source} template={template.report}/>
            }
           </Route>
           <Route path="/report/:rest*">
            { source &&
-               <RecordEditorOrPrint source={source} action={action} templateSet={template}/>
+               <RecordEditorOrPrint id={params.repId} source={source} action={action} templateSet={template}/>
            }
           </Route>
         </Switch>
@@ -85,15 +85,14 @@ function TemplateMain({id, source}: TemplateMainProps) {
 
 
 export interface RecordEditorOrPrintProps {
-  path?: string;
-  id?: string;
+  id: string;
   source: any;  //原始记录的json数据 + 。
   templateSet: any;
   action: string;
 }
 
 export const RecordEditorOrPrint: React.FunctionComponent<RecordEditorOrPrintProps> = (
-  {source,templateSet, action}
+  {source,templateSet, action, id}
   ) => {
   const theme = useTheme();
   const {user} = useSession();
@@ -287,7 +286,7 @@ export const RecordEditorOrPrint: React.FunctionComponent<RecordEditorOrPrintPro
                           }}
               >
                 {templateSet?.report &&
-                  <ReportStarter id={'227'} action={action} source={source} template={templateSet.report}/>
+                  <ReportStarter id={id} action={action} source={source} template={templateSet.report}/>
                 }
 
               </ScrollView>
@@ -360,7 +359,7 @@ export const RecordEditorOrPrint: React.FunctionComponent<RecordEditorOrPrintPro
                 }}
               >
                 {templateSet?.original && action!=='none'
-                 && <RecordStarter id={'227'} action={action}  source={source} template={templateSet.original}/>
+                 && <RecordStarter id={id} action={action}  source={source} template={templateSet.original}/>
                 }
               </Layer>
             </div>
@@ -371,8 +370,6 @@ export const RecordEditorOrPrint: React.FunctionComponent<RecordEditorOrPrintPro
     </Layout>
   );
 };
-
-
 
 
 export default TemplateMain;

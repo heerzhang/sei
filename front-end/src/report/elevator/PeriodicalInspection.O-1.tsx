@@ -27,12 +27,24 @@ import { ItemGapMeasure, ItemSurveyLinkMan } from "./rarelyVary";
 import { ItemInstrumentTable } from "../editor/rarelyVary";
 import { createItem, getInspectionItemsLength, verifyAction } from "../editor/helper";
 import { inspectionContent } from "./Periodical/main";
-import { generalFormat } from "./Periodical/editor";
+import { useGeneralFormat } from "./Periodical/editor";
 
-//模板的动态加载入口文件：  原始记录，一一对应的报告的录入编辑数据，可打印。
+//原始记录，一一对应的报告的录入编辑数据，可打印。
+//不需要每个verId新搞一个文件的，甚至不需要搞新的组件，可以只需内部逻辑处理。
 
+//对应某报告模板下所有编辑修改组件；原始记录打印展示全部列表。項目標記符不能用ALL none preview printAll item1.1保留字。
+const recordPrintList =[
+  createItem('Survey', <ItemSurveyLinkMan/>),
+  createItem('Instrument', <ItemInstrumentTable/>),
+  createItem('item1.1', <ItemUniversal x={0} y={0} inspectionContent={inspectionContent}/>),
+  createItem('gap', <ItemGapMeasure/>),
+  createItem('Appendix', <ItemAppendixB/>),
+  createItem('Remark', <ItemRemarks/>),
+  createItem('ReCheck', <ItemRecheckResult/>),
+  createItem('Conclusion', <ItemConclusion/>),
+];
+//检验项目数量
 const maxItemsSeq=getInspectionItemsLength(inspectionContent);
-
 
 //forwardRef实际上已经没用了，ref，也可改成简易组件模式。
 export const OriginalView: React.RefForwardingComponent<InternalItemHandResult,OriginalViewProps>=
@@ -40,12 +52,12 @@ export const OriginalView: React.RefForwardingComponent<InternalItemHandResult,O
     { action, children, verId}, ref
   ) => {
     const {storage, setStorage} =React.useContext(EditStorageContext);
+    const {generalFormat} =useGeneralFormat({verId, repId:'227'});
     let editorRefCount=recordPrintList.length+maxItemsSeq;
     const clRefs =useProjectListAs({count: editorRefCount});
     //同名字的字段：清除／覆盖，编辑器未定义的字段数据可保留。
     const outCome=mergeEditorItemRefs( ...clRefs.current! );
-    //旧的模式：两次暴露传递，返回给了爷爷辈组件。
-    //React.useImperativeHandle( ref,() => ({ inp: outCome }), [outCome] );
+    //旧模式两次暴露传递，返回给爷辈组件。React.useImperativeHandle( ref,() => ({ inp: outCome }), [outCome] );
     const [enableBtn, setEnableBtn] = React.useState(true);
     //延迟5秒才执行的; 可限制频繁操作。
     const throttledUpdateEnableBtn =throttle(setEnableBtn,5000);
@@ -142,15 +154,5 @@ export const OriginalView: React.RefForwardingComponent<InternalItemHandResult,O
     </React.Fragment>;
   } );
 
-//对应某报告模板下所有编辑修改组件；原始记录打印展示全部列表。項目標記符不能用ALL none preview printAll item1.1保留字。
-const recordPrintList =[
-  createItem('Survey', <ItemSurveyLinkMan/>),
-  createItem('Instrument', <ItemInstrumentTable/>),
-  createItem('item1.1', <ItemUniversal x={0} y={0} inspectionContent={inspectionContent}/>),
-  createItem('gap', <ItemGapMeasure/>),
-  createItem('Appendix', <ItemAppendixB/>),
-  createItem('Remark', <ItemRemarks/>),
-  createItem('ReCheck', <ItemRecheckResult/>),
-  createItem('Conclusion', <ItemConclusion/>),
-];
+
 

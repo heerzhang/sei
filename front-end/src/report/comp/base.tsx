@@ -488,6 +488,12 @@ export interface OriginalViewProps {
   verId: string;
 }
 
+export interface ReportViewProps {
+  source: any;
+  printing?: boolean;
+  ref?: any;
+  verId: string;
+}
 
 //Hook编译报错，不允许直接套数组()=> 回调函数模式创建；需要包裹一层Component()规避检查。
 //若本组件没有重新加载，{count}数组长度变化，会导致ｈｏｏｋ报错。  重命名也逃不掉报错。

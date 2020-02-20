@@ -8,18 +8,14 @@ import { Helmet } from "react-helmet";
 import { useMedia } from "use-media";
 import { Link as RouterLink } from "wouter";
 import { getInstrument2xColumn, itemResultTransform } from "../comp/helper";
-import { useIspNormalizeContent } from "../comp/base";
+import { ReportViewProps, useIspNormalizeContent } from "../comp/base";
 import { reportFirstPageHead, 注意事项, 落款单位地址, 首页设备概况 } from "../comp/rarelyVary";
 import { 检验编制核准, 检验设备情况 } from "./rarelyVary";
 import { inspectionContent } from "./Periodical/main";
 
-//模板的配套正式报告的显示打印； 版本号要相同的。
+//正式报告的显示打印。
+//不需要每个verId新搞一个文件的，甚至不需要搞新的组件，可以只需内部逻辑处理。
 
-interface ReportViewProps {
-  source: any;
-  printing?: boolean;
-  verId: string;
-}
 export const ReportView: React.FunctionComponent<ReportViewProps> = ({
     printing=false,
     source: orc,  verId,
