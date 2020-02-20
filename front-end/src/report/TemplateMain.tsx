@@ -96,7 +96,7 @@ export interface RecordEditorOrPrintProps {
   templateSet: any;
   action: string;
 }
-
+//带原始记录的场景。
 export const RecordEditorOrPrint: React.FunctionComponent<RecordEditorOrPrintProps> = (
   {source,templateSet, action, id}
   ) => {
@@ -105,9 +105,11 @@ export const RecordEditorOrPrint: React.FunctionComponent<RecordEditorOrPrintPro
   let showingRecipe = (action!=='none');
   const [activeTab, setActiveTab] = React.useState(0);
   const [, setLocation] = useLocation();
+  //isLarge在A4竖打印是false;
   const isLarge = useMedia({ minWidth: "800px" });
-  const renderList =(action!=='printALL') ||  isLarge || !showingRecipe;  　//大屏或者小屏但是没有显示具体明细页的场合。
-
+  //大屏或者小屏但是没有显示具体明细页的场合。
+  let renderList =isLarge || action==='none';
+  if(!isLarge && action!=='none')   renderList=false;
   function onLogoutDo() {
     setLocation("/login",  false );
   }
@@ -124,7 +126,7 @@ export const RecordEditorOrPrint: React.FunctionComponent<RecordEditorOrPrintPro
           box-sizing: border-box;
         `}
       >
-        {/*左半部分,小的列表*/}
+        {/*左半部分,包括菜单+列表*/}
         <Layer
           aria-hidden={!renderList}
           css={{
@@ -139,9 +141,8 @@ export const RecordEditorOrPrint: React.FunctionComponent<RecordEditorOrPrintPro
             borderRadius: 0,
             margin: 0,
             height: `calc(100vh)`,
-            [theme.mediaQueries.md]: {
-              display: "flex",
-              position: "absolute",
+            "@media (min-width:800px)": {
+              position: "fixed",    //"absolute"会跟随右边滚动
               zIndex: theme.zIndices.fixed,
               top: 0,
               boxShadow: theme.shadows.xl,
@@ -156,6 +157,9 @@ export const RecordEditorOrPrint: React.FunctionComponent<RecordEditorOrPrintPro
               margin: theme.spaces.xl,
               maxWidth: "40vw",
               height: `calc(100vh - ${theme.spaces.xl} - ${theme.spaces.xl})`
+            },
+            "@media print": {
+              display: "none"
             }
           }}
         >
@@ -262,7 +266,7 @@ export const RecordEditorOrPrint: React.FunctionComponent<RecordEditorOrPrintPro
               </DarkMode>
             </div>
           </div>
-
+          {/*这才是小窗口的主体，独立的可滚动部分*/}
           <Pager
             enableScrollLock
             value={activeTab}
@@ -285,6 +289,7 @@ export const RecordEditorOrPrint: React.FunctionComponent<RecordEditorOrPrintPro
             <TabPanel id="report">
             </TabPanel>
           </Pager>
+
         </Layer>
         {
           //实际情况：在小屏场合，左半边内容被后面的右中文档流后面的界面部分给屏蔽遮盖掉了。
@@ -295,7 +300,7 @@ export const RecordEditorOrPrint: React.FunctionComponent<RecordEditorOrPrintPro
               display: "block",
               position: "relative",
               flex: 1,      　//对布局影响最大
-              [theme.mediaQueries.md]: {
+              "@media (min-width:800px)": {
                 display: "flex",    　
                 justifyContent: "center"
               }
@@ -308,7 +313,7 @@ export const RecordEditorOrPrint: React.FunctionComponent<RecordEditorOrPrintPro
                 position: "absolute",
                 width: "100%",
                 boxSizing: "border-box",
-                [theme.mediaQueries.md]: {
+                "@media (min-width:800px)": {
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
@@ -331,7 +336,7 @@ export const RecordEditorOrPrint: React.FunctionComponent<RecordEditorOrPrintPro
                   position: "relative",
                   boxShadow: "none",
                   width: "100%",
-                  [theme.mediaQueries.md]: {
+                  "@media (min-width:800px)": {
                     marginTop: "auto",
                     height: "auto",
                     overflow: "hidden",
@@ -346,11 +351,13 @@ export const RecordEditorOrPrint: React.FunctionComponent<RecordEditorOrPrintPro
                 {templateSet?.original && action!=='none'
                  && <RecordStarter id={id} action={action}  source={source} template={templateSet.original}/>
                 }
+                {renderList && '有左边输出'}
               </Layer>
             </div>
 
           </div>
         )}
+
       </div>
     </Layout>
   );
