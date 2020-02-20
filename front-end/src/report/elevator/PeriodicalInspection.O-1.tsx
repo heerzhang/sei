@@ -2,23 +2,13 @@
 import { jsx,  } from "@emotion/core";
 import * as React from "react";
 import {
-  Text,
-  useTheme,
-  Button, MenuItem, MenuList,
-  InputGroupLine,
-  SuffixInput,  Input, ResponsivePopover, IconChevronDown, Layer, TextArea, Select, Touchable
+  Button,
 } from "customize-easy-ui-component";
-import {Table, TableBody,  TableRow, Cell, CCell} from "../../comp/TableExt";
-import {
-  IndentationLayText,  InspectRecordLayout,
-  SelectHookfork, OriginalViewProps,
-  useItemInputControl, useProjectListAs
-} from "../comp/base";
-import {  InternalItemHandResult, InternalItemProps } from "../comp/base";
+import {  OriginalViewProps,  useProjectListAs } from "../comp/base";
+import {  InternalItemHandResult  } from "../comp/base";
 import {  mergeEditorItemRefs  } from "../../utils/tools";
 //import isEqual from "lodash.isequal";
-import {  ReportView } from "./PeriodicalInspection.R-1";
-import { Link as RouterLink } from "wouter";
+//import { Link as RouterLink } from "wouter";
 import { EditStorageContext } from "../StorageContext";
 import throttle from 'throttle-asynchronous'
 import { ItemConclusion, ItemRecheckResult, ItemUniversal } from "../editor/base";

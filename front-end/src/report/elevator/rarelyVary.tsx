@@ -2,11 +2,10 @@
 import { jsx,  } from "@emotion/core";
 import * as React from "react";
 import {
-  Text, Link, Divider, Embed, useTheme, InputGroupLine, SuffixInput, Button, Input
+   useTheme, InputGroupLine, SuffixInput, Button, Input
 } from "customize-easy-ui-component";
 
-import { CCell, Cell, RCell, Table, TableBody, TableRow } from "../../comp/TableExt";
-import { FadeImage } from "../../FadeImage";
+import { CCell, Cell, Table, TableBody, TableRow } from "../../comp/TableExt";
 import { InspectRecordLayout, InternalItemHandResult, InternalItemProps, useItemInputControl } from "../comp/base";
 import { Link as RouterLink } from "wouter";
 import * as queryString from "querystring";

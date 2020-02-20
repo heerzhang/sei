@@ -19,16 +19,18 @@ import {
   IconPlus,
   DarkMode,
   LightMode,
-  Pager, IconArchive, ScrollView,
+  Pager, IconArchive, ScrollView, useInfiniteScroll, Text, List, ListItem, Skeleton, Spinner
 } from "customize-easy-ui-component";
 
 import { useSession,  useSignOut } from "../auth";
-import { Link, useRoute, useLocation, Switch, Route } from "wouter";
+import { Link, useLocation, Switch, Route } from "wouter";
 import { useMedia } from "use-media";
 import { Layout } from "./Layout";
 import { RelationList } from "../inspect/RelationList";
 import typeAsRoute from "../typeAsRoute.json";
 import { RecordStarter, ReportStarter } from "./TemplateLoader";
+import { useLookReports } from "../inspect/report/db";
+import { InternalItemHandResult, OriginalViewProps, ReportViewProps } from "./comp/base";
 
 //模板的版本号和相应代码维护管理是个问题；不是下载离线的，而是时刻web在线的文档格式；配套数据库数据加上配套模板才能拼凑出正式文档。要保留维护几年？有人还在用旧的。
 //模板类型：支持主报告类型1个+分报告类型多个的情况，报告展示入口管理。模板版本号由后端管理。
@@ -252,16 +254,7 @@ export const RecordEditorOrPrint: React.FunctionComponent<RecordEditorOrPrintPro
                   value={activeTab}
                   variant="evenly-spaced"
                 >
-                  <Tab
-                    badge={ //揭示数目
-                      !false
-                        ? 13
-                        : null
-                    }
-                    id="followers"
-                  >
-                    原始记录录入
-                  </Tab>
+                  <Tab id="original">原始记录录入</Tab>
                   <Tab id="list">我参与的检验</Tab>
                   <Tab id="check">待我审核的检验</Tab>
                   <Tab id="report">检验报告</Tab>
@@ -276,24 +269,12 @@ export const RecordEditorOrPrint: React.FunctionComponent<RecordEditorOrPrintPro
             onRequestChange={i => setActiveTab(i)}
             lazyLoad
           >
-            <TabPanel id="schedule">
-              <ScrollView　overflowY
-                          css={{
-                            flex: 1,
-                            height: `calc(100vh - 0.875rem - 2 * 10px - 63px)`,
-                            [theme.mediaQueries.md]: {
-                              height: `calc(100vh - 2 * ${theme.spaces.lg} - 0.875rem - 2 * 10px - 71px)`
-                            },
-                            [theme.mediaQueries.xl]: {
-                              height: `calc(100vh - 2 * ${theme.spaces.xl} - 0.875rem - 2 * 10px - 71px)`
-                            }
-                          }}
-              >
-                {templateSet?.report &&
-                  <ReportStarter id={id}  source={source} template={templateSet.report}/>
-                }
-
-              </ScrollView>
+            <TabPanel id="original"  css={{
+                    height: '100%'
+              }}>
+              {templateSet?.report &&
+                 <EmbeddedReport id={id}  source={source} template={templateSet.report}/>
+              }
             </TabPanel>
             <TabPanel  id="ISPlist">
               <RelationList />
@@ -374,6 +355,42 @@ export const RecordEditorOrPrint: React.FunctionComponent<RecordEditorOrPrintPro
     </Layout>
   );
 };
+
+
+interface EmbeddedReportProps {
+  id: string;
+  source: any;
+  template: React.ReactElement<React.RefForwardingComponent<InternalItemHandResult,ReportViewProps>>;
+}
+const EmbeddedReport: React.FunctionComponent<EmbeddedReportProps> = ({ id, source, template}
+) => {
+  const theme = useTheme();
+  //const ref = React.useRef();
+  return (
+    <ScrollView　overflowY
+                css={{
+                  flex: 1,
+                  height: "100%",
+                }}
+                innerRef={null}>
+      <div
+        css={{   //特意把父div滚动条启动开。`calc(100vh - ${ileapHeight}px)`,   '750px',  注意串里的空格必须要有！
+          //关键是靠内容持续增长列表的紧上一级DIV来控制，把这一个div高度撑开，迫使最近的窗口所附属的滚动条启动。
+          minHeight: `calc(100vh - 164px)`,
+          [theme.mediaQueries.md]: {
+            minHeight: `calc(100vh - 164px - ${theme.spaces.lg} - ${theme.spaces.lg})`
+          },
+          [theme.mediaQueries.xl]: {
+            minHeight: `calc(100vh - 164px - ${theme.spaces.xl} - ${theme.spaces.xl})`
+          },
+        }}
+      >
+        <ReportStarter id={id}  source={source} template={template}/>
+      </div>
+    </ScrollView>
+  );
+};
+
 
 
 export default TemplateMain;

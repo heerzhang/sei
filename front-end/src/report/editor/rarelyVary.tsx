@@ -3,9 +3,6 @@ import { jsx,  } from "@emotion/core";
 import * as React from "react";
 import {
   Text,
-  Link,
-  Divider,
-  Embed,
   Layer,
   InputGroupLine,
   Input,
@@ -16,8 +13,6 @@ import {
   IconChevronDown
 } from "customize-easy-ui-component";
 
-import { CCell, RCell, Table, TableBody, TableRow } from "../../comp/TableExt";
-import { FadeImage } from "../../FadeImage";
 import {
   InspectRecordLayout,
   InternalItemHandResult,

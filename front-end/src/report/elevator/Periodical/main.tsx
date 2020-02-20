@@ -1,6 +1,6 @@
 /** @jsx jsx */
-import { jsx,} from "@emotion/core";
-import * as React from "react";
+//import { jsx,} from "@emotion/core";
+//import * as React from "react";
 
 //方便管理： 目录 分离。组件越来越多，不好查找管理。
 //报告项目的主体部分。
@@ -450,6 +450,7 @@ export const inspectionContent=[
 
 
 //下一个版本inspectionContent实际可选择以旧版inspectionContent做js动态的修改，另外再定义新变量输出。
+
 
 
 
