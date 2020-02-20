@@ -25,7 +25,7 @@ import {
   SelectHookfork,
   useItemInputControl
 } from "../comp/base";
-import { inspectionContent } from "../elevator/PeriodicalInspection.R-1";
+
 
 //公共的复用性好的组件；编辑、原始记录，在多数模板能通用的。不通用的要安排放在更加具体贴近的目录文件内。
 //方便不同模板和不同版本的可重复引用。文件目录管理，组件按照抽象性程度和参数配置的关联度，分级分层次，标识容易区分开。
@@ -184,6 +184,7 @@ export interface ItemUniversalProps  extends React.HTMLAttributes<HTMLDivElement
   //检验项目配置对象标准的索引.[x].[y] ； 这里x是大项目；y是检验项目{还可拆分成几个更小项目的}。比如对应action="2.1"就是x=1,y=0的配置。
   x: number;
   y: number;
+  inspectionContent: any[];
   ref?: any;
   procedure?: any;     //传递一个检验项目开头流程性内容，显示的格式等。
   details?: any[];     //传递各个子项目(若没有子项目的，就算项目本身[0])的定制，测量数据细节内容。
@@ -191,7 +192,7 @@ export interface ItemUniversalProps  extends React.HTMLAttributes<HTMLDivElement
 //引进Render Props模式提高复用能力 { details[0](inp,setInp)  }；就可以配置成通用的组件。
 export const ItemUniversal: React.RefForwardingComponent<InternalItemHandResult,ItemUniversalProps>=
   React.forwardRef((
-    { children, show=true, procedure, details, x, y ,alone=true},  ref
+    { children, show=true, procedure, details, x, y ,alone=true,inspectionContent},  ref
   ) => {
     const getInpFilter = React.useCallback((par) => {
       let fields={};
@@ -205,7 +206,7 @@ export const ItemUniversal: React.RefForwardingComponent<InternalItemHandResult,
         fields[name] =par[name]
       );
       return fields;
-    }, [x,y]);
+    }, [x,y,inspectionContent]);
     const {inp, setInp} = useItemInputControl({ ref });
     //因为Hook不能用逻辑条件，只能上组件分解了，按条件分解两个组件。
     //下拉列表标题=检验类别+项目内容；

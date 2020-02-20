@@ -44,7 +44,7 @@ function TemplateMain({id, source}: TemplateMainProps) {
   const [template, setTemplate] = React.useState(null as any);
   if(!match || !params || !params.template || !params.verId || !params.action)
       throw new Error(`没路由了`);
-  const path =typeAsRoute[params.template] +".E-" +params.verId;
+  const path =typeAsRoute[params.template] +".E";
   //import参数变量，会被替换为【.*】；  不可这么写 import(path) 这是无效的。
   //useLayoutEffect
   React.useEffect(() => {
@@ -55,13 +55,13 @@ function TemplateMain({id, source}: TemplateMainProps) {
       if(module.reportTemplate===undefined)
         throw new Error(`没找到模板入口R组件${path}`);
 
-      setTemplate({original: module.originalTemplate, report: module.reportTemplate});
+      setTemplate({original: module.originalTemplate[params.verId], report: module.reportTemplate[params.verId]});
     })
       .catch(error => {
         throw new Error(`错误导致后续操作模板查找失败${error}`);
       });
 
-  }, [path]);
+  }, [path, params.verId]);
 
   return (
     <React.Fragment>

@@ -481,10 +481,11 @@ export interface InternalItemProps  extends React.HTMLAttributes<HTMLDivElement>
   repId?: string;
 }
 //动态载入的模板组件, 所有参数都必须？可选的，否则报错。
-export interface TemplateViewProps {
+export interface OriginalViewProps {
   inp?: any;
   action: string;
   ref?: any;
+  verId: string;
 }
 
 

@@ -7,13 +7,13 @@ import {
   Embed, Link,
   Text,  useTheme
 } from "customize-easy-ui-component";
-import { Table, TableBody, TableHead, TableRow, Cell, CCell, RCell } from "../comp/TableExt";
+import { Table, TableBody, TableHead, TableRow, Cell, CCell, RCell } from "../src/comp/TableExt";
 import { useTouchable, } from "touchable-hook";
 import { Helmet } from "react-helmet";
 import { useMedia } from "use-media";
 //import faker from "faker/locale/zh_CN";
-import { FadeImage } from "../FadeImage";
-import {  InternalItemHandResult, TemplateViewProps } from "../original/comp/base";
+import { FadeImage } from "../src/FadeImage";
+import {  InternalItemHandResult, TemplateViewProps } from "../src/original/comp/base";
 import { Link as RouterLink } from "wouter";
 
 
@@ -619,14 +619,14 @@ export const PrintReport: React.FunctionComponent<PrintReportProps> = ({
             >
               <div>
                 <Embed css={{width: "190px",margin: "auto"}} width={95} height={45}>
-                  <FadeImage src={`${require("../images/MA.png")}`}/>
+                  <FadeImage src={`${require("../src/images/MA.png")}`}/>
                 </Embed>
                 <br/>
                 <Text variant="h5">181320110160</Text>
               </div>
               <div>
                 <Embed css={{width: "140px",margin: "auto"}} width={10} height={10}>
-                  <FadeImage src={`${require("../images/reportNoQR.png")}`}/>
+                  <FadeImage src={`${require("../src/images/reportNoQR.png")}`}/>
                 </Embed>
               </div>
               <div>
@@ -931,7 +931,7 @@ export const PrintReport: React.FunctionComponent<PrintReportProps> = ({
               <CCell>日期</CCell>
               <CCell>{orc.编制日期}</CCell>
               <CCell rowSpan={3}>
-                <div css={{backgroundImage:`url(${require("../images/seal.png")})`,backgroundSize:"cover",backgroundPosition:"center",minHeight:'30vmin'}}>
+                <div css={{backgroundImage:`url(${require("../src/images/seal.png")})`,backgroundSize:"cover",backgroundPosition:"center",minHeight:'30vmin'}}>
                   <Table  fixed={ ["40%","%"]  }
                           printColWidth={ ["170","230"] }
                           css={ {borderCollapse: 'collapse',height:'fill-available'} }
