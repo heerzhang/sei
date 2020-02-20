@@ -34,17 +34,21 @@ import { RecordStarter, ReportStarter } from "./TemplateLoader";
 //模板类型：支持主报告类型1个+分报告类型多个的情况，报告展示入口管理。模板版本号由后端管理。
 
 interface TemplateMainProps {
+  template: string;
+  verId: string;
+  action: string;
   id?: string;
   source?: any;
 }
 //首次render时刻template应该还没有获取到的，需要第二次render才能获得到template。
-function TemplateMain({id, source}: TemplateMainProps) {
-  const [match, params] = useRoute("/report/:template/ver/:verId/:action/:repId");
-  let action = params &&  params.action;
+function TemplateMain( {
+                         template: templateID,
+                         verId, action, id,
+                         source
+         }:  TemplateMainProps
+) {
   const [template, setTemplate] = React.useState(null as any);
-  if(!match || !params || !params.template || !params.verId || !params.action)
-      throw new Error(`没路由了`);
-  const path =typeAsRoute[params.template] +".E";
+  const path =typeAsRoute[templateID] +".E";
   //import参数变量，会被替换为【.*】；  不可这么写 import(path) 这是无效的。
   //useLayoutEffect
   React.useEffect(() => {
@@ -55,13 +59,13 @@ function TemplateMain({id, source}: TemplateMainProps) {
       if(module.reportTemplate===undefined)
         throw new Error(`没找到模板入口R组件${path}`);
 
-      setTemplate({original: module.originalTemplate[params.verId], report: module.reportTemplate[params.verId]});
+      setTemplate({original: module.originalTemplate[verId], report: module.reportTemplate[verId]});
     })
       .catch(error => {
         throw new Error(`错误导致后续操作模板查找失败${error}`);
       });
 
-  }, [path, params.verId]);
+  }, [path, verId]);
 
   return (
     <React.Fragment>
@@ -69,12 +73,12 @@ function TemplateMain({id, source}: TemplateMainProps) {
         <Switch>
           <Route path="/report/:template/ver/:verId/preview/:repId">
            { source &&
-               <ReportStarter id={params.repId} source={source} template={template.report}/>
+               <ReportStarter id={id} source={source} template={template.report}/>
            }
           </Route>
           <Route path="/report/:rest*">
            { source &&
-               <RecordEditorOrPrint id={params.repId} source={source} action={action} templateSet={template}/>
+               <RecordEditorOrPrint id={id} source={source} action={action} templateSet={template}/>
            }
           </Route>
         </Switch>

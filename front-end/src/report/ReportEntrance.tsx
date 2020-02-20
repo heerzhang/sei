@@ -7,17 +7,23 @@ import { LayerLoading } from "customize-easy-ui-component";
 import { lazy } from "react";
 import { WaitingComponent } from "../TopRouter";
 import { EditStorageContext } from "./StorageContext";
+import { useRoute } from "wouter";
 
 
 const TemplateMain = WaitingComponent(lazy(() => import("./TemplateMain")));
 
 
-export default function ReportEntrance({name},props) {
-  let filtercomp={ id:227 };
+export default function ReportEntrance({ name },props )
+{
+  const [match, params] = useRoute("/report/:template/ver/:verId/:action/:repId");
+  let action = params &&  params.action;
+  let id= params &&  params.repId;
+  if(!match || !params || !params.template || !params.verId || !params.action || !id)
+    throw new Error(`没路由了`);
+  let filtercomp={ id: id };
   //refetch() 引起 loading= True/False变化，从而需要组件范围render重做搞2次。
   //若是浏览器后退前进的场景不会执行useQueryOriginalRecord代码，item已经有数据了，loading不会变化。
-  const {loading,items,  } =useQueryOriginalRecord(filtercomp);
-  //旧的模式废弃！  const [inp, setInp] = React.useState(null);
+  const {loading,items, } =useQueryOriginalRecord(filtercomp);
   const {storage, setStorage} =React.useContext(EditStorageContext);
 
   //外部dat不能加到依赖，变成死循环! const  dat =items&&items.data&&JSON.parse(items.data);  这dat每次render都变了？
@@ -28,14 +34,16 @@ export default function ReportEntrance({name},props) {
   }, [items, setStorage]);
 
   //console.log("ReportEntrance：捕获 ==storage=[",  storage,  "]items=", items ,"loading=", loading);
-
   //const printSizeW = useMedia('print');  这个printSizeW在打印场景时会摇摆，先是true然后变false。打印预览useMedia最终看到false。
   //打印预览不仅打印，还同时会更新网页。打印预览实际是根据当前页面最新状态去打印的。【特别注意】包括动态特征的显示！点击也算；打印实际不是从刷新页面后才去照搬的。
 
   return (
     <React.Fragment>
       <LayerLoading loading={loading} label={'更新数据，加载中请稍后'}/>
-         { storage && <TemplateMain source={storage}/> }
+       { storage && <TemplateMain  template={params.template} verId={params.verId} action={action}
+                                id={id}  source={storage}
+                />
+       }
     </React.Fragment>
   );
 }

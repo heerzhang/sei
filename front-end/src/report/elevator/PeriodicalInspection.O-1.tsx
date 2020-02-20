@@ -93,12 +93,12 @@ export const OriginalView: React.RefForwardingComponent<InternalItemHandResult,O
       return ( <React.Fragment key={'item1.1'}>
         {htmlTxts}
       </React.Fragment> );
-    }, [action,  clRefs]);
+    }, [action,  clRefs, generalFormat]);
 
-    const {isItemNo, x, y} =verifyAction(action,generalFormat);
     //这里action是 '2.1' ALL none printAll 这样的路由参数 ?readOnly=1&。
     const recordList= React.useMemo(() =>
       {
+        const {isItemNo, x, y} =verifyAction(action,generalFormat);
         if(isItemNo){
           return <React.Fragment>
             <ItemUniversal key={0} ref={null}  x={x}  y={y} show={true} inspectionContent={inspectionContent}
@@ -135,9 +135,8 @@ export const OriginalView: React.RefForwardingComponent<InternalItemHandResult,O
         }
         return  null;
       }
-      ,[action, isItemNo,x,y,clRefs,renderItemsContent]);
+      ,[action, clRefs,renderItemsContent,generalFormat]);
 
-    //  console.log("公用配置对象--isItemNo=",isItemNo,"x=", x,"y=",y, generalFormat, "inspectionContent=", inspectionContent);
 
     return <React.Fragment>
       {recordList}
