@@ -4,13 +4,25 @@ import * as React from "react";
 import {
   useTheme,
   Button,
-  useToast, LayerLoading, Text
+  useToast,
+  LayerLoading,
+  Text,
+  Navbar,
+  Toolbar,
+  IconButton,
+  IconArrowLeft,
+  ResponsivePopover,
+  MenuList,
+  MenuItem,
+  IconMoreVertical
 } from "customize-easy-ui-component";
 
 import { InternalItemHandResult, OriginalViewProps, ReportViewProps } from "./comp/base";
 import { useCommitOriginalData } from "./db";
 import throttle from 'throttle-asynchronous'
 import { EditStorageContext } from "./StorageContext";
+import { Link } from "wouter";
+import { TransparentInput } from "../comp/base";
 
 /*
 错误！ 本地重复定义了外部全局实例，结果本文件内只能看到 自己的EditStorageContext，而不是公用的哪一个。
@@ -25,15 +37,19 @@ interface RecordStarterProps {
   action: string;
   source: any;
   template: React.ReactElement<React.RefForwardingComponent<InternalItemHandResult,OriginalViewProps>>;
+  templateID: string;
+  verId: string;
 }
 //这才是右边的！，编辑，或原始记录的查看：
 export const RecordStarter: React.FunctionComponent<RecordStarterProps> = ({
-                                                                       id,
-                                                                       action,
-                                                                       source,
-                                                                       template,
-                                                                       ...other
-                                                                     }) => {
+    id,
+    action,
+    source,
+    template,
+    templateID,
+    verId,
+    ...other
+ }) => {
   const theme = useTheme();
   const toast = useToast();
   //初始化不可以直接取React.useState(source || {})，不然路由器切换就变成旧source。新修改被抛弃了。
@@ -99,7 +115,125 @@ export const RecordStarter: React.FunctionComponent<RecordStarterProps> = ({
   return (
     <React.Fragment>
       开头部分条
+      <Navbar
+        css={{
+          zIndex: theme.zIndices.sticky,
+          backgroundColor: "white",
+          boxShadow: theme.shadows.sm,
+          position: "sticky",
+          top: 0,
+          [theme.mediaQueries.md]: {
+            position: "static"
+          }
+        }}
+      >
+        <Toolbar
+          css={{
+            alignItems: "center",
+            display: "flex"
+          }}
+        >
+          <IconButton
+            icon={<IconArrowLeft />}
+            component={Link}
+            to="/inspect"
+            label="后退"
+            replace
+            variant="ghost"
+            css={{
+              marginRight: theme.spaces.sm,
+              [theme.mediaQueries.md]: {
+                display: "none"     //大屏不需要
+              }
+            }}
+          />
+          {action==='ALL' ? (
+            <div css={{ marginLeft: "-0.75rem", flex: 1 }}>
+              <TransparentInput
+                autoComplete="off"
+                autoFocus
+                inputSize="lg"
+                value={action}
+                placeholder="报告的详细可打印信息"
+                aria-label="Recipe title"
+                onChange={e => {
+                }}
+              />
+            </div>
+          ) : (
+            <Text
+              css={{
+                flex: 1,
+                textAlign: "center",
+                [theme.mediaQueries.md]: {
+                  textAlign: "left"
+                }
+              }}
+              wrap={false}
+              variant="h5"
+              gutter={false}
+            >
+              报告编号：{id}, 检验号{id}
+            </Text>
+          )}
+          <div
+            css={{
+              display: 'inline-flex',
+            }}
+          >
+            <ResponsivePopover
+              content={
+                <MenuList>
+                  <MenuItem
+                    onPress={() => {
+                    }}
+                  >
+                    编辑
+                  </MenuItem>
+                  <MenuItem onPress={() => null }>删除</MenuItem>
+                </MenuList>
+              }
+            >
+              <IconButton
+                css={{
+                  display: true ? undefined : "none",
+                  marginLeft: theme.spaces.sm
+                }}
+                variant="ghost"
+                icon={<IconMoreVertical />}
+                label="显示菜单"
+              />
+            </ResponsivePopover>
 
+            {id && (
+              <Button
+                variant="ghost"
+                css={{  //小屏这个按钮没有存在价值，顶条左角的后退就可以。
+                  //display: "none",
+                  [theme.mediaQueries.md]: {
+                    display: "inline-flex"
+                  },
+                  marginLeft: theme.spaces.sm
+                }}
+                onPress={() => 0}
+              >
+                取消
+              </Button>
+            )}
+            {(
+              <Button
+                intent="primary"
+                disabled={loading}
+                css={{ marginLeft: theme.spaces.sm }}
+                onPress={() => {
+                }}
+              >
+                保存编制中的检验报告
+              </Button>
+            )}
+          </div>
+        </Toolbar>
+      </Navbar>
       {
         //useMemo使用后：各分区项目子组件inp各自独立的，分区项目子组件内若使用setInp(null) 清空重置后，无法靠重新拉取后端数据来保证恢复显示。
         //项目子组件使用setInp(null) 重置后，若上级组件重新取后端数据没变化的，也必须再次路由后再进入才可以让各分区项目子组件render恢复显示数据。

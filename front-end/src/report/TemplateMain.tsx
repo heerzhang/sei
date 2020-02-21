@@ -19,7 +19,7 @@ import {
   IconPlus,
   DarkMode,
   LightMode,
-  Pager, IconArchive, ScrollView, useInfiniteScroll, Text, List, ListItem, Skeleton, Spinner
+  Pager, IconArchive, ScrollView,
 } from "customize-easy-ui-component";
 
 import { useSession,  useSignOut } from "../auth";
@@ -29,8 +29,7 @@ import { Layout } from "./Layout";
 import { RelationList } from "../inspect/RelationList";
 import typeAsRoute from "../typeAsRoute.json";
 import { RecordStarter, ReportStarter } from "./TemplateLoader";
-import { useLookReports } from "../inspect/report/db";
-import { InternalItemHandResult, OriginalViewProps, ReportViewProps } from "./comp/base";
+import { InternalItemHandResult, ReportViewProps } from "./comp/base";
 
 //模板的版本号和相应代码维护管理是个问题；不是下载离线的，而是时刻web在线的文档格式；配套数据库数据加上配套模板才能拼凑出正式文档。要保留维护几年？有人还在用旧的。
 //模板类型：支持主报告类型1个+分报告类型多个的情况，报告展示入口管理。模板版本号由后端管理。
@@ -80,7 +79,8 @@ function TemplateMain( {
           </Route>
           <Route path="/report/:rest*">
            { source &&
-               <RecordEditorOrPrint id={id} source={source} action={action} templateSet={template}/>
+               <RecordEditorOrPrint id={id} source={source} action={action} templateSet={template}
+                                    templateID={templateID} verId={verId} />
            }
           </Route>
         </Switch>
@@ -94,11 +94,13 @@ export interface RecordEditorOrPrintProps {
   id: string;
   source: any;  //原始记录的json数据 + 。
   templateSet: any;
+  templateID: string;
+  verId: string;
   action: string;
 }
 //带原始记录的场景。
 export const RecordEditorOrPrint: React.FunctionComponent<RecordEditorOrPrintProps> = (
-  {source,templateSet, action, id}
+  {source,templateSet, action, id, templateID, verId}
   ) => {
   const theme = useTheme();
   const {user} = useSession();
@@ -349,7 +351,8 @@ export const RecordEditorOrPrint: React.FunctionComponent<RecordEditorOrPrintPro
                 }}
               >
                 {templateSet?.original && action!=='none'
-                 && <RecordStarter id={id} action={action}  source={source} template={templateSet.original}/>
+                 && <RecordStarter id={id} action={action}  source={source} template={templateSet.original}
+                                   templateID={templateID} verId={verId}/>
                 }
                 {renderList && '有左边输出'}
               </Layer>
