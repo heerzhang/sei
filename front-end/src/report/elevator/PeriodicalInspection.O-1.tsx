@@ -73,8 +73,8 @@ export const OriginalView: React.RefForwardingComponent<InternalItemHandResult,O
           if(item){
             seq += 1;
             const rowHead =<ItemUniversal key={seq} ref={clRefs.current![recordPrintList.length+seq-1]}  x={x}  y={y}
-                                          show={action==='printAll'} inspectionContent={inspectionContent}
-                                   alone={false}  procedure={generalFormat[x].items[y].procedure}  details={generalFormat[x].items[y].details}
+                                   alone={false} show={action==='printAll'} inspectionContent={inspectionContent}
+                                   procedure={generalFormat[x].items[y].procedure}  details={generalFormat[x].items[y].details}
             />;
             htmlTxts.push(rowHead);
           }

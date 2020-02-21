@@ -21,7 +21,7 @@ import { InternalItemHandResult, OriginalViewProps, ReportViewProps } from "./co
 import { useCommitOriginalData } from "./db";
 import throttle from 'throttle-asynchronous'
 import { EditStorageContext } from "./StorageContext";
-import { Link } from "wouter";
+import { Link as RouterLink, Link } from "wouter";
 import { TransparentInput } from "../comp/base";
 
 /*
@@ -114,7 +114,6 @@ export const RecordStarter: React.FunctionComponent<RecordStarterProps> = ({
   //无法把<EditStorageContext.Provider value={{storage,setStorage}}>放这附近能产生效果，必须提升到顶级路由组件内去做。
   return (
     <React.Fragment>
-      开头部分条
       <Navbar
         css={{
           zIndex: theme.zIndices.sticky,
@@ -122,8 +121,11 @@ export const RecordStarter: React.FunctionComponent<RecordStarterProps> = ({
           boxShadow: theme.shadows.sm,
           position: "sticky",
           top: 0,
-          [theme.mediaQueries.md]: {
+          "@media (min-width:800px)": {
             position: "static"
+          },
+          "@media print": {
+            display: "none"
           }
         }}
       >
@@ -136,14 +138,14 @@ export const RecordStarter: React.FunctionComponent<RecordStarterProps> = ({
           <IconButton
             icon={<IconArrowLeft />}
             component={Link}
-            to="/inspect"
+            to={`/report/${templateID}/ver/${verId}/none/${id}`}
             label="后退"
             replace
             variant="ghost"
             css={{
               marginRight: theme.spaces.sm,
-              [theme.mediaQueries.md]: {
-                display: "none"     //大屏不需要
+              "@media (min-width:800px)": {
+                display: "none"
               }
             }}
           />
@@ -165,7 +167,7 @@ export const RecordStarter: React.FunctionComponent<RecordStarterProps> = ({
               css={{
                 flex: 1,
                 textAlign: "center",
-                [theme.mediaQueries.md]: {
+                "@media (min-width:800px)": {
                   textAlign: "left"
                 }
               }}
@@ -173,7 +175,7 @@ export const RecordStarter: React.FunctionComponent<RecordStarterProps> = ({
               variant="h5"
               gutter={false}
             >
-              报告编号：{id}, 检验号{id}
+              报告ID：{id}
             </Text>
           )}
           <div
@@ -204,36 +206,36 @@ export const RecordStarter: React.FunctionComponent<RecordStarterProps> = ({
                 label="显示菜单"
               />
             </ResponsivePopover>
-
-            {id && (
-              <Button
-                variant="ghost"
-                css={{  //小屏这个按钮没有存在价值，顶条左角的后退就可以。
-                  //display: "none",
-                  [theme.mediaQueries.md]: {
-                    display: "inline-flex"
-                  },
-                  marginLeft: theme.spaces.sm
-                }}
-                onPress={() => 0}
-              >
-                取消
-              </Button>
-            )}
             {(
               <Button
+                css={{
+                  marginLeft: theme.spaces.sm,
+                  "@media (max-width:799px)": {
+                    display: "none"
+                  }
+                }}
                 intent="primary"
                 disabled={loading}
-                css={{ marginLeft: theme.spaces.sm }}
                 onPress={() => {
                 }}
               >
-                保存编制中的检验报告
+              保存到服务器
               </Button>
             )}
           </div>
         </Toolbar>
       </Navbar>
+      <div  css={{
+        "@media not print": {
+          display: "none"
+        }
+      }}>
+        <Text variant="h4" css={{textAlign:'center'}}>福建省特种设备检验研究院</Text>
+         <Text>
+         本原始记录对应的报告模板类型：{templateID}，版本：{verId}，报告ID：{id}
+         </Text>
+        <hr/>
+      </div>
       {
         //useMemo使用后：各分区项目子组件inp各自独立的，分区项目子组件内若使用setInp(null) 清空重置后，无法靠重新拉取后端数据来保证恢复显示。
         //项目子组件使用setInp(null) 重置后，若上级组件重新取后端数据没变化的，也必须再次路由后再进入才可以让各分区项目子组件render恢复显示数据。
@@ -243,7 +245,7 @@ export const RecordStarter: React.FunctionComponent<RecordStarterProps> = ({
           repId: id,
         })
       }
-
+     {/*确认修改按钮，需要每个当前检验项目的编辑器inp，所以无法提升到这个层次做触发*/}
       <Button
         css={{ marginTop: theme.spaces.md }}
         size="lg"  intent={'warning'}
@@ -257,7 +259,6 @@ export const RecordStarter: React.FunctionComponent<RecordStarterProps> = ({
         }}
       >保存到服务器</Button>
       <LayerLoading loading={loading} />
-      <Text  css={{wordWrap: 'break-word'}}>{false && `当前(${JSON.stringify(storage)})`}</Text>
     </React.Fragment>
   );
 }
