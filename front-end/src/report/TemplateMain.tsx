@@ -262,7 +262,9 @@ export const RecordEditorOrPrint: React.FunctionComponent<RecordEditorOrPrintPro
                 >
                   <Tab id="original">原始记录录入</Tab>
                   <Tab id="list">检验溯源</Tab>
-                  <Tab id="report">检验报告</Tab>
+                  <RouterLink to={`/report/${templateID}/ver/${verId}/preview/${id}`}>
+                    <Tab id="report">检验报告</Tab>
+                  </RouterLink>
                 </Tabs>
               </DarkMode>
             </div>
@@ -284,23 +286,23 @@ export const RecordEditorOrPrint: React.FunctionComponent<RecordEditorOrPrintPro
             <TabPanel  id="ISPlist">
               <RelationList />
             </TabPanel>
-            <TabPanel id="report" css={{
-              display: 'flex',
-              alignItems: 'center',
-              height: '100%'
-            }}>
-              <RouterLink to="/report/EL-DJ/ver/1/preview/227">
-                <Button css={{
-                  margin: 'auto'
-                }}
-                  size="lg" noBind
-                  intent="primary"
-                  iconAfter={<IconArrowRight />}
-                >
-                  查看正式报告和打印
-                </Button>
-              </RouterLink>
-            </TabPanel>
+            <RouterLink to={`/report/${templateID}/ver/${verId}/preview/${id}`}>
+              <TabPanel id="report" css={{
+                display: 'flex',
+                alignItems: 'center',
+                height: '100%'
+              }}>
+                  <Button css={{
+                    margin: 'auto'
+                  }}
+                    size="lg" noBind
+                    intent="primary"
+                    iconAfter={<IconArrowRight />}
+                  >
+                    查看正式报告和打印
+                  </Button>
+              </TabPanel>
+            </RouterLink>
           </Pager>
 
         </Layer>
