@@ -19,11 +19,11 @@ import {
   IconPlus,
   DarkMode,
   LightMode,
-  Pager, IconArchive, ScrollView,
+  Pager, IconArchive, ScrollView, IconArrowRight
 } from "customize-easy-ui-component";
 
 import { useSession,  useSignOut } from "../auth";
-import { Link, useLocation, Switch, Route } from "wouter";
+import { Link, useLocation, Switch, Route, Link as RouterLink } from "wouter";
 import { useMedia } from "use-media";
 import { Layout } from "./Layout";
 import { RelationList } from "../inspect/RelationList";
@@ -261,8 +261,7 @@ export const RecordEditorOrPrint: React.FunctionComponent<RecordEditorOrPrintPro
                   variant="evenly-spaced"
                 >
                   <Tab id="original">原始记录录入</Tab>
-                  <Tab id="list">我参与的检验</Tab>
-                  <Tab id="check">待我审核的检验</Tab>
+                  <Tab id="list">检验溯源</Tab>
                   <Tab id="report">检验报告</Tab>
                 </Tabs>
               </DarkMode>
@@ -285,10 +284,22 @@ export const RecordEditorOrPrint: React.FunctionComponent<RecordEditorOrPrintPro
             <TabPanel  id="ISPlist">
               <RelationList />
             </TabPanel>
-            <TabPanel id="myCheck">
-              <RelationList check/>
-            </TabPanel>
-            <TabPanel id="report">
+            <TabPanel id="report" css={{
+              display: 'flex',
+              alignItems: 'center',
+              height: '100%'
+            }}>
+              <RouterLink to="/report/EL-DJ/ver/1/preview/227">
+                <Button css={{
+                  margin: 'auto'
+                }}
+                  size="lg" noBind
+                  intent="primary"
+                  iconAfter={<IconArrowRight />}
+                >
+                  查看正式报告和打印
+                </Button>
+              </RouterLink>
             </TabPanel>
           </Pager>
 
@@ -354,7 +365,6 @@ export const RecordEditorOrPrint: React.FunctionComponent<RecordEditorOrPrintPro
                  && <RecordStarter id={id} action={action}  source={source} template={templateSet.original}
                                    templateID={templateID} verId={verId}/>
                 }
-                {renderList && '有左边输出'}
               </Layer>
             </div>
 

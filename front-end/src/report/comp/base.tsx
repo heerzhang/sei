@@ -244,6 +244,7 @@ export const InspectRecordCollapse: React.FunctionComponent<InspectRecordCollaps
           intent="primary"
           iconAfter={eos.show  ? <IconChevronUp /> : <IconChevronDown />}
           {...eos.buttonProps}
+          css={{whiteSpace:'unset'}}
         >
           {<Text variant="h5" css={{color: eos.show ? theme.colors.palette.red.base:undefined}}>{label}</Text>}
         </Button>

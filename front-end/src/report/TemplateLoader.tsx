@@ -106,6 +106,12 @@ export const RecordStarter: React.FunctionComponent<RecordStarterProps> = ({
   //可是这里return ；将会导致子孙组件都会umount!! 等于重新加载==路由模式刷新一样； 得权衡利弊。
   // if(updating)  return <LayerLoading loading={updating} label={'正在获取后端应答，加载中请稍后'}/>;
   //管道单线图，数量大，图像文件。可仅选定URL，预览图像。但是不全部显示出来，微缩摘要图模式，点击了才你能显示大的原图。
+  async function toSaveBackEnd() {
+      //手机上更新模板TemplateView子组件重做render触发失效。只好采用延迟策略，每个分区项目的保存处理前准备，作一次render完了，才能发送数据给后端。
+      setEnable(false);
+      const {hasResolved,} =await throttledUpdateBackend('1');
+      hasResolved&&throttledUpdateEnable(true);
+  }
 
   if (!id) {
     return null;
@@ -149,7 +155,7 @@ export const RecordStarter: React.FunctionComponent<RecordStarterProps> = ({
               }
             }}
           />
-          {action==='ALL' ? (
+          {(action==='ALL'|| action==='printAll') ? (
             <div css={{ marginLeft: "-0.75rem", flex: 1 }}>
               <TransparentInput
                 autoComplete="off"
@@ -214,10 +220,10 @@ export const RecordStarter: React.FunctionComponent<RecordStarterProps> = ({
                     display: "none"
                   }
                 }}
-                intent="primary"
-                disabled={loading}
-                onPress={() => {
-                }}
+                intent={'warning'}
+                disabled ={!enable}
+                loading ={loading}
+                onPress={ ()=>toSaveBackEnd() }
               >
               保存到服务器
               </Button>
@@ -251,12 +257,7 @@ export const RecordStarter: React.FunctionComponent<RecordStarterProps> = ({
         size="lg"  intent={'warning'}
         disabled ={!enable}
         loading ={loading}
-        onPress={ async () => {
-          //手机上更新模板TemplateView子组件重做render触发失效。只好采用延迟策略，每个分区项目的保存处理前准备，作一次render完了，才能发送数据给后端。
-          setEnable(false);
-          const {hasResolved,} =await throttledUpdateBackend('1');
-          hasResolved&&throttledUpdateEnable(true);
-        }}
+        onPress={ ()=>toSaveBackEnd() }
       >保存到服务器</Button>
       <LayerLoading loading={loading} />
     </React.Fragment>
@@ -297,7 +298,6 @@ export const ReportStarter: React.FunctionComponent<ReportStarterProps> = ({
           repId: id,
         })
       }
-      <Text  css={{wordWrap: 'break-word'}}>{false && `当前(${JSON.stringify(storage)})`}</Text>
     </React.Fragment>
   );
 }
