@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 import * as React from "react";
-import { useFollowerIngs } from "./hooks/with-follow-request-count";
+import { useFollowerIngs } from "./hooks/useHelpers";
 import {
   List,
   ListItem,

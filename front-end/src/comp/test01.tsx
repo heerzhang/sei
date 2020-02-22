@@ -7,6 +7,8 @@ import {
   ListItem,
 Skeleton, useInfiniteScroll
 } from "customize-easy-ui-component";
+//import useThrottle from "@rooks/use-throttle";
+import { useThrottle } from "../hooks/useHelpers";
 
 
 //import { globalHistory  } from "@reach/router";
@@ -16,6 +18,14 @@ var faker = require('faker/locale/zh_CN');
 
 const set = new Set();
 export default function Example(props) {
+  const [number, setNumber] = React.useState(0);
+  const addNumber = (egr) => {
+    console.log("RecordView捕获,切花source egr=",egr);
+   setNumber(number + 1);
+}
+  //let isReady=true;
+  const {doFunc:addNumberThrottled, ready:isReady} = useThrottle(addNumber,4000);
+ // const [addNumberThrottled, isReady] = useThrottle(addNumber, 4000);
 
   const [count, setCount] = React.useState(1);
   const [val, setVal] = React.useState('');
@@ -94,10 +104,14 @@ export default function Example(props) {
   // @ts-ignore
   ref.current && console.log("来看", ref.current.offsetHeight,"+",ref.current.clientHeight,"大于",ref.current.scrollHeight);
 
-
+//addNumberThrottled('上空的飞机但是')
   return (
     <div>
-
+      <h1>Number: {number}</h1>
+      <p>Click really fast.</p>
+      <button onClick={addNumber}>Add number</button>
+      <button onClick={()=>{addNumberThrottled('上空的飞机但是')} }>Add number isReady={isReady?'yes':'no'} throttled</button>
+      <hr/>
       <h4>{count}</h4>
       <hr/>
       <Child callback={callback}/>

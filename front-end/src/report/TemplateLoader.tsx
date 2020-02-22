@@ -23,7 +23,7 @@ import { useCommitOriginalData } from "./db";
 import { EditStorageContext } from "./StorageContext";
 import { Link as RouterLink } from "wouter";
 import { TransparentInput } from "../comp/base";
-import { useThrottle } from "../hooks/with-follow-request-count";
+import { useThrottle } from "../hooks/useHelpers";
 
 /*
 错误！ 本地重复定义了外部全局实例，结果本文件内只能看到 自己的EditStorageContext，而不是公用的哪一个。
@@ -101,25 +101,30 @@ export const RecordStarter: React.FunctionComponent<RecordStarterProps> = ({
     //须用其它机制，切换界面setXXX(标记),result？():();设置新的URL转场页面, 结果要在点击函数外面/组件顶层获得；组件根据操作结果切换页面/链接。
   }
 
-  const [throttledUpdateBackend, timer1]= useThrottle(updateRecipe,0);
+  //const [throttledUpdateBackend, timer1]= useThrottle(updateRecipe,0);
   //延迟3秒才执行的; 可限制频繁操作，若很多下点击的3秒后触发2次。
   //【注意】延迟时间设置后，页面切换会报错，组件已经卸载，还来setEnable啊，状态错误！
-  const [throttledUpdateEnable, timer2] = useThrottle(setEnable,3000);
+  const {doFunc:throttledUpdateRecipe, ready} = useThrottle(updateRecipe,3000);
+  //const [throttledUpdateEnable, isReady] = useThrottle(setEnable, 5000);
+  /*
   React.useEffect(() => {
     return () => {
-      clearTimeout(timer1);
       clearTimeout(timer2);
     };
-  }, [timer1, timer2]);
+  }, [timer2]);
+  */
   //可是这里return ；将会导致子孙组件都会umount!! 等于重新加载==路由模式刷新一样； 得权衡利弊。
   // if(updating)  return <LayerLoading loading={updating} label={'正在获取后端应答，加载中请稍后'}/>;
   //管道单线图，数量大，图像文件。可仅选定URL，预览图像。但是不全部显示出来，微缩摘要图模式，点击了才你能显示大的原图。
+  /*
   async function toSaveBackEnd() {
       //手机上更新模板TemplateView子组件重做render触发失效。只好采用延迟策略，每个分区项目的保存处理前准备，作一次render完了，才能发送数据给后端。
       setEnable(false);
-      const {hasResolved,} =await throttledUpdateBackend('1');
-      hasResolved&&throttledUpdateEnable(true);
+      await updateRecipe('1');    //阻塞了await关键字只能用在aync定义的函数内。
+
+    throttledUpdateEnable(true);
   }
+*/
 
   if (!id) {
     return null;
@@ -229,9 +234,9 @@ export const RecordStarter: React.FunctionComponent<RecordStarterProps> = ({
                   }
                 }}
                 intent={'warning'}
-                disabled ={!enable}
+                disabled ={!ready}
                 loading ={loading}
-                onPress={ ()=>toSaveBackEnd() }
+                onPress={ ()=>throttledUpdateRecipe('1') }
               >
               保存到服务器
               </Button>
@@ -263,9 +268,9 @@ export const RecordStarter: React.FunctionComponent<RecordStarterProps> = ({
       <Button
         css={{ marginTop: theme.spaces.md }}
         size="lg"  intent={'warning'}
-        disabled ={!enable}
+        disabled ={!ready}
         loading ={loading}
-        onPress={ ()=>toSaveBackEnd() }
+        onPress={ ()=>throttledUpdateRecipe('1') }
       >保存到服务器</Button>
       <LayerLoading loading={loading} />
     </React.Fragment>

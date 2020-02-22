@@ -4,6 +4,7 @@
 //import * as firebase from "firebase/app";
 import {  useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
+import * as React from "react";
 //import debug from "debug";
 //const log = debug("app:with-follow-requests");
 
@@ -112,8 +113,8 @@ export function useFollowerIngs(toUser = true) {
   return { loading, userList:value };
 }
 
-//使用，页面切换会报错。
-export function useThrottle(fn, delay) {
+//使用，页面切换会定时器执行报错unmount。
+export function useThrottle222(fn, delay) {
   let timeoutId;
   const accumulator = [];
   const doFunc =(...args) => new Promise(resolve => {
@@ -132,7 +133,75 @@ export function useThrottle(fn, delay) {
     timeoutId = setTimeout(execute, delay)
   });
 
+  React.useEffect(() => {
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [timeoutId]);
   return [doFunc, timeoutId];
 }
+
+//export function useThrottle(fn: Function, timeout: number = 1000) {
+
+export function useThrottle333(fn, timeout) {
+  const [ready, setReady] = React.useState(true);
+  const timerRef = React.useRef(null);
+/*
+  if (!fn || typeof fn !== "function") {
+    throw new Error(
+      "As a first argument, you need to pass a function to useThrottle hook."
+    );
+  }
+*/
+  const throttledFn = React.useCallback(
+    (...args) => {
+      if(ready) {
+        setReady(false);
+        fn(...args);
+      }
+    },
+    [ready, fn]
+  );
+
+  React.useEffect(() => {
+    if (!ready) {
+      timerRef.current = setTimeout(() => {
+        setReady(true);
+      }, timeout);
+      return () => clearTimeout(timerRef.current);
+    }
+  }, [ready, timeout]);
+
+  return [ready, throttledFn];
+}
+
+//防止频繁 按按钮！3000毫秒。
+export function useThrottle(fn: Function, timeout: number = 3000) {
+  const [ready, setReady] = React.useState(true);
+  const timerRef = React.useRef(null);
+  if (!fn || typeof fn !== "function")   throw new Error("要传函数");
+  const doFunc = React.useCallback(
+    (...args) => {
+      if(ready) {
+        setReady(false);
+        fn(...args);
+      }
+    },
+    [ready, fn]
+  );
+
+  React.useEffect(() => {
+    if (!ready) {
+      timerRef.current = setTimeout(() => {
+        setReady(true);
+      }, timeout);
+      return () => clearTimeout(timerRef.current);
+    }
+  }, [ready, timeout]);
+
+  ///return [ready, throttledFn]; 数组的版本编译器容易报错！改成返回对象的搞。
+  return {doFunc, ready};
+}
+
 
 

@@ -1959,6 +1959,11 @@
     "@react-spring/core" "^9.0.0-beta.33"
     "@react-spring/shared" "^9.0.0-beta.33"
 
+"@rooks/use-throttle@^3.6.0":
+  version "3.6.0"
+  resolved "https://registry.yarnpkg.com/@rooks/use-throttle/-/use-throttle-3.6.0.tgz#e8274a8b317d50063b965fdcfbef48b9eb27c73c"
+  integrity sha512-kkFnmlH3hMkl1OvoqOE5R+LcOraeyTIaPfWmK5UZ4kcBQ1WNkch2+e0JubIbOP0dyAqrSDVNShvPf+9bV3pSdA==
+
 "@samverschueren/stream-to-observable@^0.3.0":
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/@samverschueren/stream-to-observable/-/stream-to-observable-0.3.0.tgz#ecdf48d532c58ea477acfcab80348424f8d0662f"

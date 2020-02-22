@@ -214,7 +214,7 @@ function TopRouter() {
             <PrivateRoute path="/chaipu/:rest*" component={Main} />
             <Route path="/">   <Branding />   </Route>
 
-            <Route path="/test" component={Test}/>
+            <Route path="/test/test2"  component={Test}/>
             { /*
 　           从设备的视角来导航进入。
             */ }
@@ -224,7 +224,7 @@ function TopRouter() {
             <NestingtRoute path="/report/:rest*" component={ReportEntrance}/>
             <NestingtRoute path="/original/:rest*" component={OriginalRecord}/>
 
-            <Route path="/test/test01">   <Example  />    </Route>
+            <Route path="/test/test1">   <Example  />    </Route>
             <Route path="/:rest*"><h1>没有该URL匹配的视图内容</h1></Route>
           </Switch>
 
