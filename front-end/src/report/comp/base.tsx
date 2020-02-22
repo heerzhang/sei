@@ -472,6 +472,7 @@ export　function useItemInputControl({
 //各个检验单项子组件暴露给父组件的接口数据。
 export interface InternalItemHandResult {
   inp: any;
+  doConfirm: ()=>{};
 }
 //各个检验单项
 export interface InternalItemProps  extends React.HTMLAttributes<HTMLDivElement>{
@@ -487,6 +488,7 @@ export interface OriginalViewProps {
   action: string;
   ref?: any;
   verId: string;
+  repId?: string;
 }
 
 export interface ReportViewProps {

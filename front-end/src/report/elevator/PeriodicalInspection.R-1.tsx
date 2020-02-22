@@ -39,7 +39,7 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
     if(orc['对重越程'] && orc['对重越程最大'])   out[3.15][2]=`最大允许值${orc['对重越程最大']}mm;测量值${orc['对重越程']}mm`;
   }, []);
   const itRes =React.useMemo(()=>itemResultTransform(orc,inspectionContent,检验结果替换), [orc,检验结果替换]);
-  const {renderIspContent} =useIspNormalizeContent({itRes, inspectionContent, modelPath:'EL-DJ/ver/1', repNo:'227'});
+  const {renderIspContent} =useIspNormalizeContent({itRes, inspectionContent, modelPath:'EL-DJ/ver/1', repNo:`${repId}`});
 
   return (
     <React.Fragment>
@@ -115,7 +115,7 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
             <Text variant="h2" css={{textAlign:'center'}}>有机房曳引驱动电梯定期检验报告</Text>
           </div>
         </Collapse>
-        <RouterLink  to={`/report/EL-DJ/ver/1/Survey/227`}>
+        <RouterLink  to={`/report/EL-DJ/ver/1/Survey/${repId}`}>
          <Table  fixed={ ["15%","34%","16%","%"]  }
                 printColWidth={ ["95","210","110","300"] }
                 css={ {borderCollapse: 'collapse' } }
@@ -156,7 +156,7 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
               <CCell component="th" scope="row">检验依据</CCell>
               <Cell colSpan={6}>《电梯监督检验和定期检验规则——曳引与强制驱动电梯》（TSG T7001-2009）及1号、2号修改单</Cell>
             </TableRow>
-            <RouterLink  to={`/report/EL-DJ/ver/1/Instrument/227`}>
+            <RouterLink  to={`/report/EL-DJ/ver/1/Instrument/${repId}`}>
               <TableRow >
                 <CCell component="th" scope="row" rowSpan={1+instrumentTable.length}>主要检验仪器设备</CCell>
                 <CCell>序号</CCell>
@@ -180,13 +180,13 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
                 );
               } )
             }
-            <RouterLink  to={`/report/EL-DJ/ver/1/Conclusion/227`}>
+            <RouterLink  to={`/report/EL-DJ/ver/1/Conclusion/${repId}`}>
              <TableRow>
               <CCell component="th" scope="row">检验结论</CCell>
               <CCell colSpan={6}><Text variant="h1" css={{fontSize:'4rem'}}>{orc.检验结论}</Text></CCell>
             </TableRow>
             </RouterLink>
-            <RouterLink  to={`/report/EL-DJ/ver/1/Remark/227`}>
+            <RouterLink  to={`/report/EL-DJ/ver/1/Remark/${repId}`}>
             <TableRow>
               <CCell component="th" scope="row">备注</CCell>
               <Cell colSpan={6}>{orc.memo}</Cell>
@@ -199,7 +199,7 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
                 css={ {borderCollapse: 'collapse' } }
         >
           <TableBody>
-            <RouterLink  to={`/report/EL-DJ/ver/1/Appendix/227`}>
+            <RouterLink  to={`/report/EL-DJ/ver/1/Appendix/${repId}`}>
             <TableRow>
               <CCell component="th" scope="row">检验日期</CCell>
               <CCell colSpan={2}>{orc.检验日期}</CCell>
@@ -228,7 +228,7 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
                css={ {borderCollapse: 'collapse' } }
         >
           <TableHead>
-            <RouterLink  to={`/report/EL-DJ/ver/1/ALL/227`}>
+            <RouterLink  to={`/report/EL-DJ/ver/1/ALL/${repId}`}>
               <TableRow>
                 <CCell>序号</CCell>
                 <CCell>检验类别</CCell>
@@ -248,7 +248,7 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
                 css={ {borderCollapse: 'collapse' } }
         >
           <TableHead>
-           <RouterLink  to={`/report/EL-DJ/ver/1/ReCheck/227`}>
+           <RouterLink  to={`/report/EL-DJ/ver/1/ReCheck/${repId}`}>
             <TableRow>
               <CCell>序号</CCell>
               <CCell>类别/编号</CCell>
@@ -261,7 +261,7 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
           <TableBody>
             {itRes.failure.map((ts, i) => {
               return (
-                <RouterLink key={i} to={`/report/EL-DJ/ver/1/${ts}/227`}>
+                <RouterLink key={i} to={`/report/EL-DJ/ver/1/${ts}/${repId}`}>
                   <TableRow>
                     <CCell component="th" scope="row">{i+1}</CCell>
                     <CCell>{itRes[ts].iClass}/{ts}</CCell>
@@ -284,8 +284,11 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
           }}
        >
        - 报告完毕 -<br/>
-       <RouterLink to={`/report/EL-DJ/ver/${verId}/printAll/227`}>
-         看完整的原始记录
+       <RouterLink to={`/report/EL-DJ/ver/${verId}/printAll/${repId}`}>
+         看完整原始记录
+       </RouterLink><br/>
+       <RouterLink to={`/report/EL-DJ/ver/${verId}/ALL/${repId}`}>
+         编辑原始记录
        </RouterLink>
       </div>
     </React.Fragment>

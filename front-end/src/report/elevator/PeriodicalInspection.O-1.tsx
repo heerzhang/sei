@@ -10,7 +10,6 @@ import {  mergeEditorItemRefs  } from "../../utils/tools";
 //import isEqual from "lodash.isequal";
 //import { Link as RouterLink } from "wouter";
 import { EditStorageContext } from "../StorageContext";
-import throttle from 'throttle-asynchronous'
 import { ItemConclusion, ItemRecheckResult, ItemUniversal } from "../editor/eBase";
 import { ItemAppendixB, ItemRemarks } from "./elvBase";
 import { ItemGapMeasure, ItemSurveyLinkMan } from "./elvRarelyVary";
@@ -18,6 +17,7 @@ import { ItemInstrumentTable } from "../editor/eRarelyVary";
 import { createItem, getInspectionItemsLength, verifyAction } from "../editor/eHelper";
 import { inspectionContent } from "./Periodical/main";
 import { useGeneralFormat } from "./Periodical/editor";
+import { useThrottle } from "../../hooks/useHelpers";
 
 //原始记录，一一对应的报告的录入编辑数据，可打印。
 //不需要每个verId新搞一个文件的，甚至不需要搞新的组件，可以只需内部逻辑处理。
@@ -39,30 +39,25 @@ const maxItemsSeq=getInspectionItemsLength(inspectionContent);
 //forwardRef实际上已经没用了，ref，也可改成简易组件模式。
 export const OriginalView: React.RefForwardingComponent<InternalItemHandResult,OriginalViewProps>=
   React.forwardRef((
-    { action, children, verId}, ref
+    { action, children, verId, repId}, ref
   ) => {
     const {storage, setStorage} =React.useContext(EditStorageContext);
-    const {generalFormat} =useGeneralFormat({verId, repId:'227'});
+    const {generalFormat} =useGeneralFormat({verId, repId});
     let editorRefCount=recordPrintList.length+maxItemsSeq;
     const clRefs =useProjectListAs({count: editorRefCount});
     //同名字的字段：清除／覆盖，编辑器未定义的字段数据可保留。
     const outCome=mergeEditorItemRefs( ...clRefs.current! );
-    //旧模式两次暴露传递，返回给爷辈组件。React.useImperativeHandle( ref,() => ({ inp: outCome }), [outCome] );
-    const [enableBtn, setEnableBtn] = React.useState(true);
-    //延迟5秒才执行的; 可限制频繁操作。
-    const throttledUpdateEnableBtn =throttle(setEnableBtn,5000);
+    //旧模式两次暴露传递，返回给爷辈组件。
     const [doConfirmModify, setDoConfirmModify] = React.useState(false);
-    //useReducer我这里不用它的state，只用action，简化变成消息通知或异步的命令。
-    //多次点击按钮useReducer这里却不会多次触发的，只有在状态修改了才能触发执行？。
-    //useReducer底下state不能简化和省略，会导致不正常。为什么按钮点击会触发了两次一样action？
-    //必须从false到true的变化才能触发执行。 true->true不能执行的。  useLayoutEffect
+    React.useImperativeHandle( ref,() => ({doConfirm: setDoConfirmModify }), [setDoConfirmModify] );
+    const {doFunc:throttledSetDoConfirmModify, ready} = useThrottle(setDoConfirmModify);
+    //点按钮后outCome先要render一次获得最新值；必须从false到true的变化才能触发执行。 true->true不能执行的。 useLayoutEffect
     React.useEffect(() => {
       if(doConfirmModify){
         setStorage({...storage, ...outCome});
         setDoConfirmModify(false);
-        throttledUpdateEnableBtn(true);
       }
-   }, [doConfirmModify, outCome, storage, setStorage, throttledUpdateEnableBtn] );
+   }, [doConfirmModify, outCome, storage, setStorage] );
 
 
     const renderItemsContent =React.useMemo(() => {
@@ -103,7 +98,7 @@ export const OriginalView: React.RefForwardingComponent<InternalItemHandResult,O
                 React.cloneElement(itemA.zoneContent as React.ReactElement<any>, {
                   ref: null,
                   key: itemA.itemArea,
-                  repId: '227',
+                  repId,
                   show: true
                 })
               }
@@ -117,7 +112,7 @@ export const OriginalView: React.RefForwardingComponent<InternalItemHandResult,O
                   ref: clRefs.current![i],
                   show: action==='printAll',
                   alone: false,
-                  repId: '227',
+                  repId,
                   key: i
                 });
             });
@@ -131,10 +126,10 @@ export const OriginalView: React.RefForwardingComponent<InternalItemHandResult,O
     return <React.Fragment>
       {recordList}
       { (action==='ALL' || action==='printAll') &&
-          <Button size="lg" intent={'primary'}  disabled ={!enableBtn}
-                onPress={() =>{   setEnableBtn(false);
-                 //这里派发出去editorSnapshot: outCome都是按钮捕获的值，还要经过一轮render才会有最新值。
-                 setDoConfirmModify(true);
+          <Button size="lg" intent={'primary'}  disabled ={!ready}
+                onPress={() =>{
+                 //这里派发出去editorSnapshot: outCome {...storage, ...outCome}都是按钮捕获的值，还要经过一轮render才会有最新值。
+                 throttledSetDoConfirmModify(true);
               }
             }>
             全部输入一起确认

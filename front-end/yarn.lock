@@ -1959,11 +1959,6 @@
     "@react-spring/core" "^9.0.0-beta.33"
     "@react-spring/shared" "^9.0.0-beta.33"
 
-"@rooks/use-throttle@^3.6.0":
-  version "3.6.0"
-  resolved "https://registry.yarnpkg.com/@rooks/use-throttle/-/use-throttle-3.6.0.tgz#e8274a8b317d50063b965fdcfbef48b9eb27c73c"
-  integrity sha512-kkFnmlH3hMkl1OvoqOE5R+LcOraeyTIaPfWmK5UZ4kcBQ1WNkch2+e0JubIbOP0dyAqrSDVNShvPf+9bV3pSdA==
-
 "@samverschueren/stream-to-observable@^0.3.0":
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/@samverschueren/stream-to-observable/-/stream-to-observable-0.3.0.tgz#ecdf48d532c58ea477acfcab80348424f8d0662f"
@@ -13605,11 +13600,6 @@ throat@^4.0.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/throat/-/throat-4.1.0.tgz#89037cbc92c56ab18926e6ba4cbb200e15672a6a"
   integrity sha1-iQN8vJLFarGJJua6TLsgDhVnKmo=
-
-throttle-asynchronous@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/throttle-asynchronous/-/throttle-asynchronous-1.1.1.tgz#7a5a2821f86a298dae24174e2b07069699d989a6"
-  integrity sha512-rgpF4fS+KdfSRHRvpSFD5B8saXmX/vlXtsDIrRljMjFd2onKRiLF210UIvUlE6TG/GtHQHw5PmenvUFGgTlpLA==
 
 through2@^2.0.0:
   version "2.0.5"

@@ -175,8 +175,11 @@ export function useThrottle333(fn, timeout) {
   return [ready, throttledFn];
 }
 
+  //"throttle-asynchronous": "^1.1.1",
+  //看了 "@rooks/use-throttle":"^3.6.0",
 //防止频繁 按按钮！3000毫秒。
 export function useThrottle(fn: Function, timeout: number = 3000) {
+  //要把按钮使能开关ready一起做上。
   const [ready, setReady] = React.useState(true);
   const timerRef = React.useRef(null);
   if (!fn || typeof fn !== "function")   throw new Error("要传函数");
@@ -195,6 +198,7 @@ export function useThrottle(fn: Function, timeout: number = 3000) {
       timerRef.current = setTimeout(() => {
         setReady(true);
       }, timeout);
+      //重要的，否则经常报错Can't perform a React state update on an unmounted。卸载了必须清理回调任务。
       return () => clearTimeout(timerRef.current);
     }
   }, [ready, timeout]);

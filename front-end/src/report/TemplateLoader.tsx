@@ -55,7 +55,7 @@ export const RecordStarter: React.FunctionComponent<RecordStarterProps> = ({
   const toast = useToast();
   //初始化不可以直接取React.useState(source || {})，不然路由器切换就变成旧source。新修改被抛弃了。
   const {storage, } =React.useContext(EditStorageContext);
-  const [enable, setEnable] = React.useState(true);
+  //const [enable, setEnable] = React.useState(true);
   //useState(默认值) ； 后面参数值仅仅在组件的装载时期有起作用，若再次路由RouterLink进入的，它不会依照该新默认值去修改show。useRef跳出Cpature Value带来的限制
 //旧模式淘汰！  const ref =React.useRef<InternalItemHandResult>(null);
 
@@ -104,7 +104,10 @@ export const RecordStarter: React.FunctionComponent<RecordStarterProps> = ({
   //const [throttledUpdateBackend, timer1]= useThrottle(updateRecipe,0);
   //延迟3秒才执行的; 可限制频繁操作，若很多下点击的3秒后触发2次。
   //【注意】延迟时间设置后，页面切换会报错，组件已经卸载，还来setEnable啊，状态错误！
-  const {doFunc:throttledUpdateRecipe, ready} = useThrottle(updateRecipe,3000);
+  const {doFunc:throttledUpdateRecipe, ready} = useThrottle(updateRecipe,5000);
+
+  const refEditor =React.useRef<InternalItemHandResult>(null);
+
   //const [throttledUpdateEnable, isReady] = useThrottle(setEnable, 5000);
   /*
   React.useEffect(() => {
@@ -205,13 +208,20 @@ export const RecordStarter: React.FunctionComponent<RecordStarterProps> = ({
             <ResponsivePopover
               content={
                 <MenuList>
+                  <MenuItem disabled={!ready} onPress={ ()=>throttledUpdateRecipe('1') }>
+                    保存到服务器
+                  </MenuItem>
                   <MenuItem
                     onPress={() => {
                     }}
                   >
                     编辑
                   </MenuItem>
-                  <MenuItem onPress={() => null }>删除</MenuItem>
+                  <MenuItem onPress={() => {
+                      (refEditor as any).current!.doConfirm(true);
+                    } }>
+                  全部输入一起确认
+                  </MenuItem>
                 </MenuList>
               }
             >
@@ -259,6 +269,7 @@ export const RecordStarter: React.FunctionComponent<RecordStarterProps> = ({
         //useMemo使用后：各分区项目子组件inp各自独立的，分区项目子组件内若使用setInp(null) 清空重置后，无法靠重新拉取后端数据来保证恢复显示。
         //项目子组件使用setInp(null) 重置后，若上级组件重新取后端数据没变化的，也必须再次路由后再进入才可以让各分区项目子组件render恢复显示数据。
         React.cloneElement(template as React.ReactElement<any>, {
+          ref: refEditor,
           inp: source,
           action,
           repId: id,
