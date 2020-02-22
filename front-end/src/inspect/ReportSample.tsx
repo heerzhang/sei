@@ -16,13 +16,18 @@ import {
   Container,
   ResponsivePopover,
   IconMoreVertical,
-  IconArrowLeft,
+  IconArrowLeft, IconArrowRight, Input
 } from "customize-easy-ui-component";
 import {  useDispatchIspMen,  useReport } from "./db";
 //import { useSession } from "../auth";
 import {Helmet} from "react-helmet";
-import {  Link,  } from "wouter";
+import { Link as RouterLink, Link, Route, Switch } from "wouter";
 import { ContainLine, TransparentInput } from "../comp/base";
+import { IspDetail } from "./IspDetail";
+import { CCell, RCell, Table, TableBody, TableRow } from "../comp/TableExt";
+import { ReportStarter } from "../report/TemplateLoader";
+import { RecordEditorOrPrint } from "../report/TemplateMain";
+import { useCommitOriginalData, useQueryOriginalRecord } from "../report/db";
 
 //[HOOK限制]按钮点击函数内部直接上toast()或toaster.notify()很可能无法正常显示。而放在函数组件顶层render代码前却能正常。
 
@@ -340,92 +345,29 @@ export const ReportSample: React.FunctionComponent<ComposeProps> = ({
                   width:'100%',
                 }}
                 >
-                  <Text variant="h5">报告封面首页</Text>
-
                       <div key={1}>
-
-                        <div>
-                          <ContainLine display={'报告类型'}>
-                            <TransparentInput
-                              autoFocus={true}
-                              readOnly
-                              placeholder="报告类型"
-                              value={ rep && rep.type }
-                              onChange={e => {
-                                setIngredients( {
-                                  ...ingredients,
-                                });
-                              }}
-                            />
-                          </ContainLine>
-                          <ContainLine display={'设备号'}>
-                              <TransparentInput
-                                autoFocus={true}
-                                readOnly
-                                placeholder="设备号"
-                                value={ rep && rep.isp.dev.cod }
-                                onChange={e => {
-                                  setIngredients( {
-                                    ...ingredients,
-                                  });
-                                }}
-                              />
-                          </ContainLine>
-                          <ContainLine display={'检验结论'}>
-                            <TransparentInput
-                              autoFocus={true}
-                              readOnly
-                              placeholder="审核人"
-                              value={rep && rep.isp.conclusion}
-                              onChange={e => {
-                                setIngredients( {
-                                  ...ingredients,
-                                  ispMen: e.target.value
-                                });
-                              }}
-                            />
-                          </ContainLine>
-                          <ContainLine display={'设备出厂编码'}>
-                            <Text  placeholder="所有参与检验人"
-                                   css={{
-                                     display: 'block',
-                                     width: '100%',
-                                   }}
-                            >
-                              {rep && rep.isp.dev.factoryNo}
-                            </Text>
-                          </ContainLine>
-                          <ContainLine display={'报告上传日期'}>
-                            <TransparentInput
-                              autoFocus={true}
-                              readOnly
-                              placeholder="输入日期格式2019-08-03"
-                              value={rep && rep.upLoadDate}
-                            />
-                          </ContainLine>
-                          <ContainLine display={'设备安装地址'}>
-                            <TransparentInput
-                              readOnly
-                              value={rep && rep.isp.dev.pos && rep.isp.dev.pos.address}
-                            />
-                          </ContainLine>
-                          <ContainLine display={'设备使用单位'}>
-                            <TransparentInput
-                              readOnly
-                              value={rep &&rep.isp.dev.ownerUnt && rep.isp.dev.ownerUnt.name}
-                            />
-                          </ContainLine>
-                          <ContainLine display={'设备使用单位联系人'}>
-                            <TransparentInput
-                              readOnly
-                              value={rep && rep.isp.dev.ownerUnt && rep.isp.dev.ownerUnt.linkMen}
-                            />
-                          </ContainLine>
-                        </div>
-
+                        <MainContent id={id} rep={rep}/>
                       </div>
 
-
+                  <RouterLink to={`/report/EL-DJ/ver/1/preview/${repId}`}>
+                    <Button
+                      size="lg" noBind
+                      intent="primary"
+                      iconAfter={<IconArrowRight />}
+                    >
+                      查看报告
+                    </Button>
+                  </RouterLink>
+                  {' '}
+                  <RouterLink to={`/inspect/${id}/report/${repId}/copy`}>
+                    <Button
+                      size="lg" noBind
+                      intent="primary"
+                      iconAfter={<IconArrowRight />}
+                    >
+                      拷贝原始记录
+                    </Button>
+                  </RouterLink>
                 </div>
               )}
 
@@ -438,4 +380,188 @@ export const ReportSample: React.FunctionComponent<ComposeProps> = ({
     </div>
   );
 };
+
+
+interface MainContentProps {
+  id?: string;
+  rep: any;
+}
+
+function MainContent({ id, rep}: MainContentProps) {
+  if (!id) {
+    return null;
+  }
+  return <ThirdRoterContent id={id} rep={rep}/>;
+}
+
+
+interface ThirdRoterProps {
+  id?: string;
+  dt?: any;
+  rep: any;
+}
+function ThirdRoterContent({id, dt, rep}: ThirdRoterProps) {
+  return (
+   <React.Fragment>
+    <Switch>
+      <Route path="/inspect/:id/report/:repId">
+          <FirstPage id={id} rep={rep}/>
+      </Route>
+      <Route path="/inspect/:id/report/:repId/copy">
+          <CopyRecord id={id} rep={rep}/>
+      </Route>
+    </Switch>
+  </React.Fragment>
+  );
+}
+
+const FirstPage= ( {theme=null, id ,rep}
+) => {
+  const [ingredients, setIngredients] = React.useState<any>( rep||{} );
+
+  return <React.Fragment>
+    <div>
+      <Text variant="h5">报告封面首页</Text>
+      <ContainLine display={'报告类型'}>
+        <TransparentInput
+          autoFocus={true}
+          readOnly
+          placeholder="报告类型"
+          value={ rep && rep.type }
+          onChange={e => {
+            setIngredients( {
+              ...ingredients,
+            });
+          }}
+        />
+      </ContainLine>
+      <ContainLine display={'设备号'}>
+        <TransparentInput
+          autoFocus={true}
+          readOnly
+          placeholder="设备号"
+          value={ rep && rep.isp.dev.cod }
+          onChange={e => {
+            setIngredients( {
+              ...ingredients,
+            });
+          }}
+        />
+      </ContainLine>
+      <ContainLine display={'检验结论'}>
+        <TransparentInput
+          autoFocus={true}
+          readOnly
+          placeholder="审核人"
+          value={rep && rep.isp.conclusion}
+          onChange={e => {
+            setIngredients( {
+              ...ingredients,
+              ispMen: e.target.value
+            });
+          }}
+        />
+      </ContainLine>
+      <ContainLine display={'设备出厂编码'}>
+        <Text  placeholder="所有参与检验人"
+               css={{
+                 display: 'block',
+                 width: '100%',
+               }}
+        >
+          {rep && rep.isp.dev.factoryNo}
+        </Text>
+      </ContainLine>
+      <ContainLine display={'报告上传日期'}>
+        <TransparentInput
+          autoFocus={true}
+          readOnly
+          placeholder="输入日期格式2019-08-03"
+          value={rep && rep.upLoadDate}
+        />
+      </ContainLine>
+      <ContainLine display={'设备安装地址'}>
+        <TransparentInput
+          readOnly
+          value={rep && rep.isp.dev.pos && rep.isp.dev.pos.address}
+        />
+      </ContainLine>
+      <ContainLine display={'设备使用单位'}>
+        <TransparentInput
+          readOnly
+          value={rep &&rep.isp.dev.ownerUnt && rep.isp.dev.ownerUnt.name}
+        />
+      </ContainLine>
+      <ContainLine display={'设备使用单位联系人'}>
+        <TransparentInput
+          readOnly
+          value={rep && rep.isp.dev.ownerUnt && rep.isp.dev.ownerUnt.linkMen}
+        />
+      </ContainLine>
+
+    </div>
+  </React.Fragment>;
+};
+
+const CopyRecord= ( { id ,rep}
+) => {
+  const theme = useTheme();
+  const [copyID, setCopyID] = React.useState( '' );
+  const [orc, setOrc] = React.useState( null );
+  const toast = useToast();
+  let filtercomp={ id: copyID };
+  const {items, } =useQueryOriginalRecord(filtercomp);
+  React.useEffect(() => {
+    const  dat =items&&items.data&&JSON.parse(items.data);
+    dat && setOrc(dat);
+  }, [items, setOrc]);
+  //拷贝
+  const {result, submit:updateFunc,loading } = useCommitOriginalData({
+    id:rep?.id,  operationType:1,
+    data:  JSON.stringify(orc) ,
+    deduction:{emergencyElectric:'45,423'}
+  });
+  async function updateRecipe(
+    id: string ) {
+    let yes= result && result.id;
+    try {
+      await updateFunc();
+    } catch (err) {
+      toast({
+        title: "后端请求错",
+        subtitle: err.message,
+        intent: "danger"
+      });
+      console.log("updateRecipe返回了,捕获err", err);
+      return;
+    }
+    toast({
+      title: "任务派工返回了",
+      subtitle: '加入，ISP ID＝'+id,
+      intent: "info"
+    });
+  }
+  return <React.Fragment>
+    <div>
+      <Text variant="h5">想从那一份报告去拷贝原始记录？</Text>
+      <ContainLine display={'请输入对方的报告ID'}>
+        <TransparentInput
+          autoFocus={true}
+          placeholder="报告ID"
+          value={ copyID }
+          onChange={e => setCopyID( e.currentTarget.value) }
+        />
+      </ContainLine>
+      <Text variant="h5">{orc?.检验结论}</Text>
+      <Button
+        css={{ marginTop: theme.spaces.md }}
+        size="lg"  intent={'warning'}
+        disabled ={loading}
+        loading ={loading}
+        onPress={ ()=>updateRecipe('1') }
+      >拷贝并保存</Button>
+    </div>
+  </React.Fragment>;
+};
+
 

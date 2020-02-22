@@ -7,6 +7,9 @@ import {
   useTheme,
   InputBaseProps,
 } from "customize-easy-ui-component";
+import * as React from "react";
+import { StackContext } from "react-gesture-stack";
+import { animated } from "react-spring";
 //import { useSession } from "../auth";
 //import {Helmet} from "react-helmet";
 
@@ -78,5 +81,48 @@ export const ContainLine =({ display, children, ...props })  => {
   );
 };
 
+
+//别人封装好的组件也可定制和替换：SearchTitle用于代替基本构件库的已有标准样式StackTitle部分，相当于定制修改原生就有的组件。
+export function SearchTitle({ children }: { children: React.ReactNode }) {
+  const {
+    active,
+    transform
+  } = React.useContext(StackContext);
+
+  //const {calc: { to : opacityTo} } =transform;
+  // console.log("Login开始DV SearchTitle transform=",transform, " \n opacityTo=",transform.to(0));
+
+  return (
+    <div
+      className="StackTitle"
+      aria-hidden={!active}
+      style={{
+        pointerEvents: active ? "auto" : "none",
+        display: active ? "unset" : "none",     //添加
+        zIndex: 10,
+        position: "absolute",
+        top: 0,
+        left: 0,
+        right: 0
+      }}
+    >
+      {/*<animated.div 版本不支持暂时改成div*/}
+      <animated.div
+        className="StackTitle__heading"
+        style={{
+          textOverflow: "ellipsis",
+          whiteSpace: "nowrap",
+          overflow: "hidden",
+          opacity:  '$(opacity.animation.to)',
+          transform: `translateX(${transform.to(x => `translateX(${x * 0.85}%)` )})`
+          //   opacity,          //版本不支持，！暂时改
+          //   transform: transform.to(x => `translateX(${x * 0.85}%)`)
+        }}
+      >
+        {children}
+      </animated.div>
+    </div>
+  );
+}
 
 

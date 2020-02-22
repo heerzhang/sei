@@ -120,7 +120,7 @@ export const OriginalView: React.RefForwardingComponent<InternalItemHandResult,O
         }
         return  null;
       }
-      ,[action, clRefs,renderItemsContent,generalFormat]);
+      ,[action, clRefs,renderItemsContent,generalFormat,repId]);
 
 
     return <React.Fragment>

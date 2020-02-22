@@ -67,7 +67,7 @@ export const RecordStarter: React.FunctionComponent<RecordStarterProps> = ({
   //审核保存?对应数据deduction结论栏目＋审核手动修改；适用于出具正式报告，正式报告只读取deduction部分。依据审核保存>随后才是原始记录复检>初检data。
   //若复检保存 ，复检rexm，正检data。
   const {result, submit:updateFunc,loading } = useCommitOriginalData({
-    id:227,  operationType:1,
+    id,  operationType:1,
     data:  JSON.stringify(storage || source) ,
     deduction:{emergencyElectric:'45,423'}
   });

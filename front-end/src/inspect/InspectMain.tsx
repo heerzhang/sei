@@ -322,14 +322,14 @@ interface SecondRoterProps {
 function SecondRoterContent({id, dt}: SecondRoterProps) {
   return (
     <Switch>
-      <Route path={"/inspect/:id/report/:repId"} component={ReportSample} />
+      <Route path={"/inspect/:id/report/:repId/:rest*"} component={ReportSample} />
 
       <Route path="/inspect/:id">
         {params => <IspDetail readOnly params={params}/>}
       </Route>
 
       <Route path="/:rest*">
-          <h1>没有该URL匹配的视图内容</h1>
+          <h1>没有该URL匹配的视图sdf内容</h1>
       </Route>
     </Switch>
   );

@@ -31,6 +31,7 @@ import { StackItem, StackContext } from "react-gesture-stack";
 import { animated } from "react-spring";
 import { Link as RouterLink,  } from "wouter";
 import { BoundReports } from "./report/BoundReports";
+import { SearchTitle } from "../comp/base";
 
 
 /*const client = algoliasearch(
@@ -371,59 +372,6 @@ export const RelationList: React.FunctionComponent<FollowingListProps> = ({
 
 };
 
-
-
-//别人封装好的组件也可定制和替换：SearchTitle用于代替基本构件库的已有标准样式StackTitle部分，相当于定制修改原生就有的组件。
-//由于父组件Stack提供StackContext是内部实际来自react-gesture-stack，而它的react-spring版本更高了，而我这里用的低版本react-spring。
-function SearchTitle({ children }: { children: React.ReactNode }) {
-  const {
-    active,
-    transform,
-    opacity,
-  } = React.useContext(StackContext);
-
-  if (!transform || !opacity) {
-    throw new Error("StackTitle must be used within a Stack component");
-  }
-  //console.log("SearchTitle捕获 opacity=", opacity.get(), "active=",active, "转=%o", (transform.to(x => `translateX(${x * 0.85}%)`) ).node.getValue());
-
-  return (
-    <div
-      className="StackTitle"
-      aria-hidden={!active}
-      style={{
-        pointerEvents: active ? "auto" : "none",
-        zIndex: 10,
-        position: "absolute",
-        top: 0,
-        left: 0,
-        right: 0
-      }}
-    >
-      {/*<animated.div    目标opacity: 0; transform: translateX(100%);
-       因为toast-notes必须要用低版本的react-spring； 当前是只好用"react-spring" "8.0.27",
-       版本冲突
-       版本不对，导致没有执行完成的spring弹簧*/}
-      <animated.div
-        className="StackTitle__heading"
-        style={{
-          textOverflow: "ellipsis",
-          whiteSpace: "nowrap",
-          overflow: "hidden",
-         // opacity: opacity.animation.to as any,
-          //opacity:  `$(opacity.animation.to)`,
-          opacity: active? 1 : opacity.get(),
-         //react-spring不是最新版本的，有些步骤失效，只好直接修改。
-         // transform: transform.to(x => `translateX(${x * 0.85}%)`) as any,
-         // transform: `translateX(${transform.to(x => `translateX(${x * 0.85}%)` )})`
-          transform: active? `translateX(0%)` : (transform.to(x => `translateX(${x * 0.85}%)`) ).node.getValue(),
-        }}
-      >
-        {children}
-      </animated.div>
-    </div>
-  );
-}
 
 
 
