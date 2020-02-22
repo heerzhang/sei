@@ -10,7 +10,7 @@ import { Link as RouterLink } from "wouter";
 import { getInstrument2xColumn, itemResultTransform } from "../comp/helper";
 import { ReportViewProps, useIspNormalizeContent } from "../comp/base";
 import { reportFirstPageHead, 注意事项, 落款单位地址, 首页设备概况 } from "../comp/rarelyVary";
-import { 检验编制核准, 检验设备情况 } from "./rarelyVary";
+import { 检验编制核准, 检验设备情况 } from "./elvRarelyVary";
 import { inspectionContent } from "./Periodical/main";
 import * as queryString from "querystring";
 

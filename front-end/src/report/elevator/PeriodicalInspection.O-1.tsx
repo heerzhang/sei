@@ -11,11 +11,11 @@ import {  mergeEditorItemRefs  } from "../../utils/tools";
 //import { Link as RouterLink } from "wouter";
 import { EditStorageContext } from "../StorageContext";
 import throttle from 'throttle-asynchronous'
-import { ItemConclusion, ItemRecheckResult, ItemUniversal } from "../editor/base";
-import { ItemAppendixB, ItemRemarks } from "./base";
-import { ItemGapMeasure, ItemSurveyLinkMan } from "./rarelyVary";
-import { ItemInstrumentTable } from "../editor/rarelyVary";
-import { createItem, getInspectionItemsLength, verifyAction } from "../editor/helper";
+import { ItemConclusion, ItemRecheckResult, ItemUniversal } from "../editor/eBase";
+import { ItemAppendixB, ItemRemarks } from "./elvBase";
+import { ItemGapMeasure, ItemSurveyLinkMan } from "./elvRarelyVary";
+import { ItemInstrumentTable } from "../editor/eRarelyVary";
+import { createItem, getInspectionItemsLength, verifyAction } from "../editor/eHelper";
 import { inspectionContent } from "./Periodical/main";
 import { useGeneralFormat } from "./Periodical/editor";
 

@@ -21,7 +21,7 @@ import { InternalItemHandResult, OriginalViewProps, ReportViewProps } from "./co
 import { useCommitOriginalData } from "./db";
 
 import { EditStorageContext } from "./StorageContext";
-import { Link as RouterLink, Link } from "wouter";
+import { Link as RouterLink } from "wouter";
 import { TransparentInput } from "../comp/base";
 import { useThrottle } from "../hooks/with-follow-request-count";
 
@@ -102,7 +102,7 @@ export const RecordStarter: React.FunctionComponent<RecordStarterProps> = ({
   }
 
   const [throttledUpdateBackend, timer1]= useThrottle(updateRecipe,0);
-  //延迟30秒才执行的; 可限制频繁操作，若很多下点击的10秒后触发2-3次。
+  //延迟3秒才执行的; 可限制频繁操作，若很多下点击的3秒后触发2次。
   //【注意】延迟时间设置后，页面切换会报错，组件已经卸载，还来setEnable啊，状态错误！
   const [throttledUpdateEnable, timer2] = useThrottle(setEnable,3000);
   React.useEffect(() => {
@@ -110,7 +110,7 @@ export const RecordStarter: React.FunctionComponent<RecordStarterProps> = ({
       clearTimeout(timer1);
       clearTimeout(timer2);
     };
-  }, []);
+  }, [timer1, timer2]);
   //可是这里return ；将会导致子孙组件都会umount!! 等于重新加载==路由模式刷新一样； 得权衡利弊。
   // if(updating)  return <LayerLoading loading={updating} label={'正在获取后端应答，加载中请稍后'}/>;
   //管道单线图，数量大，图像文件。可仅选定URL，预览图像。但是不全部显示出来，微缩摘要图模式，点击了才你能显示大的原图。
@@ -289,7 +289,7 @@ export const ReportStarter: React.FunctionComponent<ReportStarterProps> = ({
                                                                              ...other
                                                                            }) => {
   //初始化不可以直接取React.useState(source || {})，不然路由器切换就变成旧source。新修改被抛弃了。
-  const {storage, } =React.useContext(EditStorageContext);
+ // const {storage, } =React.useContext(EditStorageContext);
   //console.log("ReportStarter捕获,切花source=", source,"新storage=",storage);
   if (!id) {
     return null;
