@@ -292,8 +292,8 @@ export const InspectRecordDialog: React.FunctionComponent<InspectRecordDialogPro
     <Layer elevation={"sm"}  css={{ padding: '0.25rem' }}>
        {children}
         <div css={{textAlign: 'right',padding:'0.2rem'}}>
-          <Button size="lg" intent={'primary'} onPress={() => {
-            setStorage({ ...storage, ...inp }) }}>
+          <Button size="lg" intent={'primary'}
+             onPress={() => {setStorage({ ...storage, ...inp }) }}>
             修改确认
           </Button>
         </div>
@@ -490,8 +490,9 @@ export interface OriginalViewProps {
 }
 
 export interface ReportViewProps {
+  repId?: string;
   source: any;
-  printing?: boolean;
+  //printing?: boolean;
   ref?: any;
   verId: string;
 }

@@ -19,10 +19,11 @@ import {
 
 import { InternalItemHandResult, OriginalViewProps, ReportViewProps } from "./comp/base";
 import { useCommitOriginalData } from "./db";
-import throttle from 'throttle-asynchronous'
+
 import { EditStorageContext } from "./StorageContext";
 import { Link as RouterLink, Link } from "wouter";
 import { TransparentInput } from "../comp/base";
+import { useThrottle } from "../hooks/with-follow-request-count";
 
 /*
 错误！ 本地重复定义了外部全局实例，结果本文件内只能看到 自己的EditStorageContext，而不是公用的哪一个。
@@ -100,9 +101,16 @@ export const RecordStarter: React.FunctionComponent<RecordStarterProps> = ({
     //须用其它机制，切换界面setXXX(标记),result？():();设置新的URL转场页面, 结果要在点击函数外面/组件顶层获得；组件根据操作结果切换页面/链接。
   }
 
-  const throttledUpdateBackend = throttle(updateRecipe,0);
-  //延迟30秒才执行的; 可限制频繁操作，若很多下点击的30秒后触发2-3次。
-  const throttledUpdateEnable = throttle(setEnable,10000);
+  const [throttledUpdateBackend, timer1]= useThrottle(updateRecipe,0);
+  //延迟30秒才执行的; 可限制频繁操作，若很多下点击的10秒后触发2-3次。
+  //【注意】延迟时间设置后，页面切换会报错，组件已经卸载，还来setEnable啊，状态错误！
+  const [throttledUpdateEnable, timer2] = useThrottle(setEnable,3000);
+  React.useEffect(() => {
+    return () => {
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+    };
+  }, []);
   //可是这里return ；将会导致子孙组件都会umount!! 等于重新加载==路由模式刷新一样； 得权衡利弊。
   // if(updating)  return <LayerLoading loading={updating} label={'正在获取后端应答，加载中请稍后'}/>;
   //管道单线图，数量大，图像文件。可仅选定URL，预览图像。但是不全部显示出来，微缩摘要图模式，点击了才你能显示大的原图。
@@ -141,20 +149,20 @@ export const RecordStarter: React.FunctionComponent<RecordStarterProps> = ({
             display: "flex"
           }}
         >
-          <IconButton
-            icon={<IconArrowLeft />}
-            component={Link}
-            to={`/report/${templateID}/ver/${verId}/none/${id}`}
-            label="后退"
-            replace
-            variant="ghost"
-            css={{
-              marginRight: theme.spaces.sm,
-              "@media (min-width:800px)": {
-                display: "none"
-              }
-            }}
-          />
+          <RouterLink  to={`/report/${templateID}/ver/${verId}/none/${id}`}>
+            <IconButton
+              icon={<IconArrowLeft />}
+              label="后退"
+              variant="ghost"
+              noBind
+              css={{
+                marginRight: theme.spaces.sm,
+                "@media (min-width:800px)": {
+                  display: "none"
+                }
+              }}
+            />
+          </RouterLink>
           {(action==='ALL'|| action==='printAll') ? (
             <div css={{ marginLeft: "-0.75rem", flex: 1 }}>
               <TransparentInput

@@ -116,7 +116,6 @@ export const RecordEditorOrPrint: React.FunctionComponent<RecordEditorOrPrintPro
     setLocation("/login",  false );
   }
   const { submitfunc:signOut,  } = useSignOut(onLogoutDo);
-
   if(!templateSet)   throw new Error(`没模板哦`);
   //console.log("来TemplateMain当前的params action=",action ,"showingRecipe=",showingRecipe);
 
@@ -262,9 +261,9 @@ export const RecordEditorOrPrint: React.FunctionComponent<RecordEditorOrPrintPro
                 >
                   <Tab id="original">原始记录录入</Tab>
                   <Tab id="list">检验溯源</Tab>
-                  <RouterLink to={`/report/${templateID}/ver/${verId}/preview/${id}`}>
-                    <Tab id="report">检验报告</Tab>
-                  </RouterLink>
+                  <Tab id="report" onPress={()=>setLocation(`/report/${templateID}/ver/${verId}/preview/${id}?&print=1`, true)}>
+                    检验报告
+                  </Tab>
                 </Tabs>
               </DarkMode>
             </div>
@@ -286,7 +285,7 @@ export const RecordEditorOrPrint: React.FunctionComponent<RecordEditorOrPrintPro
             <TabPanel  id="ISPlist">
               <RelationList />
             </TabPanel>
-            <RouterLink to={`/report/${templateID}/ver/${verId}/preview/${id}`}>
+            <RouterLink to={`/report/${templateID}/ver/${verId}/preview/${id}?&print=1`}>
               <TabPanel id="report" css={{
                 display: 'flex',
                 alignItems: 'center',
@@ -363,9 +362,13 @@ export const RecordEditorOrPrint: React.FunctionComponent<RecordEditorOrPrintPro
                   }
                 }}
               >
-                {templateSet?.original && action!=='none'
+                {templateSet?.original
                  && <RecordStarter id={id} action={action}  source={source} template={templateSet.original}
-                                   templateID={templateID} verId={verId}/>
+                                   templateID={templateID} verId={verId}
+                         css={{
+                           display: action!=='none' ? "unset" : "none",
+                         }}
+                    />
                 }
               </Layer>
             </div>

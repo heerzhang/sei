@@ -12,16 +12,19 @@ import { ReportViewProps, useIspNormalizeContent } from "../comp/base";
 import { reportFirstPageHead, 注意事项, 落款单位地址, 首页设备概况 } from "../comp/rarelyVary";
 import { 检验编制核准, 检验设备情况 } from "./rarelyVary";
 import { inspectionContent } from "./Periodical/main";
+import * as queryString from "querystring";
 
 //正式报告的显示打印。
 //不需要每个verId新搞一个文件的，甚至不需要搞新的组件，可以只需内部逻辑处理。
 
 export const ReportView: React.FunctionComponent<ReportViewProps> = ({
-    printing=false,
-    source: orc,  verId,
+    repId,   source: orc,  verId,
 }) => {
   const theme = useTheme();
   const notSmallScr = useMedia('(min-width:800px),print');
+  const qs= queryString.parse(window.location.search);
+  const printing =qs && !!qs.print;
+  console.log("参数第三层路由&print qs printing=",printing, qs);
   const [redundance, setRedundance] =React.useState(notSmallScr||printing);
   function onPress() {
       setRedundance(!redundance);

@@ -111,3 +111,28 @@ export function useFollowerIngs(toUser = true) {
   }
   return { loading, userList:value };
 }
+
+//使用，页面切换会报错。
+export function useThrottle(fn, delay) {
+  let timeoutId;
+  const accumulator = [];
+  const doFunc =(...args) => new Promise(resolve => {
+    clearTimeout(timeoutId)
+
+    accumulator.push(() => resolve({ hasResolved: false }))
+
+    const execute = () => Promise.resolve(fn(...args))
+      .then(value => {
+        accumulator.pop()
+        accumulator.forEach(fn => fn())
+        accumulator.length = 0
+        resolve({ hasResolved: true, value })
+      })
+
+    timeoutId = setTimeout(execute, delay)
+  });
+
+  return [doFunc, timeoutId];
+}
+
+

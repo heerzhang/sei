@@ -578,7 +578,7 @@ export const useGeneralFormat= ( {verId, repId}
                   点击下方标题修改
                   <Table css={{borderCollapse:'collapse'}}>
                     <TableBody>
-                      <RouterLink to={`/report/EL-DJ/ver/${verId}/gap/${repId}?from=6.3`}>
+                      <RouterLink to={`/report/EL-DJ/ver/${verId}/gap/${repId}?&from=6.3`}>
                         <TableRow >
                           <CCell>层</CCell>
                           <CCell>门扇隙</CCell>
@@ -652,7 +652,7 @@ export const useGeneralFormat= ( {verId, repId}
                   return parseFloat(inp?.门锁啮长?.[f])<7;
                 });
                 return <React.Fragment>
-                  <RouterLink  to={`/report/EL-DJ/ver/${verId}/gap/${repId}?from=6.9`}>
+                  <RouterLink  to={`/report/EL-DJ/ver/${verId}/gap/${repId}?&from=6.9`}>
                     (点击修改)已检门锁啮合长度:
                   </RouterLink>
                   <div>
@@ -696,7 +696,7 @@ export const useGeneralFormat= ( {verId, repId}
                   return parseFloat(inp?.轮坎距?.[f])<5;
                 });
                 return <React.Fragment>
-                  <RouterLink  to={`/report/EL-DJ/ver/${verId}/gap/${repId}?from=6.12`}>
+                  <RouterLink  to={`/report/EL-DJ/ver/${verId}/gap/${repId}?&from=6.12`}>
                     <Touchable  component={'div'} >
                       (点击修改):
                       <div>
