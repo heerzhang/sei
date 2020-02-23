@@ -316,12 +316,12 @@ export const SelectHookfork: React.FunctionComponent<SelectHookforkProps> = ({
             value={value}  onChange={onChange}  topDivStyle={topDivStyle}
             {...other}
     >
-      <option></option>
-      <option>√</option>
-      <option>▽</option>
-      <option>／</option>
-      <option>×</option>
-      <option>△</option>
+      <option value={''}>空</option>
+      <option value={'√'}>合格</option>
+      <option value={'▽'}>见证确认</option>
+      <option value={'／'}>无此项</option>
+      <option value={'×'}>不合格</option>
+      <option value={'△'}>未检测</option>
     </Select>
   );
 };

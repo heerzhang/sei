@@ -3,7 +3,7 @@ cssInJs比较：   性能差不多都较慢；　emotion必须文件头/** @jsx 
 有些底层错误告警太难消除，每一步都得注意新出现的警告的性质，提前准备。
 重新合并，背景是\前端\emotion\julienne-master ,hook新技术是\No-next\Example-React-App-master
 graphQL新的用法：  F:\前端\emotion\next-apollo-example-master
-
+屏幕尺寸：Win10上chrome浏览器看见的px分辨率实际上还会比win系统分辨率更小，win设置了放大功能，这门道多。
 删除firebase相关//
 没有模块注入，也会报出TypeScript error: Type '    .  TS2322 怪
 

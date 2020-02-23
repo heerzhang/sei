@@ -17,6 +17,7 @@ import { Example as Test } from "./comp/test02";
 import  Example  from "./comp/test01";
 //import MainReport from "./report/ReportEntrance";
 import { EditStorageContext } from "./report/StorageContext";
+import {Guide as ReportGuide} from "./report/Guide";
 
 
 //网站的顶级路由器；　这里可以添加或分解子网站，分批开发，分开管理属于同一个域名底下的多个内容网站。
@@ -220,7 +221,7 @@ function TopRouter() {
             */ }
             <NestingtRoute path="/device/:rest*" component={DeviceMain}/>
             <NestingtRoute path="/inspect/:rest*" component={InspectMain}/>
-
+            <Route path="/report/guide">   <ReportGuide />    </Route>
             <NestingtRoute path="/report/:rest*" component={ReportEntrance}/>
             <NestingtRoute path="/original/:rest*" component={OriginalRecord}/>
 

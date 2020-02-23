@@ -7,6 +7,7 @@ import {
 
 import { CCell, RCell, Table, TableBody, TableRow } from "../../comp/TableExt";
 import { FadeImage } from "../../FadeImage";
+import { Link as RouterLink } from "wouter";
 
 //很多内容相对重复，这里是报告较高层范围复用的组件；专门报告类型的可以安排在下一层次分开目录去做。
 
@@ -142,6 +143,27 @@ export const 首页设备概况= ( {theme, orc }
     </Table>
     <br/>
   </React.Fragment>;
+};
+
+//重复性代码抽象抽取参数化后可复用。
+export const 末尾链接= ( {template, verId, repId }
+) => {
+  return  <div css={{
+              "@media print": {
+                display:'none'
+              },
+              textAlign:'center',
+              paddingBottom: '0.5rem'
+          }}
+      >
+          - 报告完毕 -<br/>
+          <RouterLink to={`/report/${template}/ver/${verId}/printAll/${repId}`}>
+            看完整原始记录
+          </RouterLink><br/>
+          <RouterLink to={`/report/${template}/ver/${verId}/ALL/${repId}`}>
+            编辑原始记录
+          </RouterLink>
+    </div>;
 };
 
 

@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx,} from "@emotion/core";
 import * as React from "react";
-import { Collapse,  Text,  useTheme } from "customize-easy-ui-component";
+import { Button, Collapse, IconArrowRight, Text, useTheme } from "customize-easy-ui-component";
 import { Table, TableBody, TableHead, TableRow, Cell, CCell } from "../../comp/TableExt";
 import { useTouchable, } from "touchable-hook";
 import { Helmet } from "react-helmet";
@@ -9,7 +9,7 @@ import { useMedia } from "use-media";
 import { Link as RouterLink } from "wouter";
 import { getInstrument2xColumn, itemResultTransform } from "../comp/helper";
 import { ReportViewProps, useIspNormalizeContent } from "../comp/base";
-import { reportFirstPageHead, 注意事项, 落款单位地址, 首页设备概况 } from "../comp/rarelyVary";
+import { reportFirstPageHead, 末尾链接, 注意事项, 落款单位地址, 首页设备概况 } from "../comp/rarelyVary";
 import { 检验编制核准, 检验设备情况 } from "./elvRarelyVary";
 import { inspectionContent } from "./Periodical/main";
 import * as queryString from "querystring";
@@ -276,23 +276,10 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
           </TableBody>
         </Table>
       </div>
-      <div css={{
-            "@media print": {
-              display:'none'
-            },
-            textAlign:'center'
-          }}
-       >
-       - 报告完毕 -<br/>
-       <RouterLink to={`/report/EL-DJ/ver/${verId}/printAll/${repId}`}>
-         看完整原始记录
-       </RouterLink><br/>
-       <RouterLink to={`/report/EL-DJ/ver/${verId}/ALL/${repId}`}>
-         编辑原始记录
-       </RouterLink>
-      </div>
+      {末尾链接({template:'EL-DJ',verId,repId})}
     </React.Fragment>
   );
 }
+
 
 
