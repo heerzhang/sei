@@ -23,7 +23,7 @@ export default function ReportEntrance({ name },props )
   let filtercomp={ id: id };
   //refetch() 引起 loading= True/False变化，从而需要组件范围render重做搞2次。
   //若是浏览器后退前进的场景不会执行useQueryOriginalRecord代码，item已经有数据了，loading不会变化。
-  const {loading,items, } =useQueryOriginalRecord(filtercomp);
+  const {loading,items, error} =useQueryOriginalRecord(filtercomp);
   const {storage, setStorage} =React.useContext(EditStorageContext);
 
   //外部dat不能加到依赖，变成死循环! const  dat =items&&items.data&&JSON.parse(items.data);  这dat每次render都变了？
@@ -45,8 +45,12 @@ export default function ReportEntrance({ name },props )
                 />
        }
       {!loading && items &&!storage &&
-        <Text>未初始化原始记录</Text>
+        <Text>未初始化原始记录， 报告ID={id}</Text>
       }
+      {!loading && !items &&
+        <Text>没找到该份报告， ID={id}</Text>
+      }
+      {error && error.message}
     </React.Fragment>
   );
 }

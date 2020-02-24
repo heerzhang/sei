@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.fjsei.yewu.entity.sei.original.OriginalRecord;
 import org.springframework.security.access.prepost.PreAuthorize;
 
 import javax.persistence.*;

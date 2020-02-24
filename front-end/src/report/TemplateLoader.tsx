@@ -91,10 +91,10 @@ export const RecordStarter: React.FunctionComponent<RecordStarterProps> = ({
       return;
     }
     //这里无法获得result值，就算所在组件顶层已经获得result值，这里可能还是await () 前那样null;
-    console.log("生成任务返回了＝", result,"yes=", yes);
+    console.log("保存返回了＝", result,"yes=", yes);
     toast({
-      title: "任务派工返回了",
-      subtitle: '加入，ISP ID＝'+id,
+      title: "保存返回了",
+      subtitle: '报告ID：'+id,
       intent: "info"
     });
     //除非用const {data: { buildTask: some }} = await updateFunc()捕捉当前操作结果; 否则这时这地方只能用旧的result,点击函数里获取不到最新结果。
@@ -207,7 +207,7 @@ export const RecordStarter: React.FunctionComponent<RecordStarterProps> = ({
             <ResponsivePopover
               content={
                 <MenuList>
-                  <MenuItem disabled={!ready} onPress={ ()=>throttledUpdateRecipe('1') }>
+                  <MenuItem disabled={!ready} onPress={ ()=>throttledUpdateRecipe(id) }>
                     保存到服务器
                   </MenuItem>
                   <MenuItem
@@ -247,7 +247,7 @@ export const RecordStarter: React.FunctionComponent<RecordStarterProps> = ({
                 intent={'warning'}
                 disabled ={!ready}
                 loading ={loading}
-                onPress={ ()=>throttledUpdateRecipe('1') }
+                onPress={ ()=>throttledUpdateRecipe(id) }
               >
               保存到服务器
               </Button>
@@ -282,7 +282,7 @@ export const RecordStarter: React.FunctionComponent<RecordStarterProps> = ({
         size="lg"  intent={'warning'}
         disabled ={!ready}
         loading ={loading}
-        onPress={ ()=>throttledUpdateRecipe('1') }
+        onPress={ ()=>throttledUpdateRecipe(id) }
       >保存到服务器</Button>
       <LayerLoading loading={loading} />
     </React.Fragment>

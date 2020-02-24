@@ -8,7 +8,7 @@ import {
   Button,
   IconChevronDown,
   IconChevronUp,
-  Select, Container, IconCloud, InputGroupLine, Input,
+  Select, Container, IconCloud, InputGroupLine, Input, TabPanel, IconArrowRight, Layer
 } from "customize-easy-ui-component";
 //import useLocation from "wouter/use-location";
 import {  useQueryOriginalRecord } from "./db";
@@ -25,7 +25,7 @@ export  function Guide({printing, }:{printing?:boolean, },props) {
   //useState(默认值) ； 后面参数值仅仅在组件的装载时期有起作用，若再次路由RouterLink进入的，它不会依照该新默认值去修改show。useRef跳出Cpature Value带来的限制
   //采用RouterLink页内路由进入useState还保留旧的值，要修改就将会导致render两次；旧的值新的值各一次渲染。若采用URL刷新模式只有一次。
   const [show, setShow] = React.useState(false);
-  const [repId, setRepId] = React.useState('227');
+  const [repId, setRepId] = React.useState('');
   let filtercomp={ id:repId };
   //refetch() 引起 loading= True/False变化，从而需要组件范围render重做搞2次。
   //若是浏览器后退前进的场景不会执行useQueryOriginalRecord代码，item已经有数据了，loading不会变化。
@@ -73,10 +73,16 @@ export  function Guide({printing, }:{printing?:boolean, },props) {
 
   return (
     <Layout>
-      <Container>
-      <Text  variant="h4"　css={{ textAlign: 'center' }}>
-        <span>电梯定期检验</span>
-      </Text>
+      <Container  css={{
+        boxSizing: "border-box",
+        flexDirection: "column",
+        flex: "1",
+        boxShadow: "none",
+        position: "absolute",
+        width: "100%",
+        borderRadius: 0,
+        height: `calc(100vh)`,
+      }}>
       <Toolbar>
         <Text
           variant="h5"
@@ -98,48 +104,47 @@ export  function Guide({printing, }:{printing?:boolean, },props) {
           />
           <span>检验平台</span>
         </Text>
-
-        <Select inputSize="md" css={{minWidth:'140px',fontSize:'1.3rem',padding:'0 1rem'}} divStyle={css`max-width:240px;`}
-                value={tplType}  onChange={e => setTplType(e.currentTarget.value) }
-        >
-          <option>模板类型</option>
-          <option value={'EL-DJ'}>定期检验</option>
-          <option value={'EL-JJ'}>监督检验</option>
-        </Select>
-
         <div css={{ marginLeft: "auto" }}>
-          <Button
-            aria-controls="collapse"
-            variant="ghost"
-            intent="primary"
-            iconAfter={show ? <IconChevronUp /> : <IconChevronDown />}
-            onPress={() => {
-                //异步的，但是多个setXXX合并执行的,　然后才做render。 而传递到useEffect（,[tplType])需要等到下一次render;
-                // !show&&setTplType('EL-JJ');     show&&setTplType('EL-DJ');
-               setShow(!show);
-              }  }
-          >
-            {show ? "都收起" : "都显示"}
-          </Button>
         </div>
       </Toolbar>
-        <InputGroupLine  label='报告ID{将来是从链接地址自动获得}' >
-          <Input  value={repId}  placeholder="那一份报告？暂时要求，将来是点击链接自动获得"
-                  onChange={e => setRepId(e.currentTarget.value) } />
-        </InputGroupLine>
-        {
-          inp &&  <div/>
-        }
-        <RouterLink to={`/report/EL-DJ/ver/1/preview/${repId}`}>
-          <Button
-            size="lg" noBind
-            intent="primary"
-            variant="ghost"
-            iconAfter={<IconCloud />}
+
+        <Container css={{
+          display: 'flex',
+          alignItems: 'center',
+          height: '100%'
+        }}>
+          <div css={{
+              margin: 'auto'
+            }}
           >
-            读取该份报告内容
-          </Button>
-        </RouterLink>
+            <Text  variant="h5"　css={{ textAlign: 'center' }}>
+              <span>目前支持电梯的定期检验</span>
+            </Text>
+            <InputGroupLine  label='报告ID{将来是从链接地址自动获得}' >
+              <Input  value={repId}  placeholder="那一份报告？将来是点击链接自动获得"
+                      onChange={e => setRepId(e.currentTarget.value) } />
+            </InputGroupLine>
+            <InputGroupLine  label='本系统签发token{将来是从链接地址自动获得}' >
+              <Input  value={''}  placeholder="三月有效；登录用户无需token"
+                      onChange={e => void 0 } />
+            </InputGroupLine>
+            <RouterLink to={`/report/EL-DJ/ver/1/preview/${repId}`}>
+              <Button
+                size="lg" noBind
+                intent="primary"
+                variant="ghost"
+                iconAfter={<IconCloud />}
+              >
+                读取该份报告内容
+              </Button>
+            </RouterLink>
+          </div>
+        </Container>
+
+        <hr/>
+        <Text css={{ textAlign: 'center' }}>
+          业务端客户可以无密码登录进入浏览报告，但是必须提供本系统签发的token来验明真身，token三个月有效期，过期想看报告需申请。
+        </Text>
       </Container>
     </Layout>
   );

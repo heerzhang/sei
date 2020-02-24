@@ -6,8 +6,6 @@ import org.fjsei.yewu.entity.sei.inspect.ISP;
 import org.fjsei.yewu.entity.sei.inspect.ISPRepository;
 import org.fjsei.yewu.entity.sei.inspect.Task;
 import org.fjsei.yewu.entity.sei.inspect.TaskRepository;
-import org.fjsei.yewu.entity.sei.original.OriginalRecord;
-import org.fjsei.yewu.entity.sei.original.OriginalRecordRepository;
 import org.fjsei.yewu.exception.BookNotFoundException;
 import org.fjsei.yewu.security.JwtTokenUtil;
 import org.fjsei.yewu.service.security.JwtUserDetailsService;
