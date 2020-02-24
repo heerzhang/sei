@@ -220,7 +220,11 @@ public class BaseMutation implements GraphQLMutationResolver {
     public boolean authenticate(String name,String password) {
         if(!emSei.isJoinedToTransaction())      emSei.joinTransaction();
         User user = userRepository.findByUsernameAndPassword(name, password);
-        Assert.isTrue(user != null,"没user:"+name);
+        if(user==null){
+            User userHasName =userRepository.findByUsername(name);
+            Assert.isTrue(userHasName == null,"密码错:"+name);
+            Assert.isTrue(userHasName != null,"没用户:"+name);
+        }
         logger.debug("checking authentication for user '{}'", name);
         if(user==null)  return false;
         if (name != null ) {         //&& SecurityContextHolder.getContext().getAuthentication() == null

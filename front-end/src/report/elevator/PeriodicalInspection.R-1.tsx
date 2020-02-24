@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx,} from "@emotion/core";
 import * as React from "react";
-import { Button, Collapse, IconArrowRight, Text, useTheme } from "customize-easy-ui-component";
+import { Collapse, Text, useTheme } from "customize-easy-ui-component";
 import { Table, TableBody, TableHead, TableRow, Cell, CCell } from "../../comp/TableExt";
 import { useTouchable, } from "touchable-hook";
 import { Helmet } from "react-helmet";

@@ -3,7 +3,7 @@ import { jsx} from "@emotion/core";
 import * as React from "react";
 //import { globalHistory  } from "@reach/router";
 import { useQueryOriginalRecord } from "./db";
-import { LayerLoading } from "customize-easy-ui-component";
+import { LayerLoading, Text } from "customize-easy-ui-component";
 import { lazy } from "react";
 import { WaitingComponent } from "../TopRouter";
 import { EditStorageContext } from "./StorageContext";
@@ -33,7 +33,7 @@ export default function ReportEntrance({ name },props )
     dat && setStorage(dat);
   }, [items, setStorage]);
 
-  //console.log("ReportEntrance：捕获 ==storage=[",  storage,  "]items=", items ,"loading=", loading);
+  console.log("ReportEntrance：捕获 ==storage=[",  storage,  "]items=", items ,"loading=", loading);
   //const printSizeW = useMedia('print');  这个printSizeW在打印场景时会摇摆，先是true然后变false。打印预览useMedia最终看到false。
   //打印预览不仅打印，还同时会更新网页。打印预览实际是根据当前页面最新状态去打印的。【特别注意】包括动态特征的显示！点击也算；打印实际不是从刷新页面后才去照搬的。
 
@@ -44,6 +44,9 @@ export default function ReportEntrance({ name },props )
                                 id={id}  source={storage}
                 />
        }
+      {!loading && items &&!storage &&
+        <Text>未初始化原始记录</Text>
+      }
     </React.Fragment>
   );
 }

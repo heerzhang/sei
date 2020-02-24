@@ -19,7 +19,7 @@ import {
   IconPlus,
   DarkMode,
   LightMode,
-  Pager, IconArchive, ScrollView, IconArrowRight
+  Pager, IconArchive, IconArrowRight
 } from "customize-easy-ui-component";
 
 import { useSession,  useSignOut } from "../auth";

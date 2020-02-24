@@ -31,7 +31,7 @@ export default function OriginalRecord({printing, }:{printing?:boolean, },props)
   //采用RouterLink页内路由进入useState还保留旧的值，要修改就将会导致render两次；旧的值新的值各一次渲染。若采用URL刷新模式只有一次。
   const [show, setShow] = React.useState(false);
 
-  let filtercomp={ id:227 };
+  let filtercomp={ id:231 };
   //refetch() 引起 loading= True/False变化，从而需要组件范围render重做搞2次。
   //若是浏览器后退前进的场景不会执行useQueryOriginalRecord代码，item已经有数据了，loading不会变化。
   const {loading,items, refetch } =useQueryOriginalRecord(filtercomp);

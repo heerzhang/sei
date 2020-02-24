@@ -622,8 +622,8 @@ export const useCommitOriginalData = (options) => {
 
 
 const GET_ORGINAL_RECORD = gql`
-  query getOriginalRecord($id: ID! ) {
-    all:getOriginalRecord(id: $id) {
+  query getReport($id: ID! ) {
+    all:getReport(id: $id) {
         id
         data
         files{id url}

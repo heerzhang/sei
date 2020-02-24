@@ -8,19 +8,14 @@ import {
   Button,
   IconChevronDown,
   IconChevronUp,
-  Select, Container, IconCloud, InputGroupLine, Input, IconArrowRight
+  Select, Container, IconCloud, InputGroupLine, Input,
 } from "customize-easy-ui-component";
 //import useLocation from "wouter/use-location";
 import {  useQueryOriginalRecord } from "./db";
 //import { useUid } from "customize-easy-ui-component/esm/Hooks/use-uid";
 import food from "../images/food.svg";
 import { Layout } from "./Layout";
-//import queryString from "query-string";
-//import pick from "lodash.pick";
 
-  /*类比路由功能的配置表，根据类型来映射组件的文件名*/
-import typeAsRoute from "../typeAsRoute.json";
-import { InspectRecordLayout } from "./comp/base";
 import { Link as RouterLink } from "wouter";
 
 
@@ -34,8 +29,8 @@ export  function Guide({printing, }:{printing?:boolean, },props) {
   let filtercomp={ id:repId };
   //refetch() 引起 loading= True/False变化，从而需要组件范围render重做搞2次。
   //若是浏览器后退前进的场景不会执行useQueryOriginalRecord代码，item已经有数据了，loading不会变化。
-  const {loading,items, refetch } =useQueryOriginalRecord(filtercomp);
-  const [template, setTemplate] = React.useState(null   as any);
+  const {loading,items, } =useQueryOriginalRecord(filtercomp);
+ // const [template, ] = React.useState(null   as any);
   //模板的类型标识
   const [tplType, setTplType] = React.useState('EL-DJ');
 
@@ -133,7 +128,7 @@ export  function Guide({printing, }:{printing?:boolean, },props) {
                   onChange={e => setRepId(e.currentTarget.value) } />
         </InputGroupLine>
         {
-          inp && template &&  <div/>
+          inp &&  <div/>
         }
         <RouterLink to={`/report/EL-DJ/ver/1/preview/${repId}`}>
           <Button

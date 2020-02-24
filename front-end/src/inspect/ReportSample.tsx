@@ -16,17 +16,13 @@ import {
   Container,
   ResponsivePopover,
   IconMoreVertical,
-  IconArrowLeft, IconArrowRight, Input
+  IconArrowLeft, IconArrowRight,
 } from "customize-easy-ui-component";
 import {  useDispatchIspMen,  useReport } from "./db";
 //import { useSession } from "../auth";
 import {Helmet} from "react-helmet";
 import { Link as RouterLink, Link, Route, Switch } from "wouter";
 import { ContainLine, TransparentInput } from "../comp/base";
-import { IspDetail } from "./IspDetail";
-import { CCell, RCell, Table, TableBody, TableRow } from "../comp/TableExt";
-import { ReportStarter } from "../report/TemplateLoader";
-import { RecordEditorOrPrint } from "../report/TemplateMain";
 import { useCommitOriginalData, useQueryOriginalRecord } from "../report/db";
 
 //[HOOK限制]按钮点击函数内部直接上toast()或toaster.notify()很可能无法正常显示。而放在函数组件顶层render代码前却能正常。
@@ -523,7 +519,7 @@ const CopyRecord= ( { id ,rep}
   });
   async function updateRecipe(
     id: string ) {
-    let yes= result && result.id;
+    //let yes= result && result.id;
     try {
       await updateFunc();
     } catch (err) {
@@ -552,7 +548,7 @@ const CopyRecord= ( { id ,rep}
           onChange={e => setCopyID( e.currentTarget.value) }
         />
       </ContainLine>
-      <Text variant="h5">{orc?.检验结论}</Text>
+      <Text variant="h5">该份报告简要：{orc?.检验结论}</Text>
       <Button
         css={{ marginTop: theme.spaces.md }}
         size="lg"  intent={'warning'}
@@ -560,6 +556,9 @@ const CopyRecord= ( { id ,rep}
         loading ={loading}
         onPress={ ()=>updateRecipe('1') }
       >拷贝并保存</Button>
+      { result &&
+        <Text variant="h5">拷贝结果：报告ID {result.id}; 模板类型 {result.modeltype}</Text>
+      }
     </div>
   </React.Fragment>;
 };

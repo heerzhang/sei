@@ -53,12 +53,14 @@ public class Report  implements SimpleReport {
         this.type=type;
         this.no=no;
         this.isp=isp;
+        data="{}";
     }
     //重载是依靠参数类型以及个数和顺序来确定的。
     public  Report(String path,ISP isp,String no){
         this.path=path;
         this.no=no;
         this.isp=isp;
+        data="{}";
     }
     //graphql选择集　安全信息控制方式： 单个字段的。
     //@PostAuthorize对实体类不起作用，对行动类有效？    @PostAuthorize("hasRole('ADMIN')") !;
