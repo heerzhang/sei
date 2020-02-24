@@ -8,7 +8,7 @@ import {
   InputGroup,
   Input, ScrollView, ScrollViewHandles, Layer, Table, TableHead, TableRow, TableCell, ExpandingRow, useTheme, Toolbar
 } from "customize-easy-ui-component";
-
+import useScrollLock from "use-scroll-lock";
 
 
 //import {ScrollView, ScrollViewHandles} from "customize-easy-ui-component";
@@ -235,8 +235,13 @@ const rows = [
   createData("Cupcake", 305, 3.7, 67, 4.3),
   createData("Gingerbread", 356, 16.0, 49, 3.9)
 ];
+
 export  function Example() {
   const theme = useTheme();
+  const [enabled, setEnabled] = React.useState(true);
+  const ref = React.useRef(null);
+  useScrollLock(!enabled  );
+
   return (
     <React.Fragment >
   <div
@@ -246,6 +251,9 @@ export  function Example() {
       padding: "48px"
     }}
   >
+    <button onClick={() => setEnabled(!enabled)}>
+      {enabled ? "可以滚动 turn off" : "不行滚动，turn on"}
+    </button>
     <Layer elevation="sm">
       <Toolbar
         css={{
@@ -264,6 +272,8 @@ export  function Example() {
           <Button intent="primary">Add ingredient</Button>
         </div>
       </Toolbar>
+      <div style={{ overflow: "auto" }} ref={ref}>
+
       <Table fixed={["200", "15%", "15%", "15%", "15%"]}>
         <TableHead>
           <TableRow>
@@ -321,6 +331,8 @@ shun 公董 寫
           </ExpandingRow>
         ))}
       </Table>
+        Scrollable content
+      </div>
       <Toolbar
         compressed
         css={{

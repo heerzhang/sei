@@ -46,7 +46,7 @@ export const InspectMain: React.FunctionComponent<MainProps> = props => {
   const [match1, params1] = useRoute("/inspect/:recipe*");
   let showingRecipe = (match && params.recipe) || (match1 && params1.recipe);
   let initTab= showingRecipe=== "list"? 1:
-              showingRecipe=== "check"? 2: 0;
+              showingRecipe=== "check"? 2: 1;
   if(showingRecipe)   initTab=3;
 
   const [activeTab, setActiveTab] = React.useState(initTab);

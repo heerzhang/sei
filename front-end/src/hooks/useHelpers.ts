@@ -175,14 +175,13 @@ export function useThrottle333(fn, timeout) {
   return [ready, throttledFn];
 }
 
-  //"throttle-asynchronous": "^1.1.1",
-  //看了 "@rooks/use-throttle":"^3.6.0",
-//防止频繁 按按钮！3000毫秒。
+//"throttle-asynchronous": "^1.1.1",
+//看了 "@rooks/use-throttle":"^3.6.0",
+//防止频繁 按按钮！3000毫秒。　　fn　参数书写时不要加()的。
 export function useThrottle(fn: Function, timeout: number = 3000) {
   //要把按钮使能开关ready一起做上。
   const [ready, setReady] = React.useState(true);
   const timerRef = React.useRef(null);
-  if (!fn || typeof fn !== "function")   throw new Error("要传函数");
   const doFunc = React.useCallback(
     (...args) => {
       if(ready) {
@@ -202,7 +201,8 @@ export function useThrottle(fn: Function, timeout: number = 3000) {
       return () => clearTimeout(timerRef.current);
     }
   }, [ready, timeout]);
-
+  if (!fn || typeof fn !== "function")
+          return {doFunc: void 0, ready};
   ///return [ready, throttledFn]; 数组的版本编译器容易报错！改成返回对象的搞。
   return {doFunc, ready};
 }

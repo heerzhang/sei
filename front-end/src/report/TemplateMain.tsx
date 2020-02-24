@@ -105,7 +105,7 @@ export const RecordEditorOrPrint: React.FunctionComponent<RecordEditorOrPrintPro
   const theme = useTheme();
   const {user} = useSession();
   let showingRecipe = (action!=='none');
-  const [activeTab, setActiveTab] = React.useState(0);
+  const [activeTab, setActiveTab] = React.useState(1);
   const [, setLocation] = useLocation();
   //isLarge在A4竖打印是false;
   const isLarge = useMedia({ minWidth: "800px" });
@@ -260,7 +260,7 @@ export const RecordEditorOrPrint: React.FunctionComponent<RecordEditorOrPrintPro
                   variant="evenly-spaced"
                 >
                   <Tab id="original">原始记录录入</Tab>
-                  <Tab id="list">检验溯源</Tab>
+                  <Tab id="ISPlist">检验溯源</Tab>
                   <Tab id="report" onPress={()=>setLocation(`/report/${templateID}/ver/${verId}/preview/${id}?&print=1`, true)}>
                     检验报告
                   </Tab>
@@ -270,16 +270,16 @@ export const RecordEditorOrPrint: React.FunctionComponent<RecordEditorOrPrintPro
           </div>
           {/*这才是小窗口的主体，独立的可滚动部分*/}
           <Pager
-            enableScrollLock
+            enableScrollLock={false}
             value={activeTab}
             onRequestChange={i => setActiveTab(i)}
-            lazyLoad
+            lazyLoad={false}
           >
             <TabPanel id="original"  css={{
-                    height: '100%'
-              }}>
+              height: '100%'
+            }}>
               {templateSet?.report &&
-                 <EmbeddedReport id={id}  source={source} template={templateSet.report}/>
+              <EmbeddedReport id={id}  source={source} template={templateSet.report}/>
               }
             </TabPanel>
             <TabPanel  id="ISPlist">

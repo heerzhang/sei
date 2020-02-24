@@ -105,9 +105,8 @@ export const RecordStarter: React.FunctionComponent<RecordStarterProps> = ({
   //延迟3秒才执行的; 可限制频繁操作，若很多下点击的3秒后触发2次。
   //【注意】延迟时间设置后，页面切换会报错，组件已经卸载，还来setEnable啊，状态错误！
   const {doFunc:throttledUpdateRecipe, ready} = useThrottle(updateRecipe,5000);
-
   const refEditor =React.useRef<InternalItemHandResult>(null);
-
+  const {doFunc:throttleDoConfirm, ready:confirmEnable} =useThrottle((refEditor as any)?.current?.doConfirm);
   //const [throttledUpdateEnable, isReady] = useThrottle(setEnable, 5000);
   /*
   React.useEffect(() => {
@@ -217,10 +216,12 @@ export const RecordStarter: React.FunctionComponent<RecordStarterProps> = ({
                   >
                     编辑
                   </MenuItem>
-                  <MenuItem onPress={() => {
-                      (refEditor as any).current!.doConfirm(true);
-                    } }>
-                  全部输入一起确认
+                  <MenuItem disabled={!confirmEnable}
+                       onPress={() => {
+                           if(throttleDoConfirm)  throttleDoConfirm(true);
+                           else (refEditor as any).current!.doConfirm(true);
+                       } }>
+                  全部项目一起确认
                   </MenuItem>
                 </MenuList>
               }

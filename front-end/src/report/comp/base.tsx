@@ -321,7 +321,7 @@ export const SelectHookfork: React.FunctionComponent<SelectHookforkProps> = ({
       <option value={'▽'}>见证确认</option>
       <option value={'／'}>无此项</option>
       <option value={'×'}>不合格</option>
-      <option value={'△'}>未检测</option>
+      <option value={'△'}>无法检测</option>
     </Select>
   );
 };

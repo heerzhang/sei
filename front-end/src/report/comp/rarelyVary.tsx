@@ -2,7 +2,7 @@
 import { jsx,  } from "@emotion/core";
 import * as React from "react";
 import {
- Text, Link, Divider, Embed
+  Text, Link, Divider, Embed, useTheme
 } from "customize-easy-ui-component";
 
 import { CCell, RCell, Table, TableBody, TableRow } from "../../comp/TableExt";
@@ -148,21 +148,42 @@ export const 首页设备概况= ( {theme, orc }
 //重复性代码抽象抽取参数化后可复用。
 export const 末尾链接= ( {template, verId, repId }
 ) => {
+  const theme = useTheme();
   return  <div css={{
               "@media print": {
                 display:'none'
               },
               textAlign:'center',
-              paddingBottom: '0.5rem'
+              marginBottom: '0.8rem'
           }}
+       >
+       - 报告完毕 -
+      <div css={{
+        textAlign: "center",
+        "& > div": {
+          marginLeft: "auto",
+          marginRight: "auto",
+          marginTop: '0.5rem',
+          marginBottom: '0.5rem'
+        },
+        [theme.mediaQueries.md]: {
+          display: "flex",
+          justifyContent: "space-evenly",
+          flexWrap: 'wrap'
+        }
+      }}
       >
-          - 报告完毕 -<br/>
+        <div>
           <RouterLink to={`/report/${template}/ver/${verId}/printAll/${repId}`}>
             看完整原始记录
-          </RouterLink><br/>
+          </RouterLink>
+        </div>
+        <div>
           <RouterLink to={`/report/${template}/ver/${verId}/ALL/${repId}`}>
             编辑原始记录
           </RouterLink>
+        </div>
+      </div>
     </div>;
 };
 

@@ -132,7 +132,7 @@ export const OriginalView: React.RefForwardingComponent<InternalItemHandResult,O
                  throttledSetDoConfirmModify(true);
               }
             }>
-            全部输入一起确认
+            全部项目一起确认
           </Button>
       }
     </React.Fragment>;
