@@ -6,8 +6,6 @@ import org.fjsei.yewu.entity.sei.inspect.ISP;
 import org.fjsei.yewu.entity.sei.inspect.ISPRepository;
 import org.fjsei.yewu.entity.sei.inspect.Task;
 import org.fjsei.yewu.entity.sei.inspect.TaskRepository;
-import org.fjsei.yewu.entity.sei.original.OriginalRecord;
-import org.fjsei.yewu.entity.sei.original.OriginalRecordRepository;
 import org.fjsei.yewu.input.WhereTree;
 import org.fjsei.yewu.jpa.ModelFiltersImpl;
 import org.fjsei.yewu.jpa.PageOffsetFirst;
@@ -51,16 +49,12 @@ public class ReportMgrQuery implements GraphQLQueryResolver {
     private PositionRepository positionRepository;
     @Autowired
     private AuthorityRepository authorityRepository;
-    @Autowired
-    private OriginalRecordRepository originalRecordRepository;
+
 
     @PersistenceContext(unitName = "entityManagerFactorySei")
     private EntityManager emSei;
 
-    public OriginalRecord getOriginalRecord(Long id) {
-        OriginalRecord originalRecord =originalRecordRepository.findById(id).orElse(null);
-        return originalRecord;
-    }
+
 
 
 }

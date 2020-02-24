@@ -8,6 +8,10 @@ type Report implements SimpleReport{
     detail: String
     isp(id: ID ): ISP
     numTest: Float
+    modeltype: String!
+    modelversion: String!
+    data: String
+    files: [File]
 }
 #安全非安全类型的使用原则，尽量把保密字段打包抽离，非安全类型用于普通功能比如关联对象
 interface SimpleReport {
@@ -30,6 +34,8 @@ extend type Query {
 extend type Mutation {
     newReport(type: String!, no:String!, isp: ID!) :Report! @authr(qx:["REPCHECKER","ADMIN"])
     buildReport(isp: ID!,no: String!,path: String!) : Report!
+    modifyOriginalRecordData(id: ID!,operationType:Int!,data: String,deduction: String) : Report
+    modifyOriginalRecordFiles(id: ID!, fileIDs: [ID]!) : Report
 }
 
 

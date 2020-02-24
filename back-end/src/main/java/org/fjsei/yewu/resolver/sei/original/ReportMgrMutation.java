@@ -50,8 +50,7 @@ public class ReportMgrMutation implements GraphQLMutationResolver {
     private PositionRepository positionRepository;
     @Autowired
     private AuthorityRepository authorityRepository;
-    @Autowired
-    private OriginalRecordRepository originalRecordRepository;
+
     @Autowired
     private FileRepository fileRepository;
 
@@ -62,29 +61,24 @@ public class ReportMgrMutation implements GraphQLMutationResolver {
     @Autowired
     private final JwtTokenUtil jwtTokenUtil=new JwtTokenUtil();
 
-    @Transactional
-    public OriginalRecord newOriginalRecord(String modeltype, String modelversion, Long ispId, String data) {
-        if(!emSei.isJoinedToTransaction())      emSei.joinTransaction();
+    /*
+@Transactional
+public OriginalRecord newOriginalRecord(String modeltype, String modelversion, Long ispId, String data) {
+    if(!emSei.isJoinedToTransaction())      emSei.joinTransaction();
 
-        ISP isp = iSPRepository.findById(ispId).orElse(null);
-        if(isp == null)     throw new BookNotFoundException("没有该ISP", ispId);
+    ISP isp = iSPRepository.findById(ispId).orElse(null);
+    if(isp == null)     throw new BookNotFoundException("没有该ISP", ispId);
 
-        OriginalRecord originalRecord = new OriginalRecord(modeltype,modelversion,isp,data);
-        /*
-        Set<User> ispMen= new HashSet<User>();
-        //  ispMens.stream().forEach(item ->
-        ispMen.add(user);
-        isp.setIspMen(ispMen);
-
-        */
-        originalRecordRepository.save(originalRecord);
-        return originalRecord;
-    }
+    OriginalRecord originalRecord = new OriginalRecord(modeltype,modelversion,isp,data);
+    originalRecordRepository.save(originalRecord);
+    return originalRecord;
+}
+    */
 
     @Transactional
-    public OriginalRecord modifyOriginalRecordFiles(Long id,  List<Long> fileIDs) {
+    public Report modifyOriginalRecordFiles(Long id,  List<Long> fileIDs) {
         if(!emSei.isJoinedToTransaction())      emSei.joinTransaction();
-        OriginalRecord originalRecord= originalRecordRepository.findById(id).orElse(null);
+        Report originalRecord= reportRepository.findById(id).orElse(null);
         if(originalRecord == null)     throw new BookNotFoundException("没有该原始记录", id);
         fileIDs.stream().forEach(item -> {
             File file=fileRepository.findById(item).orElse(null);
@@ -92,21 +86,20 @@ public class ReportMgrMutation implements GraphQLMutationResolver {
         });
         originalRecord.setFiles(null);
 
-        originalRecordRepository.save(originalRecord);
+        reportRepository.save(originalRecord);
         return originalRecord;
     }
     @Transactional
-    public OriginalRecord modifyOriginalRecordData(Long id,int operationType,String data, String deduction) {
+    public Report modifyOriginalRecordData(Long id,int operationType,String data, String deduction) {
         if(!emSei.isJoinedToTransaction())      emSei.joinTransaction();
-        OriginalRecord originalRecord= originalRecordRepository.findById(id).orElse(null);
+        Report originalRecord= reportRepository.findById(id).orElse(null);
         if(originalRecord == null)     throw new BookNotFoundException("没有该原始记录", id);
         if(1==operationType)
             originalRecord.setData(data);
         else if(2==operationType){
             //权限验证
-            originalRecord.setDeduction(deduction);
         }
-        originalRecordRepository.save(originalRecord);
+        reportRepository.save(originalRecord);
         return originalRecord;
     }
 

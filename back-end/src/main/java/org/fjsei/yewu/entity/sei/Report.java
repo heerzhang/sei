@@ -11,6 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 //实体类不可搞 interface： ？可能死循环, 返回结果集只能使用接口/不能做实体转换。
 
@@ -29,15 +30,24 @@ public class Report  implements SimpleReport {
 
     private Date upLoadDate;
     private String path;
+    //单次ISP如果多个报告，每个报告单独打印，单独编制特定编号的报告，单独链接；主报告1+N。
     @ManyToOne
     @JoinColumn
-    private ISP isp;   //多份子报告
+    private ISP isp;   //1个检验可以有很多份子报告，报告类型可以不同的。
 
     private double  numTest;    //测试表达式
 
     //测试：高保密性质的2个扩展字段；
     private String  sign;
     private String  detail;
+ //和original.OriginalRecord进行合并了；
+    private String  modeltype;
+    private String  modelversion;
+    //原始记录内容-JSON；
+    //字段长度，数据库要修改定义成 clob
+    private String  data;
+    @OneToMany(mappedBy="report" ,fetch = FetchType.LAZY)
+    private Set<File> files;
 
     public  Report(String type,String no,ISP isp){
         this.type=type;

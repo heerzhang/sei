@@ -84,6 +84,7 @@ public class EQP {
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE,region ="Fast")
     private Set<Task> task= new HashSet<>();
 
+    //单1次ISP只能做1个EQP;考虑？一次检验很多气瓶？若支持设备汇聚出场编号汇集重新转义呢，1:N子部件设备关联表。
     //EQP.TASK.ISP  EQP.ISP {.短路?}  复杂关联关系， 在做EntityGraph选择定义不恰当而貌似可能死循环了？
     //ISP挂接关系到EQP底下还是挂接关系到TASK底下的？不可以两者同时都挂接关联关系，那样就是多余和混淆概念或两种分歧路径，数据多了而且还产生不一致了。
     //检验单独生成，TASK和EQP多对多的；单个ISP检验为了某个EQP和某个TASK而生成的。

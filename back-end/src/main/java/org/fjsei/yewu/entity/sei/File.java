@@ -33,10 +33,10 @@ public class File {
 
     private boolean anyoneCanSee=false;
 
-    //原始记录的附带文件
+    //报告=原始记录的附带图片等的文件
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn
-    private OriginalRecord  originalRecord;
+    private Report  report;
 
 }
 
