@@ -33,7 +33,7 @@ export const ItemConclusion: React.RefForwardingComponent<InternalItemHandResult
                            alone={alone}  label={'下结论!'}>
         五、现场检验意见
         <InputGroupLine  label='检验结论{签名后结论不能再改}' >
-          <Select inputSize="md" css={{minWidth:'140px',fontSize:'2rem',padding:'0 1rem'}}
+          <Select inputSize="md" css={{minWidth:'140px',fontSize:'1.3rem',padding:'0 1rem'}}
                   value={ inp?.检验结论  ||''}
                   onChange={e => setInp({ ...inp, 检验结论: e.currentTarget.value||undefined}) }
           >

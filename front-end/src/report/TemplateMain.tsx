@@ -270,10 +270,10 @@ export const RecordEditorOrPrint: React.FunctionComponent<RecordEditorOrPrintPro
           </div>
           {/*这才是小窗口的主体，独立的可滚动部分*/}
           <Pager
-            enableScrollLock={false}
+            enableScrollLock={true}
             value={activeTab}
             onRequestChange={i => setActiveTab(i)}
-            lazyLoad={false}
+            lazyLoad={true}
           >
             <TabPanel id="original"  css={{
               height: '100%'
@@ -390,29 +390,23 @@ interface EmbeddedReportProps {
 const EmbeddedReport: React.FunctionComponent<EmbeddedReportProps> = ({ id, source, template}
 ) => {
   const theme = useTheme();
-  //const ref = React.useRef();
   return (
-    <ScrollView　overflowY
-                css={{
-                  flex: 1,
-                  height: "100%",
-                }}
-                innerRef={null}>
-      <div
-        css={{   //特意把父div滚动条启动开。`calc(100vh - ${ileapHeight}px)`,   '750px',  注意串里的空格必须要有！
-          //关键是靠内容持续增长列表的紧上一级DIV来控制，把这一个div高度撑开，迫使最近的窗口所附属的滚动条启动。
-          minHeight: `calc(100vh - 164px)`,
-          [theme.mediaQueries.md]: {
-            minHeight: `calc(100vh - 164px - ${theme.spaces.lg} - ${theme.spaces.lg})`
-          },
-          [theme.mediaQueries.xl]: {
-            minHeight: `calc(100vh - 164px - ${theme.spaces.xl} - ${theme.spaces.xl})`
-          },
-        }}
-      >
-        <ReportStarter id={id}  source={source} template={template}/>
-      </div>
-    </ScrollView>
+    <div
+      css={{   //特意把父div滚动条启动开。`calc(100vh - ${ileapHeight}px)`,   '750px',  注意串里的空格必须要有！
+        //关键是靠内容持续增长列表的紧上一级DIV来控制，把这一个div高度撑开，迫使最近的窗口所附属的滚动条启动。
+        overflowY: 'scroll',
+        height: '100%',
+        minHeight: `calc(100vh - 164px)`,
+        [theme.mediaQueries.md]: {
+          minHeight: `calc(100vh - 164px - ${theme.spaces.lg} - ${theme.spaces.lg})`
+        },
+        [theme.mediaQueries.xl]: {
+          minHeight: `calc(100vh - 164px - ${theme.spaces.xl} - ${theme.spaces.xl})`
+        },
+      }}
+    >
+      <ReportStarter id={id}  source={source} template={template}/>
+    </div>
   );
 };
 

@@ -312,7 +312,7 @@ export const SelectHookfork: React.FunctionComponent<SelectHookforkProps> = ({
                                                                ...other
                                                              }) => {
   return (
-    <Select inputSize="md" css={{minWidth:'140px',fontSize:'2rem',padding:'0 1rem'}} divStyle={css`max-width:240px;`}
+    <Select inputSize="md" css={{minWidth:'140px',fontSize:'1.3rem',padding:'0 1rem'}} divStyle={css`max-width:240px;`}
             value={value}  onChange={onChange}  topDivStyle={topDivStyle}
             {...other}
     >
