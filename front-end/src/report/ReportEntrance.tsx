@@ -45,10 +45,10 @@ export default function ReportEntrance({ name },props )
                 />
        }
       {!loading && items &&!storage &&
-        <Text>未初始化原始记录， 报告ID={id}</Text>
+        <Text>未初始化原始记录， 报告ID={id} </Text>
       }
       {!loading && !items &&
-        <Text>没找到该份报告， ID={id}</Text>
+        <Text>没找到该份报告， ID={id} </Text>
       }
       {error && error.message}
     </React.Fragment>

@@ -105,7 +105,7 @@ export const RecordEditorOrPrint: React.FunctionComponent<RecordEditorOrPrintPro
   const theme = useTheme();
   const {user} = useSession();
   let showingRecipe = (action!=='none');
-  const [activeTab, setActiveTab] = React.useState(1);
+  const [activeTab, setActiveTab] = React.useState(0);
   const [, setLocation] = useLocation();
   //isLarge在A4竖打印是false;
   const isLarge = useMedia({ minWidth: "800px" });

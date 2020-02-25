@@ -114,7 +114,8 @@ export  function Guide({printing, }:{printing?:boolean, },props) {
           height: '100%'
         }}>
           <div css={{
-              margin: 'auto'
+              margin: 'auto',
+              background: "white"
             }}
           >
             <Text  variant="h5"　css={{ textAlign: 'center' }}>

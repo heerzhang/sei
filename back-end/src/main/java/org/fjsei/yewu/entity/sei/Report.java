@@ -45,7 +45,10 @@ public class Report  implements SimpleReport {
     private String  modelversion;
     //原始记录内容-JSON；
     //字段长度，数据库要修改定义成 clob
+    @Lob
+    @Basic(fetch=FetchType.LAZY)
     private String  data;
+
     @OneToMany(mappedBy="report" ,fetch = FetchType.LAZY)
     private Set<File> files;
 

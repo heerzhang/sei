@@ -12,7 +12,7 @@ import java.util.List;
 public interface RecipeRepository extends JpaRepository<Recipe, Long>, JpaSpecificationExecutor<Recipe> {
 
 
- //   List<Recipe> findAllByCreatedByEquals(User user);
+ //   List<EqpMge> findAllByCreatedByEquals(User user);
 
 
 }
