@@ -26,5 +26,3 @@ public class HouseMge {
    // AREA_COD        NUMBER(10),
 }
 
-
-//和旧平台的对接实体表。

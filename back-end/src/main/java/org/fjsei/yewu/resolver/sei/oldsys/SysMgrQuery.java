@@ -46,6 +46,8 @@ public class SysMgrQuery implements GraphQLQueryResolver {
     private ElevParaRepository elevParaRepository;
     @Autowired
     private HouseMgeRepository houseMgeRepository;
+    @Autowired
+    private UntMgeRepository untMgeRepository;
 
 
     @PersistenceContext(unitName = "entityManagerFactorySei")
@@ -74,7 +76,10 @@ public class SysMgrQuery implements GraphQLQueryResolver {
         EqpMge eqp=eqpMgeRepository.findById(id).orElse(null);
 
         ElevPara elevPara=elevParaRepository.getByEqpcodEquals(eqp.getEQPCOD());
-        HouseMge houseMge=houseMgeRepository.getOne(eqp.getBUILD_ID());
+       // Long build_id= eqp.getBUILD_ID();
+        //HouseMge houseMge=houseMgeRepository.getOne(5194L); 不可使用getOne，未加载的实体记录就查不到。
+        HouseMge houseMge=houseMgeRepository.findById(eqp.getBUILD_ID()).orElse(null);
+        UntMge untMge=untMgeRepository.findById(eqp.getUSE_UNT_ID()).orElse(null);
 
         return eqp;
     }

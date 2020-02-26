@@ -66,7 +66,13 @@ query Look_Relations($where:WhereTree,$offset:Int!,$first:Int,$orderBy:String,$a
   	}
 }
 
-
+query findEqpMge($id: ID!) {
+  findEqpMge(id: $id) {
+    id
+	eQPCOD
+    __typename
+  }
+}
 
 #参数举例
 # {
@@ -99,3 +105,6 @@ query Look_Relations($where:WhereTree,$offset:Int!,$first:Int,$orderBy:String,$a
 #           }
 #        }
 
+# {
+#    "id": "59273"
+# }

@@ -311,13 +311,3 @@ media queries查询条件的使用 Query的语法只有四项：and、or、not�
 
 useTouchable这个外来useTouchable组件感觉有点小毛病。 这个useTouchable其实是Touchable和Button核心，底下就是bind，也不用加ref的也可以触发。
 
-query findEqpMge($id: ID!) {
-  findEqpMge(id: $id) {
-    id
-		eQPCOD
-    __typename
-  }
-}
-{
-  "id": "59273"
-}
