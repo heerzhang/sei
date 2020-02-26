@@ -626,6 +626,7 @@ const GET_ORGINAL_RECORD = gql`
     all:getReport(id: $id) {
         id
         data
+        snapshot
         files{id url}
         modeltype
         isp{id}

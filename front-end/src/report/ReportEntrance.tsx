@@ -30,10 +30,12 @@ export default function ReportEntrance({ name },props )
   //从后端返回的数据可能items已经被修改了
   React.useEffect(() => {
     const  dat =items&&items.data&&JSON.parse(items.data);
-    dat && setStorage(dat);
+    const  snap =items&&items.snapshot&&JSON.parse(items.snapshot);
+    if(snap)   dat && setStorage({...dat, ...snap});
+    else  dat && setStorage(dat);
   }, [items, setStorage]);
 
-  console.log("ReportEntrance：捕获 ==storage=[",  storage,  "]items=", items ,"loading=", loading);
+  console.log("ReportEntrance：捕获 ==storage=[",  storage,  "]items=", items ,"snap=", items&&items.snapshot);
   //const printSizeW = useMedia('print');  这个printSizeW在打印场景时会摇摆，先是true然后变false。打印预览useMedia最终看到false。
   //打印预览不仅打印，还同时会更新网页。打印预览实际是根据当前页面最新状态去打印的。【特别注意】包括动态特征的显示！点击也算；打印实际不是从刷新页面后才去照搬的。
 

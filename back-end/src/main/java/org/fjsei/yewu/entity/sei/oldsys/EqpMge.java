@@ -26,7 +26,9 @@ public class EqpMge {
     private String EQP_USECERT_COD;     //'使用证号'
     private String EQP_STATION_COD;     //'设备代码
     private String EQP_NAME;            //'设备名称'=品种    EQP_VART_NAME
+    private String EQP_VART_NAME;
     private String EQP_SORT;        //设备类别  EQP_SORT_NAME
+    private String EQP_SORT_NAME;
     private String EQP_MOD;      //型号'
     private String FACTORY_COD;     //出厂编号；
     private String EQP_INNER_COD;     //单位内部编号'
@@ -41,6 +43,7 @@ public class EqpMge {
     private Date NEXT_ISP_DATE1;  //下次检验日期1（在线、年度）
     private Date NEXT_ISP_DATE2;  //下次检验日期2(机电定检，内检，全面）'
     //部分重复的属性。
+    private String USE_UNT_ADDR;
     private String  EQP_USE_ADDR;    // '使用地点' 几号楼？
     // SAFE_MAN, SAFE_MAN_PHONE ;
     //WX_SIGNATURE;

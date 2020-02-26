@@ -202,37 +202,37 @@ export const 检验设备情况= ( { orc }
     <TableBody>
       <TableRow>
         <CCell component="th" scope="row">设备品种</CCell>
-        <CCell>曳引驱动乘客电梯</CCell>
+        <CCell>{orc.设备品种}</CCell>
         <CCell>使用登记证编号</CCell>
-        <CCell>梯11闽AB139(17)</CCell>
+        <CCell>{orc.使用证号}</CCell>
       </TableRow>
       <TableRow >
         <CCell component="th" scope="row">使用单位名称</CCell>
-        <CCell colSpan={3}>林钦全</CCell>
+        <CCell colSpan={3}>{orc.使用单位}</CCell>
       </TableRow>
       <TableRow >
         <CCell component="th" scope="row">使用单位地址</CCell>
-        <CCell colSpan={3}>福建省连江县马鼻镇南门村岐尾69号</CCell>
+        <CCell colSpan={3}>{orc.使用单位地址}</CCell>
       </TableRow>
       <TableRow >
         <CCell component="th" scope="row">楼盘名称</CCell>
-        <CCell colSpan={3}>/</CCell>
+        <CCell colSpan={3}>{orc.楼盘}</CCell>
       </TableRow>
       <TableRow >
         <CCell component="th" scope="row">楼盘地址</CCell>
-        <CCell colSpan={3}>/</CCell>
+        <CCell colSpan={3}>{orc.楼盘地址}</CCell>
       </TableRow>
       <TableRow >
         <CCell component="th" scope="row">分支机构名称</CCell>
-        <CCell colSpan={3}>/</CCell>
+        <CCell colSpan={3}>{orc.分支机构}</CCell>
       </TableRow>
       <TableRow >
         <CCell component="th" scope="row">分支机构地址</CCell>
-        <CCell colSpan={3}>/</CCell>
+        <CCell colSpan={3}>{orc.分支机构地址}</CCell>
       </TableRow>
       <TableRow>
         <CCell component="th" scope="row">设备使用地点</CCell>
-        <CCell colSpan={3}>连江县马鼻镇南门村岐尾69号</CCell>
+        <CCell colSpan={3}>{orc.设备使用地点}</CCell>
       </TableRow>
       <TableRow>
         <CCell component="th" scope="row">使用单位代码</CCell>
@@ -242,31 +242,31 @@ export const 检验设备情况= ( { orc }
         <CCell component="th" scope="row">安全管理人员</CCell>
         <CCell>{orc.安全人员}</CCell>
         <CCell>使用单位设备编号</CCell>
-        <CCell>1#</CCell>
+        <CCell>{orc.单位内部编号}</CCell>
       </TableRow>
       <TableRow>
         <CCell component="th" scope="row">制造日期</CCell>
-        <CCell>2016-11-22</CCell>
+        <CCell>{orc.制造日期}</CCell>
         <CCell>改造日期</CCell>
-        <CCell>/</CCell>
+        <CCell>{orc.改造日期}</CCell>
       </TableRow>
       <TableRow>
         <CCell component="th" scope="row">制造单位名称</CCell>
-        <CCell colSpan={3}>快意电梯股份有限公司</CCell>
+        <CCell colSpan={3}>{orc.制造单位}</CCell>
       </TableRow>
       <TableRow>
         <CCell component="th" scope="row">改造单位名称</CCell>
-        <CCell colSpan={3}>/</CCell>
+        <CCell colSpan={3}>{orc.改造单位}</CCell>
       </TableRow>
       <TableRow>
         <CCell component="th" scope="row">产品编号</CCell>
         <CCell>ZT1600005085</CCell>
         <CCell>型号</CCell>
-        <CCell>METIS</CCell>
+        <CCell>{orc.型号}</CCell>
       </TableRow>
       <TableRow>
         <CCell component="th" scope="row">维护保养单位名称</CCell>
-        <CCell colSpan={3}>福州新奥电梯工程有限公司</CCell>
+        <CCell colSpan={3}>{orc.维保单位}</CCell>
       </TableRow>
     </TableBody>
   </React.Fragment>;

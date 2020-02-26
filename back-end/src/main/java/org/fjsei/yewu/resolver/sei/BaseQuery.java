@@ -7,11 +7,13 @@ import org.fjsei.yewu.entity.sei.inspect.ISP;
 import org.fjsei.yewu.entity.sei.inspect.ISPRepository;
 import org.fjsei.yewu.entity.sei.inspect.Task;
 import org.fjsei.yewu.entity.sei.inspect.TaskRepository;
+import org.fjsei.yewu.entity.sei.oldsys.*;
 import org.fjsei.yewu.input.*;
 import org.fjsei.yewu.filter.Person;
 import org.fjsei.yewu.filter.SimpleReport;
 import org.fjsei.yewu.jpa.ModelFiltersImpl;
 import org.fjsei.yewu.jpa.PageOffsetFirst;
+import org.fjsei.yewu.pojo.sei.DeviceSnapshot;
 import org.fjsei.yewu.security.JwtUser;
 import org.fjsei.yewu.service.security.JwtUserDetailsService;
 
@@ -69,6 +71,14 @@ public class BaseQuery implements GraphQLQueryResolver {
     private AuthorityRepository authorityRepository;
     @Autowired
     private FileRepository fileRepository;
+    @Autowired
+    private EqpMgeRepository eqpMgeRepository;
+    @Autowired
+    private ElevParaRepository elevParaRepository;
+    @Autowired
+    private HouseMgeRepository houseMgeRepository;
+    @Autowired
+    private UntMgeRepository untMgeRepository;
 
     @PersistenceContext(unitName = "entityManagerFactorySei")
     private EntityManager emSei;
@@ -403,7 +413,66 @@ public class BaseQuery implements GraphQLQueryResolver {
     }
 
     public Report getReport(Long id) {
-        return reportRepository.findById(id).orElse(null);
+        Report  report=reportRepository.findById(id).orElse(null);
+        //若需初始化，snapshot为空的
+        if(report!=null && report.getSnapshot()==null){
+            String cod=report.getIsp().getDev().getCod();
+            DeviceSnapshot dss=new DeviceSnapshot();
+            dss.setEqpcod(cod);
+            EqpMge eqp=eqpMgeRepository.findByEQPCODEquals(cod);
+            ElevPara  para=elevParaRepository.getByEqpcodEquals(cod);
+            if(eqp==null || para==null)    return report;
+            dss.set监察识别码(eqp.getOIDNO());
+            dss.set使用证号(eqp.getEQP_USECERT_COD());
+            dss.set设备代码(eqp.getEQP_STATION_COD());
+            dss.set设备品种(eqp.getEQP_VART_NAME());
+            dss.set设备类别(eqp.getEQP_SORT_NAME());
+            dss.set型号(eqp.getEQP_MOD());
+            dss.set出厂编号(eqp.getFACTORY_COD());
+            dss.set单位内部编号(eqp.getEQP_INNER_COD());
+            dss.set制造日期(eqp.getMAKE_DATE());
+            dss.set下检日期(eqp.getNEXT_ISP_DATE2());   //下次检验日期2(机电定检，1；
+            dss.set改造日期(eqp.getALT_DATE());
+            dss.set设备使用地点(eqp.getEQP_USE_ADDR());
+            Long uid= eqp.getBUILD_ID();
+            HouseMge houseMge= uid!=null? houseMgeRepository.findById(uid).orElse(null) :null;
+            if(houseMge!=null) {
+                dss.set楼盘(houseMge.getBUILD_NAME());
+                dss.set楼盘地址(houseMge.getBUILD_ADDR());
+            }
+            UntMge untMge;
+            uid= eqp.getMANT_UNT_ID();
+            untMge= uid!=null? untMgeRepository.findById(uid).orElse(null) :null;
+            if(untMge!=null)  dss.set维保单位(untMge.getUNT_NAME());
+            uid= eqp.getALT_UNT_ID();
+            untMge= uid!=null? untMgeRepository.findById(uid).orElse(null) :null;
+            if(untMge!=null)  dss.set改造单位(untMge.getUNT_NAME());
+            uid= eqp.getMAKE_UNT_ID();
+            untMge= uid!=null? untMgeRepository.findById(uid).orElse(null) :null;
+            if(untMge!=null)  dss.set制造单位(untMge.getUNT_NAME());
+            uid= eqp.getSECUDEPT_ID();
+            untMge= uid!=null? untMgeRepository.findById(uid).orElse(null) :null;
+            if(untMge!=null) {
+                dss.set分支机构(untMge.getUNT_NAME());        //SECUDEPT_ID;     //分支机构ID'
+                dss.set分支机构地址(untMge.getUNT_ADDR());
+            }
+            uid= eqp.getUSE_UNT_ID();
+            untMge= uid!=null? untMgeRepository.findById(uid).orElse(null) :null;
+            if(untMge!=null) {
+                dss.set使用单位(untMge.getUNT_NAME());
+                dss.set使用单位地址(untMge.getUNT_ADDR());
+            }
+            dss.set控制方式(para.getCONTROL_TYPE());
+            dss.set电梯层数(para.getELEFLOORNUMBER());
+            dss.set电梯站数(para.getELESTADENUMBER());
+            dss.set电梯门数(para.getELEDOORNUMBER());
+            dss.set运行速度(para.getRUNVELOCITY());
+            dss.set额定载荷(para.getRATEDLOAD());
+            String strJson = JSON.toJSONString(dss);
+            report.setSnapshot(strJson);
+        }
+        //是否需要重新初始化技术参数设备基本字段呢？
+        return report;
     }
 
     public Iterable<EQP> findAllEQPsFilter(WhereTree where,int offset,int first,String orderBy,boolean asc) {

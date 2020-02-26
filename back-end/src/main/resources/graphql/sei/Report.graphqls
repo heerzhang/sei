@@ -11,6 +11,7 @@ type Report implements SimpleReport{
     modeltype: String!
     modelversion: String!
     data: String
+    snapshot: String
     files: [File]
 }
 #安全非安全类型的使用原则，尽量把保密字段打包抽离，非安全类型用于普通功能比如关联对象

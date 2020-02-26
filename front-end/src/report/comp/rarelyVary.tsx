@@ -105,23 +105,23 @@ export const 首页设备概况= ( {theme, orc }
       <TableBody>
         <TableRow>
           <RCell css={{border:'none'}}>使用单位</RCell>
-          <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>林钦全</CCell>
+          <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>{orc.使用单位}</CCell>
         </TableRow>
         <TableRow>
           <RCell css={{border:'none'}}>分支机构</RCell>
-          <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>/</CCell>
+          <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>{orc.分支机构}</CCell>
         </TableRow>
         <TableRow>
           <RCell css={{border:'none'}}>楼盘名称</RCell>
-          <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>/</CCell>
+          <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>{orc.楼盘}</CCell>
         </TableRow>
         <TableRow>
           <RCell css={{border:'none'}}>设备类别</RCell>
-          <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>曳引与强制驱动电梯</CCell>
+          <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>{orc.设备类别}</CCell>
         </TableRow>
         <TableRow>
           <RCell css={{border:'none'}}>设备品种</RCell>
-          <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>曳引驱动乘客电梯</CCell>
+          <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>{orc.设备品种}</CCell>
         </TableRow>
         <TableRow>
           <RCell css={{border:'none'}}>检验日期</RCell>
@@ -129,15 +129,15 @@ export const 首页设备概况= ( {theme, orc }
         </TableRow>
         <TableRow>
           <RCell css={{border:'none'}}>监察识别码</RCell>
-          <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>TA74507</CCell>
+          <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>{orc.监察识别码}</CCell>
         </TableRow>
         <TableRow>
           <RCell css={{border:'none'}}>设备号</RCell>
-          <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>3501T104807</CCell>
+          <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>{orc.eqpcod}</CCell>
         </TableRow>
         <TableRow>
           <RCell css={{border:'none'}}>设备代码</RCell>
-          <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>/</CCell>
+          <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>{orc.设备代码}</CCell>
         </TableRow>
       </TableBody>
     </Table>

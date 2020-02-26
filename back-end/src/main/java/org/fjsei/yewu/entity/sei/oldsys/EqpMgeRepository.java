@@ -14,7 +14,7 @@ public interface EqpMgeRepository extends JpaRepository<EqpMge, Long>, JpaSpecif
 
  //   List<EqpMge> findAllByCreatedByEquals(User user);
     List<EqpMge>  findAllByEQPCODIsLike(String codlike);
-
+    EqpMge  findByEQPCODEquals(String cod);
     //findAllByEQP_CODIsLike(String codlike);
 }
 

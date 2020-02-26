@@ -43,11 +43,16 @@ public class Report  implements SimpleReport {
  //和original.OriginalRecord进行合并了；
     private String  modeltype;
     private String  modelversion;
-    //原始记录内容-JSON；
+    //原始记录内容-JSON；在前端录入和修改的部分。
     //字段长度，数据库要修改定义成 clob
-    @Lob
+  //  @Lob
     @Basic(fetch=FetchType.LAZY)
     private String  data;
+    //该部分数据-JSON，在编制后提交审核时就能固定化了。可直接复制合并到data，存snapshot仅是接口对接便利的过渡工具。
+    //纯粹是后端提供给检验报告的，编制报告的那一时间的相关设备状态数据。接口对接复制完成后就可清空了。
+   // @Lob
+    @Basic(fetch=FetchType.LAZY)
+    private String  snapshot;
 
     @OneToMany(mappedBy="report" ,fetch = FetchType.LAZY)
     private Set<File> files;
@@ -56,6 +61,7 @@ public class Report  implements SimpleReport {
         this.type=type;
         this.no=no;
         this.isp=isp;
+        //初始化
         data="{}";
     }
     //重载是依靠参数类型以及个数和顺序来确定的。

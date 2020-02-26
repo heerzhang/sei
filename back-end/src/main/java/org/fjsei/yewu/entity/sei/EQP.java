@@ -71,7 +71,7 @@ public class EQP {
     //缺省FetchType.EAGER  不管查询对象后面具体使用的字段，EAGER都会提前获取数据。
     @ManyToOne(fetch= FetchType.LAZY)
     @JoinColumn(name = "pos_id")
-    private Position pos;    //地理定位
+    private Position pos;    //地理定位x+y经纬度。
 
     @ManyToOne(fetch= FetchType.LAZY)
     @JoinColumn
