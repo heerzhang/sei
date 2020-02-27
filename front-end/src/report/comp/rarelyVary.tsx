@@ -109,11 +109,11 @@ export const 首页设备概况= ( {theme, orc }
         </TableRow>
         <TableRow>
           <RCell css={{border:'none'}}>分支机构</RCell>
-          <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>{orc.分支机构}</CCell>
+          <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>{orc.分支机构 || '／'}</CCell>
         </TableRow>
         <TableRow>
           <RCell css={{border:'none'}}>楼盘名称</RCell>
-          <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>{orc.楼盘}</CCell>
+          <CCell css={{border:'none',borderBottom:`1px dashed ${theme.colors.intent.primary.light}`}}>{orc.楼盘 || '／'}</CCell>
         </TableRow>
         <TableRow>
           <RCell css={{border:'none'}}>设备类别</RCell>

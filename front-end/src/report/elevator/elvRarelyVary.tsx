@@ -224,11 +224,11 @@ export const 检验设备情况= ( { orc }
       </TableRow>
       <TableRow >
         <CCell component="th" scope="row">分支机构名称</CCell>
-        <CCell colSpan={3}>{orc.分支机构}</CCell>
+        <CCell colSpan={3}>{orc.分支机构 || '／'}</CCell>
       </TableRow>
       <TableRow >
         <CCell component="th" scope="row">分支机构地址</CCell>
-        <CCell colSpan={3}>{orc.分支机构地址}</CCell>
+        <CCell colSpan={3}>{orc.分支机构地址 || '／'}</CCell>
       </TableRow>
       <TableRow>
         <CCell component="th" scope="row">设备使用地点</CCell>
@@ -246,17 +246,17 @@ export const 检验设备情况= ( { orc }
       </TableRow>
       <TableRow>
         <CCell component="th" scope="row">制造日期</CCell>
-        <CCell>{orc.制造日期}</CCell>
+        <CCell>{orc.制造日期 || '／'}</CCell>
         <CCell>改造日期</CCell>
-        <CCell>{orc.改造日期}</CCell>
+        <CCell>{orc.改造日期 || '／'}</CCell>
       </TableRow>
       <TableRow>
         <CCell component="th" scope="row">制造单位名称</CCell>
-        <CCell colSpan={3}>{orc.制造单位}</CCell>
+        <CCell colSpan={3}>{orc.制造单位 || '／'}</CCell>
       </TableRow>
       <TableRow>
         <CCell component="th" scope="row">改造单位名称</CCell>
-        <CCell colSpan={3}>{orc.改造单位}</CCell>
+        <CCell colSpan={3}>{orc.改造单位 || '／'}</CCell>
       </TableRow>
       <TableRow>
         <CCell component="th" scope="row">产品编号</CCell>

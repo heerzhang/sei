@@ -32,6 +32,7 @@ public class EqpMge {
     private String EQP_MOD;      //型号'
     private String FACTORY_COD;     //出厂编号；
     private String EQP_INNER_COD;     //单位内部编号'
+    @Temporal(TemporalType.DATE)
     private Date MAKE_DATE;   //制造日期
     private Long USE_UNT_ID;      //使用单位ID  ,   USE_UNT_ADDR
     private Long SECUDEPT_ID;     //分支机构ID'
@@ -39,8 +40,11 @@ public class EqpMge {
     private Long ALT_UNT_ID;      //改造单位ID　　= -1
     private Long MANT_UNT_ID; //维保单位ID
     private Long BUILD_ID;    //'楼盘ID'
+    @Temporal(TemporalType.DATE)
     private Date ALT_DATE;    //改造日期'
+    @Temporal(TemporalType.DATE)
     private Date NEXT_ISP_DATE1;  //下次检验日期1（在线、年度）
+    @Temporal(TemporalType.DATE)
     private Date NEXT_ISP_DATE2;  //下次检验日期2(机电定检，内检，全面）'
     //部分重复的属性。
     private String USE_UNT_ADDR;

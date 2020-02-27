@@ -22,7 +22,7 @@ public class DeviceSnapshot {
     private String 型号;      //型号'
     private String 出厂编号;     //出厂编号；
     private String 单位内部编号;     //单位内部编号'
-    private Date 制造日期;   //制造日期
+    private String  制造日期;   //制造日期
     private String  使用单位;       // ,   USE_UNT_ADDR
     private String  使用单位地址;
     private String  分支机构;
@@ -32,8 +32,8 @@ public class DeviceSnapshot {
     private String  维保单位;
     private String  楼盘;
     private String  楼盘地址;
-    private Date 改造日期;    //改造日期'
-    private Date 下检日期;  //1下次检验日期1（在线、年度）
+    private String  改造日期;    //改造日期'
+    private String  下检日期;  //1下次检验日期1（在线、年度）
          //2下次检验日期2(机电定检，内检，全面）'
     private String  设备使用地点;
 

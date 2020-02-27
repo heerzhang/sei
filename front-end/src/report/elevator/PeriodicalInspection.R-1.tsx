@@ -138,15 +138,15 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
                   <TableBody>
                     <TableRow >
                       <CCell>额定载重量</CCell>
-                      <CCell>1050         kg</CCell>
+                      <CCell>{orc.额定载荷}  kg</CCell>
                       <CCell>额定速度</CCell>
-                      <CCell>1.75       m/s</CCell>
+                      <CCell>{orc.运行速度}  m/s</CCell>
                     </TableRow>
                     <TableRow >
                       <CCell>层站数</CCell>
-                      <CCell>12  层     12     站     12         门 </CCell>
+                      <CCell>{orc.电梯层数}  层   {orc.电梯站数}  站  {orc.电梯门数} 门</CCell>
                       <CCell>控制方式</CCell>
-                      <CCell>集选</CCell>
+                      <CCell>{orc.控制方式}</CCell>
                     </TableRow>
                   </TableBody>
                 </Table>
@@ -204,7 +204,7 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
               <CCell component="th" scope="row">检验日期</CCell>
               <CCell colSpan={2}>{orc.检验日期}</CCell>
               <CCell>下次检验日期</CCell>
-              <CCell>/</CCell>
+              <CCell>{orc.下检日期 || '／'}</CCell>
             </TableRow>
             </RouterLink>
            {检验编制核准({orc})}

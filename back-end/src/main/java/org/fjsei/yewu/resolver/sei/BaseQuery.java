@@ -430,9 +430,12 @@ public class BaseQuery implements GraphQLQueryResolver {
             dss.set型号(eqp.getEQP_MOD());
             dss.set出厂编号(eqp.getFACTORY_COD());
             dss.set单位内部编号(eqp.getEQP_INNER_COD());
-            dss.set制造日期(eqp.getMAKE_DATE());
-            dss.set下检日期(eqp.getNEXT_ISP_DATE2());   //下次检验日期2(机电定检，1；
-            dss.set改造日期(eqp.getALT_DATE());
+            Date  date=eqp.getMAKE_DATE();
+            if(date!=null)   dss.set制造日期(date.toString());
+            date=eqp.getNEXT_ISP_DATE2();
+            if(date!=null)   dss.set下检日期(date.toString());   //下次检验日期2(机电定检，1；
+            date=eqp.getALT_DATE();
+            if(date!=null)   dss.set改造日期(date.toString());
             dss.set设备使用地点(eqp.getEQP_USE_ADDR());
             Long uid= eqp.getBUILD_ID();
             HouseMge houseMge= uid!=null? houseMgeRepository.findById(uid).orElse(null) :null;
