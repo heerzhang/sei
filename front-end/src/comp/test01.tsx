@@ -9,7 +9,7 @@ Skeleton, useInfiniteScroll
 } from "customize-easy-ui-component";
 //import useThrottle from "@rooks/use-throttle";
 import { useThrottle } from "../hooks/useHelpers";
-
+import parseXlsx from 'excel';
 
 //import { globalHistory  } from "@reach/router";
 
@@ -94,13 +94,14 @@ export default function Example(props) {
   });
 
   //const [option, setOption] = useHistoryState("", "option");
-  //使用window.history.pushState(；必须刷新页面才有数据。
-
+  //使用window.history.pushState(；必须刷新页面才有数据。 "d:\\\\jtestx.xlsx"
   //console.log("来看当前的items nowPath=",globalHistory.location.state&&globalHistory.location.state.option, omit(globalHistory.location.state,'key'), globalHistory.location.state);
+  var sheetsDir = __dirname + __filename;
+  console.log("来看当前的Spreadsheet.xlsx sheetsDir=",sheetsDir);
+  parseXlsx(sheetsDir, '2').then((data) => {
+    console.log("来看当前的Spreadsheet.xlsx data=",data);
+  });
 
-//  console.log("来看当前的items nowPath=",globalHistory.location.state ,"option=",globalHistory);
-  // @ts-ignore
-  // ref.current && ( ref.current.scrollHeight=350);
   // @ts-ignore
   ref.current && console.log("来看", ref.current.offsetHeight,"+",ref.current.clientHeight,"大于",ref.current.scrollHeight);
 

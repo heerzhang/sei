@@ -12,6 +12,7 @@ import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 //import useFetch, { useGet, usePost } from 'use-http'  ;?无法使用{{ process:( load, error ) }}修正中间件FilePond的状态。
 //虽然用全局变量可传递load, error函数，可是若想'use-http'多个文件同时上传时，将会交叉混乱。
 // import "./image.css";
+import parseXlsx from 'excel';
 
 
 
@@ -48,6 +49,11 @@ export function ImageUpload({
           formData.append(fieldName, file, "菜谱图片/"+file.name);
           // formData.append('file', file);    　  //前后端交互的标准的参数？：'file'
           console.log("发送前钩：", formData,file);
+          console.log("来看当前的Spreadsheet.xlsx sheetsDir=",file.toString());
+          parseXlsx(file.toString(), '1').then((data) => {
+            console.log("来看当前的Spreadsheet.xlsx data=",data);
+          });
+
           //fetch()不支持进度,无法实现像axios和ajax(XMLHttpRequest)那样对文件上传进度progress提示。
           //progress(true, 500, 1024);
           fetch(`${process.env.REACT_APP_BACK_END}/uploadFile`, {
