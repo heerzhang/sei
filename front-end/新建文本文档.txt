@@ -263,4 +263,6 @@ react-data-export 生成excel文档。    handsontable是excel形式UI编辑器�
  excel-core
  path instanceof Stream ? path : fs.createReadStream(path);
  request模块的stream接口 https://www.jb51.net/article/179705.htm
-https://www.cnblogs.com/hanguidong/p/9296711.html
+https://blog.csdn.net/weixin_41646716/article/details/82423817
+在前端无法直接读取excel文件内容的。首先转成json文件，直接在代码模块打包导入。https://www.bejson.com/json/col2json/
+

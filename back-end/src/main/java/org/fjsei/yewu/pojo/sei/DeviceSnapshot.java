@@ -14,7 +14,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class DeviceSnapshot {
     private String eqpcod;
-    private String 监察识别码;
+    private String 监察识别码;    //OIDNO;
     private String 使用证号;     //'使用证号'
     private String 设备代码;     //'设备代码
     private String 设备品种;            //'设备名称'=品种    EQP_VART_NAME

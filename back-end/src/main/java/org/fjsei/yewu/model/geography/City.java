@@ -18,5 +18,5 @@ public class City {
     private String  name;        //+',市' '洲？' ,行政级别：？‘xx实验区’； 旧的地区级区域
     //‘香港’‘上海市’ 如何呢： 省 市 都是同一个。 两个实体表都有的。
     //特殊例外的 标志位。
-    private int promote;    //缺省=0，  1表示区域管理Grade提升了1级。
+    private int promote;    //缺省=0，  1表示区域管理级Grade提升了1级　：上海市 /上海市/　区。
 }

@@ -16,9 +16,12 @@ public class UntMge {
     @SequenceGenerator(name = "commonSeq", initialValue = 1, allocationSize = 1, sequenceName = "SEQUENCE_COMMON")
     protected Long id;
     private String UNT_NAME;
-    private String UNT_ADDR;      //'单位详细地址'
+    private String UNT_ADDR;      //'单位详细地址'  填写很乱，最终门栋地址。
+    //个人的 也算=单位？
     private String UNT_ORG_COD;      //组织机构代码
     private String UNT_LKMEN;      //单位联系人
     private String UNT_MOBILE;      //单位联系人手机
     private String POST_COD;      //单位邮编
+    //UNT_AREA_COD,
+    //UNT_LAT,　UNT_LONG, 大多都没有数据的。
 }

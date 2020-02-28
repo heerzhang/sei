@@ -79,6 +79,8 @@ public class BaseQuery implements GraphQLQueryResolver {
     private HouseMgeRepository houseMgeRepository;
     @Autowired
     private UntMgeRepository untMgeRepository;
+    @Autowired
+    private DictEqpTypeRepository dictEqpTypeRepository;
 
     @PersistenceContext(unitName = "entityManagerFactorySei")
     private EntityManager emSei;
@@ -425,8 +427,12 @@ public class BaseQuery implements GraphQLQueryResolver {
             dss.set监察识别码(eqp.getOIDNO());
             dss.set使用证号(eqp.getEQP_USECERT_COD());
             dss.set设备代码(eqp.getEQP_STATION_COD());
-            dss.set设备品种(eqp.getEQP_VART_NAME());
-            dss.set设备类别(eqp.getEQP_SORT_NAME());
+            String idcl=eqp.getEQP_SORT();
+            DictEqpType dcType=dictEqpTypeRepository.findByIdCodEquals(idcl);
+            if(dcType!=null)    dss.set设备类别(dcType.getCLASS_NAME());
+            idcl=eqp.getEQP_VART();
+            dcType=dictEqpTypeRepository.findByIdCodEquals(idcl);
+            if(dcType!=null)    dss.set设备品种(dcType.getCLASS_NAME());
             dss.set型号(eqp.getEQP_MOD());
             dss.set出厂编号(eqp.getFACTORY_COD());
             dss.set单位内部编号(eqp.getEQP_INNER_COD());

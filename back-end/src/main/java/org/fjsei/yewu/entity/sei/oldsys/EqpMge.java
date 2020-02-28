@@ -25,7 +25,8 @@ public class EqpMge {
     private String OIDNO;
     private String EQP_USECERT_COD;     //'使用证号'
     private String EQP_STATION_COD;     //'设备代码
-    private String EQP_NAME;            //'设备名称'=品种    EQP_VART_NAME
+    private String EQP_NAME;            //没用~ ！
+    private String EQP_VART;        //'设备名称'=品种
     private String EQP_VART_NAME;
     private String EQP_SORT;        //设备类别  EQP_SORT_NAME
     private String EQP_SORT_NAME;
@@ -34,11 +35,15 @@ public class EqpMge {
     private String EQP_INNER_COD;     //单位内部编号'
     @Temporal(TemporalType.DATE)
     private Date MAKE_DATE;   //制造日期
+    //内设管理部门=很少的。   关联TB_UNT_DEPT；单位有多个内部管理人；实际用途非常简略=没意义。
+    //内设分支机构，根据地区分辨的。     关联TB_UNT_SECUDEPT；    报告显示的。
     private Long USE_UNT_ID;      //使用单位ID  ,   USE_UNT_ADDR
-    private Long SECUDEPT_ID;     //分支机构ID'
+    //使用单位类型：无内设；内设管理　算统一地域之内的的行政划分； 内设机构是按照地域码的分,分支Name多个，每个分支机构联系人也能多个，地址与区域码可重复。
+    private Long SECUDEPT_ID;     //分支机构ID'　
     private Long MAKE_UNT_ID;     //制造单位ID
     private Long ALT_UNT_ID;      //改造单位ID　　= -1
     private Long MANT_UNT_ID; //维保单位ID
+    //有BUILD_ID的设备不算很多比例。
     private Long BUILD_ID;    //'楼盘ID'
     @Temporal(TemporalType.DATE)
     private Date ALT_DATE;    //改造日期'
@@ -47,9 +52,13 @@ public class EqpMge {
     @Temporal(TemporalType.DATE)
     private Date NEXT_ISP_DATE2;  //下次检验日期2(机电定检，内检，全面）'
     //部分重复的属性。
-    private String USE_UNT_ADDR;
-    private String  EQP_USE_ADDR;    // '使用地点' 几号楼？
-    // SAFE_MAN, SAFE_MAN_PHONE ;
+    private String USE_UNT_ADDR;    //作废没用的？ 全部=null
+    //报告书用到的：
+    //大部分都有的，但是可能很简单地址。
+    private String  EQP_USE_ADDR;     // '使用地点' 可能是具体几号楼？可能是很简单的称谓,最具体地址，大地址的反而没说。
+    //EQP_AREA_COD  EQP_LAT EQP_LONG ; 地理信息不算重要， 仅作标记。
+
+    //安全人员是合并字段？ SAFE_MAN || USE_LKMEN,  ；
     //WX_SIGNATURE;
 }
 
