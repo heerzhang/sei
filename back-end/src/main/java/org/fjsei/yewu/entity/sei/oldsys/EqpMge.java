@@ -43,8 +43,8 @@ public class EqpMge {
     private Long MAKE_UNT_ID;     //制造单位ID
     private Long ALT_UNT_ID;      //改造单位ID　　= -1
     private Long MANT_UNT_ID; //维保单位ID
-    //有BUILD_ID的设备不算很多比例。
-    private Long BUILD_ID;    //'楼盘ID'
+    //非强制字段： 有BUILD_ID的设备 不算 很多比例。
+    private Long BUILD_ID;    //'楼盘ID'；   标示出该设备当前归属哪一个楼盘下辖管控的，可以询问该楼盘就知晓的到。
     @Temporal(TemporalType.DATE)
     private Date ALT_DATE;    //改造日期'
     @Temporal(TemporalType.DATE)
@@ -54,7 +54,7 @@ public class EqpMge {
     //部分重复的属性。
     private String USE_UNT_ADDR;    //作废没用的？ 全部=null
     //报告书用到的：
-    //大部分都有的，但是可能很简单地址。
+    //大部分都有的，但是可能很简单地址。配合区域码和负责任务的机关。
     private String  EQP_USE_ADDR;     // '使用地点' 可能是具体几号楼？可能是很简单的称谓,最具体地址，大地址的反而没说。
     //EQP_AREA_COD  EQP_LAT EQP_LONG ; 地理信息不算重要， 仅作标记。
 
