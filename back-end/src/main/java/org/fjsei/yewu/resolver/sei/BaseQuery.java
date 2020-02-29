@@ -13,6 +13,8 @@ import org.fjsei.yewu.filter.Person;
 import org.fjsei.yewu.filter.SimpleReport;
 import org.fjsei.yewu.jpa.ModelFiltersImpl;
 import org.fjsei.yewu.jpa.PageOffsetFirst;
+import org.fjsei.yewu.model.geography.Address;
+import org.fjsei.yewu.model.geography.AddressRepository;
 import org.fjsei.yewu.pojo.sei.DeviceSnapshot;
 import org.fjsei.yewu.security.JwtUser;
 import org.fjsei.yewu.service.security.JwtUserDetailsService;
@@ -66,7 +68,7 @@ public class BaseQuery implements GraphQLQueryResolver {
     @Autowired
     private UnitRepository unitRepository;
     @Autowired
-    private PositionRepository positionRepository;
+    private AddressRepository addressRepository;
     @Autowired
     private AuthorityRepository authorityRepository;
     @Autowired
@@ -196,8 +198,8 @@ public class BaseQuery implements GraphQLQueryResolver {
         return reportRepository.findAll();
     }
 
-    public Iterable<Position> findAllPositions() {
-        return positionRepository.findAll();
+    public Iterable<Address> findAllPositions() {
+        return addressRepository.findAll();
     }
 
 
@@ -256,7 +258,7 @@ public class BaseQuery implements GraphQLQueryResolver {
     }
 
     public Long countPositionEQP(Long Id) {
-        Position position = positionRepository.findById(Id).orElse(null);
+        Address position = addressRepository.findById(Id).orElse(null);
         int myInt=position.getEqps().size();
         return Long.parseLong(new String().valueOf(myInt));
     }

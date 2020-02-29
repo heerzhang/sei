@@ -6,6 +6,7 @@ import lombok.Setter;
 import org.fjsei.yewu.entity.sei.inspect.ISP;
 import org.fjsei.yewu.entity.sei.inspect.Task;
 //同名冲突！@Cache不是来自javax.persistence.*;的，所以小心添加org.hibernate.annotations.Cache;在其上方。
+import org.fjsei.yewu.model.geography.Address;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.stereotype.Component;
@@ -71,7 +72,7 @@ public class EQP {
     //缺省FetchType.EAGER  不管查询对象后面具体使用的字段，EAGER都会提前获取数据。
     @ManyToOne(fetch= FetchType.LAZY)
     @JoinColumn(name = "pos_id")
-    private Position pos;    //地理定位x+y经纬度。
+    private Address pos;    //多对1，多端来存储定义实体ID字段。 ；地理定位。
 
     @ManyToOne(fetch= FetchType.LAZY)
     @JoinColumn

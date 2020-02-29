@@ -8,6 +8,8 @@ import org.fjsei.yewu.entity.sei.inspect.Task;
 import org.fjsei.yewu.entity.sei.inspect.TaskRepository;
 import org.fjsei.yewu.exception.BookNotFoundException;
 import org.fjsei.yewu.input.DeviceCommonInput;
+import org.fjsei.yewu.model.geography.Address;
+import org.fjsei.yewu.model.geography.AddressRepository;
 import org.fjsei.yewu.security.JwtTokenUtil;
 import org.fjsei.yewu.security.JwtUser;
 import org.fjsei.yewu.service.security.JwtUserDetailsService;
@@ -71,7 +73,7 @@ public class BaseMutation implements GraphQLMutationResolver {
     @Autowired
     private UnitRepository unitRepository;
     @Autowired
-    private PositionRepository positionRepository;
+    private AddressRepository addressRepository;
     @Autowired
     private AuthorityRepository authorityRepository;
 
@@ -93,11 +95,11 @@ public class BaseMutation implements GraphQLMutationResolver {
     }
 
      @Transactional
-    public Position newPosition(String address,String building,String area,String lng,String lat) {
+    public Address newPosition(String address, String building, String area, String lng, String lat) {
         if(!emSei.isJoinedToTransaction())      emSei.joinTransaction();
-        Position position = new Position(address,area,building);
+        Address position = new Address();
         position.setLngAndLat(lng,lat);
-        positionRepository.save(position);
+        addressRepository.save(position);
         return position;
     }
 
@@ -261,7 +263,7 @@ public class BaseMutation implements GraphQLMutationResolver {
         if(!emSei.isJoinedToTransaction())      emSei.joinTransaction();
         EQP eQP = eQPRepository.findById(id).orElse(null);
         Assert.isTrue(eQP != null,"未找到eQP:"+eQP);
-        Position position= positionRepository.findById(posId).orElse(null);
+        Address position= addressRepository.findById(posId).orElse(null);
         Unit ownerUnit= unitRepository.findById(ownerId).orElse(null);
         Unit maintUnit= unitRepository.findById(maintId).orElse(null);
         Assert.isTrue(position != null,"未找到position:"+position);
@@ -279,10 +281,13 @@ public class BaseMutation implements GraphQLMutationResolver {
         if(!emSei.isJoinedToTransaction())      emSei.joinTransaction();
         EQP eQP = eQPRepository.findById(id).orElse(null);
         Assert.isTrue(eQP != null,"未找到eQP:"+eQP);
-        Position position= positionRepository.findByAddress(info.getAddress());
+        //Todo: 行政部分+用户定义名
+        Address position= addressRepository.findByName(info.getAddress());
         if(position==null){
-            position=new Position(info.getAddress(),"05910103","贵大厦");
-            positionRepository.save(position);
+            position=new Address();
+            //Todo: 行政部分 独立了。
+            position.setName(info.getAddress());
+            addressRepository.save(position);
         }
         Unit ownerUnit= unitRepository.findById(ownerId).orElse(null);
         Assert.isTrue(position != null,"未找到position:"+position);

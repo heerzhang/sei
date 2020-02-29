@@ -5,7 +5,7 @@ type EQP{
     oid: String
     type: String!
     ownerUnt: Unit
-    pos: Position
+    pos: Address
     maintUnt: Unit
     instDate: String
     factoryNo: String

@@ -5,6 +5,7 @@ import org.fjsei.yewu.entity.sei.*;
 import org.fjsei.yewu.entity.sei.inspect.ISPRepository;
 import org.fjsei.yewu.entity.sei.inspect.TaskRepository;
 import org.fjsei.yewu.entity.sei.oldsys.*;
+import org.fjsei.yewu.model.geography.AddressRepository;
 import org.fjsei.yewu.security.JwtUser;
 import org.fjsei.yewu.service.security.JwtUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,7 @@ public class SysMgrQuery implements GraphQLQueryResolver {
     @Autowired
     private UnitRepository unitRepository;
     @Autowired
-    private PositionRepository positionRepository;
+    private AddressRepository addressRepository;
     @Autowired
     private AuthorityRepository authorityRepository;
     @Autowired

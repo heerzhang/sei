@@ -7,6 +7,8 @@ import org.fjsei.yewu.entity.sei.inspect.ISP;
 import org.fjsei.yewu.entity.sei.inspect.ISPRepository;
 import org.fjsei.yewu.entity.sei.inspect.Task;
 import org.fjsei.yewu.entity.sei.inspect.TaskRepository;
+import org.fjsei.yewu.model.geography.Address;
+import org.fjsei.yewu.model.geography.AddressRepository;
 import org.hibernate.jpa.QueryHints;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -50,7 +52,7 @@ public class JpaServiceImpl implements JpaService {
     private TaskRepository taskRepository;
 
     @Autowired
-    private PositionRepository positionRepository;
+    private AddressRepository addressRepository;
 
     @Override
     public Student findByName(String name) {
@@ -194,15 +196,17 @@ public class JpaServiceImpl implements JpaService {
     @Transactional
     public void addPositions() {
         if(!emSei.isJoinedToTransaction())      emSei.joinTransaction();
-        List<Position> topics = new ArrayList<>();
+        List<Address> topics = new ArrayList<>();
         Random random=new Random();
         for(int j = 0; j < 5000; j++)  {
             int uid=random.nextInt(19)+1 +1000;
-            Position user = new Position(getRandomString(24),"35"+uid, getRandomString(12));
+            Address user = new Address();
+            //,"35"+uid, getRandomString(12)
+            user.setName(getRandomString(24));
             topics.add(user);
         }
-        positionRepository.saveAll(topics);
-        positionRepository.flush();
+        addressRepository.saveAll(topics);
+        addressRepository.flush();
     }
     public static String getRandomString(int length){
         //定义一个字符串（A-Z，a-z，0-9）即62位；
@@ -267,7 +271,7 @@ public class JpaServiceImpl implements JpaService {
             //eQP.setTask(task_list);
             eQP.setFactoryNo("越F"+getRandomString(10));
             int uid8=random.nextInt(1999)+1 +1293333;
-            Position position=positionRepository.getOne((long)uid8);
+            Address position=addressRepository.getOne((long)uid8);
             eQP.setPos(position);
             topics.add(eQP);
         }

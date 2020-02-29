@@ -7,6 +7,7 @@ import org.fjsei.yewu.entity.sei.inspect.ISPRepository;
 import org.fjsei.yewu.entity.sei.inspect.Task;
 import org.fjsei.yewu.entity.sei.inspect.TaskRepository;
 import org.fjsei.yewu.exception.BookNotFoundException;
+import org.fjsei.yewu.model.geography.AddressRepository;
 import org.fjsei.yewu.security.JwtTokenUtil;
 import org.fjsei.yewu.service.security.JwtUserDetailsService;
 import org.slf4j.Logger;
@@ -48,7 +49,7 @@ public class IspMgrMutation implements GraphQLMutationResolver {
     @Autowired
     private UnitRepository unitRepository;
     @Autowired
-    private PositionRepository positionRepository;
+    private AddressRepository addressRepository;
     @Autowired
     private AuthorityRepository authorityRepository;
 
