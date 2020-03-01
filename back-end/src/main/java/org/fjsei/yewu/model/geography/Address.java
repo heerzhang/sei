@@ -12,6 +12,8 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @Entity
+@Table(name = "ADDRESS",
+        uniqueConstraints={@UniqueConstraint(columnNames={"name"}) ,@UniqueConstraint(columnNames={"aid"})} )  //={“字段1”,“字段2”}
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "commonSeq")
@@ -21,7 +23,7 @@ public class Address {
     private String  name;     //'[前缀不需要]单位详细地址，门牌号'； 前面行政地理描述部分要省略掉。
     //【前缀，行政地理描述部分】     用于提高搜索判定速度。
     @ManyToOne(fetch= FetchType.LAZY)
-    @JoinColumn(name = "ad_id")
+    @JoinColumn(name = "aid")
     private Adminunit  ad;       //行政区划
     //地址需要再次丰富掉， 省 市 区 镇 小区。
     // private String  area;   //地区码 "zipCode": "",          area;   //地区码

@@ -16,6 +16,7 @@ public class County {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "commonSeq")
     @SequenceGenerator(name = "commonSeq", initialValue = 1, allocationSize = 1, sequenceName = "SEQUENCE_COMMON")
     protected Long id;
+    //台江区  长乐市  马尾区， 根据习惯写上什么名字 就写啥。
     private String  name;        //+'县'、'区'； 独立市。
     //？某个市级单位，底下只有一个区。
     //市辖区和县级城市是同一个行政级别。 县底下能管的镇级市。
@@ -27,4 +28,15 @@ public class County {
     //竟然是倒过来的关系：县的底下才是城市域。和中国相反了。在中国，市比县大；在美国，县比市大。
     @OneToMany(mappedBy = "county")
     private Set<Adminunit> ads;
+    //上级行政关系的关联：
+    @ManyToOne(fetch= FetchType.LAZY)
+    @JoinColumn(name = "city_id")
+    private City  city;
+    //下级行政关系的关联：
+    @OneToMany(mappedBy = "county")
+    private Set<Town>   towns;
+    //下一级行政关系坍塌,下一级关联区划实际上是摆设：只有一条虚拟的记录。
+    //底下只有一个镇的，没有划分镇的县级别。
+    //搜索的时候，支持 按照 镇 一级，  按县级别，都算有效的搜索匹配区域。
+    private boolean collapse;
 }
