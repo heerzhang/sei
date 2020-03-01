@@ -3,6 +3,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import javax.persistence.*;
+import java.util.Set;
 
 //这一级别 可能省略掉。 街道上面--》地级市。
 
@@ -24,4 +25,6 @@ public class County {
 
     //平潭县()如何？
     //竟然是倒过来的关系：县的底下才是城市域。和中国相反了。在中国，市比县大；在美国，县比市大。
+    @OneToMany(mappedBy = "county")
+    private Set<Adminunit> ads;
 }

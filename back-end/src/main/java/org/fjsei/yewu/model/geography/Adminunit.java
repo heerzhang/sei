@@ -32,10 +32,16 @@ public class Adminunit {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ID", referencedColumnName = "ID")
     private Town  town;         //最小的1:1关系。
-
+    @ManyToOne(fetch= FetchType.LAZY)
+    @JoinColumn(name = "county_id")
     private County  county;
+    @ManyToOne(fetch= FetchType.LAZY)
+    @JoinColumn(name = "city_id")
     private City  city;
+
     private Province  province;
+    @ManyToOne(fetch= FetchType.LAZY)
+    @JoinColumn(name = "country_id")
     private Country  country;
 }
 //最低等级的行政区划。

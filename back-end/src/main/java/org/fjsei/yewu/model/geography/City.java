@@ -3,6 +3,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import javax.persistence.*;
+import java.util.Set;
 
 
 //地区一级的城市。 可以大的City套小的市镇。
@@ -23,6 +24,8 @@ public class City {
     //外国竟然是倒过来的关系：县(=郡)的底下才是城市域（也有县改成市的）。和中国相反了。
     //美国是没有“地级”的，一个州可以辖极少到极多的“县级”单位; 特例 纽约市。 加州行政区划是 州-县-市/镇-街区 四级。
     //中国县级市的？ 福建省福州市福清市某乡镇。
+    @OneToMany(mappedBy = "city")
+    private Set<Adminunit>  ads;
 }
 
 //美国比中国少了一个级别。=地区级别少了。
