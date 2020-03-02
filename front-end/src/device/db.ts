@@ -27,33 +27,24 @@ export interface RecipeOptions {
 
 const CREATE_DEVICE = gql`
   mutation CREATE_DEVICE($cod: String!,$oid: String!) {
-    newEQP(cod: $cod,type:"电梯4000",oid: $oid) {
+    res: newEQP(cod: $cod,type:"电梯4000",oid: $oid) {
       id cod oid
       pos {
-       id address
+       id name
       }
     }
   }
 `;
 
-//创立设备　
-export const useCreateEntry = (filter) => {
-  const [userList, setUserList] = React.useState(null);
-  console.log("进入useCreateE-device.filter=",filter );
-  const [submitfunc, {error, }] = useMutation(CREATE_DEVICE, {
-    variables: {...filter},
-    update: (proxy, mutationResult) => {
-      const newPost = mutationResult.data.newEQP;     //新的一条,登录ok；　　.data.createPost;
-      console.log("createEntry返回Q1=" + JSON.stringify(mutationResult.data) + newPost);
-      setUserList( newPost );
-    },
-    onCompleted: (data) => {
-      console.log("createEntry返回Q=Completed=" ,data );
-    }
+//创立或导入设备　
+export const useCreateDevice = (options) => {
+  console.log("保 useCreateDevice @@ options=", options);
+  const [submit, {error, data, loading, called}] = useMutation(CREATE_DEVICE, {
+    variables: {...options},
   })
-  return { userList ,submitfunc,error　};
+  const { res : result} = data||{};
+  return { result ,submit, error, loading, called };
 };
-
 
 
 const UPDATE_DEVICE_MUTATION = gql`
@@ -69,7 +60,7 @@ const UPDATE_DEVICE_MUTATION = gql`
 
 export const useUpdateEntry = (options) => {
   const [result, setResult] = React.useState(null);
-  console.log("进入useUpdateEntry.filter=",options );
+ // console.log("进入useUpdateEntry.filter=",options );
   const [submitfunc, {error, }] = useMutation(UPDATE_DEVICE_MUTATION, {
     variables: {...options},
     update: (proxy, mutationResult) => {

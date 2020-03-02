@@ -34,7 +34,7 @@ import { DeviceList } from "./DeviceList";
 import { DeviceDetail } from "./DeviceDetail";
 import { IspEntrance } from "./task/IspEntrance";
 import { useCountOfTask } from "./db";
-
+import { Link as RouterLink } from "wouter";
 
 export interface MainProps {
   path?: string;
@@ -159,28 +159,30 @@ export const DeviceMain: React.FunctionComponent<MainProps> = props => {
                 <Tooltip content="增加个待检测设备">
                   <div>
                     <DarkMode>
+                      <RouterLink to="/device/new">
                       <IconButton
-                        component={Link}
-                        to="/device/new"
+                        noBind
                         variant="ghost"
-                        label="加菜谱"
+                        label="加设备"
                         size="md"
                         icon={<IconPlus />}
                       />
+                      </RouterLink>
                     </DarkMode>
                   </div>
                 </Tooltip>
                 <Tooltip content="从旧平台导入设备">
                   <div>
                     <DarkMode>
-                      <IconButton
-                        component={Link}
-                        to="/device/new"
-                        variant="ghost"
-                        label="加菜谱"
-                        size="md"
-                        icon={<IconArchive />}
-                      />
+                      <RouterLink to="/device/new">
+                        <IconButton
+                          noBind
+                          variant="ghost"
+                          label="加设备"
+                          size="md"
+                          icon={<IconArchive />}
+                        />
+                      </RouterLink>
                     </DarkMode>
                   </div>
                 </Tooltip>

@@ -28,7 +28,7 @@ import {
 //import { useSession } from "../auth";
 import {Helmet} from "react-helmet";
 import { Link,  useLocation } from "wouter";
-
+import { Link as RouterLink } from "wouter";
 //[HOOK限制]按钮点击函数内部直接上toast()或toaster.notify()很可能无法正常显示。而放在函数组件顶层render代码前却能正常。
 //import toaster from "toasted-notes";
 
@@ -213,12 +213,19 @@ export const AttachedTask: React.FunctionComponent<ComposeProps> = ({
                   </MenuItem>
                   <MenuItem onPress={() => handleDelete(id)}>删除</MenuItem>
                   <MenuDivider />
-                  <MenuItem contentBefore={<IconPackage />} component={Link} to={"/device/"+id+"/addTask"}>
-                    生成任务
-                  </MenuItem>
-                  <MenuItem contentBefore={<IconPackage />} component={Link} to={"/device/"+id+"/task/"}>
-                    准备派工给检验员
-                  </MenuItem>
+
+                    <MenuItem contentBefore={<IconPackage />}  onPress={() => {
+                      setLocation("/device/"+id+"/addTask", true );
+                    } }>
+                      生成任务1
+                    </MenuItem>
+
+                     <MenuItem contentBefore={<IconPackage />}  onPress={() => {
+                       setLocation("/device/"+id+"/task/", true );
+                     } }>
+                      准备派工给检验员2
+                    </MenuItem>
+
                 </MenuList>
               }
             >

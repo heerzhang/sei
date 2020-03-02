@@ -92,7 +92,7 @@ export const ReportSample: React.FunctionComponent<ComposeProps> = ({
 //  const [hoverIngredient, setHoverIngredient] = React.useState(null);
 //  const hoverIngredientRef = React.useRef(hoverIngredient);
  // const [Options, setOptions] = React.useState({});
- // const {userList:entry, submitfunc, } = useCreateEntry(Options);
+ // const {userList:entry, submitfunc, } = useCreateDevice(Options);
 
   const {result, submit:updateFunc, } = useDispatchIspMen({
     task: repId,

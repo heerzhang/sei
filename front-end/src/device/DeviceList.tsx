@@ -259,8 +259,8 @@ export const DeviceList: React.FunctionComponent<
                     )}
 
                     {   queryResults && queryResults.hits &&
-                     queryResults.hits.map(hit => (
-                      <RouterLink
+                     queryResults.hits.map((hit,i) => (
+                      <RouterLink key={i}
                           to={`/device/${hit.id}`} >
                         <ListItem
                           key={hit.id}

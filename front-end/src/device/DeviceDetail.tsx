@@ -21,15 +21,18 @@ export interface RecipeProps {
 }
 
 //id 184213562 ;这个id是　云搜索algoliasearch内部生成的objectID:　竟然这样? http://localhost:3000/184213562 ？
-export const DeviceDetail: React.FunctionComponent<RecipeProps> = ({ id, taskId }) => {
+export const DeviceDetail: React.FunctionComponent<RecipeProps> = ({ id:pid, taskId }) => {
   const theme = useTheme();
   const {user,} = useSession();
+  console.log("DeviceDetail进入时taskId=",taskId,"进行中id=",pid);
   //设备 外部关联的 任务。
   const [matched, params] = useRoute("/device/:id/task/:taskId*");
   //const showingRecipe = matched && params.taskId;
   //var   value=null;
+  //不要改组件的props带来的变量。
+  let id= (params && params.id) || pid;
   const { loading ,data:value, error } = useDeviceDetail(id);
-  id= params && params.id;
+
   //第一个render这里loading=true，要到第二次再执行到了这里才会有data数据!
   console.log("刚DeviceDetail经过taskId=",taskId,"进行中id=",id,"showingRecipe=",matched,params);
 

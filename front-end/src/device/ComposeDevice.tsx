@@ -27,10 +27,10 @@ import {
   IconArrowLeft,
    MenuDivider, IconPackage
 } from "customize-easy-ui-component";
-import {   useCreateEntry, useUpdateEntry } from "./db";
+import {   useCreateDevice, useUpdateEntry } from "./db";
 import {Helmet} from "react-helmet";
 import { Link,  useLocation } from "wouter";
-
+import { Link as RouterLink } from "wouter";
 //[HOOK限制]按钮点击函数内部直接上toast()或toaster.notify()很可能无法正常显示。而放在函数组件顶层render代码前却能正常。
 //import toaster from "toasted-notes";
 
@@ -100,7 +100,7 @@ export const ComposeDevice: React.FunctionComponent<ComposeProps> = ({
  // const [hoverIngredient, setHoverIngredient] = React.useState(null);
   //const hoverIngredientRef = React.useRef(hoverIngredient);
   const [Options, setOptions] = React.useState({});
-  const {userList:entry, submitfunc, error} = useCreateEntry(Options);
+  const {result:entry, submit:submitfunc, error} = useCreateDevice({oid:"test暂且空着",  ...ingredients});
   const {result, submitfunc:updateFunc, } = useUpdateEntry({
     id: ingredients && ingredients.id,
     unt: 1,
@@ -108,7 +108,7 @@ export const ComposeDevice: React.FunctionComponent<ComposeProps> = ({
           ,address: "贵大厦" },
     });
   //useUpdateEntry({ id: ingredients && ingredients.id, info: {...ingredients, id: undefined,address: "大厦" }, });
-  console.log("页面刷新钩子ComposeDevice entry=",entry,",id="+id+";task=",task,";dt=",dt,result);
+  console.log("页面刷新钩子ComposeDevice Options=",Options,",id="+id+";task=",task,";dt=",dt,result);
 /*
   function onIngredientChange(i: number, value: any) {
     //ingredients[i] = value;
@@ -127,29 +127,14 @@ export const ComposeDevice: React.FunctionComponent<ComposeProps> = ({
   }
   */
   //不能在这点击触发函数内部执行HOOKs!! 必须上移动外移到 界面组件的头部初始化hooks，随后点击触发调用hook钩子函数。
-  async function saveRecipe({
-    title,
-    plain,
-    ingredients,
-    description,
-    author,
-    image
-  }: {
-    title: string;
-    plain: string;
-    ingredients: any[];
-    description: string;
-    author: string;
-    image: string;
-  }) {
-    log("create entry");
-
+  async function saveRecipe( a
+  ) {
     try {
       setLoading(true);
-      setOptions({
-        ...ingredients
-      });
-      console.log("baochun等待之前 ingredients=", ingredients );
+      console.log("baochun等待之前１ ingredients=", ingredients );
+      //这时才去修改submitfunc参数，已经来不及，setOptions异步执行；submitfunc会看见前面的取值。
+      setOptions({oid:"test暂且空着",  ...ingredients});
+      console.log("baochun等待之前２ ingredients=", ingredients );
       await submitfunc();   //要等待正常的结果应答从后端返回。
       //submitfunc(); 立刻执行后面代码，这样不会等待后端应答的。
       /*点击函数发送给后端服务器，即刻返回到这里了await submitfunc();　这个时候entry还不是后端的应答数据，要等到下一次entry被ＨＯＯＫ修正*/
@@ -338,12 +323,10 @@ export const ComposeDevice: React.FunctionComponent<ComposeProps> = ({
             display: "flex"
           }}
         >
+          <RouterLink to="/device">
           <IconButton
             icon={<IconArrowLeft />}
-            component={Link}
-            to="/device"
             label="后退"
-            replace
             variant="ghost"
             css={{
               marginRight: theme.spaces.sm,
@@ -352,6 +335,7 @@ export const ComposeDevice: React.FunctionComponent<ComposeProps> = ({
               }
             }}
           />
+          </RouterLink>
           {editing ? (
             <div css={{ marginLeft: "-0.75rem", flex: 1 }}>
               <TransparentInput
@@ -395,10 +379,10 @@ export const ComposeDevice: React.FunctionComponent<ComposeProps> = ({
                   </MenuItem>
                   <MenuItem onPress={() => handleDelete(id)}>删除</MenuItem>
                   <MenuDivider />
-                  <MenuItem contentBefore={<IconPackage />} component={Link} to={"/device/"+id+"/addTask"}>
+                  <MenuItem contentBefore={<IconPackage />}  to={"/device/"+id+"/addTask"}>
                     生成任务
                   </MenuItem>
-                  <MenuItem contentBefore={<IconPackage />} component={Link} to={"/device/"+id+"/task/"+task}>
+                  <MenuItem contentBefore={<IconPackage />}  to={"/device/"+id+"/task/"+task}>
                     准备派工给检验员
                   </MenuItem>
                 </MenuList>
@@ -433,10 +417,10 @@ export const ComposeDevice: React.FunctionComponent<ComposeProps> = ({
             {editing && (
               <Button
                 intent="primary"
-                disabled={!title}
+                disabled={false}
                 css={{ marginLeft: theme.spaces.sm }}
                 onPress={() => {
-                  //这里serialize是　src/Editor.jsx:120　自定义函数
+                  //按钮里面看不到最新的input取值的。
                   //const { text, content } = current.serialize();
                   const toSave = {
                     title,
@@ -447,7 +431,7 @@ export const ComposeDevice: React.FunctionComponent<ComposeProps> = ({
                     ingredients
                   };
 
-                  id ? updateRecipe(id, toSave) : saveRecipe(toSave);
+                  id ? updateRecipe(id, toSave) : saveRecipe(null);
                 }}
                >
                 保存
@@ -466,15 +450,6 @@ export const ComposeDevice: React.FunctionComponent<ComposeProps> = ({
         }}
       >
         <div>
-          {editing ? (
-            <div
-
-            />
-          ) : image ? (
-            <div  id={image} />
-          ) : null}
-          {//在图片以下的内容：
-          }
           <Container>
             <div
               css={{
@@ -492,8 +467,8 @@ export const ComposeDevice: React.FunctionComponent<ComposeProps> = ({
                           <ContainLine display={'设备号'}>
                               <TransparentInput
                                 autoFocus={true}
-                                placeholder="名字"
-                                value={ingredients.cod}
+                                placeholder="那一台电梯？"
+                                value={ingredients.cod||''}
                                 onChange={e => {
                                   setIngredients( {
                                     ...ingredients,
@@ -505,7 +480,8 @@ export const ComposeDevice: React.FunctionComponent<ComposeProps> = ({
                           <ContainLine display={'监察识别码'}>
                             <TransparentInput
                               autoFocus={true}
-                              value={ingredients.oid}
+                              placeholder="可以不要输入"
+                              value={ingredients.oid||''}
                               onChange={e => {
                                 setIngredients( {
                                   ...ingredients,
@@ -571,52 +547,23 @@ export const ComposeDevice: React.FunctionComponent<ComposeProps> = ({
                 </div>
               )}
 
-
-              <div css={{ marginTop: theme.spaces.lg }}>
-                <Text variant="h5">技术规格明细</Text>
-                <div>
-                  { /*  <Editor
-                    ref={ref}
-                    value={content}
-                    onChange={value => setContent(value)}
-                    renderAnnotation={renderAnnotation}
-                    initialValue={
-                      defaultDescription ? defaultDescription : null
-                    }
-                    readOnly={!editing}
-                  /> */ }
-                </div>
-              </div>
-              <div css={{ marginTop: theme.spaces.lg }}>
-                {editing ? (
-                  <>
-                    <Text variant="h5">原创人</Text>
-                    <Contain>
-                      <TransparentInput
-                        placeholder="原创和转载的出处说明"
-                        value={credit}
-                        onChange={e => {
-                          setCredit(e.target.value);
-                        }}
-                      />
-                    </Contain>
-                  </>
-                ) : (
-                  <>
-                    {credit && (
-                      <>
-                        <Text variant="h5">原创人</Text>
-                        <Text>{credit}</Text>
-                      </>
-                    )}
-                  </>
-                )}
-              </div>
+              <LayerLoading loading={loading} />
+              {editing && <Button
+                  intent="primary"
+                  disabled={false}
+                  css={{ marginLeft: theme.spaces.sm }}
+                  onPress={() => {  //按钮里面看不到最新的input取值的。
+                     saveRecipe(null);
+                  }}
+                  >
+                从旧平台导入一个设备吧
+                </Button>
+              }
             </div>
           </Container>
         </div>
       </div>
-      <LayerLoading loading={loading} />
+
     </div>
   );
 };
@@ -662,9 +609,9 @@ const ContainLine =({ display, children, ...props })  => {
   return (
     <div
       css={{
-        marginTop: "-0.25rem",
-        marginLeft: "-0.75rem",
-        marginRight: "-0.75rem"
+     //   marginTop: "-0.25rem",
+     //   marginLeft: "-0.75rem",
+     //   marginRight: "-0.75rem"
       }}
       {...props}
     >
@@ -697,3 +644,6 @@ const ContainLine =({ display, children, ...props })  => {
     </div>
   );
 };
+
+
+//注意：component is changing an uncontrolled input of type undefined to be controlled：使得输入捕获异常．

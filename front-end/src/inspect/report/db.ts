@@ -208,7 +208,7 @@ const CREATE_DEVICE = gql`
 `;*/
 
 /*/创立设备　
-export const useCreateEntry = (filter) => {
+export const useCreateDevice = (filter) => {
   const [userList, setUserList] = React.useState(null);
   console.log("进入useCreateE-device.filter=",filter );
   const [submitfunc, {error, data, loading, called}] = useMutation(CREATE_DEVICE, {
