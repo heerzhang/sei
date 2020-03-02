@@ -8,12 +8,12 @@ import food from "./images/food.svg";
 import {
   Navbar,
   Toolbar,
-  Text,Button,
+  Text, Button,
   useTheme,
   useResponsiveBodyPadding,
   Container,
   Link,   　　　//这里sancho的Link等同于基础的<a><a/>，会跳转重新刷新页面；
-  IconArrowRight
+  IconArrowRight, IconGift, IconTruck, IconPrinter, IconKey
 } from "customize-easy-ui-component";
 
 
@@ -73,6 +73,7 @@ export const Branding: React.FunctionComponent<BrandingProps> = (props) => {
               <Button
                 size="md"
                 intent="primary"
+                iconBefore={<IconKey />}
                 iconAfter={<IconArrowRight />}
               >
                 用户登录
@@ -186,7 +187,7 @@ export const Branding: React.FunctionComponent<BrandingProps> = (props) => {
               src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1566208112112&di=057216c9b1f519a6bec42f465025062e&imgtype=0&src=http%3A%2F%2Fqcloud.dpfile.com%2Fpc%2F5B4EKvgdVHvYJdSIXlvqZF_P3CApeL2gFM3VtjrHbrl2RzRjFYhj5njVYekTCwBvTYGVDmosZWTLal1WbWRW3A.jpg"
               alt="Ben"
             />
-            Hey! 测试当中. I was getting tired of losing recipes in my
+            Hey! 新一代平台接受用户测试和需求意见征集阶段. I was getting tired of losing recipes in my
             inbox and nagging friends and family for their recipes, so I created
             this little app. It's a simple tool to help my family maintain a
             shared, searchable database of recipes. Give it a try, and happy
@@ -220,21 +221,12 @@ export const Branding: React.FunctionComponent<BrandingProps> = (props) => {
             marginTop: theme.spaces.lg
           }}
         >
-          <RouterLink   to="/login?register=true" >
-              <Button
-                size="lg" noBind
-                intent="primary"
-                iconAfter={<IconArrowRight />}
-              >
-                用户注册
-              </Button>
-          </RouterLink>
           <RouterLink   to="/device/">
             <Button
               size="lg" noBind
               intent="primary"
+              iconBefore={<IconGift />}
               iconAfter={<IconArrowRight />}
-
             >
               从设备入口
             </Button>
@@ -243,6 +235,7 @@ export const Branding: React.FunctionComponent<BrandingProps> = (props) => {
             <Button
               size="lg" noBind
               intent="primary"
+              iconBefore={<IconTruck />}
               iconAfter={<IconArrowRight />}
             >
               从检验入手
@@ -252,6 +245,7 @@ export const Branding: React.FunctionComponent<BrandingProps> = (props) => {
             <Button
               size="lg" noBind
               intent="primary"
+              iconBefore={<IconPrinter />}
               iconAfter={<IconArrowRight />}
             >
              正式报告入口
@@ -341,7 +335,7 @@ export const Branding: React.FunctionComponent<BrandingProps> = (props) => {
               </svg>
               <Text variant="h4">Share</Text>
               <Text>
-                无需登录的就可以看得 页面；2 Easily share recipes with family and friends by creating a
+                无需登录就可以看得的页面；2 Easily share recipes with family and friends by creating a
                 shared recipe collection. Trust me, it beats emailing recipes.
                 And it's super easy to find them again later.
               </Text>
@@ -414,7 +408,7 @@ export const Branding: React.FunctionComponent<BrandingProps> = (props) => {
             制作者 <Link href="/chaipu">hez</Link>
             <br />
             <Link href="mailto:fjsei@gmail.com">Email me</Link> with
-            questions or whatevs!
+            questions or whatevs! <Link href="/original/">后台维护传送门</Link>
             <br />
             <div>
               Icons made by{" "}

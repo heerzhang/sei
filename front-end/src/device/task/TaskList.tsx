@@ -261,26 +261,18 @@ export const TaskList: React.FunctionComponent<
                           showRelation( each.id )
                         }
                         contentBefore={
-                          <Avatar
-                            size="sm"
-                            src={each.status}
-                            name={
-                              each.id || ('图片' || each.dep)
-                            }
+                          <Avatar size="sm"   src={each.status}
+                            name={each.id || ('图片' || each.dep)}
                           />
                         }
-                        primary={`${each.date} ${each.id}` }
+                        primary={`日期 ${each.date}`}
+                        secondary={`状态 ${each.status}` }
                         contentAfter={
-                          each.status ? (
-                            <IconChevronRight
-                              color={theme.colors.text.muted}
-                              aria-hidden
-                            />
-                          ) : (
-                            `${each.dep}部门的`
-                          )
+                            <IconChevronRight  color={theme.colors.text.muted} aria-hidden/>
                         }
-                      />
+                      >
+                        任务号 {each.id}
+                      </ListItem>
                     );
                   })}
                 </List>

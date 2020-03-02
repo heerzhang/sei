@@ -236,15 +236,14 @@ function DeviceListItem({ recipe, id, highlight ,task }: any) {
             <FadeImage src={src} hidden />
           </Embed>
         ) : (
-          recipe.cod
+          recipe.oid
         )
       }
-
       primary={
         highlight ? (
           <span dangerouslySetInnerHTML={{ __html: highlight.title.value }} />
         ) : (
-          recipe.oid
+          recipe.cod
         )
       }
     />

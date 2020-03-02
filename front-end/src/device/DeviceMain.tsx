@@ -200,13 +200,11 @@ export const DeviceMain: React.FunctionComponent<MainProps> = props => {
                   value={activeTab}
                   variant="evenly-spaced"
                 >
-                  <Tab
-                    id="device"
-                  >
-                    设备
+                  <Tab id="device">
+                    关注的设备
                   </Tab>
                   <Tab  badge={ sumofTask }
-                    id="task">检验任务</Tab>
+                    id="task">当前检验任务</Tab>
                   <Tab id="maintain">系统管理</Tab>
                 </Tabs>
               </DarkMode>

@@ -12,14 +12,14 @@ import {
   Link as StyledLink,
   LayerLoading,
   Alert,
-  Container, Input,  InputGroup
+  Container, Input, InputGroup, IconArrowRight
 } from "customize-easy-ui-component";
 import {  useSession, useLoginToServer } from "./auth";
 //query-string是其他的基础库所依赖的，不是直接引入的。
 import queryString from "query-string";
 import { Layout } from "./Layout";
 //import { InputGroup } from "./comp/Form";
-
+import { Link as RouterLink } from "wouter";
 
 export interface LoginProps {
   path?: string;
@@ -171,8 +171,16 @@ export const Login: React.FunctionComponent<LoginProps> = props => {
                         setIsRegistering(true);
                       }}
                     >
-                      先要申请注册.
+                      先要申请
                     </StyledLink>
+                    <RouterLink   to="/login?register=true" >
+                      <Button
+                        size="xs" noBind
+                        intent="primary"
+                        iconAfter={<IconArrowRight />}
+                      >注册
+                      </Button>
+                    </RouterLink>
                   </Text>
                 )}
               </div>

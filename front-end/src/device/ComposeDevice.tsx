@@ -378,13 +378,6 @@ export const ComposeDevice: React.FunctionComponent<ComposeProps> = ({
                     编辑
                   </MenuItem>
                   <MenuItem onPress={() => handleDelete(id)}>删除</MenuItem>
-                  <MenuDivider />
-                  <MenuItem contentBefore={<IconPackage />}  to={"/device/"+id+"/addTask"}>
-                    生成任务
-                  </MenuItem>
-                  <MenuItem contentBefore={<IconPackage />}  to={"/device/"+id+"/task/"+task}>
-                    准备派工给检验员
-                  </MenuItem>
                 </MenuList>
               }
             >

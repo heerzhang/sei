@@ -268,10 +268,10 @@ export const DeviceList: React.FunctionComponent<
                             <Avatar
                               size="sm"
                               src={hit.oid}
-                              name={hit.cod || hit.oid}
+                              name={hit.id}
                             />
                           }
-                          primary={`${hit.id} 类型${hit.type}`}
+                          primary={`${hit.cod}`}
                           contentAfter={
                             <IconPlus
                               color={theme.colors.text.muted}
