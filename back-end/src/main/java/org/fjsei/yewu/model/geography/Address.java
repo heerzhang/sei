@@ -7,13 +7,13 @@ import org.springframework.security.access.prepost.PreAuthorize;
 
 import javax.persistence.*;
 import java.util.Set;
+//联合主键类比ID字段，并不是 联合唯一约束，两个概念用法不同。 主键只能有一个，但是唯一约束搞可以多个的。而ID关系到JPA接口方法引用。
 
 @Getter
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "ADDRESS",
-        uniqueConstraints={@UniqueConstraint(columnNames={"name"}) ,@UniqueConstraint(columnNames={"aid"})} )  //={“字段1”,“字段2”}
+@Table( uniqueConstraints = {@UniqueConstraint(columnNames={"name", "aid"})} )
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "commonSeq")
@@ -36,7 +36,7 @@ public class Address {
 
     //测试
     @PreAuthorize("hasRole('ADMIN')")
-    public boolean setLngAndLat(String lng,String lat){
+    public boolean setLngAndLat(String lat, String lng){
         this.lng=Double.parseDouble(lng);
         this.lat=Double.parseDouble(lat);
         return true;

@@ -1,3 +1,5 @@
+http://27.151.117.65:8673/graphiql
+http://192.168.1.105:8673/graphiql
 JPA通用接口
 //标记名字 旧的。
 //case 用法1;
@@ -541,7 +543,7 @@ JPA通用接口
    }
 }
 
-http://192.168.1.105:8673/graphiql
+
 
 query findEqpMge($id: ID!) {
   findEqpMge(id: $id) {
@@ -554,9 +556,35 @@ query findEqpMge($id: ID!) {
   "id": "59273"
 }
 
+  mutation initAdminunit($townId:ID!,$prefix: String!,$areacode: String!,$zipcode: String) {
+    initAdminunit(townId: $townId,prefix: $prefix,areacode: $areacode,zipcode: $zipcode) {
+      id prefix
+    }
+  }
+{
+  "townId": "9",
+  "prefix": "五四都大山",
+  "areacode": "3502901"
+}
 
+  mutation newPosition($name: String!,$aduId:ID!,$areacode: String!,$zipcode: String) {
+    newPosition(name: $name,aduId: $aduId,lat: $areacode,lng: $zipcode) {
+      id name
+    }
+  }
+{
+  "name": "9史蒂芬森",
+  "aduId": "125",
+  "areacode": "35.0290567567561",
+  "zipcode": "130.02342352534361"
+}
 
-
+query findAllPositions{
+  findAllPositions{
+    id name lng lat
+    ad {id prefix areacode}
+  }
+}
 
 
 

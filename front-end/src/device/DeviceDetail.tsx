@@ -48,7 +48,7 @@ export const DeviceDetail: React.FunctionComponent<RecipeProps> = ({ id, taskId 
           textAlign: "center"
         }}
       >
-        Oh bummer! A loading error occurred. 查询设备详细.
+        Oh bummer! 查询设备详细， 报错.
       </Text>
     );
   }

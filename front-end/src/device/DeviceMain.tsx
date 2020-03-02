@@ -170,7 +170,7 @@ export const DeviceMain: React.FunctionComponent<MainProps> = props => {
                     </DarkMode>
                   </div>
                 </Tooltip>
-                <Tooltip content="其他的命令">
+                <Tooltip content="从旧平台导入设备">
                   <div>
                     <DarkMode>
                       <IconButton

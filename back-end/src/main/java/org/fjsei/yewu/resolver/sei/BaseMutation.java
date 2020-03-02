@@ -8,8 +8,7 @@ import org.fjsei.yewu.entity.sei.inspect.Task;
 import org.fjsei.yewu.entity.sei.inspect.TaskRepository;
 import org.fjsei.yewu.exception.BookNotFoundException;
 import org.fjsei.yewu.input.DeviceCommonInput;
-import org.fjsei.yewu.model.geography.Address;
-import org.fjsei.yewu.model.geography.AddressRepository;
+import org.fjsei.yewu.model.geography.*;
 import org.fjsei.yewu.security.JwtTokenUtil;
 import org.fjsei.yewu.security.JwtUser;
 import org.fjsei.yewu.service.security.JwtUserDetailsService;
@@ -76,6 +75,10 @@ public class BaseMutation implements GraphQLMutationResolver {
     private AddressRepository addressRepository;
     @Autowired
     private AuthorityRepository authorityRepository;
+    @Autowired
+    private TownRepository townRepository;
+    @Autowired
+    private AdminunitRepository adminunitRepository;
 
 
     @PersistenceContext(unitName = "entityManagerFactorySei")
@@ -93,12 +96,37 @@ public class BaseMutation implements GraphQLMutationResolver {
         eQPRepository.save(eQP);
         return eQP;
     }
-
-     @Transactional
-    public Address newPosition(String address, String building, String area, String lng, String lat) {
+    //Town + address
+    @Transactional
+    public Adminunit initAdminunit(Long townId,String prefix, String areacode, String zipcode) {
         if(!emSei.isJoinedToTransaction())      emSei.joinTransaction();
+        Town town = townRepository.findById(townId).orElse(null);
+        Assert.isTrue(town != null,"未找到town:"+townId);
+        Adminunit adminunit=adminunitRepository.findByTownIs(town);
+        if(adminunit==null){
+            adminunit=new Adminunit();
+            adminunit.setTown(town);
+            adminunit.setCounty(town.getCounty());
+            adminunit.setCity(town.getCounty().getCity());
+            adminunit.setProvince(town.getCounty().getCity().getProvince());
+            adminunit.setCountry(town.getCounty().getCity().getProvince().getCountry());
+        }
+        adminunit.setPrefix(prefix);
+        adminunit.setAreacode(areacode);
+        adminunit.setZipcode(zipcode);
+        adminunitRepository.save(adminunit);
+        return adminunit;
+    }
+    @Transactional
+    public Address newPosition(String name, Long aduId, String lat, String lng) {
+        if(!emSei.isJoinedToTransaction())      emSei.joinTransaction();
+        Adminunit adminunit=adminunitRepository.findById(aduId).orElse(null);
+        //Adminunit adminunit=adminunitRepository.findByTownIs(town);
+        Assert.isTrue(adminunit != null,"未找到adminunit:"+aduId);
         Address position = new Address();
-        position.setLngAndLat(lng,lat);
+        position.setName(name);
+        position.setAd(adminunit);
+        position.setLngAndLat(lat, lng);
         addressRepository.save(position);
         return position;
     }

@@ -11,6 +11,7 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @Entity
+@Table( uniqueConstraints = {@UniqueConstraint(columnNames={"name", "country_id"})} )
 public class Province {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "commonSeq")

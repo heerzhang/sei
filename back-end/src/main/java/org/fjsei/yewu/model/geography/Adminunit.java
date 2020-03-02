@@ -18,7 +18,9 @@ public class Adminunit {
     @SequenceGenerator(name = "commonSeq", initialValue = 1, allocationSize = 1, sequenceName = "SEQUENCE_COMMON")
     protected Long id;
     //前缀行政地理描述部分， 规范地址命名空间
-    private String  prefix;   //街道'乡'镇';但允许街道名称省略掉。 鼓楼区就行，不一定要加上街道称呼。
+    //在最小的行政单元内部　prefix　名称唯一的。
+    //地址名字不一定要指明街道名称的。 五四路241号XX大厦23#308;
+    private String  prefix;    //街道'乡'镇';但允许街道名称省略掉。 鼓楼区就行，不一定要加上街道称呼。
     //旧平台 ， 外部地理系统的对接的 地区码。
     //行政区划代码9位数字;350100 福州市; 350101 市辖区　350102 鼓楼区 350181 福清市　350182 长乐区市; 福建省350000;
     private String  areacode;
@@ -27,11 +29,13 @@ public class Adminunit {
 
     @OneToMany(mappedBy = "ad")
     private Set<Address>  adrs;
+    //JoinColumn 的 name 和 referencedColumnName 指的都是数据库的字段名，不是 Entity 的属性。
     //行政区划4个等级+1的； 用于提高搜索判定速度。
     //1:1关联； Adminunit本id对应Town的ID； 本来应当这张表添加1:1关联id字段。
     //1 ：1关系，关系是本类来维护，添加外键指向对方实体表的主键；
+    //本类来维护1：1缺省的字段关联名字；@JoinColumn(name = "townID我这一边的关联字段不一定是id", referencedColumnName = "ID是对方的ＩＤ")
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "ID", referencedColumnName = "ID")
+    @JoinColumn( referencedColumnName = "ID")
     private Town  town;         //最小的1:1关系。
     @ManyToOne(fetch= FetchType.LAZY)
     @JoinColumn(name = "county_id")

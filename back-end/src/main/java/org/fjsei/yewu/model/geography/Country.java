@@ -16,6 +16,9 @@ public class Country {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "commonSeq")
     @SequenceGenerator(name = "commonSeq", initialValue = 1, allocationSize = 1, sequenceName = "SEQUENCE_COMMON")
     protected Long id;
+    //name=搜索名，不一定要全称呼的。 中华xxx;
+    //null=世界;
+    @Column(unique = true)
     private String  name;        //世界--》国家和地区。
     @OneToMany(mappedBy = "country")
     private Set<Adminunit> ads;

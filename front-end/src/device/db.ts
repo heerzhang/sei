@@ -113,7 +113,7 @@ const DEVICE_BY_ID = gql`
 			id,oid,cod,isps{
 				id
 			},pos{
-				id,address
+				id,name
 			},ownerUnt{
 				id,name
 			},task{
@@ -123,6 +123,7 @@ const DEVICE_BY_ID = gql`
 	}
 `;
 
+//点击设备获取详细；
 export function useDeviceDetail( id ) {
   var value = null;
   console.log("Recipe页面id=" + JSON.stringify(id));

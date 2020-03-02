@@ -5,12 +5,13 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.Set;
 
-//这一级别 可能省略掉。 街道上面--》地级市。
+//县，区级。
 
 @Getter
 @Setter
 @NoArgsConstructor
 @Entity
+@Table( uniqueConstraints = {@UniqueConstraint(columnNames={"name", "city_id"})} )
 public class County {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "commonSeq")
