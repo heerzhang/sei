@@ -41,9 +41,9 @@ public class Address {
         this.lat=Double.parseDouble(lat);
         return true;
     }
-
 }
 
 
 //能减少重复性录入的随意性，地址字符串实体化。 已经输入生成的就直接能选择关联旧的地址登记字符串。同时隐含地就选定了地区编码xxx_AREA_COD。
 //旧平台设备表登记的EQP_USE_ADDR; '使用地点'==》 强化变成Address关联表。 原来是直接任意字符串字段。现在是签了ID的独立一个地址表，可重复性关联。
+//这里name+Adminunit是唯一索引约束：重复报错violation，要尽量约束name的同义词减少重复数据量,注册地址需要核准制度。

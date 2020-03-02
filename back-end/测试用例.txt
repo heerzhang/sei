@@ -555,7 +555,7 @@ query findEqpMge($id: ID!) {
 {
   "id": "59273"
 }
-
+初始化地址库
   mutation initAdminunit($townId:ID!,$prefix: String!,$areacode: String!,$zipcode: String) {
     initAdminunit(townId: $townId,prefix: $prefix,areacode: $areacode,zipcode: $zipcode) {
       id prefix
@@ -566,7 +566,7 @@ query findEqpMge($id: ID!) {
   "prefix": "五四都大山",
   "areacode": "3502901"
 }
-
+添加用户地址
   mutation newPosition($name: String!,$aduId:ID!,$areacode: String!,$zipcode: String) {
     newPosition(name: $name,aduId: $aduId,lat: $areacode,lng: $zipcode) {
       id name
