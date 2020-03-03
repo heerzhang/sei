@@ -1,7 +1,6 @@
 /** @jsx jsx */
-import { jsx,  } from "@emotion/core";
+import { jsx, css } from "@emotion/core";
 import * as React from "react";
-//import debug from "debug";
 import {
   Navbar,
   Toolbar,
@@ -16,18 +15,13 @@ import {
   Container,
   ResponsivePopover,
   IconMoreVertical,
-  IconArrowLeft, IconArrowRight,
+  IconArrowLeft, IconArrowRight, Select
 } from "customize-easy-ui-component";
 import {  useDispatchIspMen,  useReport } from "../db";
-//import { useSession } from "../auth";
 import {Helmet} from "react-helmet";
 import { Link as RouterLink, Link, Route, Switch } from "wouter";
 import { ContainLine, TransparentInput } from "../../comp/base";
 import { useCommitOriginalData, useQueryOriginalRecord } from "../../report/db";
-
-//[HOOK限制]按钮点击函数内部直接上toast()或toaster.notify()很可能无法正常显示。而放在函数组件顶层render代码前却能正常。
-
-//const log = debug("app:Compose");
 
 export interface ComposeProps {
   //id?: string;
@@ -55,6 +49,7 @@ export const AddReport: React.FunctionComponent<ComposeProps> = ({
 }) => {
   const theme = useTheme();
   const toast = useToast();
+  const ispId =id;
   //const ref = React.useRef(null);
   //const {user,} = useSession();
   //const [loading, setLoading] = React.useState(false);
@@ -76,7 +71,7 @@ export const AddReport: React.FunctionComponent<ComposeProps> = ({
   const [credit, ] = React.useState(defaultCredit);
 
   let filtercomp={
-    id: repId,
+    id: 2,
   };
   const {error, loading, items:rep , } = useReport(filtercomp);
 
@@ -96,59 +91,26 @@ export const AddReport: React.FunctionComponent<ComposeProps> = ({
   //const {buildTask:returnD} =data||{};
   //useUpdateEntry({ id: ingredients && ingredients.id, info: {...ingredients, id: undefined,address: "大厦" }, });
   //const { params: { id: idww } } = {...props.params};
-  console.log("AddReport来呢", id,",rep=,",rep,";ingredients=", ingredients);
+  console.log("AddReport来呢", id,",repId=",repId,";ingredients=", ingredients);
 
 
   //不能在这点击触发函数内部执行HOOKs!! 必须上移动外移到 界面组件的头部初始化hooks，随后点击触发调用hook钩子函数。
-  async function updateRecipe(
-    id: string,
-    {
-      title,
-      plain,
-      ingredients,
-      description,
-      author,
-      image
-    }: {
-      title: string;
-      plain: string;
-      ingredients: any[];
-      description: string;
-      author: string;
-      image: string;
-    }
-  ) {
-    let yes= result && result.id;
-    console.log("生成任务－更新: %s", id, yes);
-    //setLoading(true);
+  async function updateRecipe(id: string)
+  {
     try {
-      //这里放HOOK()报错＝Hooks can only be called inside of the body of a function component.
-      //考虑封装适配不同类型的接口，不采用这种：
-      //const {data: { buildTask: some }} = await updateFunc();
       await updateFunc();
-      //等待后端服务器处理完成才能继续运行下面的代码。可长时间等待，挂着页面10分钟都允许。
-       setEditing(false);
-     // setLoading(false);
     } catch (err) {
-      //这里先要setLoading(),还有err.message而非err；否则很可能也能导致？setMessage:toast()显示异常。
-     // setLoading(false);
       toast({
         title: "后端请求错",
         subtitle: err.message,
         intent: "danger"
       });
-      //很多错误是在这里捕获的。
-      console.log("useAddToTask返回 捕获err", err);
     }
-    //这里无法获得result值，就算所在组件顶层已经获得result值，这里可能还是await () 前那样null;
-     console.log("生成任务返回了＝", result,"yes=", yes);
     toast({
       title: "任务派工返回了",
       subtitle: '加入，ISP ID＝'+id,
       intent: "info"
     });
-    //除非用const {data: { buildTask: some }} = await updateFunc()捕捉当前操作结果; 否则这时这地方只能用旧的result,点击函数里获取不到最新结果。
-    //须用其它机制，切换界面setXXX(标记),result？():();设置新的URL转场页面, 结果要在点击函数外面/组件顶层获得；组件根据操作结果切换页面/链接。
   }
 
 
@@ -156,7 +118,7 @@ export const AddReport: React.FunctionComponent<ComposeProps> = ({
     setIngredients( rep||{} );
   }, [rep]);
 
-  if(error) return  <h1>没有该容？</h1>
+  //if(error) return  <h1>没有该容？</h1>
 
   return (
     <div
@@ -291,10 +253,10 @@ export const AddReport: React.FunctionComponent<ComposeProps> = ({
                     image,
                     ingredients
                   };
-                  if(id) updateRecipe(id, toSave);
+                  if(id) updateRecipe(id);
                 }}
                >
-                保存编制中的检验报告
+                保存报告
                </Button>
             )}
           </div>
@@ -340,6 +302,15 @@ export const AddReport: React.FunctionComponent<ComposeProps> = ({
                         <MainContent id={id} rep={rep}/>
                       </div>
 
+                  <RouterLink to={`/inspect/${id}/report/${repId}/copy`}>
+                    <Button
+                      size="lg" noBind
+                      intent="primary"
+                      iconAfter={<IconArrowRight />}
+                    >
+                      生成报告并初始化
+                    </Button>
+                  </RouterLink>
                   <RouterLink to={`/report/EL-DJ/ver/1/preview/${repId}`}>
                     <Button
                       size="lg" noBind
@@ -350,15 +321,6 @@ export const AddReport: React.FunctionComponent<ComposeProps> = ({
                     </Button>
                   </RouterLink>
                   {' '}
-                  <RouterLink to={`/inspect/${id}/report/${repId}/copy`}>
-                    <Button
-                      size="lg" noBind
-                      intent="primary"
-                      iconAfter={<IconArrowRight />}
-                    >
-                      拷贝原始记录
-                    </Button>
-                  </RouterLink>
                 </div>
               )}
 
@@ -395,10 +357,10 @@ function ThirdRoterContent({id, dt, rep}: ThirdRoterProps) {
   return (
    <React.Fragment>
     <Switch>
-      <Route path="/inspect/:id/report/:repId">
+      <Route path="/inspect/:id/addReport/choose">
           <FirstPage id={id} rep={rep}/>
       </Route>
-      <Route path="/inspect/:id/report/:repId/copy">
+      <Route path="/inspect/:id/addReport/:repId/result">
           <CopyRecord id={id} rep={rep}/>
       </Route>
     </Switch>
@@ -406,90 +368,33 @@ function ThirdRoterContent({id, dt, rep}: ThirdRoterProps) {
   );
 }
 
-const FirstPage= ( {theme=null, id ,rep}
+const FirstPage= ( {id ,rep}
 ) => {
-  const [ingredients, setIngredients] = React.useState<any>( rep||{} );
+  //模板的类型标识;
+  //Todo: 获取后端的列表？ 或者，前后端同步数据维护。
+  const [tplType, setTplType] = React.useState('EL-DJ');
+  const [ingredients, setIngredients] = React.useState<any>( {modeltype:'EL-DJ', modelversion:'1'} );
 
   return <React.Fragment>
     <div>
-      <Text variant="h5">报告封面首页</Text>
-      <ContainLine display={'报告类型'}>
-        <TransparentInput
-          autoFocus={true}
-          readOnly
-          placeholder="报告类型"
-          value={ rep && rep.type }
-          onChange={e => {
-            setIngredients( {
-              ...ingredients,
-            });
-          }}
-        />
-      </ContainLine>
-      <ContainLine display={'设备号'}>
-        <TransparentInput
-          autoFocus={true}
-          readOnly
-          placeholder="设备号"
-          value={ rep && rep.isp.dev.cod }
-          onChange={e => {
-            setIngredients( {
-              ...ingredients,
-            });
-          }}
-        />
-      </ContainLine>
-      <ContainLine display={'检验结论'}>
-        <TransparentInput
-          autoFocus={true}
-          readOnly
-          placeholder="审核人"
-          value={rep && rep.isp.conclusion}
-          onChange={e => {
-            setIngredients( {
-              ...ingredients,
-              ispMen: e.target.value
-            });
-          }}
-        />
-      </ContainLine>
-      <ContainLine display={'设备出厂编码'}>
-        <Text  placeholder="所有参与检验人"
-               css={{
-                 display: 'block',
-                 width: '100%',
-               }}
+      <Text variant="h5">为该份报告做选择</Text>
+      <ContainLine display={'模板对应报告类型'}>
+        <Select inputSize="md" css={{minWidth:'190px',fontSize:'1.4rem',padding:'0 0.5rem'}} divStyle={css`max-width:340px;`}
+                value={ingredients.modeltype||''}  onChange={e => setIngredients({...ingredients, modeltype:e.currentTarget.value}) }
         >
-          {rep && rep.isp.dev.factoryNo}
-        </Text>
+          <option value={'EL-DJ'}>有机房曳引驱动电梯定期检验</option>
+          <option value={''}>模板类型编号</option>
+          <option value={'EL-JJ'}>EL-JJ</option>
+        </Select>
       </ContainLine>
-      <ContainLine display={'报告上传日期'}>
-        <TransparentInput
-          autoFocus={true}
-          readOnly
-          placeholder="输入日期格式2019-08-03"
-          value={rep && rep.upLoadDate}
-        />
+      <ContainLine display={'模板对应版本号'}>
+        <Select inputSize="md" css={{minWidth:'190px',fontSize:'1.4rem',padding:'0 0.5rem'}} divStyle={css`max-width:340px;`}
+                value={ingredients.modelversion||''}  onChange={e => setIngredients({...ingredients, modelversion:e.currentTarget.value}) }
+        >
+          <option value={'1'}>1版</option>
+          <option value={'2'}>2版</option>
+        </Select>
       </ContainLine>
-      <ContainLine display={'设备安装地址'}>
-        <TransparentInput
-          readOnly
-          value={rep && rep.isp.dev.pos && rep.isp.dev.pos.address}
-        />
-      </ContainLine>
-      <ContainLine display={'设备使用单位'}>
-        <TransparentInput
-          readOnly
-          value={rep &&rep.isp.dev.ownerUnt && rep.isp.dev.ownerUnt.name}
-        />
-      </ContainLine>
-      <ContainLine display={'设备使用单位联系人'}>
-        <TransparentInput
-          readOnly
-          value={rep && rep.isp.dev.ownerUnt && rep.isp.dev.ownerUnt.linkMen}
-        />
-      </ContainLine>
-
     </div>
   </React.Fragment>;
 };

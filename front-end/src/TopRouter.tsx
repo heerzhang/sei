@@ -82,6 +82,7 @@ interface NestingtRouteProps {
   component: any;
   path?: string;
 }
+//Todo: 问题，NestingtRoute， 导致Link 后缀重复添加。
 //嵌套路由必须在上层路由通过path/:rest*向下一级路由去传递相对的目录路径，下级路由无需预设基础路径/通过path参数设置。
 const NestingtRoute = ({
                          component: Component,

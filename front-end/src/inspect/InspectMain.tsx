@@ -159,8 +159,8 @@ export const InspectMain: React.FunctionComponent<MainProps> = props => {
                 <Tooltip content="增加个检验报告">
                   <div>
                     <DarkMode>
-                      <Link to={`/inspect/${showingRecipe}/addReport`}>
-                          <IconButton
+                      <Link to={`/inspect/${showingRecipe}/addReport/choose`}>
+                          <IconButton  disabled={!showingRecipe}
                             variant="ghost"
                             label="加菜谱"
                             size="md"
@@ -323,7 +323,7 @@ interface SecondRoterProps {
 function SecondRoterContent({id, dt}: SecondRoterProps) {
   return (
     <Switch>
-      <Route path={"/inspect/:id/addReport"} component={AddReport} />
+      <Route path={"/inspect/:id/addReport/:rest*"} component={AddReport} />
       <Route path={"/inspect/:id/report/:repId/:rest*"} component={ReportSample} />
 
       <Route path="/inspect/:id">
