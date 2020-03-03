@@ -246,3 +246,4 @@ Twitter强迫所有第三方开发者使用OAuth 2； https安全。
 测试接口 auth: "{"authorities":[],"dep":"...} 没有授权，无法使用http://27.151.117.65:8673/graphiql 前端先登录 defaultQuery.graphql编辑界面不能全部发出。
 
 枚举　日期　类型JPA映射　https://blog.csdn.net/ly1028826685/article/details/84216746?depth_1-utm_source=distribute.pc_relevant.none-task&utm_source=distribute.pc_relevant.none-task
+关联记录直接删除导致查询关联到了时刻报错，等待缓存时间过了才正常。

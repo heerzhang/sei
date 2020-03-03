@@ -10,10 +10,19 @@ import {
   List,
   Button,
   ListItem,
-  Skeleton, ScrollView, useInfiniteScroll, Embed
+  Skeleton,
+  ScrollView,
+  useInfiniteScroll,
+  Embed,
+  ResponsivePopover,
+  MenuList,
+  MenuItem,
+  IconPackage,
+  MenuDivider,
+  IconButton, IconMoreVertical, useToast
 } from "customize-easy-ui-component";
 
-import { useLookReports, } from "./db";
+import { useDeleteReport, useLookReports } from "./db";
 import { useFirebaseImage } from "../../Image";
 import { useLocation, useRoute } from "wouter";
 import { FadeImage } from "../../FadeImage";
@@ -29,13 +38,13 @@ export const BoundReports: React.FunctionComponent<
   FollowingRecipesProps
 > = ({ id }) => {
   const theme = useTheme();
-  console.log("看FollowingRecipes filter =id=", id );
+  console.log("看BoundReports filter =id=", id );
 
 
   const [filter, setFilter] = React.useState({ id:id });
   const {loading, error, items, loadMore } =useLookReports(filter);
 
-  console.log("看FollowingRecipes filter=", filter );
+  console.log("所有挂接的报告 filter=", filter, items);
   //就算id切换了，本组件的数据还是会被appollo自动缓存的，id变化不会一定导致重新查询后端数据库的，看着像页面显示的缓存。
   //根据id和界面操作后的参数，来要修正graphQL的Query()的参数 = 要做重新查询。
   React.useEffect(() => {
@@ -84,6 +93,7 @@ export const BoundReports: React.FunctionComponent<
           css={{   //特意把父div滚动条启动开。`calc(100vh - ${ileapHeight}px)`,   '750px',  注意串里的空格必须要有！
             //关键是靠内容持续增长列表的紧上一级DIV来控制，把这一个div高度撑开，迫使最近的窗口所附属的滚动条启动。
             minHeight: `calc(100vh - 164px)`,
+          //Todo: 嵌入不是一个地方的，高度不同。
             [theme.mediaQueries.md]: {
               minHeight: `calc(100vh - 164px - ${theme.spaces.lg} - ${theme.spaces.lg})`
             },
@@ -137,7 +147,7 @@ export const BoundReports: React.FunctionComponent<
                 />
               </React.Fragment>
             )}
-
+            {/*所有挂接的报告*/}
             {items && items.map(recipe => (
               <BoundListItem
                 id={recipe.id}
@@ -178,31 +188,50 @@ export const BoundReports: React.FunctionComponent<
 //缩略图和完整图都是同一个图片的数据内容，　不做差异化处理！
 function BoundListItem({ recipe, id, highlight ,task }: any) {
   const theme = useTheme();
+  const toast = useToast();
+  const ispId =task;
+  console.log("BoundListItem参数", recipe, ispId);
   //缩略图thumb-sm@和完整图片thumb@的url不一样的；后端支持缩略？　没必要做；
   //const { src, error } = useFirebaseImage("thumb-sm@", recipe.image);
   const {  error } = useFirebaseImage("thumb-sm@", recipe.image);
+  //const href = `/inspect/${task}/report/${id}`;
+  //Todo: 类型和版本；　report/EL-DJ/ver/1/preview/
+  const href = `/report/EL-DJ/ver/1/preview/${id}`;
 
-  const href = `/inspect/${task}/report/${id}`;
   //被点击中匹配href，成功=true=isActive[? ,..];　表示正好跟界面显示同样的一个路由。
   const [isActive,] = useRoute(href);
   const [, setLocation] = useLocation();
+  const [repId, setRepId] = React.useState(null);
+  const {result, submit:updateFunc, } = useDeleteReport({
+    repId, reason:'测试期直接删'
+  });
   //下面highlight. 是algoliasearch.Response返回的，必须有预先定义。
-  //console.log("进RecipeListItem；href=",href);
+  async function handleDelete(id: string) {
+    try {
+      console.log("页面handleDelete Id="+id);
+      await updateFunc();
+    } catch (err) {
+      toast({
+        title: "后端报错",
+        subtitle: err.message,
+        intent: "danger"
+      });
+      console.log("handleDelete返回", err);
+      return;
+    }
+    setLocation("/inspect/"+ispId,  true );
+  }
 
   return (
     <ListItem
       wrap={false}
-      onClick={e => {
-        e.preventDefault();
+      onPress={e => {
+        //e.preventDefault();
         setLocation(href);
-        //navigate(href , { replace: true });
       }}
       aria-current={isActive}
-      href={`/device/${id}`}
+     // href={`/device/${id}`}
       css={{
-        paddingTop: 0,
-        paddingBottom: 0,
-        height: "56px",
         alignItems: "center",
         display: "flex",
         justifyContent: "space-between",
@@ -216,23 +245,61 @@ function BoundListItem({ recipe, id, highlight ,task }: any) {
           overflow: "hidden"
         }
       }}
-      contentAfter={
+      contentBefore={
         recipe.sssdf && !error ? (
           <Embed css={{ width: "60px" }} width={75} height={50}>
             <FadeImage src={recipe.path} hidden />
           </Embed>
         ) : (
-          recipe.no
+          recipe.id
         )
       }
       primary={
         highlight ? (
           <span dangerouslySetInnerHTML={{ __html: highlight.title.value }} />
         ) : (
-          recipe.path ||''
+          recipe.no ||''
         )
       }
-    />
+      secondary={recipe.type ||''}
+      contentAfter={
+          <ResponsivePopover
+            content={
+              <MenuList>
+                <MenuItem contentBefore={<IconPackage />}  onPress={() => {
+                  setLocation("/device/"+id+"/addTask", true );
+                } }>
+                  删除该报告１
+                </MenuItem>
+                <MenuItem onPress={ async () => {
+                  await setRepId(recipe.id);
+                  handleDelete(recipe.id)
+                }
+                }>删除该报告
+                </MenuItem>
+                <MenuDivider />
+                <MenuItem contentBefore={<IconPackage />}  onPress={() => {
+                  setLocation("/device/"+id+"/task/", true );
+                } }>
+                  签名并提交审核
+                </MenuItem>
+              </MenuList>
+            }
+          >
+            <IconButton
+              css={{
+                //display: !editing && editable ? undefined : "none",
+                marginLeft: theme.spaces.sm
+              }}
+              variant="ghost" size={'lg'}
+              icon={<IconMoreVertical />}
+              label="菜单"
+            />
+          </ResponsivePopover>
+      }
+    >
+      { `日期 ${recipe.upLoadDate||''}` }
+    </ListItem>
   );
 }
 

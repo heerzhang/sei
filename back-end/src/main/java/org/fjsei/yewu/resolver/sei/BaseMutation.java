@@ -132,11 +132,15 @@ public class BaseMutation implements GraphQLMutationResolver {
     }
 
     @Transactional
-    public Report newReport(String type,String no,Long ispId) {
+    public Report newReport(Long ispId,String modeltype,String modelversion) {
         if(!emSei.isJoinedToTransaction())      emSei.joinTransaction();
         ISP isp = iSPRepository.findById(ispId).orElse(null);
-        Assert.isTrue(isp != null,"未找到isp:"+isp);
-        Report report = new Report(type,no,isp);
+        Assert.isTrue(isp != null,"未找到isp:"+ispId);
+        //Todo: 报告编码
+        String repNo="JD2020FTC00004";
+        Report report = new Report("电梯定检",repNo,isp);
+        report.setModeltype(modeltype);
+        report.setModelversion(modelversion);
         reportRepository.save(report);
         return report;
     }
@@ -423,6 +427,18 @@ public class BaseMutation implements GraphQLMutationResolver {
         eQPRepository.save(eQP);
         Map<String, Object>  properties2=emSei.getProperties();
         return  prevOid;
+    }
+
+    @Transactional
+    public boolean deleteReport(Long repId,String reason)
+    {
+        if(!emSei.isJoinedToTransaction())      emSei.joinTransaction();
+        Report report = reportRepository.findById(repId).orElse(null);
+        Assert.isTrue(report != null,"未找到Report:"+repId);
+        Assert.isTrue(report.getFiles().isEmpty(),"还有File关联"+repId);
+        emSei.remove(report);
+        emSei.flush();
+        return report!=null;
     }
 
 }

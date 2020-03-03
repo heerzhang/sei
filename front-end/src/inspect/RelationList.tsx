@@ -294,31 +294,16 @@ export const RelationList: React.FunctionComponent<FollowingListProps> = ({
                           <Avatar
                             size="sm"
                             src={item.photoURL}
-                            name={
-                              item.username || item.email || ('图片' || item.id)
-                            }
+                            name={item.id}
                           />
                         }
-                        primary={item.username || item.email || item.id}
+                        primary={item?.dev?.cod}
+                        secondary={ `结论${item?.conclusion||''}` }
                         contentAfter={
-                          item.confirmed ? (
                             <IconChevronRight
                               color={theme.colors.text.muted}
                               aria-hidden
                             />
-                          ) : (
-                            <Button
-                              onPress={e => {
-                                e.stopPropagation();
-                                e.preventDefault();
-                                setRelation(item.toUser);
-                                deleteRequest(item.id);
-                              }}
-                              size="sm"
-                            >
-                              我要取消这条关注{item.id}的请求
-                            </Button>
-                          )
                         }
                       />
                       </RouterLink>
@@ -340,7 +325,7 @@ export const RelationList: React.FunctionComponent<FollowingListProps> = ({
                     content={
                       <MenuList>
                         <MenuItem onPress={() => unfollow(relation.id)}>
-                          Unfollow　不想关注他了={relation.id || '空的？'} user
+                          清空检验号{relation.id || ''}的报告
                         </MenuItem>
                       </MenuList>
                     }
@@ -354,7 +339,7 @@ export const RelationList: React.FunctionComponent<FollowingListProps> = ({
                   </Popover>
                 )
               }
-              title={relation ? `该检验${relation.id}的所有报告` : ""}
+              title={relation ? `检验号${relation.id}所有报告` : ""}
             />
           ),
           content: (

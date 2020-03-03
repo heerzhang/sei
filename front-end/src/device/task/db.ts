@@ -533,4 +533,20 @@ export function useLookIspOfDevTask(filter:any) {
   return {item: data&&data.obj, error, loading, refetch};
 }
 
-
+const CANCELLATION_TASK = gql`
+    mutation cancellationTask(
+        $taskid: ID! 
+        $reason: String
+    ) {
+    res: cancellationTask(task: $taskid,  reason: $reason) 
+    }
+`;
+//注销任务
+export const useCancellationTask  = (options) => {
+  console.log("保 删除ta @@ options=", options);
+  const [submit, {error, data, loading, called}] = useMutation( CANCELLATION_TASK, {
+    variables: {...options},
+  })
+  const { res : result} = data||{};
+  return { result ,submit, error, loading, called };
+};

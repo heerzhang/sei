@@ -30,7 +30,7 @@ import { RelationList } from "./RelationList";
 import { IspDetail } from "./IspDetail";
 import { ReportSample } from "./ReportSample";
 import { BoundReports } from "./report/BoundReports";
-
+import { AddReport } from "./report/AddReport";
 
 export interface MainProps {
   path?: string;
@@ -159,7 +159,7 @@ export const InspectMain: React.FunctionComponent<MainProps> = props => {
                 <Tooltip content="增加个检验报告">
                   <div>
                     <DarkMode>
-                      <Link to="/chaipu/new">
+                      <Link to={`/inspect/${showingRecipe}/addReport`}>
                           <IconButton
                             variant="ghost"
                             label="加菜谱"
@@ -170,13 +170,13 @@ export const InspectMain: React.FunctionComponent<MainProps> = props => {
                     </DarkMode>
                   </div>
                 </Tooltip>
-                <Tooltip content="其他的命令">
+                <Tooltip content="返回首页">
                   <div>
                     <DarkMode>
-                      <Link to="/chaipu/new">
+                      <Link to="/">
                         <IconButton
                           variant="ghost"
-                          label="加菜谱"
+                          label="首页"
                           size="md"
                           icon={<IconArchive />}
                         />
@@ -232,6 +232,7 @@ export const InspectMain: React.FunctionComponent<MainProps> = props => {
             </TabPanel>
             <TabPanel id="report">
               { showingRecipe && ( <BoundReports key={showingRecipe} id={showingRecipe} /> ) }
+              { !showingRecipe && ( '未指定检验号') }
             </TabPanel>
           </Pager>
         </Layer>
@@ -322,6 +323,7 @@ interface SecondRoterProps {
 function SecondRoterContent({id, dt}: SecondRoterProps) {
   return (
     <Switch>
+      <Route path={"/inspect/:id/addReport"} component={AddReport} />
       <Route path={"/inspect/:id/report/:repId/:rest*"} component={ReportSample} />
 
       <Route path="/inspect/:id">

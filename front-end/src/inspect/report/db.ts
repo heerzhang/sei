@@ -7,7 +7,7 @@ import debug from "debug";
 //import isNil from "lodash.isnil";
 //import { Ingredient } from "./RecipeList";
 import gql from "graphql-tag";
-import {  useQuery } from "@apollo/react-hooks";
+import { useMutation, useQuery } from "@apollo/react-hooks";
 //import * as React from "react";
 
 //import { client } from "./graphql/setup";
@@ -386,4 +386,22 @@ export function useLookReports(filter:any) {
 //useQuery输出包含：'startPolling' 'subscribeToMore' | 'refetch' | 'variables'> +fetchMore；　输入第二参数：onCompleted?:　onError?: ；
 //类似fetchMore，原型定义 refetch(variables) 立刻刷新；startPolling(pollInterval)；subscribeToMore(options{variables，updateQuery()})；　
 
+const DELETE_REPORT = gql`
+    mutation deleteReport(
+        $repId: ID! 
+        $reason: String
+    ) {
+    res: deleteReport(repId: $repId,  reason: $reason) 
+    }
+`;
+//删除一份报告
+export const useDeleteReport  = (options) => {
+  const [submit, {error, data, loading, called}] = useMutation( DELETE_REPORT, {
+    variables: {...options},
+  })
+  const { res : result} = data||{};
+  return { result ,submit, error, loading, called };
+};
 
+//增加新的报告
+//newReport(isp: ID!,modeltype: String!, modelversion:String) :Report!

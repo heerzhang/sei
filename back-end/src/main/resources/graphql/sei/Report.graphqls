@@ -33,10 +33,11 @@ extend type Query {
 }
 
 extend type Mutation {
-    newReport(type: String!, no:String!, isp: ID!) :Report! @authr(qx:["REPCHECKER","ADMIN"])
+    newReport(isp: ID!,modeltype: String!, modelversion:String) :Report! @authr(qx:["REPCHECKER","ADMIN"])
     buildReport(isp: ID!,no: String!,path: String!) : Report!
     modifyOriginalRecordData(id: ID!,operationType:Int!,data: String,deduction: String) : Report
     modifyOriginalRecordFiles(id: ID!, fileIDs: [ID]!) : Report
+    deleteReport(repId: ID!, reason: String): Boolean!
 }
 
 

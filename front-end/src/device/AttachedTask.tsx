@@ -22,13 +22,14 @@ import {
   Container,
   ResponsivePopover,
   IconMoreVertical,
-  MenuDivider, IconPackage
+  MenuDivider, IconPackage, Button, IconChevronDown
 } from "customize-easy-ui-component";
 
 //import { useSession } from "../auth";
 import {Helmet} from "react-helmet";
 import { Link,  useLocation } from "wouter";
 import { Link as RouterLink } from "wouter";
+import { useCancellationTask } from "./task/db";
 //[HOOK限制]按钮点击函数内部直接上toast()或toaster.notify()很可能无法正常显示。而放在函数组件顶层render代码前却能正常。
 //import toaster from "toasted-notes";
 
@@ -70,6 +71,7 @@ export const AttachedTask: React.FunctionComponent<ComposeProps> = ({
 }) => {
   const theme = useTheme();
   const toast = useToast();
+  const eqpId=id;
   //const ref = React.useRef(null);
   //const {user,} = useSession();
   const [loading, setLoading] = React.useState(false);
@@ -82,30 +84,30 @@ export const AttachedTask: React.FunctionComponent<ComposeProps> = ({
   const [image, ] = React.useState(defaultImage);
   const [title, setTitle] = React.useState(defaultTitle);
  // const [message, setMessage] = React.useState(null);
- // const [credit, setCredit] = React.useState(defaultCredit);
+  const [taskId, setTaskId] = React.useState(null);
   const {task} =dt;
  // const [ingredients, setIngredients] = React.useState<any>( dt||{} );
   const [, setLocation] = useLocation();
-
+  const {result, submit:updateFunc, } = useCancellationTask({
+    taskid: taskId, reason:'测试期直接删'
+  });
   console.log("页面刷新钩子AttachedTask entry=",　",id="+id+";task=",task,";dt=",dt);
-
 
   async function handleDelete(id: string) {
     try {
-      setLoading(true);
-      //await deleteEntry(id);
-      setLocation("/",  true );
+      console.log("页面handleDelete Id="+id);
+      await updateFunc();
     } catch (err) {
-      console.error(err);
-      setLoading(false);
       toast({
-        title: "An error occurred. Please try again",
+        title: "后端报错",
         subtitle: err.message,
         intent: "danger"
       });
+      console.log("handleDelete返回", err);
+      return;
     }
+    setLocation("/device/"+eqpId,  true );
   }
-
 
   return (
     <div
@@ -204,28 +206,17 @@ export const AttachedTask: React.FunctionComponent<ComposeProps> = ({
             <ResponsivePopover
               content={
                 <MenuList>
-                  <MenuItem
-                    onPress={() => {
-                      setEditing(true);
-                    }}
-                  >
-                    编辑
-                  </MenuItem>
-                  <MenuItem onPress={() => handleDelete(id)}>删除</MenuItem>
-                  <MenuDivider />
-
                     <MenuItem contentBefore={<IconPackage />}  onPress={() => {
                       setLocation("/device/"+id+"/addTask", true );
                     } }>
                       生成任务1
                     </MenuItem>
-
+                  <MenuDivider />
                      <MenuItem contentBefore={<IconPackage />}  onPress={() => {
                        setLocation("/device/"+id+"/task/", true );
                      } }>
                       准备派工给检验员2
                     </MenuItem>
-
                 </MenuList>
               }
             >
@@ -253,15 +244,7 @@ export const AttachedTask: React.FunctionComponent<ComposeProps> = ({
         }}
       >
         <div>
-          {editing ? (
-            <div
 
-            />
-          ) : image ? (
-            <div  id={image} />
-          ) : null}
-          {//在图片以下的内容：
-          }
           <Container>
             <div
               css={{
@@ -279,10 +262,10 @@ export const AttachedTask: React.FunctionComponent<ComposeProps> = ({
                                 ? theme.colors.palette.blue.lightest
                                 : "transparent",
                               display: "flex",
-                              marginLeft: "-0.25rem",
-                              paddingLeft: "0.25rem",
-                              marginRight: "-0.25rem",
-                              paddingRight: "0.25rem",
+                           //  marginLeft: "-0.25rem",
+                            //  paddingLeft: "0.25rem",
+                           //   marginRight: "-0.25rem",
+                          //    paddingRight: "0.25rem",
                               // borderRadius: "0.25rem",
                               marginBottom: theme.spaces.xs,
                               justifyContent: "space-between",
@@ -299,7 +282,7 @@ export const AttachedTask: React.FunctionComponent<ComposeProps> = ({
                                   : "white"
                               }}
                             >
-                              日期：{each.date}
+                              任务号{each.id}
                             </Text>
                             <div
                               css={{
@@ -321,8 +304,24 @@ export const AttachedTask: React.FunctionComponent<ComposeProps> = ({
                               状态：{each.status}
                             </Text>
                             <Link  to={"/device/"+dt.id+"/task/"+each.id}>
-                              检验任务当前详情ISP
+                              检验ISP详情
                             </Link>
+                            <ResponsivePopover
+                              content={
+                                <MenuList>
+                                  <MenuItem onPress={ async () => {
+                                      await setTaskId(each.id);
+                                      handleDelete(each.id)
+                                    }
+                                  }>注销任务
+                                  </MenuItem>
+                                </MenuList>
+                              }
+                            >
+                              <Button  size="md" iconAfter={<IconChevronDown />} variant="ghost" css={{whiteSpace:'unset'}}>
+                                {`${each.date||''}`}
+                              </Button>
+                            </ResponsivePopover>
                           </div>
                         )}
                       </div>
@@ -364,58 +363,3 @@ const TransparentInput = (props: TransparentInputProps) => {
   );
 };
 
-/*
-const Contain = props => {
-  return (
-    <div
-      css={{
-        marginTop: "-0.25rem",
-        marginLeft: "-0.75rem",
-        marginRight: "-0.75rem"
-      }}
-      {...props}
-    />
-  );
-};
-//其余的属性，({ display, children, ...props })  => {
-const ContainLine =({ display, children, ...props })  => {
-  const theme = useTheme();
-  return (
-    <div
-      css={{
-        marginTop: "-0.25rem",
-        marginLeft: "-0.75rem",
-        marginRight: "-0.75rem"
-      }}
-      {...props}
-    >
-
-      <div
-        css={{
-          backgroundColor: false
-            ? theme.colors.palette.blue.lightest
-            : "transparent",
-          display: "flex",
-          [theme.mediaQueries.md]: {
-            maxWidth: "400px"
-          }
-        }}
-      >
-        <Text
-          css={{
-            display: "block",
-            width: "100%",
-            padding: "0.5rem 0.75rem"   //无法和输入组建的大小联动。
-          }}
-        >
-          {display}
-          </Text>
-
-        {children}
-
-      </div>
-
-    </div>
-  );
-};
-*/

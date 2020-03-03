@@ -187,7 +187,7 @@ export const Branding: React.FunctionComponent<BrandingProps> = (props) => {
               src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1566208112112&di=057216c9b1f519a6bec42f465025062e&imgtype=0&src=http%3A%2F%2Fqcloud.dpfile.com%2Fpc%2F5B4EKvgdVHvYJdSIXlvqZF_P3CApeL2gFM3VtjrHbrl2RzRjFYhj5njVYekTCwBvTYGVDmosZWTLal1WbWRW3A.jpg"
               alt="Ben"
             />
-            Hey! 新一代平台接受用户测试和需求意见征集阶段. I was getting tired of losing recipes in my
+            Hey! 新一代平台(用户意见和需求征集阶段). I was getting tired of losing recipes in my
             inbox and nagging friends and family for their recipes, so I created
             this little app. It's a simple tool to help my family maintain a
             shared, searchable database of recipes. Give it a try, and happy
@@ -228,7 +228,7 @@ export const Branding: React.FunctionComponent<BrandingProps> = (props) => {
               iconBefore={<IconGift />}
               iconAfter={<IconArrowRight />}
             >
-              从设备入口
+              从设备入手
             </Button>
           </RouterLink>
           <RouterLink   to="/inspect/">

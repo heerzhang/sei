@@ -307,7 +307,7 @@ export const TaskList: React.FunctionComponent<
                   </Popover>
                 )
               }
-              title={ '该任务'+(relation ? relation.username || relation.mobile : "")+'挂的设备如下' }
+              title={ '该任务'+ (relation?.username||'') +'挂的设备' }
             />
           ),
           content: (

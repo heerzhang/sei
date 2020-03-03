@@ -91,7 +91,6 @@ public class IspMgrMutation implements GraphQLMutationResolver {
         return isp;
     }
 
-
     @Transactional
     public Task dispatchTaskTo(Long id,String status,String dep,String sdate) throws ParseException
     {
@@ -146,6 +145,22 @@ public class IspMgrMutation implements GraphQLMutationResolver {
         return isp;
     }
 
+    @Transactional
+    public boolean cancellationTask(Long taskId,String reason)
+    {
+        if(!emSei.isJoinedToTransaction())      emSei.joinTransaction();
+        Task task = taskRepository.findById(taskId).orElse(null);
+        Assert.isTrue(task != null,"未找到task:"+taskId);
+        //这实体发现之间关联的情况越多的，删除就越麻烦咯，关系复杂。
+        //ISP表与EQP都关联着Task的呢。  只好把ISP的清理当成了前置条件。
+        Assert.isTrue(task.getIsps().isEmpty(),"还有ISP关联"+taskId);
+        List<EQP>  devs= task.getDevs();
+        //解除关系
+        devs.forEach(dev -> dev.getTask().remove(task));
+        emSei.remove(task);
+        emSei.flush();
+        return task!=null;
+    }
 
 }
 

@@ -19,5 +19,6 @@ extend type Mutation {
     addDeviceToTask(task: ID!, dev: ID!) : Task!
     dispatchTaskTo(id: ID!,status: String!,dep: String!, date: String!) : Task!
     buildTask(devs: ID!, dep: String!, date: String!) : Task!
+    cancellationTask(task: ID!, reason: String): Boolean!
 }
 

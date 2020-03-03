@@ -156,7 +156,7 @@ export const DeviceMain: React.FunctionComponent<MainProps> = props => {
                     </DarkMode>
                   </ResponsivePopover>
                 </LightMode>
-                <Tooltip content="增加个待检测设备">
+                <Tooltip content="导入设备或新增">
                   <div>
                     <DarkMode>
                       <RouterLink to="/device/new">
@@ -171,18 +171,17 @@ export const DeviceMain: React.FunctionComponent<MainProps> = props => {
                     </DarkMode>
                   </div>
                 </Tooltip>
-                <Tooltip content="从旧平台导入设备">
+                <Tooltip content="返回首页">
                   <div>
                     <DarkMode>
-                      <RouterLink to="/device/new">
+                      <Link to="/">
                         <IconButton
-                          noBind
                           variant="ghost"
-                          label="加设备"
+                          label="首页"
                           size="md"
                           icon={<IconArchive />}
                         />
-                      </RouterLink>
+                      </Link>
                     </DarkMode>
                   </div>
                 </Tooltip>

@@ -220,10 +220,10 @@ export const RecordEditorOrPrint: React.FunctionComponent<RecordEditorOrPrintPro
                 <Tooltip content="增加个检验报告">
                   <div>
                     <DarkMode>
-                      <Link to="/chaipu/new">
+                      <Link to="/">
                         <IconButton
                           variant="ghost"
-                          label="加菜谱"
+                          label="增加"
                           size="md"
                           icon={<IconPlus />}
                         />
@@ -231,13 +231,13 @@ export const RecordEditorOrPrint: React.FunctionComponent<RecordEditorOrPrintPro
                     </DarkMode>
                   </div>
                 </Tooltip>
-                <Tooltip content="其他的命令">
+                <Tooltip content="返回首页">
                   <div>
                     <DarkMode>
-                      <Link to="/chaipu/new">
+                      <Link to="/">
                         <IconButton
                           variant="ghost"
-                          label="加菜谱"
+                          label="首页"
                           size="md"
                           icon={<IconArchive />}
                         />
