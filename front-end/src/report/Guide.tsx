@@ -84,6 +84,7 @@ export  function Guide({printing, }:{printing?:boolean, },props) {
         height: `calc(100vh)`,
       }}>
       <Toolbar>
+        <RouterLink　to="/">
         <Text
           variant="h5"
           css={{
@@ -104,6 +105,7 @@ export  function Guide({printing, }:{printing?:boolean, },props) {
           />
           <span>检验平台</span>
         </Text>
+        </RouterLink>
         <div css={{ marginLeft: "auto" }}>
         </div>
       </Toolbar>

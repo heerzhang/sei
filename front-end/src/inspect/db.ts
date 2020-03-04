@@ -583,6 +583,24 @@ export function useReport(filter:any) {
     error, loading, refetch};
 }
 
+const ABADON_ISP = gql`
+    mutation abandonISP(
+        $ispId: ID! 
+        $reason: String
+    ) {
+    res: abandonISP(isp: $ispId,  reason: $reason) 
+    }
+`;
+//放弃ISP检验
+export const useAbandonISP  = (options) => {
+  const [submit, {error, data, loading, called}] = useMutation( ABADON_ISP, {
+    variables: {...options},
+  })
+  const { res : result} = data||{};
+  return { result ,submit, error, loading, called };
+};
+
+
 
 //useQuery输出包含：'startPolling' 'subscribeToMore' | 'refetch' | 'variables'> +fetchMore；　输入第二参数：onCompleted?:　onError?: ；
 //类似fetchMore，原型定义 refetch(variables) 立刻刷新；startPolling(pollInterval)；subscribeToMore(options{variables，updateQuery()})；　

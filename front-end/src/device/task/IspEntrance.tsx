@@ -49,8 +49,7 @@ export const IspEntrance: React.FunctionComponent<ComposeProps> = ({
   const {loading, error, item } =useLookIspOfDevTask(filtercomp);
   console.log("IspEntrance页面刷新 id:", id,",dt=,",dt,";params=", taskId, item);
 
-
-
+  //加载数据后立刻跳转，重定向操作。 要么直接去ISP页面；  要么先去派工吧。
 
   React.useEffect(() => {
     if(!loading && !error){

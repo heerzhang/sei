@@ -25,7 +25,7 @@ import { loadTemplate } from "./template";
 
 
 //viewAll是否是整个报表都一起显示。
-export default function OriginalRecord({printing, }:{printing?:boolean, },props) {
+export default function MaintenanceMain({printing, }:{printing?:boolean, },props) {
   const theme = useTheme();
   //useState(默认值) ； 后面参数值仅仅在组件的装载时期有起作用，若再次路由RouterLink进入的，它不会依照该新默认值去修改show。useRef跳出Cpature Value带来的限制
   //采用RouterLink页内路由进入useState还保留旧的值，要修改就将会导致render两次；旧的值新的值各一次渲染。若采用URL刷新模式只有一次。

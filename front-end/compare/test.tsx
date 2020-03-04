@@ -66,7 +66,7 @@ import { usePanResponder } from "pan-responder-hook";
 import pick from "lodash.pick";
 import ReactToPrint from 'react-to-print';
 import { lazy } from "react";
-import OriginalRecord from "../src/original/OriginalRecord";
+import OriginalRecord from "../src/original/MaintenanceMain";
 
 
 

@@ -47,7 +47,7 @@ export const InspectMain: React.FunctionComponent<MainProps> = props => {
   let showingRecipe = (match && params.recipe) || (match1 && params1.recipe);
   let initTab= showingRecipe=== "list"? 1:
               showingRecipe=== "check"? 2: 1;
-  if(showingRecipe)   initTab=3;
+  if(showingRecipe)   initTab=1;
 
   const [activeTab, setActiveTab] = React.useState(initTab);
   const [, setLocation] = useLocation(); 　
@@ -162,7 +162,7 @@ export const InspectMain: React.FunctionComponent<MainProps> = props => {
                       <Link to={`/inspect/${showingRecipe}/addReport/choose`}>
                           <IconButton  disabled={!showingRecipe}
                             variant="ghost"
-                            label="加菜谱"
+                            label="增加"
                             size="md"
                             icon={<IconPlus />}
                           />
@@ -210,7 +210,7 @@ export const InspectMain: React.FunctionComponent<MainProps> = props => {
                   </Tab>
                   <Tab id="list">我参与的检验</Tab>
                   <Tab id="check">待我审核的检验</Tab>
-                  <Tab id="report">检验报告</Tab>
+                  <Tab id="report">关注的报告列表</Tab>
                 </Tabs>
               </DarkMode>
             </div>
@@ -231,8 +231,8 @@ export const InspectMain: React.FunctionComponent<MainProps> = props => {
               <RelationList check/>
             </TabPanel>
             <TabPanel id="report">
-              { showingRecipe && ( <BoundReports key={showingRecipe} id={showingRecipe} /> ) }
-              { !showingRecipe && ( '未指定检验号') }
+              {/* 所有关注的，列表形式showingRecipe && ( <BoundReports key={showingRecipe} id={showingRecipe} /> ) */}
+              {  '建设当中，未完成。。。' }
             </TabPanel>
           </Pager>
         </Layer>

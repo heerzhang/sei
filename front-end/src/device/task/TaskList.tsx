@@ -293,7 +293,7 @@ export const TaskList: React.FunctionComponent<
                     content={
                       <MenuList>
                         <MenuItem onPress={() => unfollow(relation.id)}>
-                          派工给检验员={relation || '空的？'} user
+                          派工任务{relation || '？'}给检验员
                         </MenuItem>
                       </MenuList>
                     }

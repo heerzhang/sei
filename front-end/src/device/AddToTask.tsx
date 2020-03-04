@@ -16,7 +16,7 @@ import {
   Container,
   ResponsivePopover,
   IconMoreVertical,
-  IconArrowLeft,
+  IconArrowLeft, Input, InputGroupLine
 } from "customize-easy-ui-component";
 import {   useAddToTask } from "./db";
 //import { useSession } from "../auth";
@@ -80,7 +80,7 @@ export const AddToTask: React.FunctionComponent<ComposeProps> = ({
   //console.log("来React.useState="+ JSON.stringify(title) +",id="+id+";title="+title+";defaultTitle="+JSON.stringify(defaultTitle));
   const [credit, ] = React.useState(defaultCredit);
   //ingredients 原来是[]数组，改成对象。ingredients.length无定义了。
-  const [ingredients, setIngredients] = React.useState<any>( dt||{} );
+  const [ingredients, setIngredients] = React.useState<any>( dt||{dep:'二部'　} );
 //  const [, setLocation] = useLocation();
   //这里hoverIngredient是当前高亮选择的某个食材;
 //  const [hoverIngredient, setHoverIngredient] = React.useState(null);
@@ -298,7 +298,7 @@ export const AddToTask: React.FunctionComponent<ComposeProps> = ({
                   if(id) updateRecipe(id, toSave);
                 }}
                >
-                把该设备添加到这个任务
+                为该设备添加任务
                </Button>
             )}
           </div>
@@ -345,10 +345,11 @@ export const AddToTask: React.FunctionComponent<ComposeProps> = ({
                       <div key={1}>
                         {editing ? (
                         <div>
+                          <Text  variant="h6">任务号已经有的要填（合并任务），否则自动生成新的任务号</Text>
                           <ContainLine display={'任务号'}>
                               <TransparentInput
                                 autoFocus={true}
-                                placeholder="任务号"
+                                placeholder="已有任务号的可填，也可自动生成"
                                 value={ingredients.task}
                                 onChange={e => {
                                   setIngredients( {
@@ -371,11 +372,10 @@ export const AddToTask: React.FunctionComponent<ComposeProps> = ({
                               }}
                             />
                           </ContainLine>
-                          <ContainLine display={'任务日期'}>
+                          <ContainLine display={'任务到期日期'}>
                             <TransparentInput
-                              autoFocus={true}
-                              placeholder="输入日期格式2019-08-03"
-                              value={ingredients.date}
+                              type='date'
+                              value={ingredients.date||''}
                               onChange={e => {
                                 setIngredients( {
                                   ...ingredients,

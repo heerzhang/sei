@@ -23,10 +23,11 @@ public class ISP {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "commonSeq")
     @SequenceGenerator(name = "commonSeq", initialValue = 1, allocationSize = 1, sequenceName = "SEQUENCE_COMMON")
     protected Long id;
-    //先有EQP,后来规划TASK了(1个task多eqp)，最后才为某task和某一个EQP去生产ISP的;
-    //一个检验记录只有一个设备，一个设备EQP可有多个ISP检验。
-    //若是ISP该从TASK挂接关系而来的，那么这里就不应该有EQP字段的，设备在TASK哪里去找。
-    //检验单独生成，TASK和EQP多对多的；单个ISP检验为了某个EQP和某个TASK而生成的。
+    //先有EQP,后来规划TASK了(1个task多eqp)，最后才为某task和某一个EQP去生成ISP{inspect}的;
+    //一个检验ISP记录只有一个设备，一个设备EQP可有多个ISP检验。
+    //若是ISP该从TASK挂接关系而来的，那么这里就不应该有EQP字段的，设备在TASK 哪去找。Task是部门细分责任的。
+    //检验单独生成，TASK和EQP多对多的； ISP比Task更进一步，更靠近事务处理中心。EQP是和外部对接的。
+    //单个ISP检验为了某个EQP和某个TASK而生成的。主要目的推动后续的报告，管理流程，以及结算等。
     //我是多端我来维护关联关系，我的表有直接外键的存储。
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn
@@ -38,8 +39,8 @@ public class ISP {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn
     private Task task;
-    //缺省 fetch= FetchType.LAZY
-    //这里维护多对多关系，版本升级导致中间表ISP_ISP_MEN变成ISP_USERS；？需要自己指定表名,且字段名都也改了"ISPMEN_ID"　ISP_MEN_ID？
+    //缺省 fetch= FetchType.LAZY  ；多对多的实际都派生第三张表，不会和实体表放在一起的；
+    //这地方维护多对多关系，版本升级导致中间表ISP_ISP_MEN变成ISP_USERS；？需要自己指定表名,且字段名都也改了"ISPMEN_ID"　ISP_MEN_ID？
     @ManyToMany
     @JoinTable(name="ISP_ISP_MEN",joinColumns={@JoinColumn(name="ISP_ID")},inverseJoinColumns={@JoinColumn(name="ISP_MEN_ID")})
     @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE,region ="Fast")

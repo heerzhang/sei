@@ -157,7 +157,7 @@ export const 末尾链接= ( {template, verId, repId }
               marginBottom: '0.8rem'
           }}
        >
-       - 报告完毕 -
+    <RouterLink to="/"> - 报告完毕 -</RouterLink>
       <div css={{
         textAlign: "center",
         "& > div": {

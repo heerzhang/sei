@@ -209,13 +209,13 @@ export const AttachedTask: React.FunctionComponent<ComposeProps> = ({
                     <MenuItem contentBefore={<IconPackage />}  onPress={() => {
                       setLocation("/device/"+id+"/addTask", true );
                     } }>
-                      生成任务1
+                      生成新任务
                     </MenuItem>
                   <MenuDivider />
                      <MenuItem contentBefore={<IconPackage />}  onPress={() => {
                        setLocation("/device/"+id+"/task/", true );
                      } }>
-                      准备派工给检验员2
+                      有任务就派工给检验员
                     </MenuItem>
                 </MenuList>
               }

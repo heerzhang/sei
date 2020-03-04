@@ -165,7 +165,7 @@ const Main = WaitingComponent(lazy(() => import("./Main")));
 const DeviceMain = WaitingComponent(lazy(() => import("./device/DeviceMain")));
 const InspectMain = WaitingComponent(lazy(() => import("./inspect/InspectMain")));
 const ReportEntrance = WaitingComponent(lazy(() => import("./report/ReportEntrance")));
-const OriginalRecord = WaitingComponent(lazy(() => import("./original/OriginalRecord")));
+const Maintenance = WaitingComponent(lazy(() => import("./maintenance/MaintenanceMain")));
 
 function TopRouter() {
   //const { initialising, } = useAuthState(firebase.auth());
@@ -224,7 +224,7 @@ function TopRouter() {
             <NestingtRoute path="/inspect/:rest*" component={InspectMain}/>
             <Route path="/report/guide">   <ReportGuide />    </Route>
             <NestingtRoute path="/report/:rest*" component={ReportEntrance}/>
-            <NestingtRoute path="/original/:rest*" component={OriginalRecord}/>
+            <NestingtRoute path="/maintenance/:rest*" component={Maintenance}/>
 
             <Route path="/test/test1">   <Example  />    </Route>
             <Route path="/:rest*"><h1>没有该URL匹配的视图内容</h1></Route>

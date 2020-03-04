@@ -162,6 +162,20 @@ public class IspMgrMutation implements GraphQLMutationResolver {
         return task!=null;
     }
 
+    @Transactional
+    public boolean abandonISP(Long ispId,String reason)
+    {
+        if(!emSei.isJoinedToTransaction())      emSei.joinTransaction();
+        ISP isp = iSPRepository.findById(ispId).orElse(null);
+        Assert.isTrue(isp != null,"未找到isp:"+ispId);
+        //ispMen 解除关系
+        Set<User>  mens= isp.getIspMen();
+        mens.forEach(a -> a.getIsp().remove(isp));
+        //reps 解除关系
+        emSei.remove(isp);
+        emSei.flush();
+        return isp!=null;
+    }
 }
 
 

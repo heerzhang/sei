@@ -187,11 +187,11 @@ export const Branding: React.FunctionComponent<BrandingProps> = (props) => {
               src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1566208112112&di=057216c9b1f519a6bec42f465025062e&imgtype=0&src=http%3A%2F%2Fqcloud.dpfile.com%2Fpc%2F5B4EKvgdVHvYJdSIXlvqZF_P3CApeL2gFM3VtjrHbrl2RzRjFYhj5njVYekTCwBvTYGVDmosZWTLal1WbWRW3A.jpg"
               alt="Ben"
             />
-            Hey! 新一代平台(用户意见和需求征集阶段). I was getting tired of losing recipes in my
-            inbox and nagging friends and family for their recipes, so I created
-            this little app. It's a simple tool to help my family maintain a
-            shared, searchable database of recipes. Give it a try, and happy
-            cooking! 😋
+            Hey! 新一代平台(用户意见和需求征集阶段)，请使用手机谷歌浏览器来访问，虽然微信也可直接访问。
+            开放功能还非常有限。目前只能支持原始记录编制报告和打印，还仅完成了1个模板的报告；出报告没问题。
+            支持设备数据从旧平台同步；当前本平台数据库是基于旧平台的测试数据库做的，设备数据可能和旧平台可能稍有出入。
+            本平台目前运行于个人笔记本电脑，还经常调试导致中断运行的，数据也无法保障保存了就不会被主机网管清理掉。
+            登录帐户申请直接联系开发者! 😋
           </Text>
           <div
             css={{
@@ -408,7 +408,7 @@ export const Branding: React.FunctionComponent<BrandingProps> = (props) => {
             制作者 <Link href="/chaipu">hez</Link>
             <br />
             <Link href="mailto:fjsei@gmail.com">Email me</Link> with
-            questions or whatevs! <Link href="/original/">后台维护传送门</Link>
+            questions or whatevs! <Link href="/maintenance/">后台维护传送门</Link>
             <br />
             <div>
               Icons made by{" "}

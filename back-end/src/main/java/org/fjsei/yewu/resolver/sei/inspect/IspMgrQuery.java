@@ -399,6 +399,7 @@ public class IspMgrQuery implements GraphQLQueryResolver {
         Page<Task>   items= taskRepository.findAll(modelFilters,pageable);
         return items;
     }
+    //Todo： 排除多条ISP对应一个[Task+Dev]组合的可能性。
     //最多1条正常状态的ISP， 唯一性保证： device/157/task/184 ;未派工的null
     public ISP getISPofDevTask(Long dev,Long task) {
         List<ISP> allPage =iSPRepository.getByDev_IdAndTask_IdOrderByNextIspDate(dev,task);

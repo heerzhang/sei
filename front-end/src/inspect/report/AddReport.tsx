@@ -238,28 +238,6 @@ export const AddReport: React.FunctionComponent<ComposeProps> = ({
                 取消
               </Button>
             )}
-            {editing && (
-              <Button
-                intent="primary"
-                disabled={loading}
-                css={{ marginLeft: theme.spaces.sm }}
-                onPress={() => {
-                  //这里serialize是　src/Editor.jsx:120　自定义函数
-                  //const { text, content } = current.serialize();
-                  const toSave = {
-                    title,
-                    description: content,
-                    plain: '',
-                    author: credit,
-                    image,
-                    ingredients
-                  };
-                  if(id) updateRecipe(id);
-                }}
-               >
-                保存报告
-               </Button>
-            )}
           </div>
         </Toolbar>
       </Navbar>
@@ -299,29 +277,20 @@ export const AddReport: React.FunctionComponent<ComposeProps> = ({
                   width:'100%',
                 }}
                 >
-                      <div key={1}>
-                        <MainContent id={id} rep={rep}/>
-                      </div>
+                  {/*三级路由了： 嵌套再嵌套了一层 布局级别的组件*/}
+                  <div key={1}>
+                    <MainContent id={id} rep={rep}/>
+                  </div>
 
-                  <RouterLink to={`/inspect/${id}/report/${repId}/copy`}>
+                  <RouterLink to={`/inspect/${id}`}>
                     <Button
                       size="lg" noBind
                       intent="primary"
                       iconAfter={<IconArrowRight />}
                     >
-                      生成报告并初始化
+                      其他功能
                     </Button>
                   </RouterLink>
-                  <RouterLink to={`/report/EL-DJ/ver/1/preview/${repId}`}>
-                    <Button
-                      size="lg" noBind
-                      intent="primary"
-                      iconAfter={<IconArrowRight />}
-                    >
-                      查看报告
-                    </Button>
-                  </RouterLink>
-                  {' '}
                 </div>
               )}
 
@@ -361,6 +330,8 @@ function ThirdRoterContent({id, dt, rep}: ThirdRoterProps) {
       <Route path="/inspect/:id/addReport/choose">
           <FirstPage id={id} rep={rep}/>
       </Route>
+
+      {/*实际没用*/}
       <Route path="/inspect/:id/addReport/:repId/result">
           <CopyRecord id={id} rep={rep}/>
       </Route>
@@ -420,14 +391,25 @@ const FirstPage= ( {id ,rep}
         disabled ={loading}
         loading ={loading}
         onPress={ ()=>updateRecipe('1') }
-      >发给后端</Button>
+      >发给后端服务器生成新报告
+      </Button>
       { result &&
       <Text variant="h5">生成返回结果：报告ID {result.id}; 报告编号 {result.no} 日期 {result.upLoadDate}</Text>
       }
     </div>
+      <RouterLink to={`/report/EL-DJ/ver/1/preview/${result?.id}`}>
+        <Button
+          size="lg" noBind
+          intent="primary"
+          iconAfter={<IconArrowRight />}
+        >
+         进入报告编制
+        </Button>
+      </RouterLink>
   </React.Fragment>;
 };
 
+//作废了
 const CopyRecord= ( { id ,rep}
 ) => {
   const theme = useTheme();

@@ -27,5 +27,6 @@ extend type Mutation {
     setISPtask(id:ID!, task:ID! ) : ISP!
     setISPreport(id:ID!, reps:[ID]! ) : ISP!
     buildISP(dev: ID!,task:ID!, username:String!) : ISP!
+    abandonISP(isp: ID!, reason: String): Boolean!
 }
 

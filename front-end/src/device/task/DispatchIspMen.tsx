@@ -22,6 +22,7 @@ import {   useDispatchIspMen } from "./db";
 import {Helmet} from "react-helmet";
 import { Link,  } from "wouter";
 import { ContainLine, TransparentInput } from "../../comp/base";
+import { useSession } from "../../auth";
 
 //[HOOK限制]按钮点击函数内部直接上toast()或toaster.notify()很可能无法正常显示。而放在函数组件顶层render代码前却能正常。
 
@@ -59,7 +60,7 @@ export const DispatchIspMen: React.FunctionComponent<ComposeProps> = ({
   const theme = useTheme();
   const toast = useToast();
   //const ref = React.useRef(null);
-  //const {user,} = useSession();
+  const {user,} = useSession();
   const [loading, setLoading] = React.useState(false);
   const [editing, setEditing] = React.useState(!readOnly);
   const [content, ] = React.useState(() => {
@@ -78,7 +79,8 @@ export const DispatchIspMen: React.FunctionComponent<ComposeProps> = ({
   //console.log("来React.useState="+ JSON.stringify(title) +",id="+id+";title="+title+";defaultTitle="+JSON.stringify(defaultTitle));
   const [credit, ] = React.useState(defaultCredit);
   //ingredients 原来是[]数组，改成对象。ingredients.length无定义了。
-  const [ingredients, setIngredients] = React.useState<any>( dt||{} );
+  console.log("来React.useruseState="+ JSON.stringify(title) +",user=",user);
+  const [ingredients, setIngredients] = React.useState<any>( dt||{ispMen: user.username} );
   //const [, setLocation] = useLocation();
   //这里hoverIngredient是当前高亮选择的某个食材;
  // const [hoverIngredient, setHoverIngredient] = React.useState(null);
@@ -140,8 +142,8 @@ export const DispatchIspMen: React.FunctionComponent<ComposeProps> = ({
     //这里无法获得result值，就算所在组件顶层已经获得result值，这里可能还是await () 前那样null;
      console.log("生成任务返回了＝", result,"yes=", yes);
     toast({
-      title: "任务派工返回了",
-      subtitle: '加入，ISP ID＝'+id,
+      title: "派工返回了",
+      subtitle: '新ISP的ID＝'+result?.id,
       intent: "info"
     });
     //除非用const {data: { buildTask: some }} = await updateFunc()捕捉当前操作结果; 否则这时这地方只能用旧的result,点击函数里获取不到最新结果。
@@ -330,14 +332,27 @@ export const DispatchIspMen: React.FunctionComponent<ComposeProps> = ({
                 }}
                 >
                   <Text variant="h5">任务派工向导</Text>
-
+                    <Text
+                      css={{
+                        flex: 1,
+                        textAlign: "center",
+                        [theme.mediaQueries.md]: {
+                          textAlign: "left"
+                        }
+                      }}
+                      wrap={false}
+                      variant="h6"
+                      gutter={false}
+                    >
+                      填检验员账号，以 ,号 来分割多个人, 选择方式：开发中。  敬请期待，都忙不过来。
+                    </Text>
                       <div key={1}>
                         {editing ? (
                         <div>
                           <ContainLine display={'检验员'}>
                               <TransparentInput
                                 autoFocus={true}
-                                placeholder="检验员"
+                                placeholder="填检验员账号, 以后选择方式。"
                                 value={ingredients.ispMen}
                                 onChange={e => {
                                   setIngredients( {
@@ -347,24 +362,10 @@ export const DispatchIspMen: React.FunctionComponent<ComposeProps> = ({
                                 }}
                               />
                           </ContainLine>
-                          <ContainLine display={'任务日期'}>
-                            <TransparentInput
-                              autoFocus={true}
-                              placeholder="输入日期格式2019-08-03"
-                              value={ingredients.date}
-                              onChange={e => {
-                                setIngredients( {
-                                  ...ingredients,
-                                  date: e.target.value
-                                });
-                              }}
-                            />
-                          </ContainLine>
+
                         </div>
                         ) : null }
                       </div>
-
-
                 </div>
               )}
 

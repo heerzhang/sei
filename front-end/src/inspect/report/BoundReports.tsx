@@ -194,9 +194,11 @@ function BoundListItem({ recipe, id, highlight ,task }: any) {
   //缩略图thumb-sm@和完整图片thumb@的url不一样的；后端支持缩略？　没必要做；
   //const { src, error } = useFirebaseImage("thumb-sm@", recipe.image);
   const {  error } = useFirebaseImage("thumb-sm@", recipe.image);
-
+  //Todo: 根据身份识别场景，　区分按钮点击的url，或是隐藏按钮。
+  //报告编制人的报告入口链接
   const href = `/inspect/${task}/report/${id}`;
   //Todo: 类型和版本；　report/EL-DJ/ver/1/preview/
+  //其他人直接看报告连接
   //const href = `/report/EL-DJ/ver/1/preview/${id}`;
 
   //被点击中匹配href，成功=true=isActive[? ,..];　表示正好跟界面显示同样的一个路由。
@@ -267,11 +269,6 @@ function BoundListItem({ recipe, id, highlight ,task }: any) {
           <ResponsivePopover
             content={
               <MenuList>
-                <MenuItem contentBefore={<IconPackage />}  onPress={() => {
-                  setLocation("/device/"+id+"/addTask", true );
-                } }>
-                  删除该报告１
-                </MenuItem>
                 <MenuItem onPress={ async () => {
                   await setRepId(recipe.id);
                   handleDelete(recipe.id)
@@ -280,7 +277,10 @@ function BoundListItem({ recipe, id, highlight ,task }: any) {
                 </MenuItem>
                 <MenuDivider />
                 <MenuItem contentBefore={<IconPackage />}  onPress={() => {
-                  setLocation("/device/"+id+"/task/", true );
+                  toast({
+                    title: "该功能还未做呢"
+                  });
+                  setLocation("/", true );
                 } }>
                   签名并提交审核
                 </MenuItem>
@@ -290,9 +290,9 @@ function BoundListItem({ recipe, id, highlight ,task }: any) {
             <IconButton
               css={{
                 //display: !editing && editable ? undefined : "none",
-                marginLeft: theme.spaces.sm
+                //marginLeft: theme.spaces.sm
               }}
-              variant="ghost" size={'lg'}
+              variant="ghost" size={'md'}
               icon={<IconMoreVertical />}
               label="菜单"
             />
