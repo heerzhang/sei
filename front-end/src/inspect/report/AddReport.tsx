@@ -22,6 +22,7 @@ import {Helmet} from "react-helmet";
 import { Link as RouterLink, Link, Route, Switch } from "wouter";
 import { ContainLine, TransparentInput } from "../../comp/base";
 import { useCommitOriginalData, useQueryOriginalRecord } from "../../report/db";
+import { useNewReport } from "./db";
 
 export interface ComposeProps {
   //id?: string;
@@ -370,11 +371,30 @@ function ThirdRoterContent({id, dt, rep}: ThirdRoterProps) {
 
 const FirstPage= ( {id ,rep}
 ) => {
+  const theme = useTheme();
+  const toast = useToast();
   //模板的类型标识;
   //Todo: 获取后端的列表？ 或者，前后端同步数据维护。
   const [tplType, setTplType] = React.useState('EL-DJ');
   const [ingredients, setIngredients] = React.useState<any>( {modeltype:'EL-DJ', modelversion:'1'} );
-
+  const {result, submit:updateFunc, loading} = useNewReport({
+    isp: id, type:ingredients.modeltype , version:ingredients.modelversion
+  });
+  async function updateRecipe(id: string) {
+    try {
+      console.log("页面handleDelete Id="+id);
+      await updateFunc();
+    } catch (err) {
+      toast({
+        title: "后端报错",
+        subtitle: err.message,
+        intent: "danger"
+      });
+      console.log("handleDelete返回", err);
+      return;
+    }
+  //  setLocation("/device/"+eqpId,  true );
+  }
   return <React.Fragment>
     <div>
       <Text variant="h5">为该份报告做选择</Text>
@@ -383,7 +403,6 @@ const FirstPage= ( {id ,rep}
                 value={ingredients.modeltype||''}  onChange={e => setIngredients({...ingredients, modeltype:e.currentTarget.value}) }
         >
           <option value={'EL-DJ'}>有机房曳引驱动电梯定期检验</option>
-          <option value={''}>模板类型编号</option>
           <option value={'EL-JJ'}>EL-JJ</option>
         </Select>
       </ContainLine>
@@ -395,6 +414,16 @@ const FirstPage= ( {id ,rep}
           <option value={'2'}>2版</option>
         </Select>
       </ContainLine>
+      <Button
+        css={{ marginTop: theme.spaces.md }}
+        size="lg"  intent={'warning'}
+        disabled ={loading}
+        loading ={loading}
+        onPress={ ()=>updateRecipe('1') }
+      >发给后端</Button>
+      { result &&
+      <Text variant="h5">生成返回结果：报告ID {result.id}; 报告编号 {result.no} 日期 {result.upLoadDate}</Text>
+      }
     </div>
   </React.Fragment>;
 };

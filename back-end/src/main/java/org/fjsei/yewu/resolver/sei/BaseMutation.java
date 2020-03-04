@@ -141,6 +141,9 @@ public class BaseMutation implements GraphQLMutationResolver {
         Report report = new Report("电梯定检",repNo,isp);
         report.setModeltype(modeltype);
         report.setModelversion(modelversion);
+        java.util.Date  now= new java.util.Date();
+        //report.setUpLoadDate(new java.sql.Date(now.getTime()));
+        report.setUpLoadDate(now);
         reportRepository.save(report);
         return report;
     }

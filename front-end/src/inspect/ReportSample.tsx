@@ -417,7 +417,7 @@ const FirstPage= ( {theme=null, id ,rep}
 
   return <React.Fragment>
     <div>
-      <Text variant="h5">报告封面首页</Text>
+      <Text variant="h5">该份报告{rep?.id}概要信息</Text>
       <ContainLine display={'报告类型'}>
         <TransparentInput
           autoFocus={true}
@@ -473,7 +473,7 @@ const FirstPage= ( {theme=null, id ,rep}
           autoFocus={true}
           readOnly
           placeholder="输入日期格式2019-08-03"
-          value={rep && rep.upLoadDate}
+          value={rep?.upLoadDate || ''}
         />
       </ContainLine>
       <ContainLine display={'设备安装地址'}>

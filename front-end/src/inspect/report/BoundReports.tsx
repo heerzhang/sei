@@ -194,9 +194,10 @@ function BoundListItem({ recipe, id, highlight ,task }: any) {
   //缩略图thumb-sm@和完整图片thumb@的url不一样的；后端支持缩略？　没必要做；
   //const { src, error } = useFirebaseImage("thumb-sm@", recipe.image);
   const {  error } = useFirebaseImage("thumb-sm@", recipe.image);
-  //const href = `/inspect/${task}/report/${id}`;
+
+  const href = `/inspect/${task}/report/${id}`;
   //Todo: 类型和版本；　report/EL-DJ/ver/1/preview/
-  const href = `/report/EL-DJ/ver/1/preview/${id}`;
+  //const href = `/report/EL-DJ/ver/1/preview/${id}`;
 
   //被点击中匹配href，成功=true=isActive[? ,..];　表示正好跟界面显示同样的一个路由。
   const [isActive,] = useRoute(href);

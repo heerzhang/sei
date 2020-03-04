@@ -403,5 +403,23 @@ export const useDeleteReport  = (options) => {
   return { result ,submit, error, loading, called };
 };
 
+const NEW_REPORT = gql`
+    mutation newReport(
+        $isp: ID! 
+        $type: String!
+        $version: String
+    ) {
+    res: newReport(isp: $isp, modeltype: $type, modelversion: $version) {
+      id, no  upLoadDate
+    }
+    }
+`;
 //增加新的报告
 //newReport(isp: ID!,modeltype: String!, modelversion:String) :Report!
+export const useNewReport  = (options) => {
+  const [submit, {error, data, loading, called}] = useMutation( NEW_REPORT, {
+    variables: {...options},
+  })
+  const { res : result} = data||{};
+  return { result ,submit, error, loading, called };
+};
