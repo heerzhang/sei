@@ -199,7 +199,7 @@ export const AttachedTask: React.FunctionComponent<ComposeProps> = ({
               variant="h5"
               gutter={false}
             >
-              该设备{dt.cod}关联的近期活动任务
+              该设备 {dt.cod} 关联的活动任务
             </Text>
           )}
           <div>
@@ -212,11 +212,7 @@ export const AttachedTask: React.FunctionComponent<ComposeProps> = ({
                       生成新任务
                     </MenuItem>
                   <MenuDivider />
-                     <MenuItem contentBefore={<IconPackage />}  onPress={() => {
-                       setLocation("/device/"+id+"/task/", true );
-                     } }>
-                      有任务就派工给检验员
-                    </MenuItem>
+
                 </MenuList>
               }
             >
@@ -270,7 +266,7 @@ export const AttachedTask: React.FunctionComponent<ComposeProps> = ({
                               marginBottom: theme.spaces.xs,
                               justifyContent: "space-between",
                               [theme.mediaQueries.md]: {
-                                width: "300px"
+                                width: "600px"
                               }
                             }}
                           >
@@ -282,7 +278,7 @@ export const AttachedTask: React.FunctionComponent<ComposeProps> = ({
                                   : "white"
                               }}
                             >
-                              任务号{each.id}
+                            任务号 {each.id}
                             </Text>
                             <div
                               css={{
@@ -301,7 +297,7 @@ export const AttachedTask: React.FunctionComponent<ComposeProps> = ({
                                   : "white"
                               }}
                             >
-                              状态：{each.status}
+                              状态：{each.status||''}
                             </Text>
                             <Link  to={"/device/"+dt.id+"/task/"+each.id}>
                               检验ISP详情
@@ -314,6 +310,11 @@ export const AttachedTask: React.FunctionComponent<ComposeProps> = ({
                                       handleDelete(each.id)
                                     }
                                   }>注销任务
+                                  </MenuItem>
+                                  <MenuItem contentBefore={<IconPackage />}  onPress={() => {
+                                    setLocation("/device/"+dt.id+"/task/"+each.id+'/dispatch', true);
+                                     } }>
+                                  有任务就派工给检验员
                                   </MenuItem>
                                 </MenuList>
                               }

@@ -247,3 +247,4 @@ Twitter强迫所有第三方开发者使用OAuth 2； https安全。
 
 枚举　日期　类型JPA映射　https://blog.csdn.net/ly1028826685/article/details/84216746?depth_1-utm_source=distribute.pc_relevant.none-task&utm_source=distribute.pc_relevant.none-task
 关联记录直接删除导致查询关联到了时刻报错，等待缓存时间过了才正常。
+新生成任务单要等待缓存时间过了，才能显示进入设备关联列表中。

@@ -190,7 +190,7 @@ export const AddReport: React.FunctionComponent<ComposeProps> = ({
               variant="h5"
               gutter={false}
             >
-              报告编号：{repId}, 检验号{id}
+              报告ID号：{repId}, 检验号{id}
             </Text>
           )}
           <div
@@ -370,7 +370,7 @@ const FirstPage= ( {id ,rep}
     <div>
       <Text variant="h5">为该份报告做选择</Text>
       <ContainLine display={'模板对应报告类型'}>
-        <Select inputSize="md" css={{minWidth:'190px',fontSize:'1.4rem',padding:'0 0.5rem'}} divStyle={css`max-width:340px;`}
+        <Select inputSize="md" css={{minWidth:'210px',fontSize:'1.2rem',padding:'0 0.5rem'}} divStyle={css`max-width:390px;`}
                 value={ingredients.modeltype||''}  onChange={e => setIngredients({...ingredients, modeltype:e.currentTarget.value}) }
         >
           <option value={'EL-DJ'}>有机房曳引驱动电梯定期检验</option>
@@ -378,7 +378,7 @@ const FirstPage= ( {id ,rep}
         </Select>
       </ContainLine>
       <ContainLine display={'模板对应版本号'}>
-        <Select inputSize="md" css={{minWidth:'190px',fontSize:'1.4rem',padding:'0 0.5rem'}} divStyle={css`max-width:340px;`}
+        <Select inputSize="md" css={{minWidth:'190px',fontSize:'1.2rem',padding:'0 0.5rem'}} divStyle={css`max-width:340px;`}
                 value={ingredients.modelversion||''}  onChange={e => setIngredients({...ingredients, modelversion:e.currentTarget.value}) }
         >
           <option value={'1'}>1版</option>
@@ -394,9 +394,10 @@ const FirstPage= ( {id ,rep}
       >发给后端服务器生成新报告
       </Button>
       { result &&
-      <Text variant="h5">生成返回结果：报告ID {result.id}; 报告编号 {result.no} 日期 {result.upLoadDate}</Text>
+      <Text variant="h5">生成返回结果：报告ID {result.id}; 报告编号 {result.no}; 日期：{result.upLoadDate}</Text>
       }
     </div>
+    <Text>这里生成返回报告编号还无法和旧平台对接，待完善；报告编号给对外对接识别用的，内部使用报告ID</Text><br/>
       <RouterLink to={`/report/EL-DJ/ver/1/preview/${result?.id}`}>
         <Button
           size="lg" noBind

@@ -305,7 +305,9 @@ export const RelationList: React.FunctionComponent<FollowingListProps> = ({
                               aria-hidden
                             />
                         }
-                      />
+                      >
+                        {`检验号 ${item.id}`}
+                      </ListItem>
                       </RouterLink>
                     );
                   })}

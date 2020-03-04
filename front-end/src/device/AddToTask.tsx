@@ -282,7 +282,7 @@ export const AddToTask: React.FunctionComponent<ComposeProps> = ({
             {editing && (
               <Button
                 intent="primary"
-                disabled={loading}
+                disabled={loading || !(ingredients?.date)}
                 css={{ marginLeft: theme.spaces.sm }}
                 onPress={() => {
                   //这里serialize是　src/Editor.jsx:120　自定义函数

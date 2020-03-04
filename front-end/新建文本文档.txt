@@ -266,3 +266,8 @@ react-data-export 生成excel文档。    handsontable是excel形式UI编辑器�
 https://blog.csdn.net/weixin_41646716/article/details/82423817
 在前端无法直接读取excel文件内容的。首先转成json文件，直接在代码模块打包导入。https://www.bejson.com/json/col2json/
 
+    useMutation(CONFIRM_FOLLOW, {
+    variables: {...options},
+    refetchQueries:  ['findAllUserFilter']
+  export function useIspDetail(filter:any) {
+    error, loading, refetch};

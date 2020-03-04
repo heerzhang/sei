@@ -232,7 +232,7 @@ export const ReportSample: React.FunctionComponent<ComposeProps> = ({
               variant="h5"
               gutter={false}
             >
-              报告编号：{repId}, 检验号{id}
+              报告ID号：{repId}, 检验号{id}
             </Text>
           )}
           <div
@@ -296,7 +296,7 @@ export const ReportSample: React.FunctionComponent<ComposeProps> = ({
                     image,
                     ingredients
                   };
-                  if(id) updateRecipe(id, toSave);
+                 // if(id) updateRecipe(id, toSave);
                 }}
                >
                 保存编制中的检验报告
@@ -417,7 +417,7 @@ const FirstPage= ( {theme=null, id ,rep}
 
   return <React.Fragment>
     <div>
-      <Text variant="h5">该份报告{rep?.id}概要信息</Text>
+      <Text variant="h5">该份报告的概要信息</Text>
       <ContainLine display={'报告类型'}>
         <TransparentInput
           autoFocus={true}
@@ -448,7 +448,6 @@ const FirstPage= ( {theme=null, id ,rep}
         <TransparentInput
           autoFocus={true}
           readOnly
-          placeholder="审核人"
           value={rep && rep.isp.conclusion}
           onChange={e => {
             setIngredients( {

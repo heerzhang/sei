@@ -155,7 +155,7 @@ export const IspDetail: React.FunctionComponent<ComposeProps> = ({
               variant="h5"
               gutter={false}
             >
-              ISP检验号{id}的详情页
+             ISP检验号 {id} 的详情向导
             </Text>
           <div
             css={{

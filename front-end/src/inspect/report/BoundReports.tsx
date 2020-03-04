@@ -277,12 +277,12 @@ function BoundListItem({ recipe, id, highlight ,task }: any) {
                 </MenuItem>
                 <MenuDivider />
                 <MenuItem contentBefore={<IconPackage />}  onPress={() => {
-                  toast({
-                    title: "该功能还未做呢"
-                  });
-                  setLocation("/", true );
-                } }>
-                  签名并提交审核
+                    toast({
+                      title: "该功能还未做呢，只能提交审核员一个网页链接看看"
+                    });
+                    setLocation("/", true );
+                  } }>
+                 签名并提交审核
                 </MenuItem>
               </MenuList>
             }

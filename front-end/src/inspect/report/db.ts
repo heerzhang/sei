@@ -398,6 +398,7 @@ const DELETE_REPORT = gql`
 export const useDeleteReport  = (options) => {
   const [submit, {error, data, loading, called}] = useMutation( DELETE_REPORT, {
     variables: {...options},
+    refetchQueries:  ['findAllUserFilter']
   })
   const { res : result} = data||{};
   return { result ,submit, error, loading, called };

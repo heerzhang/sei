@@ -220,8 +220,8 @@ export const DispatchIspMen: React.FunctionComponent<ComposeProps> = ({
               variant="h5"
               gutter={false}
             >
-              { updateError?  '添加任务失败了':
-                 '您已将该任务派工给检验员，检验id号：'+(result && result.id)
+              { updateError?  '派工任务失败了':
+                 '您已将该任务派工给检验员，检验号ID: '+(result && result.id)
               }
             </Text>
           )}

@@ -499,7 +499,7 @@ export const ComposeDevice: React.FunctionComponent<ComposeProps> = ({
                               marginBottom: theme.spaces.xs,
                               justifyContent: "space-between",
                               [theme.mediaQueries.md]: {
-                                width: "300px"
+                                width: "500px"
                               }
                             }}
                           >
@@ -534,8 +534,9 @@ export const ComposeDevice: React.FunctionComponent<ComposeProps> = ({
                             </Text>
                           </div>
                         )}
+                        <br/>
+                        <Text>暂时无独立设备库，目前设备是导入一个就积累一个的设备列表，待完善</Text>
                       </div>
-
 
                 </div>
               )}
