@@ -429,7 +429,7 @@ export function useFollowerIngs(toUser = true) {
   return { loading, userList:value };
 }
 
-
+/*
 const DEVICE_BY_ID = gql`
   query DEVICE_EQPCOD_QUERY($id: ID!) {
     getDeviceSelf(id: $id) {
@@ -440,35 +440,10 @@ const DEVICE_BY_ID = gql`
       } ownerUnt {
         id name
       }
-    } 
-  }
-`;
-
-function useDeviceDetail( id ) {
-  var value = null;
-  console.log("Recipe页面id=" + JSON.stringify(id));
-  const { loading, error, data,  } = useQuery(DEVICE_BY_ID, {
-    variables: { id },
-    notifyOnNetworkStatusChange: true
-  });
-//第一个render这里loading=true，要到第二次再执行到了这里才会有data数据!
-  console.log("刚Recipe经过" + JSON.stringify(data) + "进行中" + JSON.stringify(loading));
-
-  if (!loading) {
-    if (data) {
-      const { getDeviceSelf: recipe } = data;
-      if (recipe) {
-        value = recipe;
-        //  authjs = JSON.parse(user);
-        //setAuthj(authjs); 报错！//React limits the number of renders to prevent an infinite loop.
-        console.log("以Recipe从后端获得=" + JSON.stringify(value),"函数：",'eviceDetail');
-        return { loading,error, data:recipe };
-      }
     }
   }
-  //可能有数据data但是同时errors[]存在的情况。
-  return { loading,error, data:null };
-}
+`;
+*/
 
 const DISPATCH_ISP_MEN = gql`
     mutation DISPATCH_ISP_MEN(

@@ -314,16 +314,16 @@ interface SecondRoterProps {
   id?: string;
   dt?: any;
 }
+//路由和刷新？Mutation数据更新 refetchQueries:[''] 对应查询函数必须是挂载的组件内才能重做查询，路由导致分岔屏蔽掉。
 function SecondRoterContent({id, dt}: SecondRoterProps) {
   return (
     <Switch>
+      <Route path={"/device/:id/task/:taskId/dispatch"} component={DispatchIspMen} />
+      <Route path={"/device/:id/task/:taskId"} component={IspEntrance} />
       <Route path={"/device/:id/addTask"} component={AddToTask} />
       <Route path={`/device/:id`}>
         <DeviceDetail id={id} />
       </Route>
-      <Route path={"/device/:id/task/:taskId/dispatch"} component={DispatchIspMen} />
-      <Route path={"/device/:id/task/:taskId"} component={IspEntrance} />
-
       <Route path="/:rest*">
         <h1>没有该URL匹配的视图内容</h1>
       </Route>

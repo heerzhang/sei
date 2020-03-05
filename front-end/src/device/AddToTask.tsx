@@ -21,7 +21,7 @@ import {
 import {   useAddToTask } from "./db";
 //import { useSession } from "../auth";
 import { Helmet } from "react-helmet";
-import { Link,  } from "wouter";
+import { Link as RouterLink, Link } from "wouter";
 import { ContainLine, TransparentInput } from "../comp/base";
 //import { awaitExpression } from "@babel/types";
 
@@ -184,20 +184,19 @@ export const AddToTask: React.FunctionComponent<ComposeProps> = ({
             display: "flex"
           }}
         >
-          <IconButton
-            icon={<IconArrowLeft />}
-            component={Link}
-            to="/device"
-            label="后退"
-            replace
-            variant="ghost"
-            css={{
-              marginRight: theme.spaces.sm,
-              [theme.mediaQueries.md]: {
-                display: "none"     //大屏不需要
-              }
-            }}
-          />
+          <RouterLink   to="/device">
+            <IconButton
+              icon={<IconArrowLeft />}
+              label="后退"
+              variant="ghost"
+              css={{
+                marginRight: theme.spaces.sm,
+                [theme.mediaQueries.md]: {
+                  display: "none"
+                }
+              }}
+            />
+          </RouterLink>
           {editing ? (
             <div css={{ marginLeft: "-0.75rem", flex: 1 }}>
               <TransparentInput

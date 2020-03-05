@@ -30,6 +30,7 @@ import {Helmet} from "react-helmet";
 import { Link,  useLocation } from "wouter";
 import { Link as RouterLink } from "wouter";
 import { useCancellationTask } from "./task/db";
+import { useAddToTask } from "./db";
 //[HOOK限制]按钮点击函数内部直接上toast()或toaster.notify()很可能无法正常显示。而放在函数组件顶层render代码前却能正常。
 //import toaster from "toasted-notes";
 
@@ -72,18 +73,10 @@ export const AttachedTask: React.FunctionComponent<ComposeProps> = ({
   const theme = useTheme();
   const toast = useToast();
   const eqpId=id;
-  //const ref = React.useRef(null);
-  //const {user,} = useSession();
   const [loading, setLoading] = React.useState(false);
   const [editing, setEditing] = React.useState(!readOnly);
- /* const [content, setContent] = React.useState(() => {
-    return defaultDescription
-      ? ''
-      : null;
-  });*/
   const [image, ] = React.useState(defaultImage);
   const [title, setTitle] = React.useState(defaultTitle);
- // const [message, setMessage] = React.useState(null);
   const [taskId, setTaskId] = React.useState(null);
   const {task} =dt;
  // const [ingredients, setIngredients] = React.useState<any>( dt||{} );
@@ -91,11 +84,28 @@ export const AttachedTask: React.FunctionComponent<ComposeProps> = ({
   const {result, submit:updateFunc, } = useCancellationTask({
     taskid: taskId, reason:'测试期直接删'
   });
-  console.log("页面刷新钩子AttachedTask entry=",　",id="+id+";task=",task,";dt=",dt);
+  console.log("页面刷新钩子AttachedTask entry=",　",设备id="+id+";task=",task,";dt=",dt);
+  const {result:aNewTask, submit:addTaskFunc, error:updateError} = useAddToTask({
+    dep: '14',
+    devs: id, date: '2414-06-19',
+  });
 
   async function handleDelete(id: string) {
     try {
       await updateFunc();
+    } catch (err) {
+      toast({
+        title: "后端报错",
+        subtitle: err.message,
+        intent: "danger"
+      });
+      return;
+    }
+    setLocation("/device/"+eqpId,  true );
+  }
+  async function handleAddTask(id: string) {
+    try {
+      await addTaskFunc();
     } catch (err) {
       toast({
         title: "后端报错",
@@ -205,12 +215,16 @@ export const AttachedTask: React.FunctionComponent<ComposeProps> = ({
               content={
                 <MenuList>
                     <MenuItem contentBefore={<IconPackage />}  onPress={() => {
-                      setLocation("/device/"+id+"/addTask", true );
+                      setLocation("/device/"+id+"/addTask", false);
                     } }>
                       生成新任务
                     </MenuItem>
                   <MenuDivider />
-
+                  <MenuItem contentBefore={<IconPackage />}  onPress={() => {
+                        handleAddTask(id)
+                    } }>
+                    非交互简单生成新任务
+                  </MenuItem>
                 </MenuList>
               }
             >
@@ -247,8 +261,7 @@ export const AttachedTask: React.FunctionComponent<ComposeProps> = ({
               }}
             >
               {task && task.map(each => (
-                <div>
-                      <div key={each.id}>
+                   <div key={each.id}>
                         {  (
                           <div
                             css={{
@@ -256,11 +269,6 @@ export const AttachedTask: React.FunctionComponent<ComposeProps> = ({
                                 ? theme.colors.palette.blue.lightest
                                 : "transparent",
                               display: "flex",
-                           //  marginLeft: "-0.25rem",
-                            //  paddingLeft: "0.25rem",
-                           //   marginRight: "-0.25rem",
-                          //    paddingRight: "0.25rem",
-                              // borderRadius: "0.25rem",
                               marginBottom: theme.spaces.xs,
                               justifyContent: "space-between",
                               [theme.mediaQueries.md]: {
@@ -316,11 +324,7 @@ export const AttachedTask: React.FunctionComponent<ComposeProps> = ({
                           </div>
                         )}
                       </div>
-
-
-                </div>
               ))}
-
 
             </div>
           </Container>

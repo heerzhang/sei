@@ -170,7 +170,7 @@ export const TaskList: React.FunctionComponent<
                     content={
                       <MenuList>
                         <MenuItem onPress={() => refetch( {} )}>
-                          更新整个{ '任务'} 列表
+                          更新任务列表
                         </MenuItem>
                       </MenuList>
                     }

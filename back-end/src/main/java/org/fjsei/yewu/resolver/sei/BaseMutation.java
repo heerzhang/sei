@@ -190,6 +190,9 @@ public class BaseMutation implements GraphQLMutationResolver {
         task.setDep(dep);
         task.setDate(date);
         taskRepository.save(task);
+        //在前端上无法立刻更新，看不见新任务啊；加了底下2行点刷新URL可立刻看见。
+        eQP.getTask().add(task);
+        eQPRepository.save(eQP);
         return task;
     }
 
