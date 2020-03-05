@@ -6,7 +6,7 @@ import lombok.Setter;
 
 import java.util.Date;
 
-//仅供服务端使用，非DB表实体的。
+//仅供服务端使用，非DB表实体的。但是从数据库字段转换，然后转输出变JSON发给前端，需要类比JPA数据库5种基本类型。
 //提供前端，但是字段若是null的如何合并 能够理解？
 
 @Getter
@@ -39,11 +39,12 @@ public class DeviceSnapshot {
 
     //'控制方式@[{id:''按钮'',text:''按钮''},{id:''信号'',text:''信号''},{id:''集选'',text:''集选''},{id:''并联'',text:''并联''},{id:''群控'',text:''群控''}]'
     private String 控制方式;
-    private int 电梯层数;     //'电梯层数'
-    private int 电梯站数;     // '电梯站数'
-    private int 电梯门数;       // is '电梯门数'
-    private float  运行速度;      //    is '运行速度(m/s)
-    private double  额定载荷;       //   is '额定载荷(kg) .
+    private Long 电梯层数;     //'电梯层数'
+    private Long 电梯站数;     // '电梯站数'
+    //类型不对； private int 电梯门数;     数据库可能为null?
+    private Long 电梯门数;       // is '电梯门数'
+    private Double  运行速度;      //    is '运行速度(m/s)
+    private Double  额定载荷;       //   is '额定载荷(kg) .
 
 }
 

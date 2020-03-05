@@ -250,3 +250,15 @@ Twitter强迫所有第三方开发者使用OAuth 2； https安全。
 关联记录直接删除导致查询关联到了时刻报错，等待缓存时间过了才正常。
 新生成任务单要等待缓存时间过了，才能显示进入设备关联列表中。
 新报告获取getReport 很可能旧平台数据有问题 没有内容？。
+后端JPA和数据库基本数据类型：Long Double Date String Boolean
+@Column(unique = true, nullable = false)      //nullable默认为true
+    @ManyToOne
+    @JoinColumn(name = "author_id",  nullable = false, updatable = false)  //insertable和updatable用于只读属性
+@NotNull
+    private Boolean enabled=true;
+@Temporal(TemporalType.TIMESTAMP)
+    private Date lastPasswordResetDate;
+@Column(name="monthly_income",precision=12,scale=2)
+    private BigDecimal income;
+@Column(name = "contact_name",columnDefinition=" clob not null" )
+    private String name;
