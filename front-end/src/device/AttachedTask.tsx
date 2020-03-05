@@ -1,12 +1,7 @@
 /** @jsx jsx */
 import { jsx, Global } from "@emotion/core";
 import * as React from "react";
-//import Editor, { tryValue } from "./Editor";
-//import { ImageUpload } from "./ImageUpload";
-//import { Image } from "./Image";
-//import debug from "debug";
-//import initialValue from "./value.json";
-//import { Ingredient } from "./RecipeList";
+
 import {
   Navbar,
   Toolbar,
@@ -30,17 +25,7 @@ import {Helmet} from "react-helmet";
 import { Link,  useLocation } from "wouter";
 import { Link as RouterLink } from "wouter";
 import { useCancellationTask } from "./task/db";
-import { useAddToTask } from "./db";
-//[HOOK限制]按钮点击函数内部直接上toast()或toaster.notify()很可能无法正常显示。而放在函数组件顶层render代码前却能正常。
-//import toaster from "toasted-notes";
 
-//这是给高亮注释的id/key的，DOM显示需要唯一标识符。
-/*let n = 0;
-function getHighlightKey() {
-  return `highlight_${n++}`;
-}
-*/
-//const log = debug("app:Compose");
 
 export interface ComposeProps {
   id?: string;
@@ -54,10 +39,6 @@ export interface ComposeProps {
   dt?:any;
 }
 
-/**
- * THIS IS A DISASTER. HAHAHhahha.. ugh. Rewrite when i'm not lazy
- * @param param0
- */
 
 export const AttachedTask: React.FunctionComponent<ComposeProps> = ({
   readOnly,
@@ -85,10 +66,7 @@ export const AttachedTask: React.FunctionComponent<ComposeProps> = ({
     taskid: taskId, reason:'测试期直接删'
   });
   console.log("页面刷新钩子AttachedTask entry=",　",设备id="+id+";task=",task,";dt=",dt);
-  const {result:aNewTask, submit:addTaskFunc, error:updateError} = useAddToTask({
-    dep: '14',
-    devs: id, date: '2414-06-19',
-  });
+
 
   async function handleDelete(id: string) {
     try {
@@ -103,19 +81,7 @@ export const AttachedTask: React.FunctionComponent<ComposeProps> = ({
     }
     setLocation("/device/"+eqpId,  true );
   }
-  async function handleAddTask(id: string) {
-    try {
-      await addTaskFunc();
-    } catch (err) {
-      toast({
-        title: "后端报错",
-        subtitle: err.message,
-        intent: "danger"
-      });
-      return;
-    }
-    setLocation("/device/"+eqpId,  true );
-  }
+
 
   return (
     <div
@@ -220,11 +186,6 @@ export const AttachedTask: React.FunctionComponent<ComposeProps> = ({
                       生成新任务
                     </MenuItem>
                   <MenuDivider />
-                  <MenuItem contentBefore={<IconPackage />}  onPress={() => {
-                        handleAddTask(id)
-                    } }>
-                    非交互简单生成新任务
-                  </MenuItem>
                 </MenuList>
               }
             >
@@ -235,7 +196,7 @@ export const AttachedTask: React.FunctionComponent<ComposeProps> = ({
                 }}
                 variant="ghost"
                 icon={<IconMoreVertical />}
-                label="显示菜单"
+                label="菜单"
               />
             </ResponsivePopover>
 

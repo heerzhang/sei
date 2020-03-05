@@ -15,73 +15,44 @@ import { AttachedTask } from "./AttachedTask";
 
 
 
-export interface RecipeProps {
+export interface DeviceDetailProps {
   id: string;
-  taskId?: string;    //通过组件参数传递的
+  eqp: any;
 }
-
-//id 184213562 ;这个id是　云搜索algoliasearch内部生成的objectID:　竟然这样? http://localhost:3000/184213562 ？
-export const DeviceDetail: React.FunctionComponent<RecipeProps> = ({ id:pid, taskId }) => {
+export const DeviceDetail: React.FunctionComponent<DeviceDetailProps> = ({ id, eqp }) => {
   const theme = useTheme();
   const {user,} = useSession();
-  console.log("DeviceDetail进入时taskId=",taskId,"进行中id=",pid);
   //设备 外部关联的 任务。
   const [matched, params] = useRoute("/device/:id/task/:taskId*");
   //const showingRecipe = matched && params.taskId;
   //var   value=null;
   //不要改组件的props带来的变量。
-  let id= (params && params.id) || pid;
-  const { loading ,data:value, error } = useDeviceDetail(id);
-
   //第一个render这里loading=true，要到第二次再执行到了这里才会有data数据!
-  console.log("刚DeviceDetail经过taskId=",taskId,"进行中id=",id,"showingRecipe=",matched,params);
+  console.log("刚DeviceDetail经过taskId=",eqp,"进行中id=",id,"showingRecipe=",matched,params);
 
-  if (loading) {
-    return null;
-  }
-
-
-  if (error) {
-    return (
-      <Text
-        muted
-        css={{
-          display: "block",
-          padding: theme.spaces.lg,
-          textAlign: "center"
-        }}
-      >
-        Oh bummer! 查询设备详细， 报错.
-      </Text>
-    );
-  }
-
-  if (!loading && !value) {
-    return null;
-  }
   //菜谱内容: 富文本编辑器内容defaultDescription={x.description}
-  if (value) {
+  if (eqp) {
     return (
       <div>
         <ComposeDevice
           readOnly={true}
           id={id}
-          editable={true || value.createdBy.id === user.uid}
+          editable={true || eqp.createdBy.id === user.uid}
           //defaultCredit={value.author}
           //defaultDescription={value.description}
-          defaultTitle={value.title}
+          defaultTitle={eqp.title}
           //defaultIngredients={ JSON.parse( value.ingredients ) }
           //defaultImage={value.image}
-          dt={value}
+          dt={eqp}
           task={params && params.id}
         />
 
         <AttachedTask
           readOnly={true}
           id={id}
-          editable={true || value.createdBy.id === user.uid}
-          defaultTitle={value.title}
-          dt={value}
+          editable={true || eqp.createdBy.id === user.uid}
+          defaultTitle={eqp.title}
+          dt={eqp}
         />
       </div>
     );

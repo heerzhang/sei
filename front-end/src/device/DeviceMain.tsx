@@ -27,7 +27,7 @@ import { Link, useRoute, useLocation, Switch, Route } from "wouter";
 import { useMedia } from "use-media";
 import { Layout } from "./Layout";
 import { ComposeDevice } from "./ComposeDevice";
-import { AddToTask } from "./AddToTask";
+import { AddToTask } from "./task/AddToTask";
 import { TaskList } from "./task/TaskList";
 import { DispatchIspMen } from "./task/DispatchIspMen";
 import { DeviceList } from "./DeviceList";
@@ -35,6 +35,7 @@ import { DeviceDetail } from "./DeviceDetail";
 import { IspEntrance } from "./task/IspEntrance";
 import { useCountOfTask } from "./db";
 import { Link as RouterLink } from "wouter";
+import { DetailedGuide } from "./DetailedGuide";
 
 export interface MainProps {
   path?: string;
@@ -284,7 +285,7 @@ export const DeviceMain: React.FunctionComponent<MainProps> = props => {
                   }
                 }}
               >
-                <MainContent id={showingRecipe} />
+                <SecondRouterContent id={showingRecipe} />
               </Layer>
             </div>
 
@@ -295,35 +296,23 @@ export const DeviceMain: React.FunctionComponent<MainProps> = props => {
   );
 };
 
-interface MainContentProps {
-  id?: string;
-}
 
-function MainContent({ id }: MainContentProps) {
-  if (!id) {
-    return null;
-  }
-  if (id === "new") {
-    return <ComposeDevice />;
-  }
-  return <SecondRoterContent id={id} />;
-}
-
-
-interface SecondRoterProps {
-  id?: string;
-  dt?: any;
+interface SecondRouterProps {
+  id: string;
 }
 //路由和刷新？Mutation数据更新 refetchQueries:[''] 对应查询函数必须是挂载的组件内才能重做查询，路由导致分岔屏蔽掉。
-function SecondRoterContent({id, dt}: SecondRoterProps) {
+function SecondRouterContent({id, }: SecondRouterProps) {
   return (
     <Switch>
+      <Route path={"/device/new"}>
+        <DetailedGuide id={id} />
+      </Route>
       <Route path={"/device/:id/task/:taskId/dispatch"} component={DispatchIspMen} />
       <Route path={"/device/:id/task/:taskId"} component={IspEntrance} />
-      <Route path={"/device/:id/addTask"} component={AddToTask} />
-      <Route path={`/device/:id`}>
-        <DeviceDetail id={id} />
+      <Route path={"/device/:id/:rest*"}>
+        <DetailedGuide id={id} />
       </Route>
+
       <Route path="/:rest*">
         <h1>没有该URL匹配的视图内容</h1>
       </Route>

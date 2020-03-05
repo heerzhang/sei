@@ -2,6 +2,7 @@ package org.fjsei.yewu.entity.sei.oldsys;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -25,7 +26,10 @@ public class ElevPara {
     private String CONTROL_TYPE;
     private int ELEFLOORNUMBER;     //'电梯层数'
     private int ELESTADENUMBER;     // '电梯站数'
-    private int ELEDOORNUMBER;  //    is '电梯门数'
+    @NonNull
+    private int ELEDOORNUMBER;      //    is '电梯门数'   空值NULL 报错！！
+
+    //private String ELEDOORNUMBER;      //    is '电梯门数'
     private float  RUNVELOCITY;      //    is '运行速度(m/s)
     private double  RATEDLOAD;       //   is '额定载荷(kg) .
 

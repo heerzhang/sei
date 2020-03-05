@@ -221,7 +221,7 @@ export const DispatchIspMen: React.FunctionComponent<ComposeProps> = ({
               gutter={false}
             >
               { updateError?  '派工任务失败了':
-                 '您已将该任务派工给检验员，检验号ID: '+(result && result.id)
+                 '您已将该任务派工给检验员 '
               }
             </Text>
           )}
@@ -364,7 +364,22 @@ export const DispatchIspMen: React.FunctionComponent<ComposeProps> = ({
                           </ContainLine>
 
                         </div>
-                        ) : null }
+                        ) :
+                          result && <Text
+                            css={{
+                              flex: 1,
+                              textAlign: "center",
+                              [theme.mediaQueries.md]: {
+                                textAlign: "left"
+                              }
+                            }}
+                            wrap={false}
+                            variant="h4"
+                            gutter={false}
+                          >
+                            派工结果，得到检验号：{result?.id} 。
+                          </Text>
+                        }
                       </div>
                 </div>
               )}

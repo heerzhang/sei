@@ -156,6 +156,7 @@ mutation BUILD_TASK($devs: ID!,$dep: String!,$date: String!) {
 //适配封装层：针对不同类型接口(REST,graphql,等?)，都对外统一处理。
 //事务更新处理类型：
 //立刻更新受到影响的页面，其数据来自DEVICE_BY_ID这个函数[可能多个，必须针对性的避免扩大化无效查询]。　
+//这里refetchQueries:  ['DEVICE_BY_ID']不一定执行的，对应查询Hook与当前页面同时加载的组件场景下才能生效，查询需放在做更新组件的上级去。
 export const useAddToTask = (options) => {
   const [submit, {error, data, loading, called}] = useMutation( BUILD_TASK, {
     variables: {...options},

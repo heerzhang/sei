@@ -204,8 +204,7 @@ export const TaskList: React.FunctionComponent<
                       margin: theme.spaces.lg
                     }}
                   >
-                    您还没有following anyone. Start following
-                    someone by searching for their email in the box above.
+                    您还没有任务
                   </Text>
                 )}
 

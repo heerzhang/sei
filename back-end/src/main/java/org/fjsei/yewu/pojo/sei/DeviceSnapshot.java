@@ -41,7 +41,7 @@ public class DeviceSnapshot {
     private String 控制方式;
     private int 电梯层数;     //'电梯层数'
     private int 电梯站数;     // '电梯站数'
-    private int 电梯门数;   //    is '电梯门数'
+    private int 电梯门数;       // is '电梯门数'
     private float  运行速度;      //    is '运行速度(m/s)
     private double  额定载荷;       //   is '额定载荷(kg) .
 
