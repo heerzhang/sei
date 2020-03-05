@@ -80,7 +80,7 @@ export const RecordView: React.FunctionComponent<RecordViewProps> = ({
     //这里无法获得result值，就算所在组件顶层已经获得result值，这里可能还是await () 前那样null;
     console.log("生成任务返回了＝", result,"yes=", yes);
     toast({
-      title: "任务派工返回了",
+      title: "任务返回了",
       subtitle: '加入，ISP ID＝'+id,
       intent: "info"
     });

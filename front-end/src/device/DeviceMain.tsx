@@ -200,11 +200,11 @@ export const DeviceMain: React.FunctionComponent<MainProps> = props => {
                   variant="evenly-spaced"
                 >
                   <Tab id="device">
-                    关注的设备
+                    我关注的设备
                   </Tab>
                   <Tab  badge={ sumofTask }
-                    id="task">当前检验任务</Tab>
-                  <Tab id="maintain">系统管理</Tab>
+                    id="task">我的检验任务</Tab>
+                  <Tab id="maintain">其他功能</Tab>
                 </Tabs>
               </DarkMode>
             </div>
@@ -223,6 +223,7 @@ export const DeviceMain: React.FunctionComponent<MainProps> = props => {
               <TaskList />
             </TabPanel>
             <TabPanel id="maintain">
+              未开启，建设中。。。
             </TabPanel>
           </Pager>
         </Layer>

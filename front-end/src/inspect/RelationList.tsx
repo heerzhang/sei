@@ -242,7 +242,7 @@ export const RelationList: React.FunctionComponent<FollowingListProps> = ({
                       margin: theme.spaces.lg
                     }}
                   >
-                    没有找到任务
+                    队列为空
                   </Text>
                 )}
 
@@ -298,7 +298,7 @@ export const RelationList: React.FunctionComponent<FollowingListProps> = ({
                           />
                         }
                         primary={item?.dev?.cod}
-                        secondary={ `结论${item?.conclusion||''}` }
+                        secondary={ `结论: ${item?.conclusion||''}` }
                         contentAfter={
                             <IconChevronRight
                               color={theme.colors.text.muted}
@@ -306,7 +306,7 @@ export const RelationList: React.FunctionComponent<FollowingListProps> = ({
                             />
                         }
                       >
-                        {`检验号 ${item.id}`}
+                        {`检验号 ${item.id} 日期:${item?.task?.date||''}`}
                       </ListItem>
                       </RouterLink>
                     );
@@ -336,12 +336,12 @@ export const RelationList: React.FunctionComponent<FollowingListProps> = ({
                       onPress={e => e.stopPropagation()}
                       variant="ghost"
                       icon={<IconMoreVertical />}
-                      label="Options菜单"
+                      label="菜单"
                     />
                   </Popover>
                 )
               }
-              title={relation ? `检验号${relation.id}所有报告` : ""}
+              title={relation ? `检验号${relation.id}含报告` : ""}
             />
           ),
           content: (

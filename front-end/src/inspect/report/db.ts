@@ -8,6 +8,8 @@ import debug from "debug";
 //import { Ingredient } from "./RecipeList";
 import gql from "graphql-tag";
 import { useMutation, useQuery } from "@apollo/react-hooks";
+import { StackItem } from "react-gesture-stack";
+import * as React from "react";
 //import * as React from "react";
 
 //import { client } from "./graphql/setup";
@@ -395,10 +397,11 @@ const DELETE_REPORT = gql`
     }
 `;
 //删除一份报告
+//这里用refetchQueries:  ['findAllUserFilter']不好使的，无法让上一级列表即刻刷新。因为该<StackItem>组件内容不是由它查来的。
 export const useDeleteReport  = (options) => {
   const [submit, {error, data, loading, called}] = useMutation( DELETE_REPORT, {
     variables: {...options},
-    refetchQueries:  ['findAllUserFilter']
+    refetchQueries:  ['getReportOfISP']
   })
   const { res : result} = data||{};
   return { result ,submit, error, loading, called };
@@ -420,7 +423,8 @@ const NEW_REPORT = gql`
 export const useNewReport  = (options) => {
   const [submit, {error, data, loading, called}] = useMutation( NEW_REPORT, {
     variables: {...options},
-  })
+    refetchQueries:  ['getReportOfISP']
+  });
   const { res : result} = data||{};
   return { result ,submit, error, loading, called };
 };

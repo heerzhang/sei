@@ -108,7 +108,7 @@ export const AddReport: React.FunctionComponent<ComposeProps> = ({
       });
     }
     toast({
-      title: "任务派工返回了",
+      title: "任务返回了",
       subtitle: '加入，ISP ID＝'+id,
       intent: "info"
     });
@@ -444,7 +444,7 @@ const CopyRecord= ( { id ,rep}
       return;
     }
     toast({
-      title: "任务派工返回了",
+      title: "任务返回了",
       subtitle: '加入，ISP ID＝'+id,
       intent: "info"
     });

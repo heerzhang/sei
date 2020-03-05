@@ -201,15 +201,15 @@ export const InspectMain: React.FunctionComponent<MainProps> = props => {
                   <Tab
                     badge={ //揭示数目
                       !false
-                        ? 13
+                        ? 1
                         : null
                     }
                     id="followers"
                   >
-                    待办事项
+                    我的待办事项
                   </Tab>
                   <Tab id="list">我参与的检验</Tab>
-                  <Tab id="check">待我审核的检验</Tab>
+                  <Tab id="check">待我审核报告</Tab>
                   <Tab id="report">关注的报告列表</Tab>
                 </Tabs>
               </DarkMode>

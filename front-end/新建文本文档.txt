@@ -265,9 +265,5 @@ react-data-export 生成excel文档。    handsontable是excel形式UI编辑器�
  request模块的stream接口 https://www.jb51.net/article/179705.htm
 https://blog.csdn.net/weixin_41646716/article/details/82423817
 在前端无法直接读取excel文件内容的。首先转成json文件，直接在代码模块打包导入。https://www.bejson.com/json/col2json/
+即刻刷新：调用Mutation要加入一参数refetchQueries，其对应方法名是页面数据来源函数对应gql`定义体内的query紧跟着的那函数名。
 
-    useMutation(CONFIRM_FOLLOW, {
-    variables: {...options},
-    refetchQueries:  ['findAllUserFilter']
-  export function useIspDetail(filter:any) {
-    error, loading, refetch};

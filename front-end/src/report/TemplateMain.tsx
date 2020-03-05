@@ -283,6 +283,7 @@ export const RecordEditorOrPrint: React.FunctionComponent<RecordEditorOrPrintPro
               }
             </TabPanel>
             <TabPanel  id="ISPlist">
+              {/*实际直接引入检验大模块的左半边的嵌入组件*/}
               <RelationList />
             </TabPanel>
             <RouterLink to={`/report/${templateID}/ver/${verId}/preview/${id}?&print=1`}>

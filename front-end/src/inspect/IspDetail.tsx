@@ -155,7 +155,7 @@ export const IspDetail: React.FunctionComponent<ComposeProps> = ({
               variant="h5"
               gutter={false}
             >
-             ISP检验号 {id} 的详情向导
+             检验号{id}详情向导
             </Text>
           <div
             css={{
@@ -174,7 +174,7 @@ export const IspDetail: React.FunctionComponent<ComposeProps> = ({
                      //await setTaskId(each.id);
                      handleDelete(id)
                   }
-                  }>放弃这个ISP
+                  }>放弃这个检验号ISP
                   </MenuItem>
                   <MenuItem onPress={() => null }>检验终结流程</MenuItem>
                 </MenuList>

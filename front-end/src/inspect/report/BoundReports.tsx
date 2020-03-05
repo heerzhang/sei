@@ -174,7 +174,7 @@ export const BoundReports: React.FunctionComponent<
           {(!items || items.length===0) && (
             <div css={{ textAlign: "center" }}>
               <Button  onPress={ () => toLoadMore() } >
-                哎呀，还没有报告可看
+                检验ID　{id}　底下还没有现成的报告可看
               </Button>
             </div>
           )}
@@ -211,7 +211,6 @@ function BoundListItem({ recipe, id, highlight ,task }: any) {
   //下面highlight. 是algoliasearch.Response返回的，必须有预先定义。
   async function handleDelete(id: string) {
     try {
-      console.log("页面handleDelete Id="+id);
       await updateFunc();
     } catch (err) {
       toast({
@@ -270,8 +269,8 @@ function BoundListItem({ recipe, id, highlight ,task }: any) {
             content={
               <MenuList>
                 <MenuItem onPress={ async () => {
-                  await setRepId(recipe.id);
-                  handleDelete(recipe.id)
+                    await setRepId(recipe.id);
+                    handleDelete(recipe.id)
                 }
                 }>删除该报告
                 </MenuItem>

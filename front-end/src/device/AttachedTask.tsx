@@ -95,7 +95,6 @@ export const AttachedTask: React.FunctionComponent<ComposeProps> = ({
 
   async function handleDelete(id: string) {
     try {
-      console.log("页面handleDelete Id="+id);
       await updateFunc();
     } catch (err) {
       toast({
@@ -103,7 +102,6 @@ export const AttachedTask: React.FunctionComponent<ComposeProps> = ({
         subtitle: err.message,
         intent: "danger"
       });
-      console.log("handleDelete返回", err);
       return;
     }
     setLocation("/device/"+eqpId,  true );
@@ -199,7 +197,7 @@ export const AttachedTask: React.FunctionComponent<ComposeProps> = ({
               variant="h5"
               gutter={false}
             >
-              该设备 {dt.cod} 关联的活动任务
+           {dt.cod}关联活动任务
             </Text>
           )}
           <div>
@@ -280,15 +278,7 @@ export const AttachedTask: React.FunctionComponent<ComposeProps> = ({
                             >
                             任务号 {each.id}
                             </Text>
-                            <div
-                              css={{
-                                flex: 1,
-                                borderBottom: `1px dashed ${
-                                  theme.colors.border.muted
-                                }`,
-                                marginBottom: "6px"
-                              }}
-                            />
+
                             <Text
                               css={{
                                 paddingLeft: theme.spaces.xs,

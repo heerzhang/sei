@@ -118,12 +118,8 @@ export const AddToTask: React.FunctionComponent<ComposeProps> = ({
     }
   ) {
     let yes= result && result.id;
-    console.log("生成任务－更新: %s", id, yes);
     setLoading(true);
     try {
-      //这里放HOOK()报错＝Hooks can only be called inside of the body of a function component.
-      //考虑封装适配不同类型的接口，不采用这种：
-      //const {data: { buildTask: some }} = await updateFunc();
       await updateFunc();
       //等待后端服务器处理完成才能继续运行下面的代码。可长时间等待，挂着页面10分钟都允许。
        setEditing(false);
@@ -285,8 +281,6 @@ export const AddToTask: React.FunctionComponent<ComposeProps> = ({
                 disabled={loading || !(ingredients?.date)}
                 css={{ marginLeft: theme.spaces.sm }}
                 onPress={() => {
-                  //这里serialize是　src/Editor.jsx:120　自定义函数
-                  //const { text, content } = current.serialize();
                   const toSave = {
                     title,
                     description: content,

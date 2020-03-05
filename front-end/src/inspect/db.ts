@@ -518,7 +518,8 @@ const GET_TASKS = gql`
     user:findAllUserFilter(where: $where,offset:$offset,first:$first,orderBy:$orderBy,asc:$asc) {
       id,isp{
           id,conclusion,nextIspDate,checkMen{id},
-          dev{id,cod,oid},ispMen{id,username},reps{id,no,path}
+          dev{id,cod,oid},ispMen{id,username},reps{id,no,path},
+          task{id,date}
            } 
     }
   }
@@ -528,7 +529,8 @@ const GET_CHECK_TASKS = gql`
     user:findAllUserFilter(where: $where,offset:$offset,first:$first,orderBy:$orderBy,asc:$asc) {
       id,checks{
           id,conclusion,nextIspDate,checkMen{id},
-          dev{id,cod,oid},ispMen{id,username},reps{id,no,path}
+          dev{id,cod,oid},ispMen{id,username},reps{id,no,path},
+          task{id,date}
            } 
     }
   }

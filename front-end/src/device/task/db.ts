@@ -444,7 +444,7 @@ const DEVICE_BY_ID = gql`
   }
 `;
 
-export function useDeviceDetail( id ) {
+function useDeviceDetail( id ) {
   var value = null;
   console.log("Recipe页面id=" + JSON.stringify(id));
   const { loading, error, data,  } = useQuery(DEVICE_BY_ID, {
@@ -461,7 +461,7 @@ export function useDeviceDetail( id ) {
         value = recipe;
         //  authjs = JSON.parse(user);
         //setAuthj(authjs); 报错！//React limits the number of renders to prevent an infinite loop.
-        console.log("以Recipe从后端获得=" + JSON.stringify(value),"函数：",'useDeviceDetail');
+        console.log("以Recipe从后端获得=" + JSON.stringify(value),"函数：",'eviceDetail');
         return { loading,error, data:recipe };
       }
     }
@@ -541,12 +541,14 @@ const CANCELLATION_TASK = gql`
     res: cancellationTask(task: $taskid,  reason: $reason) 
     }
 `;
-//注销任务
+//注销任务　
+//同步更新任务列表: items靠上一层组件传入的。
 export const useCancellationTask  = (options) => {
-  console.log("保 删除ta @@ options=", options);
   const [submit, {error, data, loading, called}] = useMutation( CANCELLATION_TASK, {
     variables: {...options},
+    refetchQueries:  ['DEVICE_BY_ID']
   })
   const { res : result} = data||{};
   return { result ,submit, error, loading, called };
 };
+
