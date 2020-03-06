@@ -196,7 +196,10 @@ export const AddToTask: React.FunctionComponent<ComposeProps> = ({
                             />
                           </ContainLine>
                         </div>
-                        ) : null }
+                        )
+                        :
+                        <Text variant="h6">生成的新任务ID： {result?.id}</Text>
+                        }
                       </div>
 
 

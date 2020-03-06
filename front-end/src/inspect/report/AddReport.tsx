@@ -190,7 +190,7 @@ export const AddReport: React.FunctionComponent<ComposeProps> = ({
               variant="h5"
               gutter={false}
             >
-              报告ID号：{repId}, 检验号{id}
+            检验号 {id} 添加报告
             </Text>
           )}
           <div

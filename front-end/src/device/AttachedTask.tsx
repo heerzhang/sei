@@ -59,6 +59,7 @@ export const AttachedTask: React.FunctionComponent<AttachedTaskProps> = ({
   const [image, ] = React.useState(defaultImage);
   const [title, setTitle] = React.useState(defaultTitle);
   const [taskId, setTaskId] = React.useState(null);
+  //直接取得EQP关联的task字段的对象。
   const {task} =eqp;
  // const [ingredients, setIngredients] = React.useState<any>( dt||{} );
   const [, setLocation] = useLocation();
@@ -91,117 +92,21 @@ export const AttachedTask: React.FunctionComponent<AttachedTaskProps> = ({
         }
       }}
     >
-      <Helmet title={title ? title : "设备数据维护"} />
-      <Global
-        styles={{
-          ".filepond--wrapper": {
-            padding: theme.spaces.lg,
-            paddingBottom: 0
-          },
-          ".filepond--root": {
-            marginBottom: 0
-          },
-          ".filepond--label-action": {
-            display: "flex",
-            alignItems: "center",
-            textDecoration: "none"
-          },
-          ".filepond--label-action > svg": {
-            width: "40px",
-            height: "40px",
-            fill: theme.colors.text.default
-          },
-          ".filepond--label-action > span": {
-            border: 0,
-            clip: "rect(0 0 0 0)",
-            height: "1px",
-            width: "1px",
-            margin: "-1px",
-            padding: 0,
-            overflow: "hidden",
-            position: "absolute"
-          },
-          ".filepond--panel-root": {
-            backgroundColor: theme.colors.background.tint1
-          },
-        }}
-      />
-      <Navbar
+      <hr/>
+      <Text
         css={{
-          zIndex: theme.zIndices.sticky,
-          backgroundColor: "white",
-          boxShadow: theme.shadows.sm,
-          position: "sticky",
-          top: 0,
+          flex: 1,
+          textAlign: "center",
           [theme.mediaQueries.md]: {
-            position: "static"
+            textAlign: "left"
           }
         }}
+        wrap={false}
+        variant="h5"
+        gutter={false}
       >
-        <Toolbar
-          css={{
-            alignItems: "center",
-            display: "flex"
-          }}
-        >
-
-          {editing ? (
-            <div css={{ marginLeft: "-0.75rem", flex: 1 }}>
-              <TransparentInput
-                autoComplete="off"
-                autoFocus
-                inputSize="lg"
-                value={title}
-                placeholder="增加新的检验设备"
-                aria-label="Recipe title"
-                onChange={e => {
-                  setTitle(e.target.value);
-                }}
-              />
-            </div>
-          ) : (
-            <Text
-              css={{
-                flex: 1,
-                textAlign: "center",
-                [theme.mediaQueries.md]: {
-                  textAlign: "left"
-                }
-              }}
-              wrap={false}
-              variant="h5"
-              gutter={false}
-            >
-           {eqp.cod}关联活动任务
-            </Text>
-          )}
-          <div>
-            <ResponsivePopover
-              content={
-                <MenuList>
-                    <MenuItem contentBefore={<IconPackage />}  onPress={() => {
-                      setLocation("/device/"+id+"/addTask", false);
-                    } }>
-                      生成新任务
-                    </MenuItem>
-                  <MenuDivider />
-                </MenuList>
-              }
-            >
-              <IconButton
-                css={{
-                  display: !editing && editable ? undefined : "none",
-                  marginLeft: theme.spaces.sm
-                }}
-                variant="ghost"
-                icon={<IconMoreVertical />}
-                label="菜单"
-              />
-            </ResponsivePopover>
-
-          </div>
-        </Toolbar>
-      </Navbar>
+        {eqp.cod}关联活动任务
+      </Text>
 
       <div
         css={{  //控制小屏时的导航条底下的整个页面滚动。

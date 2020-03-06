@@ -87,9 +87,10 @@ public class IspMgrMutation implements GraphQLMutationResolver {
         //  ispMens.stream().forEach(item ->
         ispMen.add(user);
         isp.setIspMen(ispMen);
-        //缓存时间之内可能，从EQP查询无法查到关联isp;
-        eQP.getIsps().add(isp);
+        //没有底下1行，在缓存时间之内，若以EQP起头查询关联将无法查到新isp，刷新URL也看不见新ISP，但getISPofDevTask查就可见。后端侧cache时间到了就都行了。
         task.getIsps().add(isp);
+        //因为前端getDeviceSelf接口关联查询后读取路径是EQP.task.isps;而不是读EQP.isps字段，所以下面1行可以不搞；和接口使用者读的字段关联路径需求有直接关系。
+        //eQP.getIsps().add(isp);
         iSPRepository.save(isp);
         return isp;
     }

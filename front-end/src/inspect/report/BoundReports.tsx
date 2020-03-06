@@ -29,13 +29,13 @@ import { FadeImage } from "../../FadeImage";
 
 
 
-export interface FollowingRecipesProps {
+interface BoundReportsProps {
   id: string;
 }
 //显示某一个关注对象用户菜谱列表
 //有1个地方会引用到的。
 export const BoundReports: React.FunctionComponent<
-  FollowingRecipesProps
+  BoundReportsProps
 > = ({ id }) => {
   const theme = useTheme();
   console.log("看BoundReports filter =id=", id );
@@ -260,7 +260,7 @@ function BoundListItem({ recipe, id, highlight ,task }: any) {
         highlight ? (
           <span dangerouslySetInnerHTML={{ __html: highlight.title.value }} />
         ) : (
-          recipe.no ||''
+         `报告号 ${recipe.no||''}`
         )
       }
       secondary={recipe.type ||''}

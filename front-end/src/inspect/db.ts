@@ -569,10 +569,12 @@ const GET_REPORT = gql`
     rep:getReport(id: $id) {
        id,type,no,upLoadDate,path,detail,isp{
         id,nextIspDate,conclusion,dev{
-          id,cod,oid,type,factoryNo,pos{id,name,ad{id,prefix}}, ownerUnt{
-            id,name,linkMen} 
+          id,cod,oid,type,factoryNo,pos{id,name,ad{id,prefix}},
+          ownerUnt{id,name,linkMen} 
+        },task{
+          id,date,status
         } 
-      },
+      }
     }
   }
 `;

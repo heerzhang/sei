@@ -15,11 +15,11 @@ import {
   Container,
   ResponsivePopover,
   IconMoreVertical,
-  IconArrowLeft, IconArrowRight, Select
+  IconArrowLeft, IconArrowRight, Select, IconPackage
 } from "customize-easy-ui-component";
 
 import {Helmet} from "react-helmet";
-import { Link as RouterLink, Link, Route, Switch, useRoute } from "wouter";
+import { Link as RouterLink, Link, Route, Switch, useLocation, useRoute } from "wouter";
 import { ContainLine, TransparentInput } from "../comp/base";
 import { useDeviceDetail } from "./db";
 import { AddToTask } from "./task/AddToTask";
@@ -35,6 +35,7 @@ export const DetailedGuide: React.FunctionComponent<DetailedGuideProps> = ({
    id: pid,
 }) => {
   const theme = useTheme();
+  const [, setLocation] = useLocation();
   const [match, params] = useRoute("/device/:id/:rest*");
   let id =(match && params.id);
 
@@ -107,11 +108,16 @@ export const DetailedGuide: React.FunctionComponent<DetailedGuideProps> = ({
             <ResponsivePopover
               content={
                 <MenuList>
+                  <MenuItem contentBefore={<IconPackage />}  onPress={() => {
+                      setLocation("/device/"+id+"/addTask", false);
+                   } }>
+                    生成新任务
+                  </MenuItem>
                   <MenuItem onPress={ async () => {
                        }
                     }>其他功能
                   </MenuItem>
-                  <MenuItem onPress={() => null }>删除</MenuItem>
+                  <MenuItem onPress={() => null }>设备停用</MenuItem>
                 </MenuList>
               }
             >
@@ -158,16 +164,18 @@ export const DetailedGuide: React.FunctionComponent<DetailedGuideProps> = ({
                 >
                   {/*三级路由了： 嵌套再嵌套了一层 布局级别的组件*/}
                   <ThirdRouterContent id={id} device={dtvalue}/>
-                  <LayerLoading loading={loading} />
-                  <RouterLink to={`/inspect/${id}`}>
-                    <Button
-                      size="lg" noBind
-                      intent="primary"
-                      iconAfter={<IconArrowRight />}
-                    >
-                      其他功能
-                    </Button>
-                  </RouterLink>
+
+                  <div css={{ marginTop: theme.spaces.sm }}>
+                    <RouterLink to={`/inspect/${id}`}>
+                      <Button
+                        size="lg" noBind
+                        intent="primary"
+                        iconAfter={<IconArrowRight />}
+                      >
+                        其他功能
+                      </Button>
+                    </RouterLink>
+                  </div>
                 </div>
             </div>
           </Container>

@@ -229,9 +229,13 @@ export const IspDetail: React.FunctionComponent<ComposeProps> = ({
                   width:'100%',
                 }}
                 >
-                  <Text variant="h5">基本概况</Text>
-
+                  <Text variant="h5">该次检验的基本概况</Text>
                       <div key={1}>
+                        <ContainLine display={'设备号'}>
+                          <TransparentInput  readOnly
+                            value={ (ingredients.dev||{}).cod ||'' }
+                          />
+                        </ContainLine>
                         <ContainLine display={'任务号'}>
                           <TransparentInput readOnly value={ ingredients?.task?.id ||'' }/>
                         </ContainLine>
@@ -242,20 +246,7 @@ export const IspDetail: React.FunctionComponent<ComposeProps> = ({
                           <TransparentInput readOnly value={ ingredients?.task?.status ||'' }/>
                         </ContainLine>
                         <div>
-                          <ContainLine display={'设备号'}>
-                              <TransparentInput
-                                autoFocus={true}
-                                readOnly
-                                placeholder="设备号"
-                                value={ (ingredients.dev||{}).cod ||'' }
-                                onChange={e => {
-                                  setIngredients( {
-                                    ...ingredients,
-                                  });
-                                }}
-                              />
-                          </ContainLine>
-                          <ContainLine display={'审核人'}>
+                         <ContainLine display={'审核人'}>
                             <TransparentInput
                               autoFocus={true}
                               readOnly

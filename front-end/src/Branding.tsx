@@ -187,10 +187,10 @@ export const Branding: React.FunctionComponent<BrandingProps> = (props) => {
               src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1566208112112&di=057216c9b1f519a6bec42f465025062e&imgtype=0&src=http%3A%2F%2Fqcloud.dpfile.com%2Fpc%2F5B4EKvgdVHvYJdSIXlvqZF_P3CApeL2gFM3VtjrHbrl2RzRjFYhj5njVYekTCwBvTYGVDmosZWTLal1WbWRW3A.jpg"
               alt="Ben"
             />
-            Hey! 新一代平台(用户意见和需求征集阶段)，请使用手机谷歌浏览器来访问，虽然微信也可直接访问。
-            开放功能还非常有限。目前只能支持原始记录编制报告和打印，还仅完成了1个模板的报告；出报告没问题。
-            支持设备数据从旧平台同步；当前本平台数据库是基于旧平台的测试数据库做的，设备数据可能和旧平台可能稍有出入。
-            本平台目前运行于个人笔记本电脑，还经常调试导致中断运行的，数据也无法保障保存了就不会被主机网管清理掉。
+            下一代业务平台(用户意见征集阶段)，请使用手机上的谷歌Chrome浏览器来访问，虽然微信也可直接访问本平台。
+            开放功能还非常有限。目前支持原始记录编制报告和打印，报告模板还仅实验性地推出了1个；可以出正式检验报告。
+            支持设备数据从旧平台同步；当前本平台的数据库是基于旧平台的测试数据库做的，设备数据可能和旧平台可能稍有出入。
+            其它模块功能还属于模型设计初期。本平台目前运行于个人笔记本电脑，还经常调试导致中断运行的，非上班时间无法访问。
             登录帐户申请直接联系开发者! 😋
           </Text>
           <div
@@ -317,7 +317,7 @@ export const Branding: React.FunctionComponent<BrandingProps> = (props) => {
               </svg>
               <Text variant="h4">Save</Text>
               <Text>
-                Write out 1 your recipes and access them from anywhere. Find your
+                1  Write out your recipes and access them from anywhere. Find your
                 recipes on the road, at a friend's place, or in the comfort of
                 your own kitchen.
               </Text>
@@ -335,7 +335,7 @@ export const Branding: React.FunctionComponent<BrandingProps> = (props) => {
               </svg>
               <Text variant="h4">Share</Text>
               <Text>
-                无需登录就可以看得的页面；2 Easily share recipes with family and friends by creating a
+                2 无需登录就可以看得的页面； Easily share recipes with family and friends by creating a
                 shared recipe collection. Trust me, it beats emailing recipes.
                 And it's super easy to find them again later.
               </Text>
@@ -360,7 +360,7 @@ export const Branding: React.FunctionComponent<BrandingProps> = (props) => {
               </svg>
               <Text variant="h4">Search</Text>
               <Text>
-                Search for 3 recipes by ingredient, name, or author. It's really,
+                3  Search for recipes by ingredient, name, or author. It's really,
                 really fast - at least a tad faster than flipping through your
                 overflowing recipe box.
               </Text>
@@ -407,8 +407,8 @@ export const Branding: React.FunctionComponent<BrandingProps> = (props) => {
           >
             制作者 <Link href="/chaipu">hez</Link>
             <br />
-            <Link href="mailto:fjsei@gmail.com">Email me</Link> with
-            questions or whatevs! <Link href="/maintenance/">后台维护传送门</Link>
+            <Link href="mailto:herzhang@163.com">有问题发个电子邮件</Link> 欢迎提出问题!
+            <Link href="/maintenance/">后台维护传送门</Link>
             <br />
             <div>
               Icons made by{" "}
