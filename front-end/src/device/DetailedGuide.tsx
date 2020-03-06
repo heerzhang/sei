@@ -41,7 +41,7 @@ export const DetailedGuide: React.FunctionComponent<DetailedGuideProps> = ({
   let filtercomp={
     id: id,
   };
-  const { loading ,data: dtvalue, error } = useDeviceDetail(id);
+  const { loading ,items: dtvalue, error } = useDeviceDetail( { id } );
 
   return (
     <div
@@ -158,7 +158,7 @@ export const DetailedGuide: React.FunctionComponent<DetailedGuideProps> = ({
                 >
                   {/*三级路由了： 嵌套再嵌套了一层 布局级别的组件*/}
                   <ThirdRouterContent id={id} device={dtvalue}/>
-
+                  <LayerLoading loading={loading} />
                   <RouterLink to={`/inspect/${id}`}>
                     <Button
                       size="lg" noBind

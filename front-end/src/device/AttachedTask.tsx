@@ -27,7 +27,7 @@ import { Link as RouterLink } from "wouter";
 import { useCancellationTask } from "./task/db";
 
 
-export interface ComposeProps {
+export interface AttachedTaskProps {
   id?: string;
   defaultTitle?: string;
   defaultImage?: string;
@@ -36,11 +36,11 @@ export interface ComposeProps {
   readOnly?: boolean;
   editable?: boolean;
   defaultCredit?: string;
-  dt?:any;
+  eqp?:any;
 }
 
 
-export const AttachedTask: React.FunctionComponent<ComposeProps> = ({
+export const AttachedTask: React.FunctionComponent<AttachedTaskProps> = ({
   readOnly,
   id,
   editable,
@@ -49,7 +49,7 @@ export const AttachedTask: React.FunctionComponent<ComposeProps> = ({
   defaultImage,
   defaultIngredients,
   defaultTitle = "",
-  dt=null,
+  eqp=null,
 }) => {
   const theme = useTheme();
   const toast = useToast();
@@ -59,14 +59,13 @@ export const AttachedTask: React.FunctionComponent<ComposeProps> = ({
   const [image, ] = React.useState(defaultImage);
   const [title, setTitle] = React.useState(defaultTitle);
   const [taskId, setTaskId] = React.useState(null);
-  const {task} =dt;
+  const {task} =eqp;
  // const [ingredients, setIngredients] = React.useState<any>( dt||{} );
   const [, setLocation] = useLocation();
   const {result, submit:updateFunc, } = useCancellationTask({
     taskid: taskId, reason:'测试期直接删'
   });
-  console.log("页面刷新钩子AttachedTask entry=",　",设备id="+id+";task=",task,";dt=",dt);
-
+  console.log("页面刷新钩子AttachedTask entry=",　",设备id="+id+";task=",task,";eqp=",eqp);
 
   async function handleDelete(id: string) {
     try {
@@ -173,7 +172,7 @@ export const AttachedTask: React.FunctionComponent<ComposeProps> = ({
               variant="h5"
               gutter={false}
             >
-           {dt.cod}关联活动任务
+           {eqp.cod}关联活动任务
             </Text>
           )}
           <div>
@@ -221,9 +220,14 @@ export const AttachedTask: React.FunctionComponent<ComposeProps> = ({
                 paddingBottom: theme.spaces.lg
               }}
             >
-              {task && task.map(each => (
-                   <div key={each.id}>
-                        {  (
+              {task && task.map(each => {
+                let myIsp= each.isps?.find((it,i)=>{return  it.dev?.id===eqp.id });
+                //let hasIsp= (myIsp!==null);  不好使！　undefined的！
+                let hasIsp= !!myIsp;
+                console.log("刷新 奇怪啊hasIsp:", hasIsp,",myIsp=",myIsp,";each.isps=", each.isps);
+                return <div key={each.id}>
+                        {
+                          (
                           <div
                             css={{
                               backgroundColor: false
@@ -258,20 +262,21 @@ export const AttachedTask: React.FunctionComponent<ComposeProps> = ({
                             >
                               状态：{each.status||''}
                             </Text>
-                            <Link  to={"/device/"+dt.id+"/task/"+each.id}>
-                              检验ISP详情
+                            <Link  to={"/device/"+eqp.id+"/task/"+each.id}>
+                              {hasIsp? '检验ISP详情' : '先要去派工'}
                             </Link>
                             <ResponsivePopover
                               content={
                                 <MenuList>
-                                  <MenuItem onPress={ async () => {
+                                  <MenuItem disabled={hasIsp} onPress={ async () => {
                                       await setTaskId(each.id);
                                       handleDelete(each.id)
                                     }
                                   }>注销任务
                                   </MenuItem>
-                                  <MenuItem contentBefore={<IconPackage />}  onPress={() => {
-                                    setLocation("/device/"+dt.id+"/task/"+each.id+'/dispatch', true);
+                                  <MenuItem contentBefore={<IconPackage />}  disabled={hasIsp}
+                                    onPress={() => {
+                                       setLocation("/device/"+eqp.id+"/task/"+each.id+'/dispatch', true);
                                      } }>
                                   有任务就派工给检验员
                                   </MenuItem>
@@ -283,9 +288,10 @@ export const AttachedTask: React.FunctionComponent<ComposeProps> = ({
                               </Button>
                             </ResponsivePopover>
                           </div>
-                        )}
+                        )
+                        }
                       </div>
-              ))}
+              } )}
 
             </div>
           </Container>

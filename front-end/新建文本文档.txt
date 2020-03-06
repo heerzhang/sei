@@ -270,3 +270,4 @@ refetchQueries:  ['xx_BY_ID']不一定执行的，对应查询Hook与当前页�
 
 Select  *  from    TB_ELEV_PARA where EQP_COD='3501T53449' 空的数字null
 http://27.151.117.65:3765/inspect/173
+js特别逻辑  let hasIsp= !!myIsp; //let hasIsp= (myIsp!==null);  不好使！　undefined的！

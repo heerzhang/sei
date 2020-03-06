@@ -326,8 +326,8 @@ export const RelationList: React.FunctionComponent<FollowingListProps> = ({
                   <Popover
                     content={
                       <MenuList>
-                        <MenuItem onPress={() => unfollow(relation.id)}>
-                          清空检验号{relation.id || ''}的报告
+                        <MenuItem onPress={() => void 0 }>
+                          检验号{relation.id || ''}其他功能
                         </MenuItem>
                       </MenuList>
                     }

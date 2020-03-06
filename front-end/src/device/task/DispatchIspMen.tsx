@@ -41,11 +41,6 @@ export interface ComposeProps {
   params?:any;   //上级路由器传入的参数。
 }
 
-/**
- * THIS IS A DISASTER. HAHAHhahha.. ugh. Rewrite when i'm not lazy
- * @param param0
- */
-
 export const DispatchIspMen: React.FunctionComponent<ComposeProps> = ({
   readOnly,
   editable,

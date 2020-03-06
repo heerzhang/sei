@@ -52,7 +52,7 @@ export const DeviceDetail: React.FunctionComponent<DeviceDetailProps> = ({ id, e
           id={id}
           editable={true || eqp.createdBy.id === user.uid}
           defaultTitle={eqp.title}
-          dt={eqp}
+          eqp={eqp}
         />
       </div>
     );

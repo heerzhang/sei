@@ -311,3 +311,17 @@ media queries查询条件的使用 Query的语法只有四项：and、or、not�
 
 useTouchable这个外来useTouchable组件感觉有点小毛病。 这个useTouchable其实是Touchable和Button核心，底下就是bind，也不用加ref的也可以触发。
 
+subItems?.map((a, i) => {
+            const namex = `${inspectionContent[x].items[y].names[i]}`;
+            return <React.Fragment key={i}>
+              {details[i] && details[i](inp, setInp)}
+              <InputGroupLine label='描述或问题'>
+                <Input value={(inp?.[namexD]) || ''} onChange={e => {
+                  inp[namexD] = e.currentTarget.value || undefined;
+                  setInp({ ...inp });
+                }}
+                />
+              </InputGroupLine>
+            </React.Fragment>;
+          })
+

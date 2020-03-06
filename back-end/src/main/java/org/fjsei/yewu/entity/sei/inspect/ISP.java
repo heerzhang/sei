@@ -11,12 +11,15 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 import java.util.*;
 
+//一个设备ID+一个任务ID只能做一个ISP（正常的ispID;作废删除的记录资料另外再做信息追溯）
+//唯一性索引UniqueConstraint不一定生效，必须确保现有表中数据都满足约束后，JPA才能成功建立唯一索引！。
 //针对graphQL关联查询的安全问题，考虑把关对其他或低权限用户不可见的字段独立出来，JPA　三种继承映射策略。
 //比如ISP extends ISPbase{ISPbase字段低保密性}，ISP可额外添加保密性要求高的其他字段，代码配置graphql返回对象类型正常都用ISPbase替换ISP。
 
 @Getter
 @Setter
 @Entity
+@Table( uniqueConstraints = {@UniqueConstraint(columnNames={"dev_id", "task_id"})} )
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "Fast")
 public class ISP {
     @Id
@@ -30,14 +33,14 @@ public class ISP {
     //单个ISP检验为了某个EQP和某个TASK而生成的。主要目的推动后续的报告，管理流程，以及结算等。
     //我是多端我来维护关联关系，我的表有直接外键的存储。
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn
+    @JoinColumn(name = "dev_id")
     private EQP dev;
 
     //单个检验记录规属于某一个TASK底下的某次;
     //一个任务单Task包含了多个的ISP检验记录。 　任务1：检验N；
     //我是多的方，我维护关系，我方表字段包含了对方表记录ID
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn
+    @JoinColumn(name = "task_id")
     private Task task;
     //缺省 fetch= FetchType.LAZY  ；多对多的实际都派生第三张表，不会和实体表放在一起的；
     //这地方维护多对多关系，版本升级导致中间表ISP_ISP_MEN变成ISP_USERS；？需要自己指定表名,且字段名都也改了"ISPMEN_ID"　ISP_MEN_ID？

@@ -87,6 +87,9 @@ public class IspMgrMutation implements GraphQLMutationResolver {
         //  ispMens.stream().forEach(item ->
         ispMen.add(user);
         isp.setIspMen(ispMen);
+        //缓存时间之内可能，从EQP查询无法查到关联isp;
+        eQP.getIsps().add(isp);
+        task.getIsps().add(isp);
         iSPRepository.save(isp);
         return isp;
     }
@@ -171,7 +174,11 @@ public class IspMgrMutation implements GraphQLMutationResolver {
         //ispMen 解除关系
         Set<User>  mens= isp.getIspMen();
         mens.forEach(a -> a.getIsp().remove(isp));
-        //reps 解除关系
+        //若不解除关系不能立即给正确的应答，在缓存期限时间内做关联查找会报错某关联id找不到。
+        //下面这两行若去掉一个都会导致关联id找不到，除非cache缓存时间过了才行，或者其他操作影响。
+        isp.getTask().getIsps().remove(isp);
+        isp.getDev().getIsps().remove(isp);
+
         emSei.remove(isp);
         emSei.flush();
         return isp!=null;

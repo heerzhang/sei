@@ -96,11 +96,9 @@ export function usePaginateQueryDevice(filter:any) {
     error, loading, refetch, fetchMore};
 }
 
-
-
 const DEVICE_BY_ID = gql`
-	query DEVICE_BY_ID($id:ID!){
-		getDeviceSelf(id:$id){
+  query DEVICE_BY_ID($id: ID! ) {
+    all:getDeviceSelf(id: $id) {
 			id,oid,cod,isps{
 				id
 			},pos{
@@ -108,38 +106,21 @@ const DEVICE_BY_ID = gql`
 			},ownerUnt{
 				id,name
 			},task{
-				id,date,dep,status
+				id,date,dep,status,isps{ id,dev{id} }
 			}
 		}
 	}
 `;
-
-//点击设备获取详细；
-export function useDeviceDetail( id ) {
-  var value = null;
-  console.log("Recipe页面id=" + JSON.stringify(id));
-  const { loading, error, data,  } = useQuery(DEVICE_BY_ID, {
-    variables: { id },
+////点击设备获取详细；
+export function useDeviceDetail(filter:any) {
+  const { loading, error, data, fetchMore, refetch} = useQuery(DEVICE_BY_ID, {
+    variables: { ...filter },
     notifyOnNetworkStatusChange: true
   });
-//第一个render这里loading=true，要到第二次再执行到了这里才会有data数据!
-  console.log("刚Recipe经过" + JSON.stringify(data) + "进行中" + JSON.stringify(loading));
-
-  if (!loading) {
-    if (data) {
-      const { getDeviceSelf: recipe } = data;
-      if (recipe) {
-        value = recipe;
-        //  authjs = JSON.parse(user);
-        //setAuthj(authjs); 报错！//React limits the number of renders to prevent an infinite loop.
-        console.log("以Recipe从后端获得=" + JSON.stringify(value),"函数：",'useDeviceDetail');
-        return { loading,error, data:recipe };
-      }
-    }
-  }
-  //可能有数据data但是同时errors[]存在的情况。
-  return { loading,error, data:null };
+  return {items:　data && data.all ,
+    error, loadMore:fetchMore, loading, refetch};
 }
+
 
 const BUILD_TASK = gql`
 mutation BUILD_TASK($devs: ID!,$dep: String!,$date: String!) {

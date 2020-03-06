@@ -159,7 +159,7 @@ export const InspectMain: React.FunctionComponent<MainProps> = props => {
                 <Tooltip content="增加个检验报告">
                   <div>
                     <DarkMode>
-                      <Link to={`/inspect/${showingRecipe}/addReport/choose`}>
+                      <Link to={"/inspect/"+showingRecipe+"/addReport/choose"} >
                           <IconButton  disabled={!showingRecipe}
                             variant="ghost"
                             label="增加"

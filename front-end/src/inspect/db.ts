@@ -549,7 +549,8 @@ const GET_ISP_DETAIL = gql`
   query getISP($id: ID!) {
     isp:getISP(id: $id) {
        id,conclusion,nextIspDate,checkMen{id,username},
-       dev{id,cod,oid},ispMen{id,username},reps{id,no,path}
+       dev{id,cod,oid},ispMen{id,username},reps{id,no,path},
+       task{id,date,status}
     }
   }
 `;

@@ -232,7 +232,15 @@ export const IspDetail: React.FunctionComponent<ComposeProps> = ({
                   <Text variant="h5">基本概况</Text>
 
                       <div key={1}>
-
+                        <ContainLine display={'任务号'}>
+                          <TransparentInput readOnly value={ ingredients?.task?.id ||'' }/>
+                        </ContainLine>
+                        <ContainLine display={'任务日期'}>
+                          <TransparentInput readOnly value={ ingredients?.task?.date ||'' }/>
+                        </ContainLine>
+                        <ContainLine display={'任务状态'}>
+                          <TransparentInput readOnly value={ ingredients?.task?.status ||'' }/>
+                        </ContainLine>
                         <div>
                           <ContainLine display={'设备号'}>
                               <TransparentInput
