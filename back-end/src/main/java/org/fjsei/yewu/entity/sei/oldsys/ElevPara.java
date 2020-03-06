@@ -26,7 +26,7 @@ public class ElevPara {
     private Long ELEFLOORNUMBER;     //'电梯层数'
     private Long ELESTADENUMBER;     // '电梯站数'
     //类型不对； private int ELEDOORNUMBER;    电梯门数'   数据库可能为null?
-    //不能用 lombok包 提供的 @NonNull 来注释表实体字段？Debug运行死循环？而Run运行正常的。
+    //lombok包 提供的 @NonNull 来注释表实体字段
     private Long ELEDOORNUMBER;         // '电梯门数'   空值NULL 报错！！
 
     //private String ELEDOORNUMBER;      //    is '电梯门数'

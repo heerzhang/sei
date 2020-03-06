@@ -262,3 +262,5 @@ Twitter强迫所有第三方开发者使用OAuth 2； https安全。
     private BigDecimal income;
 @Column(name = "contact_name",columnDefinition=" clob not null" )
     private String name;
+？Debug运行死循环？而Run运行正常的。特别注意IDEA界面上Mute breakpoits那个选择按钮;启动时刻会死掉。
+
