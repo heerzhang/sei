@@ -24,8 +24,7 @@ import { ContainLine, TransparentInput } from "../../comp/base";
 import { useCommitOriginalData, useQueryOriginalRecord } from "../../report/db";
 import { useNewReport } from "./db";
 
-export interface ComposeProps {
-  //id?: string;
+interface AddReportProps {
   defaultTitle?: string;
   defaultImage?: string;
   defaultDescription?: string;
@@ -37,7 +36,7 @@ export interface ComposeProps {
   params?:any;   //上级路由器传入的参数。
 }
 
-export const AddReport: React.FunctionComponent<ComposeProps> = ({
+export const AddReport: React.FunctionComponent<AddReportProps> = ({
   readOnly,
   editable,
   defaultCredit = "",
@@ -51,9 +50,6 @@ export const AddReport: React.FunctionComponent<ComposeProps> = ({
   const theme = useTheme();
   const toast = useToast();
   const ispId =id;
-  //const ref = React.useRef(null);
-  //const {user,} = useSession();
-  //const [loading, setLoading] = React.useState(false);
   const [editing, setEditing] = React.useState(!readOnly);
   const [content, ] = React.useState(() => {
     return defaultDescription
@@ -62,36 +58,17 @@ export const AddReport: React.FunctionComponent<ComposeProps> = ({
   });
   const [image, ] = React.useState(defaultImage);
   const [title, setTitle] = React.useState(defaultTitle);
-  //弹框钩子 toast({  }) 必须放在组件顶层，不能放在一般函数(异步/回调/触发函数)里面？。
-  //没办法，必须要添加setMessage配合toast({ });可以多次setMessage()=异步地。
-  //const [message, setMessage] = React.useState(null);
-  //特别注意！！
-  //父辈们的组件id!缺少key导致：遇到小屏幕轮转显示正常，大屏整个显示模式却必须手动刷新才能切换内容。
-  //父组件缺key引起异常：这个组件不会重新render的，defaultTitle变更了，但是title却是没有跟随变化，没有更新本组件？。
-  //console.log("来React.useState="+ JSON.stringify(title) +",id="+id+";title="+title+";defaultTitle="+JSON.stringify(defaultTitle));
   const [credit, ] = React.useState(defaultCredit);
-
   let filtercomp={
     id: 2,
   };
   const {error, loading, items:rep , } = useReport(filtercomp);
-
-  //ingredients 原来是[]数组，改成对象。ingredients.length无定义了。
   const [ingredients, setIngredients] = React.useState<any>( rep||{} );
- // const [, setLocation] = useLocation();
-  //这里hoverIngredient是当前高亮选择的某个食材;
-//  const [hoverIngredient, setHoverIngredient] = React.useState(null);
-//  const hoverIngredientRef = React.useRef(hoverIngredient);
- // const [Options, setOptions] = React.useState({});
- // const {userList:entry, submitfunc, } = useCreateDevice(Options);
 
   const {result, submit:updateFunc, } = useDispatchIspMen({
     task: repId,
     dev: id, username:ingredients && ingredients.ispMen,
     });
-  //const {buildTask:returnD} =data||{};
-  //useUpdateEntry({ id: ingredients && ingredients.id, info: {...ingredients, id: undefined,address: "大厦" }, });
-  //const { params: { id: idww } } = {...props.params};
   console.log("AddReport来呢", id,",repId=",repId,";ingredients=", ingredients);
 
 
@@ -278,10 +255,7 @@ export const AddReport: React.FunctionComponent<ComposeProps> = ({
                 }}
                 >
                   {/*三级路由了： 嵌套再嵌套了一层 布局级别的组件*/}
-                  <div key={1}>
-                    <MainContent id={id} rep={rep}/>
-                  </div>
-
+                  <ThirdRouterContent id={id} rep={rep}/>
                   <RouterLink to={`/inspect/${id}`}>
                     <Button
                       size="lg" noBind
@@ -305,25 +279,11 @@ export const AddReport: React.FunctionComponent<ComposeProps> = ({
 };
 
 
-interface MainContentProps {
+interface ThirdRouterContentProps {
   id?: string;
   rep: any;
 }
-
-function MainContent({ id, rep}: MainContentProps) {
-  if (!id) {
-    return null;
-  }
-  return <ThirdRoterContent id={id} rep={rep}/>;
-}
-
-
-interface ThirdRoterProps {
-  id?: string;
-  dt?: any;
-  rep: any;
-}
-function ThirdRoterContent({id, dt, rep}: ThirdRoterProps) {
+function ThirdRouterContent({id, rep}: ThirdRouterContentProps) {
   return (
    <React.Fragment>
     <Switch>
@@ -348,23 +308,20 @@ const FirstPage= ( {id ,rep}
   //Todo: 获取后端的列表？ 或者，前后端同步数据维护。
   const [tplType, setTplType] = React.useState('EL-DJ');
   const [ingredients, setIngredients] = React.useState<any>( {modeltype:'EL-DJ', modelversion:'1'} );
-  const {result, submit:updateFunc, loading} = useNewReport({
+  const {result, submit:doReportBuild, loading} = useNewReport({
     isp: id, type:ingredients.modeltype , version:ingredients.modelversion
   });
-  async function updateRecipe(id: string) {
+  async function makeNewReport() {
     try {
-      console.log("页面handleDelete Id="+id);
-      await updateFunc();
+      await doReportBuild();
     } catch (err) {
       toast({
         title: "后端报错",
         subtitle: err.message,
         intent: "danger"
       });
-      console.log("handleDelete返回", err);
       return;
     }
-  //  setLocation("/device/"+eqpId,  true );
   }
   return <React.Fragment>
     <div>
@@ -374,7 +331,7 @@ const FirstPage= ( {id ,rep}
                 value={ingredients.modeltype||''}  onChange={e => setIngredients({...ingredients, modeltype:e.currentTarget.value}) }
         >
           <option value={'EL-DJ'}>有机房曳引驱动电梯定期检验</option>
-          <option value={'EL-JJ'}>EL-JJ</option>
+          <option value={'EL-JJ'}>监督检验（未做待续...）</option>
         </Select>
       </ContainLine>
       <ContainLine display={'模板对应版本号'}>
@@ -390,7 +347,7 @@ const FirstPage= ( {id ,rep}
         size="lg"  intent={'warning'}
         disabled ={loading}
         loading ={loading}
-        onPress={ ()=>updateRecipe('1') }
+        onPress={ ()=>makeNewReport() }
       >发给后端服务器生成新报告
       </Button>
       { result &&

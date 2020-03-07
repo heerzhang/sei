@@ -183,25 +183,17 @@ export const BoundReports: React.FunctionComponent<
   );
 };
 
-
-
 //缩略图和完整图都是同一个图片的数据内容，　不做差异化处理！
 function BoundListItem({ recipe, id, highlight ,task }: any) {
   const theme = useTheme();
   const toast = useToast();
   const ispId =task;
-  console.log("BoundListItem参数", recipe, ispId);
-  //缩略图thumb-sm@和完整图片thumb@的url不一样的；后端支持缩略？　没必要做；
-  //const { src, error } = useFirebaseImage("thumb-sm@", recipe.image);
   const {  error } = useFirebaseImage("thumb-sm@", recipe.image);
   //Todo: 根据身份识别场景，　区分按钮点击的url，或是隐藏按钮。
   //报告编制人的报告入口链接
   const href = `/inspect/${task}/report/${id}`;
   //Todo: 类型和版本；　report/EL-DJ/ver/1/preview/
-  //其他人直接看报告连接
-  //const href = `/report/EL-DJ/ver/1/preview/${id}`;
 
-  //被点击中匹配href，成功=true=isActive[? ,..];　表示正好跟界面显示同样的一个路由。
   const [isActive,] = useRoute(href);
   const [, setLocation] = useLocation();
   const [repId, setRepId] = React.useState(null);

@@ -117,7 +117,7 @@ export const SearchDeviceBox: React.FunctionComponent<SearchBoxProps> = ({
         title="选择参数缩小查询的范围"
       >
         <div css={{ padding: theme.spaces.lg }}>
-          <Text>Dialog content</Text>
+          <Text>为了减少查询结果集的数量</Text>
           <div>
             <ContainLine display={'出厂编号'}>
               <TransparentInput
@@ -176,7 +176,9 @@ export const SearchDeviceBox: React.FunctionComponent<SearchBoxProps> = ({
               参数设置好了
             </Button>
           </div>
+          <Text>搜索框输入可用后端识别转义符号  % 任意的几个字符  _ 某个字符</Text>
         </div>
+
       </Dialog>
     </React.Fragment>
   );

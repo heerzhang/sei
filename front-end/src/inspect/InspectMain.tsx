@@ -204,12 +204,12 @@ export const InspectMain: React.FunctionComponent<MainProps> = props => {
                         ? 1
                         : null
                     }
-                    id="followers"
+                    id="schedule"
                   >
                     我的待办事项
                   </Tab>
-                  <Tab id="list">我参与的检验</Tab>
-                  <Tab id="check">待我审核报告</Tab>
+                  <Tab id="ISPlist">我参与的检验</Tab>
+                  <Tab id="myCheck">待我审核报告</Tab>
                   <Tab id="report">关注的报告列表</Tab>
                 </Tabs>
               </DarkMode>
@@ -293,7 +293,7 @@ export const InspectMain: React.FunctionComponent<MainProps> = props => {
                   }
                 }}
               >
-                <MainContent id={showingRecipe} />
+                <SecondRouterContent id={showingRecipe} />
               </Layer>
             </div>
 
@@ -304,23 +304,11 @@ export const InspectMain: React.FunctionComponent<MainProps> = props => {
   );
 };
 
-interface MainContentProps {
+
+interface SecondRouterProps {
   id?: string;
 }
-
-function MainContent({ id }: MainContentProps) {
-  if (!id) {
-    return null;
-  }
-  return <SecondRoterContent id={id} />;
-}
-
-
-interface SecondRoterProps {
-  id?: string;
-  dt?: any;
-}
-function SecondRoterContent({id, dt}: SecondRoterProps) {
+function SecondRouterContent({id}: SecondRouterProps) {
   return (
     <Switch>
       <Route path={"/inspect/:id/addReport/:rest*"} component={AddReport} />

@@ -419,7 +419,6 @@ const NEW_REPORT = gql`
     }
 `;
 //增加新的报告
-//newReport(isp: ID!,modeltype: String!, modelversion:String) :Report!
 export const useNewReport  = (options) => {
   const [submit, {error, data, loading, called}] = useMutation( NEW_REPORT, {
     variables: {...options},
@@ -428,3 +427,6 @@ export const useNewReport  = (options) => {
   const { res : result} = data||{};
   return { result ,submit, error, loading, called };
 };
+
+//点击触发更新：同一个文件内gql` query getReportOfISP；同时当前路由页面内挂载着的；并非直接上级组件内的query能立刻更新，而两个组件实际毫无嵌套关系的。
+

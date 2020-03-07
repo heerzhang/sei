@@ -171,7 +171,6 @@ export const IspDetail: React.FunctionComponent<ComposeProps> = ({
                     增加个检验报告
                   </MenuItem>
                   <MenuItem onPress={ async () => {
-                     //await setTaskId(each.id);
                      handleDelete(id)
                   }
                   }>放弃这个检验号ISP

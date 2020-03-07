@@ -600,6 +600,7 @@ const ABADON_ISP = gql`
 export const useAbandonISP  = (options) => {
   const [submit, {error, data, loading, called}] = useMutation( ABADON_ISP, {
     variables: {...options},
+    refetchQueries:  ['findAllUserFilter']
   })
   const { res : result} = data||{};
   return { result ,submit, error, loading, called };

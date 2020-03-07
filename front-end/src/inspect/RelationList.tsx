@@ -47,17 +47,17 @@ function searchAlgoliaForUsers(query: string) {
 
 const log = debug("app:FollowingList");
 
-//接口参数类型
+//接口参数类型 云服务的
 interface ResponseLikeAlgoliasearch<T=any> {
   hits: T[];
   //processingTimeMS: number;
 }
 
-export interface FollowingListProps {
+interface RelationListProps {
   check?: boolean    //我是审核人
 }
 
-export const RelationList: React.FunctionComponent<FollowingListProps> = ({
+export const RelationList: React.FunctionComponent<RelationListProps> = ({
       check=false
  }) => {
   const theme = useTheme();
@@ -93,28 +93,6 @@ export const RelationList: React.FunctionComponent<FollowingListProps> = ({
     items: usersFind,
   } =usePaginateQueryUser(filter);
 
-/*
-  async function inviteUser(otherUser: any) {
-    try {
-      setRelation(otherUser);
-      log("otherUser: %o", otherUser);
-      //await requestFollow(user, otherUser);
-      await requestFollow( otherUser);
-      toast({
-        title: `A request has been sent to ${otherUser.displayName ||
-          otherUser.email}`,
-        intent: "success"
-      });
-    } catch (err) {
-      console.error(err);
-      toast({
-        title: "An error occurred while making your request.",
-        subtitle: err.message,
-        intent: "danger"
-      });
-    }
-  }
-*/
   async function deleteRequest(id: string) {
     try {
       log("delete request: %s", id, loadingUser);

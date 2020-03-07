@@ -14,7 +14,7 @@ import {
   IconPlus,
   IconMoreVertical,
   StackTitle,
-  Skeleton
+  Skeleton, MenuItem, MenuDivider, IconPackage, ResponsivePopover
 } from "customize-easy-ui-component";
 import { SearchDeviceBox } from "./SearchDeviceBox";
 
@@ -27,7 +27,7 @@ import {  usePaginateQueryDevice,  } from "./db";
 
 import { StackItem, StackContext } from "react-gesture-stack";
 import { animated } from "react-spring";
-import { Link as RouterLink,  } from "wouter";
+import { Link as RouterLink, useLocation } from "wouter";
 //import { useHistory } from "react-router-dom";
 //@reach 的 Link 可以附带state ；
 //import { Link, navigate, globalHistory } from "@reach/router";
@@ -39,36 +39,19 @@ import { PullToRefresh,PullDownContent,RefreshContent,ReleaseContent } from "rea
 
 
 
-/*const client = algoliasearch(
-  config.ALGOLIA_APP_ID,
-  config.ALGOLIA_USER_SEARCH_KEY
-);
-//这里两个地方algoliasearch完全独立　initIndex名称不同的。
-//这个users必须在https://www.algolia.com/apps/24MA89MM0B/explorer/browse/users网站创立。
-//const index = client.initIndex("users");
-
-function searchAlgoliaForUsers(query: string) {
-  return index.search({ query });
-}*/
-
-
-
 //接口参数类型
 interface ResponseLikeAlgoliasearch<T=any> {
   hits: T[];
   //processingTimeMS: number;
 }
 
-export interface FollowingListProps {}
+interface DeviceListProps {}
 
 export const DeviceList: React.FunctionComponent<
-  FollowingListProps
+  DeviceListProps
 > = props => {
   const theme = useTheme();
-  //const toast = useToast();
- // const {user,} = useSession();
-  //graphQl的查询usexxx钩子函数，无法主动从后端读取最新数据。
-  //const { loading, userList:followings } = useFollowerIngs(false);
+  const [, setLocation] = useLocation();
   //搜索user的输入:
   const [query, setQuery] = React.useState("" as any);
   const [
@@ -200,7 +183,7 @@ export const DeviceList: React.FunctionComponent<
             <SearchTitle>
               <SearchDeviceBox
                 css={{ borderBottom: "none" }}
-                label="搜寻某个设备"
+                label="搜某设备,列表数量限制,用参数缩小范围"
                 query={query}
                 setQuery={setQuery}
               />
@@ -220,7 +203,7 @@ export const DeviceList: React.FunctionComponent<
                   releaseContent={<ReleaseContent label={'立刻刷新内容'}/>}
                   refreshContent={<RefreshContent />}
                   onRefresh={() => toRefresh() }
-                  pullDownThreshold={40}
+                  pullDownThreshold={30}
                   backgroundColor="white"
                   triggerHeight="auto"
                 >
@@ -260,10 +243,10 @@ export const DeviceList: React.FunctionComponent<
 
                     {   queryResults && queryResults.hits &&
                      queryResults.hits.map((hit,i) => (
-                      <RouterLink key={i}
-                          to={`/device/${hit.id}`} >
-                        <ListItem
-                          key={hit.id}
+                        <ListItem key={hit.id}
+                            onPress={e => {
+                              setLocation(`/device/${hit.id}`);
+                            }}
                           contentBefore={
                             <Avatar
                               size="sm"
@@ -273,14 +256,26 @@ export const DeviceList: React.FunctionComponent<
                           }
                           primary={`${hit.cod}`}
                           contentAfter={
-                            <IconPlus
-                              color={theme.colors.text.muted}
-                              aria-hidden
-                              size="lg"
-                            />
+                            <ResponsivePopover
+                              content={
+                                <MenuList>
+                                  <MenuItem onPress={ async () => {
+                                    //await setRepId(recipe.id);    handleDelete(recipe.id)
+                                  }
+                                  }>功能待续
+                                  </MenuItem>
+                                  <MenuItem contentBefore={<IconPackage />}  onPress={() => {
+                                    setLocation("/device/new", false)
+                                  } }>
+                                   加个设备
+                                  </MenuItem>
+                                </MenuList>
+                              }
+                            >
+                              <IconButton variant="ghost" icon={<IconMoreVertical/>} label="菜单"/>
+                            </ResponsivePopover>
                           }
                         />
-                      </RouterLink>
                     ))}
 
                   </List>
@@ -314,23 +309,9 @@ export const DeviceList: React.FunctionComponent<
         {
           title: (
             <StackTitle
-              backTitle={"回退吧"}
+              backTitle={"作废"}
               contentAfter={
-                relation && (
-                  <Popover
-                    content={
-                      <MenuList>
-                      </MenuList>
-                    }
-                  >
-                    <IconButton
-                      onPress={e => e.stopPropagation()}
-                      variant="ghost"
-                      icon={<IconMoreVertical />}
-                      label="Options菜单"
-                    />
-                  </Popover>
-                )
+                relation && ( 349 )
               }
               title={relation ? relation.username || relation.mobile : ""}
             />
@@ -338,7 +319,7 @@ export const DeviceList: React.FunctionComponent<
           content: (
             <StackItem>
               {relation && ( false
-               // <FollowingRecipes key={relation.id} id={relation.id} />
+               //作废了，未用  <FollowingRecipes key={relation.id} id={relation.id} />
               )}
             </StackItem>
           )

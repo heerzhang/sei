@@ -145,7 +145,7 @@ export  function Guide({printing, }:{printing?:boolean, },props) {
         </Container>
 
         <hr/>
-        <Text css={{ textAlign: 'center' }}>
+        <Text variant="h5" css={{ textAlign: 'center' }}>
           业务端客户可以无密码登录进入浏览报告，但是必须提供本系统签发的token来验明真身，token三个月有效期，过期想看报告需申请。
         </Text>
       </Container>
