@@ -26,11 +26,7 @@ import { Link as RouterLink, useLocation } from "wouter";
 import { ContainLine, TransparentInput } from "../comp/base";
 
 //[HOOK限制]按钮点击函数内部直接上toast()或toaster.notify()很可能无法正常显示。而放在函数组件顶层render代码前却能正常。
-
-//const log = debug("app:Compose");
-
-export interface ComposeProps {
-  //id?: string;
+interface IspDetailProps {
   defaultTitle?: string;
   defaultImage?: string;
   defaultDescription?: string;
@@ -42,12 +38,7 @@ export interface ComposeProps {
   params?:any;   //上级路由器传入的参数。
 }
 
-/**
- * THIS IS A DISASTER. HAHAHhahha.. ugh. Rewrite when i'm not lazy
- * @param param0
- */
-
-export const IspDetail: React.FunctionComponent<ComposeProps> = ({
+export const IspDetail: React.FunctionComponent<IspDetailProps> = ({
   readOnly,
   editable,
   defaultCredit = "",
@@ -95,7 +86,8 @@ export const IspDetail: React.FunctionComponent<ComposeProps> = ({
       });
       return;
     }
-    setLocation("/inspect/",  true );
+    //直接跳轉導致 更新丟失？任務頁面無法知曉 已經查詢的query getISP($id: ID!)應答。
+    //setLocation("/inspect/", true);
   }
 
   React.useEffect(() => {
@@ -170,10 +162,10 @@ export const IspDetail: React.FunctionComponent<ComposeProps> = ({
                       } }>
                     增加个检验报告
                   </MenuItem>
-                  <MenuItem onPress={ async () => {
+                  <MenuItem onPress={() => {
                      handleDelete(id)
                   }
-                  }>放弃这个检验号ISP
+                  }>放弃这次ISP检验号
                   </MenuItem>
                   <MenuItem onPress={() => null }>检验终结流程</MenuItem>
                 </MenuList>

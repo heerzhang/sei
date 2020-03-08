@@ -29,8 +29,8 @@ import { Layout } from "./Layout";
 import { RelationList } from "./RelationList";
 import { IspDetail } from "./IspDetail";
 import { ReportSample } from "./ReportSample";
-import { BoundReports } from "./report/BoundReports";
 import { AddReport } from "./report/AddReport";
+
 
 export interface MainProps {
   path?: string;

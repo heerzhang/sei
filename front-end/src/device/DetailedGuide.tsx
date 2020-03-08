@@ -21,7 +21,7 @@ import {
 import {Helmet} from "react-helmet";
 import { Link as RouterLink, Link, Route, Switch, useLocation, useRoute } from "wouter";
 import { ContainLine, TransparentInput } from "../comp/base";
-import { useDeviceDetail } from "./db";
+import { useDeviceDetail } from "../inspect/db";
 import { AddToTask } from "./task/AddToTask";
 import { DeviceDetail } from "./DeviceDetail";
 import { ComposeDevice } from "./ComposeDevice";
@@ -42,7 +42,7 @@ export const DetailedGuide: React.FunctionComponent<DetailedGuideProps> = ({
   let filtercomp={
     id: id,
   };
-  const { loading ,items: dtvalue, error } = useDeviceDetail( { id } );
+  const { loading ,items: dtvalue, error ,refetch} = useDeviceDetail( { id } );
 
   return (
     <div
@@ -118,6 +118,7 @@ export const DetailedGuide: React.FunctionComponent<DetailedGuideProps> = ({
                     }>其他功能
                   </MenuItem>
                   <MenuItem onPress={() => null }>设备停用</MenuItem>
+                  <MenuItem onPress={() => refetch( {} )}>刷新获最新数据</MenuItem>
                 </MenuList>
               }
             >

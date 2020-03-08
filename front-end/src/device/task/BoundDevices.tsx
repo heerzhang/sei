@@ -18,16 +18,16 @@ import { FadeImage } from "../../FadeImage";
 
 
 
-export interface FollowingRecipesProps {
+interface BoundDevicesProps {
   id: string;
 }
 //显示某一个关注对象用户菜谱列表
 //有1个地方会引用到的。
 export const BoundDevices: React.FunctionComponent<
-  FollowingRecipesProps
+  BoundDevicesProps
 > = ({ id }) => {
   const theme = useTheme();
-  console.log("看FollowingRecipes filter =id=", id );
+  //console.log("看FollowingRecipes filter =id=", id );
   let wheres={a: {s:'id',o:'EQ',lv:id } ,
      };
 
@@ -44,7 +44,7 @@ export const BoundDevices: React.FunctionComponent<
     loadMore
   } =useQueryBoundDevices(filter);
 
-  console.log("看FollowingRecipes filter=", filter );
+  //console.log("看FollowingRecipes filter=", filter );
   //就算id切换了，本组件的数据还是会被appollo自动缓存的，id变化不会一定导致重新查询后端数据库的，看着像页面显示的缓存。
   //根据id和界面操作后的参数，来要修正graphQL的Query()的参数 = 要做重新查询。
   React.useEffect(() => {
@@ -190,8 +190,6 @@ export const BoundDevices: React.FunctionComponent<
 };
 
 
-
-//缩略图和完整图都是同一个图片的数据内容，　不做差异化处理！
 function DeviceListItem({ recipe, id, highlight ,task }: any) {
   const theme = useTheme();
   //缩略图thumb-sm@和完整图片thumb@的url不一样的；后端支持缩略？　没必要做；
@@ -201,7 +199,6 @@ function DeviceListItem({ recipe, id, highlight ,task }: any) {
   //被点击中匹配href，成功=true=isActive[? ,..];　表示正好跟界面显示同样的一个路由。
   const [isActive,] = useRoute(href);
   const [, setLocation] = useLocation();
-
 
   return (
     <ListItem

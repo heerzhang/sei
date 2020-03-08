@@ -27,7 +27,7 @@ import { Link as RouterLink } from "wouter";
 import { useCancellationTask } from "./task/db";
 
 
-export interface AttachedTaskProps {
+interface AttachedTaskProps {
   id?: string;
   defaultTitle?: string;
   defaultImage?: string;
@@ -38,7 +38,6 @@ export interface AttachedTaskProps {
   defaultCredit?: string;
   eqp?:any;
 }
-
 
 export const AttachedTask: React.FunctionComponent<AttachedTaskProps> = ({
   readOnly,
@@ -66,7 +65,7 @@ export const AttachedTask: React.FunctionComponent<AttachedTaskProps> = ({
   const {result, submit:updateFunc, } = useCancellationTask({
     taskid: taskId, reason:'测试期直接删'
   });
-  console.log("页面刷新钩子AttachedTask entry=",　",设备id="+id+";task=",task,";eqp=",eqp);
+  //console.log("页面刷新钩子AttachedTask entry=",　",设备id="+id+";task=",task,";eqp=",eqp);
 
   async function handleDelete(id: string) {
     try {

@@ -271,5 +271,7 @@ refetchQueries:  ['xx_BY_ID']不一定执行的，对应查询Hook与当前页�
 Select  *  from    TB_ELEV_PARA where EQP_COD='3501T53449' 空的数字null
 http://27.151.117.65:3765/inspect/173
 js特别逻辑  let hasIsp= !!myIsp; //let hasIsp= (myIsp!==null);  不好使！　undefined的！
+直接跳轉毛病！async|no() => {setLocation("/inspect/", T/F);} 可導致当前更新附带的quey查询最新结果被跳转后的页面所忽视，跳转后的页面并不是最新数据的，去掉setLocation就可以。
 立刻更新界面？
-放弃ISp ； 队列
+放弃ISp ；
+派工了 任务点击？

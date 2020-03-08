@@ -435,46 +435,6 @@ export function useFollowerIngs(toUser = true) {
 }
 
 
-const DEVICE_BY_ID = gql`
-  query DEVICE_EQPCOD_QUERY($id: ID!) {
-    getDeviceSelf(id: $id) {
-      id oid cod isps {
-        id
-      } pos {
-        id address
-      } ownerUnt {
-        id name
-      }
-    } 
-  }
-`;
-
-export function useDeviceDetail( id ) {
-  var value = null;
-  console.log("Recipe页面id=" + JSON.stringify(id));
-  const { loading, error, data, } = useQuery(DEVICE_BY_ID, {
-    variables: { id },
-    notifyOnNetworkStatusChange: true
-  });
-//第一个render这里loading=true，要到第二次再执行到了这里才会有data数据!
-  console.log("刚Recipe经过" + JSON.stringify(data) + "进行中" + JSON.stringify(loading));
-
-  if (!loading) {
-    if (data) {
-      const { getDeviceSelf: recipe } = data;
-      if (recipe) {
-        value = recipe;
-        //  authjs = JSON.parse(user);
-        //setAuthj(authjs); 报错！//React limits the number of renders to prevent an infinite loop.
-        console.log("以Recipe从后端获得=" + JSON.stringify(value),"函数：",'useDeviceDetail');
-        return { loading,error, data:recipe };
-      }
-    }
-  }
-  //可能有数据data但是同时errors[]存在的情况。
-  return { loading,error, data:null };
-}
-
 const DISPATCH_ISP_MEN = gql`
     mutation DISPATCH_ISP_MEN(
         $dev: ID!
@@ -588,6 +548,34 @@ export function useReport(filter:any) {
     error, loading, refetch};
 }
 
+//移来看看,放在同一个db.ts文件内， 当前没挂载的refetchQueries[]就不起作用。
+export const DEVICE_BY_ID = gql`
+  query DEVICE_BY_ID($id: ID! ) {
+    all:getDeviceSelf(id: $id) {
+			id,oid,cod,isps{
+				id
+			},pos{
+				id,name
+			},ownerUnt{
+				id,name
+			},task{
+				id,date,dep,status,isps{ id,dev{id} }
+			}
+		}
+	}
+`;
+////点击设备获取详细；
+export function useDeviceDetail(filter:any) {
+  const { loading, error, data, fetchMore, refetch} = useQuery(DEVICE_BY_ID, {
+    variables: { ...filter },
+    notifyOnNetworkStatusChange: true
+  });
+  return {items:　data && data.all ,
+    error, loadMore:fetchMore, loading, refetch};
+}
+
+
+
 const ABADON_ISP = gql`
     mutation abandonISP(
         $ispId: ID! 
@@ -596,11 +584,12 @@ const ABADON_ISP = gql`
     res: abandonISP(isp: $ispId,  reason: $reason) 
     }
 `;
-//放弃ISP检验
+//这里refetchQueries[]仅仅对当前挂载的组件内查询生效，非当前mount组件就不行了，查询了也不更新界面的。
+//放弃ISP检验  ??+ ,'getISPofDevTask' ,'getISPofDevTask'
 export const useAbandonISP  = (options) => {
   const [submit, {error, data, loading, called}] = useMutation( ABADON_ISP, {
     variables: {...options},
-    refetchQueries:  ['findAllUserFilter']
+    refetchQueries:  ['DEVICE_BY_ID','findAllUserFilter','getISP']
   })
   const { res : result} = data||{};
   return { result ,submit, error, loading, called };

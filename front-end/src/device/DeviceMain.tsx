@@ -37,12 +37,12 @@ import { useCountOfTask } from "./db";
 import { Link as RouterLink } from "wouter";
 import { DetailedGuide } from "./DetailedGuide";
 
-export interface MainProps {
+interface DeviceMainProps {
   path?: string;
   id?: string;
 }
 
-export const DeviceMain: React.FunctionComponent<MainProps> = props => {
+export const DeviceMain: React.FunctionComponent<DeviceMainProps> = props => {
   const theme = useTheme();
   const {user} = useSession();
   const isLarge = useMedia({ minWidth: "768px" });

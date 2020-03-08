@@ -6,16 +6,11 @@ import { ComposeDevice } from "./ComposeDevice";
 import { useSession } from "../auth";
 //import { useDocument } from "react-firebase-hooks/firestore";
 import { useTheme, Text } from "customize-easy-ui-component";
-
-
-import { useDeviceDetail,  } from "./db";
 import {  useRoute } from "wouter";
-
 import { AttachedTask } from "./AttachedTask";
 
 
-
-export interface DeviceDetailProps {
+interface DeviceDetailProps {
   id: string;
   eqp: any;
 }

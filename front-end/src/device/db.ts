@@ -96,30 +96,6 @@ export function usePaginateQueryDevice(filter:any) {
     error, loading, refetch, fetchMore};
 }
 
-const DEVICE_BY_ID = gql`
-  query DEVICE_BY_ID($id: ID! ) {
-    all:getDeviceSelf(id: $id) {
-			id,oid,cod,isps{
-				id
-			},pos{
-				id,name
-			},ownerUnt{
-				id,name
-			},task{
-				id,date,dep,status,isps{ id,dev{id} }
-			}
-		}
-	}
-`;
-////点击设备获取详细；
-export function useDeviceDetail(filter:any) {
-  const { loading, error, data, fetchMore, refetch} = useQuery(DEVICE_BY_ID, {
-    variables: { ...filter },
-    notifyOnNetworkStatusChange: true
-  });
-  return {items:　data && data.all ,
-    error, loadMore:fetchMore, loading, refetch};
-}
 
 
 const BUILD_TASK = gql`

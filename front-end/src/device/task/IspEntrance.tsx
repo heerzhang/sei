@@ -11,35 +11,11 @@ import {  useLocation } from "wouter";
 
 //[HOOK限制]按钮点击函数内部直接上toast()或toaster.notify()很可能无法正常显示。而放在函数组件顶层render代码前却能正常。
 
-//const log = debug("app:Compose");
-
-export interface ComposeProps {
-  //id?: string;
-  defaultTitle?: string;
-  defaultImage?: string;
-  defaultDescription?: string;
-  defaultIngredients?: any[];
-  readOnly?: boolean;
-  editable?: boolean;
-  defaultCredit?: string;
-  dt?:any;
+export interface IspEntranceProps {
   params?:any;   //上级路由器传入的参数。
 }
 
-/**
- * THIS IS A DISASTER. HAHAHhahha.. ugh. Rewrite when i'm not lazy
- * @param param0
- */
-
-export const IspEntrance: React.FunctionComponent<ComposeProps> = ({
-  readOnly,
-  editable,
-  defaultCredit = "",
-  defaultDescription,
-  defaultImage,
-  defaultIngredients,
-  defaultTitle = "",
-  dt=null,
+export const IspEntrance: React.FunctionComponent<IspEntranceProps> = ({
   params: { id, taskId},      //来自上级<Route path={"/device/:id/addTask"} />路由器给的:id。
 }) => {
   const theme = useTheme();
@@ -47,7 +23,7 @@ export const IspEntrance: React.FunctionComponent<ComposeProps> = ({
 
   let filtercomp={ dev:id ,task:taskId};
   const {loading, error, item } =useLookIspOfDevTask(filtercomp);
-  console.log("IspEntrance页面刷新 id:", id,",dt=,",dt,";params=", taskId, item);
+  console.log("IspEntrance页面刷新 id:", id,";params=", taskId, item);
 
   //加载数据后立刻跳转，重定向操作。 要么直接去ISP页面；  要么先去派工吧。
 
