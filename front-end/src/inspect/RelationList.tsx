@@ -75,7 +75,6 @@ export const RelationList: React.FunctionComponent<RelationListProps> = ({
   const { loading, items:followings ,} = usePaginateQueryTask(filtercomp,check);
   //搜索user的输入:
   const [query, setQuery] = React.useState("");
-  const [    ,  setQueryResults ] = React.useState<ResponseLikeAlgoliasearch | null>(null);
 
   //状态管理　relation＝当前显示的或者按钮点击事件产生,关注的user是谁。
   const [relation, setRelation] = React.useState(null);
@@ -88,35 +87,9 @@ export const RelationList: React.FunctionComponent<RelationListProps> = ({
         {cod:query },
      });
 
-  const {
-    loading: loadingUser,
-    items: usersFind,
-  } =usePaginateQueryUser(filter);
-
-  async function deleteRequest(id: string) {
-    try {
-      log("delete request: %s", id, loadingUser);
-      await deleteRequestFollow();
-    } catch (err) {
-      console.error(err);
-      toast({
-        title: "An error occurred while cancelling your request.",
-        subtitle: err.message,
-        intent: "danger"
-      });
-    }
-  }
-
   const noUsers = !query && (!followings || (followings && followings.length === 0));
   //界面轮播 setIndex切换显示界面；   //index不是组件外部那一个同名index；
   const [index, setIndex] = React.useState(0);
-
-
-  function unfollow(id: string) {
-    deleteRequest(id);
-    setRelation(null);
-    setIndex(0);
-  }
 
   function showRelation(item: any) {
     console.log("点击showRelation？item=", item);
@@ -145,35 +118,12 @@ export const RelationList: React.FunctionComponent<RelationListProps> = ({
       }
       //云搜索的results；　搜索目标＝索引区域是users的缓存。
       //const results =usersFind;     results =await searchAlgoliaForUsers(query);
-      log("search results: %o", usersFind);
+      log("search results: %o");
       //扣除已经关注的，从搜索结果剔除。
-      const hits = usersFind
-        .filter(hit => {
-          if (hit.id === user.uid) {
-            //return false;    // 我自己的user.uid ，剔除！
-          }
-          //对象列表查找，扣除已经关注followings=的用户，
-          return !find(followings, { toUser:{cod: hit.cod} });
-        });
-      /*   .map(hit => {
-          const relationU = find(followings, { toUser:{id: hit.objectID} });    //能找已经关注的
-          　　//这requested没用到？
-            //实际上面filter过滤之后，执行到这里relationU必定是null的;　　新增加字段requested, 深度拷贝hit;
-          return {
-            ...hit,
-            requested: relationU ? relationU.id : null
-          };
-        });*/
-
-      console.log("伪善setQueryResults=" ,hits,"usersFind=",usersFind );
-      //其实只有hits有用处的；
-      setQueryResults({
-        hits
-      });
     }
     //因为其它操作副作用的，导致需要进一步更新要求：
     fetchUsers();
-  }, [query, followings, usersFind, user.uid]);
+  }, [query, followings, user.uid]);
   //上面这个副作用必须 加usersFind，否则无法继续处理后端数据带来的必要的UI反馈变化。
   //控件<Stack 是堆叠式的，像导航条；适用同一个模板显示只需上级给下级参数调整的场景。根据上一叠页面选择触发状态relation给下一叠参数来控制下一级显示；更多嵌套很困难。
   return (

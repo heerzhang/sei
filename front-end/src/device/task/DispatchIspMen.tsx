@@ -28,8 +28,7 @@ import { useSession } from "../../auth";
 
 //const log = debug("app:Compose");
 
-export interface ComposeProps {
-  //id?: string;
+interface DispatchIspMenProps {
   defaultTitle?: string;
   defaultImage?: string;
   defaultDescription?: string;
@@ -41,7 +40,7 @@ export interface ComposeProps {
   params?:any;   //上级路由器传入的参数。
 }
 
-export const DispatchIspMen: React.FunctionComponent<ComposeProps> = ({
+export const DispatchIspMen: React.FunctionComponent<DispatchIspMenProps> = ({
   readOnly,
   editable,
   defaultCredit = "",

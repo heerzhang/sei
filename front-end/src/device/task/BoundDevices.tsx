@@ -19,7 +19,7 @@ import { FadeImage } from "../../FadeImage";
 
 
 interface BoundDevicesProps {
-  id: string;
+  id: string;   //任务ID
 }
 //显示某一个关注对象用户菜谱列表
 //有1个地方会引用到的。
@@ -37,6 +37,7 @@ export const BoundDevices: React.FunctionComponent<
     orderBy: "date",
     asc: true
   });
+  //根据任务ｉｄ找设备，返回items＝下挂设备列表
   const {
     loading,
     error,
@@ -189,7 +190,7 @@ export const BoundDevices: React.FunctionComponent<
   );
 };
 
-
+//某个任务　下挂　单个设备的　recipe＝device{}
 function DeviceListItem({ recipe, id, highlight ,task }: any) {
   const theme = useTheme();
   //缩略图thumb-sm@和完整图片thumb@的url不一样的；后端支持缩略？　没必要做；
@@ -199,17 +200,18 @@ function DeviceListItem({ recipe, id, highlight ,task }: any) {
   //被点击中匹配href，成功=true=isActive[? ,..];　表示正好跟界面显示同样的一个路由。
   const [isActive,] = useRoute(href);
   const [, setLocation] = useLocation();
+//
+  //   href={`/device/${id}`}
+  //        //navigate(href , { replace: true });
 
   return (
     <ListItem
       wrap={false}
-      onClick={e => {
-        e.preventDefault();
-        setLocation(href, true);
-        //navigate(href , { replace: true });
+      onPress={e => {
+        //e.preventDefault();
+        setLocation(href, false);
       }}
       aria-current={isActive}
-      href={`/device/${id}`}
       css={{
         paddingTop: 0,
         paddingBottom: 0,

@@ -462,10 +462,11 @@ const DISPATCH_ISP_MEN = gql`
 `;
 
 //适配封装层：针对不同类型接口(REST,graphql,等?)，都对外统一处理。
-//事务更新处理类型：
+//事务更新处理类型： 附带更新getISPofDevTask没用，不在挂载状态组件内就不会去查了。
 export const useDispatchIspMen = (options) => {
   const [submit, {error, data, loading, called}] = useMutation( DISPATCH_ISP_MEN, {
     variables: {...options},
+    refetchQueries:  ['getISPofDevTask']
   })
   const { buildISP : result} = data||{};
   return { result ,submit, error, loading, called };
@@ -500,10 +501,12 @@ const ISP＿OF_DEV_TASK = gql`
      }
   }
 `;
+//受到appollo缓存影响　　不加cache-and-network就无法刷新。
 export function useLookIspOfDevTask(filter:any) {
   const { loading, error, data,  refetch} = useQuery(ISP＿OF_DEV_TASK, {
     variables: { ...filter },
-    notifyOnNetworkStatusChange: true
+    notifyOnNetworkStatusChange: true,
+    fetchPolicy: 'cache-and-network'
   });
   return {item: data&&data.obj, error, loading, refetch};
 }

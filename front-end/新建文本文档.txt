@@ -267,11 +267,11 @@ https://blog.csdn.net/weixin_41646716/article/details/82423817
 在前端无法直接读取excel文件内容的。首先转成json文件，直接在代码模块打包导入。https://www.bejson.com/json/col2json/
 即刻刷新：调用Mutation要加入一参数refetchQueries，其对应方法名是页面数据来源函数对应gql`定义体内的query紧跟着的那函数名。若不立刻更新的话实际appollo缓存时间过后也会更新的。
 refetchQueries:  ['xx_BY_ID']不一定执行的，对应查询Hook与当前页面同时加载的组件场景下才能生效，查询需放在做更新组件的上级去。
-
-Select  *  from    TB_ELEV_PARA where EQP_COD='3501T53449' 空的数字null
+useQuery查询参数cache-and-network＝每次点击都发起后端查询请求，但是同时cache也同时可用作替补来显示，断网时照样有数据用。缺省参数cache-first固执优先用cache旧数据。
+appollo的缓存似乎没有过期时间的说法，必须上手动更新等等方式。
 http://27.151.117.65:3765/inspect/173
 js特别逻辑  let hasIsp= !!myIsp; //let hasIsp= (myIsp!==null);  不好使！　undefined的！
 直接跳轉毛病！async|no() => {setLocation("/inspect/", T/F);} 可導致当前更新附带的quey查询最新结果被跳转后的页面所忽视，跳转后的页面并不是最新数据的，去掉setLocation就可以。
 立刻更新界面？
-放弃ISp ；
+派工加个ISp ；
 派工了 任务点击？

@@ -564,11 +564,13 @@ export const DEVICE_BY_ID = gql`
 		}
 	}
 `;
-////点击设备获取详细；
+///点击设备获取详细；
+//cache-and-network参数＝每次点击都发起后端查询请求，但是同时cache也同时可用作替补来显示，断网时照样有数据用。缺省参数cache-first固执优先用cache旧数据。
 export function useDeviceDetail(filter:any) {
   const { loading, error, data, fetchMore, refetch} = useQuery(DEVICE_BY_ID, {
     variables: { ...filter },
-    notifyOnNetworkStatusChange: true
+    notifyOnNetworkStatusChange: true,
+    fetchPolicy: 'cache-and-network'
   });
   return {items:　data && data.all ,
     error, loadMore:fetchMore, loading, refetch};

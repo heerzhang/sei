@@ -17,7 +17,7 @@ import {
   ResponsivePopover,
   IconMoreVertical,
   IconArrowLeft,
-  IconArrowRight, IconPackage
+  IconArrowRight, IconPackage, IconTruck
 } from "customize-easy-ui-component";
 import { useAbandonISP, useDispatchIspMen, useIspDetail } from "./db";
 //import { useSession } from "../auth";
@@ -184,8 +184,8 @@ export const IspDetail: React.FunctionComponent<IspDetailProps> = ({
           </div>
         </Toolbar>
       </Navbar>
-
-      <div
+      { isp &&
+        <div
         css={{  //控制小屏时的导航条底下的整个页面滚动。
           flex: 1,
           //minHeight: '100vh',
@@ -300,6 +300,23 @@ export const IspDetail: React.FunctionComponent<IspDetailProps> = ({
           </Container>
         </div>
       </div>
+      }
+      {!isp && <React.Fragment>
+          <Text  variant="h4"　css={{ textAlign: 'center' }}>
+            没找到该ISP,请刷新
+          </Text><br/>
+            <RouterLink to="/inspect/">
+              <Button
+                size="lg" noBind
+                intent="primary"
+                iconBefore={<IconTruck />}
+                iconAfter={<IconArrowRight />}
+              >
+                后退刷新
+              </Button>
+            </RouterLink>
+          </React.Fragment>
+      }
       <LayerLoading loading={loading} />
     </div>
   );
