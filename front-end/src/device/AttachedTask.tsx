@@ -166,9 +166,14 @@ export const AttachedTask: React.FunctionComponent<AttachedTaskProps> = ({
                             >
                               状态：{each.status||''}
                             </Text>
-                            <Link  to={"/device/"+eqp.id+"/task/"+each.id}>
-                              {hasIsp? '检验ISP详情' : '先要去派工'}
-                            </Link>
+                            {hasIsp? <Link  to={"/inspect/" + myIsp.id}>
+                                {myIsp? '检验ISP详情' : '逻辑异常'}
+                              </Link>
+                               :
+                              <Link  to={"/device/"+eqp.id+"/task/"+each.id+'/dispatch'}>
+                                先要去派工
+                              </Link>
+                            }
                             <ResponsivePopover
                               content={
                                 <MenuList>
@@ -203,29 +208,6 @@ export const AttachedTask: React.FunctionComponent<AttachedTaskProps> = ({
       </div>
       <LayerLoading loading={loading} />
     </div>
-  );
-};
-
-interface TransparentInputProps extends InputBaseProps {}
-
-const TransparentInput = (props: TransparentInputProps) => {
-
-  return (
-    <Input
-      css={{
-        background: "none",
-        border: "none",
-        boxShadow: "none",
-        // paddingTop: theme.spaces.xs,
-        // paddingBottom: theme.spaces.xs,
-        ":focus": {
-          outline: "none",
-          boxShadow: "none",
-          background: "none"
-        }
-      }}
-      {...props}
-    />
   );
 };
 

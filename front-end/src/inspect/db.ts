@@ -495,11 +495,12 @@ const GET_CHECK_TASKS = gql`
     }
   }
 `;
-//底下refetch可用于紧急手动刷新＝刷新URL一样的， 底层缓存机制与自动更新界面很慢。
+//底下refetch可用于紧急手动刷新＝刷新URL一样的， 缓存fetchPolicy: 'cache-and-network'
 export function usePaginateQueryTask(filter:any, check:boolean) {
   const { loading, error, data, fetchMore, refetch} = useQuery(check? GET_CHECK_TASKS:GET_TASKS, {
     variables: { ...filter },
-    notifyOnNetworkStatusChange: true
+    notifyOnNetworkStatusChange: true,
+    fetchPolicy: 'cache-and-network'
   });
   return {items:　data　&&　data.user && data.user[0] && (check? data.user[0].checks : data.user[0].isp),
       　error, loadMore:fetchMore, loading, refetch};

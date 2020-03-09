@@ -64,52 +64,22 @@ export const DispatchIspMen: React.FunctionComponent<DispatchIspMenProps> = ({
   });
   const [image, ] = React.useState(defaultImage);
   const [title, setTitle] = React.useState(defaultTitle);
-  //弹框钩子 toast({  }) 必须放在组件顶层，不能放在一般函数(异步/回调/触发函数)里面？。
-  //没办法，必须要添加setMessage配合toast({ });可以多次setMessage()=异步地。
- // const [message, setMessage] = React.useState(null);
-  //特别注意！！
-  //父辈们的组件id!缺少key导致：遇到小屏幕轮转显示正常，大屏整个显示模式却必须手动刷新才能切换内容。
-  //父组件缺key引起异常：这个组件不会重新render的，defaultTitle变更了，但是title却是没有跟随变化，没有更新本组件？。
-  //console.log("来React.useState="+ JSON.stringify(title) +",id="+id+";title="+title+";defaultTitle="+JSON.stringify(defaultTitle));
   const [credit, ] = React.useState(defaultCredit);
   //ingredients 原来是[]数组，改成对象。ingredients.length无定义了。
   console.log("来React.useruseState="+ JSON.stringify(title) +",user=",user);
   const [ingredients, setIngredients] = React.useState<any>( dt||{ispMen: user.username} );
   //const [, setLocation] = useLocation();
-  //这里hoverIngredient是当前高亮选择的某个食材;
- // const [hoverIngredient, setHoverIngredient] = React.useState(null);
-  //const hoverIngredientRef = React.useRef(hoverIngredient);
-  //const [Options, setOptions] = React.useState({});
-  //const {userList:entry, submitfunc, error} = useCreateDevice(Options);
+
 
   const {result, submit:updateFunc, error:updateError, } = useDispatchIspMen({
     task: taskId,
     dev: id, username:ingredients && ingredients.ispMen,
     });
-  //const {buildTask:returnD} =data||{};
-  //useUpdateEntry({ id: ingredients && ingredients.id, info: {...ingredients, id: undefined,address: "大厦" }, });
-  //const { params: { id: idww } } = {...props.params};
   console.log("AddToTask页面刷新 router-ID:", id,",dt=,",dt,";ingredients=", ingredients);
-
 
   //不能在这点击触发函数内部执行HOOKs!! 必须上移动外移到 界面组件的头部初始化hooks，随后点击触发调用hook钩子函数。
   async function updateRecipe(
-    id: string,
-    {
-      title,
-      plain,
-      ingredients,
-      description,
-      author,
-      image
-    }: {
-      title: string;
-      plain: string;
-      ingredients: any[];
-      description: string;
-      author: string;
-      image: string;
-    }
+    id: string
   ) {
     let yes= result && result.id;
     console.log("生成任务－更新: %s", id, yes);
@@ -270,17 +240,7 @@ export const DispatchIspMen: React.FunctionComponent<DispatchIspMenProps> = ({
                 disabled={loading}
                 css={{ marginLeft: theme.spaces.sm }}
                 onPress={() => {
-                  //这里serialize是　src/Editor.jsx:120　自定义函数
-                  //const { text, content } = current.serialize();
-                  const toSave = {
-                    title,
-                    description: content,
-                    plain: '',
-                    author: credit,
-                    image,
-                    ingredients
-                  };
-                  if(id) updateRecipe(id, toSave);
+                  if(id) updateRecipe(id);
                 }}
                >
                 把设备任务派工给该检验员

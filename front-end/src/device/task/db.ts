@@ -429,21 +429,6 @@ export function useFollowerIngs(toUser = true) {
   return { loading, userList:value };
 }
 
-/*
-const DEVICE_BY_ID = gql`
-  query DEVICE_EQPCOD_QUERY($id: ID!) {
-    getDeviceSelf(id: $id) {
-      id oid cod isps {
-        id
-      } pos {
-        id address
-      } ownerUnt {
-        id name
-      }
-    }
-  }
-`;
-*/
 
 const DISPATCH_ISP_MEN = gql`
     mutation DISPATCH_ISP_MEN(
@@ -463,10 +448,11 @@ const DISPATCH_ISP_MEN = gql`
 
 //适配封装层：针对不同类型接口(REST,graphql,等?)，都对外统一处理。
 //事务更新处理类型： 附带更新getISPofDevTask没用，不在挂载状态组件内就不会去查了。
+//派工 生成ISP;     检验的列表findAllUserFilter, 不是当前mount组件状态的查询，加了refetchQueries也没用。
 export const useDispatchIspMen = (options) => {
   const [submit, {error, data, loading, called}] = useMutation( DISPATCH_ISP_MEN, {
     variables: {...options},
-    refetchQueries:  ['getISPofDevTask']
+    refetchQueries:  ['getISPofDevTask','findAllUserFilter']
   })
   const { buildISP : result} = data||{};
   return { result ,submit, error, loading, called };

@@ -271,7 +271,6 @@ useQuery查询参数cache-and-network＝每次点击都发起后端查询请求�
 appollo的缓存似乎没有过期时间的说法，必须上手动更新等等方式。
 http://27.151.117.65:3765/inspect/173
 js特别逻辑  let hasIsp= !!myIsp; //let hasIsp= (myIsp!==null);  不好使！　undefined的！
-直接跳轉毛病！async|no() => {setLocation("/inspect/", T/F);} 可導致当前更新附带的quey查询最新结果被跳转后的页面所忽视，跳转后的页面并不是最新数据的，去掉setLocation就可以。
-立刻更新界面？
-派工加个ISp ；
-派工了 任务点击？
+直接跳轉毛病！async|orNO()=>{setLocation("/inspect/", T|F);} 可導致当前更新附带的quey查询最新结果甚至異步的還未做了就已經被跳转所忽视，跳转后的页面并不是最新数据的，去掉setLocation就可以。
+缓存注意，useQuery后端查询比cache慢了1节拍要多一次render，若是cache也算认可数据的而立刻setLocation跳转，导致后端查询结果被遗弃，都无法更新cache了。useQuery用缓存就不会体现后端查询状态变化，该环节实际被隐藏。
+
