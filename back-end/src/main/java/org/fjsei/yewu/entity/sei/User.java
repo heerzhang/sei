@@ -37,29 +37,21 @@ public class User implements Person {
     @SequenceGenerator(name = "user_seq", initialValue = 1, allocationSize = 1, sequenceName = "user_seq")
     private Long id;
 
-    @Column(name = "USERNAME", length = 24, unique = true)
+    @Column(name = "USERNAME",  unique = true)
     @NotNull
-    @Size(min = 2, max = 24)
+    @Size(min = 4, max = 30)
     private String username;
 
-    @Column(name = "PASSWORD", length = 100)
-
-    @Size(min = 3, max = 30)
+    @Size(min = 6, max = 50)
     private String password;
 
-    @Column(name = "FIRSTNAME", length = 50)
-
-    @Size(min = 4, max = 50)
+    @Size(min = 2, max = 20)
     private String firstname;
 
-    @Column(name = "LASTNAME", length = 50)
-
-    @Size(min = 4, max = 50)
+    @Size(min = 2, max = 20)
     private String lastname;
 
-    @Column(name = "EMAIL", length = 50)
-
-    @Size(min = 4, max = 50)
+    @Size(min = 6, max = 60)
     private String email;
 
     //该用户是合法的？ 未审核/屏蔽用户。

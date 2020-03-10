@@ -135,3 +135,46 @@ export function useCountOfTask(filter:any) {
   });
   return {item: data&&data.result, error, loading, refetch};
 }
+
+const INVALIDATE_EQP = gql`
+    mutation invalidateEQP($whichEqp: ID!, $reason: String!) {
+      res: invalidateEQP(whichEqp: $whichEqp, reason: $reason)
+    }
+`;
+
+export const useInvalidateEQP = (options) => {
+  const [submit, {error, data, loading, called}] = useMutation( INVALIDATE_EQP, {
+    variables: {...options},
+  })
+  const { res : result} = data||{};
+  return { result ,submit, error, loading, called };
+};
+
+
+const DEVICE_BY_ID = gql`
+  query DEVICE_BY_ID($id: ID! ) {
+    all:getDeviceSelf(id: $id) {
+			id,oid,cod,isps{
+				id
+			},pos{
+				id,name
+			},ownerUnt{
+				id,name
+			},task{
+				id,date,dep,status,isps{ id,dev{id} }
+			}
+		}
+	}
+`;
+///点击设备获取详细；
+//cache-and-network参数＝每次点击都发起后端查询请求，但是同时cache也同时可用作替补来显示，断网时照样有数据用。缺省参数cache-first固执优先用cache旧数据。
+export function useDeviceDetail(filter:any) {
+  const { loading, error, data, fetchMore, refetch} = useQuery(DEVICE_BY_ID, {
+    variables: { ...filter },
+    notifyOnNetworkStatusChange: true,
+    fetchPolicy: 'cache-and-network'
+  });
+  return {items:　data && data.all ,
+    error, loadMore:fetchMore, loading, refetch};
+}
+

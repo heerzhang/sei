@@ -509,6 +509,10 @@ public class BaseQuery implements GraphQLQueryResolver {
 
         modelFilters.initialize(specification,emSei);
         modelFilters.effectWhereTree(where);
+        /* 这下面对照是这样的： query级缓存时间内，数据库人工修改的，前端靠findAllEQPsFilter查的会滞后才显示。
+            @QueryHints(value = { @QueryHint(name = org.hibernate.jpa.QueryHints.HINT_CACHEABLE, value = "true") } )
+            Page<EQP> findAll(@Nullable Specification<EQP> spec, Pageable pageable);
+        */
         Page<EQP>  list = eQPRepository.findAll(modelFilters,pageable);
         return list;
     }

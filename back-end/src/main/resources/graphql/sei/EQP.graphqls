@@ -44,6 +44,6 @@ extend type Mutation {
     testEQPStreamModify(cod:String!, oid: String ): String
     testEQPCriteriaModify(cod:String!, oid: String, type: String): EQP
     testEQPcreateQueryModify(cod:String!, oid: String ): String
+    invalidateEQP(whichEqp:ID!, reason: String!) : Boolean!
 }
-
 

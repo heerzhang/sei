@@ -591,24 +591,7 @@ const DISPATCH_ISP_MEN = gql`
     }
     }
 `;
-/*
-const DISPATCH_ISP_MEN3 = gql`
-    mutation newOriginalRecord(
-        $modeltype: String!
-        $modelversion: String!
-        $isp: ID!
-        $data: String
-    ) {
-    newOriginalRecord(modeltype: $modeltype, modelversion: $modelversion, isp: $isp, data: $data) {
-        id
-        data
-        files{id url}
-        modeltype
-        isp{id}
-    }
-    }
-`;
-*/
+
 //适配封装层：针对不同类型接口(REST,graphql,等?)，都对外统一处理。
 //事务更新处理类型：
 export const useCommitOriginalData = (options) => {

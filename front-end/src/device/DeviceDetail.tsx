@@ -25,21 +25,19 @@ export const DeviceDetail: React.FunctionComponent<DeviceDetailProps> = ({ id, e
   //第一个render这里loading=true，要到第二次再执行到了这里才会有data数据!
   console.log("刚DeviceDetail经过taskId=",eqp,"进行中id=",id,"showingRecipe=",matched,params);
 
-  //菜谱内容: 富文本编辑器内容defaultDescription={x.description}
   if (eqp) {
     return (
       <div>
         <ComposeDevice
           readOnly={true}
           id={id}
-          editable={true || eqp.createdBy.id === user.uid}
+          //editable={true || eqp.createdBy.id === user.uid}
           //defaultCredit={value.author}
           //defaultDescription={value.description}
-          defaultTitle={eqp.title}
           //defaultIngredients={ JSON.parse( value.ingredients ) }
           //defaultImage={value.image}
           dt={eqp}
-          task={params && params.id}
+          //task={params && params.id}
         />
 
         <AttachedTask

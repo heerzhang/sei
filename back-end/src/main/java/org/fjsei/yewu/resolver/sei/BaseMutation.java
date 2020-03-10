@@ -1,6 +1,7 @@
 package org.fjsei.yewu.resolver.sei;
 
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
+import com.fasterxml.jackson.module.kotlin.ReflectionCache;
 import org.fjsei.yewu.entity.sei.*;
 import org.fjsei.yewu.entity.sei.inspect.ISP;
 import org.fjsei.yewu.entity.sei.inspect.ISPRepository;
@@ -445,6 +446,17 @@ public class BaseMutation implements GraphQLMutationResolver {
         emSei.remove(report);
         emSei.flush();
         return report!=null;
+    }
+
+    @Transactional
+    public boolean invalidateEQP(Long eqpId,String reason)
+    {
+        if(!emSei.isJoinedToTransaction())      emSei.joinTransaction();
+        EQP eqp = eQPRepository.findById(eqpId).orElse(null);
+        Assert.isTrue(eqp != null,"未找到EQP:"+eqpId);
+        eqp.setValid(false);
+        eQPRepository.save(eqp);
+        return eqp!=null;
     }
 
 }

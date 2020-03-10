@@ -549,34 +549,6 @@ export function useReport(filter:any) {
     error, loading, refetch};
 }
 
-//移来看看,放在同一个db.ts文件内， 当前没挂载的refetchQueries[]就不起作用。
-export const DEVICE_BY_ID = gql`
-  query DEVICE_BY_ID($id: ID! ) {
-    all:getDeviceSelf(id: $id) {
-			id,oid,cod,isps{
-				id
-			},pos{
-				id,name
-			},ownerUnt{
-				id,name
-			},task{
-				id,date,dep,status,isps{ id,dev{id} }
-			}
-		}
-	}
-`;
-///点击设备获取详细；
-//cache-and-network参数＝每次点击都发起后端查询请求，但是同时cache也同时可用作替补来显示，断网时照样有数据用。缺省参数cache-first固执优先用cache旧数据。
-export function useDeviceDetail(filter:any) {
-  const { loading, error, data, fetchMore, refetch} = useQuery(DEVICE_BY_ID, {
-    variables: { ...filter },
-    notifyOnNetworkStatusChange: true,
-    fetchPolicy: 'cache-and-network'
-  });
-  return {items:　data && data.all ,
-    error, loadMore:fetchMore, loading, refetch};
-}
-
 
 
 const ABADON_ISP = gql`

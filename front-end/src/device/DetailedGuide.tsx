@@ -21,10 +21,11 @@ import {
 import {Helmet} from "react-helmet";
 import { Link as RouterLink, Link, Route, Switch, useLocation, useRoute } from "wouter";
 import { ContainLine, TransparentInput } from "../comp/base";
-import { useDeviceDetail } from "../inspect/db";
+import { useDeviceDetail } from "./db";
 import { AddToTask } from "./task/AddToTask";
 import { DeviceDetail } from "./DeviceDetail";
 import { ComposeDevice } from "./ComposeDevice";
+import { useInvalidateEQP } from "./db";
 
 
 interface DetailedGuideProps {
@@ -32,17 +33,36 @@ interface DetailedGuideProps {
 }
 //右半边页面
 export const DetailedGuide: React.FunctionComponent<DetailedGuideProps> = ({
-   id: pid,
+   id: parId,
 }) => {
   const theme = useTheme();
+  const toast = useToast();
   const [, setLocation] = useLocation();
   const [match, params] = useRoute("/device/:id/:rest*");
   let id =(match && params.id);
 
-  let filtercomp={
-    id: id,
-  };
   const { loading ,items: dtvalue, error ,refetch} = useDeviceDetail( { id } );
+  const {result, submit:updateFunc, } = useInvalidateEQP({
+      whichEqp: id, reason:'测试期',
+  });
+
+  async function updateRecipe(id: string) {
+    try {
+      await updateFunc();
+    } catch (err) {
+      toast({
+        title: "后端报错",
+        subtitle: err.message,
+        intent: "danger"
+      });
+      return;
+    }
+    toast({
+      title: "返回了",
+      subtitle: '作废 ID＝'+id,
+      intent: "info"
+    });
+  }
 
   return (
     <div
@@ -117,8 +137,8 @@ export const DetailedGuide: React.FunctionComponent<DetailedGuideProps> = ({
                        }
                     }>其他功能
                   </MenuItem>
-                  <MenuItem onPress={() => null }>法定设备导入后的拆除报废</MenuItem>
-                  <MenuItem onPress={() => null }>委托设备不再维护时删除</MenuItem>
+                  <MenuItem onPress={() => updateRecipe(id) }>法定设备导入后的拆除报废</MenuItem>
+                  <MenuItem onPress={() => updateRecipe(id) }>委托设备不再维护时删除</MenuItem>
                   <MenuItem onPress={() => refetch( {} )}>刷新获最新数据</MenuItem>
                 </MenuList>
               }
@@ -199,10 +219,7 @@ function ThirdRouterContent({id, device}: ThirdRouterProps) {
    <React.Fragment>
     <Switch>
       <Route path={"/device/new"}>
-          <ComposeDevice
-            readOnly={false}
-            editable={true}
-          />
+          <ComposeDevice  readOnly={false}/>
       </Route>
       <Route path={"/device/:id/addTask"}>
         <AddToTask id={id} dt={device}/>

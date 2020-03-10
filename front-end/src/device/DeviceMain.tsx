@@ -285,7 +285,7 @@ export const DeviceMain: React.FunctionComponent<DeviceMainProps> = props => {
                   }
                 }}
               >
-                <SecondRouterContent id={showingRecipe} />
+                <SecondRouterContent />
               </Layer>
             </div>
 
@@ -297,20 +297,17 @@ export const DeviceMain: React.FunctionComponent<DeviceMainProps> = props => {
 };
 
 
-interface SecondRouterProps {
-  id: string;
-}
 //路由和刷新？Mutation数据更新 refetchQueries:[''] 对应查询函数必须是挂载的组件内才能重做查询，路由导致分岔屏蔽掉。
-function SecondRouterContent({id, }: SecondRouterProps) {
+function SecondRouterContent({}) {
   return (
     <Switch>
       <Route path={"/device/new"}>
-        <DetailedGuide id={id} />
+        <DetailedGuide />
       </Route>
       <Route path={"/device/:id/task/:taskId/dispatch"} component={DispatchIspMen} />
       <Route path={"/device/:id/task/:taskId"} component={IspEntrance} />
       <Route path={"/device/:id/:rest*"}>
-        <DetailedGuide id={id} />
+        <DetailedGuide />
       </Route>
 
       <Route path="/:rest*">

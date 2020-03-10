@@ -84,11 +84,59 @@ interface NestingtRouteProps {
 }
 //Todo: 问题，NestingtRoute， 导致Link 后缀重复添加。
 //嵌套路由必须在上层路由通过path/:rest*向下一级路由去传递相对的目录路径，下级路由无需预设基础路径/通过path参数设置。
-const NestingtRoute = ({
+const NestingtRoute_old = ({
                          component: Component,
                         path,
                         ...other
                       }: NestingtRouteProps) => {
+  console.log("NestingtRouteProps来了 , match=",path);
+  const [match, params] = useRoute(path);
+  // path="/testroot/:rest*" >
+  //基于底层连接cookie-token,来获取当前用户  useRoute(`${path}:recipe*`);
+  const { user,loading } = useSession();
+  if(!match)  return null;
+
+  //const user = firebase.auth().currentUser;
+  let urlhead=path.lastIndexOf("/:rest*")
+  if(urlhead<0)
+    return null;
+  let basePath= urlhead>0? path.substring(0,urlhead) : "/";
+
+  console.log("NestingtRoute进入useSession2=",user,";basePath=",params, basePath);
+  if (loading) {
+    return (
+      <div
+        style={{
+          width: "100%",
+          boxSizing: "border-box",
+          padding: "3rem",
+          justifyContent: "center",
+          display: "flex"
+        }}
+      >
+        <Spinner />
+      </div>
+    );
+  }
+  //刷新页面第一次ｎｕｌｌ，第二次获得user;
+  if (!user && params.rest) {
+    console.log("PrivateRoute进入params=",params);
+    return <Redirect to="/login" />;
+  }
+  //console.log("PrivateRoute进params=",params);
+  if (!user) {
+    return <Redirect to="/login" />;
+    //return null;
+  }
+
+  return <Component path={basePath} />;
+};
+
+const NestingtRoute = ({
+                         component: Component,
+                         path,
+                         ...other
+                       }: NestingtRouteProps) => {
   console.log("NestingtRouteProps来了 , match=",path);
   const [match, params] = useRoute(path);
   // path="/testroot/:rest*" >

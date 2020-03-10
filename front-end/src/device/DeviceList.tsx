@@ -65,13 +65,12 @@ export const DeviceList: React.FunctionComponent<
   console.log("DeviceList当前的查询 queryResults.hits=", queryResults && queryResults.hits);
   //根据options选择结果，来组织后端的查询参数。
   const condition = React.useMemo( () =>{
-    let condition;
+    let condition = { lj: 'AND', as: [] };
     if(typeof query==="object") {
       const {
         factoryNo, task: { dep } = '',
         isps: { ispMen: { username } = '' } = ''
       } = query;
-      condition = { lj: 'AND', as: [] };
       if (factoryNo)
         condition.as.push({ s: 'factoryNo', o: 'LK', sv: '%' + factoryNo + '%' });
       if(dep)
@@ -79,8 +78,10 @@ export const DeviceList: React.FunctionComponent<
       if(username)
         condition.as.push({s:'isps.ispMen.username',o:'EQ',sv: username });
     }
-    else
-      condition ={a: {s:'cod',o:'LK', sv:query?query:'%' } };
+    else{
+      condition.as.push({s:'cod',o:'LK', sv:query?query:'%' });
+    }
+    condition.as.push({s:'valid',o:'TRUE'});
     return condition;
   }, [query]);
 
@@ -297,7 +298,11 @@ export const DeviceList: React.FunctionComponent<
                           </Button>
                         </div>
                       )}
-                      {!hasMore && <span>嘿，没有更多了</span> }
+                      {!hasMore &&　<React.Fragment>
+                            <span>嘿，没有更多了</span>
+                           <Button variant="ghost" onPress={() => toRefresh() }>我就刷新</Button>
+                        </React.Fragment>
+                      }
                     </div>
                     <div  ref={refMore}  css={{height: "1px"}}> </div>
 
