@@ -277,5 +277,4 @@ appollo缓存'cache-and-network'情形，若是查询后端返回报错的数据
 设备已删除
   query DEVICE_BY_ID($id: ID! ) {  路由//:xx/
     all:getDeviceSelf(id: $id) { 还有嘻嘻。？
-加设备列表显示重复一个？
-暂时无独立设备库，目前设备是 都知道null还显示?
+ 都知道null还显示?

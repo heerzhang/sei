@@ -19,7 +19,6 @@ type EQP{
 
 
 extend type Query {
-    findAllEQPs: [EQP]!
     getDevice(id:ID!): EQP
     getDeviceSelf(id:ID!): EQP
     findEQPbyCod(cod: String!): EQP

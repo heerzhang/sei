@@ -87,12 +87,12 @@ public class BaseQuery implements GraphQLQueryResolver {
     @PersistenceContext(unitName = "entityManagerFactorySei")
     private EntityManager emSei;
 
-
-    public Iterable<EQP> findAllEQPs() {
-        String partcod="";
-        String partoid="";
+    //前端实际不可能用！把数据库全部都同时查入后端内存，太耗；查询只能缩小范围都得分页查，就算原子更新操作也不能全表一个个update，大的表可执行力太差！
+    @Deprecated
+    public Iterable<EQP> findAllEQPs_留后端自己内部用吧() {
+       String partcod="";
+       String partoid="";
        Pageable pageable = PageOffsetFirst.of(0, 35, Sort.by(Sort.Direction.ASC,"oid"));         //Integer.parseInt(10)
-
        Page<EQP> allPage=eQPRepository.findAll(new Specification<EQP>() {
             @Override
             public Predicate toPredicate(Root<EQP> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
@@ -105,7 +105,6 @@ public class BaseQuery implements GraphQLQueryResolver {
                     Path<String> p = root.get("oid");
                     predicateList.add(cb.like(p,"%" + partoid + "%"));
                 }
-
                 predicateList.add(cb.le(root.get("id"),2100));
                 Predicate[] predicates = new Predicate[predicateList.size()];
                 predicateList.toArray(predicates);
@@ -113,23 +112,22 @@ public class BaseQuery implements GraphQLQueryResolver {
                 return null;
             }
         }, pageable);
-
-
-  /*
-//加了EntityGraph反而更慢HHH000104: firstResult/maxResults specified with collection fetch; applying in memory!
-         EntityGraph graph =emSei.getEntityGraph("EQP.task");
-        //emSei.createQuery("FROM EQP", EQP.class).getResultList()没.setHint(?)没法使用缓存的。
-        List<EQP> eqps = emSei.createQuery("FROM EQP", EQP.class)
-                .setHint("javax.persistence.fetchgraph", graph)
-          //      .setFirstResult(11)
-         //      .setMaxResults(20)
-                .getResultList();
-        //getResultStream().limit(10).collect(Collectors.toList()) 已经全表取到内存来了;
-*/
-
-        List<EQP>  eqps= allPage.getContent();
-        return eqps;        //.subList(74070,74085);
+    /*
+    //加了EntityGraph反而更慢HHH000104: firstResult/maxResults specified with collection fetch; applying in memory!
+             EntityGraph graph =emSei.getEntityGraph("EQP.task");
+            //emSei.createQuery("FROM EQP", EQP.class).getResultList()没.setHint(?)没法使用缓存的。
+            List<EQP> eqps = emSei.createQuery("FROM EQP", EQP.class)
+                    .setHint("javax.persistence.fetchgraph", graph)
+              //      .setFirstResult(11)
+             //      .setMaxResults(20)
+                    .getResultList();
+            //getResultStream().limit(10).collect(Collectors.toList()) 已经全表取到内存来了;
+    */
+       List<EQP>  eqps= allPage.getContent();
+       return eqps;        //.subList(74070,74085);
     }
+
+    //多数系统正常地，查询都是直接规定设计好了参数范围的模式，但是灵活性较差，参数个数和逻辑功能较为限制；但安全性好，就是代码上麻烦点。
     public Iterable<EQP> findEQPLike(DeviceCommonInput filter) {
         return eQPRepository.findAll();
     }

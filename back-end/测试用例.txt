@@ -1,7 +1,7 @@
 http://27.151.117.65:8673/graphiql
 http://192.168.1.105:8673/graphiql
-JPA通用接口
-//标记名字 旧的。
+基本类型Built-in GraphQL::ScalarType有 String Int Long  ID  Boolean Float {精度小数点后5位} BigDecimal长浮点的,可就是没有日期的。
+//标记名字
 //case 用法1;
 {
   "offset": 0,
