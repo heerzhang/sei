@@ -21,10 +21,8 @@ import { Layout } from "./Layout";
 //import { InputGroup } from "./comp/Form";
 import { Link as RouterLink } from "wouter";
 
-export interface LoginProps {
-  path?: string;
+interface LoginProps {
 }
-
 export const Login: React.FunctionComponent<LoginProps> = props => {
   const theme = useTheme();
   const qs = queryString.parse(window.location.search);

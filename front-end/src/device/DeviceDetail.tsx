@@ -25,19 +25,15 @@ export const DeviceDetail: React.FunctionComponent<DeviceDetailProps> = ({ id, e
   //第一个render这里loading=true，要到第二次再执行到了这里才会有data数据!
   console.log("刚DeviceDetail经过taskId=",eqp,"进行中id=",id,"showingRecipe=",matched,params);
 
-  if (eqp) {
+  if(eqp) {
     return (
       <div>
         <ComposeDevice
           readOnly={true}
           id={id}
           //editable={true || eqp.createdBy.id === user.uid}
-          //defaultCredit={value.author}
-          //defaultDescription={value.description}
           //defaultIngredients={ JSON.parse( value.ingredients ) }
-          //defaultImage={value.image}
           dt={eqp}
-          //task={params && params.id}
         />
 
         <AttachedTask
@@ -51,7 +47,7 @@ export const DeviceDetail: React.FunctionComponent<DeviceDetailProps> = ({ id, e
     );
   }
 
-  return null;
+  return <Text variant="h5">暂时查不到该设备</Text>;
 };
 
 

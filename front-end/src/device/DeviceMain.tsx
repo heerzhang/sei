@@ -26,19 +26,15 @@ import { useSession,  useSignOut } from "../auth";
 import { Link, useRoute, useLocation, Switch, Route } from "wouter";
 import { useMedia } from "use-media";
 import { Layout } from "./Layout";
-import { ComposeDevice } from "./ComposeDevice";
-import { AddToTask } from "./task/AddToTask";
 import { TaskList } from "./task/TaskList";
 import { DispatchIspMen } from "./task/DispatchIspMen";
 import { DeviceList } from "./DeviceList";
-import { DeviceDetail } from "./DeviceDetail";
 import { IspEntrance } from "./task/IspEntrance";
 import { useCountOfTask } from "./db";
 import { Link as RouterLink } from "wouter";
 import { DetailedGuide } from "./DetailedGuide";
 
 interface DeviceMainProps {
-  path?: string;
   id?: string;
 }
 

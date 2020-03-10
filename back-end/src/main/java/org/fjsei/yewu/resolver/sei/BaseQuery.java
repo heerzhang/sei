@@ -287,7 +287,9 @@ public class BaseQuery implements GraphQLQueryResolver {
 
     //前端路由乱来？不是正常的url也来这里了： java.lang.Long` from String "favicon.ico": not a valid Long value
     public EQP getDeviceSelf(Long id) {
-        return eQPRepository.findById(id).orElse(null);
+        EQP eqp=eQPRepository.findById(id).orElse(null);
+        // Assert.isTrue(eqp != null,"未找到EQP:"+id);
+        return eqp;
     }
 
     public Iterable<SimpleReport> getReportOfISP(Long id) {

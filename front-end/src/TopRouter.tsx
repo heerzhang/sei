@@ -137,20 +137,15 @@ const NestingtRoute = ({
                          path,
                          ...other
                        }: NestingtRouteProps) => {
-  console.log("NestingtRouteProps来了 , match=",path);
-  const [match, params] = useRoute(path);
-  // path="/testroot/:rest*" >
+  console.log("NestingtRouteProps来了 , path=",path);
   //基于底层连接cookie-token,来获取当前用户  useRoute(`${path}:recipe*`);
   const { user,loading } = useSession();
+  const [match, params] = useRoute(path);
   if(!match)  return null;
-
-  //const user = firebase.auth().currentUser;
   let urlhead=path.lastIndexOf("/:rest*")
-  if(urlhead<0)
-    return null;
-  let basePath= urlhead>0? path.substring(0,urlhead) : "/";
+  if(urlhead<0)   return null;
 
-  console.log("NestingtRoute进入useSession2=",user,";basePath=",params, basePath);
+  console.log("NestingtRoute进入useSession2=",user,";params=",params);
   if (loading) {
     return (
       <div
@@ -176,8 +171,8 @@ const NestingtRoute = ({
     return <Redirect to="/login" />;
     //return null;
   }
-
-  return <Component path={basePath} />;
+  //采用基准相对路径模式<Component path={basePath} />的也不好管理。
+  return <Component />;
 };
 
 //延迟加载（在组件渲染的时候，再去加载该组件）：延迟加载组件，需要个渲染加载过程,用旋转圆圈提示用户，加载进行时。

@@ -56,7 +56,10 @@ export const ComposeDevice: React.FunctionComponent<ComposeDeviceProps> = ({
           ? ''
           : null;
       });　 */
+
+  //这里ingredients挂载初始化后只能setIngredients改了，useState()后面参数变动就不再起作用了。
   const [ingredients, setIngredients] = React.useState<any>( dt||{} );
+  console.log("刚ComposeDevice经过EQPis",dt,"进行中id=",id,"ingredients=",ingredients);
   const [, setLocation] = useLocation();
 
   const [Options, setOptions] = React.useState({});

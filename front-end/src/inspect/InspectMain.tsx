@@ -32,12 +32,10 @@ import { ReportSample } from "./ReportSample";
 import { AddReport } from "./report/AddReport";
 
 
-export interface MainProps {
-  path?: string;
+export interface InspectMainProps {
   id?: string;
 }
-
-export const InspectMain: React.FunctionComponent<MainProps> = props => {
+export const InspectMain: React.FunctionComponent<InspectMainProps> = props => {
   const theme = useTheme();
   const {user} = useSession();
   const isLarge = useMedia({ minWidth: "768px" });

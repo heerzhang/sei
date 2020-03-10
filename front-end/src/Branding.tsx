@@ -20,10 +20,8 @@ import {
 //无需登录即可显示的　主页面；
 
 
-export interface BrandingProps {
-  path?: string;
+interface BrandingProps {
 }
-
 export const Branding: React.FunctionComponent<BrandingProps> = (props) => {
   const theme = useTheme();
   const showingRecipe = props["*"];   　　 //"这个是问号前的除已预定义部分的剩余路径lo/gins/ds？

@@ -185,6 +185,7 @@ export const DetailedGuide: React.FunctionComponent<DetailedGuideProps> = ({
                 }}
                 >
                   {/*三级路由了： 嵌套再嵌套了一层 布局级别的组件*/}
+                  {error && error.message}
                   <ThirdRouterContent id={id} device={dtvalue}/>
 
                   <div css={{ marginTop: theme.spaces.sm }}>

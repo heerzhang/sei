@@ -25,12 +25,11 @@ import { useMedia } from "use-media";
 
 //骨架-背景
 
-export interface LayoutProps {
+interface LayoutProps {
   children: React.ReactNode;
-  path?: string;
 }
 //公用部分的组件可以直接引入；
-export const Layout: React.FunctionComponent<LayoutProps> = ({ children, path }) => {
+export const Layout: React.FunctionComponent<LayoutProps> = ({ children,  }) => {
   const theme = useTheme();
   const {user,} = useSession();
   const [query, setQuery] = React.useState("");
@@ -42,18 +41,16 @@ export const Layout: React.FunctionComponent<LayoutProps> = ({ children, path })
 
   const [nowPath, setLocation] = useLocation(); 　//取得路由钩子, nowPath是整个url。
 
-  const [, params] = useRoute(`${path}/:recipe*`);
-  const showingRecipe = params.recipe;
-  //控制界面的关键！：  showingRecipe=显示具体单项的菜谱的ID或者'new'; ==控制右部分界面显示。
-  //注意小屏场合：ＵＲＬ的参数recipe*，带上ID就说明，迫使renderList=false必须　隐藏掉；　否则界面会重叠。
-  const renderList = isLarge || !showingRecipe;  　//大屏或者小屏但是没有显示具体单项的菜谱的场合。
+ // const [, params] = useRoute(`${path}/:recipe*`);
+ // const showingRecipe = params.recipe;
+
 
   function onLogoutDo() {
     setLocation("/login",  false );
     //navigate("/login" , { replace: true });
   }
   const { userList, submitfunc:signOut, error:errLogin, logging,setLogging } = useSignOut(onLogoutDo);
-  console.log("Layout路由2z=",location.search,";showingRecipe=",showingRecipe);
+ // console.log("Layout路由2z=",location.search,";showingRecipe=",showingRecipe);
 
   return (
     <React.Fragment>

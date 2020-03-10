@@ -38,8 +38,7 @@ import { Layout } from "./Layout";
 //手机上看起来好像许多个页面，实际上要人工根据逻辑去控制页面元素的隐藏与否标记，人工营造多种显示形态！
 //主页面框架结构：左半边RecipeList， FollowingList{附带FollowingRecipes}， FollowersList + 右边的 MainContent{ 逻辑判定Compose或Recipe }；
 
-export interface MainProps {
-  path?: string;
+interface MainProps {
   id?: string;
 }
 
