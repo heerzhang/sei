@@ -157,7 +157,7 @@ export const ComposeDevice: React.FunctionComponent<ComposeDeviceProps> = ({
                           <ContainLine display={'监察识别码'}>
                             <TransparentInput
                               autoFocus={true}
-                              placeholder="可以不要输入"
+                              placeholder="导入的情形可以不填写"
                               value={ingredients.oid||''}
                               onChange={e => {
                                 setIngredients( {

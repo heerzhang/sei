@@ -150,7 +150,7 @@ export const useInvalidateEQP = (options) => {
   return { result ,submit, error, loading, called };
 };
 
-
+//這若id='new'的照样能发送给后端的底层去处理的。 id=null undefined就不发送。
 const DEVICE_BY_ID = gql`
   query DEVICE_BY_ID($id: ID! ) {
     all:getDeviceSelf(id: $id) {

@@ -40,6 +40,7 @@ export const DetailedGuide: React.FunctionComponent<DetailedGuideProps> = ({
   const [, setLocation] = useLocation();
   const [match, params] = useRoute("/device/:id/:rest*");
   let id =(match && params.id);
+  if(id==='new')  id=null;
 
   const { loading ,items: dtvalue, error ,refetch} = useDeviceDetail( { id } );
   const {result, submit:updateFunc, } = useInvalidateEQP({
@@ -73,7 +74,6 @@ export const DetailedGuide: React.FunctionComponent<DetailedGuideProps> = ({
         }
       }}
     >
-      <Helmet title={id ? '有结果了' : "新增任务"} />
       <Navbar
         css={{
           zIndex: theme.zIndices.sticky,
@@ -185,7 +185,7 @@ export const DetailedGuide: React.FunctionComponent<DetailedGuideProps> = ({
                 }}
                 >
                   {/*三级路由了： 嵌套再嵌套了一层 布局级别的组件*/}
-                  {error && error.message}
+                  {id && error && error.message}
                   <ThirdRouterContent id={id} device={dtvalue}/>
 
                   <div css={{ marginTop: theme.spaces.sm }}>

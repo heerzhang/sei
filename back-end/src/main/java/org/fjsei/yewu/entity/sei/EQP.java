@@ -35,23 +35,6 @@ import java.util.stream.Collectors;
 @Entity
 //@Table(indexes={ @Index(name="type_idx",columnList="type"),
        // @Index(name="factoryNo_idx",columnList="factoryNo")  } )
-@NamedEntityGraphs({
-        @NamedEntityGraph(name= "EQP.task",
-                attributeNodes = {
-                        @NamedAttributeNode(value= "task",subgraph= "taskg"),
-                },
-                subgraphs = {
-                        @NamedSubgraph(name = "taskg", attributeNodes =
-                                { @NamedAttributeNode("isps"),  }
-                        ),
-                }
-        ) ,
-        @NamedEntityGraph(name = "EQP.isps",
-                attributeNodes = {
-                        @NamedAttributeNode(value= "isps",subgraph= "ispsg"),
-                }
-        )
-})
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "Fast")
 public class EQP {
     @Id
@@ -151,3 +134,23 @@ public class EQP {
 //JPA 一对多延迟加载与关系维护,属性级延迟加载blob大字段   https://blog.csdn.net/lhd85/article/details/51692546
 //访问延迟属性若EntityManager这个对象被关闭，我们再去访问延迟属性的话，就访问不到，并抛出延迟加载意外;spring.jpa.properties.hibernate.enable_lazy_load_no_trans=true
 //枚举，enum转换器 @Converter(autoApply = true)  ； https://thoughts-on-java.org/jpa-21-type-converter-better-way-to/
+
+/* 删除没用的头注解：
+@NamedEntityGraphs({
+        @NamedEntityGraph(name= "EQP.task",
+                attributeNodes = {
+                        @NamedAttributeNode(value= "task",subgraph= "taskg"),
+                },
+                subgraphs = {
+                        @NamedSubgraph(name = "taskg", attributeNodes =
+                                { @NamedAttributeNode("isps"),  }
+                        ),
+                }
+        ) ,
+        @NamedEntityGraph(name = "EQP.isps",
+                attributeNodes = {
+                        @NamedAttributeNode(value= "isps",subgraph= "ispsg"),
+                }
+        )
+})
+*/

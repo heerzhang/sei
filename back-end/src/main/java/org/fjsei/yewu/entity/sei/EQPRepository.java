@@ -36,7 +36,7 @@ public interface EQPRepository extends JpaRepository<EQP, Long>, JpaSpecificatio
             javax.persistence.fetchgraph： 完全放弃原有Entity的定义，定义仅需要获取什么字段/关系
          */
 
-        //目的提前join取数据,减少sql语句数,能提高效率。 通过@EntityGraph来指定EQP类中定义的NamedEntityGraph
+        //目的提前join取数据,减少sql语句数,能提高效率。 通过@EntityGraph来指定EQP类中定义的NamedEntityGraph；可被实际证明不好使的，就不用了NamedEntityGraph。
 
         //@EntityGraph(value="EQP.task",type= EntityGraph.EntityGraphType.LOAD)
 
