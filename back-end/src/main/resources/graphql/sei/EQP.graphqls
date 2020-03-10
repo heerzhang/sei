@@ -13,6 +13,7 @@ type EQP{
     isps: [ISP]
     #外模型看到的字段和POJO可不同
     meDoIsp: [ISP]
+    valid: Boolean
 }
 
 

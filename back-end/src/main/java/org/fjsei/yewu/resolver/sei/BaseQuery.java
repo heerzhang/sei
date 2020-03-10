@@ -485,7 +485,7 @@ public class BaseQuery implements GraphQLQueryResolver {
         //是否需要重新初始化技术参数设备基本字段呢？
         return report;
     }
-
+    //前端设备列表
     public Iterable<EQP> findAllEQPsFilter(WhereTree where,int offset,int first,String orderBy,boolean asc) {
         User  user= checkAuth();
         if(user==null)   return null;

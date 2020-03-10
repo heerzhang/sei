@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashSet;
@@ -63,6 +64,11 @@ public class EQP {
 
     @Column(length =128, unique = true)
     private String cod; //设备号
+
+    //该条设备记录已被设置成了删除态不再有效，就等待以后维护程序去清理这些被历史淘汰的数据了。
+    @NotNull
+    private Boolean valid=true;
+
     @Column(length =128, unique = true)
     private String oid; //监察识别
     private String type;

@@ -263,4 +263,5 @@ Twitter强迫所有第三方开发者使用OAuth 2； https安全。
 @Column(name = "contact_name",columnDefinition=" clob not null" )
     private String name;
 ？Debug运行死循环？而Run运行正常的。特别注意IDEA界面上Mute breakpoits那个选择按钮;启动时刻会死掉。
+JPA加字段ORA-01758: 要添加必需的 (NOT NULL) 列, 则表必须为空。人工方式添加同名字字段。无效字段导致该实体查询都歇菜。人工加的字段JPA不会再核查的。
 

@@ -117,7 +117,8 @@ export const DetailedGuide: React.FunctionComponent<DetailedGuideProps> = ({
                        }
                     }>其他功能
                   </MenuItem>
-                  <MenuItem onPress={() => null }>设备停用</MenuItem>
+                  <MenuItem onPress={() => null }>法定设备导入后的拆除报废</MenuItem>
+                  <MenuItem onPress={() => null }>委托设备不再维护时删除</MenuItem>
                   <MenuItem onPress={() => refetch( {} )}>刷新获最新数据</MenuItem>
                 </MenuList>
               }
