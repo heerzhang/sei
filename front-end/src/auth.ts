@@ -35,30 +35,18 @@ export function useSignOut(funcCall) {
   return { logging,setLogging, userList ,submitfunc:createPost,error　};
 }
 
-//登录
-const CREATE_POST = gql`
+const LOGIN_TO_SERVER = gql`
   mutation createPost($name: String!, $password: String!) {
-    authenticate(username: $name, password: $password) 
+   res: authenticate(username: $name, password: $password) 
   }
 `;
-
-//react钩子的使用方法规定，用法严格规定，只能在FC函数组件的开头时用的。
-export function useLoginToServer(form:any) {
-  const [logging, setLogging] = useState(true);
-  const [userList, setUserList] = useState([]);
-  const name =form.email;
-  const password =form.password;
-
-  const [createPost, {error, }] = useMutation(CREATE_POST, {
-    variables: {name, password},
-    update: (proxy, mutationResult) => {
-      //const newPost = mutationResult.data.createPost;     //新的一条,登录ok；　　.data.createPost;
-      console.log("loginWithEmDGD update返回Q=" ,mutationResult.data );
-      setUserList( [JSON.stringify(mutationResult.data)] );
-      setLogging(false);
-    }
+//登录
+export const useLoginToServer  = (options) => {
+  const [submit, {error, data, loading, called}] = useMutation( LOGIN_TO_SERVER, {
+    variables: {...options},
+    refetchQueries:  []
   })
-
-  return { logging,setLogging, userList ,submitfunc:createPost,error　};
-}
+  const { res : result} = data||{};
+  return { result ,submit, error, loading, called };
+};
 

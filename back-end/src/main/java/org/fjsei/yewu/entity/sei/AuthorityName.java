@@ -10,9 +10,9 @@ package org.fjsei.yewu.entity.sei;
 //enum AuthorityName {  ROLE_SOMEONE,  ROLE_USER,  ROLE_ADMIN,   ROLE_Manager }
 
 public enum AuthorityName {
-    ROLE_SOMEONE,        //对应Authority实体表的ID=1
-    ROLE_USER,           //ID 2
-    ROLE_ADMIN,
+    ROLE_SOMEONE,        //对应Authority实体表的ID=1；   非登录账户的临时验证通行的，只读很小一部分数据权限。
+    ROLE_USER,           //ID 2；        登录的账户最低权限。
+    ROLE_ADMIN,         //ID=3;  最高权限。
     ROLE_Manager
 }
 

@@ -6,6 +6,7 @@ interface UserContext {
   loading?: boolean
 }
 
+//必须是实例输出。
 export const userContext = React.createContext<UserContext>({
   user: undefined,
   loading: undefined
@@ -18,4 +19,3 @@ CSS屏幕判定选择case用例：
 		[theme.mediaQueries.md]: 正常PAD屏，打印机用的输出，折叠屏幕展开后的，超大的横屏模式手机。
 		[theme.mediaQueries.xl]: 电脑屏。
 */
-

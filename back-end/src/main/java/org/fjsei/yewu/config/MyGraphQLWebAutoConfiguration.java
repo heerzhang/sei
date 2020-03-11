@@ -109,7 +109,7 @@ public class MyGraphQLWebAutoConfiguration {
                 boolean isItVisible=true;   //检查看外模型字段或接口方法的可见性/可使用吗。
                 if(requireRoles.size()>0) {
                     if(auth!=null)
-                        requireRoles.retainAll(auth.getAuthorities());    //交集
+                        requireRoles.retainAll(auth.getAuthorities());    //集合取交集的，剔除不在后面权限集合里面的。
                     else{   //未登录的 或正在注销退出
                         if(visibilityDefaultRole.length()>0)
                             isItVisible = false;
@@ -117,7 +117,7 @@ public class MyGraphQLWebAutoConfiguration {
                 }
 
                 if(visibilityDefaultRole.length()>0) {
-                    if (requireRoles.size() == 0)
+                    if (requireRoles.size() == 0)       //剩下是当前用户能匹配到的权限
                         isItVisible = false;      //不让看了
                     //这里可添加特殊情况-基础入口函数的处理。
                     if(!isItVisible){
@@ -130,11 +130,13 @@ public class MyGraphQLWebAutoConfiguration {
                                 isItVisible=true;
                         }
                     }
-                }else{      //没有配置缺省角色(=测试情形的) ，没登录的带ROLE_ANONYMOUS
+                }else{      //没有配置字段域或接口缺省角色(多属于测试情形的) ，没登录的带ROLE_ANONYMOUS
                     if (requireRoles.size() == 0  && fieldRolesCount>0)
                         isItVisible = false;
+                    //配置文件里visibility.role: =空的+ @authr(qx没注解；==危险咯，这条情景竟可以随意访问了。
                     //这里可添加特殊情况的处理。
                 }
+                //该地执行非常密集，每一个字段都会来这里。
                 if(isItVisible)
                     return fieldsContainer.getFieldDefinition(fieldName);   //正常的授权获取的字段可显示。
                 else

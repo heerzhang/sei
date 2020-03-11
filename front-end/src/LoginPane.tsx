@@ -25,6 +25,7 @@ interface LoginProps {
 }
 export const Login: React.FunctionComponent<LoginProps> = props => {
   const theme = useTheme();
+  const {user,loading:isload} = useSession();
   const qs = queryString.parse(window.location.search);
   const [isRegistering, setIsRegistering] = React.useState(
     typeof qs.register === "string"
@@ -32,34 +33,33 @@ export const Login: React.FunctionComponent<LoginProps> = props => {
   const [loading, setLoading] = React.useState(false);
   const [redirectToReferrer, setRedirectToReferrer] = React.useState(false);
   const [error, setError] = React.useState("");
-  const [form, setForm] = React.useState({ email: "", password: "" });
-  const { userList, submitfunc, error:errLogin,  } = useLoginToServer(form);
-  const {user,loading:isload} = useSession();
+  const [form, setForm] = React.useState({ name: "", password: "" });
 
+  const { result, submit:submitfunc, error:errLogin,  } = useLoginToServer(form);
 
-  console.log("Login开始userList="+ JSON.stringify(userList)+"；useSession user=",user,"errLogin="+errLogin);
+  console.log("Login开始userList="+ JSON.stringify(result)+"；useSession user=",user,"errLogin="+errLogin);
 
 
   //console.log("useLoginToServer回Q=7"+ JSON.stringify(user));
 
-  async function loginEmail(e: React.FormEvent  | Event) {
-    e.preventDefault();
-    const { email, password } = form;
-    try {
-      setError("");
-      setLoading(true);
-      await  submitfunc();
-      setRedirectToReferrer(true);
-    } catch (err) {
-      setLoading(false);
-      setError(err.message);
-    }
+  async function doLogin(e: React.FormEvent  | Event)
+  {
+      e.preventDefault();
+      try {
+        setError("");
+        setLoading(true);
+        await  submitfunc();
+        setRedirectToReferrer(true);
+      } catch (err) {
+        setLoading(false);
+        setError(err.message);
+      }
   }
 
   //都可能无法刷新？ <Redirect  to={from.pathname} />;  setLocation (to: Path, replace?: boolean)
   React.useEffect(() => {
     if(redirectToReferrer)
-        window.location.href = "/";
+        window.location.href = "/";       //强制刷新页面。
   }, [redirectToReferrer]);
 
 
@@ -189,9 +189,9 @@ export const Login: React.FunctionComponent<LoginProps> = props => {
                   <InputGroup  label="账户">
                     <Input
                       onChange={e => {
-                        setForm({ ...form, email: e.currentTarget.value });
+                        setForm({ ...form, name: e.currentTarget.value });
                       }}
-                      value={form.email}
+                      value={form.name}
                       inputSize="md"
                       type="text"
                       //浏览器HTML5验证格式是否正确input type="email" required multiple/>
@@ -213,7 +213,7 @@ export const Login: React.FunctionComponent<LoginProps> = props => {
                   </InputGroup>
                   <div css={{ display: "flex", justifyContent: "flex-end" }}>
                     <Button
-                      disabled={!form.email || !form.password}
+                      disabled={!form.name || !form.password}
                       block
                       component="button"
                       css={{
@@ -224,7 +224,7 @@ export const Login: React.FunctionComponent<LoginProps> = props => {
                       type="submit"
                       size="md"
                       intent="primary"
-                      onPress={e => loginEmail(e)}
+                      onPress={e => doLogin(e)}
                     >
                       {isRegistering ? "注册的需要另外途径申请" : "登录"}
                     </Button>
