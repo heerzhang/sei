@@ -760,7 +760,7 @@ Here is an example of CacheManager level resource tuning, which will use up to 4
     </cache>
 
 
-
+    <!-- [注意!] 实体缓存时间比查询缓存时间短的，查询结果集后若实体人工删除了会报错 -->
     <!-- 下面是2个系统固定的名字。查询缓存时间=取min(entity , results)  -->
 
     <cache name="default-query-results-region"

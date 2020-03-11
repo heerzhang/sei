@@ -32,8 +32,7 @@ import { FadeImage } from "../../FadeImage";
 interface BoundReportsProps {
   id: string;
 }
-//显示某一个关注对象用户菜谱列表
-//有1个地方会引用到的。
+//某个检验ISP 底下的报告队列。
 export const BoundReports: React.FunctionComponent<
   BoundReportsProps
 > = ({ id }) => {
@@ -149,7 +148,7 @@ export const BoundReports: React.FunctionComponent<
             )}
             {/*所有挂接的报告*/}
             {items && items.map(recipe => (
-              <BoundListItem
+              <ReportListItem
                 id={recipe.id}
                 key={recipe.id}
                 editable
@@ -184,7 +183,7 @@ export const BoundReports: React.FunctionComponent<
 };
 
 //缩略图和完整图都是同一个图片的数据内容，　不做差异化处理！
-function BoundListItem({ recipe, id, highlight ,task }: any) {
+function ReportListItem({ recipe, id, highlight ,task }: any) {
   const theme = useTheme();
   const toast = useToast();
   const ispId =task;

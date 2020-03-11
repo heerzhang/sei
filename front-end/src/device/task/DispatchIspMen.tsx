@@ -294,12 +294,13 @@ export const DispatchIspMen: React.FunctionComponent<DispatchIspMenProps> = ({
                           textAlign: "left"
                         }
                       }}
-                      wrap={false}
+                      wrap={true}
                       variant="h6"
                       gutter={false}
                     >
-                      填检验员账号，以 ,号 来分割多个人, 选择方式：开发中。  敬请期待，都忙不过来。
+                      填检验员账号，以 ,号 来分割多个人, 选择方式：开发中。  敬请期待。
                     </Text>
+                    <hr/>
                       <div key={1}>
                         {editing ? (
                         <div>

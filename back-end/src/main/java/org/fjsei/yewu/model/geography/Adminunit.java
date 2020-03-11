@@ -57,3 +57,5 @@ public class Adminunit {
 邮政编码6位数编码,前两位数字表示省（直辖市、自治区）；前三位数字表示邮区；前四位数字表示县（市）；最后两位数字表示投递局（所）。
 中国有省级34个，地级333个，县级2862个，乡镇级41636个。
 */
+
+//CascadeType.ALL（各种级联操作）CascadeType.DETACH  默认情况没有级联操作。  https://www.jianshu.com/p/e8caafce5445

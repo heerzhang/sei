@@ -189,7 +189,7 @@ export const DetailedGuide: React.FunctionComponent<DetailedGuideProps> = ({
                   <ThirdRouterContent id={id} device={dtvalue}/>
 
                   <div css={{ marginTop: theme.spaces.sm }}>
-                    <RouterLink to={`/inspect/${id}`}>
+                    <RouterLink to={`/device/`}>
                       <Button
                         size="lg" noBind
                         intent="primary"

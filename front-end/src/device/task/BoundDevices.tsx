@@ -8,7 +8,7 @@ import {
   List,
   Button,
   ListItem,
-  Skeleton, ScrollView, useInfiniteScroll, Embed
+  Skeleton, ScrollView, useInfiniteScroll, Embed, Avatar
 } from "customize-easy-ui-component";
 
 import {  useQueryBoundDevices } from "./db";
@@ -229,6 +229,12 @@ function DeviceListItem({ recipe, id, highlight ,task }: any) {
           overflow: "hidden"
         }
       }}
+      contentBefore={
+        <React.Fragment>
+          <Avatar size="xs" name={'曳'}/>
+          <Avatar size="xs" name={'有'}/>
+        </React.Fragment>
+      }
       contentAfter={
         recipe.image && !error ? (
           <Embed css={{ width: "60px" }} width={75} height={50}>

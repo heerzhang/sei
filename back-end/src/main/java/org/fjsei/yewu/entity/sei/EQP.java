@@ -2,6 +2,7 @@ package org.fjsei.yewu.entity.sei;
 
 import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.fjsei.yewu.entity.sei.inspect.ISP;
 import org.fjsei.yewu.entity.sei.inspect.Task;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashSet;
@@ -28,32 +30,33 @@ import java.util.stream.Collectors;
 //EntityGraph存在理由:提示JPA去屏蔽LAZY，用JOIN FETCH一次关联表全查，减少SQL语句(规避了1+N 问题)，从而提高速度；但也失去懒加载优点。https://blog.csdn.net/dm_vincent/article/details/53366934
 //对于@NamedEntityGraphs({ @NamedEntityGraph每条定义尽量精简，不要太多字段，必须每一条/每一个接口都要测试对比/打印调试hibernate SQL。
 
-@Component
-@Data
+
 @Getter
 @Setter
+@NoArgsConstructor
 @Entity
-//@Table(indexes={ @Index(name="type_idx",columnList="type"),
-       // @Index(name="factoryNo_idx",columnList="factoryNo")  } )
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "Fast")
 public class EQP {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "commonSeq")
     @SequenceGenerator(name = "commonSeq", initialValue = 1, allocationSize = 1, sequenceName = "SEQUENCE_COMMON")
     protected Long id;
-
+    //乐观锁同步用，［注意］外部系统修改本实体数据就要改它时间一起commit事务。@Version防第二类更新丢失；
     @Version
-    private Timestamp version;   //乐观锁同步用，外部系统修改本实体数据就要改它时间一起commit事务。@Version防第二类更新丢失；
+    private Timestamp version;
 
-    @Column(length =128, unique = true)
-    private String cod; //设备号
+    @Size(min = 5, max = 30)
+    @Column( unique = true)
+    private String cod;         //设备号
 
     //该条设备记录已被设置成了删除态不再有效，就等待以后维护程序去清理这些被历史淘汰的数据了。
     @NotNull
     private Boolean valid=true;
 
+   // @PropertyDef(label="监察识别码")    数据库建表注释文字。
     @Column(length =128, unique = true)
-    private String oid; //监察识别
+    private String oid;
+
     private String type;
     @ManyToOne
     @JoinColumn
@@ -85,14 +88,12 @@ public class EQP {
     private Set<ISP>  isps;
 
 
-
-    public EQP() {
-    }
     public  EQP(String cod,String type,String oid){
         this.cod=cod;
         this.type=type;
         this.oid=oid;
     }
+    //@Transient用法，非实际存在的实体属性，动态生成的实体临时属性字段。
     //大规模数据集查询不可用它，效率太慢，应该。。
     //本函数执行之前，JPA数据实际已都取完成了。
     //安全考虑，过滤isps字段合理输出,代替原来缺省的getXXX
@@ -106,25 +107,13 @@ public class EQP {
                 curruser==men.getId()
                     ).count()>0 )
         ).collect(Collectors.toSet());
-
-
-        //速度慢
+       //[误区]像这样的stream().filter().collect全部转载到后端服务器内存，速度慢！正常的应当依赖数据库去直接驱动SQL查询过滤后返回小部分数据集合。
+        //Todo: 应该改为JPA接口从让数据库替您搜索，我这里等着数据库给答案就好了。
     }
-
-
 
 }
 
 
-
-/*
-@NamedEntityGraphs({
-        @NamedEntityGraph(name = "EQP.all",
-                attributeNodes = {}  )
-        @NamedEntityGraph(name = "EQP.special",  多个
-                attributeNodes = {}  )
-    })
-*/
 
 //EntityGraph用处：用来避免Lazy延迟加载导致的代码失败问题，内部附带效果：减少了发给数据库的select语句条数。
 //定义多个 @NamedAttributeNodes 以定义更复杂的图，也可以用 @NamedSubGraph 注解来创建多层次的图。https://thoughts-on-java.org/jpa-21-entity-graph-part-2-define/?utm_source=rebellabs
@@ -135,13 +124,13 @@ public class EQP {
 //访问延迟属性若EntityManager这个对象被关闭，我们再去访问延迟属性的话，就访问不到，并抛出延迟加载意外;spring.jpa.properties.hibernate.enable_lazy_load_no_trans=true
 //枚举，enum转换器 @Converter(autoApply = true)  ； https://thoughts-on-java.org/jpa-21-type-converter-better-way-to/
 
-/* 删除没用的头注解：
+/* 删除没用的头注解： 用@EntityGraph(value="EQP.task",)做查询优化可不容易掌控的；很容易出笛卡儿积爆炸问题。
 @NamedEntityGraphs({
         @NamedEntityGraph(name= "EQP.task",
                 attributeNodes = {
                         @NamedAttributeNode(value= "task",subgraph= "taskg"),
                 },
-                subgraphs = {
+                subgraphs = {       嵌套的指示，下一级关联对象的hits;
                         @NamedSubgraph(name = "taskg", attributeNodes =
                                 { @NamedAttributeNode("isps"),  }
                         ),
@@ -154,3 +143,20 @@ public class EQP {
         )
 })
 */
+
+//无法引用其他schema底下的表的外键？建立同义词(synonym)＋授权。
+//@Table( schema="newsei")    Oracle下就等于用户，似乎没啥必要性，管理更麻烦。Oracle下RAC数据库可被多实例所使用。
+
+/*
+@NamedEntityGraphs({  每个NamedEntityGraph都是独立无关的hints，若一个查询语句同时加上多个hint，底层它该如何协调;底层API不会精确区分把控上层应用实体的真正目的。
+        @NamedEntityGraph(name = "EQP.all",    某个场景用一个hint;
+                attributeNodes = {}  )      //实际上attributeNodes可以多个，但是特别小心，关联不密切的关联对象一次性join=会产生爆炸记录数！！attributeNodes只做一个较妥。
+        @NamedEntityGraph(name = "EQP.special",    另外一个场景用另外一个hint;
+                attributeNodes = {}  )
+    })
+join爆炸记录数范例 @NamedEntityGraph( name="EQP.task",attributeNodes={　@NamedAttributeNode("task"),　@NamedAttributeNode("isps")　} )  无关的task+isps搞在一起＝爆炸。
+*/
+
+//注解定制索引，没啥实际意义。
+//@Table(indexes={ @Index(name="type_idx",columnList="type"),
+//         　 @Index(name="factoryNo_idx",columnList="factoryNo")  } )

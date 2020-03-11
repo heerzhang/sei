@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Entity
-@Table(name = "AUTHORITY")
+@Table(name = "AUTHORITY" )
 public class Authority {
 
     @Id

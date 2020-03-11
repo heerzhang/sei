@@ -249,11 +249,10 @@ export const DeviceList: React.FunctionComponent<
                               setLocation(`/device/${hit.id}`);
                             }}
                           contentBefore={
-                            <Avatar
-                              size="sm"
-                              src={hit.oid}
-                              name={hit.id}
-                            />
+                            <React.Fragment>
+                              <Avatar size="xs" name={'曳'}/>
+                              <Avatar size="xs" name={'有'}/>
+                            </React.Fragment>
                           }
                           primary={`${hit.cod}`}
                           contentAfter={

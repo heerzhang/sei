@@ -18,7 +18,7 @@ import {
   IconChevronRight,
   IconMoreVertical,
   StackTitle,
-  Skeleton
+  Skeleton, IconPackage
 } from "customize-easy-ui-component";
 import { SearchBox } from "../SearchBox";
 import debug from "debug";
@@ -28,7 +28,7 @@ import { useSession } from "../auth";
 import find from "lodash.find";
 import { useDeleteRequestFollow, usePaginateQueryUser,  } from "./db";
 import { StackItem } from "react-gesture-stack";
-import { Link as RouterLink,  } from "wouter";
+import { Link as RouterLink, useLocation } from "wouter";
 import { BoundReports } from "./report/BoundReports";
 import { SearchTitle } from "../comp/base";
 
@@ -63,6 +63,7 @@ export const RelationList: React.FunctionComponent<RelationListProps> = ({
   const theme = useTheme();
   const toast = useToast();
   const {user,} = useSession();
+  const [, setLocation] = useLocation();
   //graphQl的查询usexxx钩子函数，无法主动从后端读取最新数据。
   //const { loading, userList:followings } = useFollowerIngs(false);
   let filtercomp={where:
@@ -78,10 +79,7 @@ export const RelationList: React.FunctionComponent<RelationListProps> = ({
 
   //状态管理　relation＝当前显示的或者按钮点击事件产生,关注的user是谁。
   const [relation, setRelation] = React.useState(null);
-  //console.log("来看当前的relation=",relation );
-//  const { userList:sucessFollow ,submitfunc:requestFollow } = useRequestFollow(user, relation||{});
-  //钩子函数必须放在组件代码顶部，不能放置在逻辑条件分子语句内部，要确保都能调用到钩子函数。
-  const { submitfunc:deleteRequestFollow } = useDeleteRequestFollow(relation && relation.id);
+
 
   const [filter, setFilter] = React.useState({where:
         {cod:query },
@@ -146,7 +144,7 @@ export const RelationList: React.FunctionComponent<RelationListProps> = ({
             <SearchTitle>
               <SearchBox
                 css={{ borderBottom: "none" }}
-                label="Search 从algoliasearch云 来搜寻某个用户 to follow"
+                label="Search 从algoliasearch云 来搜寻某个用户"
                 query={query}
                 setQuery={setQuery}
               />
@@ -207,16 +205,16 @@ export const RelationList: React.FunctionComponent<RelationListProps> = ({
                     </React.Fragment>
                   )}
 
-                  {followings　&&　followings.map((item,i) => {
-                    return (
-                      <RouterLink
-                        key={i}
-                        to={`/inspect/${item.id}`} >
+                 {followings　&&　followings.map((item,i) => {
+                   return (
+                    <RouterLink  key={i}
+                         to={`/inspect/${item.id}`} >
                       <ListItem
                         key={item.id}
                         interactive={ true }
                         onPress={() =>
                           showRelation({ ...item  } )
+          //这里一次点击两个都触发了：RouterLink + showRelation; 详情页面 +左边框内<Stack 状态切换。首先触发Stack下沉的，然后页内路由，已加载组件状态能保留。
                         }
                         contentBefore={
                           <Avatar
@@ -236,7 +234,7 @@ export const RelationList: React.FunctionComponent<RelationListProps> = ({
                       >
                         {`检验号 ${item.id} 日期:${item?.task?.date||''}`}
                       </ListItem>
-                      </RouterLink>
+                    </RouterLink>
                     );
                   })}
                 </List>
@@ -254,6 +252,11 @@ export const RelationList: React.FunctionComponent<RelationListProps> = ({
                   <Popover
                     content={
                       <MenuList>
+                        <MenuItem contentBefore={<IconPackage />}  onPress={() => {
+                          setLocation(`/inspect/${relation.id}/addReport/choose`,  true );
+                        } }>
+                          增加个检验报告
+                        </MenuItem>
                         <MenuItem onPress={() => void 0 }>
                           检验号{relation.id || ''}其他功能
                         </MenuItem>

@@ -18,6 +18,7 @@ type Report implements SimpleReport{
 interface SimpleReport {
     id:ID!
     type: String!
+    #后面加权限认证@authr(qx : ["USER","ADMIN"])没这权限之一无法访问。
     no: String! @authr(qx : ["USER","ADMIN"])
     upLoadDate: String
     isp(id: ID ): ISP
@@ -33,7 +34,8 @@ extend type Query {
 }
 
 extend type Mutation {
-    newReport(isp: ID!,modeltype: String!, modelversion:String) :Report! @authr(qx:["REPCHECKER","ADMIN"])
+    #末尾加权限 @authr(qx:["REPCHECKER","ADMIN"])，没权就用不了接口函数。
+    newReport(isp: ID!,modeltype: String!, modelversion:String) :Report! @authr(qx:["USER","ADMIN"])
     buildReport(isp: ID!,no: String!,path: String!) : Report!
     modifyOriginalRecordData(id: ID!,operationType:Int!,data: String,deduction: String) : Report
     modifyOriginalRecordFiles(id: ID!, fileIDs: [ID]!) : Report
