@@ -12,49 +12,6 @@ export const useSession = () => {
   const { user, loading } = useContext(userContext);
   return  { user, loading };
 };
-/*
-export const loginWithGoogle = async () => {
-  try {
-    const result = await firebase.auth().signInWithPopup(provider);
-  } catch (err) {
-    console.error(err);
-    throw err;
-  }
-};
-
-const github = new firebase.auth.GithubAuthProvider();
-
-export const loginWithGithub = async () => {
-  try {
-    const result = await firebase.auth().signInWithPopup(github);
-  } catch (err) {
-    console.error(err);
-    throw err;
-  }
-};
-
-export const loginWithEmail = async (email: string, password: string) => {
-  try {
-    const results = await firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password);
-  } catch (err) {
-    console.error(err);
-    throw err;
-  }
-};
-
-export const createUserWithEmail = async (email: string, password: string) => {
-  try {
-    await firebase.auth().createUserWithEmailAndPassword(email, password);
-  } catch (err) {
-    console.error(err);
-    throw err;
-  }
-};
-*/
-
-//export const signOut = () => firebase.auth().signOut();
 
 //注销
 const CREATE_SIGNOUT = gql`
@@ -87,8 +44,6 @@ const CREATE_POST = gql`
 
 //react钩子的使用方法规定，用法严格规定，只能在FC函数组件的开头时用的。
 export function useLoginToServer(form:any) {
-  //const user = useSession();
-
   const [logging, setLogging] = useState(true);
   const [userList, setUserList] = useState([]);
   const name =form.email;
@@ -103,15 +58,6 @@ export function useLoginToServer(form:any) {
       setLogging(false);
     }
   })
-
-  //const client = useApolloClient();
-  // console.log('AC instance stored in the Context', client);
-  /*   没有必要这个的！：
-  React.useEffect(() => {
-    setLoading(true);
-
-  }, [createPost]);
-  */
 
   return { logging,setLogging, userList ,submitfunc:createPost,error　};
 }

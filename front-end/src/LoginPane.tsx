@@ -26,44 +26,33 @@ interface LoginProps {
 export const Login: React.FunctionComponent<LoginProps> = props => {
   const theme = useTheme();
   const qs = queryString.parse(window.location.search);
-
   const [isRegistering, setIsRegistering] = React.useState(
     typeof qs.register === "string"
   );
-  //console.log("Login qs开始useLocation =", window.location, nowPath);
   const [loading, setLoading] = React.useState(false);
   const [redirectToReferrer, setRedirectToReferrer] = React.useState(false);
-
-  //const { from } = { from: { pathname: "/" } };
-
-  // logging in errors
   const [error, setError] = React.useState("");
   const [form, setForm] = React.useState({ email: "", password: "" });
   const { userList, submitfunc, error:errLogin,  } = useLoginToServer(form);
- //console.log("useLoginToServer回Q=7"+ JSON.stringify(user));
   const {user,loading:isload} = useSession();
+
+
   console.log("Login开始userList="+ JSON.stringify(userList)+"；useSession user=",user,"errLogin="+errLogin);
 
 
+  //console.log("useLoginToServer回Q=7"+ JSON.stringify(user));
+
   async function loginEmail(e: React.FormEvent  | Event) {
     e.preventDefault();
-
     const { email, password } = form;
-
-    //const fn = isRegistering ? createUserWithEmail : loginWithEmail;
-
     try {
       setError("");
       setLoading(true);
-      console.log("Login开始form="+ JSON.stringify(form)+"；name="+JSON.stringify(email)+"password="+password);
-      //await fn(email, password);
       await  submitfunc();
-      console.log("login返回Q３ redirectToReferrer=", redirectToReferrer);
-     // const user=userList;
       setRedirectToReferrer(true);
     } catch (err) {
       setLoading(false);
-      setError(err.message || "Please try again.");
+      setError(err.message);
     }
   }
 
@@ -137,7 +126,7 @@ export const Login: React.FunctionComponent<LoginProps> = props => {
               }}
             >
               <Text variant="h4">
-                {isRegistering ? "Create an account" : "使用前先登陆账户"}
+                {isRegistering ? "我要注册一个账户" : "使用前先登陆账户"}
               </Text>
 
               <div
@@ -161,7 +150,7 @@ export const Login: React.FunctionComponent<LoginProps> = props => {
                   </Text>
                 ) : (
                   <Text css={{ fontSize: theme.fontSizes[0] }}>
-                    若没有账户?{" "}
+                    若没有账户?{" "}先要
                     <StyledLink
                       href="#"
                       onClick={e => {
@@ -169,16 +158,11 @@ export const Login: React.FunctionComponent<LoginProps> = props => {
                         setIsRegistering(true);
                       }}
                     >
-                      先要申请
-                    </StyledLink>
-                    <RouterLink   to="/login?register=true" >
-                      <Button
-                        size="xs" noBind
-                        intent="primary"
-                        iconAfter={<IconArrowRight />}
-                      >注册
+                      <Button size="xs" noBind intent="primary" iconAfter={<IconArrowRight/>}
+                      >申请注册
                       </Button>
-                    </RouterLink>
+                    </StyledLink>
+
                   </Text>
                 )}
               </div>
@@ -264,3 +248,4 @@ export const Login: React.FunctionComponent<LoginProps> = props => {
     type={ form.password? "password":"text"}
     />
 */
+//若用<RouterLink to="/login?register=true">只是在URL?号后面修改的去路由，就不会有任何动作的，因为本身已经是/login这个页面，这样问号后面不作数了。
