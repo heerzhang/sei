@@ -16,6 +16,10 @@ public class BookNotFoundException extends RuntimeException implements GraphQLEr
         super(message);
         extensions.put("invalidBookId", invalidBookId);
     }
+    public BookNotFoundException(String message, String indice) {
+        super(message);
+        extensions.put("指示", indice);
+    }
 
     @Override
     public List<SourceLocation> getLocations() {

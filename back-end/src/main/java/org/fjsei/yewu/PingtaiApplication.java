@@ -104,6 +104,7 @@ public class PingtaiApplication {
 }
 
 
+//安全控制核心在：org/fjsei/yewu/config/MyGraphQLWebAutoConfiguration.java ，没有jwt认证，就无法访问后端资源。
 //数据库H2没有启动时，可能无法启动本服务器。
 //hibernate-ehcache不支持3代的，所以出现告警WARN  org.hibernate.orm.deprecation - HHH020100:  新版本ehcache3不能用,要配套ehcache2；
 //注入配置参数对象的模式@EnableConfigurationProperties， 否则启动时找不到bean；

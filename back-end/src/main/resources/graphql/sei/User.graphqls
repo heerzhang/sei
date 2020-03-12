@@ -39,7 +39,7 @@ extend type Query {
 }
 
 extend type Mutation {
-    newUser(username: String!,password: String,dep: String,mobile: String) : Boolean!
+    newUser(username: String!,password: String!,mobile: String!,external:String,eName:String,ePassword:String) : Boolean!
     authenticate(username: String!, password: String!) : Boolean!
     logout : Boolean!
 }

@@ -45,10 +45,14 @@ public class JpaTestController {
         return jpaService.getTeacher(name);
     }
 
+    //实际POST测试成功： URL=  http://27.151.117.65:8673/teacher/teacher
+    //Content-Type application/json; charset=utf-8   /   Cache-Control no-cache
+    //请求Body = {"id":null,"name":"意查询","age":"567","course":"b是没变n2"}   ；应答体={}
     ///@Transactional
     @RequestMapping(method = RequestMethod.POST, value = "/teacher")
     public void addTopic(@RequestBody Teacher topic) {
         jpaService.addTeacher(topic);
+        //保存数据库成功
     }
 
 }

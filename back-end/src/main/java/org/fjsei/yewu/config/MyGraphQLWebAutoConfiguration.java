@@ -10,7 +10,6 @@ import graphql.schema.visibility.GraphqlFieldVisibility;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -19,6 +18,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+
+//核心安全配置代码！！　特特别提醒，　若graphql协议接口不做安全配置就非常不安全了。
+//配置文件sei.control.permitAnyURL=true那么不登录REST能随意访问，但是graphQL没变，graphQL的URL始终都允许，可是卡在字段/接口权限过滤。
+//第一道门是JWT认证，graphql 的authenticate　auth认证，随后才能使用，REST也会被这道门拦截。
+//没有登录就用的，只有　auth　authenticate　等极少数注册的接口才不会爆出异常；其他的:{permitAnyURL=false} REST报401;而graphQL就报非法字段或方法。
 
 //import static　使用：可参考graphql.schema.visibility.NoIntrospectionGraphqlFieldVisibility
 /**
@@ -119,7 +123,7 @@ public class MyGraphQLWebAutoConfiguration {
                 if(visibilityDefaultRole.length()>0) {
                     if (requireRoles.size() == 0)       //剩下是当前用户能匹配到的权限
                         isItVisible = false;      //不让看了
-                    //这里可添加特殊情况-基础入口函数的处理。
+                    //添加特殊情况入口处理。没有登录就用的，极少数注册的接口。不经过JWT cockie授权也可访问。
                     if(!isItVisible){
                         if(fieldsContainer.getName().equals("Query")) {
                             if(fieldName.equals("auth") )
@@ -147,6 +151,7 @@ public class MyGraphQLWebAutoConfiguration {
         };
     }
 }
+
 
 
 /* 自定义的语法　(外模型文件里面的)

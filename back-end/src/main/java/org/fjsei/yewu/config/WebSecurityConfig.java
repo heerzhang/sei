@@ -80,6 +80,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests();
 
         if(isPermitAnyURL) {
+            //若PermitAnyURL=true那么：不登录REST就能随意访问，但是graphQL没变化。
             //测试等场合，放开接入控制的。
             middleRegistry = middleRegistry.antMatchers("/**").permitAll();
         }else {

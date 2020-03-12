@@ -1,4 +1,4 @@
-http://localhost:8083/voyager 可以察看整个模型关系图。
+http://localhost:8083/voyager 可以察看整个模型关系图 http://27.151.117.65:8673/voyager。
 启动  nohup java  -Xms512m -Xmx4096m -Xmn32m -Xss16m  Test.jar --server.port=8080 >test.log 2>&1 &
 graphQL的输入输出的参数类型完全不能互用，type做输出，input做输入，无法共享类型。
 Boot其它配置  https://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
@@ -189,7 +189,7 @@ operationName：操作名称，选填，查询文档有多个操作时必填。
 }
 //ok
 GET http://localhost:8083/graphql?query={findAllJcAuthors{id,nickname}}
-//ok
+//ok 直接用REST Client工具窗口做的请求，编码 格式稍微需要转换的。相当于更低底层一个层次；
 POST http://localhost:8083/graphql
 Content-Type: application/json; charset=utf-8
 Cache-Control: no-cache
@@ -722,4 +722,3 @@ Hibernate中HQL函数汇总及其说明			https://blog.csdn.net/chenhuade85/arti
 SQL之case when then用法    https://www.cnblogs.com/Richardzhu/p/3571670.html
 CASE =expitem? 、放在where里条件可以， 放在select可行可以加alias，;  alias实际只用于2地方 order by和having; where里不能用。
 
-看看

@@ -32,6 +32,7 @@ import java.util.Set;
         uniqueConstraints={@UniqueConstraint(columnNames={"username"})} )  //={“字段1”,“字段2”}
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "Fast")
 public class User implements Person {
+    //注意id可能带来麻烦，数据库重整，可seq却从小开始，报唯一性约束错！select user_seq.nextval from dual;
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq")
     @SequenceGenerator(name = "user_seq", initialValue = 1, allocationSize = 1, sequenceName = "user_seq")
@@ -194,6 +195,7 @@ public class User implements Person {
         this.username=name;
         this.dep=dep;
         this.lastPasswordResetDate =new Date();
+        this.enabled=false;
     }
     //Entity这里的函数优先级比resolver要低？
     //对应同名字外模型User的约定enabled字段,graphQL都会来这里的,没带参数就是=null缺省;字段就如同函数那样。

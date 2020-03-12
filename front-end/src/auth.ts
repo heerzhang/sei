@@ -36,15 +36,31 @@ export function useSignOut(funcCall) {
 }
 
 const LOGIN_TO_SERVER = gql`
-  mutation createPost($name: String!, $password: String!) {
-   res: authenticate(username: $name, password: $password) 
+  mutation createPost($username: String!, $password: String!) {
+   res: authenticate(username: $username, password: $password) 
   }
 `;
 //登录
 export const useLoginToServer  = (options) => {
   const [submit, {error, data, loading, called}] = useMutation( LOGIN_TO_SERVER, {
-    variables: {...options},
-    refetchQueries:  []
+    variables: {...options}
+  })
+  const { res : result} = data||{};
+  return { result ,submit, error, loading, called };
+};
+
+const REGISTER_TO_SERVER = gql`
+  mutation newUser($username: String!, $password: String!, $mobile: String!, $external: String
+         , $eName: String, $ePassword: String) 
+  {
+   res: newUser(username: $username, password: $password, mobile: $mobile, external: $external
+         , eName: $eName, ePassword: $ePassword) 
+  }
+`;
+//账户申请
+export const useRegisterToServer  = (options) => {
+  const [submit, {error, data, loading, called}] = useMutation( REGISTER_TO_SERVER, {
+    variables: {...options}
   })
   const { res : result} = data||{};
   return { result ,submit, error, loading, called };

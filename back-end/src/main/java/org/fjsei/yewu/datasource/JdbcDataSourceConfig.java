@@ -19,7 +19,7 @@ import javax.sql.DataSource;
 
 @Configuration
 public class JdbcDataSourceConfig {
-
+    //只能一个 是有@Primary 注释的 数据源。
     @Primary
     @Bean(name = "dataSourcePropertiesSei")
     @Qualifier("dataSourcePropertiesSei")
@@ -37,7 +37,7 @@ public class JdbcDataSourceConfig {
     }
 
     /*
-    每个数据库固定配置一个，对应的table映射的/repository目录也固定。
+     每个数据库都要 固定配置一个，对应的table映射的/repository目录也固定。
      */
 
     @Bean(name = "dataSourcePropertiesSdn")
@@ -54,7 +54,7 @@ public class JdbcDataSourceConfig {
         return dataSourceProperties.initializeDataSourceBuilder().build();
     }
 
-    /*
+    /* 旧的库
      */
 
     @Bean(name = "dataSourcePropertiesIncp")
@@ -71,6 +71,24 @@ public class JdbcDataSourceConfig {
         return dataSourceProperties.initializeDataSourceBuilder().build();
     }
 
+    /* 旧的平台运行库;  app.datasource.fjtj是配置文件的某项。
+     */
+
+    @Bean(name = "dataSourcePropertiesFjtj")
+    @Qualifier("dataSourcePropertiesFjtj")
+    @ConfigurationProperties(prefix="app.datasource.fjtj")
+    public DataSourceProperties dataSourcePropertiesFjtj() {
+        return new DataSourceProperties();
+    }
+
+    @Bean(name = "fjtjDataSource")
+    @Qualifier("fjtjDataSource")
+    @ConfigurationProperties(prefix="app.datasource.fjtj")
+    public DataSource fjtjDataSource(@Qualifier("dataSourcePropertiesFjtj") DataSourceProperties dataSourceProperties) {
+        return dataSourceProperties.initializeDataSourceBuilder().build();
+    }
+
+    //下面这种 就不一定必须的了。
 
     /*
     可能用，使用底层Jdbc情况

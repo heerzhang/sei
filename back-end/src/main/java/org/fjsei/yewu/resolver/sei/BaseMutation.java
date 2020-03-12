@@ -7,6 +7,8 @@ import org.fjsei.yewu.entity.sei.inspect.ISP;
 import org.fjsei.yewu.entity.sei.inspect.ISPRepository;
 import org.fjsei.yewu.entity.sei.inspect.Task;
 import org.fjsei.yewu.entity.sei.inspect.TaskRepository;
+import org.fjsei.yewu.entity.sei.oldsys.HrUserinfo;
+import org.fjsei.yewu.entity.sei.oldsys.HrUserinfoRepository;
 import org.fjsei.yewu.exception.BookNotFoundException;
 import org.fjsei.yewu.input.DeviceCommonInput;
 import org.fjsei.yewu.model.geography.*;
@@ -80,7 +82,8 @@ public class BaseMutation implements GraphQLMutationResolver {
     private TownRepository townRepository;
     @Autowired
     private AdminunitRepository adminunitRepository;
-
+    @Autowired
+    private HrUserinfoRepository hrUserinfoRepository;
 
     @PersistenceContext(unitName = "entityManagerFactorySei")
     private EntityManager emSei;                //EntityManager相当于hibernate.Session：
@@ -217,15 +220,25 @@ public class BaseMutation implements GraphQLMutationResolver {
         unitRepository.save(unit);
         return unit;
     }
-    //无需授权的入口型的函数，graphQL不要返回太多内容如User;
+    //无需登录授权访问的特殊函数，graphQL不要返回太多内容如User;
     @Transactional
-    public boolean newUser(String name,String password,String dep,String mobile) {
+    public boolean newUser(String username,String password,String mobile,String external,String eName,String ePassword)
+    {
         if(!emSei.isJoinedToTransaction())      emSei.joinTransaction();
-        User user = new User(name, dep);
+        //前置条件验证, 外部的系统用户直接授权的情形。
+        if(external.equals("旧平台")){
+            String err="";
+            HrUserinfo hrUser=hrUserinfoRepository.findByUserIdEquals(eName);
+            if(hrUser==null)    err="无此用户";
+            else if(!hrUser.getPassword().equals(ePassword))    err="密码不对";
+            else if(hrUser.getStatus()!=2)    err="非正常用户";
+            if(!err.equals(""))  throw new BookNotFoundException("旧平台验证失败"+err,14L);
+        }
+        else return false;
+        User user = new User(username, null);
+        //Todo： 加入MD5 Hash 保密存储。    账户重名的验证。
         user.setPassword(password);
         user.setMobile(mobile);
-        //前置条件验证
-        // return false;
         userRepository.save(user);
         return true;    //都是成功，数据库保存不成功？ 底层就报错;
     }

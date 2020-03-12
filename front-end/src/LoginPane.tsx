@@ -14,7 +14,7 @@ import {
   Alert,
   Container, Input, InputGroup, IconArrowRight
 } from "customize-easy-ui-component";
-import {  useSession, useLoginToServer } from "./auth";
+import { useSession, useLoginToServer, useRegisterToServer } from "./auth";
 //query-string是其他的基础库所依赖的，不是直接引入的。
 import queryString from "query-string";
 import { Layout } from "./Layout";
@@ -33,14 +33,12 @@ export const Login: React.FunctionComponent<LoginProps> = props => {
   const [loading, setLoading] = React.useState(false);
   const [redirectToReferrer, setRedirectToReferrer] = React.useState(false);
   const [error, setError] = React.useState("");
-  const [form, setForm] = React.useState({ name: "", password: "" });
+  const [form, setForm] = React.useState({ username: "", password: "",
+      mobile:'18933469901234', external:'旧平台', eName:'100443', ePassword:'123456a'});
 
   const { result, submit:submitfunc, error:errLogin,  } = useLoginToServer(form);
-
-  console.log("Login开始userList="+ JSON.stringify(result)+"；useSession user=",user,"errLogin="+errLogin);
-
-
-  //console.log("useLoginToServer回Q=7"+ JSON.stringify(user));
+  const { result:regOK, submit:registerfunc, error:errReg } = useRegisterToServer(form);
+  console.log("RegisterToServer开始userList=",regOK,"errReg=",errReg);
 
   async function doLogin(e: React.FormEvent  | Event)
   {
@@ -56,6 +54,19 @@ export const Login: React.FunctionComponent<LoginProps> = props => {
       }
   }
 
+  async function doRegister()
+  {
+    try {
+      setError("");
+      setLoading(true);
+      await  registerfunc();
+      setError("恭喜您，账户申请单已提交，等待自动开通或立刻联系维护人员开");
+      setLoading(false);
+    } catch (err) {
+      setLoading(false);
+      setError(err.message);
+    }
+  }
   //都可能无法刷新？ <Redirect  to={from.pathname} />;  setLocation (to: Path, replace?: boolean)
   React.useEffect(() => {
     if(redirectToReferrer)
@@ -175,8 +186,8 @@ export const Login: React.FunctionComponent<LoginProps> = props => {
               {error && (
                 <Alert
                   css={{ marginBottom: theme.spaces.md }}
-                  intent="danger"
-                  title="An error has occurred while logging in."
+                  intent={regOK ? 'success':"danger"}
+                  title={regOK ? '成功':"报错"}
                   subtitle={error}
                 />
               )}
@@ -189,9 +200,9 @@ export const Login: React.FunctionComponent<LoginProps> = props => {
                   <InputGroup  label="账户">
                     <Input
                       onChange={e => {
-                        setForm({ ...form, name: e.currentTarget.value });
+                        setForm({ ...form, username: e.currentTarget.value });
                       }}
-                      value={form.name}
+                      value={form.username}
                       inputSize="md"
                       type="text"
                       //浏览器HTML5验证格式是否正确input type="email" required multiple/>
@@ -213,7 +224,7 @@ export const Login: React.FunctionComponent<LoginProps> = props => {
                   </InputGroup>
                   <div css={{ display: "flex", justifyContent: "flex-end" }}>
                     <Button
-                      disabled={!form.name || !form.password}
+                      disabled={!form.username || !form.password}
                       block
                       component="button"
                       css={{
@@ -224,9 +235,9 @@ export const Login: React.FunctionComponent<LoginProps> = props => {
                       type="submit"
                       size="md"
                       intent="primary"
-                      onPress={e => doLogin(e)}
+                      onPress={e =>{isRegistering ? doRegister() : doLogin(e) } }
                     >
-                      {isRegistering ? "注册的需要另外途径申请" : "登录"}
+                      {isRegistering ? "注册申请" : "登录"}
                     </Button>
                   </div>
 
