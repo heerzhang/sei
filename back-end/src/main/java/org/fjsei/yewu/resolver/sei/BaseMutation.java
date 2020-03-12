@@ -1,14 +1,13 @@
 package org.fjsei.yewu.resolver.sei;
 
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
-import com.fasterxml.jackson.module.kotlin.ReflectionCache;
 import org.fjsei.yewu.entity.sei.*;
 import org.fjsei.yewu.entity.sei.inspect.ISP;
 import org.fjsei.yewu.entity.sei.inspect.ISPRepository;
 import org.fjsei.yewu.entity.sei.inspect.Task;
 import org.fjsei.yewu.entity.sei.inspect.TaskRepository;
-import org.fjsei.yewu.entity.sei.oldsys.HrUserinfo;
-import org.fjsei.yewu.entity.sei.oldsys.HrUserinfoRepository;
+import org.fjsei.yewu.entity.fjtj.HrUserinfo;
+import org.fjsei.yewu.entity.fjtj.HrUserinfoRepository;
 import org.fjsei.yewu.exception.BookNotFoundException;
 import org.fjsei.yewu.input.DeviceCommonInput;
 import org.fjsei.yewu.model.geography.*;

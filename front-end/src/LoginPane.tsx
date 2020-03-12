@@ -34,7 +34,7 @@ export const Login: React.FunctionComponent<LoginProps> = props => {
   const [redirectToReferrer, setRedirectToReferrer] = React.useState(false);
   const [error, setError] = React.useState("");
   const [form, setForm] = React.useState({ username: "", password: "",
-      mobile:'18933469901234', external:'旧平台', eName:'100443', ePassword:'123456a'});
+      mobile:'18933469901234', external:'旧平台', eName:'100443', ePassword:'cnm321'});
 
   const { result, submit:submitfunc, error:errLogin,  } = useLoginToServer(form);
   const { result:regOK, submit:registerfunc, error:errReg } = useRegisterToServer(form);
@@ -187,7 +187,7 @@ export const Login: React.FunctionComponent<LoginProps> = props => {
                 <Alert
                   css={{ marginBottom: theme.spaces.md }}
                   intent={regOK ? 'success':"danger"}
-                  title={regOK ? '成功':"报错"}
+                  title={regOK ? '恭喜成功':"后端报错"}
                   subtitle={error}
                 />
               )}

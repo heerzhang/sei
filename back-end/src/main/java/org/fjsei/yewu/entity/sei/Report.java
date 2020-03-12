@@ -46,11 +46,13 @@ public class Report  implements SimpleReport {
     //字段长度，数据库要修改定义成 clob
     @Lob
     @Basic(fetch=FetchType.LAZY)
+    @Column( columnDefinition="CLOB ")
     private String  data;
     //该部分数据-JSON，在编制后提交审核时就能固定化了。可直接复制合并到data，存snapshot仅是接口对接便利的过渡工具。
     //纯粹是后端提供给检验报告的，编制报告的那一时间的相关设备状态数据。接口对接复制完成后就可清空了。
     @Lob
     @Basic(fetch=FetchType.LAZY)
+    @Column( columnDefinition="CLOB ")
     private String  snapshot;
 
     @OneToMany(mappedBy="report" ,fetch = FetchType.LAZY)
