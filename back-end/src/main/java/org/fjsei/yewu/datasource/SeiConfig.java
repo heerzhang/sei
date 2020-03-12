@@ -11,21 +11,14 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-
 import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.sql.DataSource;
 import java.util.Map;
 
-
-/**
- * @program: 创建EntityManagerConfig配置类
- * @description:
- * @author:
- * @EnableJpaRepositories(basePackages ={ "package1","package2"})
- * @EntityScan(basePackages ={ "package3","package4"})
- * @create: 2018-05-04 10:54
- **/
+/*
+ 阿里云DMS（数据管理）推出了跨数据库实例查询服务，一条SQL完成跨数据库实例Join查询?
+*/
 
 //启动失败hibernate.loader.MultipleBagFetchException: cannot simultaneously fetch multiple bags看https://blog.csdn.net/danchaofan0534/article/details/53873207
 //1.将List变为Set　  .fetch=FetchType.LAZY　3.@Fetch(FetchMode.SUBSELECT)   4.不是JPA规范@IndexColumn唯一性索引;

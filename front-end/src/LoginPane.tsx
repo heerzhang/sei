@@ -34,7 +34,7 @@ export const Login: React.FunctionComponent<LoginProps> = props => {
   const [redirectToReferrer, setRedirectToReferrer] = React.useState(false);
   const [error, setError] = React.useState("");
   const [form, setForm] = React.useState({ username: "", password: "",
-      mobile:'18933469901234', external:'旧平台', eName:'100443', ePassword:'cnm321'});
+         mobile:'', external:'旧平台'} as any);
 
   const { result, submit:submitfunc, error:errLogin,  } = useLoginToServer(form);
   const { result:regOK, submit:registerfunc, error:errReg } = useRegisterToServer(form);
@@ -56,11 +56,12 @@ export const Login: React.FunctionComponent<LoginProps> = props => {
 
   async function doRegister()
   {
+    if(form?.password2!==form.password)  return setError("两次输入的设置密码不一致");
     try {
       setError("");
       setLoading(true);
       await  registerfunc();
-      setError("恭喜您，账户申请单已提交，等待自动开通或立刻联系维护人员开");
+      setError("恭喜您，账户申请单已提交，等待审核与自动开通，或可立刻联系维护人员去开");
       setLoading(false);
     } catch (err) {
       setLoading(false);
@@ -183,21 +184,34 @@ export const Login: React.FunctionComponent<LoginProps> = props => {
                 padding: theme.spaces.lg
               }}
             >
-              {error && (
-                <Alert
-                  css={{ marginBottom: theme.spaces.md }}
-                  intent={regOK ? 'success':"danger"}
-                  title={regOK ? '恭喜成功':"后端报错"}
-                  subtitle={error}
-                />
-              )}
-
-              <div   css={{  marginTop: theme.spaces.md   }}>
-
+             <div   css={{  marginTop: theme.spaces.md   }}>
+                {isRegistering ? (
+                 <React.Fragment>
+                  <Text css={{ fontSize: theme.fontSizes[0] }}>
+                    首先提供旧平台的认证信息，认证通过才能申请成功。
+                  </Text>
+                   <InputGroup label="旧平台的账号ID">
+                     <Input value={form?.eName||''}
+                         onChange={e =>setForm({ ...form, eName: e.currentTarget.value }) }
+                     />
+                   </InputGroup>
+                   <InputGroup label="旧平台密码">
+                     <Input value={form?.ePassword||''} type="password"
+                            onChange={e =>setForm({ ...form, ePassword: e.currentTarget.value }) }
+                     />
+                   </InputGroup>
+                   <InputGroup label="留个电话吧">
+                     <Input value={form?.mobile||''}
+                            onChange={e =>setForm({ ...form, mobile: e.currentTarget.value }) }
+                     />
+                   </InputGroup>
+                 </React.Fragment>
+                ) : (
                   <Text muted css={{ textAlign: "center" }} variant="subtitle">
                     请使用您的用户名密码登录:
                   </Text>
-                  <InputGroup  label="账户">
+                )}
+                 <InputGroup  label={isRegistering ?'申请本平台账户名字':"账户"}>
                     <Input
                       onChange={e => {
                         setForm({ ...form, username: e.currentTarget.value });
@@ -209,7 +223,7 @@ export const Login: React.FunctionComponent<LoginProps> = props => {
                       placeholder="账户"
                     />
                   </InputGroup>
-                  <InputGroup hideLabel label="密码">
+                  <InputGroup hideLabel={!isRegistering} label={isRegistering ?'设置登录密码(强度不合格会报错)':"密码"}>
                     <Input
                       onChange={e => {
                         setForm({ ...form, password: e.currentTarget.value });
@@ -218,29 +232,47 @@ export const Login: React.FunctionComponent<LoginProps> = props => {
                       inputSize="md"
                       type="password"
                       //type={ form.password? "password":"text"}强制要求输入密码，不采用浏览器填充记住的密码。
-                      placeholder="密码"
+                      placeholder="密码最少6位的复杂的"
                       autoComplete="off"
                     />
                   </InputGroup>
-                  <div css={{ display: "flex", justifyContent: "flex-end" }}>
-                    <Button
-                      disabled={!form.username || !form.password}
-                      block
-                      component="button"
-                      css={{
-                        textAlign: "center",
-                        width: "100%",
-                        marginTop: theme.spaces.md
-                      }}
-                      type="submit"
-                      size="md"
-                      intent="primary"
-                      onPress={e =>{isRegistering ? doRegister() : doLogin(e) } }
-                    >
-                      {isRegistering ? "注册申请" : "登录"}
-                    </Button>
-                  </div>
 
+                {isRegistering ? (
+                  <React.Fragment>
+                    <InputGroup label="第二次输入密码">
+                      <Input value={form?.password2||''} type="password" placeholder="两次密码要相同"
+                             onChange={e =>setForm({ ...form, password2: e.currentTarget.value }) }
+                      />
+                    </InputGroup>
+                  </React.Fragment>
+                ) : ( null )}
+
+               {error && (
+                 <Alert
+                   css={{ marginTop: theme.spaces.md }}
+                   intent={regOK ? 'success':"danger"}
+                   title={regOK ? '恭喜成功':"后端报错"}
+                   subtitle={error}
+                 />
+               )}
+                <div css={{ display: "flex", justifyContent: "flex-end" }}>
+                  <Button
+                    disabled={!form.username || !form.password}
+                    block
+                    component="button"
+                    css={{
+                      textAlign: "center",
+                      width: "100%",
+                      marginTop: theme.spaces.md
+                    }}
+                    type="submit"
+                    size="md"
+                    intent="primary"
+                    onPress={e =>{isRegistering ? doRegister() : doLogin(e) } }
+                  >
+                    {isRegistering ? "注册申请" : "登录"}
+                  </Button>
+                </div>
               </div>
             </div>
 
@@ -260,3 +292,4 @@ export const Login: React.FunctionComponent<LoginProps> = props => {
     />
 */
 //若用<RouterLink to="/login?register=true">只是在URL?号后面修改的去路由，就不会有任何动作的，因为本身已经是/login这个页面，这样问号后面不作数了。
+//使用e.target时要小心，而用e.currentTarget就可放心;  https://blog.csdn.net/syleapn/article/details/81289337

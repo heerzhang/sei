@@ -29,30 +29,32 @@ import java.util.Set;
 @Setter
 @Entity
 @Table(name = "USERS",
-        uniqueConstraints={@UniqueConstraint(columnNames={"username"})} )  //={“字段1”,“字段2”}
+        uniqueConstraints={@UniqueConstraint(columnNames={"username"})} )
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "Fast")
 public class User implements Person {
     //注意id可能带来麻烦，数据库重整，可seq却从小开始，报唯一性约束错！select user_seq.nextval from dual;
+    //旧表可修改initialValue到旧的表最大ID值，ID最多64位，就是19个数字的字符串，相当于说是无限大的。
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq")
     @SequenceGenerator(name = "user_seq", initialValue = 1, allocationSize = 1, sequenceName = "user_seq")
     private Long id;
 
+    //这里的@Size注解：1个中文字符也算1作个char的。
     @Column(name = "USERNAME",  unique = true)
     @NotNull
-    @Size(min = 4, max = 30)
+    @Size(min = 2, max = 30)
     private String username;
 
     @Size(min = 6, max = 50)
     private String password;
 
-    @Size(min = 2, max = 20)
+    @Size(min = 1, max = 20)
     private String firstname;
 
-    @Size(min = 2, max = 20)
+    @Size(min = 1, max = 20)
     private String lastname;
 
-    @Size(min = 6, max = 60)
+    @Size(min = 6, max = 70)
     private String email;
 
     //该用户是合法的？ 未审核/屏蔽用户。
@@ -69,7 +71,7 @@ public class User implements Person {
     //设置小心，故障：hibernate.LazyInitializationException: failed to lazily initialize;
     //分页查询显示的，FetchType.EAGER 实际比FetchType.LAZY 也慢不了多少的，EAGER导致fetch join的一次查询结果集的行数量由于集合笛卡尔积很可能暴涨，两个集合关联性等因素影响；
     //一般graphQL遇FetchType.EAGER也会利用left outer join。就像是@EntityGraph它也会搞的fetch join;　
-    //@ManyToMany(fetch = FetchType.EAGER)       //用.EAGER只要关联查User就必然多出1个sql;若只是查User.id采用.EAGER就不会多出sql;
+    //用.EAGER只要关联查User就必然多出1个sql;若只是查User.id采用.EAGER就不会多出sql;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(  name = "USER_AUTHORITY",
             joinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "ID")},
@@ -84,12 +86,13 @@ public class User implements Person {
 
     @OneToMany(mappedBy = "checkMen")
     private Set<ISP> checks;
-//暂时应对：hibernate.LazyInitializationException: failed to lazily initialize XXXXX could not initialize proxy - no Session错误
-//把fetch= FetchType.LAZY,改成fetch= FetchType.LAZY,牺牲性能；GraphQL经常会关联的多层嵌套查询，前端决定的查询关系，不预先提取数据，运行报错。
+    //暂时应对：hibernate.LazyInitializationException: failed to lazily initialize XXXXX could not initialize proxy - no Session错误
+    //把fetch= FetchType.LAZY,改成fetch= FetchType.LAZY,牺牲性能；GraphQL经常会关联的多层嵌套查询，前端决定的查询关系，不预先提取数据，运行报错。
     //不要fetch= FetchType.EAGER,User对象每次请求都要读取的，isp数据多。
     //为何要维护这个关联表？不见得必须的,多层关联还是直接联系，关联数据的逻辑也得维护。
     @ManyToMany(mappedBy="ispMen")
     private Set<ISP> isp= new HashSet<>();
+
     //头像
     private String  photoURL;
 
@@ -103,55 +106,42 @@ public class User implements Person {
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
-
     public String getUsername() {
         return username;
     }
-
     public void setUsername(String username) {
         this.username = username;
     }
-
     public String getPassword() {
         return password;
     }
-
     public void setPassword(String password) {
         this.password = password;
     }
-
     public String getFirstname() {
         return firstname;
     }
-
     public void setFirstname(String firstname) {
         this.firstname = firstname;
     }
-
     public String getLastname() {
         return lastname;
     }
-
     public void setLastname(String lastname) {
         this.lastname = lastname;
     }
-
     public String getEmail() {
         return email;
     }
-
     public void setEmail(String email) {
         this.email = email;
     }
-
     public Boolean getEnabled() {
         return enabled;
     }
-
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
     }
@@ -197,6 +187,7 @@ public class User implements Person {
         this.lastPasswordResetDate =new Date();
         this.enabled=false;
     }
+
     //Entity这里的函数优先级比resolver要低？
     //对应同名字外模型User的约定enabled字段,graphQL都会来这里的,没带参数就是=null缺省;字段就如同函数那样。
     public Boolean getEnabled(Boolean isUsing) {

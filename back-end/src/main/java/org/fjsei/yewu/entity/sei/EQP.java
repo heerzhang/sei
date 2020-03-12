@@ -1,18 +1,14 @@
 package org.fjsei.yewu.entity.sei;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.fjsei.yewu.entity.sei.inspect.ISP;
 import org.fjsei.yewu.entity.sei.inspect.Task;
-//同名冲突！@Cache不是来自javax.persistence.*;的，所以小心添加org.hibernate.annotations.Cache;在其上方。
 import org.fjsei.yewu.model.geography.Address;
+//同名冲突！@Cache不是来自javax.persistence.*;的，所以小心添加org.hibernate.annotations.Cache;在其上方。
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.springframework.stereotype.Component;
-
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -21,6 +17,8 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+//云数据库网关服务 支持跨DB实例SQL关联查询; 但是无法确保事务，数据一致性毛病？
 
 //懒加载导致了N+1问题(按照后面逻辑代码需求再去那可能的会执行N条SQL)，假设不用懒加载的EAGER话就会强行加载可能根本就不会用到的大量的关联数据(不是更浪费?)。
 //EntityGraph是和LAZY相反的？，总体写死掉策略搞lazy，动态的个性化查询用EntityGraph来提示{深度定制的,细化,仅针对个别使用到的字段的}，俩个机制的目标完全冲突。

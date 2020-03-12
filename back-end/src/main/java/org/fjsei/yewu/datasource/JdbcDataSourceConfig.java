@@ -11,10 +11,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import javax.sql.DataSource;
 
 /**
- * @program: spring-boot-example
- * @description: 底层的Jdbc数据源配置类;这个也必须配置，否则错误非常隐蔽与深处。
- * @author:
- * @create: 2018-05-03 14:35
+ 跨实例SQL查询==数据库网关是DMS刚推出的新特性,阿里云DMS发布 https://www.sohu.com/a/299468414_612370
+ 云数据库，分布式数据库服务，Amazon的Aurora，阿里云的PolarDB等 https://www.cnblogs.com/cchust/p/11366175.html
+ 底层的Jdbc数据源配置类;这个也必须配置，否则错误非常隐蔽与深处。
  **/
 
 @Configuration
