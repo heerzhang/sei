@@ -12,8 +12,8 @@ sei:
       list[7]: http://192.168.1.105:3765
     maxage: 3600
   visibility:
-    #role: USER
-    role:
+    #role: USER =graphql定义文件中没@authr(qx明确指的其他字段或接口将用的角色缺省值,一般来说都务必要设置上！！
+    role: USER
   testMode: true
   control:
     permitAnyURL: false
