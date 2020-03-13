@@ -193,21 +193,20 @@ GET http://localhost:8083/graphql?query={findAllJcAuthors{id,nickname}}
 POST http://localhost:8083/graphql
 Content-Type: application/json; charset=utf-8
 Cache-Control: no-cache
-
 {
   "query": "{findAllJcAuthors{id,nickname}}",
   "operationName": ""
 }
 //ok
-
 POST http://localhost:8083/graphql
 Content-Type: application/json; charset=utf-8
 Cache-Control: no-cache
-
 {
   "query": "{countJcBook(author:1)}"
 }
-//OK OK！ ！
+//加用户
+ {"query": "mutation{newUser(username:\"asdccu\",password:\"12ffghe3\",mobile:\"23次的4\")}" }
+ OK！ ！
 POST http://localhost:8083/graphql
 Content-Type: application/json; charset=utf-8
 Cache-Control: no-cache
