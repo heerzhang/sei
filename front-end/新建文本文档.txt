@@ -1,3 +1,7 @@
+Git用法：先要提交commit然后先fetch ，再merge origin/master，有冲突解决冲突，最后再从1开始;没有冲突commit git push origin master推送到远程仓库。
+向npm网站发布自己的npm包：  /工程根目录/　npm  publish　；实际内部去执行prepublishOnly；
+npm whoami
+Node.js environment服务端的{文件读写功能只能在这环境才能用}，它和客户端/浏览器端的js{无法读写文件}相对立的称呼。
 cssInJs比较：   性能差不多都较慢；　emotion必须文件头/** @jsx jsx */ 　import { jsx, css } from "@emotion/core";　可以css={}直接用。
         styled-components只需import styled, { css } from "styled-components"; 但是css``必须套在styled里面用。emotion更加灵活直白。
 有些底层错误告警太难消除，每一步都得注意新出现的警告的性质，提前准备。
@@ -45,10 +49,6 @@ package.json都可以这样　 "dependencies": {
 打印机场景：不能使用滚动条的，否则打印显示全部内容，只能事先敲定显示适合尺寸的。因此，想打印就不要用滚动条！！
 问题是若页面为了打印机优化，可能小屏幕的场景无法正常看？。<Table>不限定尺寸适合屏幕场景但对打印文书场景不适合，因为尺寸会随意变化。
 
-Git用法：先要提交commit然后先fetch ，再merge origin/master，有冲突解决冲突，最后再从1开始;没有冲突commit git push origin master推送到远程仓库。
-向npm网站发布自己的npm包：  /工程根目录/npm  publish；实际内部去执行prepublishOnly；
-npm whoami
-Node.js environment服务端的，和客户端/浏览器端的js相对立的称呼。
 页面代码存数据库的缺点：tsx移植到jsx，import注入，参数注入，` $变量要改写；{boolean} 要改成 {`${boolean}`}
 　运行速度损失，代码管理更麻烦，源代码搜索失效了。　优点：源代码看起来简洁需要路由页面规模小了，大量代码藏数据库。
 export var breakpoints = {

@@ -57,7 +57,7 @@ public class User implements Person {
     @Size(min = 6, max = 70)
     private String email;
 
-    //该用户是合法的？ 未审核/屏蔽用户。
+    //该用户是合法的？ 未审核/屏蔽用户。前端控制用于页面的。
     @Column(name = "ENABLED")
     @NotNull
     private Boolean enabled=true;
@@ -67,6 +67,7 @@ public class User implements Person {
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastPasswordResetDate;
 
+    //必须为账户都设置权限，否则graphQL这层就无法访问后端数据。
     //这里维护多对多关系(JPA自动生成一个中间维护联系的关联表)，对方的实体仅仅说明我方的字段名。
     //设置小心，故障：hibernate.LazyInitializationException: failed to lazily initialize;
     //分页查询显示的，FetchType.EAGER 实际比FetchType.LAZY 也慢不了多少的，EAGER导致fetch join的一次查询结果集的行数量由于集合笛卡尔积很可能暴涨，两个集合关联性等因素影响；

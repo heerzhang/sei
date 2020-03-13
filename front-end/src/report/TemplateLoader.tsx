@@ -229,7 +229,7 @@ export const RecordStarter: React.FunctionComponent<RecordStarterProps> = ({
               <IconButton
                 css={{
                   display: true ? undefined : "none",
-                  marginLeft: theme.spaces.sm
+                  marginLeft: theme.spaces.sm,
                 }}
                 variant="ghost"
                 icon={<IconMoreVertical />}

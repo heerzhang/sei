@@ -209,6 +209,7 @@ const DeviceMain = WaitingComponent(lazy(() => import("./device/DeviceMain")));
 const InspectMain = WaitingComponent(lazy(() => import("./inspect/InspectMain")));
 const ReportEntrance = WaitingComponent(lazy(() => import("./report/ReportEntrance")));
 const Maintenance = WaitingComponent(lazy(() => import("./maintenance/MaintenanceMain")));
+const About = WaitingComponent(lazy(() => import("./About")));
 
 function TopRouter() {
   //const { initialising, } = useAuthState(firebase.auth());
@@ -251,6 +252,7 @@ function TopRouter() {
             {!user &&  <Route path="/">   <Branding />    </Route> }
 
             <Route path="/login">   <Login />    </Route>
+            <PrivateRoute path="/about" component={About} />
             <PrivateRoute path="/device/likeit" component={Branding} />
             <PrivateRoute path="/device/company" component={Login} />
 
