@@ -101,6 +101,11 @@ public class User implements Person {
 
     @OneToMany(mappedBy = "toUser")
     private Set<Following>  beFollowed;
+    //旧平台的
+    private String  旧账户;
+    //外部认证；
+    private String  authType;
+    private String  authName;
 
 
     public Long getId() {

@@ -224,7 +224,7 @@ public class BaseMutation implements GraphQLMutationResolver {
     public boolean newUser(String username,String password,String mobile,String external,String eName,String ePassword)
     {
         if(!emSei.isJoinedToTransaction())      emSei.joinTransaction();
-        //前置条件验证, 外部的系统用户直接授权的情形。
+        //前置条件验证,OAuth2 外部的系统用户直接授权的情形。
         if(external.equals("旧平台")){
             String err="";
             HrUserinfo hrUser=hrUserinfoRepository.findByUserIdEquals(eName);
@@ -238,6 +238,9 @@ public class BaseMutation implements GraphQLMutationResolver {
         //Todo： 加入MD5 Hash 保密存储。    账户重名的验证。
         user.setPassword(password);
         user.setMobile(mobile);
+        user.setAuthName(eName);
+        user.setAuthType(external);
+        user.set旧账户(eName);
         userRepository.save(user);
         return true;    //都是成功，数据库保存不成功？ 底层就报错;
     }
