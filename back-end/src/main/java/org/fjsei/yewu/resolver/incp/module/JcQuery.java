@@ -1,6 +1,6 @@
 package org.fjsei.yewu.resolver.incp.module;
 
-import com.coxautodev.graphql.tools.GraphQLQueryResolver;
+import graphql.kickstart.tools.GraphQLQueryResolver;
 import org.fjsei.yewu.entity.incp.JcAuthor;
 import org.fjsei.yewu.entity.incp.JcAuthorRepository;
 import org.fjsei.yewu.entity.incp.JcBook;

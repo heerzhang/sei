@@ -1,6 +1,6 @@
 package org.fjsei.yewu.resolver.sei.oldsys;
 
-import com.coxautodev.graphql.tools.GraphQLMutationResolver;
+import graphql.kickstart.tools.GraphQLMutationResolver;
 import org.fjsei.yewu.entity.sei.*;
 import org.fjsei.yewu.entity.sei.inspect.ISPRepository;
 import org.fjsei.yewu.entity.sei.inspect.TaskRepository;

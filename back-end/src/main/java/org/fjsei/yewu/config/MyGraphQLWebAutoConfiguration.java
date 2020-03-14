@@ -1,6 +1,6 @@
 package org.fjsei.yewu.config;
 
-import com.coxautodev.graphql.tools.SchemaParser;
+import graphql.kickstart.tools.SchemaParser;
 import graphql.language.*;
 import graphql.schema.GraphQLFieldDefinition;
 import graphql.schema.GraphQLFieldsContainer;
@@ -55,7 +55,7 @@ public class MyGraphQLWebAutoConfiguration {
     @Bean
     public GraphQLSchema graphQLSchema(SchemaParser schemaParser) {
         //这个函数入口时刻schemaParser就已经把所有模型文件加载完了。
-//Failed to instantiate [com.coxautodev.graphql.tools.SchemaParser]:
+//Failed to instantiate [graphql.kickstart.tools.SchemaParser]:
         //java.lang.NoClassDefFoundError: kotlin/coroutines/ContinuationInterceptor
 
         /* 这个模式也只能匹配两层, Model.property过滤服务端不返回数据。

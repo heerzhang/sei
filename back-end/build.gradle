@@ -15,14 +15,13 @@ buildscript {
 }
 
 apply plugin: 'java'
-//apply plugin: 'maven'
 apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
 
 group = 'org.fjsei'
-version = '0.0.3'
+version = '0.0.4'
 description = 'yewu'
 
 //目前java最少是8版本的；
@@ -59,71 +58,47 @@ dependencies {
 	
 	compile('org.springframework.boot:spring-boot-starter-data-rest')
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.1.2.RELEASE'
-    //而jpa本身关键用到ORM Hibernate Core；数据库方言https://blog.csdn.net/erlian1992/article/details/74331774　
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '2.1.2.RELEASE'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.1.2.RELEASE'
 
     //compile group: 'mysql', name: 'mysql-connector-java', version:'5.1.21'
     compile('org.springframework.boot:spring-boot-starter-jdbc')
-    //compile group: 'org.springframework.boot', name: 'spring-boot-starter-jdbc', version:'2.0.1.RELEASE'
-    //testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-module3', version:'2.0.1.RELEASE'
+
     compile group: 'com.h2database', name: 'h2', version:'1.4.197'
     compile group: 'com.oracle', name: 'ojdbc6', version:'11.2.0.3'
-  //  compile group: 'com.atomikos', name: 'transactions', version:'3.9.3'
-  //  compile group: 'com.atomikos', name: 'transactions-jta', version:'3.9.3'
-  //  compile(group: 'com.atomikos', name: 'transactions-hibernate3', version:'3.9.3') {
-  //      exclude(module: 'hibernate')
-  //   }
-    
+
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-jta-atomikos', version: '2.1.2.RELEASE'
 
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-cache', version: '2.1.2.RELEASE'
     //hibernate-ehcache依赖于net.sf.ehcache　2.10.6旧版本，必须要配套的版本。
-    //  compile(group: 'org.hibernate', name: 'hibernate-ehcache', version: '5.4.1.Final')  
-    compile(group: 'org.hibernate', name: 'hibernate-ehcache', version: '5.4.1.Final') {
+    compile(group: 'org.hibernate', name: 'hibernate-ehcache', version: '5.4.12.Final') {
         exclude(module: 'ehcache-core')
     }
-    //新版本ehcache３不能用,要配套ehcache２；Integration for using Ehcache 2.x as a Hibernate second-level-cache provider
+
+    //新版本ehcache 3 不能用, Hibernate 必须要配套的版本。
     //compile group: 'org.ehcache', name: 'ehcache', version: '3.6.3'
     compile group: 'net.sf.ehcache', name: 'ehcache', version: '2.10.6'
 
-
     runtime('org.springframework.boot:spring-boot-devtools')
-	//runtime('com.h2database:h2')
-	//runtime('mysql:mysql-connector-java')
-	//runtime('org.postgresql:postgresql')
+    //runtime('mysql:mysql-connector-java')
     testCompile('org.springframework.boot:spring-boot-starter-test')
-    
+
     //版本必须匹配才好使  graphql-java-tools:5.4.1  可不必指定
-    compile 'com.graphql-java-kickstart:graphql-java-tools:5.4.1'
-    
-    compile 'com.graphql-java-kickstart:graphql-spring-boot-starter:5.3.1'
-    // to embed GraphiQL tool
-    compile 'com.graphql-java-kickstart:graphiql-spring-boot-starter:5.3.1'
-    // to embed Voyager tool
-    compile 'com.graphql-java-kickstart:voyager-spring-boot-starter:5.3.1'
-   
-    //直接指定它的内部中间件的版本？
-    //compile group: 'com.graphql-java', name: 'graphql-java', version:  11.0;
-    //内部包裹的核心组件graphql-java版本太旧6.0/9.2; 来源自https://github.com/merapar/graphql-spring-boot-starter
- //   compile group: 'com.graphql-java', name: 'graphiql-spring-boot-starter', version: '5.0.2'
-    //graphiql库的也在升级当中　https://github.com/graphql-java-kickstart/graphql-spring-boot
- //   compile group: 'com.graphql-java', name: 'graphql-spring-boot-starter', version: '5.0.2'
+    compile 'com.graphql-java-kickstart:graphql-java-tools:6.0.0'
+
+    compile 'com.graphql-java-kickstart:graphql-spring-boot-starter:6.0.1'
+    compile 'com.graphql-java-kickstart:graphiql-spring-boot-starter:6.0.1'
+    compile 'com.graphql-java-kickstart:voyager-spring-boot-starter:6.0.1'
 
     compile group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.1'
-    compile group: 'io.jsonwebtoken', name: 'jjwt', version:'0.9.0'
-    // https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa
-   // compile group: 'org.springframework.data', name: 'spring-data-jpa', version: '2.0.10.RELEASE'
+    compile group: 'io.jsonwebtoken', name: 'jjwt', version:'0.9.1'
     compile group: 'com.google.code.findbugs', name: 'findbugs', version:'3.0.1'
-    compile group: 'com.alibaba', name: 'fastjson', version: '1.2.54'
+    compile group: 'com.alibaba', name: 'fastjson', version: '1.2.66'
 
     testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '2.1.2.RELEASE'
-    testCompile group: 'org.springframework.security', name: 'spring-security-test', version: '5.1.3.RELEASE'
-
-    // testing facilities
-    testCompile 'com.graphql-java-kickstart:graphql-spring-boot-starter-test:5.3.1'
+    testCompile group: 'org.springframework.security', name: 'spring-security-test', version: '5.3.0.RELEASE'
+    testCompile 'com.graphql-java-kickstart:graphql-spring-boot-starter-test:6.0.1'
 }
-
 
 
 dependencyManagement {
@@ -134,5 +109,5 @@ dependencyManagement {
 }
 
 
-
 //资料：Spring的全家桶　https://spring.io/projects/spring-boot
+//而JPA关键用到ORM Hibernate Core；数据库方言https://blog.csdn.net/erlian1992/article/details/74331774　

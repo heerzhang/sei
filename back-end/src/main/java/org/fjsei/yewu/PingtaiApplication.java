@@ -2,11 +2,10 @@ package org.fjsei.yewu;
 
 import graphql.ExceptionWhileDataFetching;
 import graphql.GraphQLError;
-import graphql.servlet.GraphQLErrorHandler;
 
 import org.fjsei.yewu.entity.sei.User;
 import org.fjsei.yewu.entity.sei.UserRepository;
-import org.fjsei.yewu.exception.GraphQLErrorAdapter;
+//import org.fjsei.yewu.exception.GraphQLErrorAdapter;
 
 import org.fjsei.yewu.model.Author;
 import org.fjsei.yewu.model.Book;

@@ -1,6 +1,6 @@
 package org.fjsei.yewu.resolver.sei.inspect;
 
-import com.coxautodev.graphql.tools.GraphQLQueryResolver;
+import graphql.kickstart.tools.GraphQLQueryResolver;
 import org.fjsei.yewu.entity.sei.*;
 import org.fjsei.yewu.entity.sei.inspect.ISP;
 import org.fjsei.yewu.entity.sei.inspect.ISPRepository;

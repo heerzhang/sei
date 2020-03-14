@@ -1,6 +1,6 @@
 package org.fjsei.yewu.resolver;
 
-import com.coxautodev.graphql.tools.GraphQLMutationResolver;
+import graphql.kickstart.tools.GraphQLMutationResolver;
 import org.fjsei.yewu.exception.BookNotFoundException;
 import org.fjsei.yewu.model.Author;
 import org.fjsei.yewu.model.Book;

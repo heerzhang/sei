@@ -1,10 +1,7 @@
 package org.fjsei.yewu.config;
 
 import graphql.ExceptionWhileDataFetching;
-import graphql.GraphQLError;
-import graphql.servlet.GraphQLErrorHandler;
-import graphql.servlet.GraphQLSchemaProvider;
-import org.fjsei.yewu.exception.GraphQLErrorAdapter;
+//import org.fjsei.yewu.exception.GraphQLErrorAdapter;
 import org.fjsei.yewu.repository.AuthorRepository;
 import org.fjsei.yewu.repository.BookRepository;
 
