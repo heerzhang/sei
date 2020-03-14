@@ -270,3 +270,20 @@ EQP是有cache的若人工删除JPA不一定立马会知道最新数据。新添
 给无登录方式使用的浏览报告的行为验证，估计需要独立设置graphQL的端口；以避免权限泄露，方案更简洁；前端也可以独立搞。
 无登录方式的浏览报告: 特别的graphQL接口函数和过滤字段； 前端还可以做适配层屏蔽接口差异。
 
+@Id  支持mysql oracle;
+graphQL底層庫是Kotlin語言編寫的。
+模型实体映射重命名方案SchemaParser.newParser().dictionary("Book", BookClassWithIncorrectName.class)
+现成GraphQL注解@deprecated(reason: "Not worth referencing"),
+SchemaParserOptions.newBuilder()；
+有状态GraphQL查询Relay{似乎就是内存分页而不是数据库分页，性能？} Connection.->pageInfo: 实际含义是分页查询模式不同吧@connection(for: "User")。
+？？makeExecutableSchema(SchemaParser().parse("type Query{hello: String}") , .type("Query", StaticDataFetcher );
+SchemaParserOptions options = SchemaParserOptions.newOptions()
+        .TypeDefinitionFactory(new MyTypeDefinitionFactory())
+        .build();
+GraphQLSchema schema = SchemaParser.newParser().file("schema.graphqls")
+        .resolvers(new QueryResolver())
+        .options(options)
+        .build()
+        .makeExecutableSchema();
+graphiql工具来了两个竞争对手altair和Playground。
+GraphQL核心安全代码需要JWT认证cookie.domain ?端口='无?' path='/'; token无法区分客户要访问那个URL/endpoint/ 听浏览器就不安全;

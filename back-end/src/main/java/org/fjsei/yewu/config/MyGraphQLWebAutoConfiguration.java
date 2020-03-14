@@ -66,6 +66,7 @@ public class MyGraphQLWebAutoConfiguration {
         //lambda匿名函数
         Consumer<GraphQLSchema.Builder> builderConsumer = builder -> builder.fieldVisibility(myGraphqlFieldVisibility());
         GraphQLSchema   schemaMy= schema.transform(builderConsumer);
+        //这段代码只有一次机会执行的。
         return schemaMy;
         //这里之后为何GraphQLSchemaProvider的@bean还会执行呢？
     }
