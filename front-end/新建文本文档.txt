@@ -274,3 +274,6 @@ js特别逻辑  let hasIsp= !!myIsp; //let hasIsp= (myIsp!==null);  不好使！
 直接跳轉毛病！async|orNO()=>{setLocation("/inspect/", T|F);} 可導致当前更新附带的quey查询最新结果甚至異步的還未做了就已經被跳转所忽视，跳转后的页面并不是最新数据的，去掉setLocation就可以。
 缓存注意，useQuery后端查询比cache慢了1节拍要多一次render，若是cache也算认可数据的而立刻setLocation跳转，导致后端查询结果被遗弃，都无法更新cache了。useQuery用缓存就不会体现后端查询状态变化，该环节实际被隐藏。
 appollo缓存'cache-and-network'情形，若是查询后端返回报错的数据还是照旧抄着cache的，报错的后端返回数据就被抛弃。
+
+js中的模块化，commonjs是运行在nodejs端，amd，cmd，umd是运行在浏览器;
+https://github.com/graphql-java-kickstart/samples

@@ -287,3 +287,4 @@ GraphQLSchema schema = SchemaParser.newParser().file("schema.graphqls")
         .makeExecutableSchema();
 graphiql工具来了两个竞争对手altair和Playground。
 GraphQL核心安全代码需要JWT认证cookie.domain ?端口='无?' path='/'; token无法区分客户要访问那个URL/endpoint/ 听浏览器就不安全;
+Gradle 安装与配置 https://www.cnblogs.com/NyanKoSenSei/p/11458953.html

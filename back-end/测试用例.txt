@@ -588,3 +588,6 @@ query findAllPositions{
 
 
 
+allprojects {
+    repositories {
+        maven { url 'file:///E:/del/repository'}
