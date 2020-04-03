@@ -13,7 +13,14 @@ import parseXlsx from 'excel';   //前端使用就报错.createReadStream is not
 //import { globalHistory  } from "@reach/router";
 //import excelData from "fileTest2.xlsx";　
 import excelData from "./dataMaintain.json";
+import {  Subscription } from "react-apollo"
+import gql from 'graphql-tag'
 
+const HELLO_SUBSCRIPTION = gql`
+    subscription onHelloIncremented {
+        hello
+    }
+`
 var faker = require('faker/locale/zh_CN');
 
 const set = new Set();
@@ -97,17 +104,6 @@ export default function Example(props) {
   //使用window.history.pushState(；必须刷新页面才有数据。 "d:\\\\jtestx.xlsx"
   //console.log("来看当前的items nowPath=",globalHistory.location.state&&globalHistory.location.state.option, omit(globalHistory.location.state,'key'), globalHistory.location.state);
   //var test = require('fs').readFileSync('./test.txt', 'utf8');
-  const path ="./fileTest.xls";;
-  //import参数变量，会被替换为【.*】；  不可这么写 import(path) 这是无效的。
-    //console.log("不会重复执行到这里的！ template=", "path=", path);
-    import(`${path}`).then(module => {
-      if(module===undefined)
-        throw new Error(`没找到模板入口组件${path}`);
-      console.log("来看当前的Spreadsheet.xlsx提供=", module);
-    })
-      .catch(error => {
-        throw new Error(`错误导致后续操作模板查找失败${error}`);
-      });
 
   console.log("来看当前的Spreadsheet.xlsx 没提供函数=", excelData);
 
@@ -129,6 +125,17 @@ export default function Example(props) {
       <Child callback={callback}/>
       <hr/>
       <div>
+        <Subscription
+          subscription={HELLO_SUBSCRIPTION}
+        >
+          {({ data, loading }) => {
+            if (!loading && data && data.hello) {
+              return <p>{data.hello}</p>
+            } else {
+              return <p>Loading...</p>
+            }
+          }}
+        </Subscription>
         <button onClick={() => setCount(count + 1)}>+加速</button>
         <input value={val} onChange={event => setVal(event.target.value)}/>
       </div>

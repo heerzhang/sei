@@ -12,7 +12,7 @@ import { getMainDefinition } from 'apollo-utilities';
 
 //import session from '../utils/session';
 import helpers from '../utils/helpers';
-
+import { WebSocketLink } from 'apollo-link-ws';
 
 //最后端服务器 不支持前端浏览器js去直接读取cookie；否则无法执行下去`Bearer ${session.get()}` 。
 
@@ -40,8 +40,30 @@ const wsClient = new SubscriptionClient(`ws://localhost:3000/graphql`, {
   reconnect: false
 });
 */
+
+function ackCallBack(error, result){
+  console.log("来ackCallBack error="+ JSON.stringify(error) +";result="+JSON.stringify(result));
+}
+//WebSocket认证特别，让Http认证过后，格外申请个一次性token并且特别用途目的coockieToken,让JS可以读取。
+
+const wsLink = new WebSocketLink({
+  uri: `ws://localhost:8673/subscriptions`,
+  //credentials: 'include',  //不起作用！
+  options: {
+    reconnect: true,
+    ///timeout: 30, 不可以加？，这样子，导致循环失败无休止。
+    reconnectionAttempts: 5,
+    connectionCallback: ackCallBack,
+    lazy: false,
+    inactivityTimeout: 90,
+    connectionParams: {
+      authToken: 'herzhang',
+    }
+  }
+});
+
 //const wsLink = new WebSocketLink(wsClient);       后端还不支持
-const wsLink = empty();         //空的链接。
+//const wsLink = empty();         //空的链接。
 
 const logoutLink = onError((e: any) => {
     const { networkError, graphQLErrors } = e;
