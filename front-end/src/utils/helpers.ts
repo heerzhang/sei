@@ -20,6 +20,9 @@ export default {
     session.remove();
     //    location.href = routeUrls.auth.login;     没用？？
   },
+  getToken() {
+    return session.get();
+  },
 /*
   getIdFromParams() {
     return location.pathname.substring(location.pathname.lastIndexOf('/') + 1);

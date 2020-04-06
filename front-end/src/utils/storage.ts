@@ -17,14 +17,9 @@ export default {
   },
 
   get(key: string) {
-    let value = this.isLocalStorageSupported()
-      ? window.localStorage.getItem(key)
-      : cookies.get(key);
-
-    if (value) {
-      value = JSON.parse(value);
-    }
-
+    //let value = this.isLocalStorageSupported() ? window.localStorage.getItem(key)  : cookies.get(key);
+    let value = cookies.get(key);
+    //if (value) { value = JSON.parse(value); }
     return value;
   },
 

@@ -46,6 +46,12 @@ function ackCallBack(error, result){
 }
 //WebSocket认证特别，让Http认证过后，格外申请个一次性token并且特别用途目的coockieToken,让JS可以读取。
 
+console.log("启动时已经有cookie=",document.cookie);
+//对前端所有网页都能带上cookie, 跨域ws:/还能传递过去啊。  全局性质都会有增加cookie。
+//这个是我直接写入cookie,并不是服务端给我的。
+//这个仅仅对ws:/ WebSocketLink请求才有用的，正常graphql http:/ 请求实际不受这个影响的。
+//document.cookie = 'token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJoZXJ6aGFuZyIsImV4cCI6MTU4NjEyNjc1MywiaWF0IjoxNTg2MTIxMzUzfQ.ceX6DXgJEAoWK6qfajXWh6Nsf8vbB4Qa8gm9Dp0dkMp3NR5mxtN5gVC6LUQsYGXayyjifOuumc_GN9BwDGFAOg';
+
 const wsLink = new WebSocketLink({
   uri: `ws://localhost:8673/subscriptions`,
   //credentials: 'include',  //不起作用！
@@ -56,8 +62,9 @@ const wsLink = new WebSocketLink({
     connectionCallback: ackCallBack,
     lazy: false,
     inactivityTimeout: 90,
+    //这里的token实际上针对ws协议自己的，它发生作用时间点是http握手Upgrade以后的事情。
     connectionParams: {
-      authToken: 'herzhang',
+      authToken: helpers.getToken(),
     }
   }
 });
