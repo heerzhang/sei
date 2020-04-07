@@ -41,18 +41,6 @@ const wsClient = new SubscriptionClient(`ws://localhost:3000/graphql`, {
 });
 */
 
-const authWsMiddleware = new ApolloLink((operation: any, forward: any) => {
-  operation.setContext({
-    headers: {
-      Cookie: helpers.getToken(),
-      authorization: `Bearer heh23432432432bb`
-    }
-  });
-
-  return forward && forward(operation);
-});
-
-
 function ackCallBack(error, result){
   console.log("来ackCallBack error="+ JSON.stringify(error) +";result="+JSON.stringify(result));
 }
@@ -62,14 +50,12 @@ console.log("启动时已经有cookie=",document.cookie);
 //对前端所有网页都能带上cookie, 跨域ws:/还能传递过去啊。  全局性质都会有增加cookie。
 //这个是我直接写入cookie,并不是服务端给我的。
 //这个仅仅对ws:/ WebSocketLink请求才有用的，正常graphql http:/ 请求实际不受这个影响的。
-document.cookie = `token=${helpers.getToken()}`;
+//document.cookie = 'token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJoZXJ6aGFuZyIsImV4cCI6MTU4NjEyNjc1MywiaWF0IjoxNTg2MTIxMzUzfQ.ceX6DXgJEAoWK6qfajXWh6Nsf8vbB4Qa8gm9Dp0dkMp3NR5mxtN5gVC6LUQsYGXayyjifOuumc_GN9BwDGFAOg';
 
 const wsLink = new WebSocketLink({
   uri: `ws://localhost:8673/subscriptions`,
   //credentials: 'include',  //不起作用！
   options: {
-   // Cookie: helpers.getToken(),
-   // Authorization: `Bearer ${helpers.getToken()}` || null,
     reconnect: true,
     ///timeout: 30, 不可以加？，这样子，导致循环失败无休止。
     reconnectionAttempts: 5,
@@ -78,10 +64,8 @@ const wsLink = new WebSocketLink({
     inactivityTimeout: 90,
     //这里的token实际上针对ws协议自己的，它发生作用时间点是http握手Upgrade以后的事情。
     connectionParams: {
-      //这里增加任意参数都是针对ws的自身Payload{}; 和http的没有一点点关系！
-     // Cookie: helpers.getToken(),
-     // Authorization: `Bearer ${helpers.getToken()}` || null,
-     // authToken: helpers.getToken(),
+      //这里添加参数都是ws的数据包，对http包却是没任何用处。
+      authToken: helpers.getToken(),
     }
   }
 });
@@ -109,13 +93,6 @@ const mainLink = logoutLink.concat(
 );
 
 
-const wsLinkAuthed = logoutLink.concat(
-  concat(authWsMiddleware, wsLink
-  )
-  //concat(authMiddleware, new HttpLink({ uri: `${process.env.API_URL}/graphql` }))
-);
-
-
 /* 不一样的包 import { HttpLink } from "apollo-boost";
 new HttpLink({
   uri: "http://localhost:8083/graphql", // Server URL (must be absolute)
@@ -138,7 +115,7 @@ const terminatingLink = split(
     ) as OperationDefinitionNode;
     return kind === 'OperationDefinition' && operation === 'subscription';
   },
-  wsLinkAuthed,
+  wsLink,
   mainLink
 );
 
