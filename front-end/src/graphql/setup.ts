@@ -57,7 +57,7 @@ console.log("启动时已经有cookie=",document.cookie);
 //document.cookie = 'token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJoZXJ6aGFuZyIsImV4cCI6MTU4NjEyNjc1MywiaWF0IjoxNTg2MTIxMzUzfQ.ceX6DXgJEAoWK6qfajXWh6Nsf8vbB4Qa8gm9Dp0dkMp3NR5mxtN5gVC6LUQsYGXayyjifOuumc_GN9BwDGFAOg';
 
 const wsLink = new WebSocketLink({
-  uri: `ws://localhost:8673/subscriptions`,
+  uri: `ws://27.151.117.65:8673/subscriptions`,
   //credentials: 'include',  //不起作用！
   options: {
     reconnect: true,
