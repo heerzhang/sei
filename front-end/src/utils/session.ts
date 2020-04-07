@@ -7,8 +7,7 @@ export default {
   },
 
   get() {
-    //const  token=storage.get('token');
-     const  token=storage.get('wsToken');
+    const  token=storage.get('token');
      return token? token : '没有初始化吧？的';
     //  return storage.get('token');
   },

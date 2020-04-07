@@ -49,30 +49,32 @@ function ackCallBack(error, result){
   console.log("来ackCallBack error="+ JSON.stringify(error) +";result="+JSON.stringify(result));
 }
 //WebSocket认证特别，让Http认证过后，格外申请个一次性token并且特别用途目的coockieToken,让JS可以读取。
-
-console.log("启动时已经有cookie=",document.cookie);
+//console.log("启动时已经有cookie=",document.cookie);
 //对前端所有网页都能带上cookie, 跨域ws:/还能传递过去啊。  全局性质都会有增加cookie。
 //这个是我直接写入cookie,并不是服务端给我的。
 //这个仅仅对ws:/ WebSocketLink请求才有用的，正常graphql http:/ 请求实际不受这个影响的。
-//document.cookie = 'token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJoZXJ6aGFuZyIsImV4cCI6MTU4NjEyNjc1MywiaWF0IjoxNTg2MTIxMzUzfQ.ceX6DXgJEAoWK6qfajXWh6Nsf8vbB4Qa8gm9Dp0dkMp3NR5mxtN5gVC6LUQsYGXayyjifOuumc_GN9BwDGFAOg';
+//document.cookie = 'token=eyJhbGciOiJIUzUxMiQsYGXayyjifOuumc_GN9BwDGFAOg';
 
 const wsLink = new WebSocketLink({
-  uri: `ws://27.151.117.65:8673/subscriptions`,
-  //credentials: 'include',  //不起作用！
+  //這里的域名特别重要 cookie域名一致，在websocket握手连接http阶段跨域场景，浏览器才可会把cookie甩给后端的。
+  uri: `${process.env.REACT_APP_WEBSOCKET_END}/subscriptions`,
+  //credentials: 'include',  //根本没用！
   options: {
     reconnect: true,
-    ///timeout: 30, 不可以加？，这样子，导致循环失败无休止。
-    reconnectionAttempts: 5,
+    //timeout: 30, 乱加？，导致循环失败无休止。
+    reconnectionAttempts: 1,
     connectionCallback: ackCallBack,
     lazy: false,
     inactivityTimeout: 90,
     //这里的token实际上针对ws协议自己的，它发生作用时间点是http握手Upgrade以后的事情。
     connectionParams: {
       //这里添加参数都是ws的数据包，对http包却是没任何用处。
-      authToken: helpers.getToken(),
+      //authToken: helpers.getToken(),   作废！ 走http握手cookie去验证。
     }
   }
 });
+
+//浏览器ws://192.168.1.105:8673/subscriptions请求头没显示带上cookie，可实际后端http握手却收到cookie。
 
 //const wsLink = new WebSocketLink(wsClient);       后端还不支持
 //const wsLink = empty();         //空的链接。
