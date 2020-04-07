@@ -16,10 +16,14 @@ import { WebSocketLink } from 'apollo-link-ws';
 
 //最后端服务器 不支持前端浏览器js去直接读取cookie；否则无法执行下去`Bearer ${session.get()}` 。
 
+//ws协议认证失败就导致整个前端首页都是报错。
 const authMiddleware = new ApolloLink((operation: any, forward: any) => {
   operation.setContext({
     headers: {
-      //authorization: `Bearer heh23432432432bb`
+      //若这里加上authorization: `Bearer；再遇到ws协议认证失败就导致整个前端首页都是报错。　
+      //authorization: `Bearer ${helpers.getToken()}`,
+      //这里不能加Cookie啊！加了报错
+     // Cookie: `token=${helpers.getToken()}`
     }
   });
 
