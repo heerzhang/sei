@@ -23,7 +23,7 @@ const authMiddleware = new ApolloLink((operation: any, forward: any) => {
       //若这里加上authorization: `Bearer；再遇到ws协议认证失败就导致整个前端首页都是报错。　
       //authorization: `Bearer ${helpers.getToken()}`,
       //这里不能加Cookie啊！加了报错
-     // Cookie: `token=${helpers.getToken()}`
+      //Cookie: `token=${helpers.getToken()}`
     }
   });
 
@@ -57,19 +57,20 @@ function ackCallBack(error, result){
 
 const wsLink = new WebSocketLink({
   //這里的域名特别重要 cookie域名一致，在websocket握手连接http阶段跨域场景，浏览器才可会把cookie甩给后端的。
+  //若前端域名端口修改后，REACT_APP_WEBSOCKET_END地址不动的，token同样有效会被浏览器发给不改的那个后端。
   uri: `${process.env.REACT_APP_WEBSOCKET_END}/subscriptions`,
   //credentials: 'include',  //根本没用！
   options: {
     reconnect: true,
     //timeout: 30, 乱加？，导致循环失败无休止。
-    reconnectionAttempts: 1,
+    reconnectionAttempts: 5,
     connectionCallback: ackCallBack,
-    lazy: false,
+    lazy: true,
     inactivityTimeout: 90,
     //这里的token实际上针对ws协议自己的，它发生作用时间点是http握手Upgrade以后的事情。
     connectionParams: {
       //这里添加参数都是ws的数据包，对http包却是没任何用处。
-      //authToken: helpers.getToken(),   作废！ 走http握手cookie去验证。
+      //authToken: helpers.getToken(),   //作废！ 走http握手cookie去验证。
     }
   }
 });
