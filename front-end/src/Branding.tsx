@@ -114,9 +114,9 @@ export const Branding: React.FunctionComponent<BrandingProps> = (props) => {
               maxWidth: "46rem"
             }
           }}
-          variant="h2"
+          variant="h3"
         >
-          福建特检下一代业务平台（设计征求意见中）
+          特检下一代业务平台（征求意见中）
         </Text>
 
         <div

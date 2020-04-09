@@ -89,9 +89,9 @@ const logoutLink = onError((e: any) => {
        }
 });
 
-
+//缺省主安全域graphql， third
 const mainLink = logoutLink.concat(
-  concat(authMiddleware, new HttpLink({ uri: `${process.env.REACT_APP_BACK_END}/graphql`,
+  concat(authMiddleware, new HttpLink({ uri: `${process.env.REACT_APP_BACK_END}/third`,
       credentials: 'include'
       }
     )
