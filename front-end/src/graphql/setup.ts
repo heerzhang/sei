@@ -70,7 +70,7 @@ const wsLink = new WebSocketLink({
     //这里的token实际上针对ws协议自己的，它发生作用时间点是http握手Upgrade以后的事情。
     connectionParams: {
       //这里添加参数都是ws的数据包，对http包却是没任何用处。
-      //authToken: helpers.getToken(),   //作废！ 走http握手cookie去验证。
+      authToken: 'FqGDe03vhcblpObo)fghj851Ofg',    //作废！ 走http握手cookie去验证。
     }
   }
 });
