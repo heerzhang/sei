@@ -292,4 +292,4 @@ Gradle 安装与配置 https://www.cnblogs.com/NyanKoSenSei/p/11458953.html
 启动初始化链条=HostConfig->tomcat内嵌容器->initServlet->GraphQLHttpServlet.init()->GraphQLConfiguration->createSchema()->SchemaGenerator{RuntimeWiring}.makeExecutableSchema:不可能重新改file("schema.graphqls")。
 而对每个http请求流程=SocketProcessorBase<NioChannel>：FilterChain：WsFilter->初始化connection->doFilter()->HttpServlet:service(req,resp)->AbstractGraphQLHttpServlet.doPost+doGet();
 
-
+GraphQL Playground

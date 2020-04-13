@@ -17,8 +17,8 @@ import {  Subscription } from "react-apollo"
 import gql from 'graphql-tag'
 
 const HELLO_SUBSCRIPTION = gql`
-    subscription onHelloIncremented {
-        hello
+    subscription onQQreq {
+        qqCommunicate
     }
 `
 var faker = require('faker/locale/zh_CN');
@@ -129,8 +129,8 @@ export default function Example(props) {
           subscription={HELLO_SUBSCRIPTION}
         >
           {({ data, loading }) => {
-            if (!loading && data && data.hello) {
-              return <p>{data.hello}</p>
+            if (!loading && data && data.qqCommunicate) {
+              return <p>{data.qqCommunicate}</p>
             } else {
               return <p>Loading...</p>
             }
