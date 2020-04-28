@@ -277,3 +277,10 @@ appollo缓存'cache-and-network'情形，若是查询后端返回报错的数据
 
 js中的模块化，commonjs是运行在nodejs端，amd，cmd，umd是运行在浏览器;
 https://github.com/graphql-java-kickstart/samples
+利用 PM2 让 Node.js 服务常驻 PM2 构建、编译与发布前端静态资源 http://www.imooc.com/article/284664
+
+不要执行yarn upgrade有陷阱。 caniuse-lite is outdated. Please run command
+前端开发环境：只能ws://sockjs-node无法wss，只能http1.1的。
+Browserslist: caniuse-lite is outdated. 删除caniuse-lite 和browserslist两个文件夹
+eslint目录经常被改？。webstorm工程运行日志TypeScript error而浏览器照样可以跑。
+
