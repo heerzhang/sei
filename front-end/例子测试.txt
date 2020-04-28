@@ -277,7 +277,7 @@ poperover 小屏幕alert2次;
 http://192.168.1.105:3765/report/item/1.4/227/EL-DJ/ver/1
 http://192.168.1.105:3765/report/preview/227/EL-DJ/ver/1
 代替以前的HOC如今要操纵传递ref的场合就该用上：forwardRef(）类似这样 ：
-const InternalItem2d8: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+const InternalItem2d8=
   React.forwardRef((
     { children, show },  ref
   ) => {

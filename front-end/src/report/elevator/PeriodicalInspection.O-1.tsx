@@ -37,9 +37,9 @@ const recordPrintList =[
 const maxItemsSeq=getInspectionItemsLength(inspectionContent);
 
 //forwardRef实际上已经没用了，ref，也可改成简易组件模式。
-export const OriginalView: React.RefForwardingComponent<InternalItemHandResult,OriginalViewProps>=
+export const OriginalView=
   React.forwardRef((
-    { action, children, verId, repId}, ref
+    { action,  verId, repId}:OriginalViewProps, ref
   ) => {
     const {storage, setStorage} =React.useContext(EditStorageContext);
     const {generalFormat} =useGeneralFormat({verId, repId});

@@ -59,7 +59,7 @@ const TemplateView: React.RefForwardingComponent<InternalItemHandResult,Template
 export  const  myTemplate= <TemplateView/>;
 
 
-const InternalItem1: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+const InternalItem1=
   React.forwardRef((
     { par,   show = false  },  ref
   ) => {
@@ -119,7 +119,7 @@ const InternalItem1: React.RefForwardingComponent<InternalItemHandResult,Interna
   } );
 
 
-const InternalItem50: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+const InternalItem50=
   React.forwardRef((
     { par,   show = false  },  ref
   ) => {
@@ -190,7 +190,7 @@ const InternalItem50: React.RefForwardingComponent<InternalItemHandResult,Intern
   } );
 
 
-const InternalItem37: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+const InternalItem37=
   React.forwardRef((
     { par,   show = false  },  ref
   ) => {
@@ -263,7 +263,7 @@ const InternalItem37: React.RefForwardingComponent<InternalItemHandResult,Intern
     );
   } );
 
-const InternalItem31: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+const InternalItem31=
   React.forwardRef((
     { par,   show = false  },  ref
   ) => {
@@ -334,7 +334,7 @@ const InternalItem31: React.RefForwardingComponent<InternalItemHandResult,Intern
   } );
 
 
-const InternalItem12: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+const InternalItem12=
   React.forwardRef((
     { par,   show = false  },  ref
   ) => {
@@ -406,7 +406,7 @@ const InternalItem12: React.RefForwardingComponent<InternalItemHandResult,Intern
   } );
 
 
-const InternalItem27: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+const InternalItem27=
   React.forwardRef((
     { par,   show = false  },  ref
   ) => {
@@ -482,7 +482,7 @@ const InternalItem27: React.RefForwardingComponent<InternalItemHandResult,Intern
   } );
 
 
-const InternalItem8: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+const InternalItem8=
   React.forwardRef((
     { par,   show = false  },  ref
   ) => {
@@ -517,7 +517,7 @@ const InternalItem8: React.RefForwardingComponent<InternalItemHandResult,Interna
   } );
 
 
-const InternalItem7: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+const InternalItem7=
   React.forwardRef((
     { par,   show = false  },  ref
   ) => {

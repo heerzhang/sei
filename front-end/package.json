@@ -1,10 +1,10 @@
 {
-    "name": "frontend-sei",
-    "version": "0.0.3",
+    "name": "sei-frontend-principal",
+    "version": "0.0.4",
     "private": true,
     "author": "何尔章",
     "homepage": "",
-    "description": "特检院前端系统－－子工程",
+    "description": "特检院的前端--主要业务的部分",
     "license": "MIT",
     "dependencies": {
         "@apollo/react-common":"^3.1.4",
@@ -80,7 +80,7 @@
     },
     "browserslist": {
         "production": [
-            ">0.2%",
+            ">3%",
             "not dead",
             "not op_mini all"
         ],

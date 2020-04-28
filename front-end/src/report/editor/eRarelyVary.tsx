@@ -24,9 +24,9 @@ import {
 //很多内容相对重复，这里是报告较高层范围复用的组件；专门报告类型的可以安排在下一层次分开目录去做。
 
 
-export const ItemInstrumentTable: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+export const ItemInstrumentTable=
   React.forwardRef((
-    { children, show ,alone=true},  ref
+    { children, show ,alone=true}:InternalItemProps,  ref
   ) => {
     const getInpFilter = React.useCallback((par) => {
       const {仪器表} =par||{};

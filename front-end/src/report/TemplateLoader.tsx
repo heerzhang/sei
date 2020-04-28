@@ -37,7 +37,7 @@ interface RecordStarterProps {
   id: string;
   action: string;
   source: any;
-  template: React.ReactElement<React.RefForwardingComponent<InternalItemHandResult,OriginalViewProps>>;
+  template: React.ReactElement<React.ForwardRefRenderFunction<InternalItemHandResult,OriginalViewProps>>;
   templateID: string;
   verId: string;
 }
@@ -296,7 +296,7 @@ export const RecordStarter: React.FunctionComponent<RecordStarterProps> = ({
 interface ReportStarterProps {
   id: string;
   source: any;
-  template: React.ReactElement<React.RefForwardingComponent<InternalItemHandResult,ReportViewProps>>;
+  template: React.ReactElement<React.ForwardRefRenderFunction<InternalItemHandResult,ReportViewProps>>;
 }
 //这才是右边的！，编辑，或原始记录的查看：
 export const ReportStarter: React.FunctionComponent<ReportStarterProps> = ({

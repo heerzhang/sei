@@ -28,7 +28,7 @@ interface RecordViewProps {
   inp: any;
   printing?: boolean;
   showAll?: boolean;
-  template: React.ReactElement<React.RefForwardingComponent<InternalItemHandResult,TemplateViewProps>>;
+  template: React.ReactElement<React.ForwardRefRenderFunction<InternalItemHandResult,TemplateViewProps>>;
 }
 //viewAll是否是整个报表都一起显示。
 //export default function RecordView({printing, inp}:{printing?:boolean,inp:any },props) {

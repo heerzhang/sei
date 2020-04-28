@@ -16,9 +16,9 @@ import {
 //公共的复用性好的组件；编辑、原始记录，在多数模板能通用的。不通用的要安排放在更加具体贴近的目录文件内。
 //方便不同模板和不同版本的可重复引用。文件目录管理，组件按照抽象性程度和参数配置的关联度，分级分层次，标识容易区分开。
 
-export const ItemRemarks: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+export const ItemRemarks=
   React.forwardRef((
-    { children, show ,alone=true},  ref
+    { children, show ,alone=true}:InternalItemProps,  ref
   ) => {
     const getInpFilter = React.useCallback((par) => {
       const {自检材料,校验材料,整改材料,资料及编号,memo} =par||{};
@@ -54,9 +54,9 @@ export const ItemRemarks: React.RefForwardingComponent<InternalItemHandResult,In
   } );
 
 
-export const ItemAppendixB: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+export const ItemAppendixB=
   React.forwardRef((
-    { children, show ,alone=true},  ref
+    { children, show ,alone=true}:InternalItemProps,  ref
   ) => {
     const getInpFilter = React.useCallback((par) => {
       const {检验条件,温度,电压值} =par||{};

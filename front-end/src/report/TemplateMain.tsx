@@ -386,7 +386,7 @@ export const RecordEditorOrPrint: React.FunctionComponent<RecordEditorOrPrintPro
 interface EmbeddedReportProps {
   id: string;
   source: any;
-  template: React.ReactElement<React.RefForwardingComponent<InternalItemHandResult,ReportViewProps>>;
+  template: React.ReactElement<React.ForwardRefRenderFunction<InternalItemHandResult,ReportViewProps>>;
 }
 const EmbeddedReport: React.FunctionComponent<EmbeddedReportProps> = ({ id, source, template}
 ) => {

@@ -18,9 +18,9 @@ import {
 //公共的复用性好的组件；编辑、原始记录，在多数模板能通用的。不通用的要安排放在更加具体贴近的目录文件内。
 //方便不同模板和不同版本的可重复引用。文件目录管理，组件按照抽象性程度和参数配置的关联度，分级分层次，标识容易区分开。
 
-export const ItemConclusion: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+export const ItemConclusion=
   React.forwardRef((
-    { children, show ,alone=true},  ref
+    { children, show ,alone=true}:InternalItemProps,  ref
   ) => {
     const getInpFilter = React.useCallback((par) => {
       //检验人IDs编制日期编制人结论：这些字段要提升到关系数据库表中，而不是json字段里面。只能保留上级语义更强的，json半结构化数据的就不做保留。
@@ -61,9 +61,9 @@ export const ItemConclusion: React.RefForwardingComponent<InternalItemHandResult
   } );
 
 //不合格表unq数据生成时机：复检编制开始时初始化来的。在初检场景看到是动态校验目的前端显示表还未存储到后端数据库。
-export const ItemRecheckResult: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+export const ItemRecheckResult=
   React.forwardRef((
-    { children, show ,alone=true},  ref
+    { children, show ,alone=true}:InternalItemProps,  ref
   ) => {
     const getInpFilter = React.useCallback((par) => {
       const {unq} =par||{};
@@ -178,9 +178,9 @@ export interface ItemUniversalProps  extends React.HTMLAttributes<HTMLDivElement
   details?: any[];     //传递各个子项目(若没有子项目的，就算项目本身[0])的定制，测量数据细节内容。
 }
 //引进Render Props模式提高复用能力 { details[0](inp,setInp)  }；就可以配置成通用的组件。
-export const ItemUniversal: React.RefForwardingComponent<InternalItemHandResult,ItemUniversalProps>=
+export const ItemUniversal=
   React.forwardRef((
-    { children, show=true, procedure, details, x, y ,alone=true,inspectionContent},  ref
+    { children, show=true, procedure, details, x, y ,alone=true,inspectionContent}:ItemUniversalProps,  ref
   ) => {
     const getInpFilter = React.useCallback((par) => {
       let fields={};

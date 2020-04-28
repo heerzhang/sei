@@ -27,9 +27,9 @@ function createItem( order:  number, content: React.ReactNode) {
   return {id:genId(), order, content};
 }
 
-const TemplateView: React.RefForwardingComponent<InternalItemHandResult,TemplateViewProps>=
+const TemplateView=
   React.forwardRef((
-     {inp, showAll=false, children},   ref
+     {inp, showAll=false}:TemplateViewProps,   ref
   ) => {
     const clRefs =useProjectListAs({count: projectList.length});
     let outCome=mergeSubitemRefs( ...clRefs.current! );
@@ -63,9 +63,9 @@ const TemplateView: React.RefForwardingComponent<InternalItemHandResult,Template
 export  const  myTemplate= <TemplateView/>;
 
 
-const InternalItem1: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+const InternalItem1=
   React.forwardRef((
-    props:{ children },  ref
+    props,  ref
   ) => {
     const getInpFilter = React.useCallback((par) => {
       const {登记资料,安全档案,管理制度,维保合同,作业人员证,安全档案_D} =par||{};
@@ -127,9 +127,9 @@ const InternalItem1: React.RefForwardingComponent<InternalItemHandResult,Interna
     );
   } );
 
-const InternalItem6d3: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+const InternalItem6d3=
   React.forwardRef((
-    props:{ children },  ref
+    props,  ref
   ) => {
     const getInpFilter = React.useCallback((par) => {
       const {层站,门扇隙,门套隙,地坎隙,施力隙,门锁啮长,刀坎距,轮坎距,门扇间隙,最不利隙,层门锁,轿门锁,刀轮地隙} =par||{};
@@ -341,9 +341,9 @@ const InternalItem6d3: React.RefForwardingComponent<InternalItemHandResult,Inter
     );
   } );
 
-const InternalItem31: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+const InternalItem31=
   React.forwardRef((
-    props:{ children },  ref
+    props,  ref
   ) => {
     const getInpFilter = React.useCallback((par) => {
       const {玻门防拖曳,门夹人,门运行,自动关门} =par||{};
@@ -390,9 +390,9 @@ const InternalItem31: React.RefForwardingComponent<InternalItemHandResult,Intern
     );
   } );
 
-const InternalItem25: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+const InternalItem25=
   React.forwardRef((
-    props:{ children },  ref
+    props,  ref
   ) => {
     const getInpFilter = React.useCallback((par) => {
       const {断丝数,断丝判定,钢绳直径,钢绳公称,钢绳判定,磨损变形,绳端固定} =par||{};
@@ -498,9 +498,9 @@ const InternalItem25: React.RefForwardingComponent<InternalItemHandResult,Intern
     );
   } );
 
-const InternalItem2d8: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+const InternalItem2d8=
   React.forwardRef((
-    props:{ children },  ref
+    props,  ref
   ) => {
     const getInpFilter = React.useCallback((par) => {
       const {错相保护,紧急电动,门旁路,门回路,制动故障保护,自动救援} =par||{};
@@ -567,9 +567,9 @@ const InternalItem2d8: React.RefForwardingComponent<InternalItemHandResult,Inter
     );
   } );
 
-const InternalItem2t4: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+const InternalItem2t4=
   React.forwardRef((
-    props:{ children },  ref
+    props,  ref
   ) => {
     const getInpFilter = React.useCallback((par) => {
       const {机房高出,梯子夹角,梯子判定,通道设置,通道照明,通道门宽,通道门高,通道判定,通道门,机房照明,开关电路关系} =par||{};
@@ -670,9 +670,9 @@ const InternalItem2t4: React.RefForwardingComponent<InternalItemHandResult,Inter
     );
   } );
 
-const InternalItem16: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+const InternalItem16=
   React.forwardRef((
-    props:{ children },  ref
+    props,  ref
   ) => {
     const getInpFilter = React.useCallback((par) => {
       const {限速绳电安,缓冲器固定,液位电安,对重越程最大,对重越程,对重越程判定} =par||{};
@@ -732,9 +732,9 @@ const InternalItem16: React.RefForwardingComponent<InternalItemHandResult,Intern
     );
   } );
 
-const InternalItem5: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+const InternalItem5=
   React.forwardRef((
-    props:{ children },  ref
+    props,  ref
   ) => {
     const getInpFilter = React.useCallback((par) => {
       const {主机工况,轮槽磨损,制动器,手动紧急操作} =par||{};
@@ -780,9 +780,9 @@ const InternalItem5: React.RefForwardingComponent<InternalItemHandResult,Interna
     );
   } );
 
-const InternalItem2d9: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+const InternalItem2d9=
   React.forwardRef((
-    props:{ children },  ref
+    props,  ref
   ) => {
     const getInpFilter = React.useCallback((par) => {
       const {限速器电安,封记,速度校验,接地连接,动力电阻,照明电阻,安全装置电阻,绝缘判定} =par||{};
@@ -886,9 +886,9 @@ const InternalItem2d9: React.RefForwardingComponent<InternalItemHandResult,Inter
     );
   } );
 
-const InternalItem3d4: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+const InternalItem3d4=
   React.forwardRef((
-    props:{ children },  ref
+    props,  ref
   ) => {
     const getInpFilter = React.useCallback((par) => {
       const {安全门门锁,安全门电安,检修门门锁,检修门电安,轿井间距,轿井距离判定} =par||{};
@@ -948,9 +948,9 @@ const InternalItem3d4: React.RefForwardingComponent<InternalItemHandResult,Inter
     );
   } );
 
-const InternalItem13: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+const InternalItem13=
   React.forwardRef((
-    props:{ children },  ref
+    props,  ref
   ) => {
     const getInpFilter = React.useCallback((par) => {
       const {极限开关,井道照明,底坑底部,停止装置} =par||{};
@@ -995,9 +995,9 @@ const InternalItem13: React.RefForwardingComponent<InternalItemHandResult,Intern
     );
   } );
 
-const InternalItem18: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+const InternalItem18=
   React.forwardRef((
-    props:{ children },  ref
+    props,  ref
   ) => {
     const getInpFilter = React.useCallback((par) => {
       const {检修装置,轿顶停止装置,安全窗门,对重固定,识别数量,超面积载货} =par||{};
@@ -1065,9 +1065,9 @@ const InternalItem18: React.RefForwardingComponent<InternalItemHandResult,Intern
     );
   } );
 
-const InternalItem22: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+const InternalItem22=
   React.forwardRef((
-    props:{ children },  ref
+    props,  ref
   ) => {
     const getInpFilter = React.useCallback((par) => {
       const {紧急照明,报警装置,护脚板高,护脚板高判定,护脚板,超载保护} =par||{};
@@ -1127,9 +1127,9 @@ const InternalItem22: React.RefForwardingComponent<InternalItemHandResult,Intern
     );
   } );
 
-const InternalItem27: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+const InternalItem27=
   React.forwardRef((
-    props:{ children },  ref
+    props,  ref
   ) => {
     const getInpFilter = React.useCallback((par) => {
       const {补偿绳固定,补偿绳电安,补偿绳防跳,松绳保护,旋转部件} =par||{};
@@ -1183,9 +1183,9 @@ const InternalItem27: React.RefForwardingComponent<InternalItemHandResult,Intern
     );
   } );
 
-const InternalItem35: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+const InternalItem35=
   React.forwardRef((
-    props:{ children },  ref
+    props,  ref
   ) => {
     const getInpFilter = React.useCallback((par) => {
       const {紧急开锁,机电联锁,门闭合电安,开门限制,门开启} =par||{};
@@ -1236,9 +1236,9 @@ const InternalItem35: React.RefForwardingComponent<InternalItemHandResult,Intern
     );
   } );
 
-const InternalItem8d1: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+const InternalItem8d1=
   React.forwardRef((
-    props:{ children },  ref
+    props,  ref
   ) => {
     const getInpFilter = React.useCallback((par) => {
       const {平衡系数,超速保护,制停情况,自监测,限速安全钳} =par||{};
@@ -1291,9 +1291,9 @@ const InternalItem8d1: React.RefForwardingComponent<InternalItemHandResult,Inter
     );
   } );
 
-const InternalItem8d5: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+const InternalItem8d5=
   React.forwardRef((
-    props:{ children },  ref
+    props,  ref
   ) => {
     const getInpFilter = React.useCallback((par) => {
       const {对重限速试验,运行试验,救援程序,救援通道,救援操作,空载曳引} =par||{};
@@ -1352,9 +1352,9 @@ const InternalItem8d5: React.RefForwardingComponent<InternalItemHandResult,Inter
     );
   } );
 
-const InternalItem8d10: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+const InternalItem8d10=
   React.forwardRef((
-    props:{ children },  ref
+    props,  ref
   ) => {
     const getInpFilter = React.useCallback((par) => {
       const {上行制动,下行制动,静态曳引,制动试验} =par||{};
@@ -1401,9 +1401,9 @@ const InternalItem8d10: React.RefForwardingComponent<InternalItemHandResult,Inte
     );
   } );
 
-const InternalItemh2: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+const InternalItemh2=
   React.forwardRef((
-    props:{ children },  ref
+    props,  ref
   ) => {
     const getInpFilter = React.useCallback((par) => {
       const {仪器表} =par||{};
@@ -1501,9 +1501,9 @@ const InternalItemh2: React.RefForwardingComponent<InternalItemHandResult,Intern
     );
   } );
 
-const InternalItem0: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+const InternalItem0=
   React.forwardRef((
-    props:{ children },  ref
+    props,  ref
   ) => {
     const getInpFilter = React.useCallback((par) => {
       //devCod,检验日期：这些字段要提升到关系数据库表中，json半结构化数据的就不做保留。
@@ -1537,9 +1537,9 @@ const InternalItem0: React.RefForwardingComponent<InternalItemHandResult,Interna
     );
   } );
 
-const InternalItem98: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+const InternalItem98=
   React.forwardRef((
-    props:{ children },  ref
+    props,  ref
   ) => {
     const getInpFilter = React.useCallback((par) => {
       const {自检材料,校验材料,整改材料,资料及编号,memo} =par||{};
@@ -1574,9 +1574,9 @@ const InternalItem98: React.RefForwardingComponent<InternalItemHandResult,Intern
     );
   } );
 
-const InternalItem99: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+const InternalItem99=
   React.forwardRef((
-    props:{ children },  ref
+    props,  ref
   ) => {
     const getInpFilter = React.useCallback((par) => {
      //检验人IDs编制日期编制人结论：这些字段要提升到关系数据库表中，而不是json字段里面。只能保留上级语义更强的，json半结构化数据的就不做保留。
@@ -1616,9 +1616,9 @@ const InternalItem99: React.RefForwardingComponent<InternalItemHandResult,Intern
     );
   } );
 
-const InternalItem96: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+const InternalItem96=
   React.forwardRef((
-    props:{ children },  ref
+    props,  ref
   ) => {
     const getInpFilter = React.useCallback((par) => {
       const {unq} =par||{};
@@ -1718,9 +1718,9 @@ const InternalItem96: React.RefForwardingComponent<InternalItemHandResult,Intern
     );
   } );
 
-const InternalItem97: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+const InternalItem97=
   React.forwardRef((
-    props:{ children },  ref
+    props,  ref
   ) => {
     const getInpFilter = React.useCallback((par) => {
       const {检验条件,温度,电压值} =par||{};

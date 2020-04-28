@@ -13,9 +13,9 @@ import * as queryString from "querystring";
 //不同版本能够直接复用的组件； 内容相对重复；减少代码数量的重复和冗余。
 
 //即使多版本间会有调整的，还可以添加注入的参数或者内部逻辑判定来适应。
-export const ItemSurveyLinkMan: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+export const ItemSurveyLinkMan=
   React.forwardRef((
-    { children, show ,alone=true},  ref
+    { children, show ,alone=true}:InternalItemProps,  ref
   ) => {
     const getInpFilter = React.useCallback((par) => {
       //devCod,检验日期：这些字段要提升到关系数据库表中，json半结构化数据的就不做保留。
@@ -51,9 +51,9 @@ export const ItemSurveyLinkMan: React.RefForwardingComponent<InternalItemHandRes
 
 //提供給6.3 6.9 6.12項目公用的部分。
 //'附录A 层门间隙、啮合长度' 这7个测量数据，单独放一个编辑组件。而原本'6.3','6.9','6.12'只读和跳转连接。
-export const ItemGapMeasure: React.RefForwardingComponent<InternalItemHandResult,InternalItemProps>=
+export const ItemGapMeasure=
   React.forwardRef((
-    { children, show ,alone=true, repId},  ref
+    { children, show ,alone=true, repId}:InternalItemProps,  ref
   ) => {
     const getInpFilter = React.useCallback((par) => {
       const {层站,门扇隙,门套隙,地坎隙,施力隙,门锁啮长,刀坎距,轮坎距,门扇间隙,最不利隙,层门锁,轿门锁,刀轮地隙} =par||{};
