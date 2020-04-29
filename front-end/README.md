@@ -87,4 +87,6 @@ firebase deploy
 
 ## License
 
-BSD 3-Clause, see the LICENSE file.
+网页POST https://hanyeyinyong2.123nat.com:8673/graphql net::ERR_CERT_COMMON_NAME_INVALID 域名服务提供商有问题。
+https://hanyeyinyong2.123nat.com:3765/chaipu/3 用到浏览器LocalStorage, 要清理 若URL修改了域名IP;
+
