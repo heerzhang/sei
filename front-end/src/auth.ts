@@ -6,6 +6,9 @@ import { userContext } from "./user-context";
 import { useMutation,  } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
+//密码hash
+var sha512 = require('hash.js/lib/hash/sha/256');
+
 //const provider = new firebase.auth.GoogleAuthProvider();
 
 export const useSession = () => {
@@ -42,6 +45,9 @@ const LOGIN_TO_SERVER = gql`
 `;
 //登录
 export const useLoginToServer  = (options) => {
+  console.log("useLoginToServer开始=",options,"HASH5:=",sha512().update(options.password).digest('hex'));
+
+
   const [submit, {error, data, loading, called}] = useMutation( LOGIN_TO_SERVER, {
     variables: {...options}
   })
