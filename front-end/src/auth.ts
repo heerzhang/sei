@@ -6,8 +6,8 @@ import { userContext } from "./user-context";
 import { useMutation,  } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
-//密码hash
-var sha512 = require('hash.js/lib/hash/sha/256');
+//密码hash 防止在服务后台泄密
+var sha256 = require('hash.js/lib/hash/sha/256');
 
 //const provider = new firebase.auth.GoogleAuthProvider();
 
@@ -43,13 +43,12 @@ const LOGIN_TO_SERVER = gql`
    res: authenticate(username: $username, password: $password) 
   }
 `;
-//登录
+
+//登录 后端最大只能支持72个字符密码长度！ sha256= 加密后的字节为: 32个,再转化十六进制HEX输出为:64个；SHA-256比MD5和SHA-1更安全。
 export const useLoginToServer  = (options) => {
-  console.log("useLoginToServer开始=",options,"HASH5:=",sha512().update(options.password).digest('hex'));
-
-
+  let encodePass=sha256().update(options.password).digest('hex');
   const [submit, {error, data, loading, called}] = useMutation( LOGIN_TO_SERVER, {
-    variables: {...options}
+    variables: {...options, password:encodePass}
   })
   const { res : result} = data||{};
   return { result ,submit, error, loading, called };
@@ -65,8 +64,9 @@ const REGISTER_TO_SERVER = gql`
 `;
 //账户申请
 export const useRegisterToServer  = (options) => {
+  let encodePass=sha256().update(options.password).digest('hex');
   const [submit, {error, data, loading, called}] = useMutation( REGISTER_TO_SERVER, {
-    variables: {...options}
+    variables: {...options, password:encodePass}
   })
   const { res : result} = data||{};
   return { result ,submit, error, loading, called };

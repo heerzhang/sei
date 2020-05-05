@@ -38,7 +38,7 @@ export const Login: React.FunctionComponent<LoginProps> = props => {
 
   const { result, submit:submitfunc, error:errLogin,  } = useLoginToServer(form);
   const { result:regOK, submit:registerfunc, error:errReg } = useRegisterToServer(form);
-  console.log("RegisterToServer开始userList=",regOK,"errReg=",errReg);
+  console.log("登录机密 开始userList=",regOK,"errReg=",errReg);
 
   async function doLogin(e: React.FormEvent  | Event)
   {
