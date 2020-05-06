@@ -44,7 +44,7 @@ const LOGIN_TO_SERVER = gql`
   }
 `;
 
-//登录 后端最大只能支持72个字符密码长度！ sha256= 加密后的字节为: 32个,再转化十六进制HEX输出为:64个；SHA-256比MD5和SHA-1更安全。
+//登录：后端最大只能支持72个字符密码长度！ sha256= 加密后的字节为: 32个,再转化十六进制HEX输出为:64个；SHA-256比MD5和SHA-1更安全。
 export const useLoginToServer  = (options) => {
   let encodePass=sha256().update(options.password).digest('hex');
   const [submit, {error, data, loading, called}] = useMutation( LOGIN_TO_SERVER, {
@@ -62,7 +62,7 @@ const REGISTER_TO_SERVER = gql`
          , eName: $eName, ePassword: $ePassword) 
   }
 `;
-//账户申请
+//账户申请：　encodePass前端hash防止后端恶意获取明文的口令，保护用户秘密。
 export const useRegisterToServer  = (options) => {
   let encodePass=sha256().update(options.password).digest('hex');
   const [submit, {error, data, loading, called}] = useMutation( REGISTER_TO_SERVER, {
