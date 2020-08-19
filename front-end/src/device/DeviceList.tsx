@@ -84,10 +84,14 @@ export const DeviceList: React.FunctionComponent<
     condition.as.push({s:'valid',o:'TRUE'});
     return condition;
   }, [query]);
-
+/*
   const [filter, setFilter] = React.useState({where: condition,
       offset:0,
      } as any);
+  */
+  const [filter, setFilter] = React.useState({where: {cod:'%'},
+    offset:0,
+  } as any);
 
   const {
     loading,
@@ -105,7 +109,7 @@ export const DeviceList: React.FunctionComponent<
 
   //根据query的改变来重新查询哪。
   React.useEffect(() => {
-    let filtercomp={where: condition,
+    let filtercomp={where: {cod:'%'},
       offset:0,
       first:5,
       orderBy: "instDate",

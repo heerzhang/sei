@@ -281,4 +281,5 @@ https://github.com/graphql-java-kickstart/samples
 caniuse-lite is outdated.删除caniuse-lite 和browserslist两文件夹
 前端开发环境：只能ws://sockjs-node无法wss，只能http1.1的。
 eslint目录经常会被改？。webstorm工程运行日志TypeScript error而浏览器照样可以跑。
+响应式布局不能用iframe来嵌套页面的。
 

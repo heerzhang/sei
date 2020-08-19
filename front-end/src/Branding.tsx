@@ -116,7 +116,7 @@ export const Branding: React.FunctionComponent<BrandingProps> = (props) => {
           }}
           variant="h3"
         >
-          特检下一代业务平台（征求意见中）
+          特种设备业务平台（测试中）
         </Text>
 
         <div
