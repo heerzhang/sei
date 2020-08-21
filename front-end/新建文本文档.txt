@@ -283,3 +283,6 @@ caniuse-lite is outdated.删除caniuse-lite 和browserslist两文件夹
 eslint目录经常会被改？。webstorm工程运行日志TypeScript error而浏览器照样可以跑。
 响应式布局不能用iframe来嵌套页面的。
 
+重新目录git新建后，sei\front-end\node_modules\遗留的：主目录front-end/执行 yarn　；载更新包；
+EsLint报错，设置目录D:\home\sei\front-end\node_modules\eslint
+

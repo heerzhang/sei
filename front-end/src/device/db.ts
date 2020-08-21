@@ -82,19 +82,22 @@ export const useUpdateEntry = (options) => {
 const GET_DEVICES = gql`
   query findAllEQPsFilter($where: DeviceCommonInput,$offset:Int!,$first:Int=10,$orderBy:String,$asc:Boolean=true) {
     dev:findAllEQPsFilter2(where: $where,offset:$offset,first:$first,orderBy:$orderBy,asc:$asc) {
-        id,cod,vart,
-        ... on Jidianlei{
-         oid
-        }
-        ... on EQP{
-          factoryNo
-        }
-        ... on Elevator{
-          liftHeight
-        }
-
+      id cod oid type sort vart instDate  
+      ... on IfElevator{
+        liftHeight
+      }
+      ... on Elevator{
+         factoryNo
+       }
+       ... on EQP{
+         factoryNo
+       }
+      ... on Escalator{
+       factoryNo  steps
+       }
      }
   }
+
 `;
 //著者-用户列表。
 export function usePaginateQueryDevice(filter:any) {
