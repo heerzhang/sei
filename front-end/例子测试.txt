@@ -328,3 +328,21 @@ subItems?.map((a, i) => {
 后端接口的实体方法字段图　http://27.151.117.65:8673/voyager　　登录才能看。
 prisma2.0和nexus是graphQL后端服务器/nodejs的。
 
+  query findAllEQPsFilter($where: DeviceCommonInput,$offset:Int!,$first:Int=10,$orderBy:String,$asc:Boolean=true) {
+    dev:findAllEQPsFilter2(where: $where,offset:$offset,first:$first,orderBy:$orderBy,asc:$asc) {
+      id cod oid type sort vart instDate
+      ... on IfElevator{
+        liftHeight
+      }
+      ... on Elevator{
+         factoryNo
+       }
+       ... on EQP{
+         factoryNo
+       }
+      ... on Escalator{
+       factoryNo  steps
+       }
+     }
+  }
+
