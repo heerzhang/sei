@@ -231,6 +231,16 @@ export const Branding: React.FunctionComponent<BrandingProps> = (props) => {
               从设备入手
             </Button>
           </RouterLink>
+          <RouterLink   to="/unit/">
+            <Button
+              size="lg" noBind
+              intent="primary"
+              iconBefore={<IconGift />}
+              iconAfter={<IconArrowRight />}
+            >
+              从单位入手
+            </Button>
+          </RouterLink>
           <RouterLink   to="/inspect/">
             <Button
               size="lg" noBind

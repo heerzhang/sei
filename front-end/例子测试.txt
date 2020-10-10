@@ -345,4 +345,5 @@ prisma2.0和nexus是graphQL后端服务器/nodejs的。
        }
      }
   }
+派生继承appollo的配置文件 https://www.apollographql.com/docs/react/data/fragments/#generating-possibletypes-automatically
 

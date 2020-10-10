@@ -206,6 +206,7 @@ export const WaitingComponent = (Component: any) => {
 //const ExampleRouteK3Tag = WaitingComponent(lazy(() => import("./Branding")));
 const Main = WaitingComponent(lazy(() => import("./Main")));
 const DeviceMain = WaitingComponent(lazy(() => import("./device/DeviceMain")));
+const UnitMain = WaitingComponent(lazy(() => import("./unit/DeviceMain")));
 const InspectMain = WaitingComponent(lazy(() => import("./inspect/InspectMain")));
 const ReportEntrance = WaitingComponent(lazy(() => import("./report/ReportEntrance")));
 const Maintenance = WaitingComponent(lazy(() => import("./maintenance/MaintenanceMain")));
@@ -266,13 +267,14 @@ function TopRouter() {
 　           从设备的视角来导航进入。
             */ }
             <NestingtRoute path="/device/:rest*" component={DeviceMain}/>
+            <NestingtRoute path="/unit/:rest*" component={UnitMain}/>
             <NestingtRoute path="/inspect/:rest*" component={InspectMain}/>
             <Route path="/report/guide">   <ReportGuide />    </Route>
             <NestingtRoute path="/report/:rest*" component={ReportEntrance}/>
             <NestingtRoute path="/maintenance/:rest*" component={Maintenance}/>
 
             <Route path="/test/test1">   <Example  />    </Route>
-            <Route path="/:rest*"><h1>没有该URL匹配的视图内容</h1></Route>
+            <Route path="/:rest*"><h1>没有该URL匹配的Top视图内容</h1></Route>
           </Switch>
 
           </EditStorageContext.Provider>

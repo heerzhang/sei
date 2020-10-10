@@ -26,12 +26,9 @@ export interface RecipeOptions {
 }
 
 const CREATE_DEVICE = gql`
-  mutation CREATE_DEVICE($cod: String!,$oid: String!) {
-    res: newEQP(cod: $cod,type:"电梯4000",oid: $oid) {
-      id cod oid
-      pos {
-       id name
-      }
+  mutation CREATE_DEVICE($unit: UnitCommonInput!) {
+    res: newUnitExternalSource(unit: $unit) {
+      id  company{id name}, person {id name}
     }
   }
 `;
@@ -76,23 +73,17 @@ export const useUpdateEntry = (options) => {
 };
 
 
-let CommentsPage.fragments = {
-  comment: gql`
-    fragment CommentsPageComment on IfElevator {
-        liftHeight
-    }
-  `,
-};
+
 
 //从graphQL的后端 模型数据库服务器 取模型数据。
 const GET_DEVICES = gql`
-  query findAllEQPsFilter($where: DeviceCommonInput,$offset:Int!,$first:Int=10,$orderBy:String,$asc:Boolean=true) {
-    dev:findAllEQPsFilter2(where: $where,offset:$offset,first:$first,orderBy:$orderBy,asc:$asc) {
-      id cod oid type sort vart   
-      ${CommentsPage.fragments.comment}
-
-       ... on EQP{
-         factoryNo
+  query findAllEQPsFilter($as: UnitCommonInput) {
+    res:getUnitEsFilter(as: $as) {
+      ... on CompanyEs{
+       id  name no
+       }
+      ... on PersonEs{
+       id  name no
        }
      }
   }
@@ -104,7 +95,7 @@ export function usePaginateQueryDevice(filter:any) {
     variables: { ...filter },
     notifyOnNetworkStatusChange: true
   });
-  return {items:　data　&&　data.dev,
+  return {items:　data　&&　data.res,
     error, loading, refetch, fetchMore};
 }
 

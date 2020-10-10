@@ -1,3 +1,4 @@
+更新依赖 直接执行yarn　
 Git用法：先要提交commit然后先fetch ，再merge origin/master，有冲突解决冲突，最后再从1开始;没有冲突commit git push origin master推送到远程仓库。
 向npm网站发布自己的npm包：  /工程根目录/　npm  publish　；实际内部去执行prepublishOnly；
 npm whoami
@@ -285,4 +286,5 @@ eslint目录经常会被改？。webstorm工程运行日志TypeScript error而�
 
 重新目录git新建后，sei\front-end\node_modules\遗留的：主目录front-end/执行 yarn　；载更新包；
 EsLint报错，设置目录D:\home\sei\front-end\node_modules\eslint
+react-spring 9.0　版本文档；　https://www.react-spring.io/log
 
