@@ -2,8 +2,8 @@ import * as React from "react";
 import debug from "debug";
 
 
-import gql from "graphql-tag";
-import { useMutation, useQuery } from "@apollo/react-hooks";
+
+import {gql, useMutation, useQuery } from "@apollo/client";
 
 
 
@@ -76,21 +76,18 @@ export const useUpdateEntry = (options) => {
 };
 
 
-let CommentsPage.fragments = {
-  comment: gql`
-    fragment CommentsPageComment on IfElevator {
-        liftHeight
-    }
-  `,
-};
+
+//      ${fragments.comment}
+
 
 //从graphQL的后端 模型数据库服务器 取模型数据。
 const GET_DEVICES = gql`
   query findAllEQPsFilter($where: DeviceCommonInput,$offset:Int!,$first:Int=10,$orderBy:String,$asc:Boolean=true) {
     dev:findAllEQPsFilter2(where: $where,offset:$offset,first:$first,orderBy:$orderBy,asc:$asc) {
       id cod oid type sort vart   
-      ${CommentsPage.fragments.comment}
-
+       ... on IfElevator {
+          liftHeight
+        }
        ... on EQP{
          factoryNo
        }

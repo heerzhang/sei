@@ -1,9 +1,7 @@
 import * as React from "react";
 import debug from "debug";
 
-
-import gql from "graphql-tag";
-import { useMutation, useQuery } from "@apollo/react-hooks";
+import {gql, useMutation, useQuery } from "@apollo/client";
 
 
 

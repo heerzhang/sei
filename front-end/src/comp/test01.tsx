@@ -13,8 +13,9 @@ import parseXlsx from 'excel';   //前端使用就报错.createReadStream is not
 //import { globalHistory  } from "@reach/router";
 //import excelData from "fileTest2.xlsx";　
 import excelData from "./dataMaintain.json";
-import {  Subscription } from "react-apollo"
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client';
+import { Subscription } from '@apollo/client/react/components';
+
 
 const HELLO_SUBSCRIPTION = gql`
     subscription onQQreq {

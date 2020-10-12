@@ -1,18 +1,17 @@
-import { ApolloClient } from 'apollo-client';
-import { HttpLink } from 'apollo-link-http';
-import { InMemoryCache } from 'apollo-cache-inmemory';
-//import { ApolloLink, from, split, concat } from 'apollo-link';
-import { ApolloLink,  split, concat ,empty } from 'apollo-link';
-import { onError } from 'apollo-link-error';
-//import { getOperationAST,OperationDefinitionNode } from 'graphql';
 import { OperationDefinitionNode } from 'graphql';
+import { ApolloClient,InMemoryCache,HttpLink,ApolloLink,  split, concat ,empty } from '@apollo/client';
+import { getMainDefinition } from '@apollo/client/utilities';
+import { onError } from '@apollo/client/link/error';
+import { WebSocketLink } from '@apollo/client/link/ws';
+//import { getOperationAST,OperationDefinitionNode } from 'graphql';
 //import { WebSocketLink } from 'apollo-link-ws';
 //import { SubscriptionClient } from 'subscriptions-transport-ws';
-import { getMainDefinition } from 'apollo-utilities';
-
+//import { HttpLink } from 'apollo-link-http';
+//import { InMemoryCache } from 'apollo-cache-inmemory';
+//import { ApolloLink, from, split, concat } from 'apollo-link';
 //import session from '../utils/session';
 import helpers from '../utils/helpers';
-import { WebSocketLink } from 'apollo-link-ws';
+
 
 //最后端服务器 不支持前端浏览器js去直接读取cookie；否则无法执行下去`Bearer ${session.get()}` 。
 

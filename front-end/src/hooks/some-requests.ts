@@ -2,9 +2,8 @@ import * as React from "react";
 import { useSession } from "../auth";
 //import { useCollection } from "react-firebase-hooks/firestore";
 //import * as firebase from "firebase/app";
-import { useApolloClient, useMutation } from "@apollo/react-hooks";
-//import gql from 'graphql-tag';
-import gql from "graphql-tag";
+//import { useApolloClient, useMutation } from "@apollo/client";
+
 
 import debug from "debug";
 const log = debug("app:with-follow-requests");

@@ -5,8 +5,8 @@ import { jsx,  } from "@emotion/core";
 
 //import ShopContext from './Shop-context';
 //import { shopReducer, ADD_PRODUCT, REMOVE_PRODUCT } from './Reducers';
-import { useQuery } from "@apollo/react-hooks";
-import gql from "graphql-tag";
+import {gql, useQuery } from "@apollo/client";
+
 import { userContext } from "../user-context";
 
 //这个模式无法实现预期 context。

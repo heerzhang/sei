@@ -6,9 +6,9 @@ import { Compose } from "./Compose";
 import { useSession } from "./auth";
 //import { useDocument } from "react-firebase-hooks/firestore";
 import { useTheme, Text } from "customize-easy-ui-component";
-import { useQuery } from "@apollo/react-hooks";
+import {gql, useQuery } from "@apollo/client";
 //import { gql } from "apollo-boost";
-import gql from "graphql-tag";
+
 
 
 const GET_POSTS = gql`

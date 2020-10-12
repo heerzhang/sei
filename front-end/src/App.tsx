@@ -6,7 +6,7 @@ import { jsx,  } from "@emotion/core";
 //import { useAuthState } from "react-firebase-hooks/auth";
 //import { userContext } from "./user-context";
 //import {Helmet} from "react-helmet";
-import { ApolloProvider } from '@apollo/react-hooks';
+import { ApolloProvider } from '@apollo/client';
 import { client } from './graphql/setup';
 import GlobalState from "./context/GlobalState";
 //import { useSession } from "./auth";

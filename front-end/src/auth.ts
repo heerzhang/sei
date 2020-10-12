@@ -2,9 +2,9 @@
 //import "firebase/auth";
 import { useContext, useState } from "react";
 import { userContext } from "./user-context";
-//import { useMutation, useQuery } from "@apollo/react-hooks";
-import { useMutation,  } from "@apollo/react-hooks";
-import gql from "graphql-tag";
+//import { useMutation, useQuery } from "@apollo/client";
+import {gql, useMutation,  } from "@apollo/client";
+
 
 //密码hash 防止在服务后台泄密
 var sha256 = require('hash.js/lib/hash/sha/256');

@@ -6,8 +6,8 @@ import debug from "debug";
 //import omitBy from "lodash.omitby";
 //import isNil from "lodash.isnil";
 //import { Ingredient } from "./RecipeList";
-import gql from "graphql-tag";
-import { useMutation, useQuery } from "@apollo/react-hooks";
+
+import {gql, useMutation, useQuery } from "@apollo/client";
 import { StackItem } from "react-gesture-stack";
 import * as React from "react";
 //import * as React from "react";
