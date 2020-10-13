@@ -89,6 +89,7 @@ export const DeviceList: React.FunctionComponent<
       offset:0,
      } as any);
   */
+  //let devicesFindCount=0;
   const [filter, setFilter] = React.useState({where: {cod:'%'},
     offset:0,
   } as any);
@@ -141,7 +142,7 @@ export const DeviceList: React.FunctionComponent<
         variables: {
           offset: devicesFind.length,
         },
-        updateQuery: (prev, { fetchMoreResult }) => {
+       /* updateQuery: (prev, { fetchMoreResult }) => {
           console.log("fetch来useInfiniteScroll看="+ JSON.stringify(fetchMoreResult)+",devicesFind.length=",devicesFind.length);
           if (!fetchMoreResult)   return prev;
           if (!fetchMoreResult.dev)   return prev;
@@ -153,16 +154,26 @@ export const DeviceList: React.FunctionComponent<
           return Object.assign({}, prev, {
             dev: [...prev.dev, ...fetchMoreResult.dev],
           });
-        },
-      })
+        }, */
+      });
     },
     [loadMore ,devicesFind]
   );
 
+    //.then(result => {    if(result.data.findAllEQPsFilter2.length<=0)   setHasMore(false);  })
+
   useEffect( () => { acrossMore && hasMore && toLoadMore() },
         [acrossMore,hasMore,  toLoadMore ]);
+
+
+  useEffect( () => {
+    if(hasMore && devicesFind?.length>=15)  setHasMore(false);
+    },
+    [devicesFind]);
+
   async function toRefresh() {
     setHasMore(true);
+    //TODO： 先清空旧的cache??  还是干脆取消该功能，代替为页面强制刷新
     refetch( {} );
   }
 
@@ -203,15 +214,6 @@ export const DeviceList: React.FunctionComponent<
                   height: "100%",
                 }}
               >
-                <PullToRefresh
-                  pullDownContent={<PullDownContent/>}
-                  releaseContent={<ReleaseContent label={'立刻刷新内容'}/>}
-                  refreshContent={<RefreshContent />}
-                  onRefresh={() => toRefresh() }
-                  pullDownThreshold={30}
-                  backgroundColor="white"
-                  triggerHeight="auto"
-                >
 
                   <List>
                     {/*新搜索到的用户，扣除已经关注的，单独排列在 上部分;  没有分页加载更多的user*/}
@@ -291,9 +293,9 @@ export const DeviceList: React.FunctionComponent<
                         marginTop: theme.spaces.md
                       }}
                     >
-                      { hasMore && !loading && (
+                      { hasMore &&  (
                         <div>
-                          <Button onPress={ () =>{
+                          <Button disabled={loading} onPress={ () =>{
                             toLoadMore();     //虽然引用表现是异步的，但还是需要某些步骤需要同步执行的，只能说是其内部深度嵌套了个Promise()。
                             //console.log(`按拉扯获取took ${duration}ms`);　//异步处理了，这里实际耗时也不短暂122ms; 可能因为loading要同步首先设置的。
                           } }>
@@ -303,13 +305,11 @@ export const DeviceList: React.FunctionComponent<
                       )}
                       {!hasMore &&　<React.Fragment>
                             <span>嘿，没有更多了</span>
-                           <Button variant="ghost" onPress={() => toRefresh() }>我就刷新</Button>
                         </React.Fragment>
                       }
                     </div>
                     <div  ref={refMore}  css={{height: "1px"}}> </div>
 
-                  </PullToRefresh>
                 </div>
             </StackItem>
           )

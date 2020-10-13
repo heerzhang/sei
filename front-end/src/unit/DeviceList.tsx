@@ -149,6 +149,7 @@ export const DeviceList: React.FunctionComponent<
             dev: [...prev.dev, ...fetchMoreResult.dev],
           });
         },
+
       })
     },
     [loadMore ,devicesFind]

@@ -1,6 +1,6 @@
 import { OperationDefinitionNode } from 'graphql';
 import { ApolloClient,InMemoryCache,HttpLink,ApolloLink,  split, concat ,empty } from '@apollo/client';
-import { getMainDefinition } from '@apollo/client/utilities';
+import { getMainDefinition, offsetLimitPagination } from "@apollo/client/utilities";
 import { onError } from '@apollo/client/link/error';
 import { WebSocketLink } from '@apollo/client/link/ws';
 //import { getOperationAST,OperationDefinitionNode } from 'graphql';
@@ -129,7 +129,17 @@ const link = ApolloLink.from([terminatingLink]);
 //缓存似乎无时间限制；只要有一个Query页面能触发强制刷新：比如浏览器URL重置，全部的查询也都会得到更新，网页SPA性质。
 export const  client = new ApolloClient({
   link,
-  cache: new InMemoryCache()
+  cache: new InMemoryCache(
+    {
+      typePolicies: {
+        Query: {
+          fields: {
+            findAllEQPsFilter2: offsetLimitPagination(),
+          },
+        },
+      },
+    }
+  )
 });
 
 

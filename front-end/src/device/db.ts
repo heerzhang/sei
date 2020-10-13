@@ -81,9 +81,10 @@ export const useUpdateEntry = (options) => {
 
 
 //从graphQL的后端 模型数据库服务器 取模型数据。
+//3.2版本findAllEQPsFilter2不能再用dev:findAllEQPsFilter2这样子做别名了,cache typePolicies不支持。
 const GET_DEVICES = gql`
   query findAllEQPsFilter($where: DeviceCommonInput,$offset:Int!,$first:Int=10,$orderBy:String,$asc:Boolean=true) {
-    dev:findAllEQPsFilter2(where: $where,offset:$offset,first:$first,orderBy:$orderBy,asc:$asc) {
+    findAllEQPsFilter2(where: $where,offset:$offset,first:$first,orderBy:$orderBy,asc:$asc) {
       id cod oid type sort vart   
        ... on IfElevator {
           liftHeight
@@ -101,7 +102,7 @@ export function usePaginateQueryDevice(filter:any) {
     variables: { ...filter },
     notifyOnNetworkStatusChange: true
   });
-  return {items:　data　&&　data.dev,
+  return {items:　data　&&　data.findAllEQPsFilter2,
     error, loading, refetch, fetchMore};
 }
 
