@@ -168,7 +168,7 @@ export const Compose: React.FunctionComponent<ComposeProps> = ({
         author
       });*/
       //加了await 后的　submitfunc();似乎也不能确保entry非空的，必须等待下一次render()。
-      entry && setLocation("/chaipu/" + entry.id, true );
+      entry && setLocation("/chaipu/" + entry.id,  { replace: true }  );
       //原型是 PushCallback = (to: Path, replace?: boolean) => void;
     } catch (err) {
       console.error(err);
@@ -315,7 +315,7 @@ export const Compose: React.FunctionComponent<ComposeProps> = ({
     try {
       setLoading(true);
       await deleteEntry(id);
-      setLocation("/",  true );
+      setLocation("/",  { replace: true } );
     } catch (err) {
       console.error(err);
       setLoading(false);

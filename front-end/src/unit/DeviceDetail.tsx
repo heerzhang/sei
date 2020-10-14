@@ -23,7 +23,7 @@ export const DeviceDetail: React.FunctionComponent<DeviceDetailProps> = ({ id, e
   //var   value=null;
   //不要改组件的props带来的变量。
   //第一个render这里loading=true，要到第二次再执行到了这里才会有data数据!
-  console.log("刚DeviceDetail经过eqp=",eqp,"进行中id=",id,"showingRecipe=",matched,params);
+  console.log("进入某单位=",eqp,"进行中id=",id,"showingRecipe=",matched,params);
 
   if(eqp) {
     return (

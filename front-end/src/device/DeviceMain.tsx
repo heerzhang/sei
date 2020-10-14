@@ -52,7 +52,7 @@ export const DeviceMain: React.FunctionComponent<DeviceMainProps> = props => {
   const renderList = isLarge || !showingRecipe;  　//大屏或者小屏但是没有显示具体明细页的场合。
 
   function onLogoutDo() {
-    setLocation("/login",  false );
+    setLocation("/login",  { replace: false } );
   }
   const { submitfunc:signOut,  } = useSignOut(onLogoutDo);
   const { item:sumofTask,  } = useCountOfTask({dep:"", status:""} );

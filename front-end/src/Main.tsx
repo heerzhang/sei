@@ -74,7 +74,7 @@ export const Main: React.FunctionComponent<MainProps> = props => {
   const renderList = isLarge || !showingRecipe;  　//大屏或者小屏但是没有显示具体单项的菜谱的场合。
 
   function onLogoutDo() {
-    setLocation("/login",  false );
+    setLocation("/login",  { replace: false } );
     //navigate("/login" , { replace: true });
   }
   const {  submitfunc:signOut,  } = useSignOut(onLogoutDo);

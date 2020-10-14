@@ -88,7 +88,7 @@ export const ComposeDevice: React.FunctionComponent<ComposeDeviceProps> = ({
       console.log("等半天createEntry返回error=",error,"结果",entry );
 
       //加了await 后的　submitfunc();似乎也不能确保entry非空的，必须等待下一次render()。
-      entry && setLocation("/unit/" + entry.id, true );
+      entry && setLocation("/unit/" + entry.id, { replace: true } );
       //原型是 PushCallback = (to: Path, replace?: boolean) => void;
     } catch (err) {
       setLoading(false);
@@ -116,7 +116,7 @@ export const ComposeDevice: React.FunctionComponent<ComposeDeviceProps> = ({
         }
       }}
     >
-      <Helmet title={"设备数据维护"} />
+      <Helmet title={"单位信息"} />
 
       <div
         css={{  //控制小屏时的导航条底下的整个页面滚动。
@@ -206,7 +206,7 @@ export const ComposeDevice: React.FunctionComponent<ComposeDeviceProps> = ({
                                   : "white"
                               }}
                             >
-                              设备号：{dt.cod}
+                              单位名称：{dt?.company?.name ||dt?.person?.name}
                             </Text>
                             <div
                               css={{
@@ -225,7 +225,7 @@ export const ComposeDevice: React.FunctionComponent<ComposeDeviceProps> = ({
                                   : "white"
                               }}
                             >
-                              监察识别码：{dt.oid}
+                              单位识别码：{dt?.company?.no ||dt?.person?.no}
                             </Text>
                           </div>
                         )}

@@ -271,7 +271,7 @@ export const DeviceList: React.FunctionComponent<
                                   }>功能待续
                                   </MenuItem>
                                   <MenuItem contentBefore={<IconPackage />}  onPress={() => {
-                                    setLocation("/device/new", false)
+                                    setLocation("/device/new", { replace: false })
                                   } }>
                                    加个设备
                                   </MenuItem>

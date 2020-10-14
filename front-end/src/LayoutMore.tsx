@@ -46,7 +46,7 @@ export const Layout: React.FunctionComponent<LayoutProps> = ({ children,  }) => 
 
 
   function onLogoutDo() {
-    setLocation("/login",  false );
+    setLocation("/login",  { replace: false } );
     //navigate("/login" , { replace: true });
   }
   const { userList, submitfunc:signOut, error:errLogin, logging,setLogging } = useSignOut(onLogoutDo);

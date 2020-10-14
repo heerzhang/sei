@@ -129,7 +129,7 @@ export const DetailedGuide: React.FunctionComponent<DetailedGuideProps> = ({
               content={
                 <MenuList>
                   <MenuItem contentBefore={<IconPackage />}  onPress={() => {
-                      setLocation("/device/"+id+"/addTask", false);
+                      setLocation("/device/"+id+"/addTask", { replace: false });
                    } }>
                     生成新任务
                   </MenuItem>

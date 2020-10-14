@@ -85,7 +85,7 @@ export const ItemAppendixB=
             </React.Fragment>;
           }) }
         </div>
-        新增检查=>
+        新增检查=＞
         <InputGroupLine  label='首先设置当前检验日期'>
           <SuffixInput
             type='date'

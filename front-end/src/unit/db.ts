@@ -72,7 +72,7 @@ export const useUpdateEntry = (options) => {
 
 
 
-
+//代替外部或者微服务的，从外部维护为主的大库中找到某个人或企业的ID
 //从graphQL的后端 模型数据库服务器 取模型数据。
 const GET_DEVICES = gql`
   query findAllEQPsFilter($as: UnitCommonInput) {
@@ -153,17 +153,9 @@ export const useInvalidateEQP = (options) => {
 
 //這若id='new'的照样能发送给后端的底层去处理的。 id=null undefined就不发送。
 const DEVICE_BY_ID = gql`
-  query DEVICE_BY_ID($id: ID! ) {
-    all:getDeviceSelf(id: $id) {
-			id,oid,cod,isps{
-				id
-			},pos{
-				id,name
-			},ownerUnt{
-				id,name
-			},task{
-				id,date,dep,status,isps{ id,dev{id} }
-			}
+  query DEVICE_BY_ID($id: ID!,$company:Boolean) {
+    all:getUnit(esid: $id, company:$company) {
+			id, company {id,name,no}, person {id,name,no}
 		}
 	}
 `;

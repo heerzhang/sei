@@ -78,7 +78,7 @@ export const AttachedTask: React.FunctionComponent<AttachedTaskProps> = ({
       });
       return;
     }
-    setLocation("/device/"+eqpId,  true );
+    setLocation("/device/"+eqpId,  { replace: true } );
   }
 
 
@@ -104,7 +104,7 @@ export const AttachedTask: React.FunctionComponent<AttachedTaskProps> = ({
         variant="h5"
         gutter={false}
       >
-        {eqp.cod}关联活动任务
+        {eqp?.id}名下关联设备
       </Text>
 
       <div
@@ -185,7 +185,7 @@ export const AttachedTask: React.FunctionComponent<AttachedTaskProps> = ({
                                   </MenuItem>
                                   <MenuItem contentBefore={<IconPackage />}  disabled={hasIsp}
                                     onPress={() => {
-                                       setLocation("/device/"+eqp.id+"/task/"+each.id+'/dispatch', true);
+                                       setLocation("/device/"+eqp.id+"/task/"+each.id+'/dispatch', { replace: true });
                                      } }>
                                   有任务就派工给检验员
                                   </MenuItem>

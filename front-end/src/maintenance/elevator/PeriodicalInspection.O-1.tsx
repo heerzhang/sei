@@ -164,7 +164,7 @@ const InternalItem6d3=
                 </React.Fragment>;
               }) }
             </div>
-            新增检查=>
+            新增检查=〉
             <InputGroupLine  label='首先设置当前层站号'>
               <SuffixInput
                 autoFocus={true}
@@ -1750,7 +1750,7 @@ const InternalItem97=
               </React.Fragment>;
             }) }
           </div>
-          新增检查=>
+          新增检查=＞
           <InputGroupLine  label='首先设置当前检验日期'>
             <SuffixInput
               autoFocus={true}  type='date'

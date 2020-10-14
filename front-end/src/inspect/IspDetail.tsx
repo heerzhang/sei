@@ -158,7 +158,7 @@ export const IspDetail: React.FunctionComponent<IspDetailProps> = ({
               content={
                 <MenuList>
                   <MenuItem contentBefore={<IconPackage />}  onPress={() => {
-                      setLocation(`/inspect/${id}/addReport/choose`,  true );
+                      setLocation(`/inspect/${id}/addReport/choose`,  { replace: true } );
                       } }>
                     增加个检验报告
                   </MenuItem>

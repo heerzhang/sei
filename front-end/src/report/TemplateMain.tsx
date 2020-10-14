@@ -113,7 +113,7 @@ export const RecordEditorOrPrint: React.FunctionComponent<RecordEditorOrPrintPro
   let renderList =isLarge || action==='none';
   if(!isLarge && action!=='none')   renderList=false;
   function onLogoutDo() {
-    setLocation("/login",  false );
+    setLocation("/login",  { replace: false } );
   }
   const { submitfunc:signOut,  } = useSignOut(onLogoutDo);
   if(!templateSet)   throw new Error(`没模板哦`);
@@ -261,7 +261,7 @@ export const RecordEditorOrPrint: React.FunctionComponent<RecordEditorOrPrintPro
                 >
                   <Tab id="original">原始记录录入</Tab>
                   <Tab id="ISPlist">检验溯源</Tab>
-                  <Tab id="report" onPress={()=>setLocation(`/report/${templateID}/ver/${verId}/preview/${id}?&print=1`, true)}>
+                  <Tab id="report" onPress={()=>setLocation(`/report/${templateID}/ver/${verId}/preview/${id}?&print=1`, { replace: true })}>
                     检验报告
                   </Tab>
                 </Tabs>

@@ -54,7 +54,7 @@ export const InspectMain: React.FunctionComponent<InspectMainProps> = props => {
   console.log("来InspectMain看当前的params showingRecipe=",showingRecipe ,"initTab=",initTab);
 
   function onLogoutDo() {
-    setLocation("/login",  false );
+    setLocation("/login",  { replace: false } );
   }
   const { submitfunc:signOut,  } = useSignOut(onLogoutDo);
 

@@ -9,7 +9,7 @@ Skeleton, useInfiniteScroll
 } from "customize-easy-ui-component";
 //import useThrottle from "@rooks/use-throttle";
 import { useThrottle } from "../hooks/useHelpers";
-import parseXlsx from 'excel';   //前端使用就报错.createReadStream is not a function
+//import parseXlsx from 'excel';   //前端使用就报错.createReadStream is not a function
 //import { globalHistory  } from "@reach/router";
 //import excelData from "fileTest2.xlsx";　
 import excelData from "./dataMaintain.json";

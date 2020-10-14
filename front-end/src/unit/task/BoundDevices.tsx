@@ -209,7 +209,7 @@ function DeviceListItem({ recipe, id, highlight ,task }: any) {
       wrap={false}
       onPress={e => {
         //e.preventDefault();
-        setLocation(href, false);
+        setLocation(href, { replace: false });
       }}
       aria-current={isActive}
       css={{

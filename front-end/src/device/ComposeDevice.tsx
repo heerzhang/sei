@@ -88,7 +88,7 @@ export const ComposeDevice: React.FunctionComponent<ComposeDeviceProps> = ({
       console.log("等半天createEntry返回error=",error,"结果",entry );
 
       //加了await 后的　submitfunc();似乎也不能确保entry非空的，必须等待下一次render()。
-      entry && setLocation("/device/" + entry.id, true );
+      entry && setLocation("/device/" + entry.id, { replace: true } );
       //原型是 PushCallback = (to: Path, replace?: boolean) => void;
     } catch (err) {
       setLoading(false);

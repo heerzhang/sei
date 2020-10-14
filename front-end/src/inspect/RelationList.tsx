@@ -253,7 +253,7 @@ export const RelationList: React.FunctionComponent<RelationListProps> = ({
                     content={
                       <MenuList>
                         <MenuItem contentBefore={<IconPackage />}  onPress={() => {
-                          setLocation(`/inspect/${relation.id}/addReport/choose`,  true );
+                          setLocation(`/inspect/${relation.id}/addReport/choose`,  { replace: true } );
                         } }>
                           增加个检验报告
                         </MenuItem>

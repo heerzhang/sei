@@ -79,7 +79,7 @@ export const ItemGapMeasure=
             </React.Fragment>;
           }) }
         </div>
-        新增检查=>
+        新增检查=＞
         <InputGroupLine  label='首先设置当前层站号'>
           <SuffixInput
             value={floor||''}

@@ -30,19 +30,21 @@ import { useInvalidateEQP } from "./db";
 
 interface DetailedGuideProps {
   id?: string;   　//来自上级<Route path={"/device/:id/"} component={} />给的:id。
+  company?:boolean;
 }
 //右半边页面
 export const DetailedGuide: React.FunctionComponent<DetailedGuideProps> = ({
-   id: parId,
+   id: parId, company=false
 }) => {
   const theme = useTheme();
   const toast = useToast();
   const [, setLocation] = useLocation();
   const [match, params] = useRoute("/unit/:id/:rest*");
   let id =(match && params.id);
+  console.log("DetailedGuide当前的查询 params=", params);
   if(id==='new')  id=null;
 
-  const { loading ,items: dtvalue, error ,refetch} = useDeviceDetail( { id } );
+  const { loading ,items: dtvalue, error ,refetch} = useDeviceDetail( { id , company } );
   const {result, submit:updateFunc, } = useInvalidateEQP({
       whichEqp: id, reason:'测试期',
   });
@@ -118,7 +120,7 @@ export const DetailedGuide: React.FunctionComponent<DetailedGuideProps> = ({
               variant="h5"
               gutter={false}
             >
-              单位的ID号：{id}
+             {dtvalue?.id? '单位': company? '企业':'个人'}的ID号：{dtvalue?.id || id }
            </Text>
           <div
             css={{
@@ -129,7 +131,7 @@ export const DetailedGuide: React.FunctionComponent<DetailedGuideProps> = ({
               content={
                 <MenuList>
                   <MenuItem contentBefore={<IconPackage />}  onPress={() => {
-                      setLocation("/unit/"+id+"/addTask", false);
+                      setLocation("/unit/"+id+"/addTask", { replace: false });
                    } }>
                     生成新任务
                   </MenuItem>
@@ -186,16 +188,16 @@ export const DetailedGuide: React.FunctionComponent<DetailedGuideProps> = ({
                 >
                   {/*三级路由了： 嵌套再嵌套了一层 布局级别的组件*/}
                   {id && error && error.message}
-                  <ThirdRouterContent id={id} device={dtvalue}/>
+                  <ThirdRouterContent id={id} device={dtvalue} />
 
                   <div css={{ marginTop: theme.spaces.sm }}>
-                    <RouterLink to={`/unit/`}>
+                    <RouterLink to={`/unit/${id}/owns`}>
                       <Button
                         size="lg" noBind
                         intent="primary"
                         iconAfter={<IconArrowRight />}
                       >
-                        其他功能
+                        找其名下设备
                       </Button>
                     </RouterLink>
                   </div>
@@ -228,7 +230,13 @@ function ThirdRouterContent({id, device}: ThirdRouterProps) {
       <Route path={`/unit/:id`}>
           <DeviceDetail id={id} eqp={device}/>
       </Route>
-      <Route path="/:rest*">没该URL对应third内容</Route>
+      <Route path={`/unit/:id/company`}>
+        <DeviceDetail id={device?.id} eqp={device}/>
+      </Route>
+      <Route path={`/unit/:id/person`}>
+        <DeviceDetail id={device?.id} eqp={device}/>
+      </Route>
+      <Route path="/:rest*">没该URL对应third-u内容</Route>
     </Switch>
   </React.Fragment>
   );

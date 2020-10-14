@@ -45,11 +45,12 @@ interface ResponseLikeAlgoliasearch<T=any> {
   //processingTimeMS: number;
 }
 
-interface DeviceListProps {}
+interface DeviceListProps {company?: boolean
+}
 
 export const DeviceList: React.FunctionComponent<
   DeviceListProps
-> = props => {
+> = ( {company=false} ) => {
   const theme = useTheme();
   const [, setLocation] = useLocation();
   //搜索user的输入:
@@ -65,7 +66,7 @@ export const DeviceList: React.FunctionComponent<
   console.log("DeviceList当前的查询 queryResults.hits=", queryResults && queryResults.hits);
   //根据options选择结果，来组织后端的查询参数。
   const condition = React.useMemo( () =>{
-    let condition = { company: false } as any;
+    let condition = { company: company } as any;
     if(typeof query==="object") {
       const {
         factoryNo, task: { dep } = '',
@@ -112,7 +113,7 @@ export const DeviceList: React.FunctionComponent<
     //界面查询接口参数列表
     console.log("即可搜 =filtercomp=",filtercomp);
     setFilter(filtercomp);
-  }, [query, condition]);
+  }, [ condition]);
   //这两个useEffect的前后顺序不能颠倒，顺序非常重要，后面的依赖于前面的useEffect更新结果。
   //操作UI副作用；要进一步做修正性处理。
   React.useEffect(() => {
@@ -127,7 +128,7 @@ export const DeviceList: React.FunctionComponent<
   }, [query, devicesFind]);
   //上面这个副作用必须 加usersFind，否则无法继续处理后端数据带来的必要的UI反馈变化。
 
-  const [hasMore, setHasMore] = React.useState(true);
+  const [hasMore, setHasMore] = React.useState(false);
   const [refMore, acrossMore] = useInView({threshold: 0});
   //后端返回了loading变动=会更新整个DeviceList组件，同时也执行updateQuery: ()=>{}回调更新数据。
   const toLoadMore = React.useCallback(
@@ -157,6 +158,7 @@ export const DeviceList: React.FunctionComponent<
 
   useEffect( () => { acrossMore && hasMore && toLoadMore() },
         [acrossMore,hasMore,  toLoadMore ]);
+
   async function toRefresh() {
     setHasMore(true);
     refetch( {} );
@@ -184,7 +186,7 @@ export const DeviceList: React.FunctionComponent<
             <SearchTitle>
               <SearchDeviceBox
                 css={{ borderBottom: "none" }}
-                label="搜某设备,列表数量限制,用参数缩小范围"
+                label="搜某个单位,缩小范围"
                 query={query}
                 setQuery={setQuery}
               />
@@ -199,15 +201,6 @@ export const DeviceList: React.FunctionComponent<
                   height: "100%",
                 }}
               >
-                <PullToRefresh
-                  pullDownContent={<PullDownContent/>}
-                  releaseContent={<ReleaseContent label={'立刻刷新内容'}/>}
-                  refreshContent={<RefreshContent />}
-                  onRefresh={() => toRefresh() }
-                  pullDownThreshold={30}
-                  backgroundColor="white"
-                  triggerHeight="auto"
-                >
 
                   <List>
                     {/*新搜索到的用户，扣除已经关注的，单独排列在 上部分;  没有分页加载更多的user*/}
@@ -246,7 +239,7 @@ export const DeviceList: React.FunctionComponent<
                      queryResults.hits.map((hit,i) => (
                         <ListItem key={hit.id}
                             onPress={e => {
-                              setLocation(`/unit/${hit.id}`);
+                              setLocation(`/unit/${hit.id}/${company? 'company':'person'}`);
                             }}
                           contentBefore={
                             <React.Fragment>
@@ -265,7 +258,7 @@ export const DeviceList: React.FunctionComponent<
                                   }>功能待续
                                   </MenuItem>
                                   <MenuItem contentBefore={<IconPackage />}  onPress={() => {
-                                    setLocation("/unit/new", false)
+                                    setLocation("/unit/new", { replace: false })
                                   } }>
                                    加个设备
                                   </MenuItem>
@@ -299,13 +292,11 @@ export const DeviceList: React.FunctionComponent<
                       )}
                       {!hasMore &&　<React.Fragment>
                             <span>嘿，没有更多了</span>
-                           <Button variant="ghost" onPress={() => toRefresh() }>我就刷新</Button>
                         </React.Fragment>
                       }
                     </div>
                     <div  ref={refMore}  css={{height: "1px"}}> </div>
 
-                  </PullToRefresh>
                 </div>
             </StackItem>
           )

@@ -212,7 +212,7 @@ function ReportListItem({ recipe, id, highlight ,task }: any) {
       console.log("handleDelete返回", err);
       return;
     }
-    setLocation("/inspect/"+ispId,  true );
+    setLocation("/inspect/"+ispId,  { replace: true } );
   }
 
   return (
@@ -270,7 +270,7 @@ function ReportListItem({ recipe, id, highlight ,task }: any) {
                     toast({
                       title: "该功能还未做呢，只能提交审核员一个网页链接看看"
                     });
-                    setLocation("/", true );
+                    setLocation("/", { replace: true } );
                   } }>
                  签名并提交审核
                 </MenuItem>

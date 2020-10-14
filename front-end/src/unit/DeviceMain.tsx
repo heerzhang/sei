@@ -52,10 +52,10 @@ export const DeviceMain: React.FunctionComponent<DeviceMainProps> = props => {
   const renderList = isLarge || !showingRecipe;  　//大屏或者小屏但是没有显示具体明细页的场合。
 
   function onLogoutDo() {
-    setLocation("/login",  false );
+    setLocation("/login",  { replace: false } );
   }
   const { submitfunc:signOut,  } = useSignOut(onLogoutDo);
-  const { item:sumofTask,  } = useCountOfTask({dep:"", status:""} );
+  //const { item:sumofTask,  } = useCountOfTask({dep:"", status:""} );
 
   return (
     <Layout>
@@ -196,11 +196,13 @@ export const DeviceMain: React.FunctionComponent<DeviceMainProps> = props => {
                   value={activeTab}
                   variant="evenly-spaced"
                 >
-                  <Tab id="device">
-                    我关注的设备
+                  <Tab id="company">
+                    找企业
                   </Tab>
-                  <Tab  badge={ sumofTask }
-                    id="task">我的检验任务</Tab>
+                  <Tab id="person">
+                    找个人
+                  </Tab>
+                  <Tab id="owns">名下设备</Tab>
                   <Tab id="maintain">其他功能</Tab>
                 </Tabs>
               </DarkMode>
@@ -213,10 +215,13 @@ export const DeviceMain: React.FunctionComponent<DeviceMainProps> = props => {
             onRequestChange={i => setActiveTab(i)}
             lazyLoad
           >
-            <TabPanel id="device">
-              <DeviceList />
+            <TabPanel id="company">
+              <DeviceList company />
             </TabPanel>
-            <TabPanel  id="task">
+            <TabPanel id="person">
+              <DeviceList  />
+            </TabPanel>
+            <TabPanel  id="owns">
               <TaskList />
             </TabPanel>
             <TabPanel id="maintain">
@@ -299,6 +304,12 @@ function SecondRouterContent({}) {
     <Switch>
       <Route path={"/unit/new"}>
         <DetailedGuide />
+      </Route>
+      <Route path={"/unit/:id/company"}>
+        <DetailedGuide company/>
+      </Route>
+      <Route path={"/unit/:id/person"}>
+        <DetailedGuide company={false}/>
       </Route>
       <Route path={"/unit/:id/task/:taskId/dispatch"} component={DispatchIspMen} />
       <Route path={"/unit/:id/task/:taskId"} component={IspEntrance} />
