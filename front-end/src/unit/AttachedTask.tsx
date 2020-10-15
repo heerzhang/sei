@@ -17,7 +17,7 @@ import {
   Container,
   ResponsivePopover,
   IconMoreVertical,
-  MenuDivider, IconPackage, Button, IconChevronDown
+  MenuDivider, IconPackage, Button, IconChevronDown, IconArrowRight
 } from "customize-easy-ui-component";
 
 //import { useSession } from "../auth";
@@ -25,6 +25,7 @@ import {Helmet} from "react-helmet";
 import { Link,  useLocation } from "wouter";
 import { Link as RouterLink } from "wouter";
 import { useCancellationTask } from "./task/db";
+import { DevfilterContext } from "../context/DevfilterContext";
 
 
 interface AttachedTaskProps {
@@ -62,10 +63,13 @@ export const AttachedTask: React.FunctionComponent<AttachedTaskProps> = ({
   const {task} =eqp;
  // const [ingredients, setIngredients] = React.useState<any>( dt||{} );
   const [, setLocation] = useLocation();
+  const {filter, setFilter} =React.useContext(DevfilterContext);
   const {result, submit:updateFunc, } = useCancellationTask({
     taskid: taskId, reason:'测试期直接删'
   });
-  //console.log("页面刷新钩子AttachedTask entry=",　",设备id="+id+";task=",task,";eqp=",eqp);
+  //过滤对象or参数取值K/V；有些保留key不能随意使用。
+  const  devFilterArgs={"ownerId": id };
+  console.log("页面刷新钩子AttachedTask entry=",　",设备id="+id+";task=",task,";eqp=",eqp ,"filter=",filter);
 
   async function handleDelete(id: string) {
     try {
@@ -80,6 +84,13 @@ export const AttachedTask: React.FunctionComponent<AttachedTaskProps> = ({
     }
     setLocation("/device/"+eqpId,  { replace: true } );
   }
+  //跳转前分解步骤：点击doConfirm确认，异步完成了，然后才做路由切换。
+  const [doConfirm, setDoConfirm] = React.useState(false);
+  React.useEffect(() => {
+    if(doConfirm){
+      filter && ( setLocation('/device') );
+    }
+  }, [doConfirm,filter,setLocation]);
 
 
   return (
@@ -124,14 +135,8 @@ export const AttachedTask: React.FunctionComponent<AttachedTaskProps> = ({
                 paddingBottom: theme.spaces.lg
               }}
             >
-              {task && task.map(each => {
-                let myIsp= each.isps?.find((it,i)=>{return  it.dev?.id===eqp.id });
-                //let hasIsp= (myIsp!==null);  不好使！　undefined的！
-                let hasIsp= !!myIsp;
-                console.log("刷新 奇怪啊hasIsp:", hasIsp,",myIsp=",myIsp,";each.isps=", each.isps);
-                return <div key={each.id}>
-                        {
-                          (
+                <div >
+
                           <div
                             css={{
                               backgroundColor: false
@@ -153,7 +158,7 @@ export const AttachedTask: React.FunctionComponent<AttachedTaskProps> = ({
                                   : "white"
                               }}
                             >
-                            任务号 {each.id}
+                            设备 {id}
                             </Text>
 
                             <Text
@@ -164,44 +169,29 @@ export const AttachedTask: React.FunctionComponent<AttachedTaskProps> = ({
                                   : "white"
                               }}
                             >
-                              状态：{each.status||''}
+                              状态：{eqp.status||''}
                             </Text>
-                            {hasIsp? <Link  to={"/inspect/" + myIsp.id}>
-                                {myIsp? '检验ISP详情' : '逻辑异常'}
-                              </Link>
-                               :
-                              <Link  to={"/device/"+eqp.id+"/task/"+each.id+'/dispatch'}>
-                                先要去派工
-                              </Link>
-                            }
-                            <ResponsivePopover
-                              content={
-                                <MenuList>
-                                  <MenuItem disabled={hasIsp} onPress={ async () => {
-                                      await setTaskId(each.id);
-                                      handleDelete(each.id)
-                                    }
-                                  }>注销任务
-                                  </MenuItem>
-                                  <MenuItem contentBefore={<IconPackage />}  disabled={hasIsp}
-                                    onPress={() => {
-                                       setLocation("/device/"+eqp.id+"/task/"+each.id+'/dispatch', { replace: true });
-                                     } }>
-                                  有任务就派工给检验员
-                                  </MenuItem>
-                                </MenuList>
-                              }
-                            >
-                              <Button  size="md" iconAfter={<IconChevronDown />} variant="ghost" css={{whiteSpace:'unset'}}>
-                                {`${each.date||''}`}
-                              </Button>
-                            </ResponsivePopover>
-                          </div>
-                        )
-                        }
-                      </div>
-              } )}
 
+
+
+
+
+
+                                <Button
+                                  size="lg"
+                                  intent="primary"
+                                  iconAfter={<IconArrowRight />}
+                                  onClick={() => {
+                                    //这里派发出去editorSnapshot: outCome {...storage, ...outCome}都是按钮捕获的值，还要经过一轮render才会有最新值。
+                                    setFilter({...filter, ...devFilterArgs});
+                                    setDoConfirm(true);
+                                  } }
+                                >
+                                  去找该单位设备
+                                </Button>
+                          </div>
+
+                      </div>
             </div>
           </Container>
         </div>

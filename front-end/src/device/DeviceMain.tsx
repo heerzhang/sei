@@ -33,20 +33,23 @@ import { IspEntrance } from "./task/IspEntrance";
 import { useCountOfTask } from "./db";
 import { Link as RouterLink } from "wouter";
 import { DetailedGuide } from "./DetailedGuide";
+import queryString from "query-string";
+import { DevfilterContext } from "../context/DevfilterContext";
 
 interface DeviceMainProps {
   id?: string;
 }
 
-export const DeviceMain: React.FunctionComponent<DeviceMainProps> = props => {
+export const DeviceMain: React.FunctionComponent<DeviceMainProps> =(props ,context)=> {
   const theme = useTheme();
   const {user} = useSession();
   const isLarge = useMedia({ minWidth: "768px" });
-
+  const qs = queryString.parse(window.location.search);
+  const {filter:devfl, setFilter:setDevfl} =React.useContext(DevfilterContext);
   const [, params] = useRoute("/device/:recipe*");
   let showingRecipe = params.recipe;
   let initTab=0;
-
+  console.log("DeviceMain金准" ,params ,"props:",props,"devfl:",devfl,"qs=",qs);
   const [activeTab, setActiveTab] = React.useState(initTab);
   const [, setLocation] = useLocation();
   const renderList = isLarge || !showingRecipe;  　//大屏或者小屏但是没有显示具体明细页的场合。
@@ -172,7 +175,7 @@ export const DeviceMain: React.FunctionComponent<DeviceMainProps> = props => {
                   <div>
                     <DarkMode>
                       <Link to="/">
-                        <IconButton
+                        <IconButton noBind
                           variant="ghost"
                           label="首页"
                           size="md"

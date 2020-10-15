@@ -347,4 +347,7 @@ prisma2.0和nexus是graphQL后端服务器/nodejs的。
   }
 派生继承appollo的配置文件  https://www.apollographql.com/docs/react/data/fragments/#generating-possibletypes-automatically
 interface套用子类后报错， https://stackoverflow.com/questions/59690194/apollographql-heuristic-fragment-manual-matching
+按钮组件unmount了就异常。setLocation之前更新本地状态，可能报错，需要useEffect做延迟。
+单页应用SPA应该主动清除setTimeout定时器，即使切换路由，也还是在这个页面没有离开，所以还是会继续运行的。
+setXxx是异步的; 但是多个setXXX合并执行的, 然后才做render; 而传递到useEffect（,[])需要等到下一次render;两趟绘制;
 

@@ -289,4 +289,8 @@ EsLint报错，设置目录D:\home\sei\front-end\node_modules\eslint
 react-spring 9.0　版本文档；　https://www.react-spring.io/log
 状态管理方式选择：序列化到路由的参数应该可表示资源有意义，直接定位页面也不能全用URL;临时状态UI状态等适合放在Context/组件传递props。
 升版后tsx里面符号>不能随便用了。改写：　`{'>'}` or `&gt;`?
-
+React传参的方式,<a href>queryString.parse(window.location.search)局限/全局刷新！https://www.cnblogs.com/yangyangxxb/p/10035834.html  https://www.cnblogs.com/houjl/p/10056718.html
+组件页面参数传递共享的3步骤：createContext实例化，共同父辈组件下xxContext.Provider初始化，useContext(xxContext)像本地变量使用;自动同步。
+setXxx()调用后unmount组件告警！Can't perform a React state update on an unmounted component.解决https://www.npmjs.com/package/use-state-if-mounted
+建议将修改 DOM 的操作里放useLayoutEffect 里{同步阻塞浏览器渲染}，而不是 useEffect里面{异步要等到浏览器将所有变化渲染到屏幕后才被执行}。
+<Button onXxx={()=>{ setLocation('') } }> 都会导致unmount报错。按钮自己界面处理函数还有留尾巴的却被跳转。应该分成2个步骤执行。

@@ -380,3 +380,4 @@ export default Main;
 //关键的：虚拟DOM; React组件性能高效渲染   https://www.jianshu.com/p/100a55978253
 //使用display: "none"比起 直接的逻辑隐藏 {flag &&()} 的弱点是不能让非{}逻辑包裹组件优先显示；没被逻辑包裹的组件显示更快更优先处理。
 //<ResponsivePopover 大屏是Dialog小屏是Sheet，而且从DOM文件流上看都是独立于<APP/root>节点的；弹出式的是独立打包？。
+//副作用钩子useEffect( ()=>{} , ? ) 第二参数null是每次都要执行第一个参数的功能，第二参数若是[]空数组的就是只做一次的，[a,b]依赖a/b变化触发。

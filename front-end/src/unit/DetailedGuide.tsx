@@ -19,13 +19,14 @@ import {
 } from "customize-easy-ui-component";
 
 import {Helmet} from "react-helmet";
-import { Link as RouterLink, Link, Route, Switch, useLocation, useRoute } from "wouter";
+import { Link as RouterLink, Route, Switch, useLocation, useRoute, Redirect } from "wouter";
 import { ContainLine, TransparentInput } from "../comp/base";
 import { useDeviceDetail } from "./db";
 import { AddToTask } from "./task/AddToTask";
 import { DeviceDetail } from "./DeviceDetail";
 import { ComposeDevice } from "./ComposeDevice";
 import { useInvalidateEQP } from "./db";
+import { Path } from "wouter/preact";
 
 
 interface DetailedGuideProps {
@@ -38,7 +39,9 @@ export const DetailedGuide: React.FunctionComponent<DetailedGuideProps> = ({
 }) => {
   const theme = useTheme();
   const toast = useToast();
-  const [, setLocation] = useLocation();
+  //原型是[Path, (to: Path, options?: { replace?: boolean }) => void]
+  const [location, setLocation] = useLocation();
+
   const [match, params] = useRoute("/unit/:id/:rest*");
   let id =(match && params.id);
   console.log("DetailedGuide当前的查询 params=", params);
@@ -96,7 +99,7 @@ export const DetailedGuide: React.FunctionComponent<DetailedGuideProps> = ({
         >
           <IconButton
             icon={<IconArrowLeft />}
-            component={Link}
+            component={RouterLink}
             to="/unit"
             label="后退"
             replace
@@ -191,7 +194,7 @@ export const DetailedGuide: React.FunctionComponent<DetailedGuideProps> = ({
                   <ThirdRouterContent id={id} device={dtvalue} />
 
                   <div css={{ marginTop: theme.spaces.sm }}>
-                    <RouterLink to={`/unit/${id}/owns`}>
+                    <RouterLink to={`/device/`}>
                       <Button
                         size="lg" noBind
                         intent="primary"

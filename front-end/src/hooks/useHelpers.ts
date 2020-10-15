@@ -176,8 +176,8 @@ export function useThrottle333(fn, timeout) {
 }
 
 //"throttle-asynchronous": "^1.1.1",
-//看了 "@rooks/use-throttle":"^3.6.0",
-//防止频繁 按按钮！3000毫秒。　　fn　参数书写时不要加()的。
+//防抖功能，参考看了 "@rooks/use-throttle":"^3.6.0",
+//防止频繁去按 按钮！3000毫秒。　　fn　参数书写时不要加()的。
 export function useThrottle(fn: Function, timeout: number = 3000) {
   //要把按钮使能开关ready一起做上。
   const [ready, setReady] = React.useState(true);

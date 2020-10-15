@@ -36,6 +36,10 @@ export const DeviceDetail: React.FunctionComponent<DeviceDetailProps> = ({ id, e
           dt={eqp}
         />
 
+
+
+
+
         <AttachedTask
           readOnly={true}
           id={id}
