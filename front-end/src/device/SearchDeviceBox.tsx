@@ -12,6 +12,7 @@ import {
 } from "customize-easy-ui-component";
 //import { Link } from "wouter";
 import { ContainLine, TransparentInput } from "../comp/base";
+import { DevfilterContext } from "../context/DevfilterContext";
 
 export interface SearchBoxProps {
   setQuery: React.Dispatch<React.SetStateAction<any>>;
@@ -30,7 +31,8 @@ export const SearchDeviceBox: React.FunctionComponent<SearchBoxProps> = ({
   //设备选择的范围缩小功能
   const [open, setOpen] = React.useState(false);
   const [ingredients, setIngredients] = React.useState<any>( {} );
-  console.log("来看SearchDeviceBox当前的 ingredients=",ingredients);
+  const {filter, setFilter} =React.useContext(DevfilterContext);
+  console.log("来看SearchDeviceBox当前的 ingredients=",ingredients,"filter=",filter,"query=",query);
 
   return (
     <React.Fragment>
@@ -157,6 +159,15 @@ export const SearchDeviceBox: React.FunctionComponent<SearchBoxProps> = ({
                 }}
               />
             </ContainLine>
+            <ContainLine display={'设备产权人的单位ID'}>
+              <TransparentInput
+                autoFocus={true}
+                value={filter?.ownerId||''}
+                onChange={e => {
+                  setFilter( {  ...filter, ownerId: e.currentTarget.value||undefined } );
+                }}
+              />
+            </ContainLine>
           </div>
 
           <div
@@ -177,6 +188,11 @@ export const SearchDeviceBox: React.FunctionComponent<SearchBoxProps> = ({
             </Button>
           </div>
           <Text>搜索框输入可用后端识别转义符号  % 任意的几个字符  _ 某个字符</Text>
+          <br/>
+          <Button intent="primary"
+                  onPress={e => setFilter(null) }
+          >清空过滤器设置
+          </Button>
         </div>
 
       </Dialog>

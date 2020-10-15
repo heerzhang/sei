@@ -75,16 +75,11 @@ export const useUpdateEntry = (options) => {
   return { result ,submitfunc, error};
 };
 
-
-
-//      ${fragments.comment}
-
-
 //从graphQL的后端 模型数据库服务器 取模型数据。
 //3.2版本findAllEQPsFilter2不能再用dev:findAllEQPsFilter2这样子做别名了,cache typePolicies不支持。
 const GET_DEVICES = gql`
   query findAllEQPsFilter($where: DeviceCommonInput,$offset:Int!,$first:Int=10,$orderBy:String,$asc:Boolean=true) {
-    findAllEQPsFilter2(where: $where,offset:$offset,first:$first,orderBy:$orderBy,asc:$asc) {
+    res:findAllEQPsFilter2(where: $where,offset:$offset,first:$first,orderBy:$orderBy,asc:$asc) {
       id cod oid type sort vart   
        ... on IfElevator {
           liftHeight
@@ -94,15 +89,14 @@ const GET_DEVICES = gql`
        }
      }
   }
-
 `;
-//著者-用户列表。
+//底下usePaginateQueryDevice有可能不会实际执行的，还参考接口参数变量的变化。
 export function usePaginateQueryDevice(filter:any) {
   const { loading, error, data, fetchMore, refetch} = useQuery(GET_DEVICES, {
     variables: { ...filter },
     notifyOnNetworkStatusChange: true
   });
-  return {items:　data　&&　data.findAllEQPsFilter2,
+  return {items:　data　&&　data.res,
     error, loading, refetch, fetchMore};
 }
 

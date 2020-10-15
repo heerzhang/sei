@@ -350,4 +350,25 @@ interface套用子类后报错， https://stackoverflow.com/questions/59690194/a
 按钮组件unmount了就异常。setLocation之前更新本地状态，可能报错，需要useEffect做延迟。
 单页应用SPA应该主动清除setTimeout定时器，即使切换路由，也还是在这个页面没有离开，所以还是会继续运行的。
 setXxx是异步的; 但是多个setXXX合并执行的, 然后才做render; 而传递到useEffect（,[])需要等到下一次render;两趟绘制;
+graphQL升版本后已经不支持input参数的可自循环迭代定义；之前的组织后端的查询参数如下：
+  const condition = React.useMemo( () =>{
+    let condition = { lj: 'AND', as: [] };
+    if(typeof query==="object") {
+      const {
+        factoryNo, task: { dep } = '',
+        isps: { ispMen: { username } = '' } = ''
+      } = query;
+      if (factoryNo)
+        condition.as.push({ s: 'factoryNo', o: 'LK', sv: '%' + factoryNo + '%' });
+      if(dep)
+        condition.as.push({s:'task.dep',o:'EQ',sv: dep });
+      if(username)
+        condition.as.push({s:'isps.ispMen.username',o:'EQ',sv: username });
+    }
+    else{
+      condition.as.push({s:'cod',o:'LK', sv:query?query:'%' });
+    }
+    condition.as.push({s:'valid',o:'TRUE'});
+    return condition;
+  }, [query]);
 

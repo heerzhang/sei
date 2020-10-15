@@ -28,7 +28,7 @@ import { useMedia } from "use-media";
 import { Layout } from "./Layout";
 import { TaskList } from "./task/TaskList";
 import { DispatchIspMen } from "./task/DispatchIspMen";
-import { DeviceList } from "./DeviceList";
+import { UnitList } from "./UnitList";
 import { IspEntrance } from "./task/IspEntrance";
 import { useCountOfTask } from "./db";
 import { Link as RouterLink } from "wouter";
@@ -216,10 +216,10 @@ export const DeviceMain: React.FunctionComponent<DeviceMainProps> = props => {
             lazyLoad
           >
             <TabPanel id="company">
-              <DeviceList company />
+              <UnitList company />
             </TabPanel>
             <TabPanel id="person">
-              <DeviceList  />
+              <UnitList  />
             </TabPanel>
             <TabPanel  id="owns">
               <TaskList />

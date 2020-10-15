@@ -294,3 +294,5 @@ React传参的方式,<a href>queryString.parse(window.location.search)局限/全
 setXxx()调用后unmount组件告警！Can't perform a React state update on an unmounted component.解决https://www.npmjs.com/package/use-state-if-mounted
 建议将修改 DOM 的操作里放useLayoutEffect 里{同步阻塞浏览器渲染}，而不是 useEffect里面{异步要等到浏览器将所有变化渲染到屏幕后才被执行}。
 <Button onXxx={()=>{ setLocation('') } }> 都会导致unmount报错。按钮自己界面处理函数还有留尾巴的却被跳转。应该分成2个步骤执行。
+就算filter改变useQuery(, {variables: {...filter},)也不一定会发起后端请求，可能被appollo自动优化掉了：它错误以为参数修改不影响结果不去获取。
+

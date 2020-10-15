@@ -181,7 +181,7 @@ export const AttachedTask: React.FunctionComponent<AttachedTaskProps> = ({
                                   size="lg"
                                   intent="primary"
                                   iconAfter={<IconArrowRight />}
-                                  onClick={() => {
+                                  onPress={() => {
                                     //这里派发出去editorSnapshot: outCome {...storage, ...outCome}都是按钮捕获的值，还要经过一轮render才会有最新值。
                                     setFilter({...filter, ...devFilterArgs});
                                     setDoConfirm(true);

@@ -48,7 +48,7 @@ interface ResponseLikeAlgoliasearch<T=any> {
 interface DeviceListProps {company?: boolean
 }
 
-export const DeviceList: React.FunctionComponent<
+export const UnitList: React.FunctionComponent<
   DeviceListProps
 > = ( {company=false} ) => {
   const theme = useTheme();
@@ -64,7 +64,7 @@ export const DeviceList: React.FunctionComponent<
   const [relation, ] = React.useState(null);
 
   console.log("DeviceList当前的查询 queryResults.hits=", queryResults && queryResults.hits);
-  //根据options选择结果，来组织后端的查询参数。
+  /*根据options选择结果，来组织后端的查询参数。
   const condition = React.useMemo( () =>{
     let condition = { company: company } as any;
     if(typeof query==="object") {
@@ -72,18 +72,14 @@ export const DeviceList: React.FunctionComponent<
         factoryNo, task: { dep } = '',
         isps: { ispMen: { username } = '' } = ''
       } = query;
-    //if (factoryNo)   condition.as.push({ s: 'factoryNo', o: 'LK', sv: '%' + factoryNo + '%' });
     }
     else{
       condition= {...condition, name:query }
     }
     return condition;
   }, [query]);
-/*
-  const [filter, setFilter] = React.useState({where: condition,
-      offset:0,
-     } as any);
   */
+
   const [filter, setFilter] = React.useState({unit: {cod:'%'},
     offset:0,
   } as any);
@@ -104,7 +100,7 @@ export const DeviceList: React.FunctionComponent<
 
   //根据query的改变来重新查询哪。
   React.useEffect(() => {
-    let filtercomp={as: condition,
+    let filtercomp={as: {company: company, name:query },
       offset:0,
       first:5,
       orderBy: "instDate",
@@ -113,7 +109,7 @@ export const DeviceList: React.FunctionComponent<
     //界面查询接口参数列表
     console.log("即可搜 =filtercomp=",filtercomp);
     setFilter(filtercomp);
-  }, [ condition]);
+  }, [ query]);
   //这两个useEffect的前后顺序不能颠倒，顺序非常重要，后面的依赖于前面的useEffect更新结果。
   //操作UI副作用；要进一步做修正性处理。
   React.useEffect(() => {

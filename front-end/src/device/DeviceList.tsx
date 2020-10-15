@@ -36,6 +36,7 @@ import { Link as RouterLink, useLocation } from "wouter";
 import { useEffect } from "react";
 import { useInView } from 'react-intersection-observer'
 import { PullToRefresh,PullDownContent,RefreshContent,ReleaseContent } from "react-js-pull-to-refresh";
+import { DevfilterContext } from "../context/DevfilterContext";
 
 
 
@@ -64,34 +65,8 @@ export const DeviceList: React.FunctionComponent<
 
   console.log("DeviceList当前的查询 queryResults.hits=", queryResults && queryResults.hits);
   //根据options选择结果，来组织后端的查询参数。
-  const condition = React.useMemo( () =>{
-    let condition = { lj: 'AND', as: [] };
-    if(typeof query==="object") {
-      const {
-        factoryNo, task: { dep } = '',
-        isps: { ispMen: { username } = '' } = ''
-      } = query;
-      if (factoryNo)
-        condition.as.push({ s: 'factoryNo', o: 'LK', sv: '%' + factoryNo + '%' });
-      if(dep)
-        condition.as.push({s:'task.dep',o:'EQ',sv: dep });
-      if(username)
-        condition.as.push({s:'isps.ispMen.username',o:'EQ',sv: username });
-    }
-    else{
-      condition.as.push({s:'cod',o:'LK', sv:query?query:'%' });
-    }
-    condition.as.push({s:'valid',o:'TRUE'});
-    return condition;
-  }, [query]);
-/*
-  const [filter, setFilter] = React.useState({where: condition,
-      offset:0,
-     } as any);
-  */
-  //let devicesFindCount=0;
-  const [filter, setFilter] = React.useState({where: {cod:'%'},
-    offset:0,
+   const [filter, setFilter] = React.useState({where: {cod: '%'},
+    offset:0, first:1,
   } as any);
 
   const {
@@ -107,18 +82,24 @@ export const DeviceList: React.FunctionComponent<
  // const [option, setOption] = useHistoryState("", "option");
   //let history = useHistory();
   //navigate(state:{ })传递方式，数据可以很大，就是参数不会显示在URL当中会引起歧义。bug：可能需要刷新才正常。
-
+  const {filter:devfl, } =React.useContext(DevfilterContext);
   //根据query的改变来重新查询哪。
   React.useEffect(() => {
-    let filtercomp={where: {cod:'%'},
+    let filtercomp={where: {cod: query, ...devfl},
       offset:0,
-      first:5,
+      first:2,
       orderBy: "instDate",
       asc: false
     };
     console.log("伪set Filter 回调=filtercomp=",filtercomp);
     setFilter(filtercomp);
-  }, [query, condition]);
+    //有些场合不需要做refetch就能触发，分页过滤，可能被appollo自动优化:没发起请求：它以为参数修改不影响显示。
+    //还有问题：这个时间filter还是捕获的旧的，还必须延迟执行。
+  }, [query]);
+  React.useEffect(() => {
+    //还有问题：这个时间filter还是捕获的旧的，还必须延迟执行。
+    toRefresh();
+  }, [filter]);
   //这两个useEffect的前后顺序不能颠倒，顺序非常重要，后面的依赖于前面的useEffect更新结果。
   //操作UI副作用；要进一步做修正性处理。
   React.useEffect(() => {
@@ -142,7 +123,7 @@ export const DeviceList: React.FunctionComponent<
         variables: {
           offset: devicesFind.length,
         },
-       /* updateQuery: (prev, { fetchMoreResult }) => {
+        updateQuery: (prev, { fetchMoreResult }) => {
           console.log("fetch来useInfiniteScroll看="+ JSON.stringify(fetchMoreResult)+",devicesFind.length=",devicesFind.length);
           if (!fetchMoreResult)   return prev;
           if (!fetchMoreResult.dev)   return prev;
@@ -154,7 +135,7 @@ export const DeviceList: React.FunctionComponent<
           return Object.assign({}, prev, {
             dev: [...prev.dev, ...fetchMoreResult.dev],
           });
-        }, */
+        },
       });
     },
     [loadMore ,devicesFind]
@@ -162,9 +143,10 @@ export const DeviceList: React.FunctionComponent<
 
     //.then(result => {    if(result.data.findAllEQPsFilter2.length<=0)   setHasMore(false);  })
 
+  /*
   useEffect( () => { acrossMore && hasMore && toLoadMore() },
         [acrossMore,hasMore,  toLoadMore ]);
-
+*/
 
   useEffect( () => {
     if(hasMore && devicesFind?.length>=15)  setHasMore(false);
