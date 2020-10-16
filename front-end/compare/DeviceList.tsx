@@ -36,7 +36,6 @@ import { Link as RouterLink, useLocation } from "wouter";
 import { useEffect } from "react";
 import { useInView } from 'react-intersection-observer'
 import { PullToRefresh,PullDownContent,RefreshContent,ReleaseContent } from "react-js-pull-to-refresh";
-import { DevfilterContext } from "../context/DevfilterContext";
 
 
 
@@ -46,11 +45,12 @@ interface ResponseLikeAlgoliasearch<T=any> {
   //processingTimeMS: number;
 }
 
-interface DeviceListProps {}
+interface DeviceListProps {company?: boolean
+}
 
 export const DeviceList: React.FunctionComponent<
   DeviceListProps
-> = props => {
+> = ( {company=false} ) => {
   const theme = useTheme();
   const [, setLocation] = useLocation();
   //搜索user的输入:
@@ -65,8 +65,27 @@ export const DeviceList: React.FunctionComponent<
 
   console.log("DeviceList当前的查询 queryResults.hits=", queryResults && queryResults.hits);
   //根据options选择结果，来组织后端的查询参数。
-   const [filter, setFilter] = React.useState({where: {cod: '%'},
-    offset:0, first:1,
+  const condition = React.useMemo( () =>{
+    let condition = { company: company } as any;
+    if(typeof query==="object") {
+      const {
+        factoryNo, task: { dep } = '',
+        isps: { ispMen: { username } = '' } = ''
+      } = query;
+    //if (factoryNo)   condition.as.push({ s: 'factoryNo', o: 'LK', sv: '%' + factoryNo + '%' });
+    }
+    else{
+      condition= {...condition, name:query }
+    }
+    return condition;
+  }, [query]);
+/*
+  const [filter, setFilter] = React.useState({where: condition,
+      offset:0,
+     } as any);
+  */
+  const [filter, setFilter] = React.useState({unit: {cod:'%'},
+    offset:0,
   } as any);
 
   const {
@@ -82,23 +101,19 @@ export const DeviceList: React.FunctionComponent<
  // const [option, setOption] = useHistoryState("", "option");
   //let history = useHistory();
   //navigate(state:{ })传递方式，数据可以很大，就是参数不会显示在URL当中会引起歧义。bug：可能需要刷新才正常。
-  const {filter:devfl, } =React.useContext(DevfilterContext);
+
   //根据query的改变来重新查询哪。
   React.useEffect(() => {
-    let filtercomp={where: {cod: query, ...devfl},
+    let filtercomp={as: condition,
       offset:0,
-      first:2,
+      first:5,
       orderBy: "instDate",
       asc: false
     };
-    console.log("伪set Filter 回调=filtercomp=",filtercomp);
+    //界面查询接口参数列表
+    console.log("即可搜 =filtercomp=",filtercomp);
     setFilter(filtercomp);
-  }, [query]);
-  //有些场合不需要做refetch就能触发，可能被appollo自动优化。变化驱动链条query＝>filter
-  //有问题：refetch这个时间的入口参数filter还是捕获的旧的，须延迟一个render()后再去做。
-  React.useEffect(() => {
-    toRefresh();
-  }, [filter]);
+  }, [ condition]);
   //这两个useEffect的前后顺序不能颠倒，顺序非常重要，后面的依赖于前面的useEffect更新结果。
   //操作UI副作用；要进一步做修正性处理。
   React.useEffect(() => {
@@ -113,7 +128,7 @@ export const DeviceList: React.FunctionComponent<
   }, [query, devicesFind]);
   //上面这个副作用必须 加usersFind，否则无法继续处理后端数据带来的必要的UI反馈变化。
 
-  const [hasMore, setHasMore] = React.useState(true);
+  const [hasMore, setHasMore] = React.useState(false);
   const [refMore, acrossMore] = useInView({threshold: 0});
   //后端返回了loading变动=会更新整个DeviceList组件，同时也执行updateQuery: ()=>{}回调更新数据。
   const toLoadMore = React.useCallback(
@@ -135,26 +150,17 @@ export const DeviceList: React.FunctionComponent<
             dev: [...prev.dev, ...fetchMoreResult.dev],
           });
         },
-      });
+
+      })
     },
     [loadMore ,devicesFind]
   );
 
-    //.then(result => {    if(result.data.findAllEQPsFilter2.length<=0)   setHasMore(false);  })
-
-  /*
   useEffect( () => { acrossMore && hasMore && toLoadMore() },
         [acrossMore,hasMore,  toLoadMore ]);
-*/
-
-  useEffect( () => {
-    if(hasMore && devicesFind?.length>=15)  setHasMore(false);
-    },
-    [devicesFind]);
 
   async function toRefresh() {
     setHasMore(true);
-    //TODO： 先清空旧的cache??  还是干脆取消该功能，代替为页面强制刷新
     refetch( {} );
   }
 
@@ -180,7 +186,7 @@ export const DeviceList: React.FunctionComponent<
             <SearchTitle>
               <SearchDeviceBox
                 css={{ borderBottom: "none" }}
-                label="搜某设备,列表数量限制,用参数缩小范围"
+                label="搜某个单位,缩小范围"
                 query={query}
                 setQuery={setQuery}
               />
@@ -233,15 +239,15 @@ export const DeviceList: React.FunctionComponent<
                      queryResults.hits.map((hit,i) => (
                         <ListItem key={hit.id}
                             onPress={e => {
-                              setLocation(`/device/${hit.id}`);
+                              setLocation(`/unit/${hit.id}/${company? 'company':'person'}`);
                             }}
                           contentBefore={
                             <React.Fragment>
-                              <Avatar size="xs" name={'曳'}/>
-                              <Avatar size="xs" name={'有'}/>
+                              <Avatar size="xs" name={'企'}/>
+                              <Avatar size="xs" name={'维'}/>
                             </React.Fragment>
                           }
-                          primary={`${hit.cod}`}
+                          primary={`${hit.name}`}
                           contentAfter={
                             <ResponsivePopover
                               content={
@@ -252,7 +258,7 @@ export const DeviceList: React.FunctionComponent<
                                   }>功能待续
                                   </MenuItem>
                                   <MenuItem contentBefore={<IconPackage />}  onPress={() => {
-                                    setLocation("/device/new", { replace: false })
+                                    setLocation("/unit/new", { replace: false })
                                   } }>
                                    加个设备
                                   </MenuItem>
@@ -274,9 +280,9 @@ export const DeviceList: React.FunctionComponent<
                         marginTop: theme.spaces.md
                       }}
                     >
-                      { hasMore &&  (
+                      { hasMore && !loading && (
                         <div>
-                          <Button disabled={loading} onPress={ () =>{
+                          <Button onPress={ () =>{
                             toLoadMore();     //虽然引用表现是异步的，但还是需要某些步骤需要同步执行的，只能说是其内部深度嵌套了个Promise()。
                             //console.log(`按拉扯获取took ${duration}ms`);　//异步处理了，这里实际耗时也不短暂122ms; 可能因为loading要同步首先设置的。
                           } }>

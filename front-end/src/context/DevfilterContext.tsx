@@ -1,12 +1,10 @@
 /** @jsx jsx */
 //import { jsx, css } from "@emotion/core";
 import * as React from "react";
-
-
 import { Dispatch, SetStateAction } from "react";
 
 
-//当作，模板在线文档的编辑数据的，临时存储。 子组件需要监听变化的数据。
+//设备列表过滤器设置各个参数或逻辑。
 interface EditStorageContextType {
   filter: any,
   setFilter: Dispatch<SetStateAction<any>>
@@ -16,6 +14,4 @@ interface EditStorageContextType {
 export const DevfilterContext = React.createContext<EditStorageContextType | null>(
   null
 );
-
-
 
