@@ -134,7 +134,7 @@ export const  client = new ApolloClient({
       typePolicies: {
         Query: {
           fields: {
-            findAllEQPsFilter2: offsetLimitPagination(),
+            findAllEQPsFilter: offsetLimitPagination(),
           },
         },
       },

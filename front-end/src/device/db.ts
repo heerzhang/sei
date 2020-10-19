@@ -79,7 +79,7 @@ export const useUpdateEntry = (options) => {
 //3.2版本findAllEQPsFilter2不能再用dev:findAllEQPsFilter2这样子做别名了,cache typePolicies不支持。
 const GET_DEVICES = gql`
   query findAllEQPsFilter($where: DeviceCommonInput,$offset:Int!,$first:Int=10,$orderBy:String,$asc:Boolean=true) {
-    res:findAllEQPsFilter2(where: $where,offset:$offset,first:$first,orderBy:$orderBy,asc:$asc) {
+    res:findAllEQPsFilter(where: $where,offset:$offset,first:$first,orderBy:$orderBy,asc:$asc) {
       id cod oid type sort vart   
        ... on IfElevator {
           liftHeight

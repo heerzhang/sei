@@ -19,7 +19,7 @@ export interface SearchBoxProps {
   query: any;
   label?: string;
 }
-
+//query,setQuery是搜索输入框的；不是弹出参数对话框；
 export const SearchDeviceBox: React.FunctionComponent<SearchBoxProps> = ({
   query,
   label = "搜索吧 all recipes",
@@ -32,6 +32,8 @@ export const SearchDeviceBox: React.FunctionComponent<SearchBoxProps> = ({
   const [open, setOpen] = React.useState(false);
   const [ingredients, setIngredients] = React.useState<any>( {} );
   const {filter, setFilter} =React.useContext(DevfilterContext);
+  //修改中间状态;     //Todo:ingredients合并
+  const [editor, setEditor] = React.useState<any>(filter);
   console.log("来看SearchDeviceBox当前的 ingredients=",ingredients,"filter=",filter,"query=",query);
 
   return (
@@ -125,12 +127,9 @@ export const SearchDeviceBox: React.FunctionComponent<SearchBoxProps> = ({
               <TransparentInput
                 autoFocus={true}
                 placeholder="名字"
-                value={ingredients.factoryNo}
+                value={editor?.factoryNo||''}
                 onChange={e => {
-                  setIngredients( {
-                    ...ingredients,
-                    factoryNo: e.target.value
-                  });
+                  setEditor( {  ...editor, factoryNo: e.currentTarget.value||undefined } );
                 }}
               />
             </ContainLine>
@@ -162,9 +161,9 @@ export const SearchDeviceBox: React.FunctionComponent<SearchBoxProps> = ({
             <ContainLine display={'设备产权人的单位ID'}>
               <TransparentInput
                 autoFocus={true}
-                value={filter?.ownerId||''}
+                value={editor?.ownerId||''}
                 onChange={e => {
-                  setFilter( {  ...filter, ownerId: e.currentTarget.value||undefined } );
+                  setEditor( {  ...editor, ownerId: e.currentTarget.value||undefined } );
                 }}
               />
             </ContainLine>
@@ -180,7 +179,8 @@ export const SearchDeviceBox: React.FunctionComponent<SearchBoxProps> = ({
             <Button intent="primary"
                     onPress={e => {
                       setOpen(false);
-                      setQuery(ingredients)
+                      //setQuery({ ...ingredients})
+                      setFilter( {  ...filter, ...editor } );
                       //console.log(`参数设置好了 took ${duration}ms`);   //执行时间长度102ms　setXXX同步执行
                     } }
             >

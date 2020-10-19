@@ -90,4 +90,4 @@ firebase deploy
 网页POST https://hanyeyinyong2.123nat.com:8673/graphql net::ERR_CERT_COMMON_NAME_INVALID 域名服务提供商有问题。
 https://hanyeyinyong2.123nat.com:3765/chaipu/3 用到浏览器LocalStorage, 要清理 若URL修改了域名IP;
 POST https://192.168.1.105:8673/graphql net::ERR_CERT_AUTHORITY_INVALID 后端证书域名还没认证合格。
-
+Algoliasearch是收费云服务，Elasticsearch是自建集群,功能一样。

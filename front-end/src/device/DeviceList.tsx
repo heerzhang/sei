@@ -7,14 +7,14 @@ import {
   Avatar,
   IconButton,
   Button,
-  Popover,
+
   MenuList,
   Stack,
   useTheme,
-  IconPlus,
+
   IconMoreVertical,
   StackTitle,
-  Skeleton, MenuItem, MenuDivider, IconPackage, ResponsivePopover
+  Skeleton, MenuItem, IconPackage, ResponsivePopover
 } from "customize-easy-ui-component";
 import { SearchDeviceBox } from "./SearchDeviceBox";
 
@@ -27,7 +27,7 @@ import {  usePaginateQueryDevice,  } from "./db";
 
 import { StackItem, StackContext } from "react-gesture-stack";
 import { animated } from "react-spring";
-import { Link as RouterLink, useLocation } from "wouter";
+import {  useLocation } from "wouter";
 //import { useHistory } from "react-router-dom";
 //@reach 的 Link 可以附带state ；
 //import { Link, navigate, globalHistory } from "@reach/router";
@@ -35,7 +35,7 @@ import { Link as RouterLink, useLocation } from "wouter";
 //import useHistoryState from "use-history-state";
 import { useEffect } from "react";
 import { useInView } from 'react-intersection-observer'
-import { PullToRefresh,PullDownContent,RefreshContent,ReleaseContent } from "react-js-pull-to-refresh";
+//import { PullToRefresh,PullDownContent,RefreshContent,ReleaseContent } from "react-js-pull-to-refresh";
 import { DevfilterContext } from "../context/DevfilterContext";
 
 
@@ -53,17 +53,14 @@ export const DeviceList: React.FunctionComponent<
 > = props => {
   const theme = useTheme();
   const [, setLocation] = useLocation();
-  //搜索user的输入:
+  //搜索编辑框的输入:
   const [query, setQuery] = React.useState("" as any);
-  const [
-    queryResults,
-    setQueryResults
-  ] = React.useState<ResponseLikeAlgoliasearch | null>(null);
+  const [queryResults,setQueryResults] = React.useState<ResponseLikeAlgoliasearch | null>(null);
 
   //状态管理　relation＝当前显示的或者按钮点击事件产生,关注的user是谁。
   const [relation, ] = React.useState(null);
 
-  console.log("DeviceList当前的查询 queryResults.hits=", queryResults && queryResults.hits);
+  console.log("DeviceList当前的查询 queryResults.hits=", queryResults?.hits);
   //根据options选择结果，来组织后端的查询参数。
    const [filter, setFilter] = React.useState({where: {cod: '%'},
     offset:0, first:1,
@@ -93,12 +90,8 @@ export const DeviceList: React.FunctionComponent<
     };
     console.log("伪set Filter 回调=filtercomp=",filtercomp);
     setFilter(filtercomp);
-  }, [query]);
-  //有些场合不需要做refetch就能触发，可能被appollo自动优化。变化驱动链条query＝>filter
-  //有问题：refetch这个时间的入口参数filter还是捕获的旧的，须延迟一个render()后再去做。
-  React.useEffect(() => {
-    toRefresh();
-  }, [filter]);
+  }, [query,devfl]);
+
   //这两个useEffect的前后顺序不能颠倒，顺序非常重要，后面的依赖于前面的useEffect更新结果。
   //操作UI副作用；要进一步做修正性处理。
   React.useEffect(() => {
@@ -112,8 +105,10 @@ export const DeviceList: React.FunctionComponent<
     fetchUsers();
   }, [query, devicesFind]);
   //上面这个副作用必须 加usersFind，否则无法继续处理后端数据带来的必要的UI反馈变化。
+  console.log("霉变render=",query,"devicesFind=",devicesFind);
 
   const [hasMore, setHasMore] = React.useState(true);
+
   const [refMore, acrossMore] = useInView({threshold: 0});
   //后端返回了loading变动=会更新整个DeviceList组件，同时也执行updateQuery: ()=>{}回调更新数据。
   const toLoadMore = React.useCallback(
@@ -150,13 +145,23 @@ export const DeviceList: React.FunctionComponent<
   useEffect( () => {
     if(hasMore && devicesFind?.length>=15)  setHasMore(false);
     },
-    [devicesFind]);
+    [hasMore,devicesFind]);
 
+  const callRefetch = React.useCallback(() => {
+    setHasMore(true);
+    refetch( {} );
+  }, [refetch]);
   async function toRefresh() {
     setHasMore(true);
     //TODO： 先清空旧的cache??  还是干脆取消该功能，代替为页面强制刷新
     refetch( {} );
   }
+
+  //有些场合不需要做refetch就能触发，可能被appollo自动优化。变化驱动链条query＝>filter
+  //有问题：refetch这个时间的入口参数filter还是捕获的旧的，须延迟一个render()后再去做。
+  React.useEffect(() => {
+    callRefetch();
+  }, [filter,callRefetch]);
 
   //控件<Stack 是堆叠式的，像导航条；适用同一个模板显示只需上级给下级参数调整的场景。根据上一叠页面选择触发状态relation给下一叠参数来控制下一级显示；更多嵌套很困难。
   return (
@@ -197,7 +202,6 @@ export const DeviceList: React.FunctionComponent<
               >
 
                   <List>
-                    {/*新搜索到的用户，扣除已经关注的，单独排列在 上部分;  没有分页加载更多的user*/}
                     {loading && (
                       <React.Fragment>
                         <ListItem
@@ -229,8 +233,8 @@ export const DeviceList: React.FunctionComponent<
                       </React.Fragment>
                     )}
 
-                    {   queryResults && queryResults.hits &&
-                     queryResults.hits.map((hit,i) => (
+                    {
+                     queryResults?.hits?.map((hit,i) => (
                         <ListItem key={hit.id}
                             onPress={e => {
                               setLocation(`/device/${hit.id}`);
