@@ -153,6 +153,7 @@ export const  client = new ApolloClient({
         },
       },
     }
+    offsetLimitPagination()实际使用参数{offset,limit}是useQuery({,内部接口传入参数offset,limit})
 */
 
 
