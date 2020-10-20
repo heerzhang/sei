@@ -13,6 +13,7 @@ import {
 //import { Link } from "wouter";
 import { ContainLine, TransparentInput } from "../comp/base";
 import { DevfilterContext } from "../context/DevfilterContext";
+import { useApolloClient } from "@apollo/client";
 
 export interface SearchBoxProps {
   setQuery: React.Dispatch<React.SetStateAction<any>>;
@@ -35,6 +36,7 @@ export const SearchDeviceBox: React.FunctionComponent<SearchBoxProps> = ({
   //修改中间状态;     //Todo:ingredients合并
   const [editor, setEditor] = React.useState<any>(filter);
   console.log("来看SearchDeviceBox当前的 ingredients=",ingredients,"filter=",filter,"query=",query);
+  const client = useApolloClient();
 
   return (
     <React.Fragment>
@@ -179,6 +181,8 @@ export const SearchDeviceBox: React.FunctionComponent<SearchBoxProps> = ({
             <Button intent="primary"
                     onPress={e => {
                       setOpen(false);
+                      //用client.clearStore();导致devicesFind= undefined
+                      //client.resetStore(); 可以啊。
                       //setQuery({ ...ingredients})
                       setFilter( {  ...filter, ...editor } );
                       //console.log(`参数设置好了 took ${duration}ms`);   //执行时间长度102ms　setXXX同步执行

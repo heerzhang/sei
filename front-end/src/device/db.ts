@@ -92,12 +92,14 @@ const GET_DEVICES = gql`
 `;
 //底下usePaginateQueryDevice有可能不会实际执行的，还参考接口参数变量的变化。
 export function usePaginateQueryDevice(filter:any) {
-  const { loading, error, data, fetchMore, refetch} = useQuery(GET_DEVICES, {
+  const { loading, error, data, updateQuery, resetLastResults,
+       fetchMore, refetch} = useQuery(GET_DEVICES, {
     variables: { ...filter },
-    notifyOnNetworkStatusChange: true
+    notifyOnNetworkStatusChange: true,
+    partialRefetch: true    //没效果
   });
   return {items:　data　&&　data.res,
-    error, loading, refetch, fetchMore};
+    error, loading, refetch, fetchMore, updateQuery};
 }
 
 

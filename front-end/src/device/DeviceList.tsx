@@ -7,11 +7,9 @@ import {
   Avatar,
   IconButton,
   Button,
-
   MenuList,
   Stack,
   useTheme,
-
   IconMoreVertical,
   StackTitle,
   Skeleton, MenuItem, IconPackage, ResponsivePopover
@@ -70,7 +68,7 @@ export const DeviceList: React.FunctionComponent<
   const {
     loading,
     items: devicesFind,
-    fetchMore: loadMore　,refetch
+    fetchMore: loadMore　,refetch, updateQuery
   } =usePaginateQueryDevice(filter);
 
   //界面轮播 setIndex切换显示界面；   //index不是组件外部那一个同名index；
@@ -118,7 +116,7 @@ export const DeviceList: React.FunctionComponent<
         variables: {
           offset: devicesFind.length,
         },
-        //底下res|dev:实际是useQuery返回data变量的.res; 也就是prev|fetchMoreResult等价useQuery返回data变量;
+        /*底下res|dev:实际是useQuery返回data变量的.res; 也就是prev|fetchMoreResult等价useQuery返回data变量;
         updateQuery: (prev, { fetchMoreResult }) => {
           console.log("fetch来useInfiniteScroll看="+ JSON.stringify(fetchMoreResult)+",devicesFind.length=",devicesFind.length);
           if (!fetchMoreResult)   return prev;
@@ -131,7 +129,7 @@ export const DeviceList: React.FunctionComponent<
           return Object.assign({}, prev, {
             res: [...prev.res, ...fetchMoreResult.res],
           });
-        },
+        },*/
       });
     },
     [loadMore ,devicesFind]

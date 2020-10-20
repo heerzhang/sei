@@ -130,10 +130,20 @@ const link = ApolloLink.from([terminatingLink]);
 export const  client = new ApolloClient({
   link,
   cache: new InMemoryCache(
+    {
+      typePolicies: {
+        Query: {
+          fields: {
+            findAllEQPsFilter: offsetLimitPagination(),
+          },
+        },
+      },
+    }
   )
 });
 
-/*注意InMemoryCache(typePolicies/fields)分页设置和fetchMore(updateQuery:{})的分页增量方式不可以同时使用的。
+
+/*注意InMemoryCache(typePolicies/fields)分页设置和fetchMore(updateQuery:{})的分页增量方式不可以同时使用的。前一个方式列表会保留旧的。
     {
       typePolicies: {
         Query: {
