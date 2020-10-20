@@ -79,7 +79,7 @@ export const useUpdateEntry = (options) => {
 //3.2版本findAllEQPsFilter2不能再用dev:findAllEQPsFilter2这样子做别名了,cache typePolicies不支持。
 const GET_DEVICES = gql`
   query findAllEQPsFilter($where: DeviceCommonInput,$offset:Int!,$first:Int=10,$orderBy:String,$asc:Boolean=true) {
-    res:findAllEQPsFilter(where: $where,offset:$offset,first:$first,orderBy:$orderBy,asc:$asc) {
+    findAllEQPsFilter(where: $where,offset:$offset,first:$first,orderBy:$orderBy,asc:$asc) {
       id cod oid type sort vart   
        ... on IfElevator {
           liftHeight
@@ -92,13 +92,14 @@ const GET_DEVICES = gql`
 `;
 //底下usePaginateQueryDevice有可能不会实际执行的，还参考接口参数变量的变化。
 export function usePaginateQueryDevice(filter:any) {
-  const { loading, error, data, updateQuery, resetLastResults,
+  const { loading, error, data, updateQuery,
        fetchMore, refetch} = useQuery(GET_DEVICES, {
     variables: { ...filter },
     notifyOnNetworkStatusChange: true,
-    partialRefetch: true    //没效果
+    partialRefetch: true,    //没效果
+    //returnPartialData: false 没效果
   });
-  return {items:　data　&&　data.res,
+  return {items:　data　&&　data.findAllEQPsFilter,
     error, loading, refetch, fetchMore, updateQuery};
 }
 

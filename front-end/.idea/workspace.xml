@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="339baf3b-3b56-43fa-821a-88a7b6723788" name="Default Changelist" comment="性能优化">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/.gradle/4.10.3/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/.gradle/4.10.3/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/.gradle/4.10.3/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/.gradle/4.10.3/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/build.gradle" afterDir="false" />
+    <list default="true" id="339baf3b-3b56-43fa-821a-88a7b6723788" name="Default Changelist" comment="findAllEQPsFilter2试一下union">
+      <change afterPath="$PROJECT_DIR$/src/device/DeviceListInner.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/device/DeviceList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/device/DeviceList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/device/SearchDeviceBox.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/device/SearchDeviceBox.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/device/db.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/device/db.ts" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -123,66 +124,240 @@
         </counts>
       </usages-collector>
     </session>
+    <session id="676568496">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="11" />
+          <entry key="project.open.time.0" value="2" />
+          <entry key="project.open.time.34" value="1" />
+          <entry key="project.open.time.38" value="1" />
+          <entry key="project.open.time.39" value="1" />
+          <entry key="project.open.time.41" value="2" />
+          <entry key="project.open.time.43" value="1" />
+          <entry key="project.open.time.45" value="1" />
+          <entry key="project.open.time.48" value="1" />
+          <entry key="project.open.time.49" value="2" />
+          <entry key="project.open.time.51" value="1" />
+          <entry key="project.open.time.52" value="1" />
+          <entry key="project.open.time.54" value="1" />
+          <entry key="project.open.time.55" value="2" />
+          <entry key="project.open.time.6" value="1" />
+          <entry key="project.open.time.61" value="1" />
+          <entry key="project.open.time.64" value="1" />
+          <entry key="project.open.time.76" value="2" />
+          <entry key="project.open.time.78" value="1" />
+          <entry key="project.open.time.79" value="1" />
+          <entry key="project.open.time.86" value="1" />
+          <entry key="project.open.time.89" value="1" />
+          <entry key="project.open.time.91" value="1" />
+          <entry key="project.opened" value="27" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="js" value="1" />
+          <entry key="json" value="127" />
+          <entry key="md" value="22" />
+          <entry key="ts" value="801" />
+          <entry key="tsx" value="2696" />
+          <entry key="txt" value="901" />
+          <entry key="xml" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="JSON" value="127" />
+          <entry key="JavaScript" value="1" />
+          <entry key="Markdown" value="22" />
+          <entry key="PLAIN_TEXT" value="901" />
+          <entry key="TypeScript" value="801" />
+          <entry key="TypeScript JSX" value="2696" />
+          <entry key="XML" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="LICENSE" value="1" />
+          <entry key="env" value="1" />
+          <entry key="env-公司" value="1" />
+          <entry key="env-家里" value="1" />
+          <entry key="js" value="10" />
+          <entry key="json" value="36" />
+          <entry key="map" value="2" />
+          <entry key="md" value="7" />
+          <entry key="ts" value="156" />
+          <entry key="tsx" value="159" />
+          <entry key="txt" value="36" />
+          <entry key="xml" value="2" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key=".env file" value="1" />
+          <entry key="JSON" value="35" />
+          <entry key="JavaScript" value="10" />
+          <entry key="Markdown" value="7" />
+          <entry key="PLAIN_TEXT" value="39" />
+          <entry key="SourceMap" value="2" />
+          <entry key="TypeScript" value="156" />
+          <entry key="TypeScript JSX" value="159" />
+          <entry key="XML" value="2" />
+          <entry key="tsconfig" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.js.language.service.starts">
+        <counts>
+          <entry key="ESLintLanguageService" value="1" />
+          <entry key="TypeScriptServerServiceImpl" value="22" />
+        </counts>
+      </usages-collector>
+    </session>
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/新建文本文档.txt">
+        <entry file="file://$PROJECT_DIR$/src/device/DeviceList.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="549">
-              <caret line="276" lean-forward="true" selection-start-line="276" selection-end-line="276" />
+            <state relative-caret-position="176">
+              <caret line="8" column="9" lean-forward="true" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
+              <folding>
+                <element signature="e#6427#9363#0" />
+                <element signature="e#9385#10330#0" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/例子测试.txt">
+        <entry file="file://$PROJECT_DIR$/src/device/DeviceListInner.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="65">
-              <caret line="323" column="31" lean-forward="true" selection-start-line="323" selection-start-column="31" selection-end-line="323" selection-end-column="31" />
+            <state relative-caret-position="264">
+              <caret line="29" column="27" lean-forward="true" selection-start-line="29" selection-start-column="27" selection-end-line="29" selection-end-column="27" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/graphql/setup.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="154">
+              <caret line="136" column="29" selection-start-line="136" selection-start-column="12" selection-end-line="136" selection-end-column="29" />
+              <folding>
+                <element signature="e#0#50#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/device/SearchDeviceBox.tsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="321">
+              <caret line="35" column="66" lean-forward="true" selection-start-line="35" selection-start-column="66" selection-end-line="35" selection-end-column="66" />
+              <folding>
+                <element signature="e#312#373#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/node_modules/@apollo/client/core/ApolloClient.d.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="66">
+              <caret line="11" column="32" selection-start-line="11" selection-start-column="32" selection-end-line="11" selection-end-column="32" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/node_modules/@apollo/client/core/watchQueryOptions.d.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="348">
+              <caret line="31" column="18" lean-forward="true" selection-start-line="31" selection-start-column="18" selection-end-line="31" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/node_modules/@apollo/client/react/types/types.d.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="374">
+              <caret line="24" column="21" selection-start-line="24" selection-start-column="4" selection-end-line="24" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/device/db.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1519">
+              <caret line="91" column="2" lean-forward="true" selection-start-line="91" selection-start-column="2" selection-end-line="91" selection-end-column="2" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/package.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="198">
+              <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/node_modules/@apollo/client/package.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="572">
+              <caret line="26" column="66" selection-start-line="26" selection-start-column="16" selection-end-line="26" selection-end-column="66" />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript File" />
+      </list>
+    </option>
+  </component>
   <component name="FindInProjectRecents">
     <findStrings>
+      <find>condition</find>
+      <find>伪set Filter 回调=filtercomp=</find>
+      <find>devfl</find>
+      <find>query</find>
+      <find>setQuery</find>
       <find>setIngredients</find>
-      <find>关联活动任务</find>
-      <find>setLocation</find>
-      <find>task</find>
-      <find>DEVICE_BY_ID</find>
-      <find>handleDelete</find>
-      <find>useDeviceDetail</find>
-      <find>设备停用</find>
+      <find>ingredients</find>
+      <find>editor</find>
+      <find>Algoliasearch</find>
+      <find>acrossMore</find>
+      <find>useCallback</find>
+      <find>toRefresh</find>
+      <find>dev</find>
+      <find>callRefetch</find>
+      <find>device/DeviceList.tsx</find>
+      <find>NestingtRoute</find>
       <find>refetch</find>
-      <find>useLocation</find>
-      <find>可導致当前</find>
-      <find>IspEntrance</find>
-      <find>hasIsp</find>
-      <find>SecondRouterContent</find>
-      <find>showingRecipe</find>
-      <find>abandonISP</find>
-      <find>followings</find>
-      <find>updateRecipe</find>
-      <find>findAllUserFilter</find>
-      <find>ThirdRouterContent</find>
-      <find>dtvalue</find>
-      <find>StyledLink</find>
-      <find>loading</find>
-      <find>redirectToReferrer</find>
-      <find>setRedirectToReferrer</find>
-      <find>useSession</find>
-      <find>userList</find>
-      <find>loginEmail</find>
-      <find>email</find>
-      <find>oauth</find>
+      <find>callRefetch重做归零filter=</find>
+      <find>useApolloClient</find>
+      <find>updateQuery</find>
+      <find>QueryResult&lt;</find>
+      <find>findAllEQPsFilter</find>
+      <find>devicesFind</find>
+      <find>React.useState</find>
+      <find>ResponseLikeAlgoliasearch</find>
+      <find>hits</find>
+      <find>queryResults</find>
+      <find>setQueryResults</find>
+      <find>setFilter</find>
+      <find>filter</find>
     </findStrings>
     <replaceStrings>
-      <replace>通道设置</replace>
-      <replace>amazing</replace>
-      <replace>TemplateMain</replace>
       <replace>template</replace>
       <replace>RecordView</replace>
       <replace>ItemLinkManTel</replace>
@@ -210,6 +385,9 @@
       <replace>${repId}</replace>
       <replace>doLogin</replace>
       <replace>name</replace>
+      <replace>&quot;@apollo/client&quot;;</replace>
+      <replace>unit</replace>
+      <replace>res</replace>
     </replaceStrings>
     <dirStrings>
       <dir>D:\coding\home\sei\front-end\src\</dir>
@@ -219,6 +397,23 @@
       <dir>D:\coding\home\sei\front-end\src\device</dir>
       <dir>D:\coding\home\sei\front-end\src</dir>
       <dir>D:\coding\home\sei\front-end\src\inspect</dir>
+      <dir>D:\home\sei\front-end\node_modules\customize-easy-ui-component\src</dir>
+      <dir>D:\home\sei\front-end\src\maintenance</dir>
+      <dir>D:\home\sei\front-end\node_modules\apollo-cache-inmemory</dir>
+      <dir>D:\home\sei\</dir>
+      <dir>D:\home\sei\front-end\node_modules\@apollo\react-hooks</dir>
+      <dir>D:\home\sei\front-end\compare</dir>
+      <dir>D:\home\sei\front-end\public</dir>
+      <dir>D:\home\sei\front-end\node_modules\@apollo</dir>
+      <dir>D:\home\sei\front-end\node_modules\react-js-pull-to-refresh</dir>
+      <dir>D:\home\sei\front-end\node_modules</dir>
+      <dir>D:\home\sei\front-end\node_modules\wouter</dir>
+      <dir>D:\home\sei\front-end\src\unit</dir>
+      <dir>D:\home\sei\front-end</dir>
+      <dir>D:\home\sei\front-end\src</dir>
+      <dir>D:\home\sei\front-end\src\report</dir>
+      <dir>D:\home\sei\front-end\node_modules\@apollo\client</dir>
+      <dir>D:\home\sei\front-end\</dir>
     </dirStrings>
   </component>
   <component name="Git.Settings">
@@ -233,57 +428,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/report/elevator/PeriodicalInspection.E.tsx" />
-        <option value="$PROJECT_DIR$/src/report/elevator/base.tsx" />
-        <option value="$PROJECT_DIR$/src/report/editor/base.tsx" />
-        <option value="$PROJECT_DIR$/src/report/elevator/Periodical/main.tsx" />
-        <option value="$PROJECT_DIR$/src/report/elevator/Periodical/editor.tsx" />
-        <option value="$PROJECT_DIR$/src/report/TemplateMain.tsx" />
-        <option value="$PROJECT_DIR$/src/hooks/with-follow-request-count.ts" />
-        <option value="$PROJECT_DIR$/src/hooks/useHelpers.ts" />
-        <option value="$PROJECT_DIR$/src/original/RecordView.tsx" />
-        <option value="$PROJECT_DIR$/src/report/elevator/PeriodicalInspection.O-1.tsx" />
-        <option value="$PROJECT_DIR$/src/comp/base.tsx" />
-        <option value="$PROJECT_DIR$/src/report/elevator/PeriodicalInspection.R-1.tsx" />
-        <option value="$PROJECT_DIR$/src/report/comp/base.tsx" />
-        <option value="$PROJECT_DIR$/src/report/ReportEntrance.tsx" />
-        <option value="$PROJECT_DIR$/src/report/TemplateLoader.tsx" />
-        <option value="$PROJECT_DIR$/package.json" />
-        <option value="$PROJECT_DIR$/src/comp/test01.tsx" />
-        <option value="$PROJECT_DIR$/src/ImageUpload.jsx" />
-        <option value="$PROJECT_DIR$/src/TopRouter.tsx" />
-        <option value="$PROJECT_DIR$/src/device/AddToTask.tsx" />
-        <option value="$PROJECT_DIR$/src/report/comp/rarelyVary.tsx" />
-        <option value="$PROJECT_DIR$/src/device/task/AddToTask.tsx" />
-        <option value="$PROJECT_DIR$/src/inspect/ReportSample.tsx" />
-        <option value="$PROJECT_DIR$/src/inspect/report/AddReport.tsx" />
-        <option value="$PROJECT_DIR$/src/inspect/report/db.ts" />
-        <option value="$PROJECT_DIR$/src/inspect/report/BoundReports.tsx" />
-        <option value="$PROJECT_DIR$/src/device/SearchDeviceBox.tsx" />
-        <option value="$PROJECT_DIR$/src/device/DeviceList.tsx" />
-        <option value="$PROJECT_DIR$/src/report/Guide.tsx" />
-        <option value="$PROJECT_DIR$/src/inspect/RelationList.tsx" />
-        <option value="$PROJECT_DIR$/src/device/task/TaskList.tsx" />
-        <option value="$PROJECT_DIR$/src/device/task/BoundDevices.tsx" />
-        <option value="$PROJECT_DIR$/src/device/DeviceMain.tsx" />
-        <option value="$PROJECT_DIR$/src/inspect/IspDetail.tsx" />
-        <option value="$PROJECT_DIR$/src/inspect/InspectMain.tsx" />
-        <option value="$PROJECT_DIR$/src/device/AttachedTask.tsx" />
-        <option value="$PROJECT_DIR$/src/device/task/IspEntrance.tsx" />
-        <option value="$PROJECT_DIR$/src/device/task/DispatchIspMen.tsx" />
-        <option value="$PROJECT_DIR$/src/device/task/db.ts" />
         <option value="$PROJECT_DIR$/src/inspect/db.ts" />
         <option value="$PROJECT_DIR$/src/device/DeviceDetail.tsx" />
         <option value="$PROJECT_DIR$/src/device/DetailedGuide.tsx" />
-        <option value="$PROJECT_DIR$/src/device/db.ts" />
         <option value="$PROJECT_DIR$/src/device/ComposeDevice.tsx" />
         <option value="$PROJECT_DIR$/src/user-context.ts" />
         <option value="$PROJECT_DIR$/src/auth.ts" />
         <option value="$PROJECT_DIR$/src/LoginPane.tsx" />
-        <option value="$PROJECT_DIR$/src/Branding.tsx" />
         <option value="$PROJECT_DIR$/.env-家里" />
         <option value="$PROJECT_DIR$/.env" />
+        <option value="F:/22222/infinispan-配置/v53--builder/infinispan-configs.xml" />
+        <option value="$PROJECT_DIR$/src/Branding.tsx" />
+        <option value="$PROJECT_DIR$/src/unit/SearchDeviceBox.tsx" />
+        <option value="$PROJECT_DIR$/src/hooks/some-requests.ts" />
+        <option value="$PROJECT_DIR$/src/inspect/report/db.ts" />
+        <option value="$PROJECT_DIR$/src/maintenance/db.ts" />
+        <option value="$PROJECT_DIR$/src/App.tsx" />
+        <option value="$PROJECT_DIR$/frtchMore.ts" />
+        <option value="$PROJECT_DIR$/src/unit/db.ts" />
+        <option value="$PROJECT_DIR$/src/unit/ComposeDevice.tsx" />
+        <option value="$PROJECT_DIR$/src/unit/DeviceMain.tsx" />
+        <option value="$PROJECT_DIR$/src/About.tsx" />
+        <option value="$PROJECT_DIR$/src/comp/test01.tsx" />
+        <option value="$PROJECT_DIR$/compare/Image.tsx" />
+        <option value="$PROJECT_DIR$/src/Image.tsx" />
+        <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/src/report/elevator/elvRarelyVary.tsx" />
+        <option value="$PROJECT_DIR$/src/maintenance/elevator/PeriodicalInspection.O-1.tsx" />
+        <option value="$PROJECT_DIR$/src/report/elevator/elvBase.tsx" />
+        <option value="$PROJECT_DIR$/src/Compose.tsx" />
+        <option value="$PROJECT_DIR$/src/device/AttachedTask.tsx" />
+        <option value="$PROJECT_DIR$/src/report/TemplateMain.tsx" />
+        <option value="$PROJECT_DIR$/src/TopRouter.tsx" />
+        <option value="$PROJECT_DIR$/src/unit/DetailedGuide.tsx" />
+        <option value="$PROJECT_DIR$/src/unit/DeviceDetail.tsx" />
+        <option value="$PROJECT_DIR$/src/device/DeviceMain.tsx" />
+        <option value="$PROJECT_DIR$/src/hooks/useHelpers.ts" />
+        <option value="$PROJECT_DIR$/src/Main.tsx" />
+        <option value="$PROJECT_DIR$/src/hooks/use-if-mount.ts" />
+        <option value="$PROJECT_DIR$/src/hooks/just-as-mount.ts" />
+        <option value="$PROJECT_DIR$/src/unit/AttachedTask.tsx" />
+        <option value="$PROJECT_DIR$/例子测试.txt" />
+        <option value="$PROJECT_DIR$/src/unit/DeviceList.tsx" />
+        <option value="$PROJECT_DIR$/compare/setup.ts" />
+        <option value="$PROJECT_DIR$/src/unit/UnitList.tsx" />
+        <option value="$PROJECT_DIR$/src/context/DevfilterContext.tsx" />
+        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/新建文本文档.txt" />
+        <option value="$PROJECT_DIR$/src/graphql/setup.ts" />
+        <option value="$PROJECT_DIR$/src/device/SearchDeviceBox.tsx" />
+        <option value="$PROJECT_DIR$/src/device/db.ts" />
+        <option value="$PROJECT_DIR$/src/device/DeviceList.tsx" />
       </list>
     </option>
   </component>
@@ -307,10 +502,10 @@
     <dismissed value="$PROJECT_DIR$/package.json" />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="435" />
-    <option name="y" value="80" />
-    <option name="width" value="1335" />
-    <option name="height" value="880" />
+    <option name="x" value="416" />
+    <option name="y" value="137" />
+    <option name="width" value="1364" />
+    <option name="height" value="485" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -331,6 +526,16 @@
               <item name="front-end" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="front-end" type="b2602c69:ProjectViewProjectNode" />
+              <item name="front-end" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="device" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="front-end" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Scratches and Consoles" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -339,27 +544,32 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="F:/microIO/apollo-client-main" />
     <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
-    <property name="node.js.selected.package.eslint" value="D:\coding\home\sei\front-end\node_modules\eslint" />
+    <property name="node.js.path.for.package.standard" value="project" />
+    <property name="node.js.selected.package.eslint" value="D:\home\sei\front-end\node_modules\eslint" />
+    <property name="node.js.selected.package.standard" value="D:\home\sei\front-end\node_modules\eslint" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="prettierjs.PrettierConfiguration.Package" value="D:\coding\home\sei\front-end\node_modules\prettier" />
-    <property name="ts.external.directory.path" value="D:\coding\home\sei\front-end\node_modules\typescript\lib" />
+    <property name="ts.external.directory.path" value="D:\home\sei\front-end\node_modules\typescript\lib" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\coding\home\sei\front-end\src\report" />
-      <recent name="D:\coding\home\sei\front-end\src\report\elevator\Periodical" />
-      <recent name="D:\coding\home\sei\front-end\src\report\elevator" />
-      <recent name="D:\coding\home\sei\front-end\src\report\editor" />
-      <recent name="D:\coding\home\sei\front-end\src\report\comp" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\home\sei\front-end\src" />
+      <recent name="D:\home\sei\front-end\compare" />
       <recent name="D:\coding\home\sei\front-end\compare" />
       <recent name="D:\coding\home\sei\front-end\src\comp" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\home\sei\front-end\compare" />
+      <recent name="D:\home\sei\front-end\src\context" />
+      <recent name="D:\home\sei\front-end\src" />
+      <recent name="D:\coding\home\sei\front-end\src\report" />
+      <recent name="D:\coding\home\sei\front-end\src\report\elevator\Periodical" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -525,97 +735,33 @@
       <workItem from="1584124227011" duration="3793000" />
       <workItem from="1584162905705" duration="593000" />
       <workItem from="1584220667719" duration="2238000" />
-    </task>
-    <task id="LOCAL-00084" summary="淘汰代码清理完毕">
-      <created>1581884983450</created>
-      <option name="number" value="00084" />
-      <option name="presentableId" value="LOCAL-00084" />
-      <option name="project" value="LOCAL" />
-      <updated>1581884983450</updated>
-    </task>
-    <task id="LOCAL-00085" summary="全列表的编辑体验？">
-      <created>1581888709091</created>
-      <option name="number" value="00085" />
-      <option name="presentableId" value="LOCAL-00085" />
-      <option name="project" value="LOCAL" />
-      <updated>1581888709091</updated>
-    </task>
-    <task id="LOCAL-00086" summary="浏览器预警切换性能260毫秒">
-      <created>1581895656612</created>
-      <option name="number" value="00086" />
-      <option name="presentableId" value="LOCAL-00086" />
-      <option name="project" value="LOCAL" />
-      <updated>1581895656612</updated>
-    </task>
-    <task id="LOCAL-00087" summary="准备useItemControlAs，InspectRecordTitle扩充改名">
-      <created>1581940798538</created>
-      <option name="number" value="00087" />
-      <option name="presentableId" value="LOCAL-00087" />
-      <option name="project" value="LOCAL" />
-      <updated>1581940798539</updated>
-    </task>
-    <task id="LOCAL-00088" summary="准备useItemControlAs，InspectRecordTitle扩充改名">
-      <created>1581942392423</created>
-      <option name="number" value="00088" />
-      <option name="presentableId" value="LOCAL-00088" />
-      <option name="project" value="LOCAL" />
-      <updated>1581942392423</updated>
-    </task>
-    <task id="LOCAL-00089" summary="useItemControlAs，InspectRecordTitle扩充改名">
-      <created>1581948572421</created>
-      <option name="number" value="00089" />
-      <option name="presentableId" value="LOCAL-00089" />
-      <option name="project" value="LOCAL" />
-      <updated>1581948572421</updated>
-    </task>
-    <task id="LOCAL-00090" summary="useItemControlAs，InspectRecordTitle扩充改名">
-      <created>1581949979460</created>
-      <option name="number" value="00090" />
-      <option name="presentableId" value="LOCAL-00090" />
-      <option name="project" value="LOCAL" />
-      <updated>1581949979460</updated>
-    </task>
-    <task id="LOCAL-00091" summary="useItemControlAs，InspectRecordTitle扩充改名">
-      <created>1581978288590</created>
-      <option name="number" value="00091" />
-      <option name="presentableId" value="LOCAL-00091" />
-      <option name="project" value="LOCAL" />
-      <updated>1581978288590</updated>
-    </task>
-    <task id="LOCAL-00092" summary="性能优化">
-      <created>1581980484129</created>
-      <option name="number" value="00092" />
-      <option name="presentableId" value="LOCAL-00092" />
-      <option name="project" value="LOCAL" />
-      <updated>1581980484129</updated>
-    </task>
-    <task id="LOCAL-00093" summary="很窝火usereducer会2次执行action">
-      <created>1582029727366</created>
-      <option name="number" value="00093" />
-      <option name="presentableId" value="LOCAL-00093" />
-      <option name="project" value="LOCAL" />
-      <updated>1582029727367</updated>
-    </task>
-    <task id="LOCAL-00094" summary="基本 成">
-      <created>1582061149597</created>
-      <option name="number" value="00094" />
-      <option name="presentableId" value="LOCAL-00094" />
-      <option name="project" value="LOCAL" />
-      <updated>1582061149598</updated>
-    </task>
-    <task id="LOCAL-00095" summary="准备模板简化和完善功能">
-      <created>1582064563567</created>
-      <option name="number" value="00095" />
-      <option name="presentableId" value="LOCAL-00095" />
-      <option name="project" value="LOCAL" />
-      <updated>1582064563567</updated>
-    </task>
-    <task id="LOCAL-00096" summary="性能优化">
-      <created>1582069787335</created>
-      <option name="number" value="00096" />
-      <option name="presentableId" value="LOCAL-00096" />
-      <option name="project" value="LOCAL" />
-      <updated>1582069787335</updated>
+      <workItem from="1597796646224" duration="376000" />
+      <workItem from="1597797039652" duration="326000" />
+      <workItem from="1597797371774" duration="9424000" />
+      <workItem from="1597813369345" duration="508000" />
+      <workItem from="1597818680580" duration="5340000" />
+      <workItem from="1597829289563" duration="1507000" />
+      <workItem from="1597886240654" duration="3867000" />
+      <workItem from="1597892780956" duration="10805000" />
+      <workItem from="1597913069107" duration="874000" />
+      <workItem from="1597915715096" duration="2510000" />
+      <workItem from="1597973410951" duration="825000" />
+      <workItem from="1597975133262" duration="4168000" />
+      <workItem from="1597980347618" duration="4728000" />
+      <workItem from="1598345219035" duration="1866000" />
+      <workItem from="1598576502909" duration="5824000" />
+      <workItem from="1598603076087" duration="15774000" />
+      <workItem from="1599114394556" duration="19686000" />
+      <workItem from="1599729305860" duration="3627000" />
+      <workItem from="1600069887441" duration="1831000" />
+      <workItem from="1600133796098" duration="6569000" />
+      <workItem from="1600244989881" duration="12931000" />
+      <workItem from="1600648478527" duration="15059000" />
+      <workItem from="1602201805236" duration="42828000" />
+      <workItem from="1602466025963" duration="40242000" />
+      <workItem from="1602634675078" duration="57909000" />
+      <workItem from="1603066469234" duration="12696000" />
+      <workItem from="1603089850675" duration="23539000" />
     </task>
     <task id="LOCAL-00097" summary="性能优化">
       <created>1582069958541</created>
@@ -869,11 +1015,102 @@
       <option name="project" value="LOCAL" />
       <updated>1584054241672</updated>
     </task>
-    <option name="localTasksCounter" value="133" />
+    <task id="LOCAL-00133" summary="１００天没改了">
+      <created>1597797138117</created>
+      <option name="number" value="00133" />
+      <option name="presentableId" value="LOCAL-00133" />
+      <option name="project" value="LOCAL" />
+      <updated>1597797138118</updated>
+    </task>
+    <task id="LOCAL-00134" summary="findAllEQPsFilter2试一下union">
+      <created>1597969746827</created>
+      <option name="number" value="00134" />
+      <option name="presentableId" value="LOCAL-00134" />
+      <option name="project" value="LOCAL" />
+      <updated>1597969746828</updated>
+    </task>
+    <task id="LOCAL-00135" summary="准备单位搜索入口">
+      <created>1601458046866</created>
+      <option name="number" value="00135" />
+      <option name="presentableId" value="LOCAL-00135" />
+      <option name="project" value="LOCAL" />
+      <updated>1601458046867</updated>
+    </task>
+    <task id="LOCAL-00136" summary="ApolloClient升级3.0，那么原来ApolloClient没有这个包？">
+      <created>1602315323683</created>
+      <option name="number" value="00136" />
+      <option name="presentableId" value="LOCAL-00136" />
+      <option name="project" value="LOCAL" />
+      <updated>1602315323684</updated>
+    </task>
+    <task id="LOCAL-00137" summary="&quot;@apollo/client&quot;:&quot;从2.6升级到^3.2.3&quot;">
+      <created>1602467408351</created>
+      <option name="number" value="00137" />
+      <option name="presentableId" value="LOCAL-00137" />
+      <option name="project" value="LOCAL" />
+      <updated>1602467408351</updated>
+    </task>
+    <task id="LOCAL-00138" summary="PullToRefresh应该删除掉，直接浏览器硬刷新页面取代">
+      <created>1602554847360</created>
+      <option name="number" value="00138" />
+      <option name="presentableId" value="LOCAL-00138" />
+      <option name="project" value="LOCAL" />
+      <updated>1602554847545</updated>
+    </task>
+    <task id="LOCAL-00139" summary="依赖版本集中 升版后tsx里面符号&gt;不能随便用">
+      <created>1602643971404</created>
+      <option name="number" value="00139" />
+      <option name="presentableId" value="LOCAL-00139" />
+      <option name="project" value="LOCAL" />
+      <updated>1602643971406</updated>
+    </task>
+    <task id="LOCAL-00140" summary="unmount报错。Button自己界面处理函数留尾巴的却被跳转路由。clear?|分成2步执行">
+      <created>1602732173699</created>
+      <option name="number" value="00140" />
+      <option name="presentableId" value="LOCAL-00140" />
+      <option name="project" value="LOCAL" />
+      <updated>1602732173700</updated>
+    </task>
+    <task id="LOCAL-00141" summary="appollo会自动优化接口请求">
+      <created>1602753086402</created>
+      <option name="number" value="00141" />
+      <option name="presentableId" value="LOCAL-00141" />
+      <option name="project" value="LOCAL" />
+      <updated>1602753086403</updated>
+    </task>
+    <task id="LOCAL-00142" summary="下一步复杂过滤">
+      <created>1602837687616</created>
+      <option name="number" value="00142" />
+      <option name="presentableId" value="LOCAL-00142" />
+      <option name="project" value="LOCAL" />
+      <updated>1602837687687</updated>
+    </task>
+    <task id="LOCAL-00143" summary="updateQuery更新有问题">
+      <created>1603098199563</created>
+      <option name="number" value="00143" />
+      <option name="presentableId" value="LOCAL-00143" />
+      <option name="project" value="LOCAL" />
+      <updated>1603098199565</updated>
+    </task>
+    <task id="LOCAL-00144" summary="经过路由跳转的情况useState会重新初始化mount,会触发refetch()">
+      <created>1603160220753</created>
+      <option name="number" value="00144" />
+      <option name="presentableId" value="LOCAL-00144" />
+      <option name="project" value="LOCAL" />
+      <updated>1603160220753</updated>
+    </task>
+    <task id="LOCAL-00145" summary="准备试一下updateQuery">
+      <created>1603168092215</created>
+      <option name="number" value="00145" />
+      <option name="presentableId" value="LOCAL-00145" />
+      <option name="project" value="LOCAL" />
+      <updated>1603168092215</updated>
+    </task>
+    <option name="localTasksCounter" value="146" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="865951000" />
+    <option name="totallyTimeSpent" value="1171590000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -885,25 +1122,25 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17899604" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18005952" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.68696886" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.492635" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.47733712" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.6827195" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.84942716" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3286119" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" weight="0.68696886" />
-      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" weight="0.3286119" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.5028329" />
-      <window_info anchor="bottom" id="TypeScript" order="11" weight="0.3286119" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.3797054" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" weight="0.32733223" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.83469725" />
+      <window_info anchor="bottom" id="TypeScript" order="11" weight="0.32569557" />
       <window_info anchor="bottom" id="Messages" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -967,19 +1204,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="删了不少" />
-    <MESSAGE value="renderIspContent 移出去改成hook" />
-    <MESSAGE value="import { 注意事项, } from &quot;../comp/rarelyVary&quot;" />
-    <MESSAGE value="EditStorageContext导致上级组件对底下子组件无感觉，上层并不知道底下使用了context操作，很大地破坏封装性。" />
-    <MESSAGE value="版本目录分离" />
-    <MESSAGE value="准备该repID" />
-    <MESSAGE value="文件重构完成，下一步手机2页切" />
-    <MESSAGE value="左边半框能不随着右边滚动吗" />
-    <MESSAGE value="交互好了很多" />
-    <MESSAGE value="按钮复制一个" />
-    <MESSAGE value="ReportViewProps去掉printing加 id" />
-    <MESSAGE value="timer1保存报错" />
-    <MESSAGE value="useThrottle" />
     <MESSAGE value="下一步 如何获取设备DB数据，引导" />
     <MESSAGE value="上班了" />
     <MESSAGE value="缺设备" />
@@ -992,358 +1216,409 @@
     <MESSAGE value="没用的注解：@NamedEntityGraphs 没好处抛弃不用" />
     <MESSAGE value="useLoginToServer太老咯" />
     <MESSAGE value="提交测试" />
-    <option name="LAST_COMMIT_MESSAGE" value="提交测试" />
+    <MESSAGE value="１００天没改了" />
+    <MESSAGE value="findAllEQPsFilter2试一下union" />
+    <MESSAGE value="准备单位搜索入口" />
+    <MESSAGE value="ApolloClient升级3.0，那么原来ApolloClient没有这个包？" />
+    <MESSAGE value="&quot;@apollo/client&quot;:&quot;从2.6升级到^3.2.3&quot;" />
+    <MESSAGE value="PullToRefresh应该删除掉，直接浏览器硬刷新页面取代" />
+    <MESSAGE value="依赖版本集中 升版后tsx里面符号&gt;不能随便用" />
+    <MESSAGE value="unmount报错。Button自己界面处理函数留尾巴的却被跳转路由。clear?|分成2步执行" />
+    <MESSAGE value="appollo会自动优化接口请求" />
+    <MESSAGE value="下一步复杂过滤" />
+    <MESSAGE value="updateQuery更新有问题" />
+    <MESSAGE value="经过路由跳转的情况useState会重新初始化mount,会触发refetch()" />
+    <MESSAGE value="准备试一下updateQuery" />
+    <option name="LAST_COMMIT_MESSAGE" value="准备试一下updateQuery" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/Main.tsx</url>
+          <line>1</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/inspect/ReportSample.tsx">
+    <entry file="file://$PROJECT_DIR$/node_modules/wouter/preact/use-location.d.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="282" column="20" lean-forward="true" selection-start-line="282" selection-start-column="20" selection-end-line="282" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/customize-easy-ui-component/esm/Icons/icons/IconPlus.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="2" column="21" selection-start-line="2" selection-start-column="21" selection-end-line="2" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/compare/Button.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="25" column="42" selection-start-line="25" selection-start-column="40" selection-end-line="25" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/customize-easy-ui-component/esm/IconButton.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="2" column="51" lean-forward="true" selection-start-line="2" selection-start-column="51" selection-end-line="2" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/device/SearchDeviceBox.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="463">
-          <caret line="185" lean-forward="true" selection-start-line="185" selection-end-line="185" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/report/Guide.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="520">
-          <caret line="154" lean-forward="true" selection-start-line="154" selection-end-line="154" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/inspect/InspectMain.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.dom.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="639">
-          <caret line="17147" column="17" selection-start-line="17147" selection-start-column="17" selection-end-line="17147" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/wouter/use-location.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="22" column="76" lean-forward="true" selection-start-line="22" selection-start-column="76" selection-end-line="22" selection-end-column="76" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/wouter/use-location.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/wouter/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="524">
-            <caret line="449" lean-forward="true" selection-start-line="449" selection-end-line="449" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/wouter/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="14" column="11" lean-forward="true" selection-start-line="14" selection-start-column="11" selection-end-line="14" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/inspect/report/AddReport.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="474">
-          <caret line="310" column="58" selection-start-line="310" selection-start-column="58" selection-end-line="310" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/inspect/report/db.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="639">
-          <caret line="327" column="25" lean-forward="true" selection-start-line="327" selection-start-column="25" selection-end-line="327" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/@apollo/react-common/lib/types/types.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="12" column="27" lean-forward="true" selection-start-line="12" selection-start-column="27" selection-end-line="12" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/apollo-client/core/watchQueryOptions.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="5" column="64" selection-start-line="5" selection-start-column="50" selection-end-line="5" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/inspect/report/BoundReports.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="257" column="34" lean-forward="true" selection-start-line="257" selection-start-column="34" selection-end-line="257" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/wouter/index.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="61" column="13" selection-start-line="61" selection-start-column="13" selection-end-line="61" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/inspect/IspDetail.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="284">
-          <caret line="71" column="45" selection-start-line="71" selection-start-column="45" selection-end-line="71" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/device/task/TaskList.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="325" lean-forward="true" selection-start-line="325" selection-end-line="325" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/device/task/BoundDevices.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="302">
-          <caret line="203" column="29" lean-forward="true" selection-start-line="203" selection-start-column="29" selection-end-line="203" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/device/task/IspEntrance.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1577">
-          <caret line="46" column="11" lean-forward="true" selection-start-line="46" selection-start-column="11" selection-end-line="46" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/device/DeviceMain.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="341">
-          <caret line="309" column="72" lean-forward="true" selection-start-line="309" selection-start-column="72" selection-end-line="309" selection-end-column="72" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/device/task/DispatchIspMen.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="73" column="65" selection-start-line="73" selection-start-column="65" selection-end-line="73" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/device/task/db.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="500" column="30" lean-forward="true" selection-start-line="500" selection-start-column="30" selection-end-line="500" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/inspect/RelationList.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="166">
-          <caret line="74" column="47" lean-forward="true" selection-start-line="74" selection-start-column="47" selection-end-line="74" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/device/DeviceList.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="53" column="30" selection-start-line="53" selection-start-column="30" selection-end-line="53" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/device/db.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="316">
-          <caret line="158" column="12" lean-forward="true" selection-start-line="158" selection-start-column="12" selection-end-line="158" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/device/DetailedGuide.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="292">
-          <caret line="222" column="16" lean-forward="true" selection-start-line="222" selection-start-column="16" selection-end-line="222" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/customize-easy-ui-component/esm/Link.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="11" column="25" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/@types/react/index.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="857" column="13" selection-start-line="857" selection-start-column="13" selection-end-line="857" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/user-context.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="6" column="1" lean-forward="true" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Recipe.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="47">
-          <caret line="30" column="28" selection-start-line="30" selection-start-column="18" selection-end-line="30" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/inspect/db.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="553" selection-start-line="553" selection-end-line="571" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/report/db.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="558">
-          <caret line="604" lean-forward="true" selection-start-line="604" selection-end-line="604" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/auth.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.env-公司">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/report/editor/eHelper.ts">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/report/editor/eRarelyVary.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="551">
-          <caret line="109" column="26" lean-forward="true" selection-start-line="109" selection-start-column="8" selection-end-line="109" selection-end-column="26" />
+        <state relative-caret-position="340">
+          <caret line="38" lean-forward="true" selection-start-line="38" selection-end-line="38" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/LoginPane.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="63" column="51" lean-forward="true" selection-start-line="63" selection-start-column="51" selection-end-line="63" selection-end-column="51" />
+        <state relative-caret-position="164">
+          <caret line="23" column="22" lean-forward="true" selection-start-line="23" selection-start-column="22" selection-end-line="23" selection-end-column="22" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/device/DeviceDetail.tsx">
+    <entry file="file://$PROJECT_DIR$/src/context/GlobalState.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="23" column="21" lean-forward="true" selection-start-line="23" selection-start-column="21" selection-end-line="23" selection-end-column="21" />
+        <state relative-caret-position="396">
+          <caret line="20" column="30" lean-forward="true" selection-start-line="20" selection-start-column="30" selection-end-line="20" selection-end-column="30" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/device/ComposeDevice.tsx">
+    <entry file="file://$PROJECT_DIR$/src/report/editor/eBase.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="65">
-          <caret line="217" column="35" lean-forward="true" selection-start-line="217" selection-start-column="35" selection-end-line="217" selection-end-column="35" />
+        <state relative-caret-position="129">
+          <caret line="24" column="10" selection-start-line="24" selection-start-column="10" selection-end-line="24" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/report/StorageContext.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="15" column="31" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/report/comp/base.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="287">
+          <caret line="290" column="10" lean-forward="true" selection-start-line="290" selection-start-column="10" selection-end-line="290" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/customize-easy-ui-component/esm/Link.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="11" column="21" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/compare/Menu.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="173" column="13" selection-start-line="173" selection-start-column="13" selection-end-line="173" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/unit/DetailedGuide.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="197" selection-start-line="197" selection-end-line="203" selection-end-column="31" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/device/AttachedTask.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="41" column="13" selection-start-line="41" selection-start-column="13" selection-end-line="41" selection-end-column="13" />
+        <state relative-caret-position="234">
+          <caret line="183" column="35" selection-start-line="179" selection-start-column="62" selection-end-line="183" selection-end-column="35" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/device/task/AddToTask.tsx">
+    <entry file="file://$PROJECT_DIR$/node_modules/wouter/index.d.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="206" column="16" lean-forward="true" selection-start-line="206" selection-start-column="16" selection-end-line="206" selection-end-column="16" />
+        <state relative-caret-position="186">
+          <caret line="70" column="16" selection-start-line="70" selection-start-column="16" selection-end-line="70" selection-end-column="16" />
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="412">
+          <caret line="383" lean-forward="true" selection-start-line="383" selection-end-line="383" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/unit/DeviceDetail.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="46" column="34" lean-forward="true" selection-start-line="46" selection-start-column="34" selection-end-line="46" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/@types/react/index.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="876" column="23" selection-start-line="876" selection-start-column="23" selection-end-line="876" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/unit/ComposeDevice.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="486">
+          <caret line="246" column="19" lean-forward="true" selection-start-line="246" selection-start-column="19" selection-end-line="246" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/report/elevator/PeriodicalInspection.O-1.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="133" column="14" lean-forward="true" selection-start-line="133" selection-start-column="14" selection-end-line="133" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Compose.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="761" column="10" lean-forward="true" selection-start-line="761" selection-start-column="10" selection-end-line="761" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/hooks/useHelpers.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="181" column="14" lean-forward="true" selection-start-line="181" selection-start-column="14" selection-end-line="181" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/hooks/just-as-mount.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="9" column="19" lean-forward="true" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/compare/gqlFetchMore.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="15" column="18" lean-forward="true" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/maintenance/elevator/PeriodicalInspection.O-1.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="722" column="82" lean-forward="true" selection-start-line="722" selection-start-column="48" selection-end-line="722" selection-end-column="82" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/unit/AttachedTask.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="626">
+          <caret line="95" column="10" lean-forward="true" selection-start-line="95" selection-start-column="10" selection-end-line="95" selection-end-column="10" />
+          <folding>
+            <element signature="e#16#60#0" expanded="true" />
+            <element signature="e#422#458#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/compare/DeviceList.tsx">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/compare/setup.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="8">
+          <caret line="136" lean-forward="true" selection-start-line="136" selection-end-line="136" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/unit/SearchDeviceBox.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/context/DevfilterContext.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+          <folding>
+            <element signature="e#60#91#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/unit/UnitList.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1848">
+          <caret line="105" column="26" selection-start-line="105" selection-start-column="26" selection-end-line="105" selection-end-column="26" />
+          <folding>
+            <element signature="e#16#52#0" expanded="true" />
+            <element signature="e#593#655#0" expanded="true" />
+            <element signature="e#949#983#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/unit/db.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1782">
+          <caret line="84" column="8" selection-start-line="84" selection-start-column="8" selection-end-line="84" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/unit/DeviceMain.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4246">
+          <caret line="226" column="36" selection-start-line="226" selection-start-column="36" selection-end-line="226" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/RecipeList.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5852">
+          <caret line="285" column="36" selection-start-line="285" selection-start-column="19" selection-end-line="285" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="411">
+            <caret line="93" lean-forward="true" selection-start-line="93" selection-end-line="93" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/report/elevator/elvBase.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="65" column="29" lean-forward="true" selection-start-line="65" selection-start-column="29" selection-end-line="65" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/@apollo/client/react/hooks/useQuery.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="4" column="24" selection-start-line="4" selection-start-column="24" selection-end-line="4" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/inspect/RelationList.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-462" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Branding.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="371" lean-forward="true" selection-start-line="371" selection-end-line="371" />
+        <state relative-caret-position="177">
+          <caret line="329" column="27" lean-forward="true" selection-start-line="329" selection-start-column="27" selection-end-line="329" selection-end-column="27" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/report/TemplateLoader.tsx">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.env-家里">
+    <entry file="file://$PROJECT_DIR$/src/TopRouter.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="12" lean-forward="true" selection-end-line="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.env">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="62" column="43" lean-forward="true" selection-start-line="62" selection-start-column="43" selection-end-line="62" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/新建文本文档.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="549">
-          <caret line="276" lean-forward="true" selection-start-line="276" selection-end-line="276" />
+        <state relative-caret-position="186">
+          <caret line="207" column="69" lean-forward="true" selection-start-line="207" selection-start-column="69" selection-end-line="207" selection-end-column="69" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/例子测试.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="65">
-          <caret line="323" column="31" lean-forward="true" selection-start-line="323" selection-start-column="31" selection-end-line="323" selection-end-column="31" />
+        <state relative-caret-position="230">
+          <caret line="364" column="18" selection-start-line="364" selection-start-column="18" selection-end-line="364" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/新建文本文档.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="299" lean-forward="true" selection-start-line="299" selection-end-line="299" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/device/DeviceMain.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="311" column="28" lean-forward="true" selection-start-line="311" selection-start-column="28" selection-end-line="311" selection-end-column="28" />
+          <folding>
+            <element signature="e#16#57#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/@apollo/client/react/components/types.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="6" column="29" selection-start-line="6" selection-start-column="29" selection-end-line="6" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/@apollo/client/core/ObservableQuery.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="41" column="34" lean-forward="true" selection-start-line="41" selection-start-column="34" selection-end-line="41" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/@apollo/client/react/types/types.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="24" column="21" selection-start-line="24" selection-start-column="4" selection-end-line="24" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/@apollo/client/core/ApolloClient.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="11" column="32" selection-start-line="11" selection-start-column="32" selection-end-line="11" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/graphql/setup.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="136" column="29" selection-start-line="136" selection-start-column="12" selection-end-line="136" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#50#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/@apollo/client/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="572">
+          <caret line="26" column="66" selection-start-line="26" selection-start-column="16" selection-end-line="26" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/@apollo/client/core/watchQueryOptions.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="348">
+          <caret line="31" column="18" lean-forward="true" selection-start-line="31" selection-start-column="18" selection-end-line="31" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/device/db.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1519">
+          <caret line="91" column="2" lean-forward="true" selection-start-line="91" selection-start-column="2" selection-end-line="91" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/device/SearchDeviceBox.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="321">
+          <caret line="35" column="66" lean-forward="true" selection-start-line="35" selection-start-column="66" selection-end-line="35" selection-end-column="66" />
+          <folding>
+            <element signature="e#312#373#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/device/DeviceList.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="8" column="9" lean-forward="true" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
+          <folding>
+            <element signature="e#6427#9363#0" />
+            <element signature="e#9385#10330#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/device/DeviceListInner.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="29" column="27" lean-forward="true" selection-start-line="29" selection-start-column="27" selection-end-line="29" selection-end-column="27" />
         </state>
       </provider>
     </entry>

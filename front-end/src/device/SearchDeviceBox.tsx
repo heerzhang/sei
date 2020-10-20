@@ -19,12 +19,14 @@ export interface SearchBoxProps {
   setQuery: React.Dispatch<React.SetStateAction<any>>;
   query: any;
   label?: string;
+  updateQuery?: any;   //立刻更新列表
 }
 //query,setQuery是搜索输入框的；不是弹出参数对话框；
 export const SearchDeviceBox: React.FunctionComponent<SearchBoxProps> = ({
   query,
   label = "搜索吧 all recipes",
    setQuery,
+  updateQuery,
    ...other
 }) => {
   const theme = useTheme();
@@ -184,6 +186,12 @@ export const SearchDeviceBox: React.FunctionComponent<SearchBoxProps> = ({
                       //用client.clearStore();导致devicesFind= undefined
                       //client.resetStore(); 可以啊。
                       //setQuery({ ...ingredients})
+                     /* updateQuery( (previousQueryResult, options ) => {
+                          console.log("取更２新options=",options,"previousQueryResult=",previousQueryResult);
+                          return null;
+                          }
+                        );
+                      */
                       setFilter( {  ...filter, ...editor } );
                       //console.log(`参数设置好了 took ${duration}ms`);   //执行时间长度102ms　setXXX同步执行
                     } }
