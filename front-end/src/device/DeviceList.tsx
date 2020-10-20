@@ -59,10 +59,11 @@ export const DeviceList: React.FunctionComponent<
 
   //状态管理　relation＝当前显示的或者按钮点击事件产生,关注的user是谁。
   const [relation, ] = React.useState(null);
-
+  const {filter:devfl, } =React.useContext(DevfilterContext);
   console.log("DeviceList当前的查询 queryResults.hits=", queryResults?.hits);
   //根据options选择结果，来组织后端的查询参数。
-   const [filter, setFilter] = React.useState({where: {cod: '%'},
+  //经过路由跳转的情况useState会重新初始化mount,还有一种仅仅是界面上同一大组件底下切换显示的不会经过路由，数据列表状态不变也不会触发去后端读取更新。
+   const [filter, setFilter] = React.useState({where: { ...devfl },
     offset:0, first:1,
   } as any);
 
@@ -79,7 +80,7 @@ export const DeviceList: React.FunctionComponent<
  // const [option, setOption] = useHistoryState("", "option");
   //let history = useHistory();
   //navigate(state:{ })传递方式，数据可以很大，就是参数不会显示在URL当中会引起歧义。bug：可能需要刷新才正常。
-  const {filter:devfl, } =React.useContext(DevfilterContext);
+
   //根据query的改变来重新查询哪。
   React.useEffect(() => {
     let filtercomp={where: {cod: query, ...devfl},
@@ -117,17 +118,18 @@ export const DeviceList: React.FunctionComponent<
         variables: {
           offset: devicesFind.length,
         },
+        //底下res|dev:实际是useQuery返回data变量的.res; 也就是prev|fetchMoreResult等价useQuery返回data变量;
         updateQuery: (prev, { fetchMoreResult }) => {
           console.log("fetch来useInfiniteScroll看="+ JSON.stringify(fetchMoreResult)+",devicesFind.length=",devicesFind.length);
           if (!fetchMoreResult)   return prev;
-          if (!fetchMoreResult.dev)   return prev;
-          if(fetchMoreResult.dev.length===0)
+          if (!fetchMoreResult.res)   return prev;
+          if(fetchMoreResult.res.length===0)
             setHasMore(false);
-          if(prev.dev.length + fetchMoreResult.dev.length > 2000 )
+          if(prev.res.length + fetchMoreResult.res.length > 2000 )
             setHasMore(false);
           //console.log("跑到了updateQuery-- hasMore=", hasMore );
           return Object.assign({}, prev, {
-            dev: [...prev.dev, ...fetchMoreResult.dev],
+            res: [...prev.res, ...fetchMoreResult.res],
           });
         },
       });
@@ -149,17 +151,18 @@ export const DeviceList: React.FunctionComponent<
 
   const callRefetch = React.useCallback(() => {
     setHasMore(true);
-    refetch( {} );
-  }, [refetch]);
+    refetch( filter );
+  }, [refetch, filter]);
   async function toRefresh() {
     setHasMore(true);
     //TODO： 先清空旧的cache??  还是干脆取消该功能，代替为页面强制刷新
-    refetch( {} );
+    refetch( filter );
   }
 
   //有些场合不需要做refetch就能触发，可能被appollo自动优化。变化驱动链条query＝>filter
   //有问题：refetch这个时间的入口参数filter还是捕获的旧的，须延迟一个render()后再去做。
   React.useEffect(() => {
+    console.log("callRefetch重做归零filter=",filter,"devicesFind=",devicesFind);
     callRefetch();
   }, [filter,callRefetch]);
 
