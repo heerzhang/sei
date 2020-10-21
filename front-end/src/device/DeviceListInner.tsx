@@ -20,6 +20,7 @@ import {  useLocation } from "wouter";
 import { useEffect } from "react";
 import { useInView } from 'react-intersection-observer'
 //import { PullToRefresh,PullDownContent,RefreshContent,ReleaseContent } from "react-js-pull-to-refresh";
+//import { usePrevious } from "customize-easy-ui-component/esm/Hooks/previous";
 
 interface DeviceListInner {
   filter: any   //用props参数看看
@@ -36,14 +37,16 @@ export const DeviceListInner: React.FunctionComponent<
   } =usePaginateQueryDevice(filter);
 
   //上面这个副作用必须 加usersFind，否则无法继续处理后端数据带来的必要的UI反馈变化。
-  console.log("霉3变filter=",filter,"devicesFind=",devicesFind);
-
-  const [hasMore, setHasMore] = React.useState(true);
+  const refLsize = React.useRef(null);
+  //const prvListLength=usePrevious(devicesFind?.length);
+  //const [hasMore, setHasMore] = React.useState(true);
+  //console.log("霉3变hasMore=",hasMore, "prvListLength?=", prvListLength!==devicesFind?.length );
 
   const [refMore, acrossMore] = useInView({threshold: 0});
   //后端返回了loading变动=会更新整个DeviceList组件，同时也执行updateQuery: ()=>{}回调更新数据。
   const toLoadMore = React.useCallback(
     async () => {
+      refLsize.current=devicesFind?.length;    //看看有没有新增加项目
       devicesFind && loadMore({
         variables: {
           offset: devicesFind.length,
@@ -67,32 +70,32 @@ export const DeviceListInner: React.FunctionComponent<
     [loadMore ,devicesFind]
   );
 
-    //.then(result => {    if(result.data.findAllEQPsFilter2.length<=0)   setHasMore(false);  })
-
+  useEffect( () => { acrossMore && (refLsize.current!==devicesFind?.length) && toLoadMore() },
+        [acrossMore,   toLoadMore ]);
   /*
-  useEffect( () => { acrossMore && hasMore && toLoadMore() },
-        [acrossMore,hasMore,  toLoadMore ]);
-*/
-
   useEffect( () => {
-    if(hasMore && devicesFind?.length>=15)  setHasMore(false);
+    if(hasMore &&  refLsize.current===devicesFind?.length)  setHasMore(false);
     },
     [hasMore,devicesFind]);
+  */
+  console.log("霉$R1变 refLsize=",refLsize.current,"devicesFind=",devicesFind?.length);
 
   const callRefetch = React.useCallback(() => {
-    setHasMore(true);
+    //setHasMore(true);
     refetch( filter );
   }, [refetch, filter]);
-  async function toRefresh() {
-    setHasMore(true);
+
+  /*  async function toRefresh() {
+    //setHasMore(true);
     //TODO： 先清空旧的cache??  还是干脆取消该功能，代替为页面强制刷新
     refetch( filter );
   }
+  */
 
   //有些场合不需要做refetch就能触发，可能被appollo自动优化。变化驱动链条query＝>filter
   //有问题：refetch这个时间的入口参数filter还是捕获的旧的，须延迟一个render()后再去做。
   React.useEffect(() => {
-    console.log("callRefetch重做归零filter=",filter,"devicesFind=",devicesFind);
+    //console.log("callRefetch重做归零filter=",filter,"devicesFind=",devicesFind);
     callRefetch();
   }, [filter,callRefetch]);
 
@@ -176,7 +179,7 @@ export const DeviceListInner: React.FunctionComponent<
                   marginTop: theme.spaces.md
                 }}
               >
-                { hasMore &&  (
+                { (refLsize.current!==devicesFind?.length)  &&  (
                   <div>
                     <Button disabled={loading} onPress={ () =>{
                       toLoadMore();     //虽然引用表现是异步的，但还是需要某些步骤需要同步执行的，只能说是其内部深度嵌套了个Promise()。
@@ -186,7 +189,7 @@ export const DeviceListInner: React.FunctionComponent<
                     </Button>
                   </div>
                 )}
-                {!hasMore &&　<React.Fragment>
+                {(refLsize.current===devicesFind?.length)  &&　<React.Fragment>
                       <span>嘿，没有更多了</span>
                   </React.Fragment>
                 }

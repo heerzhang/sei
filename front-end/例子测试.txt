@@ -371,4 +371,4 @@ graphQL升版本后已经不支持input参数的可自循环迭代定义；之�
     condition.as.push({s:'valid',o:'TRUE'});
     return condition;
   }, [query]);
-
+现成apollo-server是node.js(8+)环境下的。

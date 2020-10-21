@@ -134,7 +134,10 @@ export const  client = new ApolloClient({
       typePolicies: {
         Query: {
           fields: {
-            findAllEQPsFilter: offsetLimitPagination(),
+            findAllEQPsFilter: offsetLimitPagination((args, { fieldName,field,variables }) => {
+              //console.log("offsetLimitPagination关键args=",args,"field=",field,"variables=",variables);
+              return  JSON.stringify(args!.where!)
+            }),
           },
         },
       },
@@ -153,7 +156,10 @@ export const  client = new ApolloClient({
         },
       },
     }
-    offsetLimitPagination()实际使用参数{offset,limit}是useQuery({,内部接口传入参数offset,limit})
+  offsetLimitPagination()实际使用参数{offset,limit}是useQuery({,内部接口传入参数offset,limit}),
+  但offsetLimitPagination共用relayStylePagination{read部分}
+  FieldPolicy{ keyArgs,read,merge }  keyArgs代表字段或接口函数参数的具体数值去区分的缓存，参数不一样的在cache分开存储ID列表。
+  merge是合并存储，read是读取当前分页显示。keyArgs才是消除重复数据？缺省false=按照名字而不管参数的。keyFn；
 */
 
 
