@@ -215,7 +215,7 @@ export const InspectMain: React.FunctionComponent<InspectMainProps> = props => {
           </div>
 
           <Pager
-            enableScrollLock
+            enableScrollLock={false}
             value={activeTab}
             onRequestChange={i => setActiveTab(i)}
             lazyLoad

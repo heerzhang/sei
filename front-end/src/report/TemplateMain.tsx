@@ -270,7 +270,7 @@ export const RecordEditorOrPrint: React.FunctionComponent<RecordEditorOrPrintPro
           </div>
           {/*这才是小窗口的主体，独立的可滚动部分*/}
           <Pager
-            enableScrollLock={true}
+            enableScrollLock={false}
             value={activeTab}
             onRequestChange={i => setActiveTab(i)}
             lazyLoad={true}

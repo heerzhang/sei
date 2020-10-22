@@ -71,7 +71,7 @@ export const DeviceListInner: React.FunctionComponent<
   );
 
   useEffect( () => { acrossMore && (refLsize.current!==devicesFind?.length) && toLoadMore() },
-        [acrossMore,   toLoadMore ]);
+        [acrossMore,devicesFind,toLoadMore ]);
   /*
   useEffect( () => {
     if(hasMore &&  refLsize.current===devicesFind?.length)  setHasMore(false);

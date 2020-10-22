@@ -17,27 +17,12 @@ import {
   Skeleton, MenuItem, MenuDivider, IconPackage, ResponsivePopover
 } from "customize-easy-ui-component";
 import { SearchDeviceBox } from "./SearchDeviceBox";
-
-//import algoliasearch from "algoliasearch";
-//import config from "./firebase-config";
-
 import {  usePaginateQueryDevice,  } from "./db";
-
-//import { FollowingRecipes } from "./FollowingRecipes";
-
 import { StackItem, StackContext } from "react-gesture-stack";
 import { animated } from "react-spring";
-import { Link as RouterLink, useLocation } from "wouter";
-//import { useHistory } from "react-router-dom";
-//@reach 的 Link 可以附带state ；
-//import { Link, navigate, globalHistory } from "@reach/router";
-
-//import useHistoryState from "use-history-state";
+import { useLocation } from "wouter";
 import { useEffect } from "react";
 import { useInView } from 'react-intersection-observer'
-import { PullToRefresh,PullDownContent,RefreshContent,ReleaseContent } from "react-js-pull-to-refresh";
-
-
 
 //接口参数类型
 interface ResponseLikeAlgoliasearch<T=any> {
@@ -59,6 +44,8 @@ export const UnitList: React.FunctionComponent<
 
   //状态管理　relation＝当前显示的或者按钮点击事件产生,关注的user是谁。
   const [relation, ] = React.useState(null);
+  //不能用var refLsize=0;否则refLsize一直是===0；另外可以用等价方式useState来计数。　
+  const refLsize = React.useRef(null);
 
 
   /*根据options选择结果，来组织后端的查询参数。
@@ -78,7 +65,7 @@ export const UnitList: React.FunctionComponent<
   */
 
   const [filter, setFilter] = React.useState({unit: {cod:'%'},
-    offset:0,
+    offset:0,limit:3
   } as any);
 
   const {
@@ -99,54 +86,32 @@ export const UnitList: React.FunctionComponent<
   React.useEffect(() => {
     let filtercomp={as: {company: company, name:query },
       offset:0,
-      first:5,
-      orderBy: "instDate",
-      asc: false
+      limit:4,
     };
     //界面查询接口参数列表
     console.log("即可搜 =filtercomp=",filtercomp);
     setFilter(filtercomp);
-  }, [ query]);
+  }, [query, company]);
   //这两个useEffect的前后顺序不能颠倒，顺序非常重要，后面的依赖于前面的useEffect更新结果。
-  //操作UI副作用；要进一步做修正性处理。
 
-  //上面这个副作用必须 加usersFind，否则无法继续处理后端数据带来的必要的UI反馈变化。
 
-  const [hasMore, setHasMore] = React.useState(false);
+  const [hasMore, setHasMore] = React.useState(true);
   const [refMore, acrossMore] = useInView({threshold: 0});
   //后端返回了loading变动=会更新整个DeviceList组件，同时也执行updateQuery: ()=>{}回调更新数据。
   const toLoadMore = React.useCallback(
     async () => {
+      refLsize.current=devicesFind?.length;   //Appollo的cache中List项目累计，看有没有新增加
       devicesFind && loadMore({
         variables: {
           offset: devicesFind.length,
-        },
-        updateQuery: (prev, { fetchMoreResult }) => {
-          console.log("fetch来useInfiniteScroll看="+ JSON.stringify(fetchMoreResult)+",devicesFind.length=",devicesFind.length);
-          if (!fetchMoreResult)   return prev;
-          if (!fetchMoreResult.dev)   return prev;
-          if(fetchMoreResult.dev.length===0)
-            setHasMore(false);
-          if(prev.dev.length + fetchMoreResult.dev.length > 2000 )
-            setHasMore(false);
-          //console.log("跑到了updateQuery-- hasMore=", hasMore );
-          return Object.assign({}, prev, {
-            dev: [...prev.dev, ...fetchMoreResult.dev],
-          });
-        },
-
+        }
       })
     },
     [loadMore ,devicesFind]
   );
-/*
-  useEffect( () => { acrossMore && hasMore && toLoadMore() },
-        [acrossMore,hasMore,  toLoadMore ]);
-*/
-  async function toRefresh() {
-    setHasMore(true);
-    refetch( {} );
-  }
+
+  useEffect( () => { acrossMore && (refLsize.current!==devicesFind?.length) && toLoadMore() },
+    [acrossMore,devicesFind,toLoadMore ]);
 
   //控件<Stack 是堆叠式的，像导航条；适用同一个模板显示只需上级给下级参数调整的场景。根据上一叠页面选择触发状态relation给下一叠参数来控制下一级显示；更多嵌套很困难。
   return (
@@ -263,9 +228,9 @@ export const UnitList: React.FunctionComponent<
                         marginTop: theme.spaces.md
                       }}
                     >
-                      { hasMore && !loading && (
+                      { (refLsize.current!==devicesFind?.length)  &&  (
                         <div>
-                          <Button onPress={ () =>{
+                          <Button disabled={loading} onPress={ () =>{
                             toLoadMore();     //虽然引用表现是异步的，但还是需要某些步骤需要同步执行的，只能说是其内部深度嵌套了个Promise()。
                             //console.log(`按拉扯获取took ${duration}ms`);　//异步处理了，这里实际耗时也不短暂122ms; 可能因为loading要同步首先设置的。
                           } }>
@@ -273,9 +238,9 @@ export const UnitList: React.FunctionComponent<
                           </Button>
                         </div>
                       )}
-                      {!hasMore &&　<React.Fragment>
-                            <span>嘿，没有更多了</span>
-                        </React.Fragment>
+                      {(refLsize.current===devicesFind?.length)  &&　<React.Fragment>
+                        <span>嘿，没有更多了</span>
+                      </React.Fragment>
                       }
                     </div>
                     <div  ref={refMore}  css={{height: "1px"}}> </div>

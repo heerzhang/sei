@@ -1,5 +1,15 @@
 import { OperationDefinitionNode } from 'graphql';
-import { ApolloClient,InMemoryCache,HttpLink,ApolloLink,  split, concat ,empty } from '@apollo/client';
+import {
+  ApolloClient,
+  InMemoryCache,
+  HttpLink,
+  ApolloLink,
+  split,
+  concat,
+  empty,
+  Reference,
+  FieldPolicy
+} from "@apollo/client";
 import { getMainDefinition, offsetLimitPagination } from "@apollo/client/utilities";
 import { onError } from '@apollo/client/link/error';
 import { WebSocketLink } from '@apollo/client/link/ws';
@@ -126,6 +136,13 @@ const terminatingLink = split(
 );
 
 const link = ApolloLink.from([terminatingLink]);
+
+//declare function offsetLimitPagination<T = Reference>(keyArgs?: KeyArgs): FieldPolicy<T[]>;
+const pageOd=offsetLimitPagination((args, { fieldName,field,variables }) => {
+    return  JSON.stringify(args!.where!)} );
+const pageEs=offsetLimitPagination((args) => {
+    return  JSON.stringify(args!.as!)} );
+
 //缓存似乎无时间限制；只要有一个Query页面能触发强制刷新：比如浏览器URL重置，全部的查询也都会得到更新，网页SPA性质。
 export const  client = new ApolloClient({
   link,
@@ -134,10 +151,8 @@ export const  client = new ApolloClient({
       typePolicies: {
         Query: {
           fields: {
-            findAllEQPsFilter: offsetLimitPagination((args, { fieldName,field,variables }) => {
-              //console.log("offsetLimitPagination关键args=",args,"field=",field,"variables=",variables);
-              return  JSON.stringify(args!.where!)
-            }),
+            findAllEQPsFilter: pageOd,
+            getUnitEsFilter: pageEs,
           },
         },
       },

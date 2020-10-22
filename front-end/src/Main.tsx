@@ -241,7 +241,7 @@ export const Main: React.FunctionComponent<MainProps> = props => {
           </div>
 
           <Pager
-            enableScrollLock
+            enableScrollLock={false}
             value={activeTab}
             onRequestChange={i => setActiveTab(i)}
             lazyLoad
