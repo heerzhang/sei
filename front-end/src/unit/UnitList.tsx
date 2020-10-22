@@ -55,15 +55,12 @@ export const UnitList: React.FunctionComponent<
   const [, setLocation] = useLocation();
   //搜索user的输入:
   const [query, setQuery] = React.useState("" as any);
-  const [
-    queryResults,
-    setQueryResults
-  ] = React.useState<ResponseLikeAlgoliasearch | null>(null);
+
 
   //状态管理　relation＝当前显示的或者按钮点击事件产生,关注的user是谁。
   const [relation, ] = React.useState(null);
 
-  console.log("DeviceList当前的查询 queryResults.hits=", queryResults && queryResults.hits);
+
   /*根据options选择结果，来组织后端的查询参数。
   const condition = React.useMemo( () =>{
     let condition = { company: company } as any;
@@ -112,16 +109,7 @@ export const UnitList: React.FunctionComponent<
   }, [ query]);
   //这两个useEffect的前后顺序不能颠倒，顺序非常重要，后面的依赖于前面的useEffect更新结果。
   //操作UI副作用；要进一步做修正性处理。
-  React.useEffect(() => {
-    async function fetchUsers() {
-      console.log("伪set QueryRe 关键的=",query,"devicesFind=",devicesFind);
-      const hits = devicesFind;
-      setQueryResults({
-        hits
-      });
-    }
-    fetchUsers();
-  }, [query, devicesFind]);
+
   //上面这个副作用必须 加usersFind，否则无法继续处理后端数据带来的必要的UI反馈变化。
 
   const [hasMore, setHasMore] = React.useState(false);
@@ -151,10 +139,10 @@ export const UnitList: React.FunctionComponent<
     },
     [loadMore ,devicesFind]
   );
-
+/*
   useEffect( () => { acrossMore && hasMore && toLoadMore() },
         [acrossMore,hasMore,  toLoadMore ]);
-
+*/
   async function toRefresh() {
     setHasMore(true);
     refetch( {} );
@@ -231,8 +219,7 @@ export const UnitList: React.FunctionComponent<
                       </React.Fragment>
                     )}
 
-                    {   queryResults && queryResults.hits &&
-                     queryResults.hits.map((hit,i) => (
+                    {   devicesFind?.map((hit,i) => (
                         <ListItem key={hit.id}
                             onPress={e => {
                               setLocation(`/unit/${hit.id}/${company? 'company':'person'}`);
