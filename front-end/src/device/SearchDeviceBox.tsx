@@ -8,12 +8,64 @@ import {
   VisuallyHidden,
   Button,
   useResponsiveContainerPadding,
-  IconSearch, IconLayers, IconButton, Dialog, Text
+  IconSearch, IconLayers, IconButton, Dialog, Text, IconMoreVertical, ResponsivePopover, IconX
 } from "customize-easy-ui-component";
-//import { Link } from "wouter";
+
 import { ContainLine, TransparentInput } from "../comp/base";
 import { DevfilterContext } from "../context/DevfilterContext";
-import { useApolloClient } from "@apollo/client";
+import { useApolloClient, gql, useQuery, NetworkStatus } from "@apollo/client";
+import { Link as RouterLink } from "wouter";
+
+//根据unitID查具体
+const GET_UNIT_DETAIL = gql`
+  query Unit($id: ID) {
+    unit(id: $id) {
+      id name company{id name no} person{id name no}
+    }
+  }
+`;
+//非高层次通用的组件。语义整合：　数据获取和规格化显示部分组合在一个文件内。
+const UnitDetail= ( { id, onCancel }
+) => {
+  const theme = useTheme();
+  //const [getUnit, { loading, data }] = useLazyQuery(GET_UNIT_DETAIL);  https://www.apollographql.com/docs/react/data/queries/
+  const { loading, error, data, refetch,networkStatus } = useQuery(GET_UNIT_DETAIL, {
+    variables: { id },
+    notifyOnNetworkStatusChange: true
+  });
+  //Hooks必须放在条件分支if 前面，确保每一次render时刻hook执行顺序一致。
+  if (networkStatus === NetworkStatus.refetch) return <React.Fragment>Refetching!</React.Fragment>;
+  if (loading)   return null;
+  if (error) return <React.Fragment>Error! ${error}</React.Fragment>;
+    //<button onClick={() => refetch()}>Refetch!</button>
+  return (
+    <React.Fragment>
+      <RouterLink to={`/unit/${id? id:''}`}>
+        <TransparentInput
+        readOnly
+        value={data.unit?.company?.name||data.unit?.person.name||''}
+        />
+      </RouterLink>
+      { data.unit && <IconButton
+          css={{ marginLeft: theme.spaces.sm}}
+          variant="ghost"
+          icon={<IconX />}
+          label="删除"
+          onPress={onCancel}
+          />
+      }
+    </React.Fragment>
+  );
+/*   <TransparentInput
+            autoFocus={true}
+            value={editor?.ownerId||''}
+            onChange={e => {
+              setEditor( {  ...editor, ownerId: e.currentTarget.value||undefined } );
+            }}
+          />
+  */
+}
+
 
 export interface SearchBoxProps {
   setQuery: React.Dispatch<React.SetStateAction<any>>;
@@ -38,7 +90,7 @@ export const SearchDeviceBox: React.FunctionComponent<SearchBoxProps> = ({
   //修改中间状态;     //Todo:ingredients合并
   const [editor, setEditor] = React.useState<any>(filter);
   console.log("来看SearchDeviceBox当前的 ingredients=",ingredients,"filter=",filter,"query=",query);
-  const client = useApolloClient();
+  //const client = useApolloClient();
 
   return (
     <React.Fragment>
@@ -163,13 +215,12 @@ export const SearchDeviceBox: React.FunctionComponent<SearchBoxProps> = ({
               />
             </ContainLine>
             <ContainLine display={'设备产权人的单位ID'}>
-              <TransparentInput
-                autoFocus={true}
-                value={editor?.ownerId||''}
-                onChange={e => {
-                  setEditor( {  ...editor, ownerId: e.currentTarget.value||undefined } );
-                }}
-              />
+                <UnitDetail id={editor?.ownerId}
+                            onCancel={() => {
+                              //取消这一个Id
+                              setEditor( {  ...editor, ownerId:undefined })
+                            } }
+                />
             </ContainLine>
           </div>
 

@@ -298,3 +298,4 @@ setXxx()调用后unmount组件告警！Can't perform a React state update on an 
 就算filter改变useQuery(, {variables: {...filter},)也不一定会发起后端请求，可能被appollo自动优化掉了：它错误以为参数修改不影响结果不去获取。
 有没被路由切分是判定unmount的依据：经过路由跳转的情况useState会重新初始化mount,还有一种仅仅是界面上同一大组件底下切换显示的不会经过路由，数据列表状态不变也不会触发去后端读取更新。
 Apollo自动优化:InMemoryCache会针对useQuery在路由跳转再次mount的组件列表场合，自动id合并。
+技术手册Apollo Client; https://www.apollographql.com/docs/react/api/core/ApolloClient/

@@ -38,10 +38,6 @@ export const DeviceListInner: React.FunctionComponent<
 
   //上面这个副作用必须 加usersFind，否则无法继续处理后端数据带来的必要的UI反馈变化。
   const refLsize = React.useRef(null);
-  //const prvListLength=usePrevious(devicesFind?.length);
-  //const [hasMore, setHasMore] = React.useState(true);
-  //console.log("霉3变hasMore=",hasMore, "prvListLength?=", prvListLength!==devicesFind?.length );
-
   const [refMore, acrossMore] = useInView({threshold: 0});
   //后端返回了loading变动=会更新整个DeviceList组件，同时也执行updateQuery: ()=>{}回调更新数据。
   const toLoadMore = React.useCallback(
@@ -50,21 +46,7 @@ export const DeviceListInner: React.FunctionComponent<
       devicesFind && loadMore({
         variables: {
           offset: devicesFind.length,
-        },
-        /*底下res|dev:实际是useQuery返回data变量的.res; 也就是prev|fetchMoreResult等价useQuery返回data变量;
-        updateQuery: (prev, { fetchMoreResult }) => {
-          console.log("fetch来useInfiniteScroll看="+ JSON.stringify(fetchMoreResult)+",devicesFind.length=",devicesFind.length);
-          if (!fetchMoreResult)   return prev;
-          if (!fetchMoreResult.res)   return prev;
-          if(fetchMoreResult.res.length===0)
-            setHasMore(false);
-          if(prev.res.length + fetchMoreResult.res.length > 2000 )
-            setHasMore(false);
-          //console.log("跑到了updateQuery-- hasMore=", hasMore );
-          return Object.assign({}, prev, {
-            res: [...prev.res, ...fetchMoreResult.res],
-          });
-        },*/
+        }
       });
     },
     [loadMore ,devicesFind]
@@ -72,25 +54,13 @@ export const DeviceListInner: React.FunctionComponent<
 
   useEffect( () => { acrossMore && (refLsize.current!==devicesFind?.length) && toLoadMore() },
         [acrossMore,devicesFind,toLoadMore ]);
-  /*
-  useEffect( () => {
-    if(hasMore &&  refLsize.current===devicesFind?.length)  setHasMore(false);
-    },
-    [hasMore,devicesFind]);
-  */
+
   console.log("霉$R1变 refLsize=",refLsize.current,"devicesFind=",devicesFind?.length);
 
   const callRefetch = React.useCallback(() => {
     //setHasMore(true);
     refetch( filter );
   }, [refetch, filter]);
-
-  /*  async function toRefresh() {
-    //setHasMore(true);
-    //TODO： 先清空旧的cache??  还是干脆取消该功能，代替为页面强制刷新
-    refetch( filter );
-  }
-  */
 
   //有些场合不需要做refetch就能触发，可能被appollo自动优化。变化驱动链条query＝>filter
   //有问题：refetch这个时间的入口参数filter还是捕获的旧的，须延迟一个render()后再去做。

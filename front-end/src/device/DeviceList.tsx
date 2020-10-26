@@ -60,12 +60,6 @@ export const DeviceList: React.FunctionComponent<
 
   //界面轮播 setIndex切换显示界面；   //index不是组件外部那一个同名index；
   const [index, setIndex] = React.useState(0);
-
-  //let big="先有派出TASK，后来才会生成ISP\n" ;
- // const [option, setOption] = useHistoryState("", "option");
-  //let history = useHistory();
-  //navigate(state:{ })传递方式，数据可以很大，就是参数不会显示在URL当中会引起歧义。bug：可能需要刷新才正常。
-
   //根据query的改变来重新查询哪。
   React.useEffect(() => {
     let filtercomp={where: {cod: query, ...devfl},
@@ -78,14 +72,6 @@ export const DeviceList: React.FunctionComponent<
     setFilter(filtercomp);
   }, [query,devfl]);
 
-  //这两个useEffect的前后顺序不能颠倒，顺序非常重要，后面的依赖于前面的useEffect更新结果。
-  /*操作UI副作用；要进一步做修正性处理。
-  React.useEffect(() => {
-    console.log("伪set QueryRe 关键的=",query,"devicesFind=",devicesFind);
-    setQueryResults(devicesFind);
-  }, [query, devicesFind]);
-  */
-  //上面这个副作用必须 加usersFind，否则无法继续处理后端数据带来的必要的UI反馈变化。
   console.log("霉变render query=",query);
 
   //控件<Stack 是堆叠式的，像导航条；适用同一个模板显示只需上级给下级参数调整的场景。根据上一叠页面选择触发状态relation给下一叠参数来控制下一级显示；更多嵌套很困难。
