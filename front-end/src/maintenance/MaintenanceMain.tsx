@@ -8,7 +8,18 @@ import {
   Button,
   IconChevronDown,
   IconChevronUp,
-Select, Container,  IconCloud
+  Select,
+  Container,
+  IconCloud,
+  List,
+  ListItem,
+  Skeleton,
+  Avatar,
+  ResponsivePopover,
+  MenuList,
+  MenuItem,
+  IconPackage,
+  IconButton, IconMoreVertical, IconTruck, IconArrowRight
 } from "customize-easy-ui-component";
 //import useLocation from "wouter/use-location";
 import {  useQueryOriginalRecord } from "./db";
@@ -21,6 +32,97 @@ import {RecordView} from "./RecordView";
   /*类比路由功能的配置表，根据类型来映射组件的文件名*/
 import typeAsRoute from "../typeAsRoute.json";
 import { loadTemplate } from "./template";
+import { useQuery,gql,useMutation } from "@apollo/client";
+import { Link as RouterLink } from "wouter";
+import { ContainLine, TransparentInput } from "../comp/base";
+import { useEffect } from "react";
+
+
+//根据老旧平台unit做同步
+const WEI_HU_UNIT = gql`
+  mutation WEI_HU($offset: Int!, $limit: Int!) {
+    res: syncUnitFromOld(offset: $offset, limit: $limit) 
+  }
+`;
+
+const UnitDetail= ( { id, onCancel }
+) => {
+  const theme = useTheme();
+  const limit=2;
+  const [offset, setOffset] = React.useState(0 );
+  const [submitfunc, {error, data, loading, called}] = useMutation(WEI_HU_UNIT, {
+    variables: {offset, limit }
+  });
+  const [doing, setDoing] = React.useState(false );
+
+  React.useEffect(() => {
+    if(doing)
+      submitfunc();
+  }, [doing, offset, submitfunc]);
+
+  useEffect( () => {
+     //console.log("Wecord：Effect捕获 ==data=[", data, "loading=", loading, "called", called, "data.res.length", data?.res.length);
+      if (doing && called && data?.res.length <= 0)
+        setDoing(false);
+      else if (doing && data?.res.filter(a => a !== "成功").length > 0) {
+        setDoing(false);
+        setOffset(offset + limit);
+      }
+      else if(doing && called  && data?.res.length>0) {
+        setOffset(offset + limit);
+      }
+    },
+    [data,loading,doing,offset,called]);
+
+  if (error) return <React.Fragment>Error! ${error}</React.Fragment>;
+  console.log("父OriginalRecord辈：捕获 ==doing=[",  doing,  "]loading=", loading ,"called=", called);
+  //<button onClick={() => refetch()}>Refetch!</button>
+  /*
+         setOffset(`${Number(offset) + limit}`);
+         setOffset(String(Number(offset) + limit));
+  */
+  //e.currentTarget.value
+  return (
+    <React.Fragment>
+      <ContainLine display={'从旧平台同步单位'}>
+        <TransparentInput
+          autoFocus={true}
+          placeholder="起点offset记录数" type='number'
+          value={offset}
+          onChange={e => setOffset( Number(e.currentTarget.value) ) }
+        />
+      </ContainLine>
+      <Text  css={{wordWrap: 'break-word'}}>{`当前进度是offse=( ${offset} )`}</Text>
+      <List>
+        {
+          data?.res?.map((hit,i) => (
+            <ListItem key={i}
+                      contentBefore={
+                        <React.Fragment>
+                          <Avatar size="xs" name={'曳'}/>
+                          <Avatar size="xs" name={'有'}/>
+                        </React.Fragment>
+                      }
+                      primary={`${hit}`}
+            />
+          ))}
+
+      </List>
+      <Button
+        size="lg"
+        intent="primary"
+        iconBefore={<IconTruck />}
+        iconAfter={<IconArrowRight />}
+        onPress={ async () => {
+          setDoing(!doing);
+        }}
+      >
+        {doing? '停止同步吧!' : '继续同步数据去'}
+      </Button>
+    <br/>
+    </React.Fragment>
+  );
+}
 
 
 
@@ -34,7 +136,7 @@ export default function MaintenanceMain({printing, }:{printing?:boolean, },props
   let filtercomp={ id:231 };
   //refetch() 引起 loading= True/False变化，从而需要组件范围render重做搞2次。
   //若是浏览器后退前进的场景不会执行useQueryOriginalRecord代码，item已经有数据了，loading不会变化。
-  const {loading,items, refetch } =useQueryOriginalRecord(filtercomp);
+  //const {loading,items, refetch } =useQueryOriginalRecord(filtercomp);
   const [template, setTemplate] = React.useState(null   as any);
   //模板的类型标识
   const [tplType, setTplType] = React.useState('EL-DJ');
@@ -50,10 +152,7 @@ export default function MaintenanceMain({printing, }:{printing?:boolean, },props
 
   //外部dat不能加到依赖，变成死循环! const  dat =items&&items.data&&JSON.parse(items.data);  这dat每次render都变了？
   //从后端返回的数据可能items已经被修改了
-  React.useEffect(() => {
-    const  dat =items&&items.data&&JSON.parse(items.data);
-     dat && setInp(dat);
-  }, [items]);
+
 
   //父辈组件重做render了，不意味着其儿孙组件们也需要重做render。
   //依赖项[inp, show]没变化， useMemo包裹的且已经挂载的组件就不会重新render；降低重复部分的render工作量。
@@ -71,7 +170,8 @@ export default function MaintenanceMain({printing, }:{printing?:boolean, },props
   }, [tplType]);
 
 
-  console.log("祖父OriginalRecord辈：捕获 ==inp=[",  inp,  "]items=", items ,"loading=", loading);
+  //console.log("祖父OriginalRecord辈：捕获 ==inp=[",  inp,  "]items=", items ,"loading=", loading);
+
   /*这样子的逻辑， 反而导致重度加载， &&逻辑类比 路由模式，可引起该分叉的底下所有子组件重新render等价于局部的URL刷新！得不偿失。
     if(previousPar!==par && !isEqual(inp,itemVal))
         return <LayerLoading loading={true} label={'更新数据，加载中请稍后'}/>;   看不出效果来，会立刻运行下一步的render了。    */
@@ -131,12 +231,17 @@ export default function MaintenanceMain({printing, }:{printing?:boolean, },props
         {
           inp && template &&  <RecordView inp={inp} showAll={show} template={template}/>
         }
+        <UnitDetail id={1}
+                    onCancel={() => {
+                      //取消这
+                    } }
+        />
         <Button
           aria-controls="collapse"
           variant="ghost"
           intent="primary"
           iconAfter={<IconCloud />}
-          onPress={() => refetch() }
+          onPress={() => {} }
         >拉取后端最新数据
         </Button>
       </Container>
