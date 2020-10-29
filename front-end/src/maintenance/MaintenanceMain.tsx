@@ -44,11 +44,11 @@ const WEI_HU_UNIT = gql`
     res: syncUnitFromOld(offset: $offset, limit: $limit) 
   }
 `;
-
+//可能2个分片一起发起submitfunc请求的；点击停止后，任务实际继续直到已经发起的分片任务返回结果；调整参数使每个分片5-10秒能解决。
 const UnitDetail= ( { id, onCancel }
 ) => {
   const theme = useTheme();
-  const limit=2;
+  const [limit, setLimit] = React.useState(30 );
   const [offset, setOffset] = React.useState(0 );
   const [submitfunc, {error, data, loading, called}] = useMutation(WEI_HU_UNIT, {
     variables: {offset, limit }
@@ -56,51 +56,64 @@ const UnitDetail= ( { id, onCancel }
   const [doing, setDoing] = React.useState(false );
 
   React.useEffect(() => {
-    if(doing)
-      submitfunc();
-  }, [doing, offset, submitfunc]);
-
+    if(doing && !loading)   submitfunc();
+  }, [doing, offset, loading, submitfunc]);
+  //let hasEvents=data?.res.filter(a => a !== "成功");
   useEffect( () => {
-     //console.log("Wecord：Effect捕获 ==data=[", data, "loading=", loading, "called", called, "data.res.length", data?.res.length);
-      if (doing && called && data?.res.length <= 0)
-        setDoing(false);
-      else if (doing && data?.res.filter(a => a !== "成功").length > 0) {
-        setDoing(false);
-        setOffset(offset + limit);
-      }
-      else if(doing && called  && data?.res.length>0) {
-        setOffset(offset + limit);
-      }
+      if(!doing)  return;　　 //界面data显示比console.log输出还早了;
+      if(data?.res.length <= 0)    setDoing(false);
+      var someOneis=false;
+      data?.res.map((value,key) => {
+        if(value !== "成功") {
+          //可能重复,多执行了
+          console.log("UnitEventskey=", key, value);
+          if(!someOneis)  someOneis=true;
+        }
+      });
+      if(someOneis)     setDoing(false);
+      if(data?.res.length>0)     setOffset(offset + limit);
     },
-    [data,loading,doing,offset,called]);
+    [data,loading,doing,offset,limit]);
 
   if (error) return <React.Fragment>Error! ${error}</React.Fragment>;
-  console.log("父OriginalRecord辈：捕获 ==doing=[",  doing,  "]loading=", loading ,"called=", called);
-  //<button onClick={() => refetch()}>Refetch!</button>
-  /*
-         setOffset(`${Number(offset) + limit}`);
-         setOffset(String(Number(offset) + limit));
+  console.log("UnitDetail捕offset=", offset);
+  /*    setOffset(`${Number(offset) + limit}`);
+        setOffset(String(Number(offset) + limit));
+        <button onClick={() => refetch()}>Refetch!</button>
   */
-  //e.currentTarget.value
+
   return (
     <React.Fragment>
-      <ContainLine display={'从旧平台同步单位'}>
+      <Text  variant="h5"　css={{ textAlign: 'center' }}>
+        <span>从老旧平台同步单位数据来</span>
+      </Text>
+      <ContainLine display={'指定TB_UNT_MGE起点offset'}>
         <TransparentInput
           autoFocus={true}
           placeholder="起点offset记录数" type='number'
           value={offset}
           onChange={e => setOffset( Number(e.currentTarget.value) ) }
         />
+     </ContainLine>
+      <ContainLine display={'指定一批执行记录数limit'}>
+        <TransparentInput
+          autoFocus={true}
+          placeholder="一批执行记录数" type='number'
+          value={limit}
+          onChange={e => setLimit( Number(e.currentTarget.value) ) }
+        />
       </ContainLine>
-      <Text  css={{wordWrap: 'break-word'}}>{`当前进度是offse=( ${offset} )`}</Text>
+      <Text  css={{wordWrap: 'break-word'}}>{`下一步准备抓取的,当前进度offset是=( ${offset} )`}</Text>
       <List>
         {
           data?.res?.map((hit,i) => (
             <ListItem key={i}
                       contentBefore={
                         <React.Fragment>
-                          <Avatar size="xs" name={'曳'}/>
-                          <Avatar size="xs" name={'有'}/>
+                          {hit === "成功" ?
+                            <Avatar size="sm" name={'OK'}/> :
+                            <Avatar size="sm" name={'ERROR!'}/>
+                          }
                         </React.Fragment>
                       }
                       primary={`${hit}`}
@@ -125,7 +138,7 @@ const UnitDetail= ( { id, onCancel }
 }
 
 
-
+//前端任务，分片分批次，要确保允许短时间内重新执行同一个分片而没有影响。
 //viewAll是否是整个报表都一起显示。
 export default function MaintenanceMain({printing, }:{printing?:boolean, },props) {
   const theme = useTheme();
@@ -180,7 +193,7 @@ export default function MaintenanceMain({printing, }:{printing?:boolean, },props
     <Layout>
       <Container>
       <Text  variant="h4"　css={{ textAlign: 'center' }}>
-        <span>电梯定期检验原始记录</span>
+        <span>后台和数据同步等任务前端在线运行</span>
       </Text>
       <Toolbar>
         <Text
@@ -245,6 +258,9 @@ export default function MaintenanceMain({printing, }:{printing?:boolean, },props
         >拉取后端最新数据
         </Button>
       </Container>
+      <Text  variant="h6"　css={{ textAlign: 'center' }}>
+        <span>性能波动大，请确保60秒之内完成分片任务，最好控制单步运行5秒就能完成</span>
+      </Text>
     </Layout>
   );
 }
