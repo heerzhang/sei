@@ -101,7 +101,7 @@ export const RelationList: React.FunctionComponent<RelationListProps> = ({
         {cod:query },
       offset:0,
       first:5,
-      orderBy: "instDate",
+      orderBy: "useDt",
       asc: false
     };
     setFilter(filtercomp);

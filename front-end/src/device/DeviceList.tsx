@@ -65,9 +65,9 @@ export const DeviceList: React.FunctionComponent<
     let filtercomp={where: {cod: query, ...devfl},
       offset:0,
       limit:2,
-      orderBy: "instDate",
       asc: false
     };
+    //      orderBy: "id",
     console.log("伪set Filter 回调=filtercomp=",filtercomp);
     setFilter(filtercomp);
   }, [query,devfl]);
