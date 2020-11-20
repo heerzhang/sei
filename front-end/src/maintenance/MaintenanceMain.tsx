@@ -40,21 +40,22 @@ import { useEffect } from "react";
 /* 同步功能的接口可选列表， 底下定义gql`mutation WEI_HU ...`中，可直接替换：
 老旧unit同步+ES同步： syncUnitFromOld
 老旧EQP同步：syncEqpFromOld
+从Eqp腾挪复制到EqpEs索引: syncEqpEsFromEqp
 
 */
 
 //根据老旧平台unit做同步
 const WEI_HU_UNIT = gql`
   mutation WEI_HU($offset: Int!, $limit: Int!) {
-    res: syncEqpFromOld(offset: $offset, limit: $limit) 
+    res: syncEqpEsFromEqp(offset: $offset, limit: $limit) 
   }
 `;
 //可能2个分片一起发起submitfunc请求的；点击停止后，任务实际继续直到已经发起的分片任务返回结果；调整参数使每个分片5-10秒能解决。
 const UnitDetail= ( { id, onCancel }
 ) => {
   const theme = useTheme();
-  const [limit, setLimit] = React.useState(30 );
-  const [offset, setOffset] = React.useState(61440 );
+  const [limit, setLimit] = React.useState(40 );
+  const [offset, setOffset] = React.useState(0 );
   const [submitfunc, {error, data, loading, called}] = useMutation(WEI_HU_UNIT, {
     variables: {offset, limit }
   });

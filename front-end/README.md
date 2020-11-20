@@ -93,3 +93,4 @@ POST https://192.168.1.105:8673/graphql net::ERR_CERT_AUTHORITY_INVALID 后端�
 Algoliasearch是收费云服务，Elasticsearch是自建集群,功能一样。
 <IconButton component={RouterLink} 报错，应该改<RouterLink><IconButton noBind写法。
 图标库icons; https://sancho-ui.com/components/icon/
+列表查询3类接口：搜索，精确搜索，查找。1搜索=ES中用match_phrase，2精确搜索=ES中用wildcard，3查找=数据库DB中Like查询。

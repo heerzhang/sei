@@ -84,6 +84,13 @@ const GET_DEVICES = gql`
      }
   }
 `;
+const GET_DEVICES_ES = gql`
+  query findAllEQPsFilter($where: DeviceCommonInput,$offset:Int!,$limit:Int=10,$orderBy:String,$asc:Boolean=true) {
+    getAllEqpEsFilter(where: $where,offset:$offset,limit:$limit,orderBy:$orderBy,asc:$asc) {
+      id cod oid type sort vart   
+     }
+  }
+`;
 
 /*
        ... on IfElevator {
@@ -96,7 +103,7 @@ const GET_DEVICES = gql`
 //底下usePaginateQueryDevice有可能不会实际执行的，还参考接口参数变量的变化。
 export function usePaginateQueryDevice(filter:any) {
   const { loading, error, data, updateQuery,
-       fetchMore, refetch} = useQuery(GET_DEVICES, {
+       fetchMore, refetch} = useQuery(GET_DEVICES_ES, {
     variables: { ...filter },
     notifyOnNetworkStatusChange: true,
     partialRefetch: true,    //没效果

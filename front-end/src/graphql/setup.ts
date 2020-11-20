@@ -152,6 +152,7 @@ export const  client = new ApolloClient({
         Query: {
           fields: {
             findAllEQPsFilter: pageOd,
+            getAllEqpEsFilter: pageOd,
             getUnitEsFilter: pageEs,
           },
         },
