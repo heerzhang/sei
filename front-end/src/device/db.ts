@@ -86,7 +86,7 @@ const GET_DEVICES = gql`
 `;
 const GET_DEVICES_ES = gql`
   query findAllEQPsFilter($where: DeviceCommonInput,$offset:Int!,$limit:Int=10,$orderBy:String,$asc:Boolean=true) {
-    getAllEqpEsFilter(where: $where,offset:$offset,limit:$limit,orderBy:$orderBy,asc:$asc) {
+    eqps:getAllEqpEsFilter(where: $where,offset:$offset,limit:$limit,orderBy:$orderBy,asc:$asc) {
       id cod oid type sort vart   
      }
   }
@@ -109,7 +109,7 @@ export function usePaginateQueryDevice(filter:any) {
     partialRefetch: true,    //没效果
     //returnPartialData: false 没效果
   });
-  return {items:　data　&&　data.findAllEQPsFilter,
+  return {items:　data　&&　data.eqps,
     error, loading, refetch, fetchMore, updateQuery};
 }
 

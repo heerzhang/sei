@@ -69,6 +69,8 @@ export const AttachedTask: React.FunctionComponent<AttachedTaskProps> = ({
   });
   //过滤对象or参数取值K/V；有些保留key不能随意使用。
   const  devFilterArgs={"ownerId": id };
+  const  devFilterArgsUseU={"useUid": id };
+
   console.log("页面刷新钩子AttachedTask entry=",　",设备id="+id+";task=",task,";eqp=",eqp ,"filter=",filter);
 
   async function handleDelete(id: string) {
@@ -189,6 +191,19 @@ export const AttachedTask: React.FunctionComponent<AttachedTaskProps> = ({
                                 >
                                   去找该单位设备
                                 </Button>
+
+                            <Button
+                              size="lg"
+                              intent="primary"
+                              iconAfter={<IconArrowRight />}
+                              onPress={() => {
+                                //这里派发出去editorSnapshot: outCome {...storage, ...outCome}都是按钮捕获的值，还要经过一轮render才会有最新值。
+                                setFilter({...filter, ...devFilterArgsUseU});
+                                setDoConfirm(true);
+                              } }
+                            >
+                              该单位正在使用设备
+                            </Button>
                           </div>
 
                       </div>

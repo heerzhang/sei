@@ -64,7 +64,7 @@ export const DeviceList: React.FunctionComponent<
   React.useEffect(() => {
     let filtercomp={where: {cod: query, ...devfl},
       offset:0,
-      limit:2,
+      limit:10,
       asc: false
     };
     //      orderBy: "id",

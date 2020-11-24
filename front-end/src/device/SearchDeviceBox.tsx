@@ -183,9 +183,9 @@ export const SearchDeviceBox: React.FunctionComponent<SearchBoxProps> = ({
               <TransparentInput
                 autoFocus={true}
                 placeholder="名字"
-                value={editor?.factoryNo||''}
+                value={editor?.fno||''}
                 onChange={e => {
-                  setEditor( {  ...editor, factoryNo: e.currentTarget.value||undefined } );
+                  setEditor( {  ...editor, fno: e.currentTarget.value||undefined } );
                 }}
               />
             </ContainLine>
@@ -221,6 +221,14 @@ export const SearchDeviceBox: React.FunctionComponent<SearchBoxProps> = ({
                               setEditor( {  ...editor, ownerId:undefined })
                             } }
                 />
+            </ContainLine>
+            <ContainLine display={'设备使用单位ID'}>
+              <UnitDetail id={editor?.useUid}
+                          onCancel={() => {
+                            //取消这一个Id
+                            setEditor( {  ...editor, useUid:undefined })
+                          } }
+              />
             </ContainLine>
           </div>
 
