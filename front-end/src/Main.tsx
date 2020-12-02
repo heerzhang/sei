@@ -28,7 +28,7 @@ import { FollowingList } from "./FollowingList";
 import { useSession,  useSignOut } from "./auth";
 import { Compose } from "./Compose";
 import { Recipe } from "./Recipe";
-//import { useTransition, animated } from "react-spring";
+
 
 import { Link, useRoute, useLocation } from "wouter";
 //import { Link, navigate } from "@reach/router";

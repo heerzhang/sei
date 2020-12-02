@@ -32,6 +32,7 @@ import { FollowingRecipes } from "./FollowingRecipes";
 //import { User } from "firebase";
 import { StackItem, StackContext } from "react-gesture-stack";
 import { animated } from "react-spring";
+import {SearchTitle} from "./comp/base"
 
 /*const client = algoliasearch(
   config.ALGOLIA_APP_ID,
@@ -385,9 +386,10 @@ export const FollowingList: React.FunctionComponent<
 
 
 //别人封装好的组件也可定制和替换：SearchTitle用于代替基本构件库react-gesture-stack的已有标准样式StackTitle部分，相当于定制修改原生就有的组件。
-function SearchTitle({ children }) {
+function SearchTitle_删除({ children }) {
   const {
     active,
+    opacity,
     transform
   } = React.useContext(StackContext);
 
@@ -411,11 +413,11 @@ function SearchTitle({ children }) {
           textOverflow: "ellipsis",
           whiteSpace: "nowrap",
           overflow: "hidden",
-      //    opacity,          //版本不支持，！暂时改
+          opacity,          //版本不支持，！暂时改
        //   transform: transform.to(x => `translateX(${x * 0.85}%)`)
-          opacity:  '$(opacity.animation.to)',
+       //   opacity:  '$(opacity.animation.to)',
           transform: `translateX(${transform.to(x => `translateX(${x * 0.85}%)` )})`
-        }}
+        } as any }
       >
         {children}
       </animated.div>

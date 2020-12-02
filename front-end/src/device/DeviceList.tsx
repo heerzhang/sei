@@ -24,8 +24,7 @@ import {  usePaginateQueryDevice,  } from "./db";
 //import { FollowingRecipes } from "./FollowingRecipes";
 
 import { StackItem, StackContext } from "react-gesture-stack";
-import { animated } from "react-spring";
-import {  useLocation } from "wouter";
+
 //import { useHistory } from "react-router-dom";
 //@reach 的 Link 可以附带state ；
 //import { Link, navigate, globalHistory } from "@reach/router";
@@ -36,7 +35,7 @@ import { useInView } from 'react-intersection-observer'
 //import { PullToRefresh,PullDownContent,RefreshContent,ReleaseContent } from "react-js-pull-to-refresh";
 import { DevfilterContext } from "../context/DevfilterContext";
 import {DeviceListInner} from "./DeviceListInner"
-
+import {SearchTitle} from "../comp/base"
 
 interface DeviceListProps {}
 export const DeviceList: React.FunctionComponent<
@@ -143,48 +142,6 @@ export const DeviceList: React.FunctionComponent<
 };
 
 
-
-//别人封装好的组件也可定制和替换：SearchTitle用于代替基本构件库的已有标准样式StackTitle部分，相当于定制修改原生就有的组件。
-function SearchTitle({ children }: { children: React.ReactNode }) {
-  const {
-    active,
-    transform
-  } = React.useContext(StackContext);
-
-  //const {calc: { to : opacityTo} } =transform;
- // console.log("Login开始DV SearchTitle transform=",transform, " \n opacityTo=",transform.to(0));
-
-  return (
-    <div
-      className="StackTitle"
-      aria-hidden={!active}
-      style={{
-        pointerEvents: active ? "auto" : "none",
-        zIndex: 10,
-        position: "absolute",
-        top: 0,
-        left: 0,
-        right: 0
-      }}
-    >
-      {/*<animated.div 版本不支持暂时改成div*/}
-      <animated.div
-        className="StackTitle__heading"
-        style={{
-          textOverflow: "ellipsis",
-          whiteSpace: "nowrap",
-          overflow: "hidden",
-          opacity:  '$(opacity.animation.to)',
-          transform: `translateX(${transform.to(x => `translateX(${x * 0.85}%)` )})`
-       //   opacity,          //版本不支持，！暂时改
-       //   transform: transform.to(x => `translateX(${x * 0.85}%)`)
-        }}
-      >
-        {children}
-      </animated.div>
-    </div>
-  );
-}
 
 
 //报错Cannot read property 'map' of null标记出错代码行，竟可能会差错！实际错误点实在下方，报错指示却在上方的代码行，两处都有.map的代码。
