@@ -1,6 +1,6 @@
 更新依赖 直接执行yarn　
 Git用法：先要提交commit然后先fetch ，再merge origin/master，有冲突解决冲突，最后再从1开始;没有冲突commit git push origin master推送到远程仓库。
-向npm网站发布自己的npm包：  /工程根目录/　npm  publish　；实际内部去执行prepublishOnly；
+[公开包的发布] 向npm网站发布自己的npm包：  /工程根目录/　D:\home\sancho> npm  publish　；实际内部去执行prepublishOnly；
 D:\home\sancho>npm whoami
 heerzhang
 Node.js environment服务端的{文件读写功能只能在这环境才能用}，它和客户端/浏览器端的js{无法读写文件}相对立的称呼。
@@ -301,3 +301,4 @@ Apollo自动优化:InMemoryCache会针对useQuery在路由跳转再次mount的�
 技术手册Apollo Client; https://www.apollographql.com/docs/react/api/core/ApolloClient/
 使用react-spring创建逼真的撕纸 动画   https://blog.csdn.net/weixin_26738395/article/details/108494153
 
+    "@emotion/css": "^11.0.0", 版本文档；  https://emotion.sh/docs/emotion-11

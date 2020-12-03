@@ -19,7 +19,7 @@
         "@types/react-dom":"^16.9.7",
         "@types/react-helmet":"^5.0.15",
         "axios":"^0.20.0",
-        "customize-easy-ui-component": "latest",
+        "customize-easy-ui-component": "^4.2.0",
         "emotion-theming":"^11.0.0-rc.0",
         "filepond":"^4.13.4",
         "filepond-plugin-image-exif-orientation":"^1.0.8",

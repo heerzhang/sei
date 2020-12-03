@@ -95,3 +95,6 @@ Algoliasearch是收费云服务，Elasticsearch是自建集群,功能一样。
 图标库icons; https://sancho-ui.com/components/icon/
 列表查询3类接口：搜索，精确搜索，查找。1搜索=ES中用match_phrase，2精确搜索=ES中用wildcard，3查找=数据库DB中Like查询。
 使用React动画库——react-spring ; https://www.jianshu.com/p/87d0decc9c16?utm_campaign=haruki
+/** @jsx jsx */ 告诉babel替换React.createElement为注入的jsx函数，import { css, jsx } from '@emotion/react'
+CommonJS和AMD/CMD是遗留UMD旧综合。ESM是js官方标准取代UMD；Tree-shaking 副作用。https://blog.csdn.net/frontend_frank/article/details/104386097
+
