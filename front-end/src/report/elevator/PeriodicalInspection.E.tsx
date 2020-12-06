@@ -1,5 +1,5 @@
-/** @jsx jsx */
-import { jsx,  } from "@emotion/core";
+
+import { jsx,  } from "@emotion/react";
 //import * as React from "react";
 import { ReportView } from "./PeriodicalInspection.R-1";
 import { OriginalView } from "./PeriodicalInspection.O-1";

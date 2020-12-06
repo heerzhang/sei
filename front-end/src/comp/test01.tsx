@@ -1,5 +1,5 @@
-/** @jsx jsx */
-import { jsx,  } from "@emotion/core";
+
+import { jsx,  } from "@emotion/react";
 import * as React from "react";
 import {
   ScrollView,
@@ -79,7 +79,7 @@ export default function Example(props) {
   function fetchdata() {
     return new Promise(resolve => {
       setTimeout(() => {
-        resolve();
+        resolve(void 0);
       }, 500);
     });
   }
@@ -234,7 +234,7 @@ export  function Example22(props) {
   function fetchdata() {
     return new Promise(resolve => {
       setTimeout(() => {
-        resolve();
+        resolve(void 0);
       }, 500);
     });
   }

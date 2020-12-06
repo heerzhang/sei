@@ -1,5 +1,5 @@
-/** @jsx jsx */
-import { jsx,} from "@emotion/core";
+
+import { jsx,} from "@emotion/react";
 import * as React from "react";
 import { IndentationLayText, SelectHookfork } from "../../comp/base";
 import { InputGroupLine, SuffixInput, Touchable } from "customize-easy-ui-component";

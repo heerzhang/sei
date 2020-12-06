@@ -1,5 +1,5 @@
 
-import { jsx,  Global } from "@emotion/core";
+import { jsx,  Global } from "@emotion/react";
 import { Suspense, lazy,  } from "react";
 import * as React from "react";
 //import * as firebase from "firebase/app";

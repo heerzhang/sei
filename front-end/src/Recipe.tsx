@@ -1,5 +1,5 @@
-/** @jsx jsx */
-import { jsx } from "@emotion/core";
+
+import { jsx } from "@emotion/react";
 import * as React from "react";
 //import firebase from "firebase/app";
 import { Compose } from "./Compose";

@@ -1,5 +1,5 @@
-/** @jsx jsx */
-import { jsx, Global } from "@emotion/core";
+
+import { jsx, Global } from "@emotion/react";
 import * as React from "react";
 //import { Link as RouterLink } from "@reach/router";
 //使用RouterLink不会强制刷新页面的。

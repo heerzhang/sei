@@ -1,5 +1,5 @@
-/** @jsx jsx */
-//import { jsx,} from "@emotion/core";
+
+//import { jsx,} from "@emotion/react";
 //import * as React from "react";
 
 //方便管理： 目录 分离。组件越来越多，不好查找管理。

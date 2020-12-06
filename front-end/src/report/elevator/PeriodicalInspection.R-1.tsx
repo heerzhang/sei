@@ -1,5 +1,5 @@
-/** @jsx jsx */
-import { jsx,} from "@emotion/core";
+
+import { jsx,} from "@emotion/react";
 import * as React from "react";
 import { Collapse, Text, useTheme } from "customize-easy-ui-component";
 import { Table, TableBody, TableHead, TableRow, Cell, CCell } from "../../comp/TableExt";
