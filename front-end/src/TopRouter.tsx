@@ -1,4 +1,4 @@
-/** @jsx jsx */
+
 import { jsx,  Global } from "@emotion/core";
 import { Suspense, lazy,  } from "react";
 import * as React from "react";
