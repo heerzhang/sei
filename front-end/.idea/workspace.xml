@@ -2,11 +2,217 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="339baf3b-3b56-43fa-821a-88a7b6723788" name="Default Changelist" comment="维护前端 长时间任务模式">
+      <change beforePath="$PROJECT_DIR$/../back-end/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/.gradle/4.10.3/fileChanges/last-build.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/.gradle/4.10.3/fileHashes/fileHashes.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/.gradle/4.10.3/fileHashes/fileHashes.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/.gradle/4.10.3/gc.properties" beforeDir="false" afterPath="$PROJECT_DIR$/.babelrc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/.gradle/vcs-1/gc.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/META-INF/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/README后端测试.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/SeiYewu.keystore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/build.gradle.new1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/gradle.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/AtomikosJtaPlatform.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/MainConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/PingtaiApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/config/GraphqlConfiguration.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/config/MyGraphQLWebAutoConfiguration.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/config/WebSecurityConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/controller/Api.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/controller/FileController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/controller/JdbcTestController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/controller/JpaTestController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/controller/sdn/TopicController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/controller/sdn/api/WeixingController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/controller/sdn/api/WeixingInput.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/controller/sdn/api/WeixingOutput.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/controller/sdn/api/WeixingUser.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/controller/sdn/module1/TestController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/datasource/FjtjConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/datasource/IncpConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/datasource/JdbcDataSourceConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/datasource/SdnConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/datasource/SeiConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/ehcache/CustomerCacheEventListener.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/ehcache/CustomerCacheEventListenerFactory.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/ehcache/CustomerCacheManagerEventListener.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/ehcache/CustomerCacheManagerEventListenerFactory.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/entity/fjtj/HrUserinfo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/entity/fjtj/HrUserinfoRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/entity/incp/JcAuthor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/entity/incp/JcAuthorRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/entity/incp/JcBook.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/entity/incp/JcBookRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/entity/incp/JcOpemen.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/entity/incp/JcOpemenRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/entity/incp/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/entity/sdn/Framwork.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/entity/sdn/Student.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/entity/sdn/StudentDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/entity/sdn/TEbmUser.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/entity/sdn/TEbmUserRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/entity/sdn/TSdnEnp.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/entity/sdn/TSdnEnpRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/entity/sdn/TestBean.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/entity/sdn/son/Topic.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/entity/sdn/son/TopicRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/entity/sei/Authority.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/entity/sei/AuthorityName.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/entity/sei/AuthorityRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/entity/sei/EQP.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/entity/sei/EQPRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/entity/sei/File.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/entity/sei/FileRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/entity/sei/Report.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/entity/sei/ReportRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/entity/sei/Teacher.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/entity/sei/TeacherDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/entity/sei/Unit.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/entity/sei/UnitRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/entity/sei/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/entity/sei/UserRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/entity/sei/inspect/ISP.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/entity/sei/inspect/ISPRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/entity/sei/inspect/Task.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/entity/sei/inspect/TaskRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/entity/sei/julienne/Following.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/entity/sei/julienne/Recipe.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/entity/sei/julienne/RecipeRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/entity/sei/oldsys/DictEqpType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/entity/sei/oldsys/DictEqpTypeRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/entity/sei/oldsys/ElevPara.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/entity/sei/oldsys/ElevParaRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/entity/sei/oldsys/EqpMge.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/entity/sei/oldsys/EqpMgeRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/entity/sei/oldsys/HouseMge.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/entity/sei/oldsys/HouseMgeRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/entity/sei/oldsys/UntMge.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/entity/sei/oldsys/UntMgeRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/exception/BookNotFoundException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/exception/FileStorageException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/exception/MyFileNotFoundException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/filter/Person.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/filter/SimpleReport.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/input/CaseExpression.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/input/ComplexInput.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/input/DeviceCommonInput.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/input/ExpressItem.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/input/LJ_TYPE_Enum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/input/OPERATOR_Enum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/input/SubSelect.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/input/WhereLeaf.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/input/WhereTree.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/jpa/CustomRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/jpa/CustomRepositoryFactoryBean.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/jpa/CustomRepositoryImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/jpa/ModelFilters.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/jpa/ModelFiltersImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/jpa/PageOffsetFirst.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/model/Author.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/model/Book.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/model/TbUntMge.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/model/geography/Address.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/model/geography/AddressRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/model/geography/Adminunit.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/model/geography/AdminunitRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/model/geography/City.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/model/geography/CityRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/model/geography/Country.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/model/geography/CountryRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/model/geography/County.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/model/geography/CountyRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/model/geography/Province.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/model/geography/ProvinceRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/model/geography/Town.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/model/geography/TownRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/payload/UploadFileResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/pojo/sei/DeviceSnapshot.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/property/FileStorageProperties.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/property/SeiFilterOriginProperties.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/repository/AuthorRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/repository/BookRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/repository/TbUntMgeRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/resolver/Mutation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/resolver/Query.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/resolver/incp/module/JcMutation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/resolver/incp/module/JcQuery.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/resolver/sei/BaseMutation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/resolver/sei/BaseQuery.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/resolver/sei/inspect/IspMgrMutation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/resolver/sei/inspect/IspMgrQuery.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/resolver/sei/julienne/JulienneMutation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/resolver/sei/julienne/JulienneQuery.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/resolver/sei/oldsys/SysMgrMutation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/resolver/sei/oldsys/SysMgrQuery.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/resolver/sei/original/ReportMgrMutation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/resolver/sei/original/ReportMgrQuery.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/security/JwtAuthenticationEntryPoint.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/security/JwtAuthenticationRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/security/JwtAuthorizationTokenFilter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/security/JwtTokenUtil.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/security/JwtUser.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/security/JwtUserFactory.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/service/FileService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/service/FileServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/service/FileStorageService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/service/JpaService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/service/JpaServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/service/UserRowMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/service/UserService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/service/UserServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/service/core/RestService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/service/core/RestServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/service/sdn/TopicService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/service/sdn/WeixingService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/service/sdn/WeixingServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/service/security/JwtAuthenticationResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/service/security/JwtUserDetailsService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/org/fjsei/yewu/third/MyRestServiceClient.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/resources/application - 副本.yml-正式" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/resources/application - 本机测试副本.yml--" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/resources/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/resources/application.yml-公司" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/resources/application.yml-家里" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/resources/defaultQuery.graphql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/resources/ehcache.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/resources/graphql/author.graphqls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/resources/graphql/book.graphqls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/resources/graphql/common.graphqls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/resources/graphql/geography/Position.graphqls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/resources/graphql/incp/jcauthor.graphqls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/resources/graphql/incp/jcbook.graphqls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/resources/graphql/sei/Authority.graphqls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/resources/graphql/sei/Base.graphqls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/resources/graphql/sei/EQP.graphqls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/resources/graphql/sei/File.graphqls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/resources/graphql/sei/Report.graphqls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/resources/graphql/sei/Unit.graphqls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/resources/graphql/sei/User.graphqls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/resources/graphql/sei/inspect/ISP.graphqls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/resources/graphql/sei/inspect/Task.graphqls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/resources/graphql/sei/julienne/Recipe.graphqls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/resources/graphql/sei/oldsys/EqpMge.graphqls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/resources/jta.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/resources/logback.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/resources/thirdParty/author.graphqls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/resources/thirdParty/book.graphqls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/test/java/org/fjsei/yewu/ApiTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/test/java/org/fjsei/yewu/ApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/tmlog.lck" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/新建文本文档.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/测试用例.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/device/DeviceList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/device/DeviceList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/device/SearchDeviceBox.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/device/SearchDeviceBox.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/device/db.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/device/db.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/unit/AttachedTask.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/unit/AttachedTask.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/新建文本文档.txt" beforeDir="false" afterPath="$PROJECT_DIR$/新建文本文档.txt" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -21,13 +227,13 @@
     <session id="784151677">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="108" />
+          <entry key="project.closed" value="117" />
           <entry key="project.open.time.0" value="6" />
           <entry key="project.open.time.1" value="2" />
-          <entry key="project.open.time.10" value="7" />
-          <entry key="project.open.time.11" value="8" />
+          <entry key="project.open.time.10" value="9" />
+          <entry key="project.open.time.11" value="9" />
           <entry key="project.open.time.12" value="5" />
-          <entry key="project.open.time.13" value="6" />
+          <entry key="project.open.time.13" value="7" />
           <entry key="project.open.time.14" value="1" />
           <entry key="project.open.time.15" value="4" />
           <entry key="project.open.time.16" value="6" />
@@ -44,78 +250,85 @@
           <entry key="project.open.time.29" value="2" />
           <entry key="project.open.time.30" value="2" />
           <entry key="project.open.time.31" value="2" />
+          <entry key="project.open.time.33" value="1" />
           <entry key="project.open.time.5" value="2" />
           <entry key="project.open.time.6" value="11" />
-          <entry key="project.open.time.7" value="6" />
-          <entry key="project.open.time.8" value="6" />
-          <entry key="project.open.time.9" value="10" />
-          <entry key="project.opened" value="122" />
+          <entry key="project.open.time.7" value="8" />
+          <entry key="project.open.time.8" value="7" />
+          <entry key="project.open.time.9" value="12" />
+          <entry key="project.opened" value="132" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="LICENSE" value="1" />
-          <entry key="env" value="12" />
-          <entry key="env-公司" value="3" />
-          <entry key="env-家里" value="5" />
-          <entry key="gitignore" value="3" />
+          <entry key="LICENSE" value="2" />
+          <entry key="babelrc" value="2" />
+          <entry key="env" value="21" />
+          <entry key="env-公司" value="6" />
+          <entry key="env-家里" value="9" />
+          <entry key="eslintcache" value="3" />
+          <entry key="gitignore" value="4" />
           <entry key="java" value="2" />
           <entry key="jpg" value="1" />
-          <entry key="js" value="10" />
-          <entry key="json" value="28" />
+          <entry key="js" value="12" />
+          <entry key="json" value="78" />
           <entry key="jsx" value="3" />
-          <entry key="md" value="4" />
+          <entry key="lock" value="2" />
+          <entry key="log" value="1" />
+          <entry key="md" value="9" />
           <entry key="png" value="4" />
           <entry key="rep" value="5" />
-          <entry key="ts" value="195" />
-          <entry key="tsx" value="943" />
+          <entry key="ts" value="216" />
+          <entry key="tsx" value="992" />
           <entry key="tsx-" value="4" />
-          <entry key="txt" value="77" />
+          <entry key="txt" value="92" />
           <entry key="xml" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key=".env file" value="12" />
+          <entry key=".env file" value="21" />
           <entry key="Image" value="5" />
-          <entry key="JSON" value="26" />
+          <entry key="JSON" value="70" />
           <entry key="JSX Harmony" value="3" />
-          <entry key="JavaScript" value="10" />
-          <entry key="Markdown" value="4" />
-          <entry key="PLAIN_TEXT" value="100" />
-          <entry key="TypeScript" value="195" />
-          <entry key="TypeScript JSX" value="943" />
+          <entry key="JavaScript" value="12" />
+          <entry key="Markdown" value="9" />
+          <entry key="PLAIN_TEXT" value="128" />
+          <entry key="TypeScript" value="216" />
+          <entry key="TypeScript JSX" value="992" />
           <entry key="XML" value="5" />
-          <entry key="tsconfig" value="2" />
+          <entry key="tsconfig" value="10" />
+          <entry key="yarn.lock" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="env" value="7" />
+          <entry key="env" value="15" />
           <entry key="gitignore" value="12" />
-          <entry key="json" value="18" />
+          <entry key="json" value="78" />
           <entry key="jsx" value="5" />
-          <entry key="ts" value="1102" />
-          <entry key="tsx" value="25931" />
-          <entry key="txt" value="2928" />
+          <entry key="ts" value="1105" />
+          <entry key="tsx" value="25980" />
+          <entry key="txt" value="2993" />
           <entry key="xml" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key=".env file" value="7" />
-          <entry key="JSON" value="18" />
+          <entry key=".env file" value="15" />
+          <entry key="JSON" value="73" />
           <entry key="JSX Harmony" value="5" />
-          <entry key="PLAIN_TEXT" value="2940" />
-          <entry key="TypeScript" value="1102" />
-          <entry key="TypeScript JSX" value="25931" />
+          <entry key="PLAIN_TEXT" value="3005" />
+          <entry key="TypeScript" value="1105" />
+          <entry key="TypeScript JSX" value="25980" />
           <entry key="XML" value="1" />
+          <entry key="tsconfig" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.js.language.service.starts">
         <counts>
           <entry key="ESLintLanguageService" value="2" />
-          <entry key="TypeScriptServerServiceImpl" value="88" />
+          <entry key="TypeScriptServerServiceImpl" value="95" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages">
@@ -234,28 +447,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>DevfilterContext</find>
-      <find>client</find>
-      <find>DogPhoto</find>
-      <find>replace</find>
-      <find>IconButton</find>
-      <find>菜单</find>
-      <find>图标</find>
-      <find>&lt;IconButton</find>
-      <find>setFilter</find>
-      <find>GET_DOG_PHOTO</find>
-      <find>createPost</find>
-      <find>useDeleteRequestFollow</find>
-      <find>deleteRequestFollow</find>
-      <find>UnitDetail</find>
-      <find>useMutation</find>
-      <find>modeltype</find>
-      <find>query getReport($id: ID!)</find>
-      <find>GET_ORGINAL_RECORD</find>
-      <find>.filter</find>
-      <find>number</find>
-      <find>offset</find>
-      <find>called</find>
       <find>submitfunc</find>
       <find>instDate</find>
       <find>src/maintenance/MaintenanceMain.tsx</find>
@@ -264,11 +455,30 @@
       <find>findAllEQPsFilter</find>
       <find>getAllEqpEsFilter</find>
       <find>去找该单位设备</find>
+      <find>@babel/plugin-transform-parameters</find>
+      <find>@babel/preset-env</find>
+      <find>helper-call-delegate</find>
+      <find>react-dev-utils</find>
+      <find>@babel/helper-call-delegate</find>
+      <find>@emotion/styled</find>
+      <find>emotion-theming</find>
+      <find>emotion</find>
+      <find>map</find>
+      <find>eslint-config-react</find>
+      <find>resolve</find>
+      <find>babel-preset-css-prop</find>
+      <find>Stylis</find>
+      <find>@emotion/cache</find>
+      <find>react-material-table</find>
+      <find>eslint</find>
+      <find>babel</find>
+      <find>@emotion/react</find>
+      <find>@emotion/core</find>
+      <find>@emotion</find>
+      <find>/** @jsx jsx */</find>
+      <find>@emotion/babel-plugin</find>
     </findStrings>
     <replaceStrings>
-      <replace>ItemRecheckResult</replace>
-      <replace>ItemAppendixB</replace>
-      <replace>ItemRemarks</replace>
       <replace>ItemConclusion</replace>
       <replace>procedure</replace>
       <replace>originalTemplate</replace>
@@ -296,14 +506,13 @@
       <replace>refLsize.current</replace>
       <replace>UnitDetail</replace>
       <replace>GET_UNIT_DETAIL</replace>
+      <replace />
+      <replace>@emotion/react</replace>
+      <replace />
     </replaceStrings>
     <dirStrings>
-      <dir>D:\coding\home\sei\front-end\src\</dir>
-      <dir>D:\coding\home\sei\front-end\src\original</dir>
-      <dir>D:\coding\home\sei\front-end</dir>
       <dir>D:\coding\home\sei\front-end\src\report</dir>
       <dir>D:\coding\home\sei\front-end\src\device</dir>
-      <dir>D:\coding\home\sei\front-end\src</dir>
       <dir>D:\coding\home\sei\front-end\src\inspect</dir>
       <dir>D:\home\sei\front-end\node_modules\customize-easy-ui-component\src</dir>
       <dir>D:\home\sei\front-end\node_modules\apollo-cache-inmemory</dir>
@@ -328,6 +537,10 @@
       <dir>D:\home\sei\front-end\src</dir>
       <dir>D:\home\sei\front-end</dir>
       <dir>D:\home\sei\front-end\src\unit</dir>
+      <dir>D:\coding\home\sei\front-end\src\comp</dir>
+      <dir>D:\coding\home\sei\front-end\src\</dir>
+      <dir>D:\coding\home\sei\front-end</dir>
+      <dir>D:\coding\home\sei\front-end\src</dir>
     </dirStrings>
   </component>
   <component name="Git.Settings">
@@ -342,27 +555,15 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/.env-家里" />
-        <option value="F:/22222/infinispan-配置/v53--builder/infinispan-configs.xml" />
-        <option value="$PROJECT_DIR$/src/Branding.tsx" />
-        <option value="$PROJECT_DIR$/src/unit/SearchDeviceBox.tsx" />
-        <option value="$PROJECT_DIR$/src/hooks/some-requests.ts" />
-        <option value="$PROJECT_DIR$/src/inspect/report/db.ts" />
-        <option value="$PROJECT_DIR$/src/maintenance/db.ts" />
-        <option value="$PROJECT_DIR$/src/App.tsx" />
         <option value="$PROJECT_DIR$/frtchMore.ts" />
         <option value="$PROJECT_DIR$/src/unit/ComposeDevice.tsx" />
-        <option value="$PROJECT_DIR$/src/About.tsx" />
-        <option value="$PROJECT_DIR$/src/comp/test01.tsx" />
         <option value="$PROJECT_DIR$/compare/Image.tsx" />
-        <option value="$PROJECT_DIR$/src/Image.tsx" />
         <option value="$PROJECT_DIR$/src/report/elevator/elvRarelyVary.tsx" />
         <option value="$PROJECT_DIR$/src/maintenance/elevator/PeriodicalInspection.O-1.tsx" />
         <option value="$PROJECT_DIR$/src/report/elevator/elvBase.tsx" />
         <option value="$PROJECT_DIR$/src/Compose.tsx" />
         <option value="$PROJECT_DIR$/src/device/AttachedTask.tsx" />
         <option value="$PROJECT_DIR$/src/report/TemplateMain.tsx" />
-        <option value="$PROJECT_DIR$/src/TopRouter.tsx" />
         <option value="$PROJECT_DIR$/src/unit/DeviceDetail.tsx" />
         <option value="$PROJECT_DIR$/src/hooks/useHelpers.ts" />
         <option value="$PROJECT_DIR$/src/Main.tsx" />
@@ -371,20 +572,16 @@
         <option value="$PROJECT_DIR$/src/unit/DeviceList.tsx" />
         <option value="$PROJECT_DIR$/compare/setup.ts" />
         <option value="$PROJECT_DIR$/src/context/DevfilterContext.tsx" />
-        <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/src/comp/test02.tsx" />
         <option value="$PROJECT_DIR$/src/device/DeviceMain.tsx" />
-        <option value="$PROJECT_DIR$/例子测试.txt" />
         <option value="$PROJECT_DIR$/src/unit/db.ts" />
         <option value="$PROJECT_DIR$/src/unit/DeviceMain.tsx" />
         <option value="$PROJECT_DIR$/src/unit/UnitList.tsx" />
         <option value="$PROJECT_DIR$/src/device/DeviceListInner.tsx" />
-        <option value="$PROJECT_DIR$/新建文本文档.txt" />
         <option value="$PROJECT_DIR$/src/unit/DetailedGuide.tsx" />
         <option value="$PROJECT_DIR$/.env-公司" />
         <option value="$PROJECT_DIR$/.env断网" />
         <option value="$PROJECT_DIR$/.env-断网用" />
-        <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/src/inspect/RelationList.tsx" />
         <option value="$PROJECT_DIR$/src/graphql/setup.ts" />
         <option value="$PROJECT_DIR$/src/maintenance/MaintenanceMain.tsx" />
@@ -393,6 +590,22 @@
         <option value="$PROJECT_DIR$/src/device/db.ts" />
         <option value="$PROJECT_DIR$/src/device/SearchDeviceBox.tsx" />
         <option value="$PROJECT_DIR$/src/unit/AttachedTask.tsx" />
+        <option value="$PROJECT_DIR$/.env-家里" />
+        <option value="$PROJECT_DIR$/src/TopRouter.tsx" />
+        <option value="$PROJECT_DIR$/例子测试.txt" />
+        <option value="$PROJECT_DIR$/.env" />
+        <option value="$PROJECT_DIR$/src/About.tsx" />
+        <option value="$PROJECT_DIR$/src/FollowersList.tsx" />
+        <option value="$PROJECT_DIR$/src/react-app-env.d.ts" />
+        <option value="$PROJECT_DIR$/src/comp/TableExt.tsx" />
+        <option value="$PROJECT_DIR$/src/Image.tsx" />
+        <option value="$PROJECT_DIR$/src/App.tsx" />
+        <option value="$PROJECT_DIR$/src/Branding.tsx" />
+        <option value="$PROJECT_DIR$/src/comp/test01.tsx" />
+        <option value="$PROJECT_DIR$/tsconfig.json" />
+        <option value="$PROJECT_DIR$/新建文本文档.txt" />
+        <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/.babelrc" />
       </list>
     </option>
   </component>
@@ -416,10 +629,9 @@
     <dismissed value="$PROJECT_DIR$/package.json" />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="504" />
-    <option name="y" value="137" />
-    <option name="width" value="953" />
-    <option name="height" value="573" />
+    <option name="x" value="525" />
+    <option name="width" value="1335" />
+    <option name="height" value="960" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -427,7 +639,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -438,22 +649,14 @@
             <path>
               <item name="front-end" type="b2602c69:ProjectViewProjectNode" />
               <item name="front-end" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="front-end" type="b2602c69:ProjectViewProjectNode" />
-              <item name="front-end" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="unit" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="front-end" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Scratches and Consoles" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
+              <item name="node_modules" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -463,13 +666,13 @@
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.standard" value="project" />
-    <property name="node.js.selected.package.eslint" value="D:\home\sei\front-end\node_modules\eslint" />
-    <property name="node.js.selected.package.standard" value="D:\home\sei\front-end\node_modules\eslint" />
+    <property name="node.js.selected.package.eslint" value="D:\coding\home\sei\front-end\node_modules\eslint" />
+    <property name="node.js.selected.package.standard" value="D:\coding\home\sei\front-end\node_modules\eslint" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="prettierjs.PrettierConfiguration.Package" value="D:\coding\home\sei\front-end\node_modules\prettier" />
-    <property name="ts.external.directory.path" value="D:\home\sei\front-end\node_modules\typescript\lib" />
+    <property name="ts.external.directory.path" value="D:\coding\home\sei\front-end\node_modules\typescript\lib" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -686,20 +889,16 @@
       <workItem from="1604998840050" duration="26021000" />
       <workItem from="1605686504119" duration="12543000" />
       <workItem from="1606119442601" duration="4685000" />
-    </task>
-    <task id="LOCAL-00109" summary="左边半框能不随着右边滚动吗">
-      <created>1582233323873</created>
-      <option name="number" value="00109" />
-      <option name="presentableId" value="LOCAL-00109" />
-      <option name="project" value="LOCAL" />
-      <updated>1582233323874</updated>
-    </task>
-    <task id="LOCAL-00110" summary="交互好了很多">
-      <created>1582241663540</created>
-      <option name="number" value="00110" />
-      <option name="presentableId" value="LOCAL-00110" />
-      <option name="project" value="LOCAL" />
-      <updated>1582241663540</updated>
+      <workItem from="1607040353794" duration="3758000" />
+      <workItem from="1607044176570" duration="3956000" />
+      <workItem from="1607048587886" duration="2274000" />
+      <workItem from="1607051108048" duration="1997000" />
+      <workItem from="1607053615244" duration="1840000" />
+      <workItem from="1607209369190" duration="4183000" />
+      <workItem from="1607215660278" duration="4723000" />
+      <workItem from="1607221535441" duration="12067000" />
+      <workItem from="1607238347171" duration="72000" />
+      <workItem from="1607238616264" duration="511000" />
     </task>
     <task id="LOCAL-00111" summary="性能优化">
       <created>1582263614471</created>
@@ -1030,11 +1229,25 @@
       <option name="project" value="LOCAL" />
       <updated>1605859759273</updated>
     </task>
-    <option name="localTasksCounter" value="158" />
+    <task id="LOCAL-00158" summary="旧版本可用，最新版报错">
+      <created>1607223328443</created>
+      <option name="number" value="00158" />
+      <option name="presentableId" value="LOCAL-00158" />
+      <option name="project" value="LOCAL" />
+      <updated>1607223328443</updated>
+    </task>
+    <task id="LOCAL-00159" summary="高版本css=object">
+      <created>1607236336605</created>
+      <option name="number" value="00159" />
+      <option name="presentableId" value="LOCAL-00159" />
+      <option name="project" value="LOCAL" />
+      <updated>1607236336605</updated>
+    </task>
+    <option name="localTasksCounter" value="160" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1356415000" />
+    <option name="totallyTimeSpent" value="1392963000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1046,29 +1259,51 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24032739" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20937912" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.492635" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.36497545" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.8396072" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.713881" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.7393768" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32569557" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" weight="0.3797054" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.7025496" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" weight="0.32733223" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.5433715" />
-      <window_info anchor="bottom" id="TypeScript" order="11" weight="0.32569557" />
-      <window_info anchor="bottom" id="Messages" order="12" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.61331445" />
+      <window_info anchor="bottom" id="TypeScript" order="11" weight="0.3243626" />
+      <window_info anchor="bottom" id="Messages" order="12" weight="0.3286119" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
+    <layout-to-restore>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19286658" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="npm" order="2" side_tool="true" />
+      <window_info id="Favorites" order="3" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.492635" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.713881" />
+      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.5042493" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32569557" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.70679885" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" weight="0.32733223" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.39093485" />
+      <window_info anchor="bottom" id="TypeScript" order="11" weight="0.3243626" />
+      <window_info anchor="bottom" id="Messages" order="12" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -1127,8 +1362,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="１００天没改了" />
-    <MESSAGE value="findAllEQPsFilter2试一下union" />
     <MESSAGE value="准备单位搜索入口" />
     <MESSAGE value="ApolloClient升级3.0，那么原来ApolloClient没有这个包？" />
     <MESSAGE value="&quot;@apollo/client&quot;:&quot;从2.6升级到^3.2.3&quot;" />
@@ -1152,7 +1385,9 @@
     <MESSAGE value="长时间任务连续跑Unit" />
     <MESSAGE value="EQP Unit 第一次同步结束" />
     <MESSAGE value="设备列表准备更换成ES数据源搜索，而不是直接查数据库" />
-    <option name="LAST_COMMIT_MESSAGE" value="设备列表准备更换成ES数据源搜索，而不是直接查数据库" />
+    <MESSAGE value="旧版本可用，最新版报错" />
+    <MESSAGE value="高版本css=object" />
+    <option name="LAST_COMMIT_MESSAGE" value="高版本css=object" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1166,312 +1401,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/report/elevator/Periodical/editor.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="15" column="6" lean-forward="true" selection-start-line="15" selection-start-column="6" selection-end-line="15" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/report/editor/eHelper.ts">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/report/comp/rarelyVary.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="734">
-          <caret line="151" column="10" selection-start-line="151" selection-start-column="10" selection-end-line="151" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/@apollo/client/core/networkStatus.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="20" selection-start-column="20" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/新建文本文档.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="458">
-          <caret line="301" lean-forward="true" selection-start-line="301" selection-end-line="301" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/report/elevator/Periodical/main.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="16" column="7" lean-forward="true" selection-start-line="16" selection-start-column="7" selection-end-line="16" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/report/editor/eRarelyVary.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1804">
-          <caret line="102" column="13" lean-forward="true" selection-start-line="102" selection-start-column="13" selection-end-line="102" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/report/TemplateMain.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="194">
-          <caret line="223" column="35" lean-forward="true" selection-start-line="223" selection-start-column="24" selection-end-line="223" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/unit/DeviceDetail.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="18" column="31" lean-forward="true" selection-start-line="18" selection-start-column="31" selection-end-line="18" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/customize-easy-ui-component/esm/Icons/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="18" column="45" lean-forward="true" selection-start-line="18" selection-start-column="45" selection-end-line="18" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/customize-easy-ui-component/esm/Icons/icons/IconMoreVertical.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44">
-          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/例子测试.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-136">
-          <caret line="349" column="17" selection-start-line="349" selection-start-column="17" selection-end-line="349" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/unit/DetailedGuide.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="307">
-          <caret line="138" column="29" lean-forward="true" selection-start-line="138" selection-start-column="29" selection-end-line="138" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/@apollo/client/react/hooks/useQuery.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="4" column="24" selection-start-line="4" selection-start-column="24" selection-end-line="4" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.env-家里">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/TopRouter.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="283" column="40" lean-forward="true" selection-start-line="283" selection-start-column="40" selection-end-line="283" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/typeAsRoute.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/maintenance/comp/base.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="23" column="19" lean-forward="true" selection-start-line="23" selection-start-column="19" selection-end-line="23" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/maintenance/template.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="15" column="7" lean-forward="true" selection-start-line="15" selection-start-column="7" selection-end-line="15" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/device/DeviceMain.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="52" column="60" lean-forward="true" selection-start-line="52" selection-start-column="2" selection-end-line="52" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/inspect/report/BoundReports.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="584">
-          <caret line="273" column="22" lean-forward="true" selection-start-line="273" selection-start-column="22" selection-end-line="273" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/inspect/IspDetail.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="74">
-          <caret line="308" selection-start-line="308" selection-end-line="315" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/device/task/db.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="194">
-          <caret line="113" column="22" lean-forward="true" selection-start-line="113" selection-start-column="13" selection-end-line="113" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FollowingList.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="77" column="57" selection-start-line="77" selection-start-column="57" selection-end-line="77" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/db.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="130" column="28" lean-forward="true" selection-start-line="130" selection-start-column="28" selection-end-line="130" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/maintenance/elevator/PeriodicalInspection.O-1.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38918">
-          <caret line="1769" column="78" selection-start-line="1769" selection-start-column="54" selection-end-line="1769" selection-end-column="78" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/comp/base.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="22" column="8" selection-start-line="22" selection-start-column="8" selection-end-line="22" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/report/editor/eBase.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="37" column="92" lean-forward="true" selection-start-line="37" selection-start-column="18" selection-end-line="37" selection-end-column="92" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/report/elevator/PeriodicalInspection.O-1.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1276">
-          <caret line="73" column="35" lean-forward="true" selection-start-line="73" selection-start-column="35" selection-end-line="73" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/customize-easy-ui-component/esm/Form.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="902">
-          <caret line="42" column="32" selection-start-line="42" selection-start-column="32" selection-end-line="42" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/customize-easy-ui-component/node_modules/@types/react/index.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="41954">
-          <caret line="1932" column="12" selection-start-line="1932" selection-start-column="8" selection-end-line="1932" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/maintenance/Layout.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="16" column="13" lean-forward="true" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.env-断网用">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.env-公司">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="18" lean-forward="true" selection-end-line="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.env">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/customize-easy-ui-component/esm/Avatar.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="1" column="44" selection-start-line="1" selection-start-column="42" selection-end-line="1" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/inspect/RelationList.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="37">
-          <caret line="107" column="14" lean-forward="true" selection-start-line="107" selection-start-column="14" selection-end-line="107" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/maintenance/RecordView.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="55" column="58" selection-start-line="55" selection-start-column="58" selection-end-line="55" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/maintenance/db.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7419">
-          <caret line="613" column="13" selection-start-line="613" selection-start-column="13" selection-end-line="613" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/maintenance/MaintenanceMain.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="158">
-          <caret line="63" column="25" lean-forward="true" selection-start-line="63" selection-start-column="25" selection-end-line="63" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="FIRST">
-          <first_editor relative-caret-position="433">
-            <caret line="96" lean-forward="true" selection-start-line="96" selection-end-line="96" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="37">
-          <caret line="63" column="39" lean-forward="true" selection-start-line="63" selection-start-column="39" selection-end-line="63" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/graphql/setup.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="362">
-          <caret line="154" column="29" selection-start-line="154" selection-start-column="12" selection-end-line="154" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/device/DeviceDetail.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="30" column="22" selection-start-line="30" selection-start-column="22" selection-end-line="30" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/device/DetailedGuide.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="349">
-          <caret line="149" column="26" lean-forward="true" selection-start-line="149" selection-start-column="26" selection-end-line="149" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/device/DeviceList.tsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="770">
@@ -1507,6 +1436,262 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="168">
           <caret line="281" lean-forward="true" selection-start-line="281" selection-end-line="281" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/customize-easy-ui-component/umd/sancho-ui.production.min.js" />
+    <entry file="file://$PROJECT_DIR$/src/user-context.ts">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/serviceWorker.ts">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/customize-easy-ui-component/esm/Collapse.d.ts" />
+    <entry file="file://$PROJECT_DIR$/node_modules/customize-easy-ui-component/esm/Collapse.js" />
+    <entry file="file://$PROJECT_DIR$/yarn-error.log">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="972" column="37" selection-start-line="972" selection-start-column="3" selection-end-line="972" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/例子测试.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="145">
+          <caret line="111" column="71" selection-start-line="111" selection-start-column="71" selection-end-line="111" selection-end-column="71" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Recipe.tsx">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/cssnano-util-same-parent/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="10" column="10" lean-forward="true" selection-start-line="10" selection-start-column="10" selection-end-line="10" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.env-公司">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="18" lean-forward="true" selection-end-line="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/customize-easy-ui-component/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/customize-easy-ui-component/CHANGELOG.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.env-家里">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="18" lean-forward="true" selection-end-line="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="144">
+            <caret line="80" column="20" selection-start-line="80" selection-start-column="20" selection-end-line="80" selection-end-column="20" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.env">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="18" selection-start-line="18" selection-end-line="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/customize-easy-ui-component/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="303">
+          <caret line="59" selection-start-line="59" selection-end-line="60" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/yarn.lock">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" column="17" lean-forward="true" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/react-scripts/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="20" column="19" lean-forward="true" selection-start-line="20" selection-start-column="19" selection-end-line="20" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/About.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FollowingList.tsx">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/context/GlobalState.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" column="43" lean-forward="true" selection-start-line="5" selection-start-column="43" selection-end-line="5" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/unit/DetailedGuide.tsx">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/LayoutMore.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/SearchBox.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" column="8" lean-forward="true" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FollowersList.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="12" column="11" lean-forward="true" selection-start-line="12" selection-start-column="11" selection-end-line="12" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/typeAsRoute.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/report/comp/helper.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/comp/TableExt.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="29" column="3" selection-start-line="29" selection-start-column="3" selection-end-line="29" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/index.tsx">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Image.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="15" column="16" lean-forward="true" selection-start-line="15" selection-start-column="16" selection-end-line="15" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LICENSE">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.eslintcache">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/App.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="7" column="38" lean-forward="true" selection-start-line="7" selection-start-column="38" selection-end-line="7" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Branding.tsx">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/comp/test01.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="188">
+          <caret line="237" column="14" lean-forward="true" selection-start-line="237" selection-start-column="14" selection-end-line="237" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/LoginPane.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="23" column="22" lean-forward="true" selection-start-line="23" selection-start-column="22" selection-end-line="23" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/RecipeList.tsx">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/inspect/IspDetail.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret lean-forward="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/TopRouter.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="13" column="36" lean-forward="true" selection-start-line="13" selection-start-column="36" selection-end-line="13" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/react-app-env.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tsconfig.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="22" column="14" selection-start-line="22" selection-start-column="14" selection-end-line="22" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/新建文本文档.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5947">
+          <caret line="313" selection-start-line="313" selection-end-line="313" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.babelrc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" column="25" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="710">
+          <caret line="95" column="40" selection-start-line="95" selection-start-column="40" selection-end-line="95" selection-end-column="40" />
         </state>
       </provider>
     </entry>
