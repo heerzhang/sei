@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 
 import { jsx,  Global } from "@emotion/react";
+=======
+/** @jsx jsx */
+import { jsx,  Global } from "@emotion/core";
+>>>>>>> Revert "旧版本可用，最新版报错"
 import { Suspense, lazy,  } from "react";
 import * as React from "react";
 //import * as firebase from "firebase/app";

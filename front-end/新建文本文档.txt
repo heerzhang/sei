@@ -4,7 +4,7 @@ Git用法：先要提交commit然后先fetch ，再merge origin/master，有冲�
 D:\home\sancho>npm whoami
 heerzhang
 Node.js environment服务端的{文件读写功能只能在这环境才能用}，它和客户端/浏览器端的js{无法读写文件}相对立的称呼。
-cssInJs比较：   性能差不多都较慢；　emotion必须文件头/** @jsx  jsx */ 　import { jsx, css } from "@emotion/core";　可以css={}直接用。
+cssInJs比较：   性能差不多都较慢；　emotion必须文件头/** @jsx jsx */ 　import { jsx, css } from "@emotion/core";　可以css={}直接用。
         styled-components只需import styled, { css } from "styled-components"; 但是css``必须套在styled里面用。emotion更加灵活直白。
 有些底层错误告警太难消除，每一步都得注意新出现的警告的性质，提前准备。
 重新合并，背景是\前端\emotion\julienne-master ,hook新技术是\No-next\Example-React-App-master
@@ -302,6 +302,7 @@ Apollo自动优化:InMemoryCache会针对useQuery在路由跳转再次mount的�
 使用react-spring创建逼真的撕纸 动画   https://blog.csdn.net/weixin_26738395/article/details/108494153
 
     "@emotion/css": "^11.0.0", 版本文档；  https://emotion.sh/docs/emotion-11
+<<<<<<< HEAD
 css=[object Object]
 /// <reference types="@emotion/react/types/css-prop" />
 [object Object],You have tried to stringify object returned from `css` function. It isn't supposed to be used directly (e.g. as value of the `className` prop), but rather handed to emotion so it can handle it (e.g. as value of `css` prop).
@@ -312,3 +313,5 @@ Create React App Emotion
 The following changes are being made to your tsconfig.json file:  - compilerOptions.jsx must be react-jsx (to support the new JSX transform in React 17)
    https://github.com/emotion-js/emotion/issues/2041
 
+=======
+>>>>>>> Revert "旧版本可用，最新版报错"
