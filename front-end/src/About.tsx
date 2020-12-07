@@ -1,5 +1,6 @@
-
-import { jsx, Global } from "@emotion/react";
+/** @jsxRuntime classic */
+/** @jsx jsx */
+import { css, Global } from "@emotion/react";
 import * as React from "react";
 //import { Link as RouterLink } from "@reach/router";
 //使用RouterLink不会强制刷新页面的。
@@ -17,6 +18,12 @@ import {
 } from "customize-easy-ui-component";
 import { FadeImage } from "./FadeImage";
 import { 首页末尾链接 } from "./comp/rootRarelyVary";
+
+import cutting_board_knife from './images/cutting-board-knife.jpg';
+//TODO: 图片引入方式改了
+//const png_readme1=require('./images/readme1.png');
+import png_readme1 from './images/readme1.png';
+
 
 
 export const About: React.FunctionComponent<{}> = (props) => {
@@ -92,7 +99,7 @@ export const About: React.FunctionComponent<{}> = (props) => {
             background: "white",
             [theme.mediaQueries.md]: {
               backgroundSize: "cover",
-              backgroundImage: `url(${require("./images/cutting-board-knife.jpg")})`
+              backgroundImage: `url(${cutting_board_knife})`
             }
           },
           responsiveBodyPadding
@@ -266,7 +273,7 @@ export const About: React.FunctionComponent<{}> = (props) => {
               </Text>
               <div>
                 <Embed css={{margin: "auto"}} width={10} height={9}>
-                  <FadeImage src={`${require("./images/readme1.png")}`}/>
+                  <FadeImage  src={png_readme1}/>
                 </Embed>
               </div>
             </div>

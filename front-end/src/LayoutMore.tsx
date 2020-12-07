@@ -1,4 +1,4 @@
-
+/** @jsxImportSource @emotion/react */
 import { jsx, css, Global } from "@emotion/react";
 import * as React from "react";
 import {
@@ -22,7 +22,7 @@ import { useSession, useSignOut } from "./auth";
 import useLocation from "wouter/use-location";
 
 import { useMedia } from "use-media";
-
+import cutting_board_knife from '../images/cutting-board-knife.jpg';
 //骨架-背景
 
 interface LayoutProps {
@@ -60,7 +60,7 @@ export const Layout: React.FunctionComponent<LayoutProps> = ({ children,  }) => 
             [theme.mediaQueries.md]: {
               backgroundAttachment: "fixed",
               backgroundSize: "cover",
-              backgroundImage: `url(${require("./images/cutting-board-knife.jpg")})`
+              backgroundImage: `url(${cutting_board_knife})`
             }
           }
         }}

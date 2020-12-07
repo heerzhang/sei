@@ -17,15 +17,19 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-<<<<<<< HEAD
     "jsx": "react-jsx",
     "noFallthroughCasesInSwitch": true
-=======
-    "jsx": "preserve"
->>>>>>> Revert "旧版本可用，最新版报错"
   },
   "include": [
     "src/**/*"
   ],
-  "exclude": ["node_modules", "dist","build", "stories", "tests","compare", "compiled"]
+  "exclude": [
+    "node_modules",
+    "dist",
+    "build",
+    "stories",
+    "tests",
+    "compare",
+    "compiled"
+  ]
 }

@@ -1,5 +1,5 @@
-
-import { jsx, Global } from "@emotion/react";
+/** @jsxImportSource @emotion/react */
+import {  Global } from "@emotion/react";
 import * as React from "react";
 //import { Link as RouterLink } from "@reach/router";
 //使用RouterLink不会强制刷新页面的。
@@ -17,7 +17,7 @@ import {
 } from "customize-easy-ui-component";
 import { 首页末尾链接 } from "./comp/rootRarelyVary";
 
-
+import cutting_board_knife from './images/cutting-board-knife.jpg';
 //无需登录即可显示的　主页面；
 
 
@@ -94,7 +94,7 @@ export const Branding: React.FunctionComponent<BrandingProps> = (props) => {
             background: "white",
             [theme.mediaQueries.md]: {
               backgroundSize: "cover",
-              backgroundImage: `url(${require("./images/cutting-board-knife.jpg")})`
+              backgroundImage: `url(${cutting_board_knife})`
             }
           },
           responsiveBodyPadding

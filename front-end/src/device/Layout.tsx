@@ -1,8 +1,8 @@
-
+/** @jsxImportSource @emotion/react */
 import { jsx, Global } from "@emotion/react";
 import * as React from "react";
 import { useTheme } from "customize-easy-ui-component";
-
+import cutting_board_knife from '../images/cutting-board-knife.jpg';
 //骨架-背景
 //各个子网站和子路由的Layout可以分开单独；做不一样的。
 
@@ -20,7 +20,7 @@ export const Layout: React.FunctionComponent<LayoutProps> = ({ children }) => {
             [theme.mediaQueries.md]: {
               backgroundAttachment: "fixed",
               backgroundSize: "cover",
-              backgroundImage: `url(${require("../images/cutting-board-knife.jpg")})`
+              backgroundImage: `url(${cutting_board_knife})`
             }
           }
         }}
