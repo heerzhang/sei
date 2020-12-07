@@ -313,5 +313,5 @@ Create React App Emotion
 The following changes are being made to your tsconfig.json file:  - compilerOptions.jsx must be react-jsx (to support the new JSX transform in React 17)
    https://github.com/emotion-js/emotion/issues/2041
 
-=======
+
 >>>>>>> Revert "旧版本可用，最新版报错"
