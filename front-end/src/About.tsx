@@ -1,5 +1,4 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import { css, Global } from "@emotion/react";
 import * as React from "react";
 //import { Link as RouterLink } from "@reach/router";
