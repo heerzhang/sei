@@ -8,7 +8,8 @@ import {
 import { CCell, RCell, Table, TableBody, TableRow } from "../../comp/TableExt";
 import { FadeImage } from "../../FadeImage";
 import { Link as RouterLink } from "wouter";
-
+import Img_Ma  from '../../images/MA.png';
+import Img_ReportNoQR from '../../images/reportNoQR.png';
 //很多内容相对重复，这里是报告较高层范围复用的组件；专门报告类型的可以安排在下一层次分开目录去做。
 
 
@@ -72,14 +73,14 @@ export const reportFirstPageHead= ( {theme, No }
       >
         <div>
           <Embed css={{width: "190px",margin: "auto"}} width={95} height={45}>
-            <FadeImage src={`${require("../../images/MA.png")}`}/>
+            <FadeImage src={Img_Ma}/>
           </Embed>
           <br/>
           <Text variant="h5">181320110160</Text>
         </div>
         <div>
           <Embed css={{width: "140px",margin: "auto"}} width={10} height={10}>
-            <FadeImage src={`${require("../../images/reportNoQR.png")}`}/>
+            <FadeImage src={Img_ReportNoQR}/>
           </Embed>
         </div>
         <div>

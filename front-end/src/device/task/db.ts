@@ -291,8 +291,8 @@ export const deleteEntry = (id: string) => {
 };
 
 const GET_BOUND_DEVICES = gql`
-  query findAllTaskFilter($where: WhereTree,$offset:Int!,$first:Int,$orderBy:String,$asc:Boolean) {
-    list:findAllTaskFilter(where: $where,offset:$offset,first:$first,orderBy:$orderBy,asc:$asc) {
+  query findAllTaskFilter($filter: DeviceCommonInput,$offset:Int!,$limit:Int,$orderBy:String,$asc:Boolean) {
+    list:findAllTaskFilter(filter: $filter,offset:$offset,limit:$limit,orderBy:$orderBy,asc:$asc) {
         id,dep,date,status,devs{
           id,cod,oid}
      }

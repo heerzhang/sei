@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { jsx } from "@emotion/react";
+//import { jsx } from "@emotion/react";
 import * as React from "react";
 import {
   Text,
@@ -28,12 +28,11 @@ export const BoundDevices: React.FunctionComponent<
 > = ({ id }) => {
   const theme = useTheme();
   //console.log("看FollowingRecipes filter =id=", id );
-  let wheres={a: {s:'id',o:'EQ',lv:id } ,
-     };
+  let wheres={　id  };
 
-  const [filter, setFilter] = React.useState({where:wheres,
+  const [filter, setFilter] = React.useState({filter:wheres,
     offset:0,
-    first:5,
+    limit:5,
     orderBy: "date",
     asc: true
   });
@@ -49,11 +48,10 @@ export const BoundDevices: React.FunctionComponent<
   //就算id切换了，本组件的数据还是会被appollo自动缓存的，id变化不会一定导致重新查询后端数据库的，看着像页面显示的缓存。
   //根据id和界面操作后的参数，来要修正graphQL的Query()的参数 = 要做重新查询。
   React.useEffect(() => {
-    let wheres={a: {s:'id',o:'EQ',lv:id } ,
-    };
-    setFilter({where:wheres,
+    let wheres={　id  };
+    setFilter({filter:wheres,
       offset:0,
-      first:5,
+      limit:5,
       orderBy: "date",
       asc: true
     });

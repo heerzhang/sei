@@ -9,6 +9,8 @@ import { CCell, Cell, Table, TableBody, TableRow } from "../../comp/TableExt";
 import { InspectRecordLayout, InternalItemHandResult, InternalItemProps, useItemInputControl } from "../comp/base";
 import { Link as RouterLink } from "wouter";
 import * as queryString from "querystring";
+import Img_Seal from '../../images/seal.png';
+
 
 //不同版本能够直接复用的组件； 内容相对重复；减少代码数量的重复和冗余。
 
@@ -170,7 +172,7 @@ export const 检验编制核准= ( { orc }
       <CCell>日期</CCell>
       <CCell>{orc.编制日期}</CCell>
       <CCell rowSpan={3}>
-        <div css={{backgroundImage:`url(${require("../../images/seal.png")})`,backgroundSize:"cover",backgroundPosition:"center",minHeight:'30vmin'}}>
+        <div css={{backgroundImage:`url(${Img_Seal})`,backgroundSize:"cover",backgroundPosition:"center",minHeight:'30vmin'}}>
           <Table  fixed={ ["40%","%"]  }
                   printColWidth={ ["170","230"] }
                   css={ {borderCollapse: 'collapse',height:'fill-available'} }

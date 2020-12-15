@@ -474,8 +474,8 @@ const GET_TASKS_002 = gql`
 `;
 */
 const GET_TASKS = gql`
-  query findAllUserFilter($where: WhereTree,$offset:Int!,$first:Int=10,$orderBy:String,$asc:Boolean=true) {
-    user:findAllUserFilter(where: $where,offset:$offset,first:$first,orderBy:$orderBy,asc:$asc) {
+  query findAllUserFilter($filter: DeviceCommonInput,$offset:Int!,$limit:Int=10,$orderBy:String,$asc:Boolean=true) {
+    user:findAllUserFilter(filter:$filter,offset:$offset,limit:$limit,orderBy:$orderBy,asc:$asc) {
       id,isp{
           id,conclusion,nextIspDate,checkMen{id},
           dev{id,cod,oid},ispMen{id,username},reps{id,no,path},
@@ -485,8 +485,8 @@ const GET_TASKS = gql`
   }
 `;
 const GET_CHECK_TASKS = gql`
-  query findAllUserFilter($where: WhereTree,$offset:Int!,$first:Int=10,$orderBy:String,$asc:Boolean=true) {
-    user:findAllUserFilter(where: $where,offset:$offset,first:$first,orderBy:$orderBy,asc:$asc) {
+  query findAllUserFilter($filter: DeviceCommonInput,$offset:Int!,$limit:Int=10,$orderBy:String,$asc:Boolean=true) {
+    user:findAllUserFilter(filter:$filter,offset:$offset,limit:$limit,orderBy:$orderBy,asc:$asc) {
       id,checks{
           id,conclusion,nextIspDate,checkMen{id},
           dev{id,cod,oid},ispMen{id,username},reps{id,no,path},
@@ -530,8 +530,8 @@ const GET_REPORT = gql`
     rep:getReport(id: $id) {
        id,type,no,upLoadDate,path,detail,isp{
         id,nextIspDate,conclusion,dev{
-          id,cod,oid,type,factoryNo,pos{id,name,ad{id,prefix}},
-          ownerUnt{id,name,linkMen} 
+          id,cod,oid,type,fNo,pos{id,name,ad{id,prefix}},
+          useU{id,name,linkMen} 
         },task{
           id,date,status
         } 

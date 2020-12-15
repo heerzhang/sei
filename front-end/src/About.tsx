@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { css, Global } from "@emotion/react";
+import {  Global } from "@emotion/react";
 import * as React from "react";
 //import { Link as RouterLink } from "@reach/router";
 //使用RouterLink不会强制刷新页面的。
@@ -12,17 +12,25 @@ import {
   useTheme,
   useResponsiveBodyPadding,
   Container,
-  Link,   　　　//这里sancho的Link等同于基础的<a><a/>，会跳转重新刷新页面；
-  IconArrowRight, IconGift, IconTruck, IconPrinter, IconKey, Embed
+  //Link,这里sancho的Link等同于基础的<a><a/>，会跳转重新刷新页面；
+  IconArrowRight,  IconKey, Embed
 } from "customize-easy-ui-component";
 import { FadeImage } from "./FadeImage";
 import { 首页末尾链接 } from "./comp/rootRarelyVary";
 
 import cutting_board_knife from './images/cutting-board-knife.jpg';
-//TODO: 图片引入方式改了
-//const png_readme1=require('./images/readme1.png');
-import png_readme1 from './images/readme1.png';
-
+import Img_Readme1 from './images/readme1.png';
+import Img_Readme2 from './images/readme2.png';
+import Img_Readme2_1 from './images/readme2-1.png';
+import Img_Readme3 from './images/readme3.png';
+import Img_Readme4 from './images/readme4.png';
+import Img_Readme5 from './images/readme5.png';
+import Img_Readme6 from './images/readme6.png';
+import Img_Readme7 from './images/readme7.png';
+import Img_Readme8 from './images/readme8.png';
+import Img_Readme9 from './images/readme9.png';
+import Img_Readme10 from './images/readme10.png';
+import Img_Readme11 from './images/readme11.png';
 
 
 export const About: React.FunctionComponent<{}> = (props) => {
@@ -272,7 +280,7 @@ export const About: React.FunctionComponent<{}> = (props) => {
               </Text>
               <div>
                 <Embed css={{margin: "auto"}} width={10} height={9}>
-                  <FadeImage  src={png_readme1}/>
+                  <FadeImage  src={Img_Readme1}/>
                 </Embed>
               </div>
             </div>
@@ -293,10 +301,10 @@ export const About: React.FunctionComponent<{}> = (props) => {
               </Text>
               <div>
                 <Embed css={{margin: "auto"}} width={10} height={7}>
-                  <FadeImage src={`${require("./images/readme2.png")}`}/>
+                  <FadeImage src={Img_Readme2}/>
                 </Embed><br/>
                 <Embed css={{margin: "auto"}} width={10} height={4}>
-                  <FadeImage src={`${require("./images/readme2-1.png")}`}/>
+                  <FadeImage src={Img_Readme2_1}/>
                 </Embed>
               </div>
             </div>
@@ -324,10 +332,10 @@ export const About: React.FunctionComponent<{}> = (props) => {
               </Text>
               <div>
                 <Embed css={{margin: "auto"}} width={10} height={7}>
-                  <FadeImage src={`${require("./images/readme3.png")}`}/>
+                  <FadeImage src={Img_Readme3}/>
                 </Embed><br/>
                 <Embed css={{margin: "auto"}} width={10} height={7}>
-                  <FadeImage src={`${require("./images/readme4.png")}`}/>
+                  <FadeImage src={Img_Readme4}/>
                 </Embed>
               </div>
             </div>
@@ -349,10 +357,10 @@ export const About: React.FunctionComponent<{}> = (props) => {
               </Text>
               <div>
                 <Embed css={{margin: "auto"}} width={10} height={7}>
-                  <FadeImage src={`${require("./images/readme5.png")}`}/>
+                  <FadeImage src={Img_Readme5}/>
                 </Embed><br/>
                 <Embed css={{margin: "auto"}} width={10} height={5}>
-                  <FadeImage src={`${require("./images/readme6.png")}`}/>
+                  <FadeImage src={Img_Readme6}/>
                 </Embed>
               </div>
             </div>
@@ -374,13 +382,13 @@ export const About: React.FunctionComponent<{}> = (props) => {
               </Text>
               <div>
                 <Embed css={{margin: "auto"}} width={10} height={6}>
-                  <FadeImage src={`${require("./images/readme7.png")}`}/>
+                  <FadeImage src={Img_Readme7}/>
                 </Embed><br/>
                 <Embed css={{margin: "auto"}} width={10} height={7}>
-                  <FadeImage src={`${require("./images/readme8.png")}`}/>
+                  <FadeImage src={Img_Readme8}/>
                 </Embed><br/>
                 <Embed css={{margin: "auto"}} width={10} height={9}>
-                  <FadeImage src={`${require("./images/readme9.png")}`}/>
+                  <FadeImage src={Img_Readme9}/>
                 </Embed>
               </div>
             </div>
@@ -409,10 +417,10 @@ export const About: React.FunctionComponent<{}> = (props) => {
               </Text>
               <div>
                 <Embed css={{margin: "auto"}} width={10} height={7}>
-                  <FadeImage src={`${require("./images/readme10.png")}`}/>
+                  <FadeImage src={Img_Readme10}/>
                 </Embed><br/>
                 <Embed css={{margin: "auto"}} width={10} height={6}>
-                  <FadeImage src={`${require("./images/readme11.png")}`}/>
+                  <FadeImage src={Img_Readme11}/>
                 </Embed>
               </div>
             </div>

@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { jsx } from "@emotion/react";
+//import { jsx } from "@emotion/react";
 import * as React from "react";
 import { usePaginateQueryTask } from "./db";
 import {
@@ -66,10 +66,9 @@ export const RelationList: React.FunctionComponent<RelationListProps> = ({
   const [, setLocation] = useLocation();
   //graphQl的查询usexxx钩子函数，无法主动从后端读取最新数据。
   //const { loading, userList:followings } = useFollowerIngs(false);
-  let filtercomp={where:
-      {a: {s:'id',o:'EQ',lv:user.id }},
+  let filtercomp={filter: { id:user.id },
     offset:0,
-    first:5,
+    limit:5,
     orderBy: "id",
     asc: false
   };
