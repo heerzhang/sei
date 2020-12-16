@@ -17,7 +17,7 @@ import {
   ResponsivePopover,
   IconMoreVertical,
   IconArrowLeft,
-  IconArrowRight, IconPackage, IconTruck
+  IconArrowRight, IconPackage, IconTruck, Touchable
 } from "customize-easy-ui-component";
 import { useAbandonISP, useDispatchIspMen, useIspDetail } from "./db";
 //import { useSession } from "../auth";
@@ -159,7 +159,9 @@ export const IspDetail: React.FunctionComponent<IspDetailProps> = ({
                 <MenuList>
                   <MenuItem contentBefore={<IconPackage />} >
                     <RouterLink to={`/inspect/${id}/addReport/choose`}>
-                      <Text css={{paddingLeft: theme.spaces.md}}>增加个检验报告</Text>
+                      <Touchable component={'div'} css={{paddingLeft: theme.spaces.md}}>
+                        增加个检验报告
+                      </Touchable>
                     </RouterLink>
                   </MenuItem>
                   <MenuItem onPress={() => {
