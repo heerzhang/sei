@@ -15,11 +15,11 @@ import {
   Container,
   ResponsivePopover,
   IconMoreVertical,
-  IconArrowLeft, IconArrowRight, Select, IconPackage
+  IconArrowLeft, IconArrowRight, Select, IconPackage, IconPlus, DarkMode
 } from "customize-easy-ui-component";
 
 import {Helmet} from "react-helmet";
-import { Link as RouterLink, Link, Route, Switch, useLocation, useRoute } from "wouter";
+import { Link as RouterLink, Route, Switch, useLocation, useRoute } from "wouter";
 import { ContainLine, TransparentInput } from "../comp/base";
 import { useDeviceDetail } from "./db";
 import { AddToTask } from "./task/AddToTask";
@@ -92,20 +92,20 @@ export const DetailedGuide: React.FunctionComponent<DetailedGuideProps> = ({
             display: "flex"
           }}
         >
-          <IconButton
-            icon={<IconArrowLeft />}
-            component={Link}
-            to="/device"
-            label="后退"
-            replace
-            variant="ghost"
-            css={{
-              marginRight: theme.spaces.sm,
-              [theme.mediaQueries.md]: {
-                display: "none"
-              }
-            }}
-          />
+          <RouterLink to="/device">
+            <IconButton  icon={<IconArrowLeft />}
+              noBind
+              variant="ghost"
+              label="后退"
+              size="md"
+              css={{
+                marginRight: theme.spaces.sm,
+                [theme.mediaQueries.md]: {
+                  display: "none"
+                }
+              }}
+            />
+          </RouterLink>
            <Text
               css={{
                 flex: 1,
