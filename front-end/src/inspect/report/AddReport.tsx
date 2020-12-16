@@ -19,7 +19,7 @@ import {
 } from "customize-easy-ui-component";
 import {  useDispatchIspMen,  useReport } from "../db";
 import {Helmet} from "react-helmet";
-import { Link as RouterLink, Link, Route, Switch } from "wouter";
+import { Link as RouterLink,  Route, Switch } from "wouter";
 import { ContainLine, TransparentInput } from "../../comp/base";
 import { useCommitOriginalData, useQueryOriginalRecord } from "../../report/db";
 import { useNewReport } from "./db";
@@ -126,20 +126,20 @@ export const AddReport: React.FunctionComponent<AddReportProps> = ({
             display: "flex"
           }}
         >
-          <IconButton
-            icon={<IconArrowLeft />}
-            component={Link}
-            to="/inspect"
-            label="后退"
-            replace
-            variant="ghost"
-            css={{
-              marginRight: theme.spaces.sm,
-              [theme.mediaQueries.md]: {
-                display: "none"     //大屏不需要
-              }
-            }}
-          />
+          <RouterLink to="/inspect">
+            <IconButton  icon={<IconArrowLeft />}
+                         noBind
+                         variant="ghost"
+                         label="后退"
+                         size="md"
+                         css={{
+                           marginRight: theme.spaces.sm,
+                           [theme.mediaQueries.md]: {
+                             display: "none"
+                           }
+                         }}
+            />
+          </RouterLink>
           {!editing ? (
             <div css={{ marginLeft: "-0.75rem", flex: 1 }}>
               <TransparentInput
