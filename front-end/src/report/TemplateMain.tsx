@@ -19,7 +19,7 @@ import {
   IconPlus,
   DarkMode,
   LightMode,
-  Pager, IconArchive, IconArrowRight
+  Pager, IconArchive, IconArrowRight, Touchable
 } from "customize-easy-ui-component";
 
 import { useSession,  useSignOut } from "../auth";
@@ -261,9 +261,9 @@ export const RecordEditorOrPrint: React.FunctionComponent<RecordEditorOrPrintPro
                 >
                   <Tab id="original">原始记录录入</Tab>
                   <Tab id="ISPlist">检验溯源</Tab>
-                  <Tab id="report" onPress={()=>setLocation(`/report/${templateID}/ver/${verId}/preview/${id}?&print=1`, { replace: true })}>
-                    检验报告
-                  </Tab>
+                  <RouterLink to={`/report/${templateID}/ver/${verId}/preview/${id}?&print=1`}>
+                    <Tab id="report">检验报告</Tab>
+                  </RouterLink>
                 </Tabs>
               </DarkMode>
             </div>

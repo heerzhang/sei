@@ -105,20 +105,20 @@ export const ReportSample: React.FunctionComponent<ComposeProps> = ({
             display: "flex"
           }}
         >
-          <IconButton
-            icon={<IconArrowLeft />}
-            component={Link}
-            to="/inspect"
-            label="后退"
-            replace
-            variant="ghost"
-            css={{
-              marginRight: theme.spaces.sm,
-              [theme.mediaQueries.md]: {
-                display: "none"     //大屏不需要
-              }
-            }}
-          />
+          <RouterLink to="/inspect">
+            <IconButton  icon={<IconArrowLeft />}
+                         noBind
+                         variant="ghost"
+                         label="后退"
+                         size="md"
+                         css={{
+                           marginRight: theme.spaces.sm,
+                           [theme.mediaQueries.md]: {
+                             display: "none"
+                           }
+                         }}
+            />
+          </RouterLink>
           {!editing ? (
             <div css={{ marginLeft: "-0.75rem", flex: 1 }}>
               <TransparentInput
@@ -276,21 +276,21 @@ const FirstPage= ( {theme=null, id ,rep}
     <div>
       <Text variant="h5">该份报告的概要信息</Text>
       <ContainLine display={'报告号{对外的}'}>
-        <TransparentInput  readOnly value={rep?.no}/>
+        <TransparentInput  readOnly value={rep?.no||''}/>
       </ContainLine>
       <ContainLine display={'设备号'}>
-        <TransparentInput readOnly value={rep?.isp.dev.cod}/>
+        <TransparentInput readOnly value={rep?.isp.dev.cod||''}/>
       </ContainLine>
       <ContainLine display={'检验号'}>
         <TransparentInput
           readOnly
-          value={rep?.isp?.id}
+          value={rep?.isp?.id||''}
         />
       </ContainLine>
       <ContainLine display={'任务号'}>
         <TransparentInput
           readOnly
-          value={rep?.isp?.task?.id}
+          value={rep?.isp?.task?.id||''}
         />
       </ContainLine>
       <ContainLine display={'报告类型'}>
@@ -298,7 +298,7 @@ const FirstPage= ( {theme=null, id ,rep}
           autoFocus={true}
           readOnly
           placeholder="报告类型"
-          value={ rep && rep.type }
+          value={ rep && rep.type || ''}
           onChange={e => {
             setIngredients( {
               ...ingredients,
@@ -310,7 +310,7 @@ const FirstPage= ( {theme=null, id ,rep}
         <TransparentInput
           autoFocus={true}
           readOnly
-          value={rep && rep.isp.conclusion}
+          value={rep && rep.isp.conclusion ||''}
           onChange={e => {
             setIngredients( {
               ...ingredients,
@@ -339,7 +339,7 @@ const FirstPage= ( {theme=null, id ,rep}
       <ContainLine display={'设备安装地址'}>
         <TransparentInput
           readOnly
-          value={rep && rep.isp.dev.pos && rep.isp.dev.pos.address}
+          value={rep && rep.isp.dev.pos && rep.isp.dev.pos.address ||''}
         />
       </ContainLine>
     </div>
