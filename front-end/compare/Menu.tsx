@@ -1,21 +1,17 @@
-/** @jsx jsx */
-import { jsx } from "@emotion/core";
+/** @jsxImportSource @emotion/react */
+import { jsx } from "@emotion/react";
 import * as React from "react";
-
+//import { Text } from "./Text";
 import PropTypes from "prop-types";
-import {
-  Input,
-  Text,
-  useTheme,
-  InputBaseProps, RequestCloseContext
-} from "customize-easy-ui-component";
-
+//import { RequestCloseContext } from "./Sheet";
+//import { useTheme } from "./Theme/Providers";
 //import { noOp } from "./misc/noop";
 import { useTouchable, OnPressFunction } from "touchable-hook";
 import cx from "classnames";
 //import { safeBind } from "./Hooks/compose-bind";
-import { safeBind } from "customize-easy-ui-component/esm/Hooks/compose-bind";
+import {Text, useTheme, RequestCloseContext} from "customize-easy-ui-component";
 import { noOp } from "customize-easy-ui-component/esm/misc/noop";
+import { safeBind } from "customize-easy-ui-component/esm/Hooks/compose-bind";
 
 
 const KeyCodes = {
@@ -146,10 +142,9 @@ export const MenuList: React.FunctionComponent<MenuListProps> = ({
   );
 };
 
-/*MenuList.propTypes = {
-  children: PropTypes.node,
-  focusableChildren: PropTypes.arrayOf(PropTypes.elementType)
-};*/
+MenuList.propTypes = {
+  //focusableChildren: PropTypes.arrayOf(PropTypes.element)
+};
 
 
 interface MenuItemProps extends React.HTMLAttributes<Element> {
@@ -162,7 +157,7 @@ interface MenuItemProps extends React.HTMLAttributes<Element> {
   /** Pass in a string to use standard text styles. Otherwise, pass in any other node. */
   children: React.ReactNode;
   /** Provide a custom component. Eg., ReactRouter Link */
-  component?: React.ReactType<any>;
+  component?: React.ElementType<any>;
   /** optional content to appear to the right of the menu text */
   contentAfter?: React.ReactNode;
   /** optional content to appear to the left of the menu text */
@@ -300,12 +295,9 @@ export const MenuItem: React.FunctionComponent<MenuItemProps> = ({
 };
 
 
-
-
-/*
 MenuItem.propTypes = {
-  onSelect: PropTypes.func,
-  component: PropTypes.string,
+  onClick: PropTypes.func,
+ // component: PropTypes.element,
   disabled: PropTypes.bool,
   children: PropTypes.node,
   contentBefore: PropTypes.node,
@@ -313,7 +305,7 @@ MenuItem.propTypes = {
   onPress: PropTypes.func,
   className: PropTypes.string,
   role: PropTypes.string
-};*/
+};
 
 type MenuDividerProps = React.HTMLAttributes<HTMLDivElement>;
 
@@ -338,17 +330,19 @@ interface MenuLabelProps extends React.HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
 }
 
-/*
 export const MenuLabel: React.FunctionComponent<MenuLabelProps> = props => {
   const theme = useTheme();
   return (
-    <Text  {...props}/>
+    <Text
+      variant="uppercase"
+      css={{
+        padding: `${theme.spaces.xs} ${theme.spaces.md}`
+      }}
+      {...props}
+    />
   );
 };
-*/
 
-/*
 MenuLabel.propTypes = {
   children: PropTypes.node
 };
-*/

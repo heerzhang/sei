@@ -157,10 +157,10 @@ export const IspDetail: React.FunctionComponent<IspDetailProps> = ({
             <ResponsivePopover
               content={
                 <MenuList>
-                  <MenuItem contentBefore={<IconPackage />}  onPress={() => {
-                      setLocation(`/inspect/${id}/addReport/choose`,  { replace: true } );
-                      } }>
-                    增加个检验报告
+                  <MenuItem contentBefore={<IconPackage />} >
+                    <RouterLink to={`/inspect/${id}/addReport/choose`}>
+                      <Text css={{paddingLeft: theme.spaces.md}}>增加个检验报告</Text>
+                    </RouterLink>
                   </MenuItem>
                   <MenuItem onPress={() => {
                      handleDelete(id)
