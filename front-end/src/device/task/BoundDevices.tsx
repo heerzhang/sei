@@ -13,7 +13,7 @@ import {
 
 import {  useQueryBoundDevices } from "./db";
 import { useFirebaseImage } from "../../Image";
-import { useLocation, useRoute } from "wouter";
+import { Link as RouterLink, useLocation, useRoute } from "wouter";
 import { FadeImage } from "../../FadeImage";
 
 
@@ -203,53 +203,56 @@ function DeviceListItem({ recipe, id, highlight ,task }: any) {
   //        //navigate(href , { replace: true });
 
   return (
-    <ListItem
-      wrap={false}
-      onPress={e => {
-        //e.preventDefault();
-        setLocation(href, { replace: false });
-      }}
-      aria-current={isActive}
-      css={{
-        paddingTop: 0,
-        paddingBottom: 0,
-        height: "56px",
-        alignItems: "center",
-        display: "flex",
-        justifyContent: "space-between",
-        "& em": {
-          fontStyle: "normal",
-          color: theme.colors.text.selected
-        },
-        backgroundColor: isActive ? theme.colors.background.tint1 : null,
-        "& > *": {
-          flex: 1,
-          overflow: "hidden"
+    <RouterLink to={href}>
+      <ListItem  interactive={false}
+        wrap={false}
+        /*onPress={e => {
+          // 有问题？　e.preventDefault();
+          setLocation(href, { replace: false });
+        }}
+        */
+        aria-current={isActive}
+        css={{
+          paddingTop: 0,
+          paddingBottom: 0,
+          height: "56px",
+          alignItems: "center",
+          display: "flex",
+          justifyContent: "space-between",
+          "& em": {
+            fontStyle: "normal",
+            color: theme.colors.text.selected
+          },
+          backgroundColor: isActive ? theme.colors.background.tint1 : null,
+          "& > *": {
+            flex: 1,
+            overflow: "hidden"
+          }
+        }}
+        contentBefore={
+          <React.Fragment>
+            <Avatar size="xs" name={'曳'}/>
+            <Avatar size="xs" name={'有'}/>
+          </React.Fragment>
         }
-      }}
-      contentBefore={
-        <React.Fragment>
-          <Avatar size="xs" name={'曳'}/>
-          <Avatar size="xs" name={'有'}/>
-        </React.Fragment>
-      }
-      contentAfter={
-        recipe.image && !error ? (
-          <Embed css={{ width: "60px" }} width={75} height={50}>
-            <FadeImage src={src} hidden />
-          </Embed>
-        ) : (
-          recipe.oid
-        )
-      }
-      primary={
-        highlight ? (
-          <span dangerouslySetInnerHTML={{ __html: highlight.title.value }} />
-        ) : (
-          recipe.cod
-        )
-      }
-    />
+        contentAfter={
+          recipe.image && !error ? (
+            <Embed css={{ width: "60px" }} width={75} height={50}>
+              <FadeImage src={src} hidden />
+            </Embed>
+          ) : (
+            recipe.oid
+          )
+        }
+        primary={
+          highlight ? (
+            <span dangerouslySetInnerHTML={{ __html: highlight.title.value }} />
+          ) : (
+            recipe.cod
+          )
+        }
+      />
+    </RouterLink>
   );
 }
 
