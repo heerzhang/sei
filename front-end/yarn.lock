@@ -2013,19 +2013,6 @@
     prop-types "^15.7.2"
     tslib "^2.0.0"
 
-"@reach/alert@^0.1.2":
-  version "0.1.5"
-  resolved "https://registry.yarnpkg.com/@reach/alert/-/alert-0.1.5.tgz#4da79add0055fa4295f51e5295ed3b80257e9153"
-  integrity sha512-Ow+SB7rokGWxmm+AdOpf4eo29OaEYDqlJ1Kc9qulVX2cKjYiHQqAvkiCkSaIPkQbbyNmEXJ0c/rVpzPVvCVIAw==
-  dependencies:
-    "@reach/component-component" "^0.1.3"
-    "@reach/visually-hidden" "^0.1.4"
-
-"@reach/component-component@^0.1.3":
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/@reach/component-component/-/component-component-0.1.3.tgz#5d156319572dc38995b246f81878bc2577c517e5"
-  integrity sha512-a1USH7L3bEfDdPN4iNZGvMEFuBfkdG+QNybeyDv8RloVFgZYRoM+KGXyy2KOfEnTUM8QWDRSROwaL3+ts5Angg==
-
 "@reach/skip-nav@^0.12.1":
   version "0.12.1"
   resolved "https://registry.yarnpkg.com/@reach/skip-nav/-/skip-nav-0.12.1.tgz#082b7f22b8ab50e6bff6297137c13d0ad5a4bb64"
@@ -2049,11 +2036,6 @@
   integrity sha512-VXtyR36WOS0FHmFQ/BzfswwPyBXICl/YjmTPtx/I0Vy5C6djjhD9kDsE+h/FpHzP3ugTdqdqiPBVElIZTSwOSA==
   dependencies:
     tslib "^2.0.0"
-
-"@reach/visually-hidden@^0.1.4":
-  version "0.1.4"
-  resolved "https://registry.yarnpkg.com/@reach/visually-hidden/-/visually-hidden-0.1.4.tgz#0dc4ecedf523004337214187db70a46183bd945b"
-  integrity sha512-QHbzXjflSlCvDd6vJwdwx16mSB+vUCCQMiU/wK/CgVNPibtpEiIbisyxkpZc55DyDFNUIqP91rSUsNae+ogGDQ==
 
 "@react-spring/addons@9.0.0-canary.809.5.f01ecc2":
   version "9.0.0-canary.809.5.f01ecc2"
@@ -5169,10 +5151,10 @@ csstype@^3.0.2:
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.0.3.tgz#2b410bbeba38ba9633353aff34b05d9755d065f8"
   integrity sha512-jPl+wbWPOWJ7SXsWyqGRk3lGecbar0Cb0OvZF/r/ZU011R4YqiRehgkQ9p4eQfo9DSDLqLL3wHwfxeJiuIsNag==
 
-customize-easy-ui-component@~4.3.1-apha:
-  version "4.3.1-apha"
-  resolved "https://registry.yarnpkg.com/customize-easy-ui-component/-/customize-easy-ui-component-4.3.1-apha.tgz#619d13b65923c254a41ba6e44de9e511e5de30fd"
-  integrity sha512-7I+Eykvjlm40DWlbQ1tyI6X+eYUrwo/AJ95vWBMC9fbtR1+7VYnL5zRZkOD23tWr6IPtzr6QiC/PGPTUlxhb7A==
+customize-easy-ui-component@~4.3.1:
+  version "4.3.1"
+  resolved "https://registry.yarnpkg.com/customize-easy-ui-component/-/customize-easy-ui-component-4.3.1.tgz#29a040dba08626815edaf9e03ed370ed03b63d1f"
+  integrity sha512-giI9P0jk4RStEwNOyCqrIGh11u5wVyppt+mbsskzAFMXA531WA6hBCV7kFONS4MghjnqP3LA3bvn98W050OjNA==
   dependencies:
     "@popperjs/core" "^2.6.0"
     "@reach/alert" "^0.12.1"
@@ -5192,8 +5174,8 @@ customize-easy-ui-component@~4.3.1-apha:
     react-popper "^2.2.4"
     react-remove-scroll "^2.4.1"
     react-spring "~9.0.0-rc.3"
+    react-toastnotes "^3.3.1"
     resize-observer-polyfill "^1.5.1"
-    toasted-notes "^3.2.0"
     touchable-hook "^1.3.0"
     use-media "^1.4.0"
     use-scroll-lock "^1.0.0"
@@ -12575,6 +12557,16 @@ react-to-print@^2.6.3:
   dependencies:
     prop-types "^15.7.2"
 
+react-toastnotes@^3.3.1:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/react-toastnotes/-/react-toastnotes-3.3.1.tgz#478cf4ca04093b47fa12b88ef72266ec5cb52bd4"
+  integrity sha512-iaRcJylSswVs4340jEi6Y9OwrMWp+Ijv/g7/1G9t1tjDpYXZM9pvDZEodiPJvBG6/cu3c8pmGX9fscjb8BabRg==
+  dependencies:
+    "@reach/alert" "0.12.1"
+    "@types/react" "^17.0.0"
+    "@types/react-dom" "^17.0.0"
+    react-spring "^9.0.0-rc.3"
+
 react-transition-group@^4.3.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-4.3.0.tgz#fea832e386cf8796c58b61874a3319704f5ce683"
@@ -14604,15 +14596,6 @@ to-regex@^3.0.1, to-regex@^3.0.2:
     extend-shallow "^3.0.2"
     regex-not "^1.0.2"
     safe-regex "^1.1.0"
-
-toasted-notes@^3.2.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/toasted-notes/-/toasted-notes-3.2.0.tgz#dc9bdc9d0083ba2af8bf26b2f71619d014acc089"
-  integrity sha512-PucSn+SUdFSYNaaL1eNw7wYkEMJ7LULCR6j1YXPlRySHgWVgf+bXjq4dYd3hdA4mvmGz9HANmI1RnzhZ8av52Q==
-  dependencies:
-    "@reach/alert" "^0.1.2"
-    "@types/react" "^16.8.10"
-    "@types/react-dom" "^16.8.3"
 
 toidentifier@1.0.0:
   version "1.0.0"
