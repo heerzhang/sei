@@ -263,9 +263,9 @@ export const RecordEditorOrPrint: React.FunctionComponent<RecordEditorOrPrintPro
                   <Tab id="ISPlist">检验溯源</Tab>
                   <Tab id="report">
                     <RouterLink to={`/report/${templateID}/ver/${verId}/preview/${id}?&print=1`}>
-                      <Touchable component={'div'}>
-                        <span>检验报告</span>
-                      </Touchable>
+                      <Tab id="report" component={"div"}>
+                        检验报告
+                      </Tab>
                   </RouterLink>
                   </Tab>
                 </Tabs>
