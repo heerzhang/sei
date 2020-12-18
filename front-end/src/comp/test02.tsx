@@ -6,7 +6,18 @@ import {
   Button,
   Sheet,
   InputGroup,
-  Input, ScrollView, ScrollViewHandles, Layer, Table, TableHead, TableRow, TableCell, ExpandingRow, useTheme, Toolbar
+  Input,
+  ScrollView,
+  ScrollViewHandles,
+  Layer,
+  Table,
+  TableHead,
+  TableRow,
+  TableCell,
+  ExpandingRow,
+  useTheme,
+  Toolbar,
+  useToast
 } from "customize-easy-ui-component";
 import useScrollLock from "use-scroll-lock";
 
@@ -238,112 +249,21 @@ const rows = [
 
 export  function Example() {
   const theme = useTheme();
-  const [enabled, setEnabled] = React.useState(true);
-  const ref = React.useRef(null);
-  useScrollLock(!enabled  );
+  const toast = useToast();
 
   return (
-    <React.Fragment >
-  <div
-    css={{
-      minHeight: "100vh",
-      background: theme.colors.background.tint2,
-      padding: "48px"
-    }}
-  >
-    <button onClick={() => setEnabled(!enabled)}>
-      {enabled ? "可以滚动 turn off" : "不行滚动，turn on"}
-    </button>
-    <Layer elevation="sm">
-      <Toolbar
-        css={{
-          borderTopRightRadius: theme.radii.lg,
-          borderTopLeftRadius: theme.radii.lg,
-          borderBottom: `1px solid ${theme.colors.border.default}`,
-          background: theme.colors.background.tint1,
-          justifyContent: "space-between"
+    <div css={{ PADDING: "3REM" }}>
+      <Button
+        onClick={() => {
+          toast({
+            duration: 2500,
+            title: "Hello world",
+            subtitle: "Excepteur exercitation 停留 2500 ms."
+          });
         }}
       >
-        <Text css={{ margin: 0 }} variant="h4">
-          Ingredients
-        </Text>
-
-        <div>
-          <Button intent="primary">Add ingredient</Button>
-        </div>
-      </Toolbar>
-      <div style={{ overflow: "auto" }} ref={ref}>
-
-      <Table fixed={["200", "15%", "15%", "15%", "15%"]}>
-        <TableHead>
-          <TableRow>
-            <TableCell>Dessert (100g serving)</TableCell>
-            <TableCell align="right">Calories</TableCell>
-            <TableCell align="right">Fat (g)</TableCell>
-            <TableCell align="right">Carbs (g)</TableCell>
-            <TableCell align="right">Protein (g)</TableCell>
-          </TableRow>
-        </TableHead>
-
-        {rows.map(row => (
-          <ExpandingRow
-            content={close => {
-              return (
-                <div
-                  css={{
-                    padding: theme.spaces.lg,
-                    paddingTop: 0,
-                    paddingBottom: 0
-                  }}
-                >
-                  <Text variant="body" css={{ fontSize: theme.fontSizes[0] }}>
-shun 公董 寫
-                    了，這多方
-                  </Text>
-                  <div
-                    css={{
-                      display: "flex",
-                      marginTop: "1rem",
-                      justifyContent: "flex-end"
-                    }}
-                  >
-                    <Button
-                      variant="ghost"
-                      css={{ marginRight: theme.spaces.sm }}
-                      onClick={close}
-                    >
-                      Cancel
-                    </Button>
-                    <Button intent="primary">Save</Button>
-                  </div>
-                </div>
-              );
-            }}
-            key={row.id}
-          >
-            <TableCell   scope="row">
-              {row.name}
-            </TableCell>
-            <TableCell align="right">{row.calories}</TableCell>
-            <TableCell align="right">{row.fat}</TableCell>
-            <TableCell align="right">{row.carbs}</TableCell>
-            <TableCell align="right">{row.protein}</TableCell>
-          </ExpandingRow>
-        ))}
-      </Table>
-        Scrollable content
-      </div>
-      <Toolbar
-        compressed
-        css={{
-          borderBottomRightRadius: theme.radii.lg,
-          borderBottomLeftRadius: theme.radii.lg,
-
-          background: theme.colors.background.tint1
-        }}
-      />
-    </Layer>
-  </div>
-    </React.Fragment>
+        Show toast
+      </Button>
+    </div>
   );
 }

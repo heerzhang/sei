@@ -16,7 +16,7 @@ import {
 } from "customize-easy-ui-component";
 
 import {  usePaginateQueryDevice,  } from "./db";
-import {  useLocation } from "wouter";
+import { Link as RouterLink, useLocation } from "wouter";
 import { useEffect } from "react";
 import { useInView } from 'react-intersection-observer'
 //import { PullToRefresh,PullDownContent,RefreshContent,ReleaseContent } from "react-js-pull-to-refresh";
@@ -106,38 +106,37 @@ export const DeviceListInner: React.FunctionComponent<
 
               {
                 devicesFind?.map((hit,i) => (
-                  <ListItem key={hit.id}
-                      onPress={e => {
-                        setLocation(`/device/${hit.id}`);
-                      }}
-                    contentBefore={
-                      <React.Fragment>
-                        <Avatar size="xs" name={'曳'}/>
-                        <Avatar size="xs" name={'有'}/>
-                      </React.Fragment>
-                    }
-                    primary={`${hit.cod}`}
-                    contentAfter={
-                      <ResponsivePopover
-                        content={
-                          <MenuList>
-                            <MenuItem onPress={ async () => {
-                              //await setRepId(recipe.id);    handleDelete(recipe.id)
-                            }
-                            }>功能待续
-                            </MenuItem>
-                            <MenuItem contentBefore={<IconPackage />}  onPress={() => {
-                              setLocation("/device/new", { replace: false })
-                            } }>
-                             加个设备
-                            </MenuItem>
-                          </MenuList>
-                        }
-                      >
-                        <IconButton variant="ghost" icon={<IconMoreVertical/>} label="菜单"/>
-                      </ResponsivePopover>
-                    }
-                  />
+                  <RouterLink to={`/device/${hit.id}`}>
+                    <ListItem noBind  key={hit.id}
+                              contentBefore={
+                                <React.Fragment>
+                                  <Avatar size="xs" name={'曳'}/>
+                                  <Avatar size="xs" name={'有'}/>
+                                </React.Fragment>
+                              }
+                              primary={`${hit.cod}`}
+                              contentAfter={
+                                <ResponsivePopover
+                                  content={
+                                    <MenuList>
+                                      <MenuItem onPress={ async () => {
+                                        //await setRepId(recipe.id);    handleDelete(recipe.id)
+                                      }
+                                      }>功能待续
+                                      </MenuItem>
+                                      <MenuItem contentBefore={<IconPackage />}  onPress={() => {
+                                        setLocation("/device/new", { replace: false })
+                                      } }>
+                                        加个设备
+                                      </MenuItem>
+                                    </MenuList>
+                                  }
+                                >
+                                  <IconButton variant="ghost" icon={<IconMoreVertical/>} label="菜单"/>
+                                </ResponsivePopover>
+                              }
+                    />
+                  </RouterLink>
               ))}
 
             </List>
