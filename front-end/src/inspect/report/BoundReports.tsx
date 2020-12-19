@@ -20,12 +20,14 @@ import {
   IconPackage,
   MenuDivider,
   IconButton, IconMoreVertical, useToast
+  //, Touchable
 } from "customize-easy-ui-component";
 
 import { useDeleteReport, useLookReports } from "./db";
 import { useFirebaseImage } from "../../Image";
 import { Link as RouterLink,useLocation, useRoute } from "wouter";
 import { FadeImage } from "../../FadeImage";
+import { Touchable } from "../../comp/Touchable";
 
 
 
@@ -218,77 +220,79 @@ function ReportListItem({ recipe, id, highlight ,task }: any) {
   return (
     <RouterLink to={href}>
       <ListItem  interactive={false}
-        wrap={false}
+                                  wrap={false}
 
-        aria-current={isActive}
-        // href={`/device/${id}`}
-        css={{
-          alignItems: "center",
-          display: "flex",
-          justifyContent: "space-between",
-          "& em": {
-            fontStyle: "normal",
-            color: theme.colors.text.selected
-          },
-          backgroundColor: isActive ? theme.colors.background.tint1 : null,
-          "& > *": {
-            flex: 1,
-            overflow: "hidden"
-          }
-        }}
-        contentBefore={
-          recipe.sssdf && !error ? (
-            <Embed css={{ width: "60px" }} width={75} height={50}>
-              <FadeImage src={recipe.path} hidden />
-            </Embed>
-          ) : (
-            recipe.id
-          )
-        }
-        primary={
-          highlight ? (
-            <span dangerouslySetInnerHTML={{ __html: highlight.title.value }} />
-          ) : (
-            `报告号 ${recipe.no||''}`
-          )
-        }
-        secondary={recipe.type ||''}
-        contentAfter={
-          <ResponsivePopover
-            content={
-              <MenuList>
-                <MenuItem onPress={ async () => {
-                  await setRepId(recipe.id);
-                  handleDelete(recipe.id)
-                }
-                }>删除该报告
-                </MenuItem>
-                <MenuDivider />
-                <MenuItem contentBefore={<IconPackage />}  onPress={() => {
-                  toast({
-                    title: "该功能还未做呢，只能提交审核员一个网页链接看看"
-                  });
-                  setLocation("/", { replace: true } );
-                } }>
-                  签名并提交审核
-                </MenuItem>
-              </MenuList>
-            }
-          >
-            <IconButton
-              css={{
-                //display: !editing && editable ? undefined : "none",
-                //marginLeft: theme.spaces.sm
-              }}
-              variant="ghost" size={'md'}
-              icon={<IconMoreVertical />}
-              label="菜单"
-            />
-          </ResponsivePopover>
-        }
-      >
-        { `日期 ${recipe.upLoadDate||''}` }
-      </ListItem>
+                                  aria-current={isActive}
+      // href={`/device/${id}`}
+                                  css={{
+                                    alignItems: "center",
+                                    display: "flex",
+                                    justifyContent: "space-between",
+                                    "& em": {
+                                      fontStyle: "normal",
+                                      color: theme.colors.text.selected
+                                    },
+                                    backgroundColor: isActive ? theme.colors.background.tint1 : null,
+                                    "& > *": {
+                                      flex: 1,
+                                      overflow: "hidden"
+                                    }
+                                  }}
+                                  contentBefore={
+                                    recipe.sssdf && !error ? (
+                                      <Embed css={{ width: "60px" }} width={75} height={50}>
+                                        <FadeImage src={recipe.path} hidden />
+                                      </Embed>
+                                    ) : (
+                                      recipe.id
+                                    )
+                                  }
+                                  primary={
+                                    highlight ? (
+                                      <span dangerouslySetInnerHTML={{ __html: highlight.title.value }} />
+                                    ) : (
+                                      `报告号 ${recipe.no||''}`
+                                    )
+                                  }
+                                  secondary={recipe.type ||''}
+                                  contentAfter={
+                                    <ResponsivePopover
+                                      content={
+                                        <MenuList>
+                                          <MenuItem onPress={ async () => {
+                                            await setRepId(recipe.id);
+                                            handleDelete(recipe.id)
+                                          }
+                                          }>删除该报告
+                                          </MenuItem>
+                                          <MenuDivider />
+                                          <MenuItem contentBefore={<IconPackage />}  onPress={() => {
+                                                toast({title: "该功能还未做呢，只能提交审核员一个网页链接看看"});
+                                               } }>
+                                            <RouterLink to={`/`}>
+                                              <Touchable noBind component='div'>
+                                                签名并提交审核
+                                              </Touchable>
+                                            </RouterLink>
+                                          </MenuItem>
+                                        </MenuList>
+                                      }
+                                    >
+                             {/*这里实际手机与电脑表现不同，实际有IconButton->onPress()的,加noBind无法触发菜单*/}
+                                      <IconButton
+                                        css={{
+                                          //display: !editing && editable ? undefined : "none",
+                                          //marginLeft: theme.spaces.sm
+                                        }}
+                                        variant="ghost" size={'md'}
+                                        icon={<IconMoreVertical />}
+                                        label="菜单"
+                                      />
+                                    </ResponsivePopover>
+                                  }
+    >
+      { `日期 ${recipe.upLoadDate||''}` }
+    </ListItem>
     </RouterLink>
   );
 }

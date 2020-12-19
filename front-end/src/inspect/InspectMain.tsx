@@ -23,7 +23,7 @@ import {
 } from "customize-easy-ui-component";
 
 import { useSession,  useSignOut } from "../auth";
-import { Link, useRoute, useLocation, Switch, Route } from "wouter";
+import {Link as RouterLink, useRoute, useLocation, Switch, Route } from "wouter";
 import { useMedia } from "use-media";
 import { Layout } from "./Layout";
 import { RelationList } from "./RelationList";
@@ -157,28 +157,28 @@ export const InspectMain: React.FunctionComponent<InspectMainProps> = props => {
                 <Tooltip content="增加个检验报告">
                   <div>
                     <DarkMode>
-                      <Link to={"/inspect/"+showingRecipe+"/addReport/choose"} >
-                          <IconButton  disabled={!showingRecipe}
+                      <RouterLink to={"/inspect/"+showingRecipe+"/addReport/choose"} >
+                          <IconButton  noBind   disabled={!showingRecipe}
                             variant="ghost"
                             label="增加"
                             size="md"
                             icon={<IconPlus />}
                           />
-                      </Link>
+                      </RouterLink>
                     </DarkMode>
                   </div>
                 </Tooltip>
                 <Tooltip content="返回首页">
                   <div>
                     <DarkMode>
-                      <Link to="/">
-                        <IconButton
+                      <RouterLink to="/">
+                        <IconButton noBind
                           variant="ghost"
                           label="首页"
                           size="md"
                           icon={<IconArchive />}
                         />
-                      </Link>
+                      </RouterLink>
                     </DarkMode>
                   </div>
                 </Tooltip>

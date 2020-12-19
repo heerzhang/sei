@@ -78,20 +78,20 @@ export const IspEntrance: React.FunctionComponent<IspEntranceProps> = ({
             display: "flex"
           }}
         >
-          <IconButton
-            icon={<IconArrowLeft />}
-            component={RouterLink}
-            to="/device"
-            label="后退"
-            replace
-            variant="ghost"
-            css={{
-              marginRight: theme.spaces.sm,
-              [theme.mediaQueries.md]: {
-                display: "none"
-              }
-            }}
-          />
+          <RouterLink to="/device">
+            <IconButton  icon={<IconArrowLeft />}
+                         noBind
+                         variant="ghost"
+                         label="后退"
+                         size="md"
+                         css={{
+                           marginRight: theme.spaces.sm,
+                           [theme.mediaQueries.md]: {
+                             display: "none"
+                           }
+                         }}
+            />
+          </RouterLink>
             <Text
               css={{
                 flex: 1,

@@ -123,7 +123,7 @@ export const IspDetail: React.FunctionComponent<IspDetailProps> = ({
           }}
         >
           <RouterLink   to="/inspect/">
-            <IconButton
+            <IconButton noBind
               icon={<IconArrowLeft />}
               label="后退"
               variant="ghost"

@@ -97,17 +97,17 @@ export const DetailedGuide: React.FunctionComponent<DetailedGuideProps> = ({
             display: "flex"
           }}
         >
-          <RouterLink to={"/unit/"} >
-            <IconButton
-              icon={<IconArrowLeft />}
-              label="后退"
-              variant="ghost"
-              css={{
-                marginRight: theme.spaces.sm,
-                [theme.mediaQueries.md]: {
-                  display: "none"
-                }
-              }}
+          <RouterLink to="/unit/">
+            <IconButton  noBind icon={<IconArrowLeft />}
+                         variant="ghost"
+                         label="后退"
+                         size="md"
+                         css={{
+                           marginRight: theme.spaces.sm,
+                           [theme.mediaQueries.md]: {
+                             display: "none"
+                           }
+                         }}
             />
           </RouterLink>
            <Text

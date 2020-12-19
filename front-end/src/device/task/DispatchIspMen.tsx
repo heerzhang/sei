@@ -144,17 +144,16 @@ export const DispatchIspMen: React.FunctionComponent<DispatchIspMenProps> = ({
           }}
         >
           <RouterLink to="/device">
-            <IconButton  icon={<IconArrowLeft />}
-                         noBind
-                         variant="ghost"
-                         label="后退"
-                         size="md"
-                         css={{
-                           marginRight: theme.spaces.sm,
-                           [theme.mediaQueries.md]: {
-                             display: "none"
-                           }
-                         }}
+            <IconButton  noBind  icon={<IconArrowLeft />}
+                   variant="ghost"
+                   label="后退"
+                   size="md"
+                   css={{
+                     marginRight: theme.spaces.sm,
+                     [theme.mediaQueries.md]: {
+                       display: "none"
+                     }
+                   }}
             />
           </RouterLink>
           {editing ? (

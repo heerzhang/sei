@@ -23,7 +23,7 @@ import {
 } from "customize-easy-ui-component";
 
 import { useSession,  useSignOut } from "../auth";
-import { Link, useRoute, useLocation, Switch, Route } from "wouter";
+import { Link as RouterLink, useRoute, useLocation, Switch, Route } from "wouter";
 import { useMedia } from "use-media";
 import { Layout } from "./Layout";
 import { TaskList } from "./task/TaskList";
@@ -31,7 +31,6 @@ import { DispatchIspMen } from "./task/DispatchIspMen";
 import { UnitList } from "./UnitList";
 import { IspEntrance } from "./task/IspEntrance";
 import { useCountOfTask } from "./db";
-import { Link as RouterLink } from "wouter";
 import { DetailedGuide } from "./DetailedGuide";
 
 interface DeviceMainProps {
@@ -157,8 +156,7 @@ export const DeviceMain: React.FunctionComponent<DeviceMainProps> = props => {
                   <div>
                     <DarkMode>
                       <RouterLink to="/unit/new">
-                      <IconButton
-                        noBind
+                      <IconButton  noBind
                         variant="ghost"
                         label="加设备"
                         size="md"
@@ -171,14 +169,14 @@ export const DeviceMain: React.FunctionComponent<DeviceMainProps> = props => {
                 <Tooltip content="返回首页">
                   <div>
                     <DarkMode>
-                      <Link to="/">
-                        <IconButton
+                      <RouterLink to="/">
+                        <IconButton noBind
                           variant="ghost"
                           label="首页"
                           size="md"
                           icon={<IconArchive />}
                         />
-                      </Link>
+                      </RouterLink>
                     </DarkMode>
                   </div>
                 </Tooltip>

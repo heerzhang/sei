@@ -23,7 +23,7 @@ import {
 } from "customize-easy-ui-component";
 
 import { useSession,  useSignOut } from "../auth";
-import { Link, useRoute, useLocation, Switch, Route } from "wouter";
+import { Link as RouterLink, useRoute, useLocation, Switch, Route } from "wouter";
 import { useMedia } from "use-media";
 import { Layout } from "./Layout";
 import { TaskList } from "./task/TaskList";
@@ -31,7 +31,6 @@ import { DispatchIspMen } from "./task/DispatchIspMen";
 import { DeviceList } from "./DeviceList";
 import { IspEntrance } from "./task/IspEntrance";
 import { useCountOfTask } from "./db";
-import { Link as RouterLink } from "wouter";
 import { DetailedGuide } from "./DetailedGuide";
 import queryString from "query-string";
 import { DevfilterContext } from "../context/DevfilterContext";
@@ -160,13 +159,12 @@ export const DeviceMain: React.FunctionComponent<DeviceMainProps> =(props ,conte
                   <div>
                     <DarkMode>
                       <RouterLink to="/device/new">
-                      <IconButton
-                        noBind
-                        variant="ghost"
-                        label="加设备"
-                        size="md"
-                        icon={<IconPlus />}
-                      />
+                        <IconButton noBind
+                          variant="ghost"
+                          label="加设备"
+                          size="md"
+                          icon={<IconPlus />}
+                        />
                       </RouterLink>
                     </DarkMode>
                   </div>
@@ -174,14 +172,14 @@ export const DeviceMain: React.FunctionComponent<DeviceMainProps> =(props ,conte
                 <Tooltip content="返回首页">
                   <div>
                     <DarkMode>
-                      <Link to="/">
+                      <RouterLink to="/">
                         <IconButton noBind
                           variant="ghost"
                           label="首页"
                           size="md"
                           icon={<IconArchive />}
                         />
-                      </Link>
+                      </RouterLink>
                     </DarkMode>
                   </div>
                 </Tooltip>

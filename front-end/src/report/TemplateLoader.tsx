@@ -157,11 +157,10 @@ export const RecordStarter: React.FunctionComponent<RecordStarterProps> = ({
           }}
         >
           <RouterLink  to={`/report/${templateID}/ver/${verId}/none/${id}`}>
-            <IconButton
+            <IconButton  noBind
               icon={<IconArrowLeft />}
               label="后退"
               variant="ghost"
-              noBind
               css={{
                 marginRight: theme.spaces.sm,
                 "@media (min-width:800px)": {

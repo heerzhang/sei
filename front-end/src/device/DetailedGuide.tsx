@@ -93,8 +93,7 @@ export const DetailedGuide: React.FunctionComponent<DetailedGuideProps> = ({
           }}
         >
           <RouterLink to="/device">
-            <IconButton  icon={<IconArrowLeft />}
-              noBind
+            <IconButton  noBind  icon={<IconArrowLeft />}
               variant="ghost"
               label="后退"
               size="md"

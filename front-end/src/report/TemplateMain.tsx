@@ -23,7 +23,7 @@ import {
 } from "customize-easy-ui-component";
 
 import { useSession,  useSignOut } from "../auth";
-import { Link, useLocation, Switch, Route, Link as RouterLink } from "wouter";
+import { useLocation, Switch, Route, Link as RouterLink } from "wouter";
 import { useMedia } from "use-media";
 import { Layout } from "./Layout";
 import { RelationList } from "../inspect/RelationList";
@@ -220,28 +220,28 @@ export const RecordEditorOrPrint: React.FunctionComponent<RecordEditorOrPrintPro
                 <Tooltip content="增加个检验报告">
                   <div>
                     <DarkMode>
-                      <Link to="/">
+                      <RouterLink to="/">
                         <IconButton
                           variant="ghost"
                           label="增加"
                           size="md"
                           icon={<IconPlus />}
                         />
-                      </Link>
+                      </RouterLink>
                     </DarkMode>
                   </div>
                 </Tooltip>
                 <Tooltip content="返回首页">
                   <div>
                     <DarkMode>
-                      <Link to="/">
-                        <IconButton
+                      <RouterLink to="/">
+                        <IconButton noBind
                           variant="ghost"
                           label="首页"
                           size="md"
                           icon={<IconArchive />}
                         />
-                      </Link>
+                      </RouterLink>
                     </DarkMode>
                   </div>
                 </Tooltip>
