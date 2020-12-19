@@ -14,7 +14,7 @@ import {
   ScrollView,
   useInfiniteScroll,
   Embed,
-  ResponsivePopover,
+
   MenuList,
   MenuItem,
   IconPackage,
@@ -28,6 +28,7 @@ import { useFirebaseImage } from "../../Image";
 import { Link as RouterLink,useLocation, useRoute } from "wouter";
 import { FadeImage } from "../../FadeImage";
 import { Touchable } from "../../comp/Touchable";
+import { ResponsivePopover } from "../../comp/Popover";
 
 
 
@@ -259,21 +260,24 @@ function ReportListItem({ recipe, id, highlight ,task }: any) {
                                     <ResponsivePopover
                                       content={
                                         <MenuList>
+                                          <MenuItem contentBefore={<IconPackage />}
+                                              onPress={async () => {
+                                                await toast({title: "该功能还未做呢，只能提交审核员一个网页链接看看"});
+                                                setLocation(`/`);
+                                              } }
+                                          >
+                                 {/*这里实际手机与电脑表现不同，手机是点透而过头了，RouterLink没被触发，反而当前页面按钮被点触发；
+                                  无论怎样<Touchable设置noBind点击就一定能点透了；默认却会报unmount错！
+                                  手机菜单<ResponsivePopover<MenuItem若需要toast()组合路由跳转to的，不报错无法避免点透,必须await执行*/}
+                                              签名并提交审核
+                                          </MenuItem>
+
+                                          <MenuDivider />
                                           <MenuItem onPress={ async () => {
                                             await setRepId(recipe.id);
                                             handleDelete(recipe.id)
                                           }
                                           }>删除该报告
-                                          </MenuItem>
-                                          <MenuDivider />
-                                          <MenuItem contentBefore={<IconPackage />}  onPress={() => {
-                                                toast({title: "该功能还未做呢，只能提交审核员一个网页链接看看"});
-                                               } }>
-                                            <RouterLink to={`/`}>
-                                              <Touchable noBind component='div'>
-                                                签名并提交审核
-                                              </Touchable>
-                                            </RouterLink>
                                           </MenuItem>
                                         </MenuList>
                                       }
