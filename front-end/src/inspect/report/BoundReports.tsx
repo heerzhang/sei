@@ -14,21 +14,18 @@ import {
   ScrollView,
   useInfiniteScroll,
   Embed,
-
+  ResponsivePopover,
   MenuList,
   MenuItem,
   IconPackage,
   MenuDivider,
   IconButton, IconMoreVertical, useToast
-  //, Touchable
 } from "customize-easy-ui-component";
 
 import { useDeleteReport, useLookReports } from "./db";
 import { useFirebaseImage } from "../../Image";
 import { Link as RouterLink,useLocation, useRoute } from "wouter";
 import { FadeImage } from "../../FadeImage";
-import { Touchable } from "../../comp/Touchable";
-import { ResponsivePopover } from "../../comp/Popover";
 
 
 

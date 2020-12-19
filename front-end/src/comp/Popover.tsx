@@ -46,12 +46,12 @@ interface PopoverProps {
  弹出式，像个对话框的，用作菜单列表等。
  */
 export const Popover: React.FunctionComponent<PopoverProps> = ({
-  content,
-  children,
-  placement,
-  closeOnMenuItemClick = true,
-  isOpen: defaultShow = false
-}) => {
+                                                                 content,
+                                                                 children,
+                                                                 placement,
+                                                                 closeOnMenuItemClick = true,
+                                                                 isOpen: defaultShow = false
+                                                               }) => {
   const theme = useTheme();
   const [show, setShow] = React.useState(defaultShow);
   const child = React.Children.only(children);
@@ -77,7 +77,7 @@ export const Popover: React.FunctionComponent<PopoverProps> = ({
   //组件卸载了, "click"的已注册处理函数必须撤销，否则报错。
   React.useEffect(() =>{
       return () => unmount();
-  } ,
+    } ,
     [unmount]);
 
   function close() {
