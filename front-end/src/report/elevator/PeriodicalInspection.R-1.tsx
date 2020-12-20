@@ -26,8 +26,9 @@ export const ReportView: React.FunctionComponent<ReportViewProps> = ({
   const printing =qs && !!qs.print;
   console.log("参数第三层路由&print qs printing=",printing, qs);
   const [redundance, setRedundance] =React.useState(notSmallScr||printing);
-  function onPress() {
+  function onPress(e) {
       setRedundance(!redundance);
+      e.preventDefault();
   }
   const {bind:bindRedund ,} =useTouchable({ onPress,  behavior: "button" });
   React.useEffect(() => {
