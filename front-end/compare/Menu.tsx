@@ -1,4 +1,6 @@
 /** @jsxImportSource @emotion/react */
+//代码调试临时整合
+
 import { jsx } from "@emotion/react";
 import * as React from "react";
 //import { Text } from "./Text";
@@ -173,7 +175,7 @@ export const MenuItem: React.FunctionComponent<MenuItemProps> = ({
                                                                    className = "",
                                                                    component: Component = "div",
                                                                    role = "menuitem",
-                                                                   noBind=true,
+                                                                   noBind=false,
                                                                    children,
                                                                    disabled,
                                                                    onClick,
@@ -255,19 +257,19 @@ export const MenuItem: React.FunctionComponent<MenuItemProps> = ({
       tabIndex={disabled ? -1 : 0}
       data-trigger-close={true}
       {...safeBind(
-        bind,
-        {
-          ref: localRef,
-          onKeyDown: (e: React.KeyboardEvent) => {
-            e.stopPropagation();
-            if (onKeyDown) onKeyDown(e);
-          },
-          onClick: (e: React.MouseEvent) => {
-            e.stopPropagation();
-          }
-        },
-        other
-      )}
+            noBind? {}:{ bind,  ref: localRef },
+            {
+              onKeyDown: (e: React.KeyboardEvent) => {
+                e.stopPropagation();
+                if (onKeyDown) onKeyDown(e);
+              },
+              onClick: (e: React.MouseEvent) => {
+                //if(noBind)  return;
+                e.stopPropagation();
+              }
+            },
+            other
+       ) }
     >
       {contentBefore}
       {typeof children === "string" ? (
