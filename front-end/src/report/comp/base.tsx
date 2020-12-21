@@ -293,7 +293,9 @@ export const InspectRecordDialog: React.FunctionComponent<InspectRecordDialogPro
        {children}
         <div css={{textAlign: 'right',padding:'0.2rem'}}>
           <Button size="lg" intent={'primary'}
-             onPress={() => {setStorage({ ...storage, ...inp }) }}>
+             onPress={async () =>  {await setStorage({ ...storage, ...inp })
+               //修改确认 点击后快速地点击后退，可能导致Button unmounted 报错。
+             }}>
             修改确认
           </Button>
         </div>

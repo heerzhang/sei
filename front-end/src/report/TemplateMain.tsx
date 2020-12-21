@@ -59,7 +59,7 @@ function TemplateMain( {
         throw new Error(`没找到模板入口O组件${path}`);
       if(module.reportTemplate===undefined)
         throw new Error(`没找到模板入口R组件${path}`);
-
+     //对应版本号的模板文件
       setTemplate({original: module.originalTemplate[verId], report: module.reportTemplate[verId]});
     })
       .catch(error => {
@@ -93,7 +93,7 @@ function TemplateMain( {
 export interface RecordEditorOrPrintProps {
   id: string;
   source: any;  //原始记录的json数据 + 。
-  templateSet: any;
+  templateSet: any;   //类似pdf*模板
   templateID: string;
   verId: string;
   action: string;
@@ -221,7 +221,7 @@ export const RecordEditorOrPrint: React.FunctionComponent<RecordEditorOrPrintPro
                   <div>
                     <DarkMode>
                       <RouterLink to="/">
-                        <IconButton
+                        <IconButton noBind
                           variant="ghost"
                           label="增加"
                           size="md"

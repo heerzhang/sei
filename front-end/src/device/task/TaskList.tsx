@@ -294,6 +294,9 @@ export const TaskList: React.FunctionComponent<
                         <MenuItem onPress={() => unfollow(relation.id)}>
                           派工任务{relation || '？'}给检验员
                         </MenuItem>
+                        <MenuItem onPress={() => unfollow(relation.id)}>
+                          取消任务号{relation || '？'}
+                        </MenuItem>
                       </MenuList>
                     }
                   >

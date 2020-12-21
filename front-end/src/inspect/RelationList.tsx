@@ -57,6 +57,7 @@ interface RelationListProps {
   check?: boolean    //我是审核人
 }
 
+//该组件也被report模块引用了；
 export const RelationList: React.FunctionComponent<RelationListProps> = ({
       check=false
  }) => {
@@ -205,16 +206,18 @@ export const RelationList: React.FunctionComponent<RelationListProps> = ({
                   )}
 
                  {followings　&&　followings.map((item,i) => {
+                   //这样的<RouterLink <ListItem onPress={() =>showRelation ;可能会ListItem报错unmounted:仅当嵌入为报告/动态模板之内；
                    return (
-                    <RouterLink  key={i}
-                         to={`/inspect/${item.id}`} >
                       <ListItem
                         key={item.id}
                         interactive={ true }
-                        onPress={() =>
-                          showRelation({ ...item  } )
-          //这里一次点击两个都触发了：RouterLink + showRelation; 详情页面 +左边框内<Stack 状态切换。首先触发Stack下沉的，然后页内路由，已加载组件状态能保留。
-                        }
+                        onPress={async (e) => {
+                          await showRelation({ ...item  } );
+                          //这里一次点击两个都触发了：RouterLink + showRelation; 详情页面 +左边框内<Stack 状态切换。首先触发Stack下沉的，然后页内路由，已加载组件状态能保留。
+                          e.stopPropagation();
+                          e.preventDefault();
+                          setLocation(`/inspect/${item.id}`);
+                        } }
                         contentBefore={
                           <Avatar
                             size="sm"
@@ -233,7 +236,6 @@ export const RelationList: React.FunctionComponent<RelationListProps> = ({
                       >
                         {`检验号 ${item.id} 日期:${item?.task?.date||''}`}
                       </ListItem>
-                    </RouterLink>
                     );
                   })}
                 </List>

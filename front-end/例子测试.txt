@@ -373,3 +373,4 @@ graphQL升版本后已经不支持input参数的可自循环迭代定义；之�
   }, [query]);
 现成apollo-server是node.js(8+)环境下的。
 <Pager enableScrollLock={false}消除scroll-lock报错"react-page-controller"里<Pager useScrollLock(缺ref参数);<Tab><StackItem>都useScrollLock
+Chrome调试输出verbose出现：[Violation] xxx handler took xxxms; 说明违背预期规则，影响流畅性；代码有待改进，或可以改用异步执行模式来避免阻塞页面给用户响应即时性感觉。

@@ -3,6 +3,8 @@ import { jsx,  } from "@emotion/react";
 //import * as React from "react";
 import { ReportView } from "./PeriodicalInspection.R-1";
 import { OriginalView } from "./PeriodicalInspection.O-1";
+//到这里　才真正接入最终的模板tsx文件。
+
 
 //模板的动态加载入口文件。
 //版本号verId  "1" "2"  再一次做个 订制的路由。
