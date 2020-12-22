@@ -374,18 +374,3 @@ graphQL升版本后已经不支持input参数的可自循环迭代定义；之�
 现成apollo-server是node.js(8+)环境下的。
 <Pager enableScrollLock={false}消除scroll-lock报错"react-page-controller"里<Pager useScrollLock(缺ref参数);<Tab><StackItem>都useScrollLock
 Chrome调试输出verbose出现：[Violation] xxx handler took xxxms; 说明违背预期规则，影响流畅性；代码有待改进，或可以改用异步执行模式来避免阻塞页面给用户响应即时性感觉。
-
-后端
-IDEA gradle mysql/H2/Oracle
-spring-boot-starter-webflux &.-undertow &.-actuator &.-data-jpa &.-security &.-websocket &.-data-rest &.-jta-atomikos &.-cache &.-data-elasticsearch
-infinispan-spring-boot-starter-embedded &+ infinispan-hibernate-cache-v53
-graphql-spring-boot-starter  Kotlin 语言 Chrome开发工具apollo-client-devtools
-querydsl-apt &+ querydsl-jpa
-前端
-WebStorm npm yarn
-SPA单页面应用，TSX文件。
-依赖包react react-dom, @emotion/react,@apollo/client,customize-easy-ui-component,filepond,react-spring,wouter,use-media,graphql
-开发时依赖包typescript,react-scripts,@emotion/babel-plugin,@typescript-eslint/eslint-plugin,eslint-plugin-react
-文件上传用了浏览器已原生自带的fetch API；
-没有OCX概念，浏览器至少ES6起步。
-
