@@ -12,6 +12,7 @@ export const mergeSubitemRefs = <T>(...refs: Array<Ref<T>>) => {
   return all;
 };
 
+//汇总回流数据
 export const mergeEditorItemRefs = <T>(...refs: Array<Ref<T>>) => {
   let all=null;
   refs.forEach(resolvableRef => {

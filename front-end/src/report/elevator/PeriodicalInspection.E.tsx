@@ -15,6 +15,7 @@ export  const  reportTemplate={
 };
 
 //2大类用途的模板定义实例；这2个输出名字不能改。
+//这里算模板的关键注入点：<OriginalView 实际相当于DOM实例的。每个报告类型＋版本号,实际引入的组件都不同；
 export  const  originalTemplate={
   "1": <OriginalView inp={null} action='none' verId={'1'}/>,
   "2":  null,

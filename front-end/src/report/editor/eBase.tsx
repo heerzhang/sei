@@ -177,6 +177,7 @@ export interface ItemUniversalProps  extends React.HTMLAttributes<HTMLDivElement
   procedure?: any;     //传递一个检验项目开头流程性内容，显示的格式等。
   details?: any[];     //传递各个子项目(若没有子项目的，就算项目本身[0])的定制，测量数据细节内容。
 }
+//每个正在编辑的项目。
 //引进Render Props模式提高复用能力 { details[0](inp,setInp)  }；就可以配置成通用的组件。
 export const ItemUniversal=
   React.forwardRef((

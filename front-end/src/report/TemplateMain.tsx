@@ -59,7 +59,7 @@ function TemplateMain( {
         throw new Error(`没找到模板入口O组件${path}`);
       if(module.reportTemplate===undefined)
         throw new Error(`没找到模板入口R组件${path}`);
-     //对应版本号的模板文件
+     //对应版本号的模板文件, 实际上original变量也是对象方式输出的组件，但是是实例的。
       setTemplate({original: module.originalTemplate[verId], report: module.reportTemplate[verId]});
     })
       .catch(error => {

@@ -284,6 +284,7 @@ export const InspectRecordDialog: React.FunctionComponent<InspectRecordDialogPro
      ...other
  }) => {
   const {storage, setStorage} =React.useContext(EditStorageContext);
+  //外部汇集层次storage修改后，也得同步修正我这里低层次分部的，不然，它处已经改动的数据对我这里来说全然不知晓。
   React.useEffect(() => {
       storage&& setInp(getInpFilter(storage));
   }, [storage, setInp, getInpFilter] );
@@ -294,7 +295,7 @@ export const InspectRecordDialog: React.FunctionComponent<InspectRecordDialogPro
         <div css={{textAlign: 'right',padding:'0.2rem'}}>
           <Button size="lg" intent={'primary'}
              onPress={async () =>  {await setStorage({ ...storage, ...inp })
-               //修改确认 点击后快速地点击后退，可能导致Button unmounted 报错。
+               //修改确认 点击后快速地点击后退，可能导致Button unmounted 报错。堆栈useTouchable onScroll dispatchAction
              }}>
             修改确认
           </Button>
