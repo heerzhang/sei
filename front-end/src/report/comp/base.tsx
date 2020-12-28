@@ -4,10 +4,10 @@ import * as React from "react";
 import {
   useTheme,
   Text,
-  Button,SelectProps,
+  Button, SelectProps,
   IconChevronUp,
   IconChevronDown, Collapse, useCollapse,
-  Select, Layer, Check,
+  Select, Layer, Check
 } from "customize-easy-ui-component";
 import PropTypes from "prop-types";
 //import { useUid } from "customize-easy-ui-component/esm/Hooks/use-uid";
@@ -18,6 +18,7 @@ import { Ref } from "react";
 import { EditStorageContext } from "../StorageContext";
 import { Link as RouterLink } from "wouter";
 import { CCell, Cell, TableRow } from "../../comp/TableExt";
+//import { Touchable } from "../../comp/Touchable";
 
 //公共的复用性好的组件。
 
@@ -296,6 +297,7 @@ export const InspectRecordDialog: React.FunctionComponent<InspectRecordDialogPro
           <Button size="lg" intent={'primary'}
              onPress={async () =>  {await setStorage({ ...storage, ...inp })
                //修改确认 点击后快速地点击后退，可能导致Button unmounted 报错。堆栈useTouchable onScroll dispatchAction
+               //看来还得加上terminateOnScroll={false}，光光await setxxx还是不够，依然有机会在组件卸载后触发某些回调函数。得全部堵死。
              }}>
             修改确认
           </Button>

@@ -18,7 +18,7 @@
         "@types/react": "^17.0.0",
         "@types/react-dom": "^17.0.0",
         "@types/react-helmet": "^6.1.0",
-        "customize-easy-ui-component": "~4.3.2",
+        "customize-easy-ui-component": "~4.3.3-apha",
         "filepond":"^4.13.4",
         "filepond-plugin-image-exif-orientation":"^1.0.8",
         "filepond-plugin-image-preview":"^4.6.2",
