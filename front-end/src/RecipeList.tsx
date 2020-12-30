@@ -223,11 +223,11 @@ export const RecipeList: React.FunctionComponent<RecipeListProps> = ({
   //console.log("准示state.searchResponse="+ JSON.stringify(query) + JSON.stringify(state.searchResponse));
 
   //废弃<PullToRefresh onRefresh={() => toRefresh() }
-  async function toRefresh() {
+ /* async function toRefresh() {
     setHasMore(true);
     refetch( {} );
   }
-
+*/
   const toLoadMore = React.useCallback(
     async () => {
       items && loadMore({

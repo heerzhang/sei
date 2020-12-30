@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { jsx, } from "@emotion/react";
+//import { jsx, } from "@emotion/react";
 import * as React from "react";
 import {
   Navbar,
@@ -57,14 +57,14 @@ export const DispatchIspMen: React.FunctionComponent<DispatchIspMenProps> = ({
   const {user,} = useSession();
   const [loading, setLoading] = React.useState(false);
   const [editing, setEditing] = React.useState(!readOnly);
-  const [content, ] = React.useState(() => {
+  /*const [content, ] = React.useState(() => {
     return defaultDescription
       ? ''
       : null;
-  });
-  const [image, ] = React.useState(defaultImage);
+  });*/
+  //const [image, ] = React.useState(defaultImage);
   const [title, setTitle] = React.useState(defaultTitle);
-  const [credit, ] = React.useState(defaultCredit);
+  //const [credit, ] = React.useState(defaultCredit);
   //ingredients 原来是[]数组，改成对象。ingredients.length无定义了。
   console.log("来React.useruseState="+ JSON.stringify(title) +",user=",user);
   const [ingredients, setIngredients] = React.useState<any>( dt||{ispMen: user.username} );

@@ -386,6 +386,7 @@ export const FollowingList: React.FunctionComponent<
 
 
 //别人封装好的组件也可定制和替换：SearchTitle用于代替基本构件库react-gesture-stack的已有标准样式StackTitle部分，相当于定制修改原生就有的组件。
+/*
 function SearchTitle_删除({ children }) {
   const {
     active,
@@ -406,7 +407,7 @@ function SearchTitle_删除({ children }) {
         right: 0
       }}
     >
-      {/*<animated.div 版本不支持暂时改成div*/}
+
       <animated.div
         className="StackTitle__heading"
         style={{
@@ -424,6 +425,8 @@ function SearchTitle_删除({ children }) {
     </div>
   );
 }
+
+*/
 
 
 //报错Cannot read property 'map' of null标记出错代码行，竟可能会差错！实际错误点实在下方，报错指示却在上方的代码行，两处都有.map的代码。

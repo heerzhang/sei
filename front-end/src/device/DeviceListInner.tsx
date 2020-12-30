@@ -8,10 +8,8 @@ import {
   IconButton,
   Button,
   MenuList,
-  Stack,
   useTheme,
   IconMoreVertical,
-  StackTitle,
   Skeleton, MenuItem, IconPackage, ResponsivePopover
 } from "customize-easy-ui-component";
 
@@ -22,18 +20,18 @@ import { useInView } from 'react-intersection-observer'
 //import { PullToRefresh,PullDownContent,RefreshContent,ReleaseContent } from "react-js-pull-to-refresh";
 //import { usePrevious } from "customize-easy-ui-component/esm/Hooks/previous";
 
-interface DeviceListInner {
+interface DeviceListInnerProps {
   filter: any   //用props参数看看
 }
 export const DeviceListInner: React.FunctionComponent<
-  DeviceListInner
+  DeviceListInnerProps
 > = ({ filter }) => {
   const theme = useTheme();
   const [, setLocation] = useLocation();
   const {
     loading,
     items: devicesFind,
-    fetchMore: loadMore　,refetch, updateQuery
+    fetchMore: loadMore　,refetch
   } =usePaginateQueryDevice(filter);
 
   //上面这个副作用必须 加usersFind，否则无法继续处理后端数据带来的必要的UI反馈变化。

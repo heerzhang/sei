@@ -8,12 +8,12 @@ import {
   VisuallyHidden,
   Button,
   useResponsiveContainerPadding,
-  IconSearch, IconLayers, IconButton, Dialog, Text, IconMoreVertical, ResponsivePopover, IconX
+  IconSearch, IconLayers, IconButton, Dialog, Text, IconX
 } from "customize-easy-ui-component";
 
 import { ContainLine, TransparentInput } from "../comp/base";
 import { DevfilterContext } from "../context/DevfilterContext";
-import { useApolloClient, gql, useQuery, NetworkStatus } from "@apollo/client";
+import {  gql, useQuery, NetworkStatus } from "@apollo/client";
 import { Link as RouterLink } from "wouter";
 
 //根据unitID查具体
@@ -29,7 +29,7 @@ const UnitDetail= ( { id, onCancel }
 ) => {
   const theme = useTheme();
   //const [getUnit, { loading, data }] = useLazyQuery(GET_UNIT_DETAIL);  https://www.apollographql.com/docs/react/data/queries/
-  const { loading, error, data, refetch,networkStatus } = useQuery(GET_UNIT_DETAIL, {
+  const { loading, error, data, networkStatus } = useQuery(GET_UNIT_DETAIL, {
     variables: { id },
     notifyOnNetworkStatusChange: true
   });

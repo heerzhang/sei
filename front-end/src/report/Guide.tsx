@@ -1,14 +1,12 @@
 /** @jsxImportSource @emotion/react */
-import { jsx, css,  } from "@emotion/react";
+//import { jsx, css,  } from "@emotion/react";
 import * as React from "react";
 import {
   Text,
   Toolbar,
   useTheme,
   Button,
-  IconChevronDown,
-  IconChevronUp,
-  Select, Container, IconCloud, InputGroupLine, Input, TabPanel, IconArrowRight, Layer
+  Container, IconCloud, InputGroupLine, Input,
 } from "customize-easy-ui-component";
 //import useLocation from "wouter/use-location";
 import {  useQueryOriginalRecord } from "./db";
@@ -24,7 +22,7 @@ export  function Guide({printing, }:{printing?:boolean, },props) {
   const theme = useTheme();
   //useState(默认值) ； 后面参数值仅仅在组件的装载时期有起作用，若再次路由RouterLink进入的，它不会依照该新默认值去修改show。useRef跳出Cpature Value带来的限制
   //采用RouterLink页内路由进入useState还保留旧的值，要修改就将会导致render两次；旧的值新的值各一次渲染。若采用URL刷新模式只有一次。
-  const [show, setShow] = React.useState(false);
+  //const [show, setShow] = React.useState(false);
   const [repId, setRepId] = React.useState('');
   let filtercomp={ id:repId };
   //refetch() 引起 loading= True/False变化，从而需要组件范围render重做搞2次。
@@ -32,7 +30,7 @@ export  function Guide({printing, }:{printing?:boolean, },props) {
   const {loading,items, } =useQueryOriginalRecord(filtercomp);
  // const [template, ] = React.useState(null   as any);
   //模板的类型标识
-  const [tplType, setTplType] = React.useState('EL-DJ');
+  const [tplType, ] = React.useState('EL-DJ');
 
   //复检数据拷贝初检后再度修订的。最初的初检数据原封不动。复检rexm，正检data，结论及审核改定deduction｛也可部分照搬复检rexm正检data或映射转译｝。
   //原始记录录入模式复检正检，［正式报告来源项］只读的预览结论模式{动态生成结论}，(完毕提交)；

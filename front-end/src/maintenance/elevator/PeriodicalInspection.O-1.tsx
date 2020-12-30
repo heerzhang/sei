@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { jsx,  } from "@emotion/react";
+//import { jsx,  } from "@emotion/react";
 import * as React from "react";
 import {
   Text,
@@ -16,7 +16,7 @@ import {
   SelectHookfork, TemplateViewProps,
   useItemControlAs, useProjectListAs
 } from "../comp/base";
-import {  InternalItemHandResult, InternalItemProps } from "../comp/base";
+//import {  InternalItemHandResult, InternalItemProps } from "../comp/base";
 import { callSubitemChangePar, callSubitemShow, mergeSubitemRefs } from "../../utils/tools";
 import orderBy from "lodash.orderby";
 

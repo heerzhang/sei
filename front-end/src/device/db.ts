@@ -77,13 +77,15 @@ export const useUpdateEntry = (options) => {
 
 //从graphQL的后端 模型数据库服务器 取模型数据。
 //3.2版本findAllEQPsFilter2不能再用dev:findAllEQPsFilter2这样子做别名了,cache typePolicies不支持。
-const GET_DEVICES = gql`
+
+/*const GET_DEVICES = gql`
   query findAllEQPsFilter($where: DeviceCommonInput,$offset:Int!,$limit:Int=10,$orderBy:String,$asc:Boolean=true) {
     findAllEQPsFilter(where: $where,offset:$offset,limit:$limit,orderBy:$orderBy,asc:$asc) {
-      id cod oid type sort vart   
+      id cod oid type sort vart
      }
   }
 `;
+*/
 const GET_DEVICES_ES = gql`
   query findAllEQPsFilter($where: DeviceCommonInput,$offset:Int!,$limit:Int=10,$orderBy:String,$asc:Boolean=true) {
     eqps:getAllEqpEsFilter(where: $where,offset:$offset,limit:$limit,orderBy:$orderBy,asc:$asc) {

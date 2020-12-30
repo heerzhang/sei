@@ -6,9 +6,6 @@ import {
   ApolloLink,
   split,
   concat,
-  empty,
-  Reference,
-  FieldPolicy
 } from "@apollo/client";
 import { getMainDefinition, offsetLimitPagination } from "@apollo/client/utilities";
 import { onError } from '@apollo/client/link/error';

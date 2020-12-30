@@ -7,14 +7,12 @@ import {
   ListItem,
   Avatar,
   IconButton,
-  Button,
   Popover,
   MenuList,
   Stack,
   MenuItem,
   Text,
   useTheme,
-  useToast,
   IconChevronRight,
   IconMoreVertical,
   StackTitle,
@@ -25,10 +23,10 @@ import debug from "debug";
 //import algoliasearch from "algoliasearch";
 //import config from "./firebase-config";
 import { useSession } from "../auth";
-import find from "lodash.find";
-import { useDeleteRequestFollow, usePaginateQueryUser,  } from "./db";
+//import find from "lodash.find";
+//import { useDeleteRequestFollow, usePaginateQueryUser,  } from "./db";
 import { StackItem } from "react-gesture-stack";
-import { Link as RouterLink, useLocation } from "wouter";
+import { useLocation } from "wouter";
 import { BoundReports } from "./report/BoundReports";
 import { SearchTitle } from "../comp/base";
 
@@ -47,12 +45,6 @@ function searchAlgoliaForUsers(query: string) {
 
 const log = debug("app:FollowingList");
 
-//接口参数类型 云服务的
-interface ResponseLikeAlgoliasearch<T=any> {
-  hits: T[];
-  //processingTimeMS: number;
-}
-
 interface RelationListProps {
   check?: boolean    //我是审核人
 }
@@ -62,7 +54,7 @@ export const RelationList: React.FunctionComponent<RelationListProps> = ({
       check=false
  }) => {
   const theme = useTheme();
-  const toast = useToast();
+  //const toast = useToast();
   const {user,} = useSession();
   const [, setLocation] = useLocation();
   //graphQl的查询usexxx钩子函数，无法主动从后端读取最新数据。
@@ -81,7 +73,7 @@ export const RelationList: React.FunctionComponent<RelationListProps> = ({
   const [relation, setRelation] = React.useState(null);
 
 
-  const [filter, setFilter] = React.useState({where:
+  const [, setFilter] = React.useState({where:
         {cod:query },
      });
 

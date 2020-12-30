@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { jsx,  } from "@emotion/react";
+//import { jsx,  } from "@emotion/react";
 import * as React from "react";
 //import debug from "debug";
 import {
@@ -19,10 +19,10 @@ import {
   IconArrowLeft,
   IconArrowRight, IconPackage, IconTruck, Touchable
 } from "customize-easy-ui-component";
-import { useAbandonISP, useDispatchIspMen, useIspDetail } from "./db";
+import { useAbandonISP, useIspDetail } from "./db";
 //import { useSession } from "../auth";
 import {Helmet} from "react-helmet";
-import { Link as RouterLink, useLocation } from "wouter";
+import { Link as RouterLink,  } from "wouter";
 import { ContainLine, TransparentInput } from "../comp/base";
 
 //[HOOK限制]按钮点击函数内部直接上toast()或toaster.notify()很可能无法正常显示。而放在函数组件顶层render代码前却能正常。
@@ -51,17 +51,17 @@ export const IspDetail: React.FunctionComponent<IspDetailProps> = ({
 }) => {
   const theme = useTheme();
   const toast = useToast();
-  const [, setLocation] = useLocation();
-  const [editing, setEditing] = React.useState(!readOnly);
-  const [content, ] = React.useState(() => {
+ // const [, setLocation] = useLocation();
+ // const [editing, setEditing] = React.useState(!readOnly);
+  /*const [content, ] = React.useState(() => {
     return defaultDescription
       ? ''
       : null;
-  });
-  const [image, ] = React.useState(defaultImage);
-  const [title, setTitle] = React.useState(defaultTitle);
+  });*/
+  //const [image, ] = React.useState(defaultImage);
+  //const [title, setTitle] = React.useState(defaultTitle);
 
-  const [credit, ] = React.useState(defaultCredit);
+  //const [credit, ] = React.useState(defaultCredit);
 
   let filtercomp={
     id: id,

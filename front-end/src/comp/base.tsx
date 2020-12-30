@@ -85,10 +85,10 @@ export const ContainLine =({ display, children, ...props })  => {
 //别人封装好的组件也可定制和替换：SearchTitle用于代替基本构件库的已有标准样式StackTitle部分，相当于定制修改原生就有的组件。
 export function SearchTitle({ children }: { children: React.ReactNode }) {
   const {
-    navHeight,
-    index,
+    //navHeight,
+    //index,
     active,
-    changeIndex,
+    //changeIndex,
     opacity,
     transform
   } = React.useContext(StackContext);

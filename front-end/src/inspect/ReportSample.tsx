@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { jsx,  } from "@emotion/react";
+//import { jsx,  } from "@emotion/react";
 import * as React from "react";
 //import debug from "debug";
 import {
@@ -18,10 +18,10 @@ import {
   IconMoreVertical,
   IconArrowLeft, IconArrowRight,
 } from "customize-easy-ui-component";
-import {  useDispatchIspMen,  useReport } from "./db";
+import {  useReport } from "./db";
 //import { useSession } from "../auth";
 import {Helmet} from "react-helmet";
-import { Link as RouterLink, Link, Route, Switch } from "wouter";
+import { Link as RouterLink, Route, Switch } from "wouter";
 import { ContainLine, TransparentInput } from "../comp/base";
 import { useCommitOriginalData, useQueryOriginalRecord } from "../report/db";
 
@@ -54,16 +54,16 @@ export const ReportSample: React.FunctionComponent<ComposeProps> = ({
   params: { id, repId},      //来自上级<Route path={"/device/:id/addTask"} />路由器给的:id。
 }) => {
   const theme = useTheme();
-  const toast = useToast();
+  //const toast = useToast();
   const [editing, setEditing] = React.useState(!readOnly);
-  const [content, ] = React.useState(() => {
+  /*const [content, ] = React.useState(() => {
     return defaultDescription
       ? ''
       : null;
-  });
-  const [image, ] = React.useState(defaultImage);
+  });*/
+  //const [image, ] = React.useState(defaultImage);
   const [title, setTitle] = React.useState(defaultTitle);
-  const [credit, ] = React.useState(defaultCredit);
+  //const [credit, ] = React.useState(defaultCredit);
 
   let filtercomp={
     id: repId,
@@ -297,7 +297,7 @@ const FirstPage= ( {theme=null, id ,rep}
           autoFocus={true}
           readOnly
           placeholder="报告类型"
-          value={ rep && rep.type || ''}
+          value={ (rep && rep.type) || ''}
           onChange={e => {
             setIngredients( {
               ...ingredients,
@@ -309,7 +309,7 @@ const FirstPage= ( {theme=null, id ,rep}
         <TransparentInput
           autoFocus={true}
           readOnly
-          value={rep && rep.isp.conclusion ||''}
+          value={(rep && rep.isp.conclusion) ||''}
           onChange={e => {
             setIngredients( {
               ...ingredients,
@@ -338,7 +338,7 @@ const FirstPage= ( {theme=null, id ,rep}
       <ContainLine display={'设备安装地址'}>
         <TransparentInput
           readOnly
-          value={rep && rep.isp.dev.pos && rep.isp.dev.pos.address ||''}
+          value={(rep && rep.isp.dev.pos && rep.isp.dev.pos.address) ||''}
         />
       </ContainLine>
     </div>

@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { jsx, css,  } from "@emotion/react";
+import {  css,  } from "@emotion/react";
 import * as React from "react";
 import {
   Text,
@@ -13,16 +13,10 @@ import {
   IconCloud,
   List,
   ListItem,
-  Skeleton,
-  Avatar,
-  ResponsivePopover,
-  MenuList,
-  MenuItem,
-  IconPackage,
-  IconButton, IconMoreVertical, IconTruck, IconArrowRight
+  Avatar,IconTruck, IconArrowRight
 } from "customize-easy-ui-component";
 //import useLocation from "wouter/use-location";
-import {  useQueryOriginalRecord } from "./db";
+//import {  useQueryOriginalRecord } from "./db";
 //import { useUid } from "customize-easy-ui-component/esm/Hooks/use-uid";
 import food from "../images/food.svg";
 import { Layout } from "./Layout";
@@ -32,8 +26,9 @@ import {RecordView} from "./RecordView";
   /*类比路由功能的配置表，根据类型来映射组件的文件名*/
 import typeAsRoute from "../typeAsRoute.json";
 import { loadTemplate } from "./template";
+//新版本直接把gql描述放在页面组件中。
 import { useQuery,gql,useMutation } from "@apollo/client";
-import { Link as RouterLink } from "wouter";
+//import { Link as RouterLink } from "wouter";
 import { ContainLine, TransparentInput } from "../comp/base";
 import { useEffect } from "react";
 
@@ -53,10 +48,10 @@ const WEI_HU_UNIT = gql`
 //可能2个分片一起发起submitfunc请求的；点击停止后，任务实际继续直到已经发起的分片任务返回结果；调整参数使每个分片5-10秒能解决。
 const UnitDetail= ( { id, onCancel }
 ) => {
-  const theme = useTheme();
+  //const theme = useTheme();
   const [limit, setLimit] = React.useState(40 );
   const [offset, setOffset] = React.useState(0 );
-  const [submitfunc, {error, data, loading, called}] = useMutation(WEI_HU_UNIT, {
+  const [submitfunc, {error, data, loading, }] = useMutation(WEI_HU_UNIT, {
     variables: {offset, limit }
   });
   const [doing, setDoing] = React.useState(false );
@@ -75,6 +70,7 @@ const UnitDetail= ( { id, onCancel }
           console.log("UnitEventskey=", key, value);
           if(!someOneis)  someOneis=true;
         }
+        return null;
       });
       if(someOneis)     setDoing(false);
       if(data?.res.length>0)     setOffset(offset + limit);
@@ -155,7 +151,7 @@ export default function MaintenanceMain({printing, }:{printing?:boolean, },props
   //采用RouterLink页内路由进入useState还保留旧的值，要修改就将会导致render两次；旧的值新的值各一次渲染。若采用URL刷新模式只有一次。
   const [show, setShow] = React.useState(false);
 
-  let filtercomp={ id:231 };
+  //let filtercomp={ id:231 };
   //refetch() 引起 loading= True/False变化，从而需要组件范围render重做搞2次。
   //若是浏览器后退前进的场景不会执行useQueryOriginalRecord代码，item已经有数据了，loading不会变化。
   //const {loading,items, refetch } =useQueryOriginalRecord(filtercomp);
@@ -169,7 +165,7 @@ export default function MaintenanceMain({printing, }:{printing?:boolean, },props
   //２审核组件：回退或者往前固化结论项后保存给正式报告页面。　项目文本简化，数据需要保存给后端；－－正式报告手机可预览版，无下拉分区，不能编辑，－－核准管理人员审批。
   //３正式报告那个目录的打印页面。只读的，结论项也是读后端的；正式报告文书版本或可转保存其他如pdf类型文档，无下拉分区，全展示；－－大众用户查看。
   //审核但是不能修改检验数据模式，回退编制复检？或后台修正；校对转正式报告数据倒腾和推断合并结论项目，另外保存成了deduction，对表正式报告，报告排版美化。
-  const [inp, setInp] = React.useState(null);
+  const [inp, ] = React.useState(null);
 
 
   //外部dat不能加到依赖，变成死循环! const  dat =items&&items.data&&JSON.parse(items.data);  这dat每次render都变了？

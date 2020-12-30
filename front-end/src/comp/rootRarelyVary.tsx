@@ -1,11 +1,11 @@
 /** @jsxImportSource @emotion/react */
-import { jsx,  } from "@emotion/react";
+//import { jsx,  } from "@emotion/react";
 import * as React from "react";
 import {
-  Text, Link, Divider, Embed, useTheme, Container
+  Text, Link, useTheme, Container
 } from "customize-easy-ui-component";
 
-import { Link as RouterLink } from "wouter";
+//import { Link as RouterLink } from "wouter";
 
 
 //重复性代码抽象抽取参数化后可复用。

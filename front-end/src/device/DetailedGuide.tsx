@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { jsx, css } from "@emotion/react";
+//import { jsx, css } from "@emotion/react";
 import * as React from "react";
 import {
   Navbar,
@@ -15,12 +15,12 @@ import {
   Container,
   ResponsivePopover,
   IconMoreVertical,
-  IconArrowLeft, IconArrowRight, Select, IconPackage, IconPlus, DarkMode
+  IconArrowLeft, IconArrowRight, IconPackage,
 } from "customize-easy-ui-component";
 
-import {Helmet} from "react-helmet";
+//import {Helmet} from "react-helmet";
 import { Link as RouterLink, Route, Switch, useLocation, useRoute } from "wouter";
-import { ContainLine, TransparentInput } from "../comp/base";
+//import { ContainLine, TransparentInput } from "../comp/base";
 import { useDeviceDetail } from "./db";
 import { AddToTask } from "./task/AddToTask";
 import { DeviceDetail } from "./DeviceDetail";
@@ -43,7 +43,7 @@ export const DetailedGuide: React.FunctionComponent<DetailedGuideProps> = ({
   if(id==='new')  id=null;
 
   const { loading ,items: dtvalue, error ,refetch} = useDeviceDetail( { id } );
-  const {result, submit:updateFunc, } = useInvalidateEQP({
+  const { submit:updateFunc, } = useInvalidateEQP({
       whichEqp: id, reason:'测试期',
   });
 

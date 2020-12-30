@@ -8,8 +8,8 @@ import debug from "debug";
 //import { Ingredient } from "./RecipeList";
 
 import {gql, useMutation, useQuery } from "@apollo/client";
-import { StackItem } from "react-gesture-stack";
-import * as React from "react";
+//import { StackItem } from "react-gesture-stack";
+//import * as React from "react";
 //import * as React from "react";
 
 //import { client } from "./graphql/setup";

@@ -196,7 +196,7 @@ function ReportListItem({ recipe, id, highlight ,task }: any) {
   const [isActive,] = useRoute(href);
   const [, setLocation] = useLocation();
   const [repId, setRepId] = React.useState(null);
-  const {result, submit:updateFunc, } = useDeleteReport({
+  const { submit:updateFunc, } = useDeleteReport({
     repId, reason:'测试期直接删'
   });
   //下面highlight. 是algoliasearch.Response返回的，必须有预先定义。

@@ -30,14 +30,6 @@ import { StackItem,  } from "react-gesture-stack";
 import { BoundDevices } from "./BoundDevices";
 
 
-
-
-//接口参数类型
-interface ResponseLikeAlgoliasearch<T=any> {
-  hits: T[];
-  //processingTimeMS: number;
-}
-
 export interface FollowingListProps {}
 //检验任务列表的主窗口
 export const TaskList: React.FunctionComponent<

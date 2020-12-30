@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { jsx, css } from "@emotion/react";
+import { css } from "@emotion/react";
 import * as React from "react";
 import {
   Navbar,
@@ -48,24 +48,24 @@ export const AddReport: React.FunctionComponent<AddReportProps> = ({
   params: { id, repId},      //来自上级<Route path={"/device/:id/addTask"} />路由器给的:id。
 }) => {
   const theme = useTheme();
-  const toast = useToast();
-  const ispId =id;
+  //const toast = useToast();
+  //const ispId =id;
   const [editing, setEditing] = React.useState(!readOnly);
-  const [content, ] = React.useState(() => {
+  /*const [content, ] = React.useState(() => {
     return defaultDescription
       ? ''
       : null;
-  });
-  const [image, ] = React.useState(defaultImage);
+  });*/
+  //const [image, ] = React.useState(defaultImage);
   const [title, setTitle] = React.useState(defaultTitle);
-  const [credit, ] = React.useState(defaultCredit);
+  //const [credit, ] = React.useState(defaultCredit);
   let filtercomp={
     id: 2,
   };
-  const {error, loading, items:rep , } = useReport(filtercomp);
+  const { loading, items:rep , } = useReport(filtercomp);
   const [ingredients, setIngredients] = React.useState<any>( rep||{} );
 
-  const {result, submit:updateFunc, } = useDispatchIspMen({
+  const {result,  } = useDispatchIspMen({
     task: repId,
     dev: id, username:ingredients && ingredients.ispMen,
     });
@@ -73,7 +73,7 @@ export const AddReport: React.FunctionComponent<AddReportProps> = ({
 
 
   //不能在这点击触发函数内部执行HOOKs!! 必须上移动外移到 界面组件的头部初始化hooks，随后点击触发调用hook钩子函数。
-  async function updateRecipe(id: string)
+  /*async function updateRecipe(id: string)
   {
     try {
       await updateFunc();
@@ -90,7 +90,7 @@ export const AddReport: React.FunctionComponent<AddReportProps> = ({
       intent: "info"
     });
   }
-
+*/
 
   React.useEffect(() => {
     setIngredients( rep||{} );
@@ -305,7 +305,7 @@ const FirstPage= ( {id ,rep}
   const toast = useToast();
   //模板的类型标识;
   //Todo: 获取后端的列表？ 或者，前后端同步数据维护。
-  const [tplType, setTplType] = React.useState('EL-DJ');
+  //const [tplType, setTplType] = React.useState('EL-DJ');
   const [ingredients, setIngredients] = React.useState<any>( {modeltype:'EL-DJ', modelversion:'1'} );
   const {result, submit:doReportBuild, loading} = useNewReport({
     isp: id, type:ingredients.modeltype , version:ingredients.modelversion

@@ -2,36 +2,26 @@
 //import { jsx } from "@emotion/react";
 import * as React from "react";
 import {
-  List,
-  ListItem,
-  Avatar,
-  IconButton,
-  Button,
-  MenuList,
   Stack,
   useTheme,
-  IconMoreVertical,
   StackTitle,
-  Skeleton, MenuItem, IconPackage, ResponsivePopover
 } from "customize-easy-ui-component";
 import { SearchDeviceBox } from "./SearchDeviceBox";
 
 //import algoliasearch from "algoliasearch";
 //import config from "./firebase-config";
-
-import {  usePaginateQueryDevice,  } from "./db";
-
+//import {  usePaginateQueryDevice,  } from "./db";
 //import { FollowingRecipes } from "./FollowingRecipes";
 
-import { StackItem, StackContext } from "react-gesture-stack";
+import { StackItem,  } from "react-gesture-stack";
 
 //import { useHistory } from "react-router-dom";
 //@reach 的 Link 可以附带state ；
 //import { Link, navigate, globalHistory } from "@reach/router";
 
 //import useHistoryState from "use-history-state";
-import { useEffect } from "react";
-import { useInView } from 'react-intersection-observer'
+//import { useEffect } from "react";
+//import { useInView } from 'react-intersection-observer'
 //import { PullToRefresh,PullDownContent,RefreshContent,ReleaseContent } from "react-js-pull-to-refresh";
 import { DevfilterContext } from "../context/DevfilterContext";
 import {DeviceListInner} from "./DeviceListInner"

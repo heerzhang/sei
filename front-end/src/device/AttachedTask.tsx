@@ -1,29 +1,22 @@
 /** @jsxImportSource @emotion/react */
-import { jsx, Global } from "@emotion/react";
+//import { jsx, Global } from "@emotion/react";
 import * as React from "react";
 
 import {
-  Navbar,
-  Toolbar,
-  Input,
   Text,
-  IconButton,
   MenuList,
   MenuItem,
   useTheme,
-  InputBaseProps,
   useToast,
   LayerLoading,
   Container,
   ResponsivePopover,
-  IconMoreVertical,
-  MenuDivider, IconPackage, Button, IconChevronDown
+   IconPackage, Button, IconChevronDown
 } from "customize-easy-ui-component";
 
 //import { useSession } from "../auth";
-import {Helmet} from "react-helmet";
-import { Link,  useLocation } from "wouter";
-import { Link as RouterLink } from "wouter";
+//import {Helmet} from "react-helmet";
+import { Link as RouterLink,  useLocation } from "wouter";
 import { useCancellationTask } from "./task/db";
 
 
@@ -53,16 +46,16 @@ export const AttachedTask: React.FunctionComponent<AttachedTaskProps> = ({
   const theme = useTheme();
   const toast = useToast();
   const eqpId=id;
-  const [loading, setLoading] = React.useState(false);
-  const [editing, setEditing] = React.useState(!readOnly);
-  const [image, ] = React.useState(defaultImage);
-  const [title, setTitle] = React.useState(defaultTitle);
+  const [loading, ] = React.useState(false);
+  //const [editing, setEditing] = React.useState(!readOnly);
+  //const [image, ] = React.useState(defaultImage);
+  //const [title, setTitle] = React.useState(defaultTitle);
   const [taskId, setTaskId] = React.useState(null);
   //直接取得EQP关联的task字段的对象。
   const {task} =eqp;
  // const [ingredients, setIngredients] = React.useState<any>( dt||{} );
   const [, setLocation] = useLocation();
-  const {result, submit:updateFunc, } = useCancellationTask({
+  const { submit:updateFunc, } = useCancellationTask({
     taskid: taskId, reason:'测试期直接删'
   });
   //console.log("页面刷新钩子AttachedTask entry=",　",设备id="+id+";task=",task,";eqp=",eqp);
@@ -166,13 +159,13 @@ export const AttachedTask: React.FunctionComponent<AttachedTaskProps> = ({
                             >
                               状态：{each.status||''}
                             </Text>
-                            {hasIsp? <Link  to={"/inspect/" + myIsp.id}>
+                            {hasIsp? <RouterLink  to={"/inspect/" + myIsp.id}>
                                 {myIsp? '检验ISP详情' : '逻辑异常'}
-                              </Link>
+                              </RouterLink>
                                :
-                              <Link  to={"/device/"+eqp.id+"/task/"+each.id+'/dispatch'}>
+                              <RouterLink  to={"/device/"+eqp.id+"/task/"+each.id+'/dispatch'}>
                                 先要去派工
-                              </Link>
+                              </RouterLink>
                             }
                             <ResponsivePopover
                               content={

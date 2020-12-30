@@ -19,13 +19,13 @@ import { useSession, useLoginToServer, useRegisterToServer } from "./auth";
 import queryString from "query-string";
 import { Layout } from "./Layout";
 //import { InputGroup } from "./comp/Form";
-import { Link as RouterLink } from "wouter";
+//import { Link as RouterLink } from "wouter";
 
 interface LoginProps {
 }
 export const Login: React.FunctionComponent<LoginProps> = props => {
   const theme = useTheme();
-  const {user,loading:isload} = useSession();
+  const { loading:isload } = useSession();
   const qs = queryString.parse(window.location.search);
   const [isRegistering, setIsRegistering] = React.useState(
     typeof qs.register === "string"
@@ -36,7 +36,7 @@ export const Login: React.FunctionComponent<LoginProps> = props => {
   const [form, setForm] = React.useState({ username: "", password: "",
          mobile:'', external:'旧平台'} as any);
 
-  const { result, submit:submitfunc, error:errLogin,  } = useLoginToServer(form);
+  const {  submit:submitfunc,  } = useLoginToServer(form);
   const { result:regOK, submit:registerfunc, error:errReg } = useRegisterToServer(form);
   console.log("登录机密 开始userList=",regOK,"errReg=",errReg);
 

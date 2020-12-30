@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { jsx,  Global } from "@emotion/react";
+import { Global } from "@emotion/react";
 import { Suspense, lazy,  } from "react";
 import * as React from "react";
 //import * as firebase from "firebase/app";
@@ -84,6 +84,7 @@ interface NestingtRouteProps {
 }
 //Todo: 问题，NestingtRoute， 导致Link 后缀重复添加。
 //嵌套路由必须在上层路由通过path/:rest*向下一级路由去传递相对的目录路径，下级路由无需预设基础路径/通过path参数设置。
+/*
 const NestingtRoute_old = ({
                          component: Component,
                         path,
@@ -131,6 +132,8 @@ const NestingtRoute_old = ({
 
   return <Component path={basePath} />;
 };
+
+*/
 
 const NestingtRoute = ({
                          component: Component,

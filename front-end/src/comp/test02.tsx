@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { jsx,  } from "@emotion/react";
+//import { jsx,  } from "@emotion/react";
 import * as React from "react";
 import {
   Text,
@@ -9,17 +9,9 @@ import {
   Input,
   ScrollView,
   ScrollViewHandles,
-  Layer,
-  Table,
-  TableHead,
-  TableRow,
-  TableCell,
-  ExpandingRow,
-  useTheme,
-  Toolbar,
   useToast
 } from "customize-easy-ui-component";
-import useScrollLock from "use-scroll-lock";
+//import useScrollLock from "use-scroll-lock";
 
 
 //import {ScrollView, ScrollViewHandles} from "customize-easy-ui-component";
@@ -238,7 +230,7 @@ function createData(
   id += 1;
   return { id, name, calories, fat, carbs, protein };
 }
-
+/*
 const rows = [
   createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
   createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
@@ -246,9 +238,9 @@ const rows = [
   createData("Cupcake", 305, 3.7, 67, 4.3),
   createData("Gingerbread", 356, 16.0, 49, 3.9)
 ];
-
+*/
 export  function Example() {
-  const theme = useTheme();
+  //const theme = useTheme();
   const toast = useToast();
 
   return (

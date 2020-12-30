@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { jsx, css } from "@emotion/react";
+import {  css } from "@emotion/react";
 import * as React from "react";
 import {
   Toolbar,
@@ -44,7 +44,7 @@ export const DeviceMain: React.FunctionComponent<DeviceMainProps> =(props ,conte
   const {user} = useSession();
   const isLarge = useMedia({ minWidth: "768px" });
   const qs = queryString.parse(window.location.search);
-  const {filter:devfl, setFilter:setDevfl} =React.useContext(DevfilterContext);
+  const {filter:devfl, } =React.useContext(DevfilterContext);
   const [, params] = useRoute("/device/:recipe*");
   let showingRecipe = params.recipe;
   let initTab=0;
@@ -295,7 +295,7 @@ export const DeviceMain: React.FunctionComponent<DeviceMainProps> =(props ,conte
 
 
 //路由和刷新？Mutation数据更新 refetchQueries:[''] 对应查询函数必须是挂载的组件内才能重做查询，路由导致分岔屏蔽掉。
-function SecondRouterContent({}) {
+function SecondRouterContent({...props}) {
   return (
     <Switch>
       <Route path={"/device/new"}>

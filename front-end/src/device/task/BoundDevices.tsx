@@ -13,7 +13,7 @@ import {
 
 import {  useQueryBoundDevices } from "./db";
 import { useFirebaseImage } from "../../Image";
-import { Link as RouterLink, useLocation, useRoute } from "wouter";
+import { Link as RouterLink, useRoute } from "wouter";
 import { FadeImage } from "../../FadeImage";
 
 
@@ -197,7 +197,7 @@ function DeviceListItem({ recipe, id, highlight ,task }: any) {
   const href = `/device/${id}/task/${task}`;
   //被点击中匹配href，成功=true=isActive[? ,..];　表示正好跟界面显示同样的一个路由。
   const [isActive,] = useRoute(href);
-  const [, setLocation] = useLocation();
+  //const [, setLocation] = useLocation();
 //
   //   href={`/device/${id}`}
   //        //navigate(href , { replace: true });
