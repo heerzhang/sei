@@ -1,10 +1,7 @@
 # Created by .ignore support plugin (hsz.mobi)
-.idea/
-/.idea
-front-end/.idea/
-front-end/.idea
-/front-end/.idea/
-/front-end/.idea
+
+
+
 
 # dependencies
 /node_modules
