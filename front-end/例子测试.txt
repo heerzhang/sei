@@ -373,6 +373,8 @@ graphQL升版本后已经不支持input参数的可自循环迭代定义；之�
   }, [query]);
 现成apollo-server是node.js(8+)环境下的。
 <Pager enableScrollLock={false}消除scroll-lock报错"react-page-controller"里<Pager useScrollLock(缺ref参数);<Tab><StackItem>都useScrollLock
-Chrome调试输出verbose出现：[Violation] xxx handler took xxxms; 说明违背预期规则，影响流畅性；代码有待改进，或可以改用异步执行模式来避免阻塞页面给用户响应即时性感觉。
+开发Chrome浏览器输出选项卡：Verbose：仅显示 console.debug() 的输出。
+Chrome调试输出verbose出现：[Violation] xxx handler took xxxms; 说明违背常规预期，影响流畅性；提醒您代码有待改进，或可以改用异步执行模式来避免阻塞页面给用户响应即时性感觉。
+PullToRefresh实际已被淘汰了import { PullDownContent, PullToRefresh, RefreshContent, ReleaseContent } from "react-js-pull-to-refresh";
+准备彻底替换删除：verbose :  PullToRefresh.tsx:62 [Violation] Added non-passive event listener
 
-ListItem UI组件 可能遭遇scroll unmount问题，等待验证？？
