@@ -1,39 +1,31 @@
 /** @jsxImportSource @emotion/react */
-import { jsx, Global } from "@emotion/react";
+//import { jsx, Global } from "@emotion/react";
 import * as React from "react";
 //import Editor, { tryValue } from "./Editor";
 //import { ImageUpload } from "./ImageUpload";
 //import { Image } from "./Image";
 //import { Value } from "slate";
-import debug from "debug";
+//import debug from "debug";
 //import initialValue from "./value.json";
 //import { Ingredient } from "./RecipeList";
 import {
-  Navbar,
-  Toolbar,
   Input,
   Text,
   Button,
-  IconButton,
-  MenuList,
-  MenuItem,
   useTheme,
   InputBaseProps,
   useToast,
   LayerLoading,
   Container,
-  ResponsivePopover,
-  IconMoreVertical,
-  IconArrowLeft,
-  MenuDivider, IconPackage, Check
+ Check
 } from "customize-easy-ui-component";
-import {   useCreateDevice, useUpdateEntry } from "./db";
+import {   useCreateDevice,  } from "./db";
 import {Helmet} from "react-helmet";
-import { Link,  useLocation } from "wouter";
-import { Link as RouterLink } from "wouter";
+import {  useLocation } from "wouter";
+//import { Link as RouterLink } from "wouter";
 
 
-const log = debug("app:Compose");
+//const log = debug("app:Compose");
 
 interface ComposeDeviceProps {
   id?: string;
@@ -50,7 +42,7 @@ export const ComposeDevice: React.FunctionComponent<ComposeDeviceProps> = ({
   const toast = useToast();
  // const {user,} = useSession();
   const [loading, setLoading] = React.useState(false);
-  const [editing, setEditing] = React.useState(!readOnly);
+  const [editing, ] = React.useState(!readOnly);
   /* const [content, ] = React.useState(() => {
         return defaultDescription
           ? ''
@@ -62,7 +54,7 @@ export const ComposeDevice: React.FunctionComponent<ComposeDeviceProps> = ({
   console.log("刚ComposeDevice经过EQPis",dt,"进行中id=",id,"ingredients=",ingredients);
   const [, setLocation] = useLocation();
 
-  const [Options, setOptions] = React.useState({});
+  const [, setOptions] = React.useState({});
   const {result:entry, submit:submitfunc, error} = useCreateDevice({id:"1",  ...ingredients});
   /*
   const {result, submitfunc:updateFunc, } = useUpdateEntry({

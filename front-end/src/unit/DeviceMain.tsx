@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { jsx, css } from "@emotion/react";
+import {  css } from "@emotion/react";
 import * as React from "react";
 import {
   Toolbar,
@@ -30,7 +30,7 @@ import { TaskList } from "./task/TaskList";
 import { DispatchIspMen } from "./task/DispatchIspMen";
 import { UnitList } from "./UnitList";
 import { IspEntrance } from "./task/IspEntrance";
-import { useCountOfTask } from "./db";
+//import { useCountOfTask } from "./db";
 import { DetailedGuide } from "./DetailedGuide";
 
 interface DeviceMainProps {
@@ -297,7 +297,7 @@ export const DeviceMain: React.FunctionComponent<DeviceMainProps> = props => {
 
 
 //路由和刷新？Mutation数据更新 refetchQueries:[''] 对应查询函数必须是挂载的组件内才能重做查询，路由导致分岔屏蔽掉。
-function SecondRouterContent({}) {
+function SecondRouterContent({...props}) {
   return (
     <Switch>
       <Route path={"/unit/new"}>

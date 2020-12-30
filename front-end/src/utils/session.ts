@@ -1,6 +1,6 @@
 import storage from './storage';
 
-export default {
+const session =  {
   isTokenSet() {
     const authToken = storage.get('token');
     return authToken && !!authToken.trim();
@@ -20,3 +20,6 @@ export default {
     storage.remove('token');
   }
 };
+
+
+export default session;

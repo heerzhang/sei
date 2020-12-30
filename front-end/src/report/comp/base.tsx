@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { jsx, css, SerializedStyles } from "@emotion/react";
+import {  css, SerializedStyles } from "@emotion/react";
 import * as React from "react";
 import {
   useTheme,
@@ -14,7 +14,7 @@ import PropTypes from "prop-types";
 import { Dispatch, SetStateAction } from "react";
 //import isEqual from "lodash.isequal";
 import { MutableRefObject } from "react";
-import { Ref } from "react";
+//import { Ref } from "react";
 import { EditStorageContext } from "../StorageContext";
 import { Link as RouterLink } from "wouter";
 import { CCell, Cell, TableRow } from "../../comp/TableExt";

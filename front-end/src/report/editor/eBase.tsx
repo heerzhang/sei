@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { jsx,  } from "@emotion/react";
+//import { jsx,  } from "@emotion/react";
 import * as React from "react";
 import {
   Text,  Button,  IconChevronDown,
@@ -8,7 +8,6 @@ import {
 //import { Link as RouterLink } from "wouter";
 import {
   InspectRecordLayout,
-  InternalItemHandResult,
   InternalItemProps,
   SelectHookfork,
   useItemInputControl
@@ -190,6 +189,7 @@ export const ItemUniversal=
         const namexD = `${aName}_D`;
         fields[aName] =par[aName];
         fields[namexD] =par[namexD];
+        return null;
       });
       inspectionContent[x].items[y].addNames.forEach(name=>
         fields[name] =par[name]

@@ -1,7 +1,10 @@
+//还没实际使用到的；
+
 const { REACT_APP_BUILD_MODE } = process.env;
 
 /* tslint:disable */
 class Logger {
+      //debug () ,verbose ();
   static log(...args: Array<any>) {
     if (REACT_APP_BUILD_MODE !== 'production') {
       console.log(...args);
@@ -29,3 +32,4 @@ class Logger {
 /* tslint:enable */
 
 export default Logger;
+

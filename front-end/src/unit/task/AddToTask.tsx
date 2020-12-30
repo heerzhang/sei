@@ -1,27 +1,19 @@
 /** @jsxImportSource @emotion/react */
-import { jsx, } from "@emotion/react";
+//import { jsx, } from "@emotion/react";
 import * as React from "react";
 //import { Value } from "slate";
 import {
-  Navbar,
-  Toolbar,
   Text,
   Button,
-  IconButton,
-  MenuList,
-  MenuItem,
   useTheme,
   useToast,
   LayerLoading,
   Container,
-  ResponsivePopover,
-  IconMoreVertical,
-  IconArrowLeft, Input, InputGroupLine
 } from "customize-easy-ui-component";
 import {   useAddToTask } from "../db";
 //import { useSession } from "../auth";
 import { Helmet } from "react-helmet";
-import { Link as RouterLink, Link } from "wouter";
+//import { Link as RouterLink, Link } from "wouter";
 import { ContainLine, TransparentInput } from "../../comp/base";
 //import { awaitExpression } from "@babel/types";
 
@@ -58,22 +50,22 @@ export const AddToTask: React.FunctionComponent<ComposeProps> = ({
 //  const {user,} = useSession();
   const [loading, setLoading] = React.useState(false);
   const [editing, setEditing] = React.useState(!readOnly);
-  const [content, ] = React.useState(() => {
+ /* const [content, ] = React.useState(() => {
     return defaultDescription
       ? ''
       : null;
-  });
-  const [image, ] = React.useState(defaultImage);
+  });*/
+ // const [image, ] = React.useState(defaultImage);
 
-  const [title, setTitle] = React.useState(defaultTitle);
+ // const [title, setTitle] = React.useState(defaultTitle);
 
-  const [credit, ] = React.useState(defaultCredit);
+ // const [credit, ] = React.useState(defaultCredit);
   //ingredients 原来是[]数组，改成对象。ingredients.length无定义了。
   const [ingredients, setIngredients] = React.useState<any>( {dep:'二部'　} );
 
   console.log("AddToTask页面刷新id:", id ,"dt=",dt);
 
-  const {result, submit:updateFunc, error:updateError, } = useAddToTask({
+  const {result, submit:updateFunc, } = useAddToTask({
     dep: ingredients && ingredients.dep,
     devs: id, date:ingredients && ingredients.date,
     });

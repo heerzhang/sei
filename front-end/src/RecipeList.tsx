@@ -24,7 +24,7 @@ import { FadeImage } from "./FadeImage";
 import { usePaginateQueryRecipe } from "./db";
 import { SearchBox } from "./SearchBox";
 import { useInView } from 'react-intersection-observer'
-import { PullToRefresh,PullDownContent,RefreshContent,ReleaseContent } from "react-js-pull-to-refresh";
+//import { PullToRefresh,PullDownContent,RefreshContent,ReleaseContent } from "react-js-pull-to-refresh";
 import { useEffect } from "react";
 
 //import usePaginateQuery from "firestore-pagination-hook";
@@ -222,6 +222,7 @@ export const RecipeList: React.FunctionComponent<RecipeListProps> = ({
   //实际上，两个操作模式下都走读items给UI显示的话，就没必要麻烦dispatch　再去绕一圈了。
   //console.log("准示state.searchResponse="+ JSON.stringify(query) + JSON.stringify(state.searchResponse));
 
+  //废弃<PullToRefresh onRefresh={() => toRefresh() }
   async function toRefresh() {
     setHasMore(true);
     refetch( {} );
@@ -278,17 +279,6 @@ export const RecipeList: React.FunctionComponent<RecipeListProps> = ({
       <div  css={{  flex: "0 0 auto"  }}  >
         <SearchBox query={query} setQuery={setQuery} />
       </div>
-
-      <PullToRefresh
-        pullDownContent={<PullDownContent/>}
-        releaseContent={<ReleaseContent label={'立刻刷新内容'}/>}
-        refreshContent={<RefreshContent />}
-        onRefresh={() => toRefresh() }
-        pullDownThreshold={40}
-        backgroundColor="white"
-        triggerHeight="auto"
-      >
-
 
       <div
         css={{   /*特意把父div滚动条启动开。`calc(100vh - ${ileapHeight}px)`,   '750px',  注意串里的空格必须要有！
@@ -426,8 +416,6 @@ export const RecipeList: React.FunctionComponent<RecipeListProps> = ({
         </div>
         <div  ref={refMore}> </div>
      </div>
-
-      </PullToRefresh>
 
     </div>
   );

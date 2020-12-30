@@ -377,4 +377,5 @@ graphQL升版本后已经不支持input参数的可自循环迭代定义；之�
 Chrome调试输出verbose出现：[Violation] xxx handler took xxxms; 说明违背常规预期，影响流畅性；提醒您代码有待改进，或可以改用异步执行模式来避免阻塞页面给用户响应即时性感觉。
 PullToRefresh实际已被淘汰了import { PullDownContent, PullToRefresh, RefreshContent, ReleaseContent } from "react-js-pull-to-refresh";
 准备彻底替换删除：verbose :  PullToRefresh.tsx:62 [Violation] Added non-passive event listener
+优先使用interface定义,不行的再用type做,interface接口与类型别名type T=不同，接口可以定义多次，并将被视为单个接口(合并成员);type能用in关键字生成映射类型[key in T]:
 

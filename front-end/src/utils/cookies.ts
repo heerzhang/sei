@@ -4,7 +4,7 @@ interface CookiesOptions {
   [key: string]: string | Date | undefined | boolean | number;
 }
 
-export default {
+const cookies = {
   get(name: string) {
     /* eslint-disable */
     const matches = document.cookie.match(
@@ -54,6 +54,10 @@ export default {
     });
   }
 };
+
+
+export default cookies;
+
 
 /* 原文：https://blog.csdn.net/hxg117/article/details/76954606
 3. 将Token存储于Cookie

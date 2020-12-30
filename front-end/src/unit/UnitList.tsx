@@ -7,28 +7,20 @@ import {
   Avatar,
   IconButton,
   Button,
-  Popover,
   MenuList,
   Stack,
   useTheme,
-  IconPlus,
   IconMoreVertical,
   StackTitle,
-  Skeleton, MenuItem, MenuDivider, IconPackage, ResponsivePopover
+  Skeleton, MenuItem, IconPackage, ResponsivePopover
 } from "customize-easy-ui-component";
 import { SearchDeviceBox } from "./SearchDeviceBox";
 import {  usePaginateQueryDevice,  } from "./db";
-import { StackItem, StackContext } from "react-gesture-stack";
+import { StackItem,  } from "react-gesture-stack";
 import {SearchTitle} from "../comp/base"
 import { useLocation } from "wouter";
 import { useEffect } from "react";
 import { useInView } from 'react-intersection-observer'
-
-//接口参数类型
-interface ResponseLikeAlgoliasearch<T=any> {
-  hits: T[];
-  //processingTimeMS: number;
-}
 
 interface DeviceListProps {company?: boolean
 }
@@ -71,7 +63,7 @@ export const UnitList: React.FunctionComponent<
   const {
     loading,
     items: devicesFind,
-    fetchMore: loadMore　,refetch
+    fetchMore: loadMore　
   } =usePaginateQueryDevice(filter);
 
   //界面轮播 setIndex切换显示界面；   //index不是组件外部那一个同名index；
@@ -95,7 +87,7 @@ export const UnitList: React.FunctionComponent<
   //这两个useEffect的前后顺序不能颠倒，顺序非常重要，后面的依赖于前面的useEffect更新结果。
 
 
-  const [hasMore, setHasMore] = React.useState(true);
+  //const [hasMore, setHasMore] = React.useState(true);
   const [refMore, acrossMore] = useInView({threshold: 0});
   //后端返回了loading变动=会更新整个DeviceList组件，同时也执行updateQuery: ()=>{}回调更新数据。
   const toLoadMore = React.useCallback(

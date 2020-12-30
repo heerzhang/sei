@@ -1,12 +1,12 @@
 /** @jsxImportSource @emotion/react */
-import { jsx,  } from "@emotion/react";
+//import { jsx,  } from "@emotion/react";
 import * as React from "react";
 import {
    useTheme, InputGroupLine, SuffixInput, Button, Input
 } from "customize-easy-ui-component";
 
 import { CCell, Cell, Table, TableBody, TableRow } from "../../comp/TableExt";
-import { InspectRecordLayout, InternalItemHandResult, InternalItemProps, useItemInputControl } from "../comp/base";
+import { InspectRecordLayout, InternalItemProps, useItemInputControl } from "../comp/base";
 import { Link as RouterLink } from "wouter";
 import * as queryString from "querystring";
 import Img_Seal from '../../images/seal.png';

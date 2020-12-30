@@ -1,5 +1,5 @@
-/** @jsxImportSource @emotion/react */
-import { jsx, Global } from "@emotion/react";
+
+import {  Global } from "@emotion/react";
 import * as React from "react";
 import { useTheme } from "customize-easy-ui-component";
 import cutting_board_knife from '../images/cutting-board-knife.jpg';

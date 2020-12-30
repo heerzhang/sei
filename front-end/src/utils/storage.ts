@@ -1,6 +1,6 @@
 import cookies from './cookies';
 
-export default {
+const storage = {
   isLocalStorageSupported() {
     const storage = window.localStorage;
     const testKey = 'testLocalStorageFunctionality';
@@ -41,3 +41,6 @@ export default {
     }
   }
 };
+
+
+export default storage;

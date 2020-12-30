@@ -40,11 +40,11 @@
         "react-gesture-stack":"^1.3.2",
         "react-gesture-view":"^2.1.3",
         "react-helmet": "^6.1.0",
-        "react-intersection-observer":"^8.29.1",
-        "react-js-pull-to-refresh":"^1.2.2",
+        "react-intersection-observer":"^8.31.0",
         "react-spring":"^9.0.0-rc.3",
         "react-swipeable-views":"^0.13.9",
         "react-to-print":"^2.6.3",
+
         "shortid":"^2.2.15",
         "slate": "^0.47.9",
         "slate-plain-serializer": "^0.7.6",

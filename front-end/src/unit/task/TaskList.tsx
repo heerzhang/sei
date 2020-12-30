@@ -25,18 +25,19 @@ import {
 
 
 import { StackItem,  } from "react-gesture-stack";
-//只能在内容的顶部下拉，才能触发的，还是需要快捷的按钮。
-import { PullDownContent, PullToRefresh, RefreshContent, ReleaseContent } from "react-js-pull-to-refresh";
+//只能在内容的顶部下拉，才能触发的，还是需要快捷的按钮。 淘汰掉，鸡勒了也不好用告警。
+//import { PullDownContent, PullToRefresh, RefreshContent, ReleaseContent } from "react-js-pull-to-refresh";
 import { BoundDevices } from "./BoundDevices";
 
 
 
 
-//接口参数类型
+/*商业版本的ES搜索，接口参数类型
 interface ResponseLikeAlgoliasearch<T=any> {
   hits: T[];
   //processingTimeMS: number;
 }
+*/
 
 export interface FollowingListProps {}
 //检验任务列表的主窗口
@@ -208,16 +209,6 @@ export const TaskList: React.FunctionComponent<
                   </Text>
                 )}
 
-                <PullToRefresh
-                  pullDownContent={<PullDownContent label={'下拉可即刻刷新内容'}/>}
-                  releaseContent={<ReleaseContent label={'够了，放开就能刷新'}/>}
-                  refreshContent={<RefreshContent />}
-                  pullDownThreshold={120}
-                  onRefresh={() => refetch( {} )}
-                  triggerHeight={50}
-                  backgroundColor="white"
-                >
-
                 <List>
 
                   {loading && (
@@ -275,8 +266,6 @@ export const TaskList: React.FunctionComponent<
                     );
                   })}
                 </List>
-
-                </PullToRefresh>
 
               </div>
             </StackItem>

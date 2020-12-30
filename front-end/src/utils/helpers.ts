@@ -15,7 +15,8 @@ interface GraphQLError {
   };
 }
 
-export default {
+const helper = {
+  //只有这个用到
   logOut() {
     session.remove();
     //    location.href = routeUrls.auth.login;     没用？？
@@ -44,3 +45,6 @@ export default {
     return errors;
   }
 };
+
+
+export default helper;

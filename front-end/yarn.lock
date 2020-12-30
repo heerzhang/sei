@@ -12293,10 +12293,10 @@ react-immutable-proptypes@^2.1.0:
   resolved "https://registry.yarnpkg.com/react-immutable-proptypes/-/react-immutable-proptypes-2.1.0.tgz#023d6f39bb15c97c071e9e60d00d136eac5fa0b4"
   integrity sha1-Aj1vObsVyXwHHp5g0A0TbqxfoLQ=
 
-react-intersection-observer@^8.29.1:
-  version "8.29.1"
-  resolved "https://registry.yarnpkg.com/react-intersection-observer/-/react-intersection-observer-8.29.1.tgz#8c6f494ca81b39aee9f509f12d29443fc66a2256"
-  integrity sha512-JLxJ4V0L73ailfvbYQ2/lfAyirtud1WsRsYnzHyVLMfQff1AIG1lWdC5XaGSK4yb9jZHVbbNsrVIO3PJm03koQ==
+react-intersection-observer@^8.31.0:
+  version "8.31.0"
+  resolved "https://registry.yarnpkg.com/react-intersection-observer/-/react-intersection-observer-8.31.0.tgz#0ed21aaf93c4c0475b22b0ccaba6169076d01605"
+  integrity sha512-XraIC/tkrD9JtrmVA7ypEN1QIpKc52mXBH1u/bz/aicRLo8QQEJQAMUTb8mz4B6dqpPwyzgjrr7Ljv/2ACDtqw==
 
 react-is@^16.12.0:
   version "16.13.1"
@@ -12317,11 +12317,6 @@ react-is@^17.0.1:
   version "17.0.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.1.tgz#5b3531bd76a645a4c9fb6e693ed36419e3301339"
   integrity sha512-NAnt2iGDXohE5LI7uBnLnqvLQMtzhkiAOLXTmv+qnF9Ky7xAPcX8Up/xWIhxvLVGJvuLiNc4xQLtuqDRzb4fSA==
-
-react-js-pull-to-refresh@^1.2.2:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/react-js-pull-to-refresh/-/react-js-pull-to-refresh-1.2.2.tgz#bd4288049cb564953ab1fa27187c1c37bc309a91"
-  integrity sha512-fb4gBIGIE7Mehj1ZzMegl3Ca8abSc2zT6s60n+iCALdUeI9H9XvD5T+v2M8N2MDyJcxvghKdzLHZlRbSVDwK7w==
 
 react-layout-effect@^1.0.1:
   version "1.0.5"

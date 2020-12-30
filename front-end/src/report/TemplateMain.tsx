@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { jsx, css } from "@emotion/react";
+import {  css } from "@emotion/react";
 import * as React from "react";
 import {
   Toolbar,
@@ -19,7 +19,7 @@ import {
   IconPlus,
   DarkMode,
   LightMode,
-  Pager, IconArchive, IconArrowRight, Touchable,Text
+  Pager, IconArchive, IconArrowRight,
 } from "customize-easy-ui-component";
 
 import { useSession,  useSignOut } from "../auth";
