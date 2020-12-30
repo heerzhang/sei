@@ -31,3 +31,4 @@ firebase-config.ts
 
 .env
 /front-end/.env
+.eslintcache
