@@ -1,14 +1,12 @@
+//整个网站工程main() 主入口： SPA 单页面;
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-//import "./db";
 import "focus-visible";
 
 
-//整个网站工程main() 主入口： SPA 单页面;
 //网页没有手动刷新的话，都是在同一个ＡＰＰ里面跳转,context就会一直保持着。
-
 
 
 ReactDOM.render(<App />, document.getElementById("root"));

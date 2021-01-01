@@ -1,4 +1,6 @@
 /** @jsxImportSource @emotion/react */
+//入口的起始主页面；
+
 import {  Global } from "@emotion/react";
 import * as React from "react";
 //import { Link as RouterLink } from "@reach/router";
@@ -18,7 +20,7 @@ import {
 import { 首页末尾链接 } from "./comp/rootRarelyVary";
 
 import cutting_board_knife from './images/cutting-board-knife.jpg';
-//无需登录即可显示的　主页面；
+
 
 
 interface BrandingProps {

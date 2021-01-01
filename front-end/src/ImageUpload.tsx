@@ -92,7 +92,8 @@ export function ImageUpload({
               if (response.ok) {
                   response.blob().then(blob => {
                     const filename = response.headers.get('Content-Disposition').split('filename*=UTF-8\'\'')[1];
-                    console.log("钩子---文件名：", decodeURI(filename,"UTF-8"));
+                    //把文件名后缀jsx改成tsx之后decodeURI(filename,"UTF-8")函数竟然不一样了？
+                    console.log("钩子---文件名：", decodeURI(filename));
                     load(blob);
                   });
               } else {

@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
+//核心顶层的路由器，分解页面的URI路径，功能查找的起始点。
 import { Global } from "@emotion/react";
 import { Suspense, lazy,  } from "react";
 import * as React from "react";
-//import * as firebase from "firebase/app";
 import { Route, Redirect, useRoute, Switch } from "wouter";
 
 import { Login } from "./LoginPane";

@@ -1,11 +1,4 @@
 /** @jsxImportSource @emotion/react */
-//import { jsx,  } from "@emotion/react";
-//import * as firebase from "firebase/app";
-
-//import { Spinner } from "customize-easy-ui-component";
-//import { useAuthState } from "react-firebase-hooks/auth";
-//import { userContext } from "./user-context";
-//import {Helmet} from "react-helmet";
 import { ApolloProvider } from '@apollo/client';
 import { client } from './graphql/setup';
 import GlobalState from "./context/GlobalState";

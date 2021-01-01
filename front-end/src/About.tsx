@@ -32,7 +32,7 @@ import Img_Readme9 from './images/readme9.png';
 import Img_Readme10 from './images/readme10.png';
 import Img_Readme11 from './images/readme11.png';
 
-
+//说明书，操作手册。
 export const About: React.FunctionComponent<{}> = (props) => {
   const theme = useTheme();
   const showingRecipe = props["*"];   　　 //"这个是问号前的除已预定义部分的剩余路径lo/gins/ds？
