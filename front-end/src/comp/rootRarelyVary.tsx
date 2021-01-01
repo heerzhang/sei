@@ -49,7 +49,7 @@ export const 首页末尾链接= (
           fontSize: theme.fontSizes[0]
         }}
       >
-        制作者 <Link href="/chaipu">hez</Link> 维护人QQ号码<Link href="/about">1736273864</Link>
+        制作者 <Link href="/">heerzhang</Link> 维护人QQ号码<Link href="/about">1736273864</Link>
         <br />
         <Link href="mailto:herzhang@163.com">有问题发个电子邮件</Link> 欢迎提出问题!
         <Link href="/maintenance/">后台维护传送门</Link>

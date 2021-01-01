@@ -206,8 +206,6 @@ export const WaitingComponent = (Component: any) => {
 };
 
 //路由的主页面：React.lazy()用于延迟加载组件。加载的模式　；　而require 是运行时加载的；
-//const ExampleRouteK3Tag = WaitingComponent(lazy(() => import("./Branding")));
-const Main = WaitingComponent(lazy(() => import("./Main")));
 const DeviceMain = WaitingComponent(lazy(() => import("./device/DeviceMain")));
 const UnitMain = WaitingComponent(lazy(() => import("./unit/DeviceMain")));
 const InspectMain = WaitingComponent(lazy(() => import("./inspect/InspectMain")));
@@ -266,7 +264,6 @@ function TopRouter() {
 
             {/* <!-- NestingtRoute path="/seeok/fjsei/:rest*" component={TestRoot}/!-->  */}
 
-            <PrivateRoute path="/chaipu/:rest*" component={Main} />
             <Route path="/">   <Branding />   </Route>
 
             <Route path="/test/test2"  component={Test}/>
