@@ -30,8 +30,8 @@ import { useDeleteRequestFollow, usePaginateQueryUser, useRequestFollow } from "
 //import GestureView from "react-gesture-view";
 import { FollowingRecipes } from "./FollowingRecipes";
 //import { User } from "firebase";
-import { StackItem, StackContext } from "react-gesture-stack";
-import { animated } from "react-spring";
+import { StackItem } from "react-gesture-stack";
+//import { animated } from "react-spring";
 import {SearchTitle} from "./comp/base"
 
 /*const client = algoliasearch(

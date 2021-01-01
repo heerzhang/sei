@@ -26,8 +26,8 @@ import {RecordView} from "./RecordView";
   /*类比路由功能的配置表，根据类型来映射组件的文件名*/
 import typeAsRoute from "../typeAsRoute.json";
 import { loadTemplate } from "./template";
-//新版本直接把gql描述放在页面组件中。
-import { useQuery,gql,useMutation } from "@apollo/client";
+//新版本直接把gql描述放在页面组件中。import { useQuery,gql,useMutation } from "@apollo/client"
+import { gql,useMutation } from "@apollo/client";
 //import { Link as RouterLink } from "wouter";
 import { ContainLine, TransparentInput } from "../comp/base";
 import { useEffect } from "react";

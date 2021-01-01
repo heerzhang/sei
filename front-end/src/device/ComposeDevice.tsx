@@ -5,7 +5,7 @@ import * as React from "react";
 //import { ImageUpload } from "./ImageUpload";
 //import { Image } from "./Image";
 //import { Value } from "slate";
-import debug from "debug";
+//import debug from "debug";
 //import initialValue from "./value.json";
 //import { Ingredient } from "./RecipeList";
 import {

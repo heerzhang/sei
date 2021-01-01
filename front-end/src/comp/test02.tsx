@@ -217,9 +217,9 @@ export  function Example22() {
   );
 }
 
-
-
+/*
 let id = 0;
+
 function createData(
   name: string,
   calories: number,
@@ -230,7 +230,7 @@ function createData(
   id += 1;
   return { id, name, calories, fat, carbs, protein };
 }
-/*
+
 const rows = [
   createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
   createData("Ice cream sandwich", 237, 9.0, 37, 4.3),

@@ -5,7 +5,7 @@ import * as React from "react";
 import { ComposeDevice } from "./ComposeDevice";
 import { useSession } from "../auth";
 //import { useDocument } from "react-firebase-hooks/firestore";
-import { useTheme, Text } from "customize-easy-ui-component";
+import { Text } from "customize-easy-ui-component";
 import {  useRoute } from "wouter";
 import { AttachedTask } from "./AttachedTask";
 
@@ -15,7 +15,7 @@ interface DeviceDetailProps {
   eqp: any;
 }
 export const DeviceDetail: React.FunctionComponent<DeviceDetailProps> = ({ id, eqp }) => {
-  const theme = useTheme();
+  //const theme = useTheme();
   const {user,} = useSession();
   //设备 外部关联的 任务。
   const [matched, params] = useRoute("/device/:id/task/:taskId*");

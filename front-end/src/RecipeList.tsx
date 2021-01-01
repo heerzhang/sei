@@ -191,7 +191,7 @@ export const RecipeList: React.FunctionComponent<RecipeListProps> = ({
     loading,
     loadingError,
     items,
-    loadMore, refetch
+    loadMore,
   } =usePaginateQueryRecipe(filter);
 
   //根据id和界面操作后的参数，来要修正graphQL的Query()的参数 = 要做重新查询。
