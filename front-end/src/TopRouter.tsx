@@ -13,6 +13,7 @@ import { Spinner,  } from "customize-easy-ui-component";
 import {Helmet} from "react-helmet";
 import { useSession } from "./auth";
 //import { TestRoot } from "./TestRoot.tsx--";
+import { Example as Upload } from "./comp/test03";
 import { Example as Test } from "./comp/test02";
 import  Example  from "./comp/test01";
 //import MainReport from "./report/ReportEntrance";
@@ -278,6 +279,8 @@ function TopRouter() {
             <NestingtRoute path="/maintenance/:rest*" component={Maintenance}/>
 
             <Route path="/test/test1">   <Example  />    </Route>
+            <Route path="/test/Upload">   <Upload  />    </Route>
+
             <Route path="/:rest*"><h1>没有该URL匹配的Top视图内容</h1></Route>
           </Switch>
 

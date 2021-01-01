@@ -5,7 +5,7 @@
 import debug from "debug";
 import omitBy from "lodash.omitby";
 import isNil from "lodash.isnil";
-import { Ingredient } from "./RecipeList";
+//import { Ingredient } from "./RecipeList";
 
 import {gql, useMutation, useQuery } from "@apollo/client";
 import * as React from "react";
@@ -187,7 +187,7 @@ export interface RecipeOptions {
     photoURL: string;
   };
   author: string;
-  ingredients: Ingredient[];
+//  ingredients: Ingredient[];
 }
 
 const CREATE_POST = gql`
@@ -238,7 +238,7 @@ interface RecipeUpdateOptions {
     photoURL: string;
   };
   plain: string;
-  ingredients: Ingredient[];
+ // ingredients: Ingredient[];
 }
 /*
 const updateEntry001 = (id: string, options: RecipeUpdateOptions) => {
