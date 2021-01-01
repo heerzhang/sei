@@ -64,8 +64,8 @@ export function useCachedState(key: string) {
 
 
 
-/**
- * Fetch and cache our firebase download URL
+/**实际前端做了prefix差异化，指示后端返回不同的URL的; 要后端可以图片压缩处理配合 key = prefix + id;。
+ * Fetch and cache our firebase download URL  前人的后端firebase.storage();
  * @param prefix string
  * @param id string
  */

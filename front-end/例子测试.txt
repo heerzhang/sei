@@ -378,4 +378,5 @@ Chrome调试输出verbose出现：[Violation] xxx handler took xxxms; 说明违�
 PullToRefresh实际已被淘汰了import { PullDownContent, PullToRefresh, RefreshContent, ReleaseContent } from "react-js-pull-to-refresh";
 准备彻底替换删除：verbose :  PullToRefresh.tsx:62 [Violation] Added non-passive event listener
 优先使用interface定义,不行的再用type做,interface接口与类型别名type T=不同，接口可以定义多次，并将被视为单个接口(合并成员);type能用in关键字生成映射类型[key in T]:
+编辑输入的未经审查的外部不安全的数据：<span dangerouslySetInnerHTML={{ __html: danger_text }} />
 
