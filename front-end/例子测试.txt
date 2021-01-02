@@ -381,4 +381,5 @@ PullToRefresh实际已被淘汰了import { PullDownContent, PullToRefresh, Refre
 编辑输入的未经审查的外部不安全的数据：<span dangerouslySetInnerHTML={{ __html: danger_text }} />
 const [ingredients, setIngredients] = React.useState<Ingredient[]>( defaultIngredients || [{name: "", amount: "" }]);
 简单组件const Contain = props => { return (<div css={{ marginTop: "-0.25rem",  }}  {...props}  />  ); };   <Contain><TransparentInput ;
-
+用 nanoid包 代替shortid.generate()或uuid包;
+react-to-print是预留 组件打印的。

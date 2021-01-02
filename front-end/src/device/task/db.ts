@@ -3,8 +3,8 @@
 //import "firebase/auth";
 //import config from "./firebase-config";
 import debug from "debug";
-import omitBy from "lodash.omitby";
-import isNil from "lodash.isnil";
+//import omitBy from "lodash.omitby";
+//import isNil from "lodash.isnil";
 //import { Ingredient } from "./RecipeList";
 
 import {gql, useMutation, useQuery } from "@apollo/client";
@@ -16,15 +16,7 @@ const log = debug("app:db");
 log.log = console.log.bind(console);
 //debug.log = console.info.bind(console);  //输出到
 
-/*谷歌云 删除,
-firebase.initializeApp(config);
-*/
-//谷歌的firebase云数据库/云文件存储。
 
-export const db =null;
-/*谷歌云 删除, 否则 一堆的拒绝连接等
-export const db = firebase.firestore();
-*/
 type UserType = {
   uid: string;
   id: string;   　　//后端的
@@ -32,20 +24,8 @@ type UserType = {
   displayName?: string;
   photoURL: string;
 };
-/*谷歌云 删除
-db.enablePersistence().catch(function(err) {
-  console.error(err);
-});
-*/
 
-export function getUserFields(user: UserType) {
-  return {
-    uid: user.uid,
-    displayName: user.displayName,
-    email: user.email,
-    photoURL: user.photoURL
-  };
-}
+
 
 
 const CREATE_FOLLOW = gql`
@@ -272,23 +252,8 @@ export const useUpdateEntry = (options) => {
   return { result ,submitfunc, error};
 };
 
-export const updateEntry0002 = (id: string, options: RecipeUpdateOptions) => {
-  return db
-    .collection("recipes")
-    .doc(id)
-    .update({
-      ...omitBy(options, isNil),
-      image: options.image
-    });
-};
 
-export const deleteEntry = (id: string) => {
-  log("delete: %s", id);
-  return db
-    .collection("recipes")
-    .doc(id)
-    .delete();
-};
+
 
 const GET_BOUND_DEVICES = gql`
   query findAllTaskFilter($filter: DeviceCommonInput,$offset:Int!,$limit:Int,$orderBy:String,$asc:Boolean) {
