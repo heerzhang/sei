@@ -208,7 +208,7 @@ export const useCreateEntry = (filter) => {
   onError: ()=>{};  配置onError后， 外部函数就无法catch()到了;
 */
 
-interface RecipeUpdateOptions {
+/*interface RecipeUpdateOptions {
   title: string;
   author: string;
   description: string;
@@ -219,7 +219,7 @@ interface RecipeUpdateOptions {
   };
   plain: string;
   ingredients: any[];
-}
+}*/
 
 
 

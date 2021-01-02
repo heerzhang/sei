@@ -206,18 +206,6 @@ export const useCreateEntry = (filter) => {
   onError: ()=>{};  配置onError后， 外部函数就无法catch()到了;
 */
 
-interface RecipeUpdateOptions {
-  title: string;
-  author: string;
-  description: string;
-  image?: string;
-  createdBy?: {
-    email: string;
-    photoURL: string;
-  };
-  plain: string;
-  ingredients: any[];
-}
 
 const UPDATE_DEVICE_MUTATION = gql`
     mutation UPDATE_DEVICE_MUTATION($id: ID!,$unt: ID!,$info: DeviceCommonInput) {

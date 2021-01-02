@@ -3,7 +3,7 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import "focus-visible";
+//import "focus-visible";  按键css标准还未实行先来个补片
 
 
 //网页没有手动刷新的话，都是在同一个ＡＰＰ里面跳转,context就会一直保持着。
