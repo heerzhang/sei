@@ -383,3 +383,4 @@ const [ingredients, setIngredients] = React.useState<Ingredient[]>( defaultIngre
 简单组件const Contain = props => { return (<div css={{ marginTop: "-0.25rem",  }}  {...props}  />  ); };   <Contain><TransparentInput ;
 用 nanoid包 代替shortid.generate()或uuid包;
 react-to-print是预留 组件打印的。
+前端服务器gzip压缩：File sizes after gzip:  *.js *.css 静态资源服务器要配置？
