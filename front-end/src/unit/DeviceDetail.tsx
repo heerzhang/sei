@@ -7,7 +7,7 @@ import { useSession } from "../auth";
 //import { useDocument } from "react-firebase-hooks/firestore";
 import {  Text } from "customize-easy-ui-component";
 import {  useRoute } from "wouter";
-import { AttachedTask } from "./AttachedTask";
+import { JoinedDevice } from "./JoinedDevice";
 
 
 interface DeviceDetailProps {
@@ -40,7 +40,7 @@ export const DeviceDetail: React.FunctionComponent<DeviceDetailProps> = ({ id, e
 
 
 
-        <AttachedTask
+        <JoinedDevice
           readOnly={true}
           id={id}
           editable={true || eqp.createdBy.id === user.uid}

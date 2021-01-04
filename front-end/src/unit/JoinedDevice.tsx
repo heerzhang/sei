@@ -18,7 +18,7 @@ import {  useLocation } from "wouter";
 import { DevfilterContext } from "../context/DevfilterContext";
 
 
-interface AttachedTaskProps {
+interface JoinedDeviceProps {
   id?: string;
   defaultTitle?: string;
   defaultImage?: string;
@@ -30,7 +30,7 @@ interface AttachedTaskProps {
   eqp?:any;
 }
 
-export const AttachedTask: React.FunctionComponent<AttachedTaskProps> = ({
+export const JoinedDevice: React.FunctionComponent<JoinedDeviceProps> = ({
   readOnly,
   id,
   editable,
@@ -165,32 +165,28 @@ export const AttachedTask: React.FunctionComponent<AttachedTaskProps> = ({
                               状态：{eqp.status||''}
                             </Text>
 
-
-
-
-
-
-                                <Button
-                                  size="lg"
-                                  intent="primary"
-                                  iconAfter={<IconArrowRight />}
-                                  onPress={() => {
-                                    //这里派发出去editorSnapshot: outCome {...storage, ...outCome}都是按钮捕获的值，还要经过一轮render才会有最新值。
-                                    setFilter({...filter, ...devFilterArgs});
-                                    setDoConfirm(true);
-                                  } }
-                                >
-                                  去找该单位设备
-                                </Button>
+                           <Button
+                              size="lg"
+                              intent="primary"
+                              iconAfter={<IconArrowRight />}
+                              onPress={ async () => {
+                                //这里派发出去editorSnapshot: outCome {...storage, ...outCome}都是按钮捕获的值，还要经过一轮render才会有最新值。
+                                await setFilter({...filter, ...devFilterArgs});
+                                await setDoConfirm(true);
+                                //这里还要加上async await才能真的保证不报unmounted错;
+                              } }
+                            >
+                              去找该单位设备
+                            </Button>
 
                             <Button
                               size="lg"
                               intent="primary"
                               iconAfter={<IconArrowRight />}
-                              onPress={() => {
+                              onPress={ async () => {
                                 //这里派发出去editorSnapshot: outCome {...storage, ...outCome}都是按钮捕获的值，还要经过一轮render才会有最新值。
-                                setFilter({...filter, ...devFilterArgsUseU});
-                                setDoConfirm(true);
+                                await setFilter({...filter, ...devFilterArgsUseU});
+                                await setDoConfirm(true);
                               } }
                             >
                               该单位正在使用设备
