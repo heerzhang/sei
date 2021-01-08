@@ -58,8 +58,8 @@ export const JoinedDevice: React.FunctionComponent<JoinedDeviceProps> = ({
     taskid: taskId, reason:'测试期直接删'
   });*/
   //过滤对象or参数取值K/V；有些保留key不能随意使用。
-  const  devFilterArgs={"ownerId": id };
-  const  devFilterArgsUseU={"useUid": id };
+  const  devFilterArgs={"ownerId": id ,"useUid": undefined};
+  const  devFilterArgsUseU={"useUid": id,"ownerId":undefined };
 
   console.log("页面刷新钩子AttachedTask entry=",　",设备id="+id+";task=",task,";eqp=",eqp ,"filter=",filter);
 /*

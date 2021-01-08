@@ -98,7 +98,7 @@ const GET_DEVICES_ES = gql`
        ... on IfElevator {
           liftHeight
         }
-       ... on EQP{
+       ... on Eqp{
          factoryNo
        }
 */
