@@ -177,7 +177,7 @@ const DEVICE_BY_ID = gql`
 				id
 			},pos{
 				id,name
-			},useU{
+			},useu{
 				id,name
 			},task{
 				id,date,dep,status,isps{ id,dev{id} }

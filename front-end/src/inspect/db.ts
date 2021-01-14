@@ -474,7 +474,7 @@ const GET_REPORT = gql`
        id,type,no,upLoadDate,path,detail,isp{
         id,nextIspDate,conclusion,dev{
           id,cod,oid,type,fNo,pos{id,name,ad{id,prefix}},
-          useU{id,name,linkMen} 
+          useu{id,name,linkMen} 
         },task{
           id,date,status
         } 
