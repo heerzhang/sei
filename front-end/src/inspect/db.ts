@@ -473,7 +473,7 @@ const GET_REPORT = gql`
     rep:getReport(id: $id) {
        id,type,no,upLoadDate,path,detail,isp{
         id,nextIspDate,conclusion,dev{
-          id,cod,oid,type,fNo,pos{id,name,ad{id,prefix}},
+          id,cod,oid,type,fno,pos{id,name,ad{id,prefix}},
           useu{id,name,linkMen} 
         },task{
           id,date,status
