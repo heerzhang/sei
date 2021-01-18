@@ -89,7 +89,7 @@ export const useUpdateEntry = (options) => {
 const GET_DEVICES_ES = gql`
   query findAllEQPsFilter($where: DeviceCommonInput,$offset:Int!,$limit:Int=10,$orderBy:String,$asc:Boolean=true) {
     eqps:getAllEqpEsFilter(where: $where,offset:$offset,limit:$limit,orderBy:$orderBy,asc:$asc) {
-      id cod oid type sort vart   
+      id cod oid type sort vart ust 
      }
   }
 `;
