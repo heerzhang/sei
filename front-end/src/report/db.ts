@@ -172,7 +172,7 @@ export interface RecipeOptions {
 
 const CREATE_DEVICE = gql`
   mutation CREATE_DEVICE($cod: String!,$oid: String!) {
-    newEQP(cod: $cod,type:"电梯4000",oid: $oid) {
+    newEQP(cod: $cod,type:"3",oid: $oid) {
       id cod oid
       pos {
        id address

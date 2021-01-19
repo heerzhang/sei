@@ -42,7 +42,7 @@ import { useEffect } from "react";
 //根据老旧平台unit做同步
 const WEI_HU_UNIT = gql`
   mutation WEI_HU($offset: Int!, $limit: Int!) {
-    res: syncUnitFromOld(offset: $offset, limit: $limit) 
+    res: syncEqpEsFromEqp(offset: $offset, limit: $limit) 
   }
 `;
 //可能2个分片一起发起submitfunc请求的；点击停止后，任务实际继续直到已经发起的分片任务返回结果；调整参数使每个分片5-10秒能解决。

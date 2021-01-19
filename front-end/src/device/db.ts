@@ -27,7 +27,7 @@ export interface RecipeOptions {
 
 const CREATE_DEVICE = gql`
   mutation CREATE_DEVICE($cod: String!,$oid: String!) {
-    res: newEQP(cod: $cod,type:"电梯4000",oid: $oid) {
+    res: newEQP(cod: $cod,type:"3",oid: $oid) {
       id cod oid
       pos {
        id name
@@ -89,7 +89,7 @@ export const useUpdateEntry = (options) => {
 const GET_DEVICES_ES = gql`
   query findAllEQPsFilter($where: DeviceCommonInput,$offset:Int!,$limit:Int=10,$orderBy:String,$asc:Boolean=true) {
     eqps:getAllEqpEsFilter(where: $where,offset:$offset,limit:$limit,orderBy:$orderBy,asc:$asc) {
-      id cod oid type sort vart ust 
+      id cod oid type sort vart ust reg
      }
   }
 `;
