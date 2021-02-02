@@ -17,12 +17,24 @@ import {
   useToast,
   LayerLoading,
   Container,
+  Select,
+  ListItem,
+  Avatar,
+  ResponsivePopover,
+  MenuList,
+  MenuItem,
+  IconPackage,
+  IconButton,
+  IconMoreVertical,
+  List
 } from "customize-easy-ui-component";
 import {   useCreateDevice,  } from "./db";
 import {Helmet} from "react-helmet";
-import {  useLocation } from "wouter";
+import { Link as RouterLink, useLocation } from "wouter";
+import { css } from "@emotion/react";
 //import { Link as RouterLink } from "wouter";
-
+import {设备种类,设备类别,设备品种} from "./../dict/eqpComm"
+import { SelectHookfork } from "../report/comp/base";
 
 //const log = debug("app:Compose");
 
@@ -52,6 +64,9 @@ export const ComposeDevice: React.FunctionComponent<ComposeDeviceProps> = ({
   const [ingredients, setIngredients] = React.useState<any>( dt||{} );
   console.log("刚ComposeDevice经过EQPis",dt,"进行中id=",id,"ingredients=",ingredients);
   const [, setLocation] = useLocation();
+  const [eqpType, setEqpType] = React.useState(undefined);
+  const [eqpSort, setEqpSort] = React.useState(undefined);
+  const [eqpVart, setEqpVart] = React.useState(undefined);
 
   const [, setOptions] = React.useState({});
   const {result:entry, submit:submitfunc, error} = useCreateDevice({oid:"暂且空着",  ...ingredients});
@@ -211,6 +226,50 @@ export const ComposeDevice: React.FunctionComponent<ComposeDeviceProps> = ({
                         )}
                         <br/>
                         <Text>暂时无独立设备库，目前设备是导入一个就积累一个的设备列表，待完善</Text>
+                        <Select inputSize="md" css={{minWidth:'140px',fontSize:'1.3rem',padding:'0 1rem'}} divStyle={css`max-width:240px;`}
+                                value={eqpType || ''}
+                                onChange={e => {
+                                  setEqpType(e.currentTarget.value || undefined);
+                                  setEqpSort( undefined);
+                                  setEqpVart( undefined)
+                                 }
+                                }
+                        >
+                          {
+                            设备种类?.map((each,i) => (
+                              <option value={`${each.type}`}>{each.desc}</option>
+                            ))
+                          }
+                          <option value={''}>全部</option>
+                        </Select>
+                        <Select inputSize="md" css={{minWidth:'140px',fontSize:'1.3rem',padding:'0 1rem'}} divStyle={css`max-width:240px;`}
+                                value={eqpSort || ''}
+                                onChange={e =>{
+                                  setEqpSort(e.currentTarget.value||undefined);
+                                  setEqpVart( undefined)
+                                } }
+                        >
+                          {
+                            eqpType&&设备类别[eqpType]?.map((each,i) => (
+                              <option value={`${each.sort}`}>{each.desc}</option>
+                            ))
+                          }
+                          <option value={''}>全部</option>
+                        </Select>
+                        <Select inputSize="md" css={{minWidth:'140px',fontSize:'1.3rem',padding:'0 1rem'}} divStyle={css`max-width:240px;`}
+                                value={eqpVart || ''}
+                                onChange={e => setEqpVart(e.currentTarget.value||undefined)}
+                        >
+                          {
+                            console.log("刚DeviceDetail经过eqp=",eqpVart,"showingRecipe=",设备品种[eqpSort])
+                          }
+                          {
+                            eqpSort&&设备品种[eqpSort]?.map((each,i) => (
+                              <option value={`${each.vart}`}>{each.desc}</option>
+                            ))
+                          }
+                          <option value={''}>全部</option>
+                        </Select>
                       </div>
 
                 </div>
