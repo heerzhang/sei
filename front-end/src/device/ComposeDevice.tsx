@@ -64,15 +64,13 @@ export const ComposeDevice: React.FunctionComponent<ComposeDeviceProps> = ({
   const [ingredients, setIngredients] = React.useState<any>( dt||{} );
 
   const [, setLocation] = useLocation();
-  const [eqpType, setEqpType] = React.useState(undefined);
-  const [eqpSort, setEqpSort] = React.useState(undefined);
-  const [eqpVart, setEqpVart] = React.useState(undefined);
+ // const [eqpType, setEqpType] = React.useState(undefined);
   //const eqp={};   //设备数据表
-  const [eqp, setEqp] = React.useState(undefined);
+  const [eqp, setEqp] = React.useState(dt);
   console.log("刚ComposeDevice经过EQPis",dt,"进行中id=",id,"eqp=",eqp);
 
   const [, setOptions] = React.useState({});
-  const {result:entry, submit:submitfunc, error} = useCreateDevice(eqpType,{oid:"暂且空着",  ...ingredients, ...eqp});
+  const {result:entry, submit:submitfunc, error} = useCreateDevice(eqp?.type,{oid:"暂且空着",  ...ingredients, ...eqp});
   /*
   const {result, submitfunc:updateFunc, } = useUpdateEntry({
     id: ingredients && ingredients.id,
@@ -230,11 +228,9 @@ export const ComposeDevice: React.FunctionComponent<ComposeDeviceProps> = ({
                         <br/>
                         <Text>暂时无独立设备库，目前设备是导入一个就积累一个的设备列表，待完善</Text>
                         <Select inputSize="md" css={{minWidth:'140px',fontSize:'1.3rem',padding:'0 1rem'}} divStyle={css`max-width:240px;`}
-                                value={eqpType || ''}
+                                value={eqp?.type || ''}
                                 onChange={e => {
-                                  setEqpType(e.currentTarget.value || undefined);
-                                  setEqpSort( undefined);
-                                  setEqpVart( undefined)
+                                  setEqp({...eqp, type: e.currentTarget.value||undefined, sort:undefined, vart:undefined});
                                  }
                                 }
                         >
@@ -246,39 +242,39 @@ export const ComposeDevice: React.FunctionComponent<ComposeDeviceProps> = ({
                           <option value={''}>全部</option>
                         </Select>
                         <Select inputSize="md" css={{minWidth:'140px',fontSize:'1.3rem',padding:'0 1rem'}} divStyle={css`max-width:240px;`}
-                                value={eqpSort || ''}
+                                value={eqp?.sort || ''}
                                 onChange={e =>{
-                                  setEqpSort(e.currentTarget.value||undefined);
-                                  setEqpVart( undefined)
+                                  setEqp({...eqp, sort: e.currentTarget.value||undefined, vart:undefined });
                                 } }
                         >
                           {
-                            Object.entries(设备类别[eqpType]||{}).map(([key,value],i) => (
+                            Object.entries(设备类别[eqp?.type]||{}).map(([key,value],i) => (
                                 <option key={i} value={key}>{value}</option>
                             ))
                           }
                           <option value={''}>全部</option>
                         </Select>
                         <Select inputSize="md" css={{minWidth:'140px',fontSize:'1.3rem',padding:'0 1rem'}} divStyle={css`max-width:240px;`}
-                                value={eqpVart || ''}
-                                onChange={e => setEqpVart(e.currentTarget.value||undefined)}
+                                value={eqp?.vart || ''}
+                                onChange={e => setEqp({...eqp, vart: e.currentTarget.value||undefined}) }
                         >
                           {
-                            Object.entries(设备品种[eqpSort]||{}).map(([vkey,vvalue],i) => (
+                            Object.entries(设备品种[eqp?.sort]||{}).map(([vkey,vvalue],i) => (
                                 <option key={i} value={vkey}>{vvalue}</option>
                             ))
                           }
                           <option value={''}>全部</option>
                         </Select>
-
-                        <InputGroupLine label={`电梯层数:`}>
-                          <SuffixInput
-                            placeholder="层数"
-                            value={ eqp?.flo || ''}
-                            onChange={e => setEqp({ ...eqp, flo: e.currentTarget.value||undefined  } ) }
-                          >层</SuffixInput>
-                        </InputGroupLine>
-
+                        { eqp?.__typename==='Elevator' && (
+                          <InputGroupLine label={`电梯层数:`}>
+                            <SuffixInput
+                              placeholder="层数"
+                              value={ eqp?.flo || ''}
+                              onChange={e => setEqp({ ...eqp, flo: e.currentTarget.value||undefined  } ) }
+                            >层</SuffixInput>
+                          </InputGroupLine>
+                          )
+                        }
                       </div>
 
                 </div>

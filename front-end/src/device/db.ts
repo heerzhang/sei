@@ -28,17 +28,17 @@ export interface RecipeOptions {
 const CREATE_DEVICE = gql`
   mutation CREATE_DEVICE($type: String!,$info: DeviceCommonInput!) {
     res: newEQP(type:$type,info: $info) {
-      id cod oid
-      pos {
-       id name
-      }
+      id cod oid type sort vart
+        ... on Elevator {
+            flo
+        }
     }
   }
 `;
 
 //创立或导入设备　
 export const useCreateDevice = (type,info) => {
-  console.log("创立导入设备CreateDevice @@ info=", info);
+  //console.log("创立导入设备CreateDevice @@ info=", info);
   const [submit, {error, data, loading, called}] = useMutation(CREATE_DEVICE, {
     variables: {type, info},
   })
@@ -50,7 +50,7 @@ export const useCreateDevice = (type,info) => {
 const UPDATE_DEVICE_MUTATION = gql`
     mutation UPDATE_DEVICE_MUTATION($id: ID!,$unt: ID!,$info: DeviceCommonInput) {
     buildEQP(id: $id, owner: $unt, info: $info) {
-      id cod oid
+      id cod oid type sort vart
       pos {
        id address
       } ownerUnt{ id name }
