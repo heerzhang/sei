@@ -26,8 +26,8 @@ export interface RecipeOptions {
 }
 
 const CREATE_DEVICE = gql`
-  mutation CREATE_DEVICE($cod: String!,$oid: String!) {
-    res: newEQP(cod: $cod,type:"3",oid: $oid) {
+  mutation CREATE_DEVICE($type: String!,$info: DeviceCommonInput!) {
+    res: newEQP(type:$type,info: $info) {
       id cod oid
       pos {
        id name
@@ -37,10 +37,10 @@ const CREATE_DEVICE = gql`
 `;
 
 //创立或导入设备　
-export const useCreateDevice = (options) => {
-  console.log("保 useCreateDevice @@ options=", options);
+export const useCreateDevice = (type,info) => {
+  console.log("创立导入设备CreateDevice @@ info=", info);
   const [submit, {error, data, loading, called}] = useMutation(CREATE_DEVICE, {
-    variables: {...options},
+    variables: {type, info},
   })
   const { res : result} = data||{};
   return { result ,submit, error, loading, called };
@@ -169,9 +169,7 @@ export const useInvalidateEQP = (options) => {
   return { result ,submit, error, loading, called };
 };
 
-//這若id='new'的照样能发送给后端的底层去处理的。 id=null undefined就不发送。
-const DEVICE_BY_ID = gql`
-  query DEVICE_BY_ID($id: ID! ) {
+/*
     all:getDeviceSelf(id: $id) {
 			id,oid,cod,isps{
 				id
@@ -182,6 +180,16 @@ const DEVICE_BY_ID = gql`
 			},task{
 				id,date,dep,status,isps{ id,dev{id} }
 			}
+		}
+*/
+//這若id='new'的照样能发送给后端的底层去处理的。 id=null undefined就不发送。
+const DEVICE_BY_ID = gql`
+  query DEVICE_BY_ID($id: ID! ) {
+    all:getDeviceSelf(id: $id) {
+			id,oid,cod,type,sort,vart
+      ... on Elevator {
+          flo
+      }
 		}
 	}
 `;

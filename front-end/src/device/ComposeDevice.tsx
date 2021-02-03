@@ -26,7 +26,7 @@ import {
   IconPackage,
   IconButton,
   IconMoreVertical,
-  List
+  List, InputGroupLine, SuffixInput
 } from "customize-easy-ui-component";
 import {   useCreateDevice,  } from "./db";
 import {Helmet} from "react-helmet";
@@ -34,7 +34,7 @@ import { Link as RouterLink, useLocation } from "wouter";
 import { css } from "@emotion/react";
 //import { Link as RouterLink } from "wouter";
 import {设备种类,设备类别,设备品种} from "./../dict/eqpComm"
-import { SelectHookfork } from "../report/comp/base";
+import { InspectRecordLayout, SelectHookfork } from "../report/comp/base";
 
 //const log = debug("app:Compose");
 
@@ -62,14 +62,17 @@ export const ComposeDevice: React.FunctionComponent<ComposeDeviceProps> = ({
 
   //这里ingredients挂载初始化后只能setIngredients改了，useState()后面参数变动就不再起作用了。
   const [ingredients, setIngredients] = React.useState<any>( dt||{} );
-  console.log("刚ComposeDevice经过EQPis",dt,"进行中id=",id,"ingredients=",ingredients);
+
   const [, setLocation] = useLocation();
   const [eqpType, setEqpType] = React.useState(undefined);
   const [eqpSort, setEqpSort] = React.useState(undefined);
   const [eqpVart, setEqpVart] = React.useState(undefined);
+  //const eqp={};   //设备数据表
+  const [eqp, setEqp] = React.useState(undefined);
+  console.log("刚ComposeDevice经过EQPis",dt,"进行中id=",id,"eqp=",eqp);
 
   const [, setOptions] = React.useState({});
-  const {result:entry, submit:submitfunc, error} = useCreateDevice({oid:"暂且空着",  ...ingredients});
+  const {result:entry, submit:submitfunc, error} = useCreateDevice(eqpType,{oid:"暂且空着",  ...ingredients, ...eqp});
   /*
   const {result, submitfunc:updateFunc, } = useUpdateEntry({
     id: ingredients && ingredients.id,
@@ -236,8 +239,8 @@ export const ComposeDevice: React.FunctionComponent<ComposeDeviceProps> = ({
                                 }
                         >
                           {
-                            设备种类?.map((each,i) => (
-                              <option value={`${each.type}`}>{each.desc}</option>
+                            Object.entries(设备种类).map(([key,value],i) => (
+                              <option key={i} value={key}>{value}</option>
                             ))
                           }
                           <option value={''}>全部</option>
@@ -250,8 +253,8 @@ export const ComposeDevice: React.FunctionComponent<ComposeDeviceProps> = ({
                                 } }
                         >
                           {
-                            eqpType&&设备类别[eqpType]?.map((each,i) => (
-                              <option value={`${each.sort}`}>{each.desc}</option>
+                            Object.entries(设备类别[eqpType]||{}).map(([key,value],i) => (
+                                <option key={i} value={key}>{value}</option>
                             ))
                           }
                           <option value={''}>全部</option>
@@ -261,15 +264,21 @@ export const ComposeDevice: React.FunctionComponent<ComposeDeviceProps> = ({
                                 onChange={e => setEqpVart(e.currentTarget.value||undefined)}
                         >
                           {
-                            console.log("刚DeviceDetail经过eqp=",eqpVart,"showingRecipe=",设备品种[eqpSort])
-                          }
-                          {
-                            eqpSort&&设备品种[eqpSort]?.map((each,i) => (
-                              <option value={`${each.vart}`}>{each.desc}</option>
+                            Object.entries(设备品种[eqpSort]||{}).map(([vkey,vvalue],i) => (
+                                <option key={i} value={vkey}>{vvalue}</option>
                             ))
                           }
                           <option value={''}>全部</option>
                         </Select>
+
+                        <InputGroupLine label={`电梯层数:`}>
+                          <SuffixInput
+                            placeholder="层数"
+                            value={ eqp?.flo || ''}
+                            onChange={e => setEqp({ ...eqp, flo: e.currentTarget.value||undefined  } ) }
+                          >层</SuffixInput>
+                        </InputGroupLine>
+
                       </div>
 
                 </div>
