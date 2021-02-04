@@ -300,3 +300,13 @@ setXxx()调用后unmount组件告警！Can't perform a React state update on an 
 Apollo自动优化:InMemoryCache会针对useQuery在路由跳转再次mount的组件列表场合，自动id合并。
 技术手册Apollo Client; https://www.apollographql.com/docs/react/api/core/ApolloClient/
 使用react-spring创建逼真的撕纸 动画   https://blog.csdn.net/weixin_26738395/article/details/108494153
+useImperativeHandle要配套forwardRef，尽量不要用它！！它用处是子组件向父组件公开随意的操作方法，本组件第二参数ref绑定上。
+useContext(xxContext)避免props层层透传问题,组件复用必须明确告知用了某Context，注意：一般跨组件信息传递，不建议用Context。
+
+              <InputGroupLine label={`电梯层数:`}>
+                <SuffixInput
+                  placeholder="层数"
+                  value={ eqp?.flo || ''}
+                  onChange={e => setEqp({ ...eqp, flo: e.currentTarget.value||undefined  } ) }
+                >层</SuffixInput>
+              </InputGroupLine>

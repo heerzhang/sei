@@ -35,8 +35,11 @@ import { css } from "@emotion/react";
 //import { Link as RouterLink } from "wouter";
 import {设备种类,设备类别,设备品种} from "./../dict/eqpComm"
 import { InspectRecordLayout, SelectHookfork } from "../report/comp/base";
+import { 电梯 } from "./edit/电梯";
 
 //const log = debug("app:Compose");
+
+
 
 interface ComposeDeviceProps {
   id?: string;
@@ -266,13 +269,16 @@ export const ComposeDevice: React.FunctionComponent<ComposeDeviceProps> = ({
                           <option value={''}>全部</option>
                         </Select>
                         { eqp?.__typename==='Elevator' && (
-                          <InputGroupLine label={`电梯层数:`}>
-                            <SuffixInput
-                              placeholder="层数"
-                              value={ eqp?.flo || ''}
-                              onChange={e => setEqp({ ...eqp, flo: e.currentTarget.value||undefined  } ) }
-                            >层</SuffixInput>
-                          </InputGroupLine>
+                          <React.Fragment>
+                            <电梯
+                              readOnly={true}
+                              id={id}
+                              editable={true}
+                              defaultTitle={eqp.title}
+                              eqp={eqp}
+                              setPam={setEqp}
+                            />
+                          </React.Fragment>
                           )
                         }
                       </div>
