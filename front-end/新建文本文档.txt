@@ -303,9 +303,7 @@ Apollo自动优化:InMemoryCache会针对useQuery在路由跳转再次mount的�
 useImperativeHandle要配套forwardRef，尽量不要用它！！它用处是子组件向父组件公开随意的操作方法，本组件第二参数ref绑定上。
 useContext(xxContext)避免props层层透传问题,组件复用必须明确告知用了某Context，注意：一般跨组件信息传递，不建议用Context。
 
-使用登记申请代录入 只能新增压力容器、压力管道、外省流动作业起重机械，其他设备请通过告知或检验机构首检录入！导入检验系统设备
-电梯、锅炉不允许新增
-施工告知录入
+
               <InputGroupLine label={`电梯层数:`}>
                 <SuffixInput
                   placeholder="层数"

@@ -28,7 +28,7 @@ import {
   IconMoreVertical,
   List, InputGroupLine, SuffixInput
 } from "customize-easy-ui-component";
-import {   useCreateDevice,  } from "./db";
+import { useCreateDevice, useUpdateDevice } from "./db";
 import {Helmet} from "react-helmet";
 import { Link as RouterLink, useLocation } from "wouter";
 import { css } from "@emotion/react";
@@ -36,6 +36,7 @@ import { css } from "@emotion/react";
 import {设备种类,设备类别,设备品种} from "./../dict/eqpComm"
 import { InspectRecordLayout, SelectHookfork } from "../report/comp/base";
 import { 电梯 } from "./edit/电梯";
+import { useThrottle } from "../hooks/useHelpers";
 
 //const log = debug("app:Compose");
 
@@ -56,7 +57,7 @@ export const ComposeDevice: React.FunctionComponent<ComposeDeviceProps> = ({
   const toast = useToast();
  // const {user,} = useSession();
   const [loading, setLoading] = React.useState(false);
-  const [editing, ] = React.useState(!readOnly);
+  const [editing, ] = React.useState(!readOnly|| true);
   /* const [content, ] = React.useState(() => {
         return defaultDescription
           ? ''
@@ -82,6 +83,10 @@ export const ComposeDevice: React.FunctionComponent<ComposeDeviceProps> = ({
           ,address: "贵大厦" },
     });
   */
+  const {result:saveres, submit:dosaveEqpfunc, error:saveerr} = useUpdateDevice({ id, unt:4644,
+    in:{...ingredients, ...eqp, __typename:undefined} });
+
+  const {doFunc:throttledSaveEqp, ready} = useThrottle(dosaveEqpfunc,5000);
 
   //不能在这点击触发函数内部执行HOOKs!! 必须上移动外移到 界面组件的头部初始化hooks，随后点击触发调用hook钩子函数。
   async function saveRecipe( a
@@ -99,6 +104,33 @@ export const ComposeDevice: React.FunctionComponent<ComposeDeviceProps> = ({
 
       //加了await 后的　submitfunc();似乎也不能确保entry非空的，必须等待下一次render()。
       entry && setLocation("/device/" + entry.id, { replace: true } );
+      //原型是 PushCallback = (to: Path, replace?: boolean) => void;
+    } catch (err) {
+      setLoading(false);
+      toast({
+        title: "捕获errcc错",
+        subtitle: err.message,
+        intent: "danger"
+      });
+      console.log("捕获err打了吗", err);
+    }
+  }
+
+  async function updateDevice( a
+  ) {
+    try {
+      setLoading(true);
+      console.log("baochunupdateDevice 等待之前１ a=", a );
+      //这时才去修改submitfunc参数，已经来不及，setOptions异步执行；submitfunc会看见前面的取值。
+      setOptions({oid:"test暂且空着",  ...ingredients});
+      console.log("baochun等待之前２ ingredients=", ingredients );
+      await throttledSaveEqp();   //要等待正常的结果应答从后端返回。
+      //submitfunc(); 立刻执行后面代码，这样不会等待后端应答的。
+      /*点击函数发送给后端服务器，即刻返回到这里了await submitfunc();　这个时候entry还不是后端的应答数据，要等到下一次entry被ＨＯＯＫ修正*/
+      console.log("等半天createEntry返回error=",error,"结果",saveres );
+      setLoading(false);
+      //加了await 后的　submitfunc();似乎也不能确保entry非空的，必须等待下一次render()。
+      entry && setLocation("/device/" + saveres.id, { replace: true } );
       //原型是 PushCallback = (to: Path, replace?: boolean) => void;
     } catch (err) {
       setLoading(false);
@@ -155,26 +187,16 @@ export const ComposeDevice: React.FunctionComponent<ComposeDeviceProps> = ({
                               <TransparentInput
                                 autoFocus={true}
                                 placeholder="那一台电梯？"
-                                value={ingredients.cod||''}
-                                onChange={e => {
-                                  setIngredients( {
-                                    ...ingredients,
-                                    cod: e.target.value
-                                  });
-                                }}
+                                value={eqp.cod || ''}
+                                onChange={e => setEqp({...eqp, cod: e.currentTarget.value||undefined}) }
                               />
                           </ContainLine>
                           <ContainLine display={'监察识别码'}>
                             <TransparentInput
                               autoFocus={true}
                               placeholder="导入的情形可以不填写"
-                              value={ingredients.oid||''}
-                              onChange={e => {
-                                setIngredients( {
-                                  ...ingredients,
-                                  oid: e.target.value
-                                });
-                              }}
+                              value={eqp.oid || ''}
+                              onChange={e => setEqp({...eqp, oid: e.currentTarget.value||undefined}) }
                             />
                           </ContainLine>
                         </div>
@@ -295,8 +317,19 @@ export const ComposeDevice: React.FunctionComponent<ComposeDeviceProps> = ({
                      saveRecipe(null);
                   }}
                   >
-                从旧平台导入一个设备吧
+                生成新设备
                 </Button>
+              }
+              {editing && <Button
+                intent="primary"
+                disabled ={!ready}
+                css={{ marginLeft: theme.spaces.sm }}
+                onPress={ async () => {
+                  await updateDevice({ ...eqp }  );
+                } }
+              >
+                更新设备信息
+              </Button>
               }
             </div>
           </Container>

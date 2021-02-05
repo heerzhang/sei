@@ -26,8 +26,8 @@ export interface RecipeOptions {
 }
 
 const CREATE_DEVICE = gql`
-  mutation CREATE_DEVICE($type: String!,$info: DeviceCommonInput!) {
-    res: newEQP(type:$type,info: $info) {
+  mutation CREATE_DEVICE($type: String!,$in: DeviceCommonInput!) {
+    res: newEQP(type:$type,in: $in) {
       id cod oid type sort vart
         ... on Elevator {
             flo
@@ -37,10 +37,10 @@ const CREATE_DEVICE = gql`
 `;
 
 //创立或导入设备　
-export const useCreateDevice = (type,info) => {
-  //console.log("创立导入设备CreateDevice @@ info=", info);
+export const useCreateDevice = (type, info) => {
+  //console.log("创立导入设备CreateDevice @@ info=", in);
   const [submit, {error, data, loading, called}] = useMutation(CREATE_DEVICE, {
-    variables: {type, info},
+    variables: {type, in: info},
   })
   const { res : result} = data||{};
   return { result ,submit, error, loading, called };
@@ -48,32 +48,26 @@ export const useCreateDevice = (type,info) => {
 
 
 const UPDATE_DEVICE_MUTATION = gql`
-    mutation UPDATE_DEVICE_MUTATION($id: ID!,$unt: ID!,$info: DeviceCommonInput) {
-    buildEQP(id: $id, owner: $unt, info: $info) {
-      id cod oid type sort vart
-      pos {
-       id address
-      } ownerUnt{ id name }
+    mutation UPDATE_DEVICE_MUTATION($id: ID!,$unt: ID!,$in: DeviceCommonInput) {
+    buildEQP(id: $id, owner: $unt, in: $in) {
+      id cod oid type sort vart 
+        ... on Elevator {
+            flo
+        }
     }
     }
 `;
 
-export const useUpdateEntry = (options) => {
-  const [result, setResult] = React.useState(null);
- // console.log("进入useUpdateEntry.filter=",options );
-  const [submitfunc, {error, }] = useMutation(UPDATE_DEVICE_MUTATION, {
+export const useUpdateDevice = (options) => {
+  const [submit, {error, data, loading, called}] = useMutation( UPDATE_DEVICE_MUTATION, {
     variables: {...options},
-    update: (proxy, mutationResult) => {
-      const newPost = mutationResult.data.buildEQP;     //新的一条,登录ok；　　.data.createPost;
-      console.log("useUpdateEntry返回Q1=" + JSON.stringify(mutationResult.data) + newPost);
-      setResult( newPost );
-    },
-    onCompleted: (data) => {
-      console.log("useUpdateEntry返回Q=Completed=" ,data );  //onCompleted比update慢的多。
-    }
+    refetchQueries:  ['DEVICE_BY_ID']
   })
-  return { result ,submitfunc, error};
+  const { buildEQP : result} = data||{};
+  return { result ,submit, error, loading, called };
 };
+
+
 
 //从graphQL的后端 模型数据库服务器 取模型数据。
 //3.2版本findAllEQPsFilter2不能再用dev:findAllEQPsFilter2这样子做别名了,cache typePolicies不支持。
@@ -186,9 +180,10 @@ export const useInvalidateEQP = (options) => {
 const DEVICE_BY_ID = gql`
   query DEVICE_BY_ID($id: ID! ) {
     all:getDeviceSelf(id: $id) {
-			id,oid,cod,type,sort,vart
-      ... on Elevator {
-          flo
+			id,oid,cod,type,sort,vart,  
+      ... on Elevator {  svp,pa,
+          flo,spec,nnor,oldb,vl,hlf,lesc,wesc,cpm,tm,mtm,buff,rtl,aap,prot,
+          doop,limm,opm,lbkd,nbkd
       }
 		}
 	}
