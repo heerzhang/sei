@@ -243,6 +243,7 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                 >kg
                 </SuffixInput>
               </InputGroupLine>
+              {/*
               <InputGroupLine label={`加装的附加装置:`}>
                 <ComboBox  autocomplete
                   query={aap || ''}
@@ -259,6 +260,7 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                   )}
                 </ComboBox>
               </InputGroupLine>
+              */}
               <InputGroupLine label={`轿厢意外移动保护装置型号:`}>
                 <Input
                   value={ prot || ''}
@@ -266,6 +268,7 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                 >
                 </Input>
               </InputGroupLine>
+              {/*
               <InputGroupLine label={`开门方式:`}>
                 <ComboBox  autocomplete
                            query={doop || ''}
@@ -282,6 +285,7 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                   )}
                 </ComboBox>
               </InputGroupLine>
+              */}
               <InputGroupLine label={`限速器型号:`}>
                 <Input
                   value={ limm || ''}
@@ -317,7 +321,7 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                 onPress={ async () => {
                   await setPam({ ...eqp, spec,vl,nnor,cpm,hlf,oldb,lesc,wesc,tm,mtm,buff,rtl,
                       aap,prot,doop,limm,opm,lbkd,nbkd,
-                    flo: (flo===''? undefined:flo),
+                    flo,
                   }  );
                 } }
               >

@@ -311,3 +311,4 @@ useContext(xxContext)避免props层层透传问题,组件复用必须明确告�
                   onChange={e => setEqp({ ...eqp, flo: e.currentTarget.value||undefined  } ) }
                 >层</SuffixInput>
               </InputGroupLine>
+flo: (flo===''? undefined:flo),

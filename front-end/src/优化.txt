@@ -1,0 +1,14 @@
+父辈组件重做render了，不意味着其儿孙组件们也需要重做render。
+依赖项[inp, show]没变化， useMemo包裹的且已经挂载的组件就不会重新render；降低重复部分的render工作量。
+
+函数组件多个return; 前面这里return ；将会导致子孙组件都会umount!! 等于重新加载==路由模式刷新一样； 得权衡利弊。
+采用RouterLink页内路由进入useState还保留旧的值，要修改就将会导致render两次；旧的值新的值各一次渲染。若采用URL刷新模式只有一次。
+
+updateXXX 提交给后端， 这里将会引起底层变动，导致本组件即将要 render 3次。真正有更新的 4次。更新比 <Query> 读取多了1次render。
+await submitfunc() 似乎也不能确保执行过后的跟随代码看见的entry非空的，必须等待下一次render;
+
+refetch() 引起 loading= True/False变化，从而需要组件范围render重做搞2次。
+refetch 这个时间的入口参数filter还是捕获的旧的，须延迟一个render()后再去做。
+
+onPress={() => {异步的，但是多个setXXX合并执行的,　然后才做render。 而传递到useEffect（,[tplType])需要等到下一次 render 。
+
