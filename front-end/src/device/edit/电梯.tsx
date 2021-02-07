@@ -71,9 +71,9 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
   //const [image, ] = React.useState(defaultImage);
   //const [title, setTitle] = React.useState(defaultTitle);
 
-  const [flo, setFlo] = React.useState(eqp.flo);
   const [spec, setSpec] = React.useState(eqp.spec);
   const [vl, setVl] = React.useState(eqp.vl);
+  const [flo, setFlo] = React.useState(eqp.flo);
   const [nnor, setNnor] = React.useState(eqp.nnor);
   const [cpm, setCpm] = React.useState(eqp.cpm);
   const [hlf, setHlf] = React.useState(eqp.hlf);
@@ -143,13 +143,6 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                 paddingBottom: theme.spaces.lg
               }}
             >
-              <InputGroupLine label={`电梯层数:`}>
-                <SuffixInput
-                  type="number" min={1} max={999}
-                  value={ flo || '' }
-                  onChange={e => setFlo( e.currentTarget.value||undefined ) }
-                >层</SuffixInput>
-              </InputGroupLine>
               <ContainLine display={'是否特种电梯？'}>
                 <Check label={'是的'}
                        checked= {spec || false}
@@ -166,6 +159,17 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                   }}
                 />
               </ContainLine>
+              <ContainLine display={ '电梯层数'}>
+                <TransparentInput
+                  autoFocus={true}
+                  placeholder="层"
+                  type="number"
+                  value={flo || ''}
+                  onChange={ e => { setFlo( e.currentTarget.value||undefined )
+                  }}
+                />层
+              </ContainLine>
+
               <InputGroupLine label={`是否非标电梯:`}>
                 <Check label={'是的'}
                        checked= {nnor || false}
@@ -319,9 +323,9 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                 intent="primary"
                 iconAfter={<IconArrowRight />}
                 onPress={ async () => {
-                  await setPam({ ...eqp, spec,vl,nnor,cpm,hlf,oldb,lesc,wesc,tm,mtm,buff,rtl,
+                  await setPam({ ...eqp, flo,spec,vl,nnor,cpm,hlf,oldb,lesc,wesc,tm,mtm,buff,rtl,
                       aap,prot,doop,limm,opm,lbkd,nbkd,
-                    flo,
+
                   }  );
                 } }
               >
