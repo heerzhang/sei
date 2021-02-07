@@ -52,7 +52,7 @@ const UPDATE_DEVICE_MUTATION = gql`
     buildEQP(id: $id, owner: $unt, in: $in) {
       id cod oid type sort vart 
         ... on Elevator {
-            flo
+            lesc
         }
     }
     }
