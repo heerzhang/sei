@@ -52,7 +52,7 @@ const UPDATE_DEVICE_MUTATION = gql`
     buildEQP(id: $id, owner: $unt, in: $in) {
       id cod oid type sort vart 
         ... on Elevator {
-            lesc
+            flo,lesc
         }
     }
     }
@@ -61,7 +61,7 @@ const UPDATE_DEVICE_MUTATION = gql`
 export const useUpdateDevice = (options) => {
   const [submit, {error, data, loading, called}] = useMutation( UPDATE_DEVICE_MUTATION, {
     variables: {...options},
-   // refetchQueries:  ['DEVICE_BY_ID']
+    refetchQueries:  ['DEVICE_BY_ID']
   })
   const { buildEQP : result} = data||{};
   return { result ,submit, error, loading, called };

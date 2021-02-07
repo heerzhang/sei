@@ -12,3 +12,13 @@ refetch 这个时间的入口参数filter还是捕获的旧的，须延迟一个
 
 onPress={() => {异步的，但是多个setXXX合并执行的,　然后才做render。 而传递到useEffect（,[tplType])需要等到下一次 render 。
 
+Update函数返回result对象若包含了已经更改字段，会多出两次render,即时result实际上也就log用。
+就算外部业务代码没有看见数据变动，底层useMutation本身内部代码可能获得数据也会有变动，照样能够引起页面多做render两次。
+useMutation更新数据打底3次render，输入options数据有没变化也没影响render次数，而是graphql接口函数的返回data有没变化影响导致多2次render的。
+
+更新最简单2次render就可，条件：<Button disabled={直接用useMutation给的loading} onPress={并且options参数已经修改到位了}，useMutation获得数据不会变动。
+按钮disabled={直接用useMutation给的loading}，很快就切换，有可能多按，若useThrottle(dosaveEqpfunc,9000)可延迟恢复按钮，但是render多加2次=4次。
+如果Update执行的graphql接口函数的返回data有变化就会再多加2次render的=4次, 延迟用useThrottle=6次。
+useMutation(refetchQueries:['DEVICE_BY_ID']})传递下来又会再多出2次render的; 所以上面条件最差时点更新按钮最多就会有8次render/输入字段没变动的也要6次。
+幸运的是，采取局部化措施后，受到波及的组件实际的更新响应速度尚且可以。
+

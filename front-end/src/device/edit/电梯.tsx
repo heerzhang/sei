@@ -143,33 +143,26 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                 paddingBottom: theme.spaces.lg
               }}
             >
-              <ContainLine display={'是否特种电梯？'}>
+              <InputGroupLine label={`电梯层数:`}>
+                <SuffixInput
+                  type="number"  min={1} max={999}
+                  value={ flo || '' }
+                  onChange={e => setFlo( e.currentTarget.value||undefined ) }
+                >层</SuffixInput>
+              </InputGroupLine>
+              <InputGroupLine label={'是否特种电梯？'}>
                 <Check label={'是的'}
                        checked= {spec || false}
                        onChange={e => setSpec(!spec) }
                 />
-              </ContainLine>
-              <ContainLine display={ '运行速度'}>
-                <TransparentInput
-                  autoFocus={true}
-                  placeholder="m/s"
-                  type="number"
+              </InputGroupLine>
+              <InputGroupLine label={ '运行速度'}>
+                <SuffixInput
+                  type="number"  min={0} max={300}
                   value={vl || ''}
-                  onChange={ e => { setVl( e.currentTarget.value||undefined )
-                  }}
-                />
-              </ContainLine>
-              <ContainLine display={ '电梯层数'}>
-                <TransparentInput
-                  autoFocus={true}
-                  placeholder="层"
-                  type="number"
-                  value={flo || ''}
-                  onChange={ e => { setFlo( e.currentTarget.value||undefined )
-                  }}
-                />层
-              </ContainLine>
-
+                  onChange={e => setVl( e.currentTarget.value||undefined ) }
+                >m/s</SuffixInput>
+              </InputGroupLine>
               <InputGroupLine label={`是否非标电梯:`}>
                 <Check label={'是的'}
                        checked= {nnor || false}
@@ -247,7 +240,6 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                 >kg
                 </SuffixInput>
               </InputGroupLine>
-              {/*
               <InputGroupLine label={`加装的附加装置:`}>
                 <ComboBox  autocomplete
                   query={aap || ''}
@@ -264,7 +256,7 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                   )}
                 </ComboBox>
               </InputGroupLine>
-              */}
+
               <InputGroupLine label={`轿厢意外移动保护装置型号:`}>
                 <Input
                   value={ prot || ''}
@@ -272,7 +264,7 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                 >
                 </Input>
               </InputGroupLine>
-              {/*
+
               <InputGroupLine label={`开门方式:`}>
                 <ComboBox  autocomplete
                            query={doop || ''}
@@ -289,7 +281,7 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                   )}
                 </ComboBox>
               </InputGroupLine>
-              */}
+
               <InputGroupLine label={`限速器型号:`}>
                 <Input
                   value={ limm || ''}
@@ -301,7 +293,7 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                         value={ opm || ''}
                         onChange={e => setOpm( e.currentTarget.value||undefined ) }
                 >
-                  <option></option>
+                  <option> </option>
                   { 控制方式.map((one,i) => (
                     <option key={i}>{one}</option>
                   )) }
