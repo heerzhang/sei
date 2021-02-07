@@ -91,6 +91,14 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
   const [opm, setOpm] = React.useState(eqp.opm);
   const [lbkd, setLbkd] = React.useState(eqp.lbkd);
   const [nbkd, setNbkd] = React.useState(eqp.nbkd);
+  //监察参数 : 不用JSON.parse无法取出,保存对象直接发给后端数据库,存储String格式不一样;
+  const  svp =JSON.parse( eqp?.svp!);
+  const [制造国, set制造国] = React.useState(svp?.制造国);
+  const [设计使用年限, set设计使用年限] = React.useState(svp?.设计使用年限);
+  const [motorCod, setMotorCod] = React.useState(svp?.motorCod);
+  const [设计日期, set设计日期] = React.useState(svp?.设计日期);
+  const [重点监控, set重点监控] = React.useState(svp?.重点监控);
+  const [makeIspunitId, setMakeIspunitId] = React.useState(svp?.makeIspunitId);
 
 
   //直接取得EQP关联的task字段的对象。
@@ -98,9 +106,7 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
  // const [ingredients, setIngredients] = React.useState<any>( dt||{} );
   const [, setLocation] = useLocation();
 
-  //console.log("页面刷新钩子AttachedTask entry=",　",设备id="+id+";task=",task,";eqp=",eqp);
-
-
+  console.log("页面刷新钩子AttachedTask entry svp=",　eqp?.svp, ";制造国=",svp?.制造国, ";设计使用年限=",svp?.设计使用年限);
 
   return (
     <div
@@ -308,6 +314,43 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                        onChange={e => setNbkd( e.currentTarget.value||undefined ) } />
               </InputGroupLine>
               <Text variant="h5">监察参数</Text>
+              <InputGroupLine label={`制造国:`}>
+                <Input
+                  value={ 制造国 || ''}
+                  onChange={e => set制造国( e.currentTarget.value||undefined ) }
+                >
+                </Input>
+              </InputGroupLine>
+              <InputGroupLine label={`设计使用年限:`}>
+                <Input
+                  value={ 设计使用年限 || ''}
+                  onChange={e => set设计使用年限( e.currentTarget.value||undefined ) }
+                >
+                </Input>
+              </InputGroupLine>
+              <Text variant="h5">许可用的参数</Text>
+              <InputGroupLine label={`电动机(驱动主机)编号:`}>
+                <Input value={ motorCod  || ''}
+                  onChange={e => setMotorCod( e.currentTarget.value||undefined ) }
+                />
+              </InputGroupLine>
+              <InputGroupLine label={`设计日期:`}>
+                <Input type='date'  value={ 设计日期  || ''}
+                       onChange={e => set设计日期( e.currentTarget.value||undefined ) } />
+              </InputGroupLine>
+              <InputGroupLine label={`是否重点监控:`}>
+                <Check label={'是的'}
+                       checked= {重点监控 || false}
+                       onChange={e => set重点监控(重点监控? undefined:true) }
+                />
+              </InputGroupLine>
+              <InputGroupLine label={`制造监检机构:`}>
+                <SuffixInput  type="number"
+                  value={ makeIspunitId  || ''}
+                  onChange={e => setMakeIspunitId( e.currentTarget.value||undefined ) }
+                >验证选择
+                </SuffixInput>
+              </InputGroupLine>
 
 
               <Button
@@ -315,8 +358,12 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                 intent="primary"
                 iconAfter={<IconArrowRight />}
                 onPress={ async () => {
+                  //不用JSON.stringify保存到数据库格式不一样，对象直接转String，前端无法取出。必须用json格式{"制造国":"地","设计使用年限":"12"}
                   await setPam({ ...eqp, flo,spec,vl,nnor,cpm,hlf,oldb,lesc,wesc,tm,mtm,buff,rtl,
                       aap,prot,doop,limm,opm,lbkd,nbkd,
+                    svp: JSON.stringify({制造国,设计使用年限,motorCod,设计日期,重点监控,
+                      makeIspunitId}
+                      )
 
                   }  );
                 } }
