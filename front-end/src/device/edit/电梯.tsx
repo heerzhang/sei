@@ -21,7 +21,7 @@ import {
   Input,
   Select,
   ComboBox,
-  ComboBoxInput, ComboBoxList, ComboBoxOption
+  ComboBoxInput, ComboBoxList, ComboBoxOption, IconButton, IconLayers, IconX
 } from "customize-easy-ui-component";
 
 //import { useSession } from "../auth";
@@ -31,6 +31,8 @@ import { ContainLine, TransparentInput } from "../../comp/base";
 import { css } from "@emotion/react";
 import { 设备品种 } from "../../dict/eqpComm";
 import { InspectRecordLayout } from "../../report/comp/base";
+import { gql, NetworkStatus, useQuery } from "@apollo/client";
+import { UnitOrChoose } from "../../unit/UnitOrChoose";
 
 export const 缓冲器形式=["液压","聚氨酯","弹簧","蓄能型","耗能型","聚胺脂","弹簧 液压","聚氨酯 液压"];
 export const 加装附加装置=["IC卡", "自动平层装置","IC卡和自动平层装置","能量反馈装置","自动平层和能量反馈装置","IC卡和能量反馈装置"];
@@ -66,7 +68,7 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
   const theme = useTheme();
 
   const eqpId=id;
-
+  const [open, setOpen] = React.useState(false);
   //const [editing, setEditing] = React.useState(!readOnly);
   //const [image, ] = React.useState(defaultImage);
   //const [title, setTitle] = React.useState(defaultTitle);
@@ -344,13 +346,13 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                        onChange={e => set重点监控(重点监控? undefined:true) }
                 />
               </InputGroupLine>
-              <InputGroupLine label={`制造监检机构:`}>
-                <SuffixInput  type="number"
-                  value={ makeIspunitId  || ''}
-                  onChange={e => setMakeIspunitId( e.currentTarget.value||undefined ) }
-                >验证选择
-                </SuffixInput>
-              </InputGroupLine>
+              <ContainLine display={'设备使用单位ID'}>
+                <UnitOrChoose id={makeIspunitId  || ''}
+                              onCancel={(e) => {
+                                setMakeIspunitId( e.currentTarget.value||undefined )
+                              } }
+                />
+              </ContainLine>
 
 
               <Button

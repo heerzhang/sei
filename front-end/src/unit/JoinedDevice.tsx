@@ -57,9 +57,9 @@ export const JoinedDevice: React.FunctionComponent<JoinedDeviceProps> = ({
   /*const {result, submit:updateFunc, } = useCancellationTask({
     taskid: taskId, reason:'测试期直接删'
   });*/
-  //过滤对象or参数取值K/V；有些保留key不能随意使用。
-  const  devFilterArgs={"ownerId": id ,"useUid": undefined};
-  const  devFilterArgsUseU={"useUid": id,"ownerId":undefined };
+  //过滤对象or参数取值K/V；有些保留key不能随意使用。 ,"useUid": undefined
+  const  devFilterArgs={"ownerId": id };
+  const  devFilterArgsUseU={"useUid": id };
 
   console.log("页面刷新钩子AttachedTask entry=",　",设备id="+id+";task=",task,";eqp=",eqp ,"filter=",filter);
 /*

@@ -93,7 +93,7 @@ export const SearchDeviceBox: React.FunctionComponent<SearchBoxProps> = ({
       <IconButton
         onPress={() => setOpen(true)}
         variant="ghost"
-        label="定制可选参数"
+        label="定制单位选择范围"
         size="md"
         icon={<IconLayers />}
         css={{
