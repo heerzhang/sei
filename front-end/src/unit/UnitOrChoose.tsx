@@ -73,7 +73,7 @@ export const UnitOrChoose= ( { id, onCancel, onDialog }
     <React.Fragment>
       <Touchable component={'div'}
           onPress={ async () => {
-            await onDialog();
+            await onDialog();   //编辑器来源，context已确定的；
             setLocation(`/unit/${id? id:''}`,  { replace: true } );
               } }
       >

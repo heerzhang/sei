@@ -7,7 +7,7 @@ import {
   useTheme,
   LayerLoading,
   Container,
-  Button, IconArrowRight, Touchable
+  Button, IconArrowRight, Touchable, IconCloud
 } from "customize-easy-ui-component";
 
 //import { useSession } from "../auth";
@@ -89,10 +89,9 @@ export const JoinedDevice: React.FunctionComponent<JoinedDeviceProps> = ({
   }, [doConfirm,filter,setLocation]);
 
   React.useEffect(() => {
-    if(doConfirm){
       lazyurl && ( setLocation(  lazyurl ) );
-    }
-  }, [doConfirm]);
+
+  }, [lazyurl,setLocation]);
 
   return (
     <div
@@ -200,16 +199,23 @@ export const JoinedDevice: React.FunctionComponent<JoinedDeviceProps> = ({
                               该单位正在使用设备
                             </Button>
                           </div>
-                  <Touchable component={'div'}
-                             onPress={ async () => {
-                               await setNdt({...ndt, "新的Uind": 2389 });
-                               //setLayurl(`/device/1520265`); //URl进入context ,选定id，编辑ID验证明(单个目的单对话框层次),恢复编辑器数据,刷新放弃编辑；
-                               //context& ,&return=  &编辑器model=电梯, &field=makeIspunitId
-                               await setLocation(`/device/1520265?&emodel=电梯&makeIspunitId=${id}`);
-                             } }
-                  >
-                    返回刚才的编辑器
-                  </Touchable>
+                  <RouterLink to={`/device/1520265?&emodel=电梯&makeIspunitId=${id}`}>
+                    <Button
+                        size="lg" noBind
+                        intent="primary"
+                        variant="ghost"
+                        iconAfter={<IconCloud />}
+                        onPress={ async () => {
+                          //await setNdt({...ndt, "新的Uind": 2389 });
+                         // await setLayurl();
+                          //URl进入context ,选定id，编辑ID验证明(单个目的单对话框层次),恢复编辑器数据,刷新放弃编辑；
+                          //context& ,&return=  &编辑器model=电梯, &field=makeIspunitId
+                          //await setLocation();
+                        } }
+                      >
+                        返回刚才的编辑器
+                      </Button>
+                  </RouterLink>
                       </div>
             </div>
           </Container>

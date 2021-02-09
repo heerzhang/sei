@@ -311,6 +311,7 @@ useContext(xxContext)避免props层层透传问题,组件复用必须明确告�
 useContext(DialogEnterReturn)如果上层组件没提供Context实例，就会报错！
 <Dialog isOpen=组件是特殊的；弹出对话框不会产生路由页面切换，当前父组件编辑器数据都保留;<RouterLink to>无法保留编辑数据状态；但对话框可复用性差，无法随意URL跳转。
 按钮<Touchable onPress={ async () => {setXxx()做个真正有效修改,await setLocation(url);不会报错unmount的；但是前面setXxx不是真做的就会报错。
+输入框多而复杂组件条件下，保存要拆解成为两个按钮功能，点击1次前端能检查数据或插入逻辑，把子组件编辑数据汇集；点第二个按钮才发送后端服务器存储,用户友好性。
 
 
       <Touchable component={'div'}
@@ -321,3 +322,4 @@ useContext(DialogEnterReturn)如果上层组件没提供Context实例，就会�
       >
 
       </Touchable>
+      http://27.151.117.65:3765/device/1520265

@@ -69,8 +69,8 @@ export const ComposeDevice: React.FunctionComponent<ComposeDeviceProps> = ({
 
   const [, setLocation] = useLocation();
  // const [eqpType, setEqpType] = React.useState(undefined);
-  //const eqp={};   //设备数据表
-  const [eqp, setEqp] = React.useState(dt);
+  //可编辑的设备数据表 要创建新设备=null,首先生成ID,随后刷新路由再进来 eqp有基本数据了。
+  const [eqp, setEqp] = React.useState(dt);    //为了更改数据用的。
 
 
   //const [, setOptions] = React.useState({});
@@ -328,7 +328,7 @@ export const ComposeDevice: React.FunctionComponent<ComposeDeviceProps> = ({
                   await updateDevice({ ...eqp }  );
                 } }
               >
-                更新设备信息
+                更新设备信息到后端服务器
               </Button>
               }
             </div>

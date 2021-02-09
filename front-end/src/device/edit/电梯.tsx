@@ -54,7 +54,7 @@ interface 电梯props {
   eqp?:any;
   setPam:  React.Dispatch<React.SetStateAction<any>>;
 }
-
+//可嵌套的编辑器；传递保存变动数据。
 export const 电梯: React.FunctionComponent<电梯props> = ({
   readOnly,
   id,
@@ -64,8 +64,8 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
   defaultImage,
   defaultIngredients,
   defaultTitle = "",
-  eqp=null,
-                                                       setPam,
+  eqp=null,    //从好几代祖先前的DetailedGuide在graphQL获得后端服务器数据层层传递下来的。
+                                                       setPam,   //传递编辑保存回调用
 }) => {
   const qs= queryString.parse(window.location.search);
   const dialog =qs && !!qs.dialog;
@@ -76,7 +76,7 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
   const eqpId=id;
   const {ndt, setNdt} =React.useContext(DialogEnterReturn);
   const [open, setOpen] = React.useState(false);
-
+  //合并伪对话框暂存的内容，路由切换后，ndt内容还会遗留着。确定是我这个编辑器的，模型emodel&相等ID关键字的？合理的吗
   const [edt, setEdt] =React.useState(ndt&&qs?.emodel==='电梯'? ndt:eqp);
   //const [editing, setEditing] = React.useState(!readOnly);
   //const [image, ] = React.useState(defaultImage);
@@ -361,14 +361,15 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                                   setMakeIspunitId( e.currentTarget.value||undefined )
                                 }}
                                 onDialog={async (e) => {
-                                  await setPam({ ...eqp, flo,spec,vl,nnor,cpm,hlf,oldb,lesc,wesc,tm,mtm,buff,rtl,
+                                  const newdat={ ...eqp, flo,spec,vl,nnor,cpm,hlf,oldb,lesc,wesc,tm,mtm,buff,rtl,
                                     aap,prot,doop,limm,opm,lbkd,nbkd,
                                     svp: JSON.stringify({制造国,设计使用年限,motorCod,设计日期,重点监控,
                                       makeIspunitId}
                                     )
 
-                                  }  );
-                                  await setNdt( eqp );
+                                  };
+                                  await setPam( newdat );
+                                  await setNdt( newdat );
                                   }
                                 }
                   />
@@ -390,7 +391,7 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                     }  );
                   } }
                 >
-                  确认修改
+                  确认修改检查
                 </Button>
               </div>
             </Container>
