@@ -20,6 +20,7 @@ import  Example  from "./comp/test01";
 import { EditStorageContext } from "./report/StorageContext";
 import {Guide as ReportGuide} from "./report/Guide";
 import { DevfilterContext } from "./context/DevfilterContext";
+import { DialogEnterReturn } from "./context/DialogEnterReturn";
 
 //网站的顶级路由器；　这里可以添加或分解子网站，分批开发，分开管理属于同一个域名底下的多个内容网站。
 //根据类似的文件目录树结构来分解多个内容网站的路由，规划和编码URL。
@@ -220,6 +221,7 @@ function TopRouter() {
   //报告和原始记录用的临时内存存储！，避免太多次数保存发送给后端服务器。
   const [storage, setStorage] = React.useState(null);
   const [filter, setFilter] = React.useState(null);
+  const [ndt, setNdt] = React.useState(null);
     //强制URL输入框去刷新才执行的；若是浏览器后退前进的不会执行到这，该场景直接执行NestingtRoute代码。
   console.log("PageRouters入=",user,"loading=",loading );
   //<Router>套在<GlobalState>底下，所以鼠标点击在网页内切换页面不会再次运行GlobalState，除非是浏览器地址栏录入和手动刷新才会重新获取后端授权信息。
@@ -254,7 +256,9 @@ function TopRouter() {
             <DevfilterContext.Provider
               value={{ filter, setFilter }}
             >
-
+              <DialogEnterReturn.Provider
+                value={{ ndt, setNdt }}
+              >
           <Switch>
             {!user &&  <Route path="/">   <Branding />    </Route> }
 
@@ -284,6 +288,7 @@ function TopRouter() {
             <Route path="/:rest*"><h1>没有该URL匹配的Top视图内容</h1></Route>
           </Switch>
 
+              </DialogEnterReturn.Provider>
             </DevfilterContext.Provider>
           </EditStorageContext.Provider>
         </div>

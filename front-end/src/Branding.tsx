@@ -28,7 +28,7 @@ interface BrandingProps {
 export const Branding: React.FunctionComponent<BrandingProps> = (props) => {
   const theme = useTheme();
   const showingRecipe = props["*"];   　　 //"这个是问号前的除已预定义部分的剩余路径lo/gins/ds？
-  console.log("进入Branding功能页面="+ JSON.stringify(showingRecipe) );
+  console.log("路由进入Branding页面="+ JSON.stringify(showingRecipe) );
   const responsiveBodyPadding = useResponsiveBodyPadding();
 
   return (

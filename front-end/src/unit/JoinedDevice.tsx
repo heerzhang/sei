@@ -7,15 +7,16 @@ import {
   useTheme,
   LayerLoading,
   Container,
-  Button, IconArrowRight
+  Button, IconArrowRight, Touchable
 } from "customize-easy-ui-component";
 
 //import { useSession } from "../auth";
 //import {Helmet} from "react-helmet";
-import {  useLocation } from "wouter";
+import { Link as RouterLink, useLocation } from "wouter";
 //import { Link as RouterLink } from "wouter";
 //import { useCancellationTask } from "./task/db";
 import { DevfilterContext } from "../context/DevfilterContext";
+import { DialogEnterReturn } from "../context/DialogEnterReturn";
 
 
 interface JoinedDeviceProps {
@@ -53,6 +54,7 @@ export const JoinedDevice: React.FunctionComponent<JoinedDeviceProps> = ({
   const {task} =eqp;
  // const [ingredients, setIngredients] = React.useState<any>( dt||{} );
   const [, setLocation] = useLocation();
+  const [lazyurl, setLayurl] = React.useState(null);
   const {filter, setFilter} =React.useContext(DevfilterContext);
   /*const {result, submit:updateFunc, } = useCancellationTask({
     taskid: taskId, reason:'测试期直接删'
@@ -60,6 +62,7 @@ export const JoinedDevice: React.FunctionComponent<JoinedDeviceProps> = ({
   //过滤对象or参数取值K/V；有些保留key不能随意使用。 ,"useUid": undefined
   const  devFilterArgs={"ownerId": id };
   const  devFilterArgsUseU={"useUid": id };
+  const {ndt, setNdt} =React.useContext(DialogEnterReturn);
 
   console.log("页面刷新钩子AttachedTask entry=",　",设备id="+id+";task=",task,";eqp=",eqp ,"filter=",filter);
 /*
@@ -85,6 +88,11 @@ export const JoinedDevice: React.FunctionComponent<JoinedDeviceProps> = ({
     }
   }, [doConfirm,filter,setLocation]);
 
+  React.useEffect(() => {
+    if(doConfirm){
+      lazyurl && ( setLocation(  lazyurl ) );
+    }
+  }, [doConfirm]);
 
   return (
     <div
@@ -192,7 +200,16 @@ export const JoinedDevice: React.FunctionComponent<JoinedDeviceProps> = ({
                               该单位正在使用设备
                             </Button>
                           </div>
-
+                  <Touchable component={'div'}
+                             onPress={ async () => {
+                               await setNdt({...ndt, "新的Uind": 2389 });
+                               //setLayurl(`/device/1520265`); //URl进入context ,选定id，编辑ID验证明(单个目的单对话框层次),恢复编辑器数据,刷新放弃编辑；
+                               //context& ,&return=  &编辑器model=电梯, &field=makeIspunitId
+                               await setLocation(`/device/1520265?&emodel=电梯&makeIspunitId=${id}`);
+                             } }
+                  >
+                    返回刚才的编辑器
+                  </Touchable>
                       </div>
             </div>
           </Container>

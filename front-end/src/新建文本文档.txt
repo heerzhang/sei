@@ -194,7 +194,12 @@ useContext接收context对象（createContext的值）返回该context当前值�
 useContext：访问全局状态，跨级传递数据=还能代替redux的存取功能。
 Context导致上级组件对底下子组件无感觉=神鬼不知啊，上层并不知道底下组件使用了context操作，很大地破坏封装性！=实在没办法才会采用的。
 组件内置式useReducer会根据render页面变动而重做＝相当于自动２次执行某个动作。 useReducer是状态管理用的，并不是用来做事件触发使用的，副作用导致两个2次触发。
-交互useState，useReducer；传送门createContext+<.Provider+useContext，useRef,useImperativeHandle,forwardRef；性能优化useMemo,useCallback；副作用useEffect,useLayoutEffect；useDebugValue。
+[基本Hook] useState交互修改触发， useReducer复杂情形状态机的，像Redux?。
+    传送门 createContext +<.Provider+useContext 非props封装破坏；
+    useRef 避免可变动数据或者DOM抓手实例引用地址。
+    性能优化useMemo, useCallback 避免重复运算。
+    副作用useEffect, useLayoutEffect影响流畅性感觉。
+    尽量避免使用 useImperativeHandle 必须配套 forwardRef ，操作子组件的。  调试useDebugValue。
 一般回调和useContext机制是子组件触发的操作；但若是反方向父辈组件来触发的调用多个子组件的函数。
 useReducer的参数reducer必须useCallback(((state, action) => {}包裹，或者是把reducer函数独立放在全局亦即引用组件的外部；但有副作用影响场景也无法避免2次执行同一个Action{副作用render2回}。
 useRef两个用途：1=传统ref的真DOM实例操控，safeBind；2=保存不可变对象refs = React.useRef<Map<number, HTMLButtonElement | null>>(new Map())可以免除遭受render制约的保存信息用;跨越生命周期保存。
@@ -302,13 +307,17 @@ Apollo自动优化:InMemoryCache会针对useQuery在路由跳转再次mount的�
 使用react-spring创建逼真的撕纸 动画   https://blog.csdn.net/weixin_26738395/article/details/108494153
 useImperativeHandle要配套forwardRef，尽量不要用它！！它用处是子组件向父组件公开随意的操作方法，本组件第二参数ref绑定上。
 useContext(xxContext)避免props层层透传问题,组件复用必须明确告知用了某Context，注意：一般跨组件信息传递，不建议用Context。
+使用<RouterLink to?>会跑去TopRouter(){内部<Switch>开关列表}但是不会回到App()的。所以路由切换发生在<EditStorageContext.Provider>的闭包底下。
+useContext(DialogEnterReturn)如果上层组件没提供Context实例，就会报错！
+<Dialog isOpen=组件是特殊的；弹出对话框不会产生路由页面切换，当前父组件编辑器数据都保留;<RouterLink to>无法保留编辑数据状态；但对话框可复用性差，无法随意URL跳转。
+按钮<Touchable onPress={ async () => {setXxx()做个真正有效修改,await setLocation(url);不会报错unmount的；但是前面setXxx不是真做的就会报错。
 
 
-              <InputGroupLine label={`电梯层数:`}>
-                <SuffixInput
-                  placeholder="层数"
-                  value={ eqp?.flo || ''}
-                  onChange={e => setEqp({ ...eqp, flo: e.currentTarget.value||undefined  } ) }
-                >层</SuffixInput>
-              </InputGroupLine>
-flo: (flo===''? undefined:flo),
+      <Touchable component={'div'}
+          onPress={ async () => {
+            await onDialog();
+            setLocation(`/unit/${id? id:''}`,  { replace: true } );
+              } }
+      >
+
+      </Touchable>

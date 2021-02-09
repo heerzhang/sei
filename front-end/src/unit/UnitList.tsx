@@ -21,6 +21,7 @@ import {SearchTitle} from "../comp/base"
 import { useLocation } from "wouter";
 import { useEffect } from "react";
 import { useInView } from 'react-intersection-observer'
+import { DialogEnterReturn } from "../context/DialogEnterReturn";
 
 interface DeviceListProps {company?: boolean
 }
@@ -32,7 +33,7 @@ export const UnitList: React.FunctionComponent<
   const [, setLocation] = useLocation();
   //搜索user的输入:
   const [query, setQuery] = React.useState("" as any);
-
+  const {ndt, setNdt} =React.useContext(DialogEnterReturn);
 
   //状态管理　relation＝当前显示的或者按钮点击事件产生,关注的user是谁。
   const [relation, ] = React.useState(null);
@@ -104,6 +105,8 @@ export const UnitList: React.FunctionComponent<
 
   useEffect( () => { acrossMore && (refLsize.current!==devicesFind?.length) && toLoadMore() },
     [acrossMore,devicesFind,toLoadMore ]);
+
+  console.log("UnitList跑来-  ndt=",ndt);
 
   //控件<Stack 是堆叠式的，像导航条；适用同一个模板显示只需上级给下级参数调整的场景。根据上一叠页面选择触发状态relation给下一叠参数来控制下一级显示；更多嵌套很困难。
   return (
