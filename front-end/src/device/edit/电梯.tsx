@@ -356,12 +356,12 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                          onChange={e => set重点监控(重点监控? undefined:true) }
                   />
                 </InputGroupLine>
-                <ContainLine display={'制造监检机构'}>
+                <InputGroupLine label={'制造监检机构'}>
                   <UnitOrChoose id={makeIspunitId  || ''} emodel={'电梯'} field={'makeIspunitId'}
-                                onCancel={(e) => {
-                                  setMakeIspunitId( e.currentTarget.value||undefined )
+                                onCancel={() => {
+                                  setMakeIspunitId( undefined )
                                 }}
-                                onDialog={async (e) => {
+                                onDialog={async () => {
                                   const newdat={ ...eqp, flo,spec,vl,nnor,cpm,hlf,oldb,lesc,wesc,tm,mtm,buff,rtl,
                                     aap,prot,doop,limm,opm,lbkd,nbkd,
                                     svp: JSON.stringify({制造国,设计使用年限,motorCod,设计日期,重点监控,
@@ -374,13 +374,13 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                                   }
                                 }
                   />
-                </ContainLine>
+                </InputGroupLine>
                 <InputGroupLine label={`土建施工单位:`}>
                   <UnitOrChoose id={土建施工单位  || ''} emodel={'电梯'} field={'土建施工单位'}
-                                onCancel={(e) => {
-                                  set土建施工单位( e.currentTarget.value||undefined )
+                                onCancel={() => {
+                                  set土建施工单位( undefined )
                                 }}
-                                onDialog={async (e) => {
+                                onDialog={async () => {
                                   const newdat={ ...eqp, flo,spec,vl,nnor,cpm,hlf,oldb,lesc,wesc,tm,mtm,buff,rtl,
                                     aap,prot,doop,limm,opm,lbkd,nbkd,
                                     svp: JSON.stringify({制造国,设计使用年限,motorCod,设计日期,重点监控,

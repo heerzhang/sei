@@ -216,8 +216,7 @@ export const JoinedDevice: React.FunctionComponent<JoinedDeviceProps> = ({
                           //context& ,&return=  &编辑器model=电梯, &field=makeIspunitId
                           //await setLocation();
                         } }
-                      >
-                        返回刚才的编辑器
+                      >返回 {qs.emodel} 编辑器
                       </Button>
                   </RouterLink>
                       </div>

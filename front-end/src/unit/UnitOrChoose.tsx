@@ -31,7 +31,7 @@ import {
   Layer,
   Touchable,
   IconX,
-  InputGroupLine
+  InputGroupLine, useToast, SuffixInput
 } from "customize-easy-ui-component";
 //import { Link } from "wouter";
 import { ContainLine, TransparentInput } from "../comp/base";
@@ -60,12 +60,13 @@ const GET_UNIT_DETAIL = gql`
  * @param id 目前选择好的单位id
  * @param onCancel 取消该参数的单位选择
  * @param onDialog 保存当前用户编辑器的所有输入框编制新数值。
+ * other 传递CSS参数的。
  * @constructor
  */
-export const UnitOrChoose= ( { id, onCancel, onDialog, emodel, field }
+export const UnitOrChoose= ( { id, onCancel, onDialog, emodel, field, ...other }
 ) => {
   const theme = useTheme();
-  const [activeTab, setActiveTab] = React.useState(0);
+  const toast = useToast();
   //const [getUnit, { loading, data }] = useLazyQuery(GET_UNIT_DETAIL);  https://www.apollographql.com/docs/react/data/queries/
   const { loading, error, data, networkStatus } = useQuery(GET_UNIT_DETAIL, {
     variables: { id },
@@ -82,26 +83,36 @@ export const UnitOrChoose= ( { id, onCancel, onDialog, emodel, field }
   console.log("UnitOrChoose跑来  ndt=",ndt);
 
   return (
-    <React.Fragment>
-      <Touchable component={'div'}
-          onPress={ async () => {
-            await onDialog();   //编辑器来源，context已确定的；
-            setLocation(`/unit/${id? id:''}?&emodel=${emodel}&field=${field}`,  { replace: true } );
-              } }
-      >
-        <Input readOnly value={data.unit?.company?.name||data.unit?.person.name||''}
-               onChange={e => (0) }
+    <SuffixInput  readOnly
+       value={data.unit?.company?.name || data.unit?.person.name || '' }
+       onClick={async () => {
+          console.log("UnitOrChoose在测试33dx=",ndt);
+          toast({
+            title: "离开:"+emodel+" 编辑器页面",
+            subtitle: '字段：'+field+" 选择后点返回就可返回编辑,还原编辑状态信息",
+            intent: "info"
+          });
+          await onDialog();   //编辑器来源，context已确定的；
+          setLocation(`/unit/${id? id:''}?&emodel=${emodel}&field=${field}`);
+        } }
+      {...other}
+    >
+       <IconButton
+          variant="ghost"
+          icon={<IconX />}
+          label="删除"
+          css={{
+            visibility: data.unit ?  undefined : 'hidden' ,
+          }}
+          onPress={(e) => {
+            onCancel();
+            e.preventDefault();
+            e.stopPropagation();
+          } }
         />
-      </Touchable>
-      { data.unit && <IconButton
-        css={{ marginLeft: theme.spaces.sm}}
-        variant="ghost"
-        icon={<IconX />}
-        label="删除"
-        onPress={onCancel}
-      />
-      }
-    </React.Fragment>
+    </SuffixInput>
   );
 }
+
+//上面若直接用 { data.unit && <IconButton 》} 点击删除报错Can't perform a React state update on an unmounted component. 被卸载按钮。
 
