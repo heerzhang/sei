@@ -17,6 +17,7 @@ import { Link as RouterLink, useLocation } from "wouter";
 //import { useCancellationTask } from "./task/db";
 import { DevfilterContext } from "../context/DevfilterContext";
 import { DialogEnterReturn } from "../context/DialogEnterReturn";
+import queryString from "querystring";
 
 
 interface JoinedDeviceProps {
@@ -42,6 +43,9 @@ export const JoinedDevice: React.FunctionComponent<JoinedDeviceProps> = ({
   defaultTitle = "",
   eqp=null,
 }) => {
+  const qs= queryString.parse(window.location.search);
+  const field =qs && !!qs.土建施工单位;
+  console.log("参数JoinedDevice路由qs field=",field, qs);
   const theme = useTheme();
  // const toast = useToast();
   //const eqpId=id;
@@ -199,7 +203,7 @@ export const JoinedDevice: React.FunctionComponent<JoinedDeviceProps> = ({
                               该单位正在使用设备
                             </Button>
                           </div>
-                  <RouterLink to={`/device/1520265?&emodel=电梯&makeIspunitId=${id}`}>
+                  <RouterLink to={`/device/1520265?&emodel=${qs.emodel}&${qs.field}=${id}`}>
                     <Button
                         size="lg" noBind
                         intent="primary"

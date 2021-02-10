@@ -22,6 +22,7 @@ import { useLocation } from "wouter";
 import { useEffect } from "react";
 import { useInView } from 'react-intersection-observer'
 import { DialogEnterReturn } from "../context/DialogEnterReturn";
+import queryString from "querystring";
 
 interface DeviceListProps {company?: boolean
 }
@@ -29,6 +30,9 @@ interface DeviceListProps {company?: boolean
 export const UnitList: React.FunctionComponent<
   DeviceListProps
 > = ( {company=false} ) => {
+  const qs= queryString.parse(window.location.search);
+  const field =qs && !!qs.土建施工单位;
+  console.log("参数JoinedDevice路由qs field=",field, qs);
   const theme = useTheme();
   const [, setLocation] = useLocation();
   //搜索user的输入:
@@ -182,7 +186,7 @@ export const UnitList: React.FunctionComponent<
                     {   devicesFind?.map((hit,i) => (
                         <ListItem key={hit.id}
                             onPress={e => {
-                              setLocation(`/unit/${hit.id}/${company? 'company':'person'}`);
+                              setLocation(`/unit/${hit.id}/${company? 'company':'person'}?&emodel=${qs.emodel}&field=${qs.field}`);
                             }}
                           contentBefore={
                             <React.Fragment>

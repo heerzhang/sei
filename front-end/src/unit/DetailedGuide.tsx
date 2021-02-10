@@ -26,6 +26,7 @@ import { AddToTask } from "./task/AddToTask";
 import { DeviceDetail } from "./DeviceDetail";
 import { ComposeDevice } from "./ComposeDevice";
 import { useInvalidateEQP } from "./db";
+import queryString from "querystring";
 //import { Path } from "wouter/preact";
 
 
@@ -37,6 +38,9 @@ interface DetailedGuideProps {
 export const DetailedGuide: React.FunctionComponent<DetailedGuideProps> = ({
    id: parId, company=false
 }) => {
+  const qs= queryString.parse(window.location.search);
+  const field =qs && !!qs.土建施工单位;
+  console.log("参数DetailedGuide路由qs field=",field, qs);
   const theme = useTheme();
   const toast = useToast();
   //原型是[Path, (to: Path, options?: { replace?: boolean }) => void]
@@ -97,7 +101,7 @@ export const DetailedGuide: React.FunctionComponent<DetailedGuideProps> = ({
             display: "flex"
           }}
         >
-          <RouterLink to="/unit/">
+          <RouterLink to={`/unit/?&emodel=${qs.emodel}&field=${qs.field}`}>
             <IconButton  noBind icon={<IconArrowLeft />}
                          variant="ghost"
                          label="后退"

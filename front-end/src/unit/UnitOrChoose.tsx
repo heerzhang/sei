@@ -19,7 +19,19 @@ import {
   ResponsivePopover,
   MenuList,
   MenuItem,
-  DarkMode, IconChevronDown, Tooltip, IconPlus, IconArchive, Tabs, Tab, Pager, TabPanel, Layer, Touchable
+  DarkMode,
+  IconChevronDown,
+  Tooltip,
+  IconPlus,
+  IconArchive,
+  Tabs,
+  Tab,
+  Pager,
+  TabPanel,
+  Layer,
+  Touchable,
+  IconX,
+  InputGroupLine
 } from "customize-easy-ui-component";
 //import { Link } from "wouter";
 import { ContainLine, TransparentInput } from "../comp/base";
@@ -50,7 +62,7 @@ const GET_UNIT_DETAIL = gql`
  * @param onDialog 保存当前用户编辑器的所有输入框编制新数值。
  * @constructor
  */
-export const UnitOrChoose= ( { id, onCancel, onDialog }
+export const UnitOrChoose= ( { id, onCancel, onDialog, emodel, field }
 ) => {
   const theme = useTheme();
   const [activeTab, setActiveTab] = React.useState(0);
@@ -59,7 +71,7 @@ export const UnitOrChoose= ( { id, onCancel, onDialog }
     variables: { id },
     notifyOnNetworkStatusChange: true
   });
-  const [open, setOpen] = React.useState(false);
+
   const [, setLocation] = useLocation();
   const {ndt, setNdt} =React.useContext(DialogEnterReturn);
   //Hooks必须放在条件分支if 前面，确保每一次render时刻hook执行顺序一致。
@@ -74,144 +86,22 @@ export const UnitOrChoose= ( { id, onCancel, onDialog }
       <Touchable component={'div'}
           onPress={ async () => {
             await onDialog();   //编辑器来源，context已确定的；
-            setLocation(`/unit/${id? id:''}`,  { replace: true } );
+            setLocation(`/unit/${id? id:''}?&emodel=${emodel}&field=${field}`,  { replace: true } );
               } }
       >
-        <TransparentInput
-          readOnly
-          value={ id ||''}
+        <Input readOnly value={data.unit?.company?.name||data.unit?.person.name||''}
+               onChange={e => (0) }
         />
       </Touchable>
-      <IconButton
+      { data.unit && <IconButton
         css={{ marginLeft: theme.spaces.sm}}
         variant="ghost"
-        icon={<IconLayers />}
+        icon={<IconX />}
         label="删除"
-        //onPress={onCancel}
-        onPress={() => setOpen(true)}
+        onPress={onCancel}
       />
-
-
-      <Dialog
-        mobileFullscreen
-        isOpen={open}
-        onRequestClose={() => setOpen(false)}
-        title="选择参数缩小查询的范围"
-      >
-        <div
-          css={[
-            {
-              width: "100%",
-              top: 0,
-              background: theme.colors.palette.gray.base,
-              zIndex: theme.zIndices.sticky,
-              position: "sticky",
-            }
-          ]}
-        >
-          <Navbar
-            position="static"
-            css={{
-              flex: "0 0 auto",
-              background: theme.colors.palette.gray.base,
-              color: "white"
-            }}
-          >
-            <Toolbar
-              css={{
-                display: "flex",
-                justifyContent: "space-between"
-              }}
-            >
-              <div css={{ width: "42px" }} />
-              <LightMode>
-                <ResponsivePopover
-                  content={
-                    <MenuList>
-                      <MenuItem onPress={()=>0}>退出登录帐户</MenuItem>
-                    </MenuList>
-                  }
-                >
-                  <DarkMode>
-                    <Button
-                      size="md"
-                      iconAfter={<IconChevronDown />}
-                      variant="ghost"
-                    >
-                      {''}
-                    </Button>
-                  </DarkMode>
-                </ResponsivePopover>
-              </LightMode>
-              <Tooltip content="单位新增">
-                <div>
-                  <DarkMode>
-                    <RouterLink to="/unit/new">
-                      <IconButton  noBind
-                                   variant="ghost"
-                                   label="加设备"
-                                   size="md"
-                                   icon={<IconPlus />}
-                      />
-                    </RouterLink>
-                  </DarkMode>
-                </div>
-              </Tooltip>
-              <Tooltip content="返回首页">
-                <div>
-                  <DarkMode>
-                    <RouterLink to="/">
-                      <IconButton noBind
-                                  variant="ghost"
-                                  label="首页"
-                                  size="md"
-                                  icon={<IconArchive />}
-                      />
-                    </RouterLink>
-                  </DarkMode>
-                </div>
-              </Tooltip>
-            </Toolbar>
-          </Navbar>
-          <div css={{ flex: "0 0 auto", zIndex: 2 }}>
-            <DarkMode>
-              <Tabs
-                css={{
-                  position: "sticky",
-                  top: 0,
-                  background: theme.colors.palette.gray.base
-                }}
-                onChange={i => setActiveTab(i)}
-                value={activeTab}
-                variant="evenly-spaced"
-              >
-                <Tab id="company">
-                  找企业
-                </Tab>
-                <Tab id="person">
-                  找个人
-                </Tab>
-              </Tabs>
-            </DarkMode>
-          </div>
-        </div>
-
-        <Pager
-          enableScrollLock={false}
-          value={activeTab}
-          onRequestChange={i => setActiveTab(i)}
-          lazyLoad
-        >
-          <TabPanel id="company">
-            <UnitList company />
-          </TabPanel>
-          <TabPanel id="person">
-            <UnitList  />
-          </TabPanel>
-        </Pager>
-      </Dialog>
+      }
     </React.Fragment>
   );
 }
-
 

@@ -110,6 +110,7 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
   const [设计日期, set设计日期] = React.useState(svp?.设计日期);
   const [重点监控, set重点监控] = React.useState(svp?.重点监控);
   const [makeIspunitId, setMakeIspunitId] = React.useState(qs?.makeIspunitId || svp?.makeIspunitId);
+  const [土建施工单位, set土建施工单位] = React.useState(qs?.土建施工单位 || svp?.土建施工单位);
 
 
   //直接取得EQP关联的task字段的对象。
@@ -355,8 +356,8 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                          onChange={e => set重点监控(重点监控? undefined:true) }
                   />
                 </InputGroupLine>
-                <ContainLine display={'设备使用单位ID'}>
-                  <UnitOrChoose id={makeIspunitId  || ''}
+                <ContainLine display={'制造监检机构'}>
+                  <UnitOrChoose id={makeIspunitId  || ''} emodel={'电梯'} field={'makeIspunitId'}
                                 onCancel={(e) => {
                                   setMakeIspunitId( e.currentTarget.value||undefined )
                                 }}
@@ -364,7 +365,7 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                                   const newdat={ ...eqp, flo,spec,vl,nnor,cpm,hlf,oldb,lesc,wesc,tm,mtm,buff,rtl,
                                     aap,prot,doop,limm,opm,lbkd,nbkd,
                                     svp: JSON.stringify({制造国,设计使用年限,motorCod,设计日期,重点监控,
-                                      makeIspunitId}
+                                      makeIspunitId, 土建施工单位}
                                     )
 
                                   };
@@ -374,6 +375,25 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                                 }
                   />
                 </ContainLine>
+                <InputGroupLine label={`土建施工单位:`}>
+                  <UnitOrChoose id={土建施工单位  || ''} emodel={'电梯'} field={'土建施工单位'}
+                                onCancel={(e) => {
+                                  set土建施工单位( e.currentTarget.value||undefined )
+                                }}
+                                onDialog={async (e) => {
+                                  const newdat={ ...eqp, flo,spec,vl,nnor,cpm,hlf,oldb,lesc,wesc,tm,mtm,buff,rtl,
+                                    aap,prot,doop,limm,opm,lbkd,nbkd,
+                                    svp: JSON.stringify({制造国,设计使用年限,motorCod,设计日期,重点监控,
+                                      makeIspunitId, 土建施工单位}
+                                    )
+
+                                  };
+                                  await setPam( newdat );
+                                  await setNdt( newdat );
+                                }
+                                }
+                  />
+                </InputGroupLine>
 
 
                 <Button
@@ -385,7 +405,7 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                     await setPam({ ...eqp, flo,spec,vl,nnor,cpm,hlf,oldb,lesc,wesc,tm,mtm,buff,rtl,
                       aap,prot,doop,limm,opm,lbkd,nbkd,
                       svp: JSON.stringify({制造国,设计使用年限,motorCod,设计日期,重点监控,
-                        makeIspunitId}
+                        makeIspunitId, 土建施工单位 }
                       )
 
                     }  );
