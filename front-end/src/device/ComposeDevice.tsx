@@ -187,7 +187,7 @@ export const ComposeDevice: React.FunctionComponent<ComposeDeviceProps> = ({
                               <TransparentInput
                                 autoFocus={true}
                                 placeholder="那一台电梯？"
-                                value={eqp.cod || ''}
+                                value={eqp?.cod || ''}
                                 onChange={e => setEqp({...eqp, cod: e.currentTarget.value||undefined}) }
                               />
                           </ContainLine>
@@ -195,7 +195,7 @@ export const ComposeDevice: React.FunctionComponent<ComposeDeviceProps> = ({
                             <TransparentInput
                               autoFocus={true}
                               placeholder="导入的情形可以不填写"
-                              value={eqp.oid || ''}
+                              value={eqp?.oid || ''}
                               onChange={e => setEqp({...eqp, oid: e.currentTarget.value||undefined}) }
                             />
                           </ContainLine>

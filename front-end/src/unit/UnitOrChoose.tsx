@@ -114,5 +114,5 @@ export const UnitOrChoose= ( { id, onCancel, onDialog, emodel, field, ...other }
   );
 }
 
-//上面若直接用 { data.unit && <IconButton 》} 点击删除报错Can't perform a React state update on an unmounted component. 被卸载按钮。
+//上面若直接用 { data.unit && <IconButton 》} 点击删除报错Can't perform a React state update on an unmounted component. 按钮被卸载。
 
