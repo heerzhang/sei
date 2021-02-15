@@ -102,10 +102,10 @@ export const UnitOrChoose= ( { id, onCancel, onDialog, emodel, field, ...other }
           icon={<IconX />}
           label="删除"
           css={{
-            visibility: data.unit ?  undefined : 'hidden' ,
+            display: data.unit ?  undefined : 'none'
           }}
-          onPress={(e) => {
-            onCancel();
+          onClick={async (e) => {
+            await onCancel();
             e.preventDefault();
             e.stopPropagation();
           } }

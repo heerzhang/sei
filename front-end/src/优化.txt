@@ -22,3 +22,4 @@ useMutation更新数据打底3次render，输入options数据有没变化也没�
 useMutation(refetchQueries:['DEVICE_BY_ID']})传递下来又会再多出2次render的; 所以上面条件最差时点更新按钮最多就会有8次render/输入字段没变动的也要6次。
 幸运的是，采取局部化措施后，受到波及的组件实际的更新响应速度尚且可以。
 
+//Chrome版本 home= 88.0.4324.104（正式版本） （64 位）
