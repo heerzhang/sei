@@ -69,6 +69,7 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
 }) => {
   const qs= queryString.parse(window.location.search);
   const dialog =qs && !!qs.dialog;
+  //?&土建施工单位=190 底层URL 问号?后面那个&是必需的分割符号，两符号都不能省略。
   console.log("参数电梯路由&print qs printing=",dialog, qs);
 
   const theme = useTheme();

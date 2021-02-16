@@ -4875,10 +4875,10 @@ csstype@^3.0.2:
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.0.3.tgz#2b410bbeba38ba9633353aff34b05d9755d065f8"
   integrity sha512-jPl+wbWPOWJ7SXsWyqGRk3lGecbar0Cb0OvZF/r/ZU011R4YqiRehgkQ9p4eQfo9DSDLqLL3wHwfxeJiuIsNag==
 
-customize-easy-ui-component@~4.3.3:
-  version "4.3.3"
-  resolved "https://registry.yarnpkg.com/customize-easy-ui-component/-/customize-easy-ui-component-4.3.3.tgz#2eee86dbecb332a3c5f49c4bb94b82522196d56d"
-  integrity sha512-p0jEDVEQ/UiEBDETPePZGvS0Dl3nM3slRHFHWtSQp1Xi7s1vk4aMEH/YOJkQcx4R3U+DezFq6+y/ajgXiKlhvQ==
+customize-easy-ui-component@~4.3.4:
+  version "4.3.4"
+  resolved "https://registry.yarnpkg.com/customize-easy-ui-component/-/customize-easy-ui-component-4.3.4.tgz#aa11e4b03a1d156716872e72f1d39fc3c869a6ff"
+  integrity sha512-qHerZG38WEhzZJ6X/tlkZR05lIalc3CwAPxEwt1+Kf2zSEP54v5SBsVf9xZlH+Pz/uV/Eqh97zqwQgGo6sh+9w==
   dependencies:
     "@popperjs/core" "^2.6.0"
     "@reach/alert" "^0.12.1"

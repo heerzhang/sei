@@ -185,7 +185,7 @@ export const UnitList: React.FunctionComponent<
 
                     {   devicesFind?.map((hit,i) => (
                         <ListItem key={hit.id}
-                            onClick={ (e) => {
+                            onPress={ (e) => {
                                setLocation(`/unit/${hit.id}/${company? 'company':'person'}?&emodel=${qs.emodel}&emid=${qs.emid}&field=${qs.field}`);
                             }}
                           contentBefore={

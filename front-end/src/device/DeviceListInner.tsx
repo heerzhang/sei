@@ -105,7 +105,7 @@ export const DeviceListInner: React.FunctionComponent<
               {
                 devicesFind?.map((hit,i) => (
                   <RouterLink to={`/device/${hit.id}`}  key={hit.id}>
-                    <ListItem noBind
+                    <ListItem
                               contentBefore={
                                 <React.Fragment>
                                   <Avatar size="xs" name={'曳'}/>
