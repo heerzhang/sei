@@ -203,7 +203,7 @@ export const JoinedDevice: React.FunctionComponent<JoinedDeviceProps> = ({
                               该单位正在使用设备
                             </Button>
                           </div>
-                  <RouterLink to={`/device/181?&emodel=${qs.emodel}&${qs.field}=${id}`}>
+                  <RouterLink to={`/device/${qs.emid}?&emodel=${qs.emodel}&${qs.field}=${id}`}>
                     <Button
                         size="lg" noBind
                         intent="primary"

@@ -357,7 +357,7 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                   />
                 </InputGroupLine>
                 <InputGroupLine label={'制造监检机构'}>
-                  <UnitOrChoose id={makeIspunitId  || ''} emodel={'电梯'} field={'makeIspunitId'}
+                  <UnitOrChoose id={makeIspunitId  || ''} emodel={'电梯'} emid={id} field={'makeIspunitId'}
                                 onCancel={() => {
                                   setMakeIspunitId( undefined )
                                 }}
@@ -376,7 +376,7 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                   />
                 </InputGroupLine>
                 <InputGroupLine label={`土建施工单位:`}>
-                  <UnitOrChoose id={土建施工单位  || ''} emodel={'电梯'} field={'土建施工单位'}
+                  <UnitOrChoose id={土建施工单位  || ''} emodel={'电梯'} emid={id} field={'土建施工单位'}
                                 onCancel={() => {
                                   set土建施工单位( undefined )
                                 }}

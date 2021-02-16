@@ -209,7 +209,7 @@ export const WaitingComponent = (Component: any) => {
 
 //路由的主页面：React.lazy()用于延迟加载组件。加载的模式　；　而require 是运行时加载的；
 const DeviceMain = WaitingComponent(lazy(() => import("./device/DeviceMain")));
-const UnitMain = WaitingComponent(lazy(() => import("./unit/DeviceMain")));
+const UnitMain = WaitingComponent(lazy(() => import("./unit/UnitMain")));
 const InspectMain = WaitingComponent(lazy(() => import("./inspect/InspectMain")));
 const ReportEntrance = WaitingComponent(lazy(() => import("./report/ReportEntrance")));
 const Maintenance = WaitingComponent(lazy(() => import("./maintenance/MaintenanceMain")));

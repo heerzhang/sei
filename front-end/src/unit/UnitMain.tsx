@@ -33,11 +33,11 @@ import { IspEntrance } from "./task/IspEntrance";
 //import { useCountOfTask } from "./db";
 import { DetailedGuide } from "./DetailedGuide";
 
-interface DeviceMainProps {
+interface UnitMainProps {
   id?: string;
 }
 
-export const DeviceMain: React.FunctionComponent<DeviceMainProps> = props => {
+export const UnitMain: React.FunctionComponent<UnitMainProps> = props => {
   const theme = useTheme();
   const {user} = useSession();
   const isLarge = useMedia({ minWidth: "768px" });
@@ -323,5 +323,5 @@ function SecondRouterContent({...props}) {
 }
 
 
-export default DeviceMain;
+export default UnitMain;
 

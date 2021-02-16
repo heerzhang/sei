@@ -63,7 +63,7 @@ const GET_UNIT_DETAIL = gql`
  * other 传递CSS参数的。
  * @constructor
  */
-export const UnitOrChoose= ( { id, onCancel, onDialog, emodel, field, ...other }
+export const UnitOrChoose= ( { id, onCancel, onDialog, emodel, field, emid, ...other }
 ) => {
   const theme = useTheme();
   const toast = useToast();
@@ -93,7 +93,7 @@ export const UnitOrChoose= ( { id, onCancel, onDialog, emodel, field, ...other }
             intent: "info"
           });
           await onDialog();   //编辑器来源，context已确定的；
-          setLocation(`/unit/${id? id:''}?&emodel=${emodel}&field=${field}`);
+          setLocation(`/unit/${id? id:''}?&emodel=${emodel}&emid=${emid}&field=${field}`);
         } }
       {...other}
     >
