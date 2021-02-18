@@ -101,7 +101,7 @@ export const DetailedGuide: React.FunctionComponent<DetailedGuideProps> = ({
             display: "flex"
           }}
         >
-          <RouterLink to={`/unit/?&emodel=${qs.emodel}&field=${qs.field}`}>
+          <RouterLink to={`/unit/?&emodel=${qs.emodel}&emid=${qs.emid}&field=${qs.field}`}>
             <IconButton  noBind icon={<IconArrowLeft />}
                          variant="ghost"
                          label="后退"

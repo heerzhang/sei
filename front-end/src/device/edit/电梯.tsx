@@ -78,6 +78,7 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
   const {ndt, setNdt} =React.useContext(DialogEnterReturn);
   const [open, setOpen] = React.useState(false);
   //合并伪对话框暂存的内容，路由切换后，ndt内容还会遗留着。确定是我这个编辑器的，模型emodel&相等ID关键字的？合理的吗
+  //edt是代表当前编辑的， ndt是跨越组件伪对话框共享临时存储的， eqp是后端服务器给的。
   const [edt, setEdt] =React.useState(ndt&&qs?.emodel==='电梯'? ndt:eqp);
   //const [editing, setEditing] = React.useState(!readOnly);
   //const [image, ] = React.useState(defaultImage);
@@ -119,7 +120,7 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
  // const [ingredients, setIngredients] = React.useState<any>( dt||{} );
   const [, setLocation] = useLocation();
 
-  console.log("页面刷新钩子AttachedTask svp ndt=",　eqp?.svp, ";制造国=",svp?.制造国, ";ndt=",ndt);
+  console.log("电梯进入 eqp=",　eqp, "; ndt=",ndt);
 
   return (
       <div
@@ -370,6 +371,7 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                                     )
 
                                   };
+                                  console.log("制造监检机构进入 newdat=",newdat);
                                   await setPam( newdat );
                                   await setNdt( newdat );
                                   }
@@ -389,6 +391,7 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                                     )
 
                                   };
+                                  console.log("土建施工单位进入 newdat=",newdat);
                                   await setPam( newdat );
                                   await setNdt( newdat );
                                 }
