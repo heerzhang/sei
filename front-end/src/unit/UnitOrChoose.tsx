@@ -59,7 +59,7 @@ const GET_UNIT_DETAIL = gql`
 /**
  * @param id 目前选择好的单位id
  * @param onCancel 取消该参数的单位选择
- * @param onDialog 保存当前用户编辑器的所有输入框编制新数值。
+ * @param onDialog [伪对话框模式]保存当前用户编辑器的所有输入框编制新数值。
  * other 传递CSS参数的。
  * @constructor
  */
@@ -80,13 +80,13 @@ export const UnitOrChoose= ( { id, onCancel, onDialog, emodel, field, emid, ...o
   if (loading)   return null;
   if (error) return <React.Fragment>Error! ${error}</React.Fragment>;
   //<button onClick={() => refetch()}>Refetch!</button>
-  console.log("UnitOrChoose跑来  ndt=",ndt);
+  //console.log("UnitOrChoose跑来  ndt=",ndt);
 
   return (
     <SuffixInput  readOnly
        value={data.unit?.company?.name || data.unit?.person.name || '' }
        onClick={async () => {
-          console.log("UnitOrChoose在测试33dx=",ndt);
+         // console.log("UnitOrChoose在测试33dx=",ndt);
           toast({
             title: "离开:"+emodel+" 编辑器页面",
             subtitle: '字段：'+field+" 选择后点返回就可返回编辑,还原编辑状态信息",

@@ -32,7 +32,7 @@ export const UnitList: React.FunctionComponent<
 > = ( {company=false} ) => {
   const qs= queryString.parse(window.location.search);
   const field =qs && !!qs.土建施工单位;
-  console.log("参数JoinedDevice路由qs field=",field, qs);
+  //console.log("参数JoinedDevice路由qs field=",field, qs);
   const theme = useTheme();
   const [, setLocation] = useLocation();
   //搜索user的输入:
@@ -86,7 +86,7 @@ export const UnitList: React.FunctionComponent<
       limit:4,
     };
     //界面查询接口参数列表
-    console.log("即可搜 =filtercomp=",filtercomp);
+    //console.log("即可搜 =filtercomp=",filtercomp);
     setFilter(filtercomp);
   }, [query, company]);
   //这两个useEffect的前后顺序不能颠倒，顺序非常重要，后面的依赖于前面的useEffect更新结果。
@@ -110,7 +110,7 @@ export const UnitList: React.FunctionComponent<
   useEffect( () => { acrossMore && (refLsize.current!==devicesFind?.length) && toLoadMore() },
     [acrossMore,devicesFind,toLoadMore ]);
 
-  console.log("UnitList跑来-  ndt=",ndt);
+  //console.log("UnitList跑来-  ndt=",ndt);
 
   //控件<Stack 是堆叠式的，像导航条；适用同一个模板显示只需上级给下级参数调整的场景。根据上一叠页面选择触发状态relation给下一叠参数来控制下一级显示；更多嵌套很困难。
   return (

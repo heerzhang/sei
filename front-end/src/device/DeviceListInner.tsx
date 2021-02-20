@@ -53,7 +53,7 @@ export const DeviceListInner: React.FunctionComponent<
   useEffect( () => { acrossMore && (refLsize.current!==devicesFind?.length) && toLoadMore() },
         [acrossMore,devicesFind,toLoadMore ]);
 
-  console.log("霉$R1变 refLsize=",refLsize.current,"devicesFind=",devicesFind?.length);
+  //console.log("霉$R1变 refLsize=",refLsize.current,"devicesFind=",devicesFind?.length);
 
   const callRefetch = React.useCallback(() => {
     //setHasMore(true);

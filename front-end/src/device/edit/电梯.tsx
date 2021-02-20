@@ -70,7 +70,7 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
   const qs= queryString.parse(window.location.search);
   const dialog =qs && !!qs.dialog;
   //?&土建施工单位=190 底层URL 问号?后面那个&是必需的分割符号，两符号都不能省略。
-  console.log("参数电梯路由&print qs printing=",dialog, qs);
+  //console.log("参数电梯路由&print qs printing=",dialog, qs);
 
   const theme = useTheme();
 
@@ -79,33 +79,34 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
   const [open, setOpen] = React.useState(false);
   //合并伪对话框暂存的内容，路由切换后，ndt内容还会遗留着。确定是我这个编辑器的，模型emodel&相等ID关键字的？合理的吗
   //edt是代表当前编辑的， ndt是跨越组件伪对话框共享临时存储的， eqp是后端服务器给的。
-  const [edt, setEdt] =React.useState(ndt&&qs?.emodel==='电梯'? ndt:eqp);
+  const [edt, setEdt] =React.useState(ndt&&qs?.emodel==='电梯'&&ndt.id===id? ndt:eqp);
   //const [editing, setEditing] = React.useState(!readOnly);
   //const [image, ] = React.useState(defaultImage);
   //const [title, setTitle] = React.useState(defaultTitle);
 
-  const [spec, setSpec] = React.useState(eqp.spec);
-  const [vl, setVl] = React.useState(eqp.vl);
-  const [flo, setFlo] = React.useState(eqp.flo);
-  const [nnor, setNnor] = React.useState(eqp.nnor);
-  const [cpm, setCpm] = React.useState(eqp.cpm);
-  const [hlf, setHlf] = React.useState(eqp.hlf);
-  const [oldb, setOldb] = React.useState(eqp.oldb);
-  const [lesc, setLesc] = React.useState(eqp.lesc);
-  const [wesc, setWesc] = React.useState(eqp.wesc);
-  const [tm, setTm] = React.useState(eqp.tm);
-  const [mtm, setMtm] = React.useState(eqp.mtm);
-  const [buff, setBuff] = React.useState(eqp.buff);
-  const [rtl, setRtl] = React.useState(eqp.rtl);
-  const [aap, setAap] = React.useState(eqp.aap);
-  const [prot, setProt] = React.useState(eqp.prot);
-  const [doop, setDoop] = React.useState(eqp.doop);
-  const [limm, setLimm] = React.useState(eqp.limm);
+  const [spec, setSpec] = React.useState(edt.spec);
+  const [vl, setVl] = React.useState(edt.vl);
+  const [flo, setFlo] = React.useState(edt.flo);
+  const [nnor, setNnor] = React.useState(edt.nnor);
+  const [cpm, setCpm] = React.useState(edt.cpm);
+  const [hlf, setHlf] = React.useState(edt.hlf);
+  const [oldb, setOldb] = React.useState(edt.oldb);
+  const [lesc, setLesc] = React.useState(edt.lesc);
+  const [wesc, setWesc] = React.useState(edt.wesc);
+  const [tm, setTm] = React.useState(edt.tm);
+  const [mtm, setMtm] = React.useState(edt.mtm);
+  const [buff, setBuff] = React.useState(edt.buff);
+  const [rtl, setRtl] = React.useState(edt.rtl);
+  const [aap, setAap] = React.useState(edt.aap);
+  const [prot, setProt] = React.useState(edt.prot);
+  const [doop, setDoop] = React.useState(edt.doop);
+  const [limm, setLimm] = React.useState(edt.limm);
   const [opm, setOpm] = React.useState(edt.opm);
-  const [lbkd, setLbkd] = React.useState(eqp.lbkd);
-  const [nbkd, setNbkd] = React.useState(eqp.nbkd);
+  const [lbkd, setLbkd] = React.useState(edt.lbkd);
+  const [nbkd, setNbkd] = React.useState(edt.nbkd);
   //监察参数 : 不用JSON.parse无法取出,保存对象直接发给后端数据库,存储String格式不一样;
-  const  svp =JSON.parse( eqp?.svp!);
+  //console.log("参数parse JSON 前面edt=",edt);
+  const  svp =JSON.parse( edt?.svp!);
   const [制造国, set制造国] = React.useState(svp?.制造国);
   const [设计使用年限, set设计使用年限] = React.useState(svp?.设计使用年限);
   const [motorCod, setMotorCod] = React.useState(svp?.motorCod);
@@ -120,7 +121,20 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
  // const [ingredients, setIngredients] = React.useState<any>( dt||{} );
   const [, setLocation] = useLocation();
 
-  console.log("电梯进入 eqp=",　eqp, "; ndt=",ndt);
+  //console.log("电梯进入 eqp=",　eqp, "; ndt=",ndt);
+  //不用JSON.stringify保存到数据库格式不一样，对象直接转String，前端无法取出。必须用json格式{"制造国":"地","设计使用年限":"12"}
+  async function confirmation() {
+    const newdat={ ...eqp, flo,spec,vl,nnor,cpm,hlf,oldb,lesc,wesc,tm,mtm,buff,rtl,
+      aap,prot,doop,limm,opm,lbkd,nbkd,
+      svp: JSON.stringify({制造国,设计使用年限,motorCod,设计日期,重点监控,
+        makeIspunitId, 土建施工单位}
+      )
+
+    };
+    await setPam( newdat );
+    return newdat;
+  }
+
 
   return (
       <div
@@ -363,19 +377,7 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                                 onCancel={() => {
                                   setMakeIspunitId( undefined )
                                 }}
-                                onDialog={async () => {
-                                  const newdat={ ...eqp, flo,spec,vl,nnor,cpm,hlf,oldb,lesc,wesc,tm,mtm,buff,rtl,
-                                    aap,prot,doop,limm,opm,lbkd,nbkd,
-                                    svp: JSON.stringify({制造国,设计使用年限,motorCod,设计日期,重点监控,
-                                      makeIspunitId, 土建施工单位}
-                                    )
-
-                                  };
-                                  console.log("制造监检机构进入 newdat=",newdat);
-                                  await setPam( newdat );
-                                  await setNdt( newdat );
-                                  }
-                                }
+                                onDialog={async () => { await setNdt(await confirmation()); } }
                   />
                 </InputGroupLine>
                 <InputGroupLine label={`土建施工单位:`}>
@@ -383,19 +385,7 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                                 onCancel={() => {
                                   set土建施工单位( undefined )
                                 }}
-                                onDialog={async () => {
-                                  const newdat={ ...eqp, flo,spec,vl,nnor,cpm,hlf,oldb,lesc,wesc,tm,mtm,buff,rtl,
-                                    aap,prot,doop,limm,opm,lbkd,nbkd,
-                                    svp: JSON.stringify({制造国,设计使用年限,motorCod,设计日期,重点监控,
-                                      makeIspunitId, 土建施工单位}
-                                    )
-
-                                  };
-                                  console.log("土建施工单位进入 newdat=",newdat);
-                                  await setPam( newdat );
-                                  await setNdt( newdat );
-                                }
-                                }
+                                onDialog={async () => { await setNdt(await confirmation()); } }
                   />
                 </InputGroupLine>
 
@@ -406,13 +396,7 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                   iconAfter={<IconArrowRight />}
                   onPress={ async () => {
                     //不用JSON.stringify保存到数据库格式不一样，对象直接转String，前端无法取出。必须用json格式{"制造国":"地","设计使用年限":"12"}
-                    await setPam({ ...eqp, flo,spec,vl,nnor,cpm,hlf,oldb,lesc,wesc,tm,mtm,buff,rtl,
-                      aap,prot,doop,limm,opm,lbkd,nbkd,
-                      svp: JSON.stringify({制造国,设计使用年限,motorCod,设计日期,重点监控,
-                        makeIspunitId, 土建施工单位 }
-                      )
-
-                    }  );
+                    await confirmation();
                   } }
                 >
                   确认修改检查

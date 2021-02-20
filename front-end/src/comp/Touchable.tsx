@@ -3,10 +3,10 @@
 
 import { jsx } from "@emotion/react";
 import * as React from "react";
-import { useTouchable, OnPressFunction } from "touchable-hook";
 import cx from "classnames";
 //import { safeBind } from "./Hooks/compose-bind";
 import { safeBind } from "customize-easy-ui-component/esm/Hooks/compose-bind";
+import { OnPressFunction, useTouchable } from "customize-easy-ui-component";
 
 
 

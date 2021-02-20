@@ -9,7 +9,7 @@ import {
   Input,
   ScrollView,
   ScrollViewHandles,
-  useToast
+  useToast, useTouchable
 } from "customize-easy-ui-component";
 //import useScrollLock from "use-scroll-lock";
 
@@ -17,7 +17,7 @@ import {
 //import {ScrollView, ScrollViewHandles} from "customize-easy-ui-component";
 
 //import { storiesOf } from "@storybook/react";
-import { useTouchable } from "touchable-hook";
+
 import { ImageUpload } from "../ImageUpload";
 import { Image } from "../Image";
 //import { InputGroup } from "./Form";

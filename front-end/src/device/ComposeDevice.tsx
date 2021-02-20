@@ -87,7 +87,8 @@ export const ComposeDevice: React.FunctionComponent<ComposeDeviceProps> = ({
     in:{...ingredients, ...eqp, __typename:undefined} });
 
   const {doFunc:throttledSaveEqp, ready} = useThrottle(dosaveEqpfunc,9000);
-  console.log("刚ComposeDevice经过EQPis",dt,"进行中id=",id,"eqp=",eqp,"loading",loading,"saveres",saveres,"called",called);
+  //保存到后端服务器render次数较多的, 参考:\优化.txt
+  //console.log("刚ComposeDevice经过EQPis",dt,"进行中id=",id,"eqp=",eqp,"loading",loading,"saveres",saveres,"called",called);
   //不能在这点击触发函数内部执行HOOKs!! 必须上移动外移到 界面组件的头部初始化hooks，随后点击触发调用hook钩子函数。
   async function saveRecipe( a
   ) {

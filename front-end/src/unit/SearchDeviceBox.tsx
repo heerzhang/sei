@@ -30,7 +30,7 @@ export const SearchDeviceBox: React.FunctionComponent<SearchBoxProps> = ({
   //设备选择的范围缩小功能
   const [open, setOpen] = React.useState(false);
   const [ingredients, setIngredients] = React.useState<any>( {} );
-  console.log("来看SearchDeviceBox当前的 ingredients=",ingredients);
+  //console.log("来看SearchDeviceBox当前的 ingredients=",ingredients);
 
   return (
     <React.Fragment>

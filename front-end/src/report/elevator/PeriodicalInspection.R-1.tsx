@@ -1,9 +1,8 @@
 /** @jsxImportSource @emotion/react */
 //import { jsx,} from "@emotion/react";
 import * as React from "react";
-import { Collapse, Text, useTheme } from "customize-easy-ui-component";
+import { Collapse, Text, useTheme,useTouchable } from "customize-easy-ui-component";
 import { Table, TableBody, TableHead, TableRow, Cell, CCell } from "../../comp/TableExt";
-import { useTouchable, } from "touchable-hook";
 import { Helmet } from "react-helmet";
 import { useMedia } from "use-media";
 import { Link as RouterLink } from "wouter";
