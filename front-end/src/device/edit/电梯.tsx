@@ -21,7 +21,7 @@ import {
   Input,
   Select,
   ComboBox,
-  ComboBoxInput, ComboBoxList, ComboBoxOption, IconButton, IconLayers, IconX
+  ComboBoxInput, ComboBoxList, ComboBoxOption, IconButton, IconLayers, IconX, InputDatalist
 } from "customize-easy-ui-component";
 
 //import { useSession } from "../auth";
@@ -291,6 +291,14 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                   </ComboBox>
                 </InputGroupLine>
 
+                <InputGroupLine label={`加装的附加装置2:`}>
+                  <InputDatalist
+                    value={ aap || ''}
+                    onChange={e => setAap( e.currentTarget.value||undefined ) }
+                  >
+                  </InputDatalist>
+                </InputGroupLine>
+
                 <InputGroupLine label={`轿厢意外移动保护装置型号:`}>
                   <Input
                     value={ prot || ''}
@@ -314,6 +322,14 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                       </ComboBoxList>
                     )}
                   </ComboBox>
+                </InputGroupLine>
+
+                <InputGroupLine label={`开门方式2:`}>
+                  <InputDatalist
+                    value={ doop || ''}
+                    onChange={e => setDoop( e.currentTarget.value||undefined ) }
+                  >
+                  </InputDatalist>
                 </InputGroupLine>
 
                 <InputGroupLine label={`限速器型号:`}>

@@ -401,8 +401,8 @@ react-to-print是预留 组件打印的。
         </RouterLink>
 ComboBox新的思路：<datalist标签？list做关联id,为何不直接用W3C浏览器提供的，
     <input type="url2" list="url_list32" name="link2" id="myCar" /> />
-    <datalist id="url_list32">
-        <option label="W3School" value="http://www.w3school.c奥术大师单啥多啥多om.cn" />
-        <option value="http://www.goo少时诵诗书所所所所所gle.com" />
-    </datalist>
+<datalist id="url_list32">
+    <option label="W3School" value="http://www.w3school.c奥术大师单啥多啥多om.cn" />
+    <option value="http://www.goo少时诵诗书所所所所所gle.com" />
+</datalist>
 
