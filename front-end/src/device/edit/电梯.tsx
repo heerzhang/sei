@@ -295,6 +295,7 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                   <InputDatalist
                     value={ aap || ''}
                     onChange={e => setAap( e.currentTarget.value||undefined ) }
+                    datalist={加装附加装置}
                   >
                   </InputDatalist>
                 </InputGroupLine>
@@ -328,6 +329,7 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                   <InputDatalist
                     value={ doop || ''}
                     onChange={e => setDoop( e.currentTarget.value||undefined ) }
+                    datalist={开门方式}
                   >
                   </InputDatalist>
                 </InputGroupLine>
