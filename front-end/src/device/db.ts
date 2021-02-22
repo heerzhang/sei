@@ -183,7 +183,7 @@ const DEVICE_BY_ID = gql`
 			id,oid,cod,type,sort,vart,  
       ... on Elevator {  svp,pa,
           flo,spec,nnor,oldb,vl,hlf,lesc,wesc,cpm,tm,mtm,buff,rtl,aap,prot,
-          doop,limm,opm,lbkd,nbkd
+          doop,limm,opm,lbkd,nbkd,cpa,vital
       }
 		}
 	}

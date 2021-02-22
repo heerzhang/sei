@@ -21,7 +21,7 @@ import {
   Input,
   Select,
   ComboBox,
-  ComboBoxInput, ComboBoxList, ComboBoxOption, IconButton, IconLayers, IconX, InputDatalist
+  ComboBoxInput, ComboBoxList, ComboBoxOption, IconButton, IconLayers, IconX, InputDatalist, ComboBoxDatalist
 } from "customize-easy-ui-component";
 
 //import { useSession } from "../auth";
@@ -40,6 +40,7 @@ export const 缓冲器形式=["液压","聚氨酯","弹簧","蓄能型","耗能�
 export const 加装附加装置=["IC卡", "自动平层装置","IC卡和自动平层装置","能量反馈装置","自动平层和能量反馈装置","IC卡和能量反馈装置"];
 export const 开门方式=["中分门","旁开门","中分双折","旁开双折","中分","旁开","侧开","自动", "中开","手动门","水平中分滑动门（二扇）", "左折", "左开","右折","旁开三折"];
 export const 控制方式=["集选","并联","群控","按钮","信号","按钮控制","微机控制","PLC","微机","微电脑","按扭","信号控制","交流变频"]
+export const 事故隐患类别=['一般','严重','重大','特大','特别重大'];
 
 
 interface 电梯props {
@@ -104,6 +105,9 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
   const [opm, setOpm] = React.useState(edt.opm);
   const [lbkd, setLbkd] = React.useState(edt.lbkd);
   const [nbkd, setNbkd] = React.useState(edt.nbkd);
+  const [cpa, setCpa] = React.useState(edt.cpa);
+  const [vital, setVital] = React.useState(edt.vital);
+
   //监察参数 : 不用JSON.parse无法取出,保存对象直接发给后端数据库,存储String格式不一样;
   //console.log("参数parse JSON 前面edt=",edt);
   const  svp =JSON.parse( edt?.svp!);
@@ -125,7 +129,7 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
   //不用JSON.stringify保存到数据库格式不一样，对象直接转String，前端无法取出。必须用json格式{"制造国":"地","设计使用年限":"12"}
   async function confirmation() {
     const newdat={ ...eqp, flo,spec,vl,nnor,cpm,hlf,oldb,lesc,wesc,tm,mtm,buff,rtl,
-      aap,prot,doop,limm,opm,lbkd,nbkd,
+      aap,prot,doop,limm,opm,lbkd,nbkd,cpa,vital,
       svp: JSON.stringify({制造国,设计使用年限,motorCod,设计日期,重点监控,
         makeIspunitId, 土建施工单位}
       )
@@ -274,32 +278,13 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                   >kg
                   </SuffixInput>
                 </InputGroupLine>
-                <InputGroupLine label={`加装的附加装置:`}>
-                  <ComboBox  autocomplete
-                             query={aap || ''}
-                             onQueryChange={v => setAap(v) }
-                             onSelect={v => setAap(v) }
-                  >
-                    <ComboBoxInput aria-label=""/>
-                    {aap && (
-                      <ComboBoxList >
-                        { 加装附加装置.map((one,i) => {
-                          return <ComboBoxOption key={i} value={one} />;
-                        }) }
-                      </ComboBoxList>
-                    )}
-                  </ComboBox>
-                </InputGroupLine>
-
-                <InputGroupLine label={`加装的附加装置2:`}>
-                  <InputDatalist
+                 <InputGroupLine label={`加装的附加装置:`}>
+                  <ComboBoxDatalist
                     value={ aap || ''}
-                    onChange={e => setAap( e.currentTarget.value||undefined ) }
+                    onListChange={v => setAap( v||undefined ) }
                     datalist={加装附加装置}
-                  >
-                  </InputDatalist>
+                  />
                 </InputGroupLine>
-
                 <InputGroupLine label={`轿厢意外移动保护装置型号:`}>
                   <Input
                     value={ prot || ''}
@@ -307,33 +292,13 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                   >
                   </Input>
                 </InputGroupLine>
-
                 <InputGroupLine label={`开门方式:`}>
-                  <ComboBox  autocomplete
-                             query={doop || ''}
-                             onQueryChange={v => setDoop(v) }
-                             onSelect={v => setDoop(v) }
-                  >
-                    <ComboBoxInput aria-label=""/>
-                    { (
-                      <ComboBoxList >
-                        { 开门方式.map((one,i) => {
-                          return <ComboBoxOption key={i} value={one} />;
-                        }) }
-                      </ComboBoxList>
-                    )}
-                  </ComboBox>
-                </InputGroupLine>
-
-                <InputGroupLine label={`开门方式2:`}>
                   <InputDatalist
                     value={ doop || ''}
-                    onChange={e => setDoop( e.currentTarget.value||undefined ) }
+                    onListChange={v => setDoop(v ||undefined)}
                     datalist={开门方式}
-                  >
-                  </InputDatalist>
+                  />
                 </InputGroupLine>
-
                 <InputGroupLine label={`限速器型号:`}>
                   <Input
                     value={ limm || ''}
@@ -361,19 +326,38 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                 </InputGroupLine>
                 <Text variant="h5">监察参数</Text>
                 <InputGroupLine label={`制造国:`}>
-                  <Input
+                  <InputDatalist
                     value={ 制造国 || ''}
-                    onChange={e => set制造国( e.currentTarget.value||undefined ) }
-                  >
-                  </Input>
+                    onListChange={v => set制造国(v ||undefined)}
+                    datalist={["中国","美国","欧盟"]}
+                  />
+                </InputGroupLine>
+                <InputGroupLine label={`是否重要特种设备:`}>
+                  <Check label={'是的'}
+                         checked= {vital || false}
+                         onChange={e => setVital(vital? undefined:true) }
+                  />
                 </InputGroupLine>
                 <InputGroupLine label={`设计使用年限:`}>
-                  <Input
+                  <SuffixInput
+                    type="number"
                     value={ 设计使用年限 || ''}
                     onChange={e => set设计使用年限( e.currentTarget.value||undefined ) }
-                  >
-                  </Input>
+                  >年
+                  </SuffixInput>
                 </InputGroupLine>
+                <InputGroupLine label={`事故隐患类别:`}>
+                  <Select
+                          value={ cpa || ''}
+                          onChange={e => setCpa( e.currentTarget.value||undefined ) }
+                  >
+                    <option> </option>
+                    { 事故隐患类别.map((one,i) => (
+                      <option key={i} value={i+1}>{one}</option>
+                    )) }
+                  </Select>
+                </InputGroupLine>
+
                 <Text variant="h5">许可用的参数</Text>
                 <InputGroupLine label={`电动机(驱动主机)编号:`}>
                   <Input value={ motorCod  || ''}
