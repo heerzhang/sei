@@ -43,6 +43,14 @@ export const 控制方式=["集选","并联","群控","按钮","信号","按钮�
 export const 事故隐患类别=['一般','严重','重大','特大','特别重大'];
 export const 施工类别s=["安装","新装", "锅炉安装","新炉安装", "移装","改造", "旧炉移装", "新装验收","新安装","锅炉改造"]
 export const 补偿方式s=['补偿链','补偿绳','补偿缆'];
+export const 电动机类型s=["交流","YFD160M-6","YFD160L1-6"];
+export const 顶升形式s=["间接顶升","非直顶式", "直顶式","侧顶式","曳引式","间接式","侧置式"];
+export const 对重导轨型式s=["T型导轨","空心导轨","热轧型钢导轨"];
+export const 轿厢装修状态=["无预留装修，轿厢无装修；轿顶未装空调","无预留装修，轿厢已装修；轿顶未装空调","无预留装修，轿厢无装修；轿顶装有空调","无预留装修，轿厢已装修；轿顶装有空调","有预留装修200kg，轿厢未装修；轿顶未装空调"];
+export const 区域防爆等级=["2区","ⅡB", "ⅡBT4", "ⅡB级","Ⅱ级","1区"];
+export const 驱动方式s=["曳引式","VVVF","曳引驱动","强制式","链条驱动","KDL16","交流"];
+export const 上行保护装置形式=["制动器","夹绳器","曳引轮制动器","钢丝绳制动器","双向安全钳","安全钳","轮式附加制动器"];
+
 
 
 interface 电梯props {
@@ -145,6 +153,43 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
   const [层门型号, set层门型号] = React.useState(pa?.层门型号);
   const [底坑深度, set底坑深度] = React.useState(pa?.底坑深度);
   const [电动机功率, set电动机功率] = React.useState(pa?.电动机功率);
+  const [电动机类型, set电动机类型] = React.useState(pa?.电动机类型);
+  const [电动机转速, set电动机转速] = React.useState(pa?.电动机转速);
+  const [电梯门数, set电梯门数] = React.useState(pa?.电梯门数);
+  const [电梯站数, set电梯站数] = React.useState(pa?.电梯站数);
+  const [顶层高度, set顶层高度] = React.useState(pa?.顶层高度);
+  const [顶升形式, set顶升形式] = React.useState(pa?.顶升形式);
+  const [对重导轨型式, set对重导轨型式] = React.useState(pa?.对重导轨型式);
+  const [对重轨距, set对重轨距] = React.useState(pa?.对重轨距);
+  const [对重块数, set对重块数] = React.useState(pa?.对重块数);
+  const [对重限速号, set对重限速号] = React.useState(pa?.对重限速号);
+  const [对重限型号, set对重限型号] = React.useState(pa?.对重限型号);
+  const [额定电流, set额定电流] = React.useState(pa?.额定电流);
+  const [额定载人, set额定载人] = React.useState(pa?.额定载人);
+  const [缓冲器编号, set缓冲器编号] = React.useState(pa?.缓冲器编号);
+  const [缓冲器型号, set缓冲器型号] = React.useState(pa?.缓冲器型号);
+  const [缓冲器厂家, set缓冲器厂家] = React.useState(pa?.缓冲器厂家);
+  const [轿厢高, set轿厢高] = React.useState(pa?.轿厢高);
+  const [轿厢宽, set轿厢宽] = React.useState(pa?.轿厢宽);
+  const [轿厢深, set轿厢深] = React.useState(pa?.轿厢深);
+  const [轿厢轨距, set轿厢轨距] = React.useState(pa?.轿厢轨距);
+  const [上行限电速, set上行限电速] = React.useState(pa?.上行限电速);
+  const [上行限机速, set上行限机速] = React.useState(pa?.上行限机速);
+  const [下行限电速, set下行限电速] = React.useState(pa?.下行限电速);
+  const [下行限机速, set下行限机速] = React.useState(pa?.下行限机速);
+  const [移动保护号, set移动保护号] = React.useState(pa?.移动保护号);
+  const [移动保护型, set移动保护型] = React.useState(pa?.移动保护型);
+  const [装修, set装修] = React.useState(pa?.装修);
+  const [锁型号, set锁型号] = React.useState(pa?.锁型号);
+  const [区域防爆, set区域防爆] = React.useState(pa?.区域防爆);
+  const [驱动方式, set驱动方式] = React.useState(pa?.驱动方式);
+  const [上护装置, set上护装置] = React.useState(pa?.上护装置);
+  const [上护型号, set上护型号] = React.useState(pa?.上护型号);
+  const [上护编号, set上护编号] = React.useState(pa?.上护编号);
+  const [上行额速, set上行额速] = React.useState(pa?.上行额速);
+  const [船梯, set船梯] = React.useState(pa?.船梯);
+  const [公共交通, set公共交通] = React.useState(pa?.公共交通);
+  const [汽车电梯, set汽车电梯] = React.useState(pa?.汽车电梯);
 
   //直接取得EQP关联的task字段的对象。
   const {task} =eqp;
@@ -162,7 +207,10 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
         大修周期,控制屏编号,曳引机编号,电动机编号,
        }
       ),
-      pa: JSON.stringify({倾斜角度,安全钳型号,安全钳编号,爆炸物质,补偿方式,层门型号,底坑深度,电动机功率,
+      pa: JSON.stringify({倾斜角度,安全钳型号,安全钳编号,爆炸物质,补偿方式,层门型号,底坑深度,电动机功率,电动机类型,
+        电动机转速,电梯门数,电梯站数,顶层高度,顶升形式,对重导轨型式,对重轨距,对重块数,对重限速号,对重限型号,额定电流,额定载人,
+        缓冲器编号,缓冲器型号,缓冲器厂家,轿厢高,轿厢宽,轿厢深,轿厢轨距,上行限电速,上行限机速,下行限电速,下行限机速,移动保护号,
+        移动保护型,装修,锁型号,区域防爆,驱动方式,上护装置,上护型号,上护编号,上行额速,船梯,公共交通,汽车电梯,
         }
       )
 
@@ -461,11 +509,9 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                 </InputGroupLine>
                 <Text variant="h5">监检准入参数</Text>
                 <InputGroupLine label={`施工类别:`}>
-                  <ComboBoxDatalist
-                    value={ 施工类别 || ''}
+                  <ComboBoxDatalist  value={ 施工类别 || ''}
                     onListChange={v => set施工类别( v||undefined ) }
-                    datalist={施工类别s}
-                  />
+                    datalist={施工类别s}  />
                 </InputGroupLine>
                 <InputGroupLine label={`施工日期:`}>
                   <Input type='date'  value={ 施工日期  || ''}
@@ -564,6 +610,121 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                                onChange={e => set电动机功率( e.currentTarget.value||undefined ) }
                   >kw</SuffixInput>
                 </InputGroupLine>
+                <InputGroupLine label={`电动机转速:`}>
+                  <Input  value={ 电动机转速 || ''}
+                          onChange={e => set电动机转速( e.currentTarget.value||undefined ) } />
+                </InputGroupLine>
+                <InputGroupLine label={`电梯门数:`}>
+                  <SuffixInput type="number" value={ 电梯门数 || ''}
+                               onChange={e => set电梯门数( e.currentTarget.value||undefined ) }
+                  >个</SuffixInput>
+                </InputGroupLine>
+                <InputGroupLine label={`电梯站数:`}>
+                  <SuffixInput type="number" value={ 电梯站数 || ''}
+                               onChange={e => set电梯站数( e.currentTarget.value||undefined ) }
+                  >个</SuffixInput>
+                </InputGroupLine>
+                <InputGroupLine label={`顶层高度:`}>
+                  <SuffixInput type="number" value={ 顶层高度 || ''}
+                               onChange={e => set顶层高度( e.currentTarget.value||undefined ) }
+                  >m</SuffixInput>
+                </InputGroupLine>
+                <InputGroupLine label={`对重轨距:`}>
+                  <SuffixInput type="number" value={ 对重轨距 || ''}
+                               onChange={e => set对重轨距( e.currentTarget.value||undefined ) }
+                  >mm</SuffixInput>
+                </InputGroupLine>
+                <InputGroupLine label={`对重块数量:`}>
+                  <SuffixInput type="number" value={ 对重块数 || ''}
+                               onChange={e => set对重块数( e.currentTarget.value||undefined ) }
+                  >块</SuffixInput>
+                </InputGroupLine>
+                <InputGroupLine label={`对重限速器编号:`}>
+                  <Input  value={ 对重限速号 || ''}
+                          onChange={e => set对重限速号( e.currentTarget.value||undefined ) } />
+                </InputGroupLine>
+                <InputGroupLine label={`对重限速器型号:`}>
+                  <Input  value={ 对重限型号 || ''}
+                          onChange={e => set对重限型号( e.currentTarget.value||undefined ) } />
+                </InputGroupLine>
+                <InputGroupLine label={`额定电流:`}>
+                  <SuffixInput type="number" value={ 额定电流 || ''}
+                               onChange={e => set额定电流( e.currentTarget.value||undefined ) }
+                  >A</SuffixInput>
+                </InputGroupLine>
+                <InputGroupLine label={`额定载人数:`}>
+                  <SuffixInput type="number" value={ 额定载人 || ''}
+                               onChange={e => set额定载人( e.currentTarget.value||undefined ) }
+                  >个人</SuffixInput>
+                </InputGroupLine>
+                <InputGroupLine label={`缓冲器编号:`}>
+                  <Input  value={ 缓冲器编号 || ''}
+                          onChange={e => set缓冲器编号( e.currentTarget.value||undefined ) } />
+                </InputGroupLine>
+                <InputGroupLine label={`缓冲器型号:`}>
+                  <Input  value={ 缓冲器型号 || ''}
+                          onChange={e => set缓冲器型号( e.currentTarget.value||undefined ) } />
+                </InputGroupLine>
+                <InputGroupLine label={`缓冲器制造单位:`}>
+                  <Input  value={ 缓冲器厂家 || ''}
+                          onChange={e => set缓冲器厂家( e.currentTarget.value||undefined ) } />
+                </InputGroupLine>
+                <InputGroupLine label={`轿厢轨距:`}>
+                  <SuffixInput type="number" value={ 轿厢轨距 || ''}
+                               onChange={e => set轿厢轨距( e.currentTarget.value||undefined ) }
+                  >mm</SuffixInput>
+                </InputGroupLine>
+                <InputGroupLine label={`轿厢上行限速器电气动作速度:`}>
+                  <SuffixInput  value={ 上行限电速 || ''}
+                               onChange={e => set上行限电速( e.currentTarget.value||undefined ) }
+                  >m/s</SuffixInput>
+                </InputGroupLine>
+                <InputGroupLine label={`轿厢上行限速器机械动作速度:`}>
+                  <SuffixInput  value={ 上行限机速 || ''}
+                                onChange={e => set上行限机速( e.currentTarget.value||undefined ) }
+                  >m/s</SuffixInput>
+                </InputGroupLine>
+                <InputGroupLine label={`轿厢下行限速器电气动作速度:`}>
+                  <SuffixInput  value={ 下行限电速 || ''}
+                                onChange={e => set下行限电速( e.currentTarget.value||undefined ) }
+                  >m/s</SuffixInput>
+                </InputGroupLine>
+                <InputGroupLine label={`轿厢下行限速器机械动作速度:`}>
+                  <SuffixInput  value={ 下行限机速 || ''}
+                                onChange={e => set下行限机速( e.currentTarget.value||undefined ) }
+                  >m/s</SuffixInput>
+                </InputGroupLine>
+                <InputGroupLine label={`轿厢意外移动保护装置编号:`}>
+                  <Input  value={ 移动保护号 || ''}
+                          onChange={e => set移动保护号( e.currentTarget.value||undefined ) } />
+                </InputGroupLine>
+                <InputGroupLine label={`轿厢意外移动保护装置型号:`}>
+                  <Input  value={ 移动保护型 || ''}
+                          onChange={e => set移动保护型( e.currentTarget.value||undefined ) } />
+                </InputGroupLine>
+                <InputGroupLine label={`轿厢装修状态:`}>
+                  <InputDatalist  value={ 装修 || ''}
+                                  onListChange={v => set装修(v ||undefined)}
+                                  datalist={轿厢装修状态} />
+                </InputGroupLine>
+                <InputGroupLine label={`门锁型号(液压电梯):`}>
+                  <Input  value={ 锁型号 || ''}
+                          onChange={e => set锁型号( e.currentTarget.value||undefined ) } />
+                </InputGroupLine>
+                <InputGroupLine label={`上行保护装置形式:`}>
+                  <ComboBoxDatalist  value={ 上护装置 || ''}
+                              onListChange={v => set上护装置( v||undefined ) }
+                         datalist={上行保护装置形式}  />
+                </InputGroupLine>
+                <InputGroupLine label={`上行保护装置型号:`}>
+                  <Input  value={ 上护型号 || ''}
+                          onChange={e => set上护型号( e.currentTarget.value||undefined ) } />
+                </InputGroupLine>
+                <InputGroupLine label={`上行超速保护装置编号:`}>
+                  <Input  value={ 上护编号 || ''}
+                          onChange={e => set上护编号( e.currentTarget.value||undefined ) } />
+                </InputGroupLine>
+
 
                 <Text variant="h5">其它参数</Text>
                 <InputGroupLine label={`爆炸物质(防爆电梯):`}>
@@ -577,6 +738,70 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                     { 补偿方式s.map((one,i) => <option key={i} >{one}</option> ) }
                   </Select>
                 </InputGroupLine>
+                <InputGroupLine label={`电动机类型:`}>
+                  <InputDatalist  value={ 电动机类型 || ''}
+                      onListChange={v => set电动机类型(v ||undefined)}
+                      datalist={电动机类型s} />
+                </InputGroupLine>
+                <InputGroupLine label={`顶升形式(液压电梯):`}>
+                  <Select  value={ 顶升形式 || ''}
+                           onChange={e => set顶升形式( e.currentTarget.value||undefined ) } >
+                    <option></option>
+                    { 顶升形式s.map((one,i) => <option key={i} >{one}</option> ) }
+                  </Select>
+                </InputGroupLine>
+                <InputGroupLine label={`对重导轨型式:`}>
+                  <Select  value={ 对重导轨型式 || ''}
+                           onChange={e => set对重导轨型式( e.currentTarget.value||undefined ) } >
+                    <option></option>
+                    { 对重导轨型式s.map((one,i) => <option key={i} >{one}</option> ) }
+                  </Select>
+                </InputGroupLine>
+                <InputGroupLine label={`轿厢高(杂物电梯):`}>
+                  <SuffixInput type="number" value={ 轿厢高 || ''}
+                               onChange={e => set轿厢高( e.currentTarget.value||undefined ) }
+                  >m</SuffixInput>
+                </InputGroupLine>
+                <InputGroupLine label={`轿厢宽(杂物电梯):`}>
+                  <SuffixInput type="number" value={ 轿厢宽 || ''}
+                               onChange={e => set轿厢宽( e.currentTarget.value||undefined ) }
+                  >m</SuffixInput>
+                </InputGroupLine>
+                <InputGroupLine label={`轿厢深(杂物电梯):`}>
+                  <SuffixInput type="number" value={ 轿厢深 || ''}
+                               onChange={e => set轿厢深( e.currentTarget.value||undefined ) }
+                  >m</SuffixInput>
+                </InputGroupLine>
+                <InputGroupLine label={`区域防爆等级(防爆电梯):`}>
+                  <ComboBoxDatalist  value={ 区域防爆 || ''}
+                         onListChange={v => set区域防爆( v||undefined ) }
+                       datalist={区域防爆等级}  />
+                </InputGroupLine>
+                <InputGroupLine label={`驱动方式(杂物电梯):`}>
+                  <Select  value={ 驱动方式 || ''}
+                           onChange={e => set驱动方式( e.currentTarget.value||undefined ) } >
+                    <option></option>
+                    { 驱动方式s.map((one,i) => <option key={i} >{one}</option> ) }
+                  </Select>
+                </InputGroupLine>
+                <InputGroupLine label={`上行额定速度(液压电梯):`}>
+                  <SuffixInput type="number" value={ 上行额速 || ''}
+                               onChange={e => set上行额速( e.currentTarget.value||undefined ) }
+                  >m/s</SuffixInput>
+                </InputGroupLine>
+                <InputGroupLine label={`是否船舶电梯:`}>
+                  <Check label={'是的'}  checked= {船梯 || false}
+                         onChange={e => set船梯(船梯? undefined:true) } />
+                </InputGroupLine>
+                <InputGroupLine label={`是否公共交通型:`}>
+                  <Check label={'是的'}  checked= {公共交通 || false}
+                         onChange={e => set公共交通(公共交通? undefined:true) } />
+                </InputGroupLine>
+                <InputGroupLine label={`是否汽车电梯:`}>
+                  <Check label={'是的'}  checked= {汽车电梯 || false}
+                         onChange={e => set汽车电梯(汽车电梯? undefined:true) } />
+                </InputGroupLine>
+
 
                 <Button
                   size="lg"
