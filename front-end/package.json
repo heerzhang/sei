@@ -30,6 +30,7 @@
         "react-to-print":"^2.12.2",
         "wouter": "^2.6.0",
         "use-media":"^1.4.0",
+        "react-switch":"^6.0.0",
         "subscriptions-transport-ws":"^0.9.18"
     },
     "scripts": {

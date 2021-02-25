@@ -98,3 +98,6 @@ Algoliasearch是收费云服务，Elasticsearch是自建集群,功能一样。
 /** @jsx jsx */ 告诉babel替换React.createElement为注入的jsx函数，import { css, jsx } from '@emotion/react'
 CommonJS和AMD/CMD是遗留UMD旧综合。ESM是js官方标准取代UMD；Tree-shaking 副作用。https://blog.csdn.net/frontend_frank/article/details/104386097
 
+后端启动D:\home\unibackend\special-equipment-backend\build\libs > java -jar -Dspring.profiles.active=dev  ..jar
+家里启 D:\DEV\jdk13.1\bin>java -jar -Dspring.profiles.active=home D:\coding\home\unibackend\special-equipment-backend\build\libs\..jar
+

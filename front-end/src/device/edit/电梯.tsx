@@ -21,7 +21,15 @@ import {
   Input,
   Select,
   ComboBox,
-  ComboBoxInput, ComboBoxList, ComboBoxOption, IconButton, IconLayers, IconX, InputDatalist, ComboBoxDatalist
+  ComboBoxInput,
+  ComboBoxList,
+  ComboBoxOption,
+  IconButton,
+  IconLayers,
+  IconX,
+  InputDatalist,
+  ComboBoxDatalist,
+  IconToggleRight, IconToggleLeft
 } from "customize-easy-ui-component";
 
 //import { useSession } from "../auth";
@@ -35,6 +43,8 @@ import { gql, NetworkStatus, useQuery } from "@apollo/client";
 import { UnitOrChoose } from "../../unit/UnitOrChoose";
 import { DialogEnterReturn } from "../../context/DialogEnterReturn";
 import queryString from "querystring";
+import Switch from "react-switch";
+
 
 export const 缓冲器形式=["液压","聚氨酯","弹簧","蓄能型","耗能型","聚胺脂","弹簧 液压","聚氨酯 液压"];
 export const 加装附加装置=["IC卡", "自动平层装置","IC卡和自动平层装置","能量反馈装置","自动平层和能量反馈装置","IC卡和能量反馈装置"];
@@ -50,6 +60,8 @@ export const 轿厢装修状态=["无预留装修，轿厢无装修；轿顶未�
 export const 区域防爆等级=["2区","ⅡB", "ⅡBT4", "ⅡB级","Ⅱ级","1区"];
 export const 驱动方式s=["曳引式","VVVF","曳引驱动","强制式","链条驱动","KDL16","交流"];
 export const 上行保护装置形式=["制动器","夹绳器","曳引轮制动器","钢丝绳制动器","双向安全钳","安全钳","轮式附加制动器"];
+export const 拖动方式=['交流单速','交流双速','变极调速','交流调压调速','交流变频','直流晶闸管直接','柱塞直顶','柱塞侧置'];
+export const 油缸形式s=["浸油式", "非浸油式","油浸式","双节式（侧置）"];
 
 
 
@@ -80,7 +92,7 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
 }) => {
   const qs= queryString.parse(window.location.search);
   const dialog =qs && !!qs.dialog;
-  //?&土建施工单位=190 底层URL 问号?后面那个&是必需的分割符号，两符号都不能省略。
+  //?&土建施单=190 底层URL 问号?后面那个&是必需的分割符号，两符号都不能省略。
   //console.log("参数电梯路由&print qs printing=",dialog, qs);
 
   const theme = useTheme();
@@ -122,28 +134,27 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
   //console.log("参数parse JSON 前面edt=",edt);
   const  svp =JSON.parse( edt?.svp!);
   const [制造国, set制造国] = React.useState(svp?.制造国);
-  const [设计使用年限, set设计使用年限] = React.useState(svp?.设计使用年限);
-  const [motorCod, setMotorCod] = React.useState(svp?.motorCod);
+  const [年限, set年限] = React.useState(svp?.年限);
   const [设计日期, set设计日期] = React.useState(svp?.设计日期);
-  const [土建验收单位, set土建验收单位] = React.useState(qs?.土建验收单位 || svp?.土建验收单位);
-  const [makeIspunitId, setMakeIspunitId] = React.useState(qs?.makeIspunitId || svp?.makeIspunitId);
-  const [土建施工单位, set土建施工单位] = React.useState(qs?.土建施工单位 || svp?.土建施工单位);
+  const [土建验单, set土建验单] = React.useState(qs?.土建验单 || svp?.土建验单);
+  const [造监检单, set造监检单] = React.useState(qs?.造监检单 || svp?.造监检单);
+  const [土建施单, set土建施单] = React.useState(qs?.土建施单 || svp?.土建施单);
   const [施工类别, set施工类别] = React.useState(svp?.施工类别);
   const [施工日期, set施工日期] = React.useState(svp?.施工日期);
-  const [竣工验收日期, set竣工验收日期] = React.useState(svp?.竣工验收日期);
-  const [施工许可证编号, set施工许可证编号] = React.useState(svp?.施工许可证编号);
+  const [竣验日, set竣验日] = React.useState(svp?.竣验日);
+  const [施工号, set施工号] = React.useState(svp?.施工号);
   const [设计单位, set设计单位] = React.useState(qs?.设计单位 || svp?.设计单位);
-  const [设计许可证编号, set设计许可证编号] = React.useState(svp?.设计许可证编号);
+  const [设计许号, set设计许号] = React.useState(svp?.设计许号);
   const [产品标准, set产品标准] = React.useState(svp?.产品标准);
   const [设计图号, set设计图号] = React.useState(svp?.设计图号);
-  const [质量合格证编号, set质量合格证编号] = React.useState(svp?.质量合格证编号);
-  const [安装竣工日期, set安装竣工日期] = React.useState(svp?.安装竣工日期);
+  const [合格证号, set合格证号] = React.useState(svp?.合格证号);
+  const [安竣日, set安竣日] = React.useState(svp?.安竣日);
   const [固定资产值, set固定资产值] = React.useState(svp?.固定资产值);
   const [设备总重量, set设备总重量] = React.useState(svp?.设备总重量);
   const [大修周期, set大修周期] = React.useState(svp?.大修周期);
   const [控制屏编号, set控制屏编号] = React.useState(svp?.控制屏编号);
-  const [曳引机编号, set曳引机编号] = React.useState(svp?.曳引机编号);
-  const [电动机编号, set电动机编号] = React.useState(svp?.电动机编号);
+  const [曳引号, set曳引号] = React.useState(svp?.曳引号);
+  const [主机号, set主机号] = React.useState(svp?.主机号);
   const  pa =JSON.parse( edt?.pa!);
   const [倾斜角度, set倾斜角度] = React.useState(pa?.倾斜角度);
   const [安全钳型号, set安全钳型号] = React.useState(pa?.安全钳型号);
@@ -159,7 +170,7 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
   const [电梯站数, set电梯站数] = React.useState(pa?.电梯站数);
   const [顶层高度, set顶层高度] = React.useState(pa?.顶层高度);
   const [顶升形式, set顶升形式] = React.useState(pa?.顶升形式);
-  const [对重导轨型式, set对重导轨型式] = React.useState(pa?.对重导轨型式);
+  const [导轨型式, set导轨型式] = React.useState(pa?.导轨型式);
   const [对重轨距, set对重轨距] = React.useState(pa?.对重轨距);
   const [对重块数, set对重块数] = React.useState(pa?.对重块数);
   const [对重限速号, set对重限速号] = React.useState(pa?.对重限速号);
@@ -190,6 +201,33 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
   const [船梯, set船梯] = React.useState(pa?.船梯);
   const [公共交通, set公共交通] = React.useState(pa?.公共交通);
   const [汽车电梯, set汽车电梯] = React.useState(pa?.汽车电梯);
+  const [手机信, set手机信] = React.useState(pa?.手机信);
+  const [速比, set速比] = React.useState(pa?.速比);
+  const [拖动, set拖动] = React.useState(pa?.拖动);
+  const [限速器号, set限速器号] = React.useState(pa?.限速器号);
+  const [限绳直径, set限绳直径] = React.useState(pa?.限绳直径);
+  const [曳引比, set曳引比] = React.useState(pa?.曳引比);
+  const [轮节径, set轮节径] = React.useState(pa?.轮节径);
+  const [绳数, set绳数] = React.useState(pa?.绳数);
+  const [是钢带, set是钢带] = React.useState(pa?.是钢带);
+  const [钢带规格, set钢带规格] = React.useState(pa?.钢带规格);
+  const [绳直径, set绳直径] = React.useState(pa?.绳直径);
+  const [梯级宽度, set梯级宽度] = React.useState(pa?.梯级宽度);
+  const [下额定速, set下额定速] = React.useState(pa?.下额定速);
+  const [限机械速, set限机械速] = React.useState(pa?.限机械速);
+  const [悬挂绳数, set悬挂绳数] = React.useState(pa?.悬挂绳数);
+  const [悬挂绳径, set悬挂绳径] = React.useState(pa?.悬挂绳径);
+  const [泵编号, set泵编号] = React.useState(pa?.泵编号);
+  const [泵功率, set泵功率] = React.useState(pa?.泵功率);
+  const [泵流量, set泵流量] = React.useState(pa?.泵流量);
+  const [泵型号, set泵型号] = React.useState(pa?.泵型号);
+  const [泵转速, set泵转速] = React.useState(pa?.泵转速);
+  const [液油型号, set液油型号] = React.useState(pa?.液油型号);
+  const [油缸数, set油缸数] = React.useState(pa?.油缸数);
+  const [油缸形式, set油缸形式] = React.useState(pa?.油缸形式);
+  const [防爆标志, set防爆标志] = React.useState(pa?.防爆标志);
+  const [防爆证号, set防爆证号] = React.useState(pa?.防爆证号);
+
 
   //直接取得EQP关联的task字段的对象。
   const {task} =eqp;
@@ -197,23 +235,25 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
   const [, setLocation] = useLocation();
 
   //console.log("电梯进入 eqp=",　eqp, "; ndt=",ndt);
-  //不用JSON.stringify保存到数据库格式不一样，对象直接转String，前端无法取出。必须用json格式{"制造国":"地","设计使用年限":"12"}
+  //不用JSON.stringify保存到数据库格式不一样，对象直接转String，前端无法取出。必须用json格式{"制造国":"地","年限":"12"}
   async function confirmation() {
     const newdat={ ...eqp, flo,spec,vl,nnor,cpm,hlf,oldb,lesc,wesc,tm,mtm,buff,rtl,
       aap,prot,doop,limm,opm,lbkd,nbkd,cpa,vital,
-      svp: JSON.stringify({制造国,设计使用年限,motorCod,设计日期,土建验收单位,
-        makeIspunitId, 土建施工单位,施工类别,施工日期,竣工验收日期,施工许可证编号,设计单位,
-        设计许可证编号,产品标准,设计图号,质量合格证编号,安装竣工日期,固定资产值,设备总重量,
-        大修周期,控制屏编号,曳引机编号,电动机编号,
+      svp: JSON.stringify({主机号,制造国,年限,设计日期,土建验单,
+        造监检单, 土建施单,施工类别,施工日期,竣验日,施工号,设计单位,
+        设计许号,产品标准,设计图号,合格证号,安竣日,固定资产值,设备总重量,
+        大修周期,控制屏编号,曳引号,
        }
       ),
       pa: JSON.stringify({倾斜角度,安全钳型号,安全钳编号,爆炸物质,补偿方式,层门型号,底坑深度,电动机功率,电动机类型,
-        电动机转速,电梯门数,电梯站数,顶层高度,顶升形式,对重导轨型式,对重轨距,对重块数,对重限速号,对重限型号,额定电流,额定载人,
+        电动机转速,电梯门数,电梯站数,顶层高度,顶升形式,导轨型式,对重轨距,对重块数,对重限速号,对重限型号,额定电流,额定载人,
         缓冲器编号,缓冲器型号,缓冲器厂家,轿厢高,轿厢宽,轿厢深,轿厢轨距,上行限电速,上行限机速,下行限电速,下行限机速,移动保护号,
-        移动保护型,装修,锁型号,区域防爆,驱动方式,上护装置,上护型号,上护编号,上行额速,船梯,公共交通,汽车电梯,
+        移动保护型,装修,锁型号,区域防爆,驱动方式,上护装置,上护型号,上护编号,上行额速,船梯,公共交通,汽车电梯,手机信,速比,拖动,
+        限速器号,限绳直径,曳引比,轮节径,绳数, 是钢带, 钢带规格:是钢带?钢带规格:undefined,  绳直径:是钢带?undefined:绳直径,
+        梯级宽度,下额定速,限机械速,悬挂绳数,悬挂绳径,泵编号,泵功率,
+        泵流量,泵型号,泵转速,液油型号,油缸数,油缸形式,防爆标志,防爆证号
         }
       )
-
     };
     await setPam( newdat );
     return newdat;
@@ -412,14 +452,14 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                 </InputGroupLine>
                 <InputGroupLine label={`曳引机出厂编号:`}>
                   <Input
-                    value={ 曳引机编号 || ''}
-                    onChange={e => set曳引机编号( e.currentTarget.value||undefined ) }
+                    value={ 曳引号 || ''}
+                    onChange={e => set曳引号( e.currentTarget.value||undefined ) }
                   />
                 </InputGroupLine>
                 <InputGroupLine label={`电动机(驱动主机)编号:`}>
                   <Input
-                    value={ 电动机编号 || ''}
-                    onChange={e => set电动机编号( e.currentTarget.value||undefined ) }
+                    value={ 主机号 || ''}
+                    onChange={e => set主机号( e.currentTarget.value||undefined ) }
                   />
                 </InputGroupLine>
 
@@ -440,8 +480,8 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                 <InputGroupLine label={`设计使用年限:`}>
                   <SuffixInput
                     type="number"
-                    value={ 设计使用年限 || ''}
-                    onChange={e => set设计使用年限( e.currentTarget.value||undefined ) }
+                    value={ 年限 || ''}
+                    onChange={e => set年限( e.currentTarget.value||undefined ) }
                   >年
                   </SuffixInput>
                 </InputGroupLine>
@@ -474,35 +514,30 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                 </InputGroupLine>
 
                 <Text variant="h5">许可用的参数</Text>
-                <InputGroupLine label={`电动机(驱动主机)编号:`}>
-                  <Input value={ motorCod  || ''}
-                         onChange={e => setMotorCod( e.currentTarget.value||undefined ) }
-                  />
-                </InputGroupLine>
                 <InputGroupLine label={`设计日期:`}>
                   <Input type='date'  value={ 设计日期  || ''}
                          onChange={e => set设计日期( e.currentTarget.value||undefined ) } />
                 </InputGroupLine>
                 <InputGroupLine label={'制造监检机构'}>
-                  <UnitOrChoose id={makeIspunitId  || ''} emodel={'电梯'} emid={id} field={'makeIspunitId'}
+                  <UnitOrChoose id={造监检单  || ''} emodel={'电梯'} emid={id} field={'造监检单'}
                                 onCancel={() => {
-                                  setMakeIspunitId( undefined )
+                                  set造监检单( undefined )
                                 }}
                                 onDialog={async () => { await setNdt(await confirmation()); } }
                   />
                 </InputGroupLine>
                 <InputGroupLine label={`土建施工单位:`}>
-                  <UnitOrChoose id={土建施工单位  || ''} emodel={'电梯'} emid={id} field={'土建施工单位'}
+                  <UnitOrChoose id={土建施单  || ''} emodel={'电梯'} emid={id} field={'土建施单'}
                                 onCancel={() => {
-                                  set土建施工单位( undefined )
+                                  set土建施单( undefined )
                                 }}
                                 onDialog={async () => { await setNdt(await confirmation()); } }
                   />
                 </InputGroupLine>
                 <InputGroupLine label={`土建验收单位:`}>
-                  <UnitOrChoose id={土建验收单位  || ''} emodel={'电梯'} emid={id} field={'土建验收单位'}
+                  <UnitOrChoose id={土建验单  || ''} emodel={'电梯'} emid={id} field={'土建验单'}
                                 onCancel={() => {
-                                  set土建验收单位( undefined )
+                                  set土建验单( undefined )
                                 }}
                                 onDialog={async () => { await setNdt(await confirmation()); } }
                   />
@@ -518,13 +553,13 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                          onChange={e => set施工日期( e.currentTarget.value||undefined ) } />
                 </InputGroupLine>
                 <InputGroupLine label={`竣工验收日期:`}>
-                  <Input type='date'  value={ 竣工验收日期  || ''}
-                         onChange={e => set竣工验收日期( e.currentTarget.value||undefined ) } />
+                  <Input type='date'  value={ 竣验日  || ''}
+                         onChange={e => set竣验日( e.currentTarget.value||undefined ) } />
                 </InputGroupLine>
                 <InputGroupLine label={`施工许可证编号:`}>
                   <Input
-                    value={ 施工许可证编号 || ''}
-                    onChange={e => set施工许可证编号( e.currentTarget.value||undefined ) }
+                    value={ 施工号 || ''}
+                    onChange={e => set施工号( e.currentTarget.value||undefined ) }
                   >
                   </Input>
                 </InputGroupLine>
@@ -538,8 +573,8 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                 </InputGroupLine>
                 <InputGroupLine label={`设计许可证编号:`}>
                   <Input
-                    value={ 设计许可证编号 || ''}
-                    onChange={e => set设计许可证编号( e.currentTarget.value||undefined ) }
+                    value={ 设计许号 || ''}
+                    onChange={e => set设计许号( e.currentTarget.value||undefined ) }
                   >
                   </Input>
                 </InputGroupLine>
@@ -559,14 +594,14 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                 </InputGroupLine>
                 <InputGroupLine label={`质量证明书、产品合格证编号:`}>
                   <Input
-                    value={ 质量合格证编号 || ''}
-                    onChange={e => set质量合格证编号( e.currentTarget.value||undefined ) }
+                    value={ 合格证号 || ''}
+                    onChange={e => set合格证号( e.currentTarget.value||undefined ) }
                   >
                   </Input>
                 </InputGroupLine>
                 <InputGroupLine label={`安装竣工日期:`}>
-                  <Input type='date'  value={ 安装竣工日期  || ''}
-                         onChange={e => set安装竣工日期( e.currentTarget.value||undefined ) } />
+                  <Input type='date'  value={ 安竣日  || ''}
+                         onChange={e => set安竣日( e.currentTarget.value||undefined ) } />
                 </InputGroupLine>
                 <InputGroupLine label={`设备总重量:`}>
                   <SuffixInput
@@ -724,7 +759,60 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                   <Input  value={ 上护编号 || ''}
                           onChange={e => set上护编号( e.currentTarget.value||undefined ) } />
                 </InputGroupLine>
-
+                <InputGroupLine label={`是否手机信号覆盖:`}>
+                  <Check label={'是的'}  checked= {手机信 || false}
+                         onChange={e => set手机信(手机信? undefined:true) } />
+                </InputGroupLine>
+                <InputGroupLine label={`速比:`}>
+                  <Input  value={ 速比 || ''}
+                          onChange={e => set速比( e.currentTarget.value||undefined ) } />
+                </InputGroupLine>
+                <InputGroupLine label={`拖动方式:`}>
+                  <Select  value={ 拖动 || ''}
+                           onChange={e => set拖动( e.currentTarget.value||undefined ) } >
+                    <option></option>
+                    { 拖动方式.map((one,i) => <option key={i} >{one}</option> ) }
+                  </Select>
+                </InputGroupLine>
+                <InputGroupLine label={`限速器出厂编号:`}>
+                  <Input  value={ 限速器号 || ''}
+                          onChange={e => set限速器号( e.currentTarget.value||undefined ) } />
+                </InputGroupLine>
+                <InputGroupLine label={`限速器绳直径:`}>
+                  <SuffixInput type="number" value={ 限绳直径 || ''}
+                               onChange={e => set限绳直径( e.currentTarget.value||undefined ) }
+                  >mm</SuffixInput>
+                </InputGroupLine>
+                <InputGroupLine label={`曳引比:`}>
+                  <Input  value={ 曳引比 || ''}
+                          onChange={e => set曳引比( e.currentTarget.value||undefined ) } />
+                </InputGroupLine>
+                <InputGroupLine label={`曳引轮节径:`}>
+                  <SuffixInput type="number" value={ 轮节径 || ''}
+                               onChange={e => set轮节径( e.currentTarget.value||undefined ) }
+                  >mm</SuffixInput>
+                </InputGroupLine>
+                <InputGroupLine label={`曳引绳数(钢带条数):`}>
+                  <SuffixInput type="number" value={ 绳数 || ''}
+                               onChange={e => set绳数( e.currentTarget.value||undefined ) }
+                  >根</SuffixInput>
+                </InputGroupLine>
+                <InputGroupLine label={`是否曳引绳是钢带:`}>
+                  <Check label={'是的'}  checked= {是钢带 || false} disabled={true}
+                         onChange={e => set是钢带(是钢带? undefined:true) } />
+                </InputGroupLine>
+                {是钢带 ? (
+                  <InputGroupLine label={`曳引钢带的规格:`}>
+                    <Input  value={ 钢带规格 || ''} readOnly={true}
+                            onChange={e => set钢带规格( e.currentTarget.value||undefined ) } />
+                  </InputGroupLine>
+                ) :(
+                  <InputGroupLine label={`曳引绳直径:`}>
+                    <SuffixInput type="number" value={ 绳直径 || ''} readOnly={true}
+                                 onChange={e => set绳直径( e.currentTarget.value||undefined ) }
+                    >mm</SuffixInput>
+                  </InputGroupLine>
+                ) }
 
                 <Text variant="h5">其它参数</Text>
                 <InputGroupLine label={`爆炸物质(防爆电梯):`}>
@@ -751,8 +839,8 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                   </Select>
                 </InputGroupLine>
                 <InputGroupLine label={`对重导轨型式:`}>
-                  <Select  value={ 对重导轨型式 || ''}
-                           onChange={e => set对重导轨型式( e.currentTarget.value||undefined ) } >
+                  <Select  value={ 导轨型式 || ''}
+                           onChange={e => set导轨型式( e.currentTarget.value||undefined ) } >
                     <option></option>
                     { 对重导轨型式s.map((one,i) => <option key={i} >{one}</option> ) }
                   </Select>
@@ -801,14 +889,88 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                   <Check label={'是的'}  checked= {汽车电梯 || false}
                          onChange={e => set汽车电梯(汽车电梯? undefined:true) } />
                 </InputGroupLine>
-
+                <InputGroupLine label={`梯级宽度:`}>
+                  <SuffixInput type="number" value={ 梯级宽度 || ''}
+                               onChange={e => set梯级宽度( e.currentTarget.value||undefined ) }
+                  >m</SuffixInput>
+                </InputGroupLine>
+                <InputGroupLine label={`下行额定速度(液压电梯):`}>
+                  <SuffixInput type="number" value={ 下额定速 || ''}
+                               onChange={e => set下额定速( e.currentTarget.value||undefined ) }
+                  >m/s</SuffixInput>
+                </InputGroupLine>
+                <InputGroupLine label={`限速器机械动作速度(液压/杂物电梯):`}>
+                  <SuffixInput  value={ 限机械速 || ''}
+                               onChange={e => set限机械速( e.currentTarget.value||undefined ) }
+                  >m/s</SuffixInput>
+                </InputGroupLine>
+                <InputGroupLine label={`悬挂钢丝绳数(液压电梯):`}>
+                  <SuffixInput type="number" value={ 悬挂绳数 || ''}
+                               onChange={e => set悬挂绳数( e.currentTarget.value||undefined ) }
+                  >根</SuffixInput>
+                </InputGroupLine>
+                <InputGroupLine label={`悬挂钢丝绳直径(液压电梯):`}>
+                  <SuffixInput type="number" value={ 悬挂绳径 || ''}
+                               onChange={e => set悬挂绳径( e.currentTarget.value||undefined ) }
+                  >mm</SuffixInput>
+                </InputGroupLine>
+                <InputGroupLine label={`液压泵编号(液压电梯):`}>
+                  <Input  value={ 泵编号 || ''}
+                          onChange={e => set泵编号( e.currentTarget.value||undefined ) } />
+                </InputGroupLine>
+                <InputGroupLine label={`液压泵功率(液压电梯):`}>
+                  <SuffixInput type="number" value={ 泵功率 || ''}
+                               onChange={e => set泵功率( e.currentTarget.value||undefined ) }
+                  >kw</SuffixInput>
+                </InputGroupLine>
+                <InputGroupLine label={`液压泵流量(液压电梯):`}>
+                  <SuffixInput type="number" value={ 泵流量 || ''}
+                               onChange={e => set泵流量( e.currentTarget.value||undefined ) }
+                  >L/M</SuffixInput>
+                </InputGroupLine>
+                <InputGroupLine label={`液压泵型号(液压电梯):`}>
+                  <Input  value={ 泵型号 || ''}
+                          onChange={e => set泵型号( e.currentTarget.value||undefined ) } />
+                </InputGroupLine>
+                <InputGroupLine label={`液压泵转速(液压电梯):`}>
+                  <SuffixInput type="number" value={ 泵转速 || ''}
+                               onChange={e => set泵转速( e.currentTarget.value||undefined ) }
+                  >r/min</SuffixInput>
+                </InputGroupLine>
+                <InputGroupLine label={`液压油型号(液压电梯):`}>
+                  <Input  value={ 液油型号 || ''}
+                          onChange={e => set液油型号( e.currentTarget.value||undefined ) } />
+                </InputGroupLine>
+                <InputGroupLine label={`油缸数量(液压电梯):`}>
+                  <SuffixInput type="number" value={ 油缸数 || ''}
+                               onChange={e => set油缸数( e.currentTarget.value||undefined ) }
+                  >个</SuffixInput>
+                </InputGroupLine>
+                <InputGroupLine label={`油缸形式(液压电梯):`}>
+                  <InputDatalist  value={ 油缸形式 || ''}
+                                  onListChange={v => set油缸形式(v ||undefined)}
+                                  datalist={油缸形式s} />
+                </InputGroupLine>
+                <InputGroupLine label={`整机防爆标志(防爆电梯):`}>
+                  <Input  value={ 防爆标志 || ''}
+                          onChange={e => set防爆标志( e.currentTarget.value||undefined ) } />
+                </InputGroupLine>
+                <InputGroupLine label={`整机防爆合格证编号(防爆电梯):`}>
+                  <Input  value={ 防爆证号 || ''}
+                          onChange={e => set防爆证号( e.currentTarget.value||undefined ) } />
+                </InputGroupLine>
+                <InputGroupLine label={`测试tooglle按钮checkbox:`}>
+                  <>
+                  <Switch onChange={() => set汽车电梯(prev => !prev)} checked={汽车电梯} />
+                  </>
+               </InputGroupLine>
 
                 <Button
                   size="lg"
                   intent="primary"
                   iconAfter={<IconArrowRight />}
                   onPress={ async () => {
-                    //不用JSON.stringify保存到数据库格式不一样，对象直接转String，前端无法取出。必须用json格式{"制造国":"地","设计使用年限":"12"}
+                    //不用JSON.stringify保存到数据库格式不一样，对象直接转String，前端无法取出。必须用json格式{"制造国":"地","年限":"12"}
                     await confirmation();
                   } }
                 >

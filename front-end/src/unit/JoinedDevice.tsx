@@ -44,7 +44,7 @@ export const JoinedDevice: React.FunctionComponent<JoinedDeviceProps> = ({
   eqp=null,
 }) => {
   const qs= queryString.parse(window.location.search);
-  const field =qs && !!qs.土建施工单位;
+  const field =qs && !!qs.土建施单;
   console.log("参数JoinedDevice路由qs field=",field, qs);
   const theme = useTheme();
  // const toast = useToast();
@@ -213,7 +213,7 @@ export const JoinedDevice: React.FunctionComponent<JoinedDeviceProps> = ({
                           //await setNdt({...ndt, "新的Uind": 2389 });
                          // await setLayurl();
                           //URl进入context ,选定id，编辑ID验证明(单个目的单对话框层次),恢复编辑器数据,刷新放弃编辑；
-                          //context& ,&return=  &编辑器model=电梯, &field=makeIspunitId
+                          //context& ,&return=  &编辑器model=电梯, &field=造监检单
                           //await setLocation();
                         } }
                       >返回 {qs.emodel} 编辑器

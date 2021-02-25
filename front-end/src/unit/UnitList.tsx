@@ -31,7 +31,7 @@ export const UnitList: React.FunctionComponent<
   DeviceListProps
 > = ( {company=false} ) => {
   const qs= queryString.parse(window.location.search);
-  const field =qs && !!qs.土建施工单位;
+  const field =qs && !!qs.土建施单;
   //console.log("参数JoinedDevice路由qs field=",field, qs);
   const theme = useTheme();
   const [, setLocation] = useLocation();
