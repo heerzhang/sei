@@ -14,11 +14,8 @@ import {
   IconPackage,
   Button,
   IconChevronDown,
-  InputGroupLine,
-  SuffixInput,
   IconArrowRight,
   Check,
-  Input,
   Select,
   ComboBox,
   ComboBoxInput,
@@ -29,7 +26,7 @@ import {
   IconX,
   InputDatalist,
   ComboBoxDatalist,
-  IconToggleRight, IconToggleLeft, CheckSwitch
+  IconToggleRight, IconToggleLeft, CheckSwitch, InputGroup, InputFollowUnit
 } from "customize-easy-ui-component";
 
 //import { useSession } from "../auth";
@@ -301,85 +298,80 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                   paddingBottom: theme.spaces.lg
                 }}
               >
-                <InputGroupLine label={`电梯层数:`}>
-                  <SuffixInput
+
+                  <InputFollowUnit unit={'865行'}
                     type="number"  min={1} max={999}
                     value={ flo || '' }
                     onChange={e => setFlo( e.currentTarget.value||undefined ) }
-                  >层</SuffixInput>
-                </InputGroupLine>
-                <InputGroupLine label={'是否特种电梯？'}>
+                  ></InputFollowUnit>
+
+
                   <CheckSwitch
                          checked= {spec || false}
                          onChange={e => setSpec(!spec) }
                   />
-                </InputGroupLine>
-                <InputGroupLine label={ '运行速度'}>
-                  <SuffixInput
+
+
+                  <InputFollowUnit unit={'米'}
                     type="number"  min={0} max={300}
                     value={vl || ''}
                     onChange={e => setVl( e.currentTarget.value||undefined ) }
-                  >m/s</SuffixInput>
-                </InputGroupLine>
-                <InputGroupLine label={`是否非标电梯:`}>
+                  />
+
+
                   <CheckSwitch
                          checked= {nnor || false}
                          onChange={e => setNnor(!nnor) }
                   />
-                </InputGroupLine>
-                <InputGroupLine label={`是否属于旧楼加装电梯:`}>
+
+
                   <CheckSwitch
                          checked= {oldb || false}
                          onChange={e => setOldb(!oldb) }
                   />
-                </InputGroupLine>
-                <InputGroupLine label={`控制屏型号:`}>
-                  <SuffixInput
+
+
+                  <InputFollowUnit unit={'米'}
                     placeholder="层数"
                     value={ cpm || ''}
                     onChange={e => setCpm( e.currentTarget.value||undefined ) }
                   >
-                  </SuffixInput>
-                </InputGroupLine>
-                <InputGroupLine label={`提升高度:`}>
-                  <SuffixInput
+                  </InputFollowUnit>
+
+
+                  <InputFollowUnit unit={'米'}
                     type="number"
                     value={ hlf || ''}
                     onChange={e => setHlf( e.currentTarget.value||undefined ) }
-                  >米
-                  </SuffixInput>
-                </InputGroupLine>
-                <InputGroupLine label={`人行道使用区段长度:`}>
-                  <SuffixInput
+                  >
+                  </InputFollowUnit>
+
+                  <InputFollowUnit unit={'米'}
                     type="number"
                     value={ lesc || ''}
                     onChange={e => setLesc( e.currentTarget.value||undefined ) }
-                  >米
-                  </SuffixInput>
-                </InputGroupLine>
-                <InputGroupLine label={`名义宽度(自动扶梯/自动人行道):`}>
-                  <SuffixInput
+                  >
+                  </InputFollowUnit>
+
+                  <InputFollowUnit unit={'米'}
                     type="number"
                     value={ wesc || ''}
                     onChange={e => setWesc( e.currentTarget.value||undefined ) }
-                  >mm
-                  </SuffixInput>
-                </InputGroupLine>
-                <InputGroupLine label={`曳引机型号:`}>
-                  <Input
+                  >
+                  </InputFollowUnit>
+
+                  <InputFollowUnit unit={'米'}
                     value={ tm || ''}
                     onChange={e => setTm( e.currentTarget.value||undefined ) }
                   >
-                  </Input>
-                </InputGroupLine>
-                <InputGroupLine label={`电动机(驱动主机)型号:`}>
-                  <Input
+                  </InputFollowUnit>
+
+                  <InputFollowUnit unit={'米'}
                     value={ mtm || ''}
                     onChange={e => setMtm( e.currentTarget.value||undefined ) }
                   >
-                  </Input>
-                </InputGroupLine>
-                <InputGroupLine label={`缓冲器形式:`}>
+                  </InputFollowUnit>
+
                   <Select inputSize="md" css={{minWidth:'140px',fontSize:'1.5rem',padding:'0 1rem'}} divStyle={css`max-width:240px;`}
                           value={ buff || ''}
                           onChange={e => setBuff( e.currentTarget.value||undefined ) }
@@ -389,43 +381,37 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                       <option key={i}>{one}</option>
                     )) }
                   </Select>
-                </InputGroupLine>
-                <InputGroupLine label={`额定载荷:`}>
-                  <SuffixInput
+
+                  <InputFollowUnit unit={'米'}
                     type="number"
                     value={ rtl || ''}
                     onChange={e => setRtl( e.currentTarget.value||undefined ) }
-                  >kg
-                  </SuffixInput>
-                </InputGroupLine>
-                 <InputGroupLine label={`加装的附加装置:`}>
+                  >
+                  </InputFollowUnit>
+
                   <ComboBoxDatalist
                     value={ aap || ''}
                     onListChange={v => setAap( v||undefined ) }
                     datalist={加装附加装置}
                   />
-                </InputGroupLine>
-                <InputGroupLine label={`轿厢意外移动保护装置型号:`}>
-                  <Input
+
+                  <InputFollowUnit unit={'米'}
                     value={ prot || ''}
                     onChange={e => setProt( e.currentTarget.value||undefined ) }
                   >
-                  </Input>
-                </InputGroupLine>
-                <InputGroupLine label={`开门方式:`}>
+                  </InputFollowUnit>
+
                   <InputDatalist
                     value={ doop || ''}
                     onListChange={v => setDoop(v ||undefined)}
                     datalist={开门方式}
                   />
-                </InputGroupLine>
-                <InputGroupLine label={`限速器型号:`}>
-                  <Input
+
+                  <InputFollowUnit unit={'米'}
                     value={ limm || ''}
                     onChange={e => setLimm( e.currentTarget.value||undefined ) }
                   />
-                </InputGroupLine>
-                <InputGroupLine label={`控制方式:`}>
+
                   <Select inputSize="md" css={{minWidth:'140px',fontSize:'1.5rem',padding:'0 1rem'}} divStyle={css`max-width:240px;`}
                           value={ opm || ''}
                           onChange={e => setOpm( e.currentTarget.value||undefined ) }
@@ -435,57 +421,49 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                       <option key={i}>{one}</option>
                     )) }
                   </Select>
-                </InputGroupLine>
-                <InputGroupLine  label='最后一次制动实验时间:' >
-                  <Input type='date'  value={lbkd ||''}
+
+                  <InputFollowUnit unit={'米'} type='date'  value={lbkd ||''}
                          onChange={e => setLbkd( e.currentTarget.value||undefined ) } />
-                </InputGroupLine>
-                <InputGroupLine  label='下次制动实验时间:' >
-                  <Input type='date'  value={nbkd ||''}
+
+                  <InputFollowUnit unit={'米'} type='date'  value={nbkd ||''}
                          onChange={e => setNbkd( e.currentTarget.value||undefined ) } />
-                </InputGroupLine>
-                <InputGroupLine label={`控制屏出厂编号:`}>
-                  <Input
+
+                  <InputFollowUnit unit={'米'}
                     value={ 控制屏编号 || ''}
                     onChange={e => set控制屏编号( e.currentTarget.value||undefined ) }
                   />
-                </InputGroupLine>
-                <InputGroupLine label={`曳引机出厂编号:`}>
-                  <Input
+
+                  <InputFollowUnit unit={'米'}
                     value={ 曳引号 || ''}
                     onChange={e => set曳引号( e.currentTarget.value||undefined ) }
                   />
-                </InputGroupLine>
-                <InputGroupLine label={`电动机(驱动主机)编号:`}>
-                  <Input
+
+                  <InputFollowUnit unit={'米'}
                     value={ 主机号 || ''}
                     onChange={e => set主机号( e.currentTarget.value||undefined ) }
                   />
-                </InputGroupLine>
+
 
                 <Text variant="h5">监察参数</Text>
-                <InputGroupLine label={`制造国:`}>
+
                   <InputDatalist
                     value={ 制造国 || ''}
                     onListChange={v => set制造国(v ||undefined)}
                     datalist={["中国","美国","欧盟"]}
                   />
-                </InputGroupLine>
-                <InputGroupLine label={`是否重要特种设备:`}>
+
                   <CheckSwitch
                          checked= {vital || false}
                          onChange={e => setVital(vital? undefined:true) }
                   />
-                </InputGroupLine>
-                <InputGroupLine label={`设计使用年限:`}>
-                  <SuffixInput
+
+                  <InputFollowUnit unit={'米'}
                     type="number"
                     value={ 年限 || ''}
                     onChange={e => set年限( e.currentTarget.value||undefined ) }
-                  >年
-                  </SuffixInput>
-                </InputGroupLine>
-                <InputGroupLine label={`事故隐患类别:`}>
+                  >
+                  </InputFollowUnit>
+
                   <Select
                           value={ cpa || ''}
                           onChange={e => setCpa( e.currentTarget.value||undefined ) }
@@ -495,476 +473,1526 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                       <option key={i} value={i+1}>{one}</option>
                     )) }
                   </Select>
-                </InputGroupLine>
-                <InputGroupLine label={`固定资产值:`}>
-                  <SuffixInput
+
+                  <InputFollowUnit unit={'米'}
                     type="number"
                     value={ 固定资产值 || ''}
                     onChange={e => set固定资产值( e.currentTarget.value||undefined ) }
-                  >万元
-                  </SuffixInput>
-                </InputGroupLine>
-                <InputGroupLine label={`大修周期:`}>
-                  <SuffixInput
+                  >
+                  </InputFollowUnit>
+
+                  <InputFollowUnit unit={'米'}
                     type="number"
                     value={ 大修周期 || ''}
                     onChange={e => set大修周期( e.currentTarget.value||undefined ) }
-                  >月
-                  </SuffixInput>
-                </InputGroupLine>
+                  >
+                  </InputFollowUnit>
+
 
                 <Text variant="h5">许可用的参数</Text>
-                <InputGroupLine label={`设计日期:`}>
-                  <Input type='date'  value={ 设计日期  || ''}
+
+                  <InputFollowUnit unit={'米'} type='date'  value={ 设计日期  || ''}
                          onChange={e => set设计日期( e.currentTarget.value||undefined ) } />
-                </InputGroupLine>
-                <InputGroupLine label={'制造监检机构'}>
+
                   <UnitOrChoose id={造监检单  || ''} emodel={'电梯'} emid={id} field={'造监检单'}
                                 onCancel={() => {
                                   set造监检单( undefined )
                                 }}
                                 onDialog={async () => { await setNdt(await confirmation()); } }
                   />
-                </InputGroupLine>
-                <InputGroupLine label={`土建施工单位:`}>
+
                   <UnitOrChoose id={土建施单  || ''} emodel={'电梯'} emid={id} field={'土建施单'}
                                 onCancel={() => {
                                   set土建施单( undefined )
                                 }}
                                 onDialog={async () => { await setNdt(await confirmation()); } }
                   />
-                </InputGroupLine>
-                <InputGroupLine label={`土建验收单位:`}>
+
                   <UnitOrChoose id={土建验单  || ''} emodel={'电梯'} emid={id} field={'土建验单'}
                                 onCancel={() => {
                                   set土建验单( undefined )
                                 }}
                                 onDialog={async () => { await setNdt(await confirmation()); } }
                   />
-                </InputGroupLine>
+
                 <Text variant="h5">监检准入参数</Text>
-                <InputGroupLine label={`施工类别:`}>
+
                   <ComboBoxDatalist  value={ 施工类别 || ''}
                     onListChange={v => set施工类别( v||undefined ) }
                     datalist={施工类别s}  />
-                </InputGroupLine>
-                <InputGroupLine label={`施工日期:`}>
-                  <Input type='date'  value={ 施工日期  || ''}
+
+                  <InputFollowUnit unit={'米'} type='date'  value={ 施工日期  || ''}
                          onChange={e => set施工日期( e.currentTarget.value||undefined ) } />
-                </InputGroupLine>
-                <InputGroupLine label={`竣工验收日期:`}>
-                  <Input type='date'  value={ 竣验日  || ''}
+
+                  <InputFollowUnit unit={'米'} type='date'  value={ 竣验日  || ''}
                          onChange={e => set竣验日( e.currentTarget.value||undefined ) } />
-                </InputGroupLine>
-                <InputGroupLine label={`施工许可证编号:`}>
-                  <Input
+
+                  <InputFollowUnit unit={'米'}
                     value={ 施工号 || ''}
                     onChange={e => set施工号( e.currentTarget.value||undefined ) }
                   >
-                  </Input>
-                </InputGroupLine>
-                <InputGroupLine label={`设计单位:`}>
+                  </InputFollowUnit>
+
                   <UnitOrChoose id={设计单位  || ''} emodel={'电梯'} emid={id} field={'设计单位'}
                                 onCancel={() => {
                                   set设计单位( undefined )
                                 }}
                                 onDialog={async () => { await setNdt(await confirmation()); } }
                   />
-                </InputGroupLine>
-                <InputGroupLine label={`设计许可证编号:`}>
-                  <Input
+
+                  <InputFollowUnit unit={'米'}
                     value={ 设计许号 || ''}
                     onChange={e => set设计许号( e.currentTarget.value||undefined ) }
                   >
-                  </Input>
-                </InputGroupLine>
-                <InputGroupLine label={`产品标准:`}>
-                  <Input
+                  </InputFollowUnit>
+
+                  <InputFollowUnit unit={'米'}
                     value={ 产品标准 || ''}
                     onChange={e => set产品标准( e.currentTarget.value||undefined ) }
                   >
-                  </Input>
-                </InputGroupLine>
-                <InputGroupLine label={`设计图号:`}>
-                  <Input
+                  </InputFollowUnit>
+
+                  <InputFollowUnit unit={'米'}
                     value={ 设计图号 || ''}
                     onChange={e => set设计图号( e.currentTarget.value||undefined ) }
                   >
-                  </Input>
-                </InputGroupLine>
-                <InputGroupLine label={`质量证明书、产品合格证编号:`}>
-                  <Input
+                  </InputFollowUnit>
+
+                  <InputFollowUnit unit={'米'}
                     value={ 合格证号 || ''}
                     onChange={e => set合格证号( e.currentTarget.value||undefined ) }
                   >
-                  </Input>
-                </InputGroupLine>
-                <InputGroupLine label={`安装竣工日期:`}>
-                  <Input type='date'  value={ 安竣日  || ''}
+                  </InputFollowUnit>
+
+                  <InputFollowUnit unit={'米'} type='date'  value={ 安竣日  || ''}
                          onChange={e => set安竣日( e.currentTarget.value||undefined ) } />
-                </InputGroupLine>
-                <InputGroupLine label={`设备总重量:`}>
-                  <SuffixInput
+
+                  <InputFollowUnit unit={'米'}
                     type="number"
                     value={ 设备总重量 || ''}
                     onChange={e => set设备总重量( e.currentTarget.value||undefined ) }
-                  >kg
-                  </SuffixInput>
-                </InputGroupLine>
+                  >
+                  </InputFollowUnit>
 
                 <Text variant="h5">常用参数</Text>
-                <InputGroupLine label={`倾斜角度(自动扶梯/自动人行道)：`}>
-                  <SuffixInput
+
+                  <InputFollowUnit unit={'米'}
                     type="number"
                     value={ 倾斜角度 || ''}
                     onChange={e => set倾斜角度( e.currentTarget.value||undefined ) }
-                  >度
-                  </SuffixInput>
-                </InputGroupLine>
-                <InputGroupLine label={`安全钳型号:`}>
-                  <Input  value={ 安全钳型号 || ''}
+                  >
+                  </InputFollowUnit>
+
+                  <InputFollowUnit unit={'米'}  value={ 安全钳型号 || ''}
                     onChange={e => set安全钳型号( e.currentTarget.value||undefined ) }
                   />
-                </InputGroupLine>
-                <InputGroupLine label={`安全钳编号:`}>
-                  <Input  value={ 安全钳编号 || ''}
+
+                  <InputFollowUnit unit={'米'}  value={ 安全钳编号 || ''}
                           onChange={e => set安全钳编号( e.currentTarget.value||undefined ) }
                   />
-                </InputGroupLine>
-                <InputGroupLine label={`层门型号:`}>
-                  <Input  value={ 层门型号 || ''}
+
+                  <InputFollowUnit unit={'米'}  value={ 层门型号 || ''}
                        onChange={e => set层门型号( e.currentTarget.value||undefined ) } />
-                </InputGroupLine>
-                <InputGroupLine label={`底坑深度:`}>
-                  <SuffixInput type="number" value={ 底坑深度 || ''}
+
+                  <InputFollowUnit unit={'米'} type="number" value={ 底坑深度 || ''}
                       onChange={e => set底坑深度( e.currentTarget.value||undefined ) }
-                  >m</SuffixInput>
-                </InputGroupLine>
-                <InputGroupLine label={`电动机功率:`}>
-                  <SuffixInput type="number" value={ 电动机功率 || ''}
+                  ></InputFollowUnit>
+
+                  <InputFollowUnit unit={'米'} type="number" value={ 电动机功率 || ''}
                                onChange={e => set电动机功率( e.currentTarget.value||undefined ) }
-                  >kw</SuffixInput>
-                </InputGroupLine>
-                <InputGroupLine label={`电动机转速:`}>
-                  <Input  value={ 电动机转速 || ''}
+                  ></InputFollowUnit>
+
+                  <InputFollowUnit unit={'米'}  value={ 电动机转速 || ''}
                           onChange={e => set电动机转速( e.currentTarget.value||undefined ) } />
-                </InputGroupLine>
-                <InputGroupLine label={`电梯门数:`}>
-                  <SuffixInput type="number" value={ 电梯门数 || ''}
+
+                  <InputFollowUnit unit={'米'} type="number" value={ 电梯门数 || ''}
                                onChange={e => set电梯门数( e.currentTarget.value||undefined ) }
-                  >个</SuffixInput>
-                </InputGroupLine>
-                <InputGroupLine label={`电梯站数:`}>
-                  <SuffixInput type="number" value={ 电梯站数 || ''}
+                  ></InputFollowUnit>
+
+                  <InputFollowUnit unit={'米'} type="number" value={ 电梯站数 || ''}
                                onChange={e => set电梯站数( e.currentTarget.value||undefined ) }
-                  >个</SuffixInput>
-                </InputGroupLine>
-                <InputGroupLine label={`顶层高度:`}>
-                  <SuffixInput type="number" value={ 顶层高度 || ''}
+                  ></InputFollowUnit>
+
+                  <InputFollowUnit unit={'米'} type="number" value={ 顶层高度 || ''}
                                onChange={e => set顶层高度( e.currentTarget.value||undefined ) }
-                  >m</SuffixInput>
-                </InputGroupLine>
-                <InputGroupLine label={`对重轨距:`}>
-                  <SuffixInput type="number" value={ 对重轨距 || ''}
+                  ></InputFollowUnit>
+
+                  <InputFollowUnit unit={'米'} type="number" value={ 对重轨距 || ''}
                                onChange={e => set对重轨距( e.currentTarget.value||undefined ) }
-                  >mm</SuffixInput>
-                </InputGroupLine>
-                <InputGroupLine label={`对重块数量:`}>
-                  <SuffixInput type="number" value={ 对重块数 || ''}
+                  ></InputFollowUnit>
+
+                  <InputFollowUnit unit={'米'} type="number" value={ 对重块数 || ''}
                                onChange={e => set对重块数( e.currentTarget.value||undefined ) }
-                  >块</SuffixInput>
-                </InputGroupLine>
-                <InputGroupLine label={`对重限速器编号:`}>
-                  <Input  value={ 对重限速号 || ''}
+                  ></InputFollowUnit>
+
+                  <InputFollowUnit unit={'米'}  value={ 对重限速号 || ''}
                           onChange={e => set对重限速号( e.currentTarget.value||undefined ) } />
-                </InputGroupLine>
-                <InputGroupLine label={`对重限速器型号:`}>
-                  <Input  value={ 对重限型号 || ''}
+
+                  <InputFollowUnit unit={'米'}  value={ 对重限型号 || ''}
                           onChange={e => set对重限型号( e.currentTarget.value||undefined ) } />
-                </InputGroupLine>
-                <InputGroupLine label={`额定电流:`}>
-                  <SuffixInput type="number" value={ 额定电流 || ''}
+
+                  <InputFollowUnit unit={'米'} type="number" value={ 额定电流 || ''}
                                onChange={e => set额定电流( e.currentTarget.value||undefined ) }
-                  >A</SuffixInput>
-                </InputGroupLine>
-                <InputGroupLine label={`额定载人数:`}>
-                  <SuffixInput type="number" value={ 额定载人 || ''}
+                  ></InputFollowUnit>
+
+                  <InputFollowUnit unit={'米'} type="number" value={ 额定载人 || ''}
                                onChange={e => set额定载人( e.currentTarget.value||undefined ) }
-                  >个人</SuffixInput>
-                </InputGroupLine>
-                <InputGroupLine label={`缓冲器编号:`}>
-                  <Input  value={ 缓冲器编号 || ''}
+                  ></InputFollowUnit>
+
+                  <InputFollowUnit unit={'米'}  value={ 缓冲器编号 || ''}
                           onChange={e => set缓冲器编号( e.currentTarget.value||undefined ) } />
-                </InputGroupLine>
-                <InputGroupLine label={`缓冲器型号:`}>
-                  <Input  value={ 缓冲器型号 || ''}
+
+                  <InputFollowUnit unit={'米'}  value={ 缓冲器型号 || ''}
                           onChange={e => set缓冲器型号( e.currentTarget.value||undefined ) } />
-                </InputGroupLine>
-                <InputGroupLine label={`缓冲器制造单位:`}>
-                  <Input  value={ 缓冲器厂家 || ''}
+
+                  <InputFollowUnit unit={'米'}  value={ 缓冲器厂家 || ''}
                           onChange={e => set缓冲器厂家( e.currentTarget.value||undefined ) } />
-                </InputGroupLine>
-                <InputGroupLine label={`轿厢轨距:`}>
-                  <SuffixInput type="number" value={ 轿厢轨距 || ''}
+
+                  <InputFollowUnit unit={'米'} type="number" value={ 轿厢轨距 || ''}
                                onChange={e => set轿厢轨距( e.currentTarget.value||undefined ) }
-                  >mm</SuffixInput>
-                </InputGroupLine>
-                <InputGroupLine label={`轿厢上行限速器电气动作速度:`}>
-                  <SuffixInput  value={ 上行限电速 || ''}
+                  ></InputFollowUnit>
+
+                  <InputFollowUnit unit={'米'}  value={ 上行限电速 || ''}
                                onChange={e => set上行限电速( e.currentTarget.value||undefined ) }
-                  >m/s</SuffixInput>
-                </InputGroupLine>
-                <InputGroupLine label={`轿厢上行限速器机械动作速度:`}>
-                  <SuffixInput  value={ 上行限机速 || ''}
+                  ></InputFollowUnit>
+
+                  <InputFollowUnit unit={'米'}  value={ 上行限机速 || ''}
                                 onChange={e => set上行限机速( e.currentTarget.value||undefined ) }
-                  >m/s</SuffixInput>
-                </InputGroupLine>
-                <InputGroupLine label={`轿厢下行限速器电气动作速度:`}>
-                  <SuffixInput  value={ 下行限电速 || ''}
+                  ></InputFollowUnit>
+
+                  <InputFollowUnit unit={'米'}  value={ 下行限电速 || ''}
                                 onChange={e => set下行限电速( e.currentTarget.value||undefined ) }
-                  >m/s</SuffixInput>
-                </InputGroupLine>
-                <InputGroupLine label={`轿厢下行限速器机械动作速度:`}>
-                  <SuffixInput  value={ 下行限机速 || ''}
+                  ></InputFollowUnit>
+
+                  <InputFollowUnit unit={'米'}  value={ 下行限机速 || ''}
                                 onChange={e => set下行限机速( e.currentTarget.value||undefined ) }
-                  >m/s</SuffixInput>
-                </InputGroupLine>
-                <InputGroupLine label={`轿厢意外移动保护装置编号:`}>
-                  <Input  value={ 移动保护号 || ''}
+                  ></InputFollowUnit>
+
+                  <InputFollowUnit unit={'米'}  value={ 移动保护号 || ''}
                           onChange={e => set移动保护号( e.currentTarget.value||undefined ) } />
-                </InputGroupLine>
-                <InputGroupLine label={`轿厢意外移动保护装置型号:`}>
-                  <Input  value={ 移动保护型 || ''}
+
+                  <InputFollowUnit unit={'米'}  value={ 移动保护型 || ''}
                           onChange={e => set移动保护型( e.currentTarget.value||undefined ) } />
-                </InputGroupLine>
-                <InputGroupLine label={`轿厢装修状态:`}>
+
                   <InputDatalist  value={ 装修 || ''}
                                   onListChange={v => set装修(v ||undefined)}
                                   datalist={轿厢装修状态} />
-                </InputGroupLine>
-                <InputGroupLine label={`门锁型号(液压电梯):`}>
-                  <Input  value={ 锁型号 || ''}
+
+                  <InputFollowUnit unit={'米'}  value={ 锁型号 || ''}
                           onChange={e => set锁型号( e.currentTarget.value||undefined ) } />
-                </InputGroupLine>
-                <InputGroupLine label={`上行保护装置形式:`}>
+
                   <ComboBoxDatalist  value={ 上护装置 || ''}
                               onListChange={v => set上护装置( v||undefined ) }
                          datalist={上行保护装置形式}  />
-                </InputGroupLine>
-                <InputGroupLine label={`上行保护装置型号:`}>
-                  <Input  value={ 上护型号 || ''}
+
+                  <InputFollowUnit unit={'米'}  value={ 上护型号 || ''}
                           onChange={e => set上护型号( e.currentTarget.value||undefined ) } />
-                </InputGroupLine>
-                <InputGroupLine label={`上行超速保护装置编号:`}>
-                  <Input  value={ 上护编号 || ''}
+
+                  <InputFollowUnit unit={'米'}  value={ 上护编号 || ''}
                           onChange={e => set上护编号( e.currentTarget.value||undefined ) } />
-                </InputGroupLine>
-                <InputGroupLine label={`是否手机信号覆盖:`}>
+
                   <CheckSwitch  checked= {手机信 || false}
                          onChange={e => set手机信(手机信? undefined:true) } />
-                </InputGroupLine>
-                <InputGroupLine label={`速比:`}>
-                  <Input  value={ 速比 || ''}
+
+                  <InputFollowUnit unit={'米'}  value={ 速比 || ''}
                           onChange={e => set速比( e.currentTarget.value||undefined ) } />
-                </InputGroupLine>
-                <InputGroupLine label={`拖动方式:`}>
+
                   <Select  value={ 拖动 || ''}
                            onChange={e => set拖动( e.currentTarget.value||undefined ) } >
                     <option></option>
                     { 拖动方式.map((one,i) => <option key={i} >{one}</option> ) }
                   </Select>
-                </InputGroupLine>
-                <InputGroupLine label={`限速器出厂编号:`}>
-                  <Input  value={ 限速器号 || ''}
+
+                  <InputFollowUnit unit={'米'}  value={ 限速器号 || ''}
                           onChange={e => set限速器号( e.currentTarget.value||undefined ) } />
-                </InputGroupLine>
-                <InputGroupLine label={`限速器绳直径:`}>
-                  <SuffixInput type="number" value={ 限绳直径 || ''}
+
+                  <InputFollowUnit unit={'米'} type="number" value={ 限绳直径 || ''}
                                onChange={e => set限绳直径( e.currentTarget.value||undefined ) }
-                  >mm</SuffixInput>
-                </InputGroupLine>
-                <InputGroupLine label={`曳引比:`}>
-                  <Input  value={ 曳引比 || ''}
+                  ></InputFollowUnit>
+
+                  <InputFollowUnit unit={'米'}  value={ 曳引比 || ''}
                           onChange={e => set曳引比( e.currentTarget.value||undefined ) } />
-                </InputGroupLine>
-                <InputGroupLine label={`曳引轮节径:`}>
-                  <SuffixInput type="number" value={ 轮节径 || ''}
+
+                  <InputFollowUnit unit={'米'} type="number" value={ 轮节径 || ''}
                                onChange={e => set轮节径( e.currentTarget.value||undefined ) }
-                  >mm</SuffixInput>
-                </InputGroupLine>
-                <InputGroupLine label={`曳引绳数(钢带条数):`}>
-                  <SuffixInput type="number" value={ 绳数 || ''}
+                  ></InputFollowUnit>
+
+                  <InputFollowUnit unit={'米'} type="number" value={ 绳数 || ''}
                                onChange={e => set绳数( e.currentTarget.value||undefined ) }
-                  >根</SuffixInput>
-                </InputGroupLine>
-                <InputGroupLine label={`是否曳引绳是钢带:`}>
+                  ></InputFollowUnit>
+
                   <CheckSwitch  checked= {是钢带 || false} disabled={false}
                          onChange={e => set是钢带(是钢带? undefined:true) } />
-                </InputGroupLine>
+
                 {是钢带 ? (
-                  <InputGroupLine label={`曳引钢带的规格:`}>
-                    <Input  value={ 钢带规格 || ''} readOnly={true}
+
+                    <InputFollowUnit unit={'米'}  value={ 钢带规格 || ''} readOnly={true}
                             onChange={e => set钢带规格( e.currentTarget.value||undefined ) } />
-                  </InputGroupLine>
+
                 ) :(
-                  <InputGroupLine label={`曳引绳直径:`}>
-                    <SuffixInput type="number" value={ 绳直径 || ''} readOnly={true}
+
+                    <InputFollowUnit unit={'米'} type="number" value={ 绳直径 || ''} readOnly={true}
                                  onChange={e => set绳直径( e.currentTarget.value||undefined ) }
-                    >mm</SuffixInput>
-                  </InputGroupLine>
+                    ></InputFollowUnit>
+
                 ) }
 
                 <Text variant="h5">其它参数</Text>
-                <InputGroupLine label={`爆炸物质(防爆电梯):`}>
-                  <Input  value={ 爆炸物质 || ''}
+
+                  <InputFollowUnit unit={'米'}  value={ 爆炸物质 || ''}
                       onChange={e => set爆炸物质( e.currentTarget.value||undefined ) } />
-                </InputGroupLine>
-                <InputGroupLine label={`补偿方式:`}>
+
                   <Select  value={ 补偿方式 || ''}
                           onChange={e => set补偿方式( e.currentTarget.value||undefined ) } >
                     <option></option>
                     { 补偿方式s.map((one,i) => <option key={i} >{one}</option> ) }
                   </Select>
-                </InputGroupLine>
-                <InputGroupLine label={`电动机类型:`}>
+
                   <InputDatalist  value={ 电动机类型 || ''}
                       onListChange={v => set电动机类型(v ||undefined)}
                       datalist={电动机类型s} />
-                </InputGroupLine>
-                <InputGroupLine label={`顶升形式(液压电梯):`}>
+
                   <Select  value={ 顶升形式 || ''}
                            onChange={e => set顶升形式( e.currentTarget.value||undefined ) } >
                     <option></option>
                     { 顶升形式s.map((one,i) => <option key={i} >{one}</option> ) }
                   </Select>
-                </InputGroupLine>
-                <InputGroupLine label={`对重导轨型式:`}>
+
                   <Select  value={ 导轨型式 || ''}
                            onChange={e => set导轨型式( e.currentTarget.value||undefined ) } >
                     <option></option>
                     { 对重导轨型式s.map((one,i) => <option key={i} >{one}</option> ) }
                   </Select>
-                </InputGroupLine>
-                <InputGroupLine label={`轿厢高(杂物电梯):`}>
-                  <SuffixInput type="number" value={ 轿厢高 || ''}
+
+                  <InputFollowUnit unit={'米'} type="number" value={ 轿厢高 || ''}
                                onChange={e => set轿厢高( e.currentTarget.value||undefined ) }
-                  >m</SuffixInput>
-                </InputGroupLine>
-                <InputGroupLine label={`轿厢宽(杂物电梯):`}>
-                  <SuffixInput type="number" value={ 轿厢宽 || ''}
+                  ></InputFollowUnit>
+
+                  <InputFollowUnit unit={'米'} type="number" value={ 轿厢宽 || ''}
                                onChange={e => set轿厢宽( e.currentTarget.value||undefined ) }
-                  >m</SuffixInput>
-                </InputGroupLine>
-                <InputGroupLine label={`轿厢深(杂物电梯):`}>
-                  <SuffixInput type="number" value={ 轿厢深 || ''}
+                  ></InputFollowUnit>
+
+                  <InputFollowUnit unit={'米'} type="number" value={ 轿厢深 || ''}
                                onChange={e => set轿厢深( e.currentTarget.value||undefined ) }
-                  >m</SuffixInput>
-                </InputGroupLine>
-                <InputGroupLine label={`区域防爆等级(防爆电梯):`}>
+                  ></InputFollowUnit>
+
                   <ComboBoxDatalist  value={ 区域防爆 || ''}
                          onListChange={v => set区域防爆( v||undefined ) }
                        datalist={区域防爆等级}  />
-                </InputGroupLine>
-                <InputGroupLine label={`驱动方式(杂物电梯):`}>
+
                   <Select  value={ 驱动方式 || ''}
                            onChange={e => set驱动方式( e.currentTarget.value||undefined ) } >
                     <option></option>
                     { 驱动方式s.map((one,i) => <option key={i} >{one}</option> ) }
                   </Select>
-                </InputGroupLine>
-                <InputGroupLine label={`上行额定速度(液压电梯):`}>
-                  <SuffixInput type="number" value={ 上行额速 || ''}
+
+                  <InputFollowUnit unit={'米'} type="number" value={ 上行额速 || ''}
                                onChange={e => set上行额速( e.currentTarget.value||undefined ) }
-                  >m/s</SuffixInput>
-                </InputGroupLine>
-                <InputGroupLine label={`是否船舶电梯:`}>
+                  ></InputFollowUnit>
+
                   <CheckSwitch  checked= {船梯 || false}
                          onChange={e => set船梯(船梯? undefined:true) } />
-                </InputGroupLine>
-                <InputGroupLine label={`是否公共交通型:`}>
+
                   <CheckSwitch  checked= {公共交通 || false}
                          onChange={e => set公共交通(公共交通? undefined:true) } />
-                </InputGroupLine>
-                <InputGroupLine label={`是否汽车电梯:`}>
+
                   <CheckSwitch  checked= {汽车电梯 || false}
                          onChange={e => set汽车电梯(汽车电梯? undefined:true) } />
-                </InputGroupLine>
-                <InputGroupLine label={`梯级宽度:`}>
-                  <SuffixInput type="number" value={ 梯级宽度 || ''}
+
+                  <InputFollowUnit unit={'米'} type="number" value={ 梯级宽度 || ''}
                                onChange={e => set梯级宽度( e.currentTarget.value||undefined ) }
-                  >m</SuffixInput>
-                </InputGroupLine>
-                <InputGroupLine label={`下行额定速度(液压电梯):`}>
-                  <SuffixInput type="number" value={ 下额定速 || ''}
+                  ></InputFollowUnit>
+
+                  <InputFollowUnit unit={'米'} type="number" value={ 下额定速 || ''}
                                onChange={e => set下额定速( e.currentTarget.value||undefined ) }
-                  >m/s</SuffixInput>
-                </InputGroupLine>
-                <InputGroupLine label={`限速器机械动作速度(液压/杂物电梯):`}>
-                  <SuffixInput  value={ 限机械速 || ''}
+                  ></InputFollowUnit>
+
+                  <InputFollowUnit unit={'米'}  value={ 限机械速 || ''}
                                onChange={e => set限机械速( e.currentTarget.value||undefined ) }
-                  >m/s</SuffixInput>
-                </InputGroupLine>
-                <InputGroupLine label={`悬挂钢丝绳数(液压电梯):`}>
-                  <SuffixInput type="number" value={ 悬挂绳数 || ''}
+                  ></InputFollowUnit>
+
+                  <InputFollowUnit unit={'米'} type="number" value={ 悬挂绳数 || ''}
                                onChange={e => set悬挂绳数( e.currentTarget.value||undefined ) }
-                  >根</SuffixInput>
-                </InputGroupLine>
-                <InputGroupLine label={`悬挂钢丝绳直径(液压电梯):`}>
-                  <SuffixInput type="number" value={ 悬挂绳径 || ''}
+                  ></InputFollowUnit>
+
+                  <InputFollowUnit unit={'米'} type="number" value={ 悬挂绳径 || ''}
                                onChange={e => set悬挂绳径( e.currentTarget.value||undefined ) }
-                  >mm</SuffixInput>
-                </InputGroupLine>
-                <InputGroupLine label={`液压泵编号(液压电梯):`}>
-                  <Input  value={ 泵编号 || ''}
+                  ></InputFollowUnit>
+
+                  <InputFollowUnit unit={'米'}  value={ 泵编号 || ''}
                           onChange={e => set泵编号( e.currentTarget.value||undefined ) } />
-                </InputGroupLine>
-                <InputGroupLine label={`液压泵功率(液压电梯):`}>
-                  <SuffixInput type="number" value={ 泵功率 || ''}
+
+                  <InputFollowUnit unit={'米'} type="number" value={ 泵功率 || ''}
                                onChange={e => set泵功率( e.currentTarget.value||undefined ) }
-                  >kw</SuffixInput>
-                </InputGroupLine>
-                <InputGroupLine label={`液压泵流量(液压电梯):`}>
-                  <SuffixInput type="number" value={ 泵流量 || ''}
+                  ></InputFollowUnit>
+
+                  <InputFollowUnit unit={'米'} type="number" value={ 泵流量 || ''}
                                onChange={e => set泵流量( e.currentTarget.value||undefined ) }
-                  >L/M</SuffixInput>
-                </InputGroupLine>
-                <InputGroupLine label={`液压泵型号(液压电梯):`}>
-                  <Input  value={ 泵型号 || ''}
+                  ></InputFollowUnit>
+
+                  <InputFollowUnit unit={'米'}  value={ 泵型号 || ''}
                           onChange={e => set泵型号( e.currentTarget.value||undefined ) } />
-                </InputGroupLine>
-                <InputGroupLine label={`液压泵转速(液压电梯):`}>
-                  <SuffixInput type="number" value={ 泵转速 || ''}
+
+                  <InputFollowUnit unit={'米'} type="number" value={ 泵转速 || ''}
                                onChange={e => set泵转速( e.currentTarget.value||undefined ) }
-                  >r/min</SuffixInput>
-                </InputGroupLine>
-                <InputGroupLine label={`液压油型号(液压电梯):`}>
-                  <Input  value={ 液油型号 || ''}
+                  ></InputFollowUnit>
+
+                  <InputFollowUnit unit={'米'}  value={ 液油型号 || ''}
                           onChange={e => set液油型号( e.currentTarget.value||undefined ) } />
-                </InputGroupLine>
-                <InputGroupLine label={`油缸数量(液压电梯):`}>
-                  <SuffixInput type="number" value={ 油缸数 || ''}
+
+                  <InputFollowUnit unit={'米'} type="number" value={ 油缸数 || ''}
                                onChange={e => set油缸数( e.currentTarget.value||undefined ) }
-                  >个</SuffixInput>
-                </InputGroupLine>
-                <InputGroupLine label={`油缸形式(液压电梯):`}>
+                  ></InputFollowUnit>
+
                   <InputDatalist  value={ 油缸形式 || ''}
                                   onListChange={v => set油缸形式(v ||undefined)}
                                   datalist={油缸形式s} />
-                </InputGroupLine>
-                <InputGroupLine label={`整机防爆标志(防爆电梯):`}>
-                  <Input  value={ 防爆标志 || ''}
-                          onChange={e => set防爆标志( e.currentTarget.value||undefined ) } />
-                </InputGroupLine>
 
-                <InputGroupLine label={`是否汽车电梯:`}>
+                  <InputFollowUnit unit={'米'}  value={ 防爆标志 || ''}
+                          onChange={e => set防爆标志( e.currentTarget.value||undefined ) } />
+
                   <CheckSwitch  disabled={false}  checked= {汽车电梯 || false}
                                 onChange={e => set汽车电梯(汽车电梯? undefined:true) } />
-                </InputGroupLine>
 
-                <InputGroupLine label={`整机防爆合格证编号(防爆电梯):`}>
-                  <Input  value={ 防爆证号 || ''}
+                  <InputFollowUnit unit={'米'}  value={ 防爆证号 || ''}
                           onChange={e => set防爆证号( e.currentTarget.value||undefined ) } />
-                </InputGroupLine>
+
+
+
+
+
+
+
+
+
+                <InputFollowUnit unit={'米'}
+                  type="number"  min={1} max={999}
+                  value={ flo || '' }
+                  onChange={e => setFlo( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+
+                <CheckSwitch
+                  checked= {spec || false}
+                  onChange={e => setSpec(!spec) }
+                />
+
+
+                <InputFollowUnit unit={'米'}
+                  type="number"  min={0} max={300}
+                  value={vl || ''}
+                  onChange={e => setVl( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+
+                <CheckSwitch
+                  checked= {nnor || false}
+                  onChange={e => setNnor(!nnor) }
+                />
+
+
+                <CheckSwitch
+                  checked= {oldb || false}
+                  onChange={e => setOldb(!oldb) }
+                />
+
+
+                <InputFollowUnit unit={'米'}
+                  placeholder="层数"
+                  value={ cpm || ''}
+                  onChange={e => setCpm( e.currentTarget.value||undefined ) }
+                >
+                </InputFollowUnit>
+
+
+                <InputFollowUnit unit={'米'}
+                  type="number"
+                  value={ hlf || ''}
+                  onChange={e => setHlf( e.currentTarget.value||undefined ) }
+                >
+                </InputFollowUnit>
+
+                <InputFollowUnit unit={'米'}
+                  type="number"
+                  value={ lesc || ''}
+                  onChange={e => setLesc( e.currentTarget.value||undefined ) }
+                >
+                </InputFollowUnit>
+
+                <InputFollowUnit unit={'米'}
+                  type="number"
+                  value={ wesc || ''}
+                  onChange={e => setWesc( e.currentTarget.value||undefined ) }
+                >
+                </InputFollowUnit>
+
+                <InputFollowUnit unit={'米'}
+                  value={ tm || ''}
+                  onChange={e => setTm( e.currentTarget.value||undefined ) }
+                >
+                </InputFollowUnit>
+
+                <InputFollowUnit unit={'米'}
+                  value={ mtm || ''}
+                  onChange={e => setMtm( e.currentTarget.value||undefined ) }
+                >
+                </InputFollowUnit>
+
+                <Select inputSize="md" css={{minWidth:'140px',fontSize:'1.5rem',padding:'0 1rem'}} divStyle={css`max-width:240px;`}
+                        value={ buff || ''}
+                        onChange={e => setBuff( e.currentTarget.value||undefined ) }
+                >
+                  <option></option>
+                  { 缓冲器形式.map((one,i) => (
+                    <option key={i}>{one}</option>
+                  )) }
+                </Select>
+
+                <InputFollowUnit unit={'米'}
+                  type="number"
+                  value={ rtl || ''}
+                  onChange={e => setRtl( e.currentTarget.value||undefined ) }
+                >
+                </InputFollowUnit>
+
+                <ComboBoxDatalist
+                  value={ aap || ''}
+                  onListChange={v => setAap( v||undefined ) }
+                  datalist={加装附加装置}
+                />
+
+                <InputFollowUnit unit={'米'}
+                  value={ prot || ''}
+                  onChange={e => setProt( e.currentTarget.value||undefined ) }
+                >
+                </InputFollowUnit>
+
+                <InputDatalist
+                  value={ doop || ''}
+                  onListChange={v => setDoop(v ||undefined)}
+                  datalist={开门方式}
+                />
+
+                <InputFollowUnit unit={'米'}
+                  value={ limm || ''}
+                  onChange={e => setLimm( e.currentTarget.value||undefined ) }
+                />
+
+                <Select inputSize="md" css={{minWidth:'140px',fontSize:'1.5rem',padding:'0 1rem'}} divStyle={css`max-width:240px;`}
+                        value={ opm || ''}
+                        onChange={e => setOpm( e.currentTarget.value||undefined ) }
+                >
+                  <option> </option>
+                  { 控制方式.map((one,i) => (
+                    <option key={i}>{one}</option>
+                  )) }
+                </Select>
+
+                <InputFollowUnit unit={'米'} type='date'  value={lbkd ||''}
+                       onChange={e => setLbkd( e.currentTarget.value||undefined ) } />
+
+                <InputFollowUnit unit={'米'} type='date'  value={nbkd ||''}
+                       onChange={e => setNbkd( e.currentTarget.value||undefined ) } />
+
+                <InputFollowUnit unit={'米'}
+                  value={ 控制屏编号 || ''}
+                  onChange={e => set控制屏编号( e.currentTarget.value||undefined ) }
+                />
+
+                <InputFollowUnit unit={'米'}
+                  value={ 曳引号 || ''}
+                  onChange={e => set曳引号( e.currentTarget.value||undefined ) }
+                />
+
+                <InputFollowUnit unit={'米'}
+                  value={ 主机号 || ''}
+                  onChange={e => set主机号( e.currentTarget.value||undefined ) }
+                />
+
+
+                <Text variant="h5">监察参数</Text>
+
+                <InputDatalist
+                  value={ 制造国 || ''}
+                  onListChange={v => set制造国(v ||undefined)}
+                  datalist={["中国","美国","欧盟"]}
+                />
+
+                <CheckSwitch
+                  checked= {vital || false}
+                  onChange={e => setVital(vital? undefined:true) }
+                />
+
+                <InputFollowUnit unit={'米'}
+                  type="number"
+                  value={ 年限 || ''}
+                  onChange={e => set年限( e.currentTarget.value||undefined ) }
+                >
+                </InputFollowUnit>
+
+                <Select
+                  value={ cpa || ''}
+                  onChange={e => setCpa( e.currentTarget.value||undefined ) }
+                >
+                  <option> </option>
+                  { 事故隐患类别.map((one,i) => (
+                    <option key={i} value={i+1}>{one}</option>
+                  )) }
+                </Select>
+
+                <InputFollowUnit unit={'米'}
+                  type="number"
+                  value={ 固定资产值 || ''}
+                  onChange={e => set固定资产值( e.currentTarget.value||undefined ) }
+                >
+                </InputFollowUnit>
+
+                <InputFollowUnit unit={'米'}
+                  type="number"
+                  value={ 大修周期 || ''}
+                  onChange={e => set大修周期( e.currentTarget.value||undefined ) }
+                >
+                </InputFollowUnit>
+
+
+                <Text variant="h5">许可用的参数</Text>
+
+                <InputFollowUnit unit={'米'} type='date'  value={ 设计日期  || ''}
+                       onChange={e => set设计日期( e.currentTarget.value||undefined ) } />
+
+                <UnitOrChoose id={造监检单  || ''} emodel={'电梯'} emid={id} field={'造监检单'}
+                              onCancel={() => {
+                                set造监检单( undefined )
+                              }}
+                              onDialog={async () => { await setNdt(await confirmation()); } }
+                />
+
+                <UnitOrChoose id={土建施单  || ''} emodel={'电梯'} emid={id} field={'土建施单'}
+                              onCancel={() => {
+                                set土建施单( undefined )
+                              }}
+                              onDialog={async () => { await setNdt(await confirmation()); } }
+                />
+
+                <UnitOrChoose id={土建验单  || ''} emodel={'电梯'} emid={id} field={'土建验单'}
+                              onCancel={() => {
+                                set土建验单( undefined )
+                              }}
+                              onDialog={async () => { await setNdt(await confirmation()); } }
+                />
+
+                <Text variant="h5">监检准入参数</Text>
+
+                <ComboBoxDatalist  value={ 施工类别 || ''}
+                                   onListChange={v => set施工类别( v||undefined ) }
+                                   datalist={施工类别s}  />
+
+                <InputFollowUnit unit={'米'} type='date'  value={ 施工日期  || ''}
+                       onChange={e => set施工日期( e.currentTarget.value||undefined ) } />
+
+                <InputFollowUnit unit={'米'} type='date'  value={ 竣验日  || ''}
+                       onChange={e => set竣验日( e.currentTarget.value||undefined ) } />
+
+                <InputFollowUnit unit={'米'}
+                  value={ 施工号 || ''}
+                  onChange={e => set施工号( e.currentTarget.value||undefined ) }
+                >
+                </InputFollowUnit>
+
+                <UnitOrChoose id={设计单位  || ''} emodel={'电梯'} emid={id} field={'设计单位'}
+                              onCancel={() => {
+                                set设计单位( undefined )
+                              }}
+                              onDialog={async () => { await setNdt(await confirmation()); } }
+                />
+
+                <InputFollowUnit unit={'米'}
+                  value={ 设计许号 || ''}
+                  onChange={e => set设计许号( e.currentTarget.value||undefined ) }
+                >
+                </InputFollowUnit>
+
+                <InputFollowUnit unit={'米'}
+                  value={ 产品标准 || ''}
+                  onChange={e => set产品标准( e.currentTarget.value||undefined ) }
+                >
+                </InputFollowUnit>
+
+                <InputFollowUnit unit={'米'}
+                  value={ 设计图号 || ''}
+                  onChange={e => set设计图号( e.currentTarget.value||undefined ) }
+                >
+                </InputFollowUnit>
+
+                <InputFollowUnit unit={'米'}
+                  value={ 合格证号 || ''}
+                  onChange={e => set合格证号( e.currentTarget.value||undefined ) }
+                >
+                </InputFollowUnit>
+
+                <InputFollowUnit unit={'米'} type='date'  value={ 安竣日  || ''}
+                       onChange={e => set安竣日( e.currentTarget.value||undefined ) } />
+
+                <InputFollowUnit unit={'米'}
+                  type="number"
+                  value={ 设备总重量 || ''}
+                  onChange={e => set设备总重量( e.currentTarget.value||undefined ) }
+                >
+                </InputFollowUnit>
+
+                <Text variant="h5">常用参数</Text>
+
+                <InputFollowUnit unit={'米'}
+                  type="number"
+                  value={ 倾斜角度 || ''}
+                  onChange={e => set倾斜角度( e.currentTarget.value||undefined ) }
+                >
+                </InputFollowUnit>
+
+                <InputFollowUnit unit={'米'}  value={ 安全钳型号 || ''}
+                        onChange={e => set安全钳型号( e.currentTarget.value||undefined ) }
+                />
+
+                <InputFollowUnit unit={'米'}  value={ 安全钳编号 || ''}
+                        onChange={e => set安全钳编号( e.currentTarget.value||undefined ) }
+                />
+
+                <InputFollowUnit unit={'米'}  value={ 层门型号 || ''}
+                        onChange={e => set层门型号( e.currentTarget.value||undefined ) } />
+
+                <InputFollowUnit unit={'米'} type="number" value={ 底坑深度 || ''}
+                       onChange={e => set底坑深度( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+                <InputFollowUnit unit={'米'} type="number" value={ 电动机功率 || ''}
+                       onChange={e => set电动机功率( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+                <InputFollowUnit unit={'米'}  value={ 电动机转速 || ''}
+                        onChange={e => set电动机转速( e.currentTarget.value||undefined ) } />
+
+                <InputFollowUnit unit={'米'} type="number" value={ 电梯门数 || ''}
+                       onChange={e => set电梯门数( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+                <InputFollowUnit unit={'米'} type="number" value={ 电梯站数 || ''}
+                       onChange={e => set电梯站数( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+                <InputFollowUnit unit={'米'} type="number" value={ 顶层高度 || ''}
+                       onChange={e => set顶层高度( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+                <InputFollowUnit unit={'米'} type="number" value={ 对重轨距 || ''}
+                       onChange={e => set对重轨距( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+                <InputFollowUnit unit={'米'} type="number" value={ 对重块数 || ''}
+                       onChange={e => set对重块数( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+                <InputFollowUnit unit={'米'}  value={ 对重限速号 || ''}
+                        onChange={e => set对重限速号( e.currentTarget.value||undefined ) } />
+
+                <InputFollowUnit unit={'米'}  value={ 对重限型号 || ''}
+                        onChange={e => set对重限型号( e.currentTarget.value||undefined ) } />
+
+                <InputFollowUnit unit={'米'} type="number" value={ 额定电流 || ''}
+                       onChange={e => set额定电流( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+                <InputFollowUnit unit={'米'} type="number" value={ 额定载人 || ''}
+                       onChange={e => set额定载人( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+                <InputFollowUnit unit={'米'}  value={ 缓冲器编号 || ''}
+                        onChange={e => set缓冲器编号( e.currentTarget.value||undefined ) } />
+
+                <InputFollowUnit unit={'米'}  value={ 缓冲器型号 || ''}
+                        onChange={e => set缓冲器型号( e.currentTarget.value||undefined ) } />
+
+                <InputFollowUnit unit={'米'}  value={ 缓冲器厂家 || ''}
+                        onChange={e => set缓冲器厂家( e.currentTarget.value||undefined ) } />
+
+                <InputFollowUnit unit={'米'} type="number" value={ 轿厢轨距 || ''}
+                       onChange={e => set轿厢轨距( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+                <InputFollowUnit unit={'米'}  value={ 上行限电速 || ''}
+                        onChange={e => set上行限电速( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+                <InputFollowUnit unit={'米'}  value={ 上行限机速 || ''}
+                        onChange={e => set上行限机速( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+                <InputFollowUnit unit={'米'}  value={ 下行限电速 || ''}
+                        onChange={e => set下行限电速( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+                <InputFollowUnit unit={'米'}  value={ 下行限机速 || ''}
+                        onChange={e => set下行限机速( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+                <InputFollowUnit unit={'米'}  value={ 移动保护号 || ''}
+                        onChange={e => set移动保护号( e.currentTarget.value||undefined ) } />
+
+                <InputFollowUnit unit={'米'}  value={ 移动保护型 || ''}
+                        onChange={e => set移动保护型( e.currentTarget.value||undefined ) } />
+
+                <InputDatalist  value={ 装修 || ''}
+                                onListChange={v => set装修(v ||undefined)}
+                                datalist={轿厢装修状态} />
+
+                <InputFollowUnit unit={'米'}  value={ 锁型号 || ''}
+                        onChange={e => set锁型号( e.currentTarget.value||undefined ) } />
+
+                <ComboBoxDatalist  value={ 上护装置 || ''}
+                                   onListChange={v => set上护装置( v||undefined ) }
+                                   datalist={上行保护装置形式}  />
+
+                <InputFollowUnit unit={'米'}  value={ 上护型号 || ''}
+                        onChange={e => set上护型号( e.currentTarget.value||undefined ) } />
+
+                <InputFollowUnit unit={'米'}  value={ 上护编号 || ''}
+                        onChange={e => set上护编号( e.currentTarget.value||undefined ) } />
+
+                <CheckSwitch  checked= {手机信 || false}
+                              onChange={e => set手机信(手机信? undefined:true) } />
+
+                <InputFollowUnit unit={'米'}  value={ 速比 || ''}
+                        onChange={e => set速比( e.currentTarget.value||undefined ) } />
+
+                <Select  value={ 拖动 || ''}
+                         onChange={e => set拖动( e.currentTarget.value||undefined ) } >
+                  <option></option>
+                  { 拖动方式.map((one,i) => <option key={i} >{one}</option> ) }
+                </Select>
+
+                <InputFollowUnit unit={'米'}  value={ 限速器号 || ''}
+                        onChange={e => set限速器号( e.currentTarget.value||undefined ) } />
+
+                <InputFollowUnit unit={'米'} type="number" value={ 限绳直径 || ''}
+                       onChange={e => set限绳直径( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+                <InputFollowUnit unit={'米'}  value={ 曳引比 || ''}
+                        onChange={e => set曳引比( e.currentTarget.value||undefined ) } />
+
+                <InputFollowUnit unit={'米'} type="number" value={ 轮节径 || ''}
+                       onChange={e => set轮节径( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+                <InputFollowUnit unit={'米'} type="number" value={ 绳数 || ''}
+                       onChange={e => set绳数( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+                <CheckSwitch  checked= {是钢带 || false} disabled={false}
+                              onChange={e => set是钢带(是钢带? undefined:true) } />
+
+                {是钢带 ? (
+
+                  <InputFollowUnit unit={'米'}  value={ 钢带规格 || ''} readOnly={true}
+                          onChange={e => set钢带规格( e.currentTarget.value||undefined ) } />
+
+                ) :(
+
+                  <InputFollowUnit unit={'米'} type="number" value={ 绳直径 || ''} readOnly={true}
+                         onChange={e => set绳直径( e.currentTarget.value||undefined ) }
+                  ></InputFollowUnit>
+
+                ) }
+
+                <Text variant="h5">其它参数</Text>
+
+                <InputFollowUnit unit={'米'}  value={ 爆炸物质 || ''}
+                        onChange={e => set爆炸物质( e.currentTarget.value||undefined ) } />
+
+                <Select  value={ 补偿方式 || ''}
+                         onChange={e => set补偿方式( e.currentTarget.value||undefined ) } >
+                  <option></option>
+                  { 补偿方式s.map((one,i) => <option key={i} >{one}</option> ) }
+                </Select>
+
+                <InputDatalist  value={ 电动机类型 || ''}
+                                onListChange={v => set电动机类型(v ||undefined)}
+                                datalist={电动机类型s} />
+
+                <Select  value={ 顶升形式 || ''}
+                         onChange={e => set顶升形式( e.currentTarget.value||undefined ) } >
+                  <option></option>
+                  { 顶升形式s.map((one,i) => <option key={i} >{one}</option> ) }
+                </Select>
+
+                <Select  value={ 导轨型式 || ''}
+                         onChange={e => set导轨型式( e.currentTarget.value||undefined ) } >
+                  <option></option>
+                  { 对重导轨型式s.map((one,i) => <option key={i} >{one}</option> ) }
+                </Select>
+
+                <InputFollowUnit unit={'米'} type="number" value={ 轿厢高 || ''}
+                       onChange={e => set轿厢高( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+                <InputFollowUnit unit={'米'} type="number" value={ 轿厢宽 || ''}
+                       onChange={e => set轿厢宽( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+                <InputFollowUnit unit={'米'} type="number" value={ 轿厢深 || ''}
+                       onChange={e => set轿厢深( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+                <ComboBoxDatalist  value={ 区域防爆 || ''}
+                                   onListChange={v => set区域防爆( v||undefined ) }
+                                   datalist={区域防爆等级}  />
+
+                <Select  value={ 驱动方式 || ''}
+                         onChange={e => set驱动方式( e.currentTarget.value||undefined ) } >
+                  <option></option>
+                  { 驱动方式s.map((one,i) => <option key={i} >{one}</option> ) }
+                </Select>
+
+                <InputFollowUnit unit={'米'} type="number" value={ 上行额速 || ''}
+                       onChange={e => set上行额速( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+                <CheckSwitch  checked= {船梯 || false}
+                              onChange={e => set船梯(船梯? undefined:true) } />
+
+                <CheckSwitch  checked= {公共交通 || false}
+                              onChange={e => set公共交通(公共交通? undefined:true) } />
+
+                <CheckSwitch  checked= {汽车电梯 || false}
+                              onChange={e => set汽车电梯(汽车电梯? undefined:true) } />
+
+                <InputFollowUnit unit={'米'} type="number" value={ 梯级宽度 || ''}
+                       onChange={e => set梯级宽度( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+                <InputFollowUnit unit={'米'} type="number" value={ 下额定速 || ''}
+                       onChange={e => set下额定速( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+                <InputFollowUnit unit={'米'}  value={ 限机械速 || ''}
+                        onChange={e => set限机械速( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+                <InputFollowUnit unit={'米'} type="number" value={ 悬挂绳数 || ''}
+                       onChange={e => set悬挂绳数( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+                <InputFollowUnit unit={'米'} type="number" value={ 悬挂绳径 || ''}
+                       onChange={e => set悬挂绳径( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+                <InputFollowUnit unit={'米'}  value={ 泵编号 || ''}
+                        onChange={e => set泵编号( e.currentTarget.value||undefined ) } />
+
+                <InputFollowUnit unit={'米'} type="number" value={ 泵功率 || ''}
+                       onChange={e => set泵功率( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+                <InputFollowUnit unit={'米'} type="number" value={ 泵流量 || ''}
+                       onChange={e => set泵流量( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+                <InputFollowUnit unit={'米'}  value={ 泵型号 || ''}
+                        onChange={e => set泵型号( e.currentTarget.value||undefined ) } />
+
+                <InputFollowUnit unit={'米'} type="number" value={ 泵转速 || ''}
+                       onChange={e => set泵转速( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+                <InputFollowUnit unit={'米'}  value={ 液油型号 || ''}
+                        onChange={e => set液油型号( e.currentTarget.value||undefined ) } />
+
+                <InputFollowUnit unit={'米'} type="number" value={ 油缸数 || ''}
+                       onChange={e => set油缸数( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+                <InputDatalist  value={ 油缸形式 || ''}
+                                onListChange={v => set油缸形式(v ||undefined)}
+                                datalist={油缸形式s} />
+
+                <InputFollowUnit unit={'米'}  value={ 防爆标志 || ''}
+                        onChange={e => set防爆标志( e.currentTarget.value||undefined ) } />
+
+                <CheckSwitch  disabled={false}  checked= {汽车电梯 || false}
+                              onChange={e => set汽车电梯(汽车电梯? undefined:true) } />
+
+                <InputFollowUnit unit={'米'}  value={ 防爆证号 || ''}
+                        onChange={e => set防爆证号( e.currentTarget.value||undefined ) } />
+
+
+
+
+
+
+
+
+
+
+
+                <InputFollowUnit unit={'米'}
+                  type="number"  min={1} max={999}
+                  value={ flo || '' }
+                  onChange={e => setFlo( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+
+                <CheckSwitch
+                  checked= {spec || false}
+                  onChange={e => setSpec(!spec) }
+                />
+
+
+                <InputFollowUnit unit={'米'}
+                  type="number"  min={0} max={300}
+                  value={vl || ''}
+                  onChange={e => setVl( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+
+                <CheckSwitch
+                  checked= {nnor || false}
+                  onChange={e => setNnor(!nnor) }
+                />
+
+
+                <CheckSwitch
+                  checked= {oldb || false}
+                  onChange={e => setOldb(!oldb) }
+                />
+
+
+                <InputFollowUnit unit={'米'}
+                  placeholder="层数"
+                  value={ cpm || ''}
+                  onChange={e => setCpm( e.currentTarget.value||undefined ) }
+                >
+                </InputFollowUnit>
+
+
+                <InputFollowUnit unit={'米'}
+                  type="number"
+                  value={ hlf || ''}
+                  onChange={e => setHlf( e.currentTarget.value||undefined ) }
+                >
+                </InputFollowUnit>
+
+                <InputFollowUnit unit={'米'}
+                  type="number"
+                  value={ lesc || ''}
+                  onChange={e => setLesc( e.currentTarget.value||undefined ) }
+                >
+                </InputFollowUnit>
+
+                <InputFollowUnit unit={'米'}
+                  type="number"
+                  value={ wesc || ''}
+                  onChange={e => setWesc( e.currentTarget.value||undefined ) }
+                >
+                </InputFollowUnit>
+
+                <InputFollowUnit unit={'米'}
+                  value={ tm || ''}
+                  onChange={e => setTm( e.currentTarget.value||undefined ) }
+                >
+                </InputFollowUnit>
+
+                <InputFollowUnit unit={'米'}
+                  value={ mtm || ''}
+                  onChange={e => setMtm( e.currentTarget.value||undefined ) }
+                >
+                </InputFollowUnit>
+
+                <Select inputSize="md" css={{minWidth:'140px',fontSize:'1.5rem',padding:'0 1rem'}} divStyle={css`max-width:240px;`}
+                        value={ buff || ''}
+                        onChange={e => setBuff( e.currentTarget.value||undefined ) }
+                >
+                  <option></option>
+                  { 缓冲器形式.map((one,i) => (
+                    <option key={i}>{one}</option>
+                  )) }
+                </Select>
+
+                <InputFollowUnit unit={'米'}
+                  type="number"
+                  value={ rtl || ''}
+                  onChange={e => setRtl( e.currentTarget.value||undefined ) }
+                >
+                </InputFollowUnit>
+
+                <ComboBoxDatalist
+                  value={ aap || ''}
+                  onListChange={v => setAap( v||undefined ) }
+                  datalist={加装附加装置}
+                />
+
+                <InputFollowUnit unit={'米'}
+                  value={ prot || ''}
+                  onChange={e => setProt( e.currentTarget.value||undefined ) }
+                >
+                </InputFollowUnit>
+
+                <InputDatalist
+                  value={ doop || ''}
+                  onListChange={v => setDoop(v ||undefined)}
+                  datalist={开门方式}
+                />
+
+                <InputFollowUnit unit={'米'}
+                  value={ limm || ''}
+                  onChange={e => setLimm( e.currentTarget.value||undefined ) }
+                />
+
+                <Select inputSize="md" css={{minWidth:'140px',fontSize:'1.5rem',padding:'0 1rem'}} divStyle={css`max-width:240px;`}
+                        value={ opm || ''}
+                        onChange={e => setOpm( e.currentTarget.value||undefined ) }
+                >
+                  <option> </option>
+                  { 控制方式.map((one,i) => (
+                    <option key={i}>{one}</option>
+                  )) }
+                </Select>
+
+                <InputFollowUnit unit={'米'} type='date'  value={lbkd ||''}
+                       onChange={e => setLbkd( e.currentTarget.value||undefined ) } />
+
+                <InputFollowUnit unit={'米'} type='date'  value={nbkd ||''}
+                       onChange={e => setNbkd( e.currentTarget.value||undefined ) } />
+
+                <InputFollowUnit unit={'米'}
+                  value={ 控制屏编号 || ''}
+                  onChange={e => set控制屏编号( e.currentTarget.value||undefined ) }
+                />
+
+                <InputFollowUnit unit={'米'}
+                  value={ 曳引号 || ''}
+                  onChange={e => set曳引号( e.currentTarget.value||undefined ) }
+                />
+
+                <InputFollowUnit unit={'米'}
+                  value={ 主机号 || ''}
+                  onChange={e => set主机号( e.currentTarget.value||undefined ) }
+                />
+
+
+                <Text variant="h5">监察参数</Text>
+
+                <InputDatalist
+                  value={ 制造国 || ''}
+                  onListChange={v => set制造国(v ||undefined)}
+                  datalist={["中国","美国","欧盟"]}
+                />
+
+                <CheckSwitch
+                  checked= {vital || false}
+                  onChange={e => setVital(vital? undefined:true) }
+                />
+
+                <InputFollowUnit unit={'米'}
+                  type="number"
+                  value={ 年限 || ''}
+                  onChange={e => set年限( e.currentTarget.value||undefined ) }
+                >
+                </InputFollowUnit>
+
+                <Select
+                  value={ cpa || ''}
+                  onChange={e => setCpa( e.currentTarget.value||undefined ) }
+                >
+                  <option> </option>
+                  { 事故隐患类别.map((one,i) => (
+                    <option key={i} value={i+1}>{one}</option>
+                  )) }
+                </Select>
+
+                <InputFollowUnit unit={'米'}
+                  type="number"
+                  value={ 固定资产值 || ''}
+                  onChange={e => set固定资产值( e.currentTarget.value||undefined ) }
+                >
+                </InputFollowUnit>
+
+                <InputFollowUnit unit={'米'}
+                  type="number"
+                  value={ 大修周期 || ''}
+                  onChange={e => set大修周期( e.currentTarget.value||undefined ) }
+                >
+                </InputFollowUnit>
+
+
+                <Text variant="h5">许可用的参数</Text>
+
+                <InputFollowUnit unit={'米'} type='date'  value={ 设计日期  || ''}
+                       onChange={e => set设计日期( e.currentTarget.value||undefined ) } />
+
+                <UnitOrChoose id={造监检单  || ''} emodel={'电梯'} emid={id} field={'造监检单'}
+                              onCancel={() => {
+                                set造监检单( undefined )
+                              }}
+                              onDialog={async () => { await setNdt(await confirmation()); } }
+                />
+
+                <UnitOrChoose id={土建施单  || ''} emodel={'电梯'} emid={id} field={'土建施单'}
+                              onCancel={() => {
+                                set土建施单( undefined )
+                              }}
+                              onDialog={async () => { await setNdt(await confirmation()); } }
+                />
+
+                <UnitOrChoose id={土建验单  || ''} emodel={'电梯'} emid={id} field={'土建验单'}
+                              onCancel={() => {
+                                set土建验单( undefined )
+                              }}
+                              onDialog={async () => { await setNdt(await confirmation()); } }
+                />
+
+                <Text variant="h5">监检准入参数</Text>
+
+                <ComboBoxDatalist  value={ 施工类别 || ''}
+                                   onListChange={v => set施工类别( v||undefined ) }
+                                   datalist={施工类别s}  />
+
+                <InputFollowUnit unit={'米'} type='date'  value={ 施工日期  || ''}
+                       onChange={e => set施工日期( e.currentTarget.value||undefined ) } />
+
+                <InputFollowUnit unit={'米'} type='date'  value={ 竣验日  || ''}
+                       onChange={e => set竣验日( e.currentTarget.value||undefined ) } />
+
+                <InputFollowUnit unit={'米'}
+                  value={ 施工号 || ''}
+                  onChange={e => set施工号( e.currentTarget.value||undefined ) }
+                >
+                </InputFollowUnit>
+
+                <UnitOrChoose id={设计单位  || ''} emodel={'电梯'} emid={id} field={'设计单位'}
+                              onCancel={() => {
+                                set设计单位( undefined )
+                              }}
+                              onDialog={async () => { await setNdt(await confirmation()); } }
+                />
+
+                <InputFollowUnit unit={'米'}
+                  value={ 设计许号 || ''}
+                  onChange={e => set设计许号( e.currentTarget.value||undefined ) }
+                >
+                </InputFollowUnit>
+
+                <InputFollowUnit unit={'米'}
+                  value={ 产品标准 || ''}
+                  onChange={e => set产品标准( e.currentTarget.value||undefined ) }
+                >
+                </InputFollowUnit>
+
+                <InputFollowUnit unit={'米'}
+                  value={ 设计图号 || ''}
+                  onChange={e => set设计图号( e.currentTarget.value||undefined ) }
+                >
+                </InputFollowUnit>
+
+                <InputFollowUnit unit={'米'}
+                  value={ 合格证号 || ''}
+                  onChange={e => set合格证号( e.currentTarget.value||undefined ) }
+                >
+                </InputFollowUnit>
+
+                <InputFollowUnit unit={'米'} type='date'  value={ 安竣日  || ''}
+                       onChange={e => set安竣日( e.currentTarget.value||undefined ) } />
+
+                <InputFollowUnit unit={'米'}
+                  type="number"
+                  value={ 设备总重量 || ''}
+                  onChange={e => set设备总重量( e.currentTarget.value||undefined ) }
+                >
+                </InputFollowUnit>
+
+                <Text variant="h5">常用参数</Text>
+
+                <InputFollowUnit unit={'米'}
+                  type="number"
+                  value={ 倾斜角度 || ''}
+                  onChange={e => set倾斜角度( e.currentTarget.value||undefined ) }
+                >
+                </InputFollowUnit>
+
+                <InputFollowUnit unit={'米'}  value={ 安全钳型号 || ''}
+                        onChange={e => set安全钳型号( e.currentTarget.value||undefined ) }
+                />
+
+                <InputFollowUnit unit={'米'}  value={ 安全钳编号 || ''}
+                        onChange={e => set安全钳编号( e.currentTarget.value||undefined ) }
+                />
+
+                <InputFollowUnit unit={'米'}  value={ 层门型号 || ''}
+                        onChange={e => set层门型号( e.currentTarget.value||undefined ) } />
+
+                <InputFollowUnit unit={'米'} type="number" value={ 底坑深度 || ''}
+                       onChange={e => set底坑深度( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+                <InputFollowUnit unit={'米'} type="number" value={ 电动机功率 || ''}
+                       onChange={e => set电动机功率( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+                <InputFollowUnit unit={'米'}  value={ 电动机转速 || ''}
+                        onChange={e => set电动机转速( e.currentTarget.value||undefined ) } />
+
+                <InputFollowUnit unit={'米'} type="number" value={ 电梯门数 || ''}
+                       onChange={e => set电梯门数( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+                <InputFollowUnit unit={'米'} type="number" value={ 电梯站数 || ''}
+                       onChange={e => set电梯站数( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+                <InputFollowUnit unit={'米'} type="number" value={ 顶层高度 || ''}
+                       onChange={e => set顶层高度( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+                <InputFollowUnit unit={'米'} type="number" value={ 对重轨距 || ''}
+                       onChange={e => set对重轨距( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+                <InputFollowUnit unit={'米'} type="number" value={ 对重块数 || ''}
+                       onChange={e => set对重块数( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+                <InputFollowUnit unit={'米'}  value={ 对重限速号 || ''}
+                        onChange={e => set对重限速号( e.currentTarget.value||undefined ) } />
+
+                <InputFollowUnit unit={'米'}  value={ 对重限型号 || ''}
+                        onChange={e => set对重限型号( e.currentTarget.value||undefined ) } />
+
+                <InputFollowUnit unit={'米'} type="number" value={ 额定电流 || ''}
+                       onChange={e => set额定电流( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+                <InputFollowUnit unit={'米'} type="number" value={ 额定载人 || ''}
+                       onChange={e => set额定载人( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+                <InputFollowUnit unit={'米'}  value={ 缓冲器编号 || ''}
+                        onChange={e => set缓冲器编号( e.currentTarget.value||undefined ) } />
+
+                <InputFollowUnit unit={'米'}  value={ 缓冲器型号 || ''}
+                        onChange={e => set缓冲器型号( e.currentTarget.value||undefined ) } />
+
+                <InputFollowUnit unit={'米'}  value={ 缓冲器厂家 || ''}
+                        onChange={e => set缓冲器厂家( e.currentTarget.value||undefined ) } />
+
+                <InputFollowUnit unit={'米'} type="number" value={ 轿厢轨距 || ''}
+                       onChange={e => set轿厢轨距( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+                <InputFollowUnit unit={'米'}  value={ 上行限电速 || ''}
+                        onChange={e => set上行限电速( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+                <InputFollowUnit unit={'米'}  value={ 上行限机速 || ''}
+                        onChange={e => set上行限机速( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+                <InputFollowUnit unit={'米'}  value={ 下行限电速 || ''}
+                        onChange={e => set下行限电速( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+                <InputFollowUnit unit={'米'}  value={ 下行限机速 || ''}
+                        onChange={e => set下行限机速( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+                <InputFollowUnit unit={'米'}  value={ 移动保护号 || ''}
+                        onChange={e => set移动保护号( e.currentTarget.value||undefined ) } />
+
+                <InputFollowUnit unit={'米'}  value={ 移动保护型 || ''}
+                        onChange={e => set移动保护型( e.currentTarget.value||undefined ) } />
+
+                <InputDatalist  value={ 装修 || ''}
+                                onListChange={v => set装修(v ||undefined)}
+                                datalist={轿厢装修状态} />
+
+                <InputFollowUnit unit={'米'}  value={ 锁型号 || ''}
+                        onChange={e => set锁型号( e.currentTarget.value||undefined ) } />
+
+                <ComboBoxDatalist  value={ 上护装置 || ''}
+                                   onListChange={v => set上护装置( v||undefined ) }
+                                   datalist={上行保护装置形式}  />
+
+                <InputFollowUnit unit={'米'}  value={ 上护型号 || ''}
+                        onChange={e => set上护型号( e.currentTarget.value||undefined ) } />
+
+                <InputFollowUnit unit={'米'}  value={ 上护编号 || ''}
+                        onChange={e => set上护编号( e.currentTarget.value||undefined ) } />
+
+                <CheckSwitch  checked= {手机信 || false}
+                              onChange={e => set手机信(手机信? undefined:true) } />
+
+                <InputFollowUnit unit={'米'}  value={ 速比 || ''}
+                        onChange={e => set速比( e.currentTarget.value||undefined ) } />
+
+                <Select  value={ 拖动 || ''}
+                         onChange={e => set拖动( e.currentTarget.value||undefined ) } >
+                  <option></option>
+                  { 拖动方式.map((one,i) => <option key={i} >{one}</option> ) }
+                </Select>
+
+                <InputFollowUnit unit={'米'}  value={ 限速器号 || ''}
+                        onChange={e => set限速器号( e.currentTarget.value||undefined ) } />
+
+                <InputFollowUnit unit={'米'} type="number" value={ 限绳直径 || ''}
+                       onChange={e => set限绳直径( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+                <InputFollowUnit unit={'米'}  value={ 曳引比 || ''}
+                        onChange={e => set曳引比( e.currentTarget.value||undefined ) } />
+
+                <InputFollowUnit unit={'米'} type="number" value={ 轮节径 || ''}
+                       onChange={e => set轮节径( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+                <InputFollowUnit unit={'米'} type="number" value={ 绳数 || ''}
+                       onChange={e => set绳数( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+                <CheckSwitch  checked= {是钢带 || false} disabled={false}
+                              onChange={e => set是钢带(是钢带? undefined:true) } />
+
+                {是钢带 ? (
+
+                  <InputFollowUnit unit={'米'}  value={ 钢带规格 || ''} readOnly={true}
+                          onChange={e => set钢带规格( e.currentTarget.value||undefined ) } />
+
+                ) :(
+
+                  <InputFollowUnit unit={'米'} type="number" value={ 绳直径 || ''} readOnly={true}
+                         onChange={e => set绳直径( e.currentTarget.value||undefined ) }
+                  ></InputFollowUnit>
+
+                ) }
+
+                <Text variant="h5">其它参数</Text>
+
+                <InputFollowUnit unit={'米'}  value={ 爆炸物质 || ''}
+                        onChange={e => set爆炸物质( e.currentTarget.value||undefined ) } />
+
+                <Select  value={ 补偿方式 || ''}
+                         onChange={e => set补偿方式( e.currentTarget.value||undefined ) } >
+                  <option></option>
+                  { 补偿方式s.map((one,i) => <option key={i} >{one}</option> ) }
+                </Select>
+
+                <InputDatalist  value={ 电动机类型 || ''}
+                                onListChange={v => set电动机类型(v ||undefined)}
+                                datalist={电动机类型s} />
+
+                <Select  value={ 顶升形式 || ''}
+                         onChange={e => set顶升形式( e.currentTarget.value||undefined ) } >
+                  <option></option>
+                  { 顶升形式s.map((one,i) => <option key={i} >{one}</option> ) }
+                </Select>
+
+                <Select  value={ 导轨型式 || ''}
+                         onChange={e => set导轨型式( e.currentTarget.value||undefined ) } >
+                  <option></option>
+                  { 对重导轨型式s.map((one,i) => <option key={i} >{one}</option> ) }
+                </Select>
+
+                <InputFollowUnit unit={'米'} type="number" value={ 轿厢高 || ''}
+                       onChange={e => set轿厢高( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+                <InputFollowUnit unit={'米'} type="number" value={ 轿厢宽 || ''}
+                       onChange={e => set轿厢宽( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+                <InputFollowUnit unit={'米'} type="number" value={ 轿厢深 || ''}
+                       onChange={e => set轿厢深( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+                <ComboBoxDatalist  value={ 区域防爆 || ''}
+                                   onListChange={v => set区域防爆( v||undefined ) }
+                                   datalist={区域防爆等级}  />
+
+                <Select  value={ 驱动方式 || ''}
+                         onChange={e => set驱动方式( e.currentTarget.value||undefined ) } >
+                  <option></option>
+                  { 驱动方式s.map((one,i) => <option key={i} >{one}</option> ) }
+                </Select>
+
+                <InputFollowUnit unit={'米'} type="number" value={ 上行额速 || ''}
+                       onChange={e => set上行额速( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+                <CheckSwitch  checked= {船梯 || false}
+                              onChange={e => set船梯(船梯? undefined:true) } />
+
+                <CheckSwitch  checked= {公共交通 || false}
+                              onChange={e => set公共交通(公共交通? undefined:true) } />
+
+                <CheckSwitch  checked= {汽车电梯 || false}
+                              onChange={e => set汽车电梯(汽车电梯? undefined:true) } />
+
+                <InputFollowUnit unit={'米'} type="number" value={ 梯级宽度 || ''}
+                       onChange={e => set梯级宽度( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+                <InputFollowUnit unit={'米'} type="number" value={ 下额定速 || ''}
+                       onChange={e => set下额定速( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+                <InputFollowUnit unit={'米'}  value={ 限机械速 || ''}
+                        onChange={e => set限机械速( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+                <InputFollowUnit unit={'米'} type="number" value={ 悬挂绳数 || ''}
+                       onChange={e => set悬挂绳数( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+                <InputFollowUnit unit={'米'} type="number" value={ 悬挂绳径 || ''}
+                       onChange={e => set悬挂绳径( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+                <InputFollowUnit unit={'米'}  value={ 泵编号 || ''}
+                        onChange={e => set泵编号( e.currentTarget.value||undefined ) } />
+
+                <InputFollowUnit unit={'米'} type="number" value={ 泵功率 || ''}
+                       onChange={e => set泵功率( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+                <InputFollowUnit unit={'米'} type="number" value={ 泵流量 || ''}
+                       onChange={e => set泵流量( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+                <InputFollowUnit unit={'米'}  value={ 泵型号 || ''}
+                        onChange={e => set泵型号( e.currentTarget.value||undefined ) } />
+
+                <InputFollowUnit unit={'米'} type="number" value={ 泵转速 || ''}
+                       onChange={e => set泵转速( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+                <InputFollowUnit unit={'米'}  value={ 液油型号 || ''}
+                        onChange={e => set液油型号( e.currentTarget.value||undefined ) } />
+
+                <InputFollowUnit unit={'米'} type="number" value={ 油缸数 || ''}
+                       onChange={e => set油缸数( e.currentTarget.value||undefined ) }
+                ></InputFollowUnit>
+
+                <InputDatalist  value={ 油缸形式 || ''}
+                                onListChange={v => set油缸形式(v ||undefined)}
+                                datalist={油缸形式s} />
+
+                <InputFollowUnit unit={'米'}  value={ 防爆标志 || ''}
+                        onChange={e => set防爆标志( e.currentTarget.value||undefined ) } />
+
+                <CheckSwitch  disabled={false}  checked= {汽车电梯 || false}
+                              onChange={e => set汽车电梯(汽车电梯? undefined:true) } />
+
+                <InputFollowUnit unit={'米'}  value={ 防爆证号 || ''}
+                        onChange={e => set防爆证号( e.currentTarget.value||undefined ) } />
+
+
+
 
                 <Button
                   size="lg"
