@@ -4875,10 +4875,10 @@ csstype@^3.0.2:
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.0.3.tgz#2b410bbeba38ba9633353aff34b05d9755d065f8"
   integrity sha512-jPl+wbWPOWJ7SXsWyqGRk3lGecbar0Cb0OvZF/r/ZU011R4YqiRehgkQ9p4eQfo9DSDLqLL3wHwfxeJiuIsNag==
 
-customize-easy-ui-component@~4.3.6:
-  version "4.3.6"
-  resolved "https://registry.yarnpkg.com/customize-easy-ui-component/-/customize-easy-ui-component-4.3.6.tgz#ba6e863e3192b9ef4975733d7b91d108c41b78c8"
-  integrity sha512-8uPA8u7ZERIFsH29X7CRJdTIs/8kbm3e67PGx3FYSM4UnTsF8Z13qmDw75lOxM/tbOkRZAGp54XiHBuG6/E8Cg==
+customize-easy-ui-component@~4.3.7:
+  version "4.3.7"
+  resolved "https://registry.yarnpkg.com/customize-easy-ui-component/-/customize-easy-ui-component-4.3.7.tgz#9f743c742cf2adfbd276d445ae243ec6ccd190ca"
+  integrity sha512-wFcqTtPYZmeho4a+xpQkOw2b2hyN5KxAXTt6LfyXdFXJ4ocGJIeMVWdADPHgG+Ws+NFcZ0TpJzAsq3qRujvCng==
   dependencies:
     "@popperjs/core" "^2.6.0"
     "@reach/alert" "^0.12.1"
@@ -4898,6 +4898,7 @@ customize-easy-ui-component@~4.3.6:
     react-popper "^2.2.4"
     react-remove-scroll "^2.4.1"
     react-spring "~9.0.0-rc.3"
+    react-switch "^6.0.0"
     react-toastnotes "^3.3.1"
     resize-observer-polyfill "^1.5.1"
     use-media "^1.4.0"

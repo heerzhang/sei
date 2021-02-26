@@ -29,7 +29,7 @@ import {
   IconX,
   InputDatalist,
   ComboBoxDatalist,
-  IconToggleRight, IconToggleLeft
+  IconToggleRight, IconToggleLeft, CheckSwitch
 } from "customize-easy-ui-component";
 
 //import { useSession } from "../auth";
@@ -309,7 +309,7 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                   >层</SuffixInput>
                 </InputGroupLine>
                 <InputGroupLine label={'是否特种电梯？'}>
-                  <Check label={'是的'}
+                  <CheckSwitch
                          checked= {spec || false}
                          onChange={e => setSpec(!spec) }
                   />
@@ -322,13 +322,13 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                   >m/s</SuffixInput>
                 </InputGroupLine>
                 <InputGroupLine label={`是否非标电梯:`}>
-                  <Check label={'是的'}
+                  <CheckSwitch
                          checked= {nnor || false}
                          onChange={e => setNnor(!nnor) }
                   />
                 </InputGroupLine>
                 <InputGroupLine label={`是否属于旧楼加装电梯:`}>
-                  <Check label={'是的'}
+                  <CheckSwitch
                          checked= {oldb || false}
                          onChange={e => setOldb(!oldb) }
                   />
@@ -472,7 +472,7 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                   />
                 </InputGroupLine>
                 <InputGroupLine label={`是否重要特种设备:`}>
-                  <Check label={'是的'}
+                  <CheckSwitch
                          checked= {vital || false}
                          onChange={e => setVital(vital? undefined:true) }
                   />
@@ -760,7 +760,7 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                           onChange={e => set上护编号( e.currentTarget.value||undefined ) } />
                 </InputGroupLine>
                 <InputGroupLine label={`是否手机信号覆盖:`}>
-                  <Check label={'是的'}  checked= {手机信 || false}
+                  <CheckSwitch  checked= {手机信 || false}
                          onChange={e => set手机信(手机信? undefined:true) } />
                 </InputGroupLine>
                 <InputGroupLine label={`速比:`}>
@@ -798,7 +798,7 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                   >根</SuffixInput>
                 </InputGroupLine>
                 <InputGroupLine label={`是否曳引绳是钢带:`}>
-                  <Check label={'是的'}  checked= {是钢带 || false} disabled={true}
+                  <CheckSwitch  checked= {是钢带 || false} disabled={false}
                          onChange={e => set是钢带(是钢带? undefined:true) } />
                 </InputGroupLine>
                 {是钢带 ? (
@@ -878,15 +878,15 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                   >m/s</SuffixInput>
                 </InputGroupLine>
                 <InputGroupLine label={`是否船舶电梯:`}>
-                  <Check label={'是的'}  checked= {船梯 || false}
+                  <CheckSwitch  checked= {船梯 || false}
                          onChange={e => set船梯(船梯? undefined:true) } />
                 </InputGroupLine>
                 <InputGroupLine label={`是否公共交通型:`}>
-                  <Check label={'是的'}  checked= {公共交通 || false}
+                  <CheckSwitch  checked= {公共交通 || false}
                          onChange={e => set公共交通(公共交通? undefined:true) } />
                 </InputGroupLine>
                 <InputGroupLine label={`是否汽车电梯:`}>
-                  <Check label={'是的'}  checked= {汽车电梯 || false}
+                  <CheckSwitch  checked= {汽车电梯 || false}
                          onChange={e => set汽车电梯(汽车电梯? undefined:true) } />
                 </InputGroupLine>
                 <InputGroupLine label={`梯级宽度:`}>
@@ -955,15 +955,16 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                   <Input  value={ 防爆标志 || ''}
                           onChange={e => set防爆标志( e.currentTarget.value||undefined ) } />
                 </InputGroupLine>
+
+                <InputGroupLine label={`是否汽车电梯:`}>
+                  <CheckSwitch  disabled={false}  checked= {汽车电梯 || false}
+                                onChange={e => set汽车电梯(汽车电梯? undefined:true) } />
+                </InputGroupLine>
+
                 <InputGroupLine label={`整机防爆合格证编号(防爆电梯):`}>
                   <Input  value={ 防爆证号 || ''}
                           onChange={e => set防爆证号( e.currentTarget.value||undefined ) } />
                 </InputGroupLine>
-                <InputGroupLine label={`测试tooglle按钮checkbox:`}>
-                  <>
-                  <Switch onChange={() => set汽车电梯(prev => !prev)} checked={汽车电梯} />
-                  </>
-               </InputGroupLine>
 
                 <Button
                   size="lg"
