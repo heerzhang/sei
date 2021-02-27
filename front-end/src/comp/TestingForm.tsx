@@ -269,9 +269,10 @@ export interface InputBaseProps
  * Our basic Input element. Use this when building customized
  * forms. Otherwise, stick with InputGroup
  * 不对外开放使用的；外部引用请用Input
+ * 原先InputBase 改名成 InputRefBase; 比如ComboBox才会需要使用forwardRef形式的;
  */
 
-export const InputBase = React.forwardRef(
+export const InputRefBase = React.forwardRef(
   (
     { autoComplete, autoFocus, inputSize = "md",topDivStyle, ...other }: InputBaseProps,
     ref: React.Ref<HTMLInputElement>
@@ -297,8 +298,7 @@ export const InputBase = React.forwardRef(
           inputSizes[inputSize],
           active && activeBackground,
           error && errorStyles,
-          { height },
-          topDivStyle
+          { height }
         ]}
         {...safeBind({ ref }, other)}
       />
@@ -310,8 +310,12 @@ export const InputBase = React.forwardRef(
 //首层<div topDivStyle 等都去掉，130ms  ，!! css样式影响挺大的。
 //在<input的头顶多搞出一层<div来嵌套下实际不会影响性能的。
 //--InputSimple普通FunctionComponent代替React.forwardRef(safeBind({ ref }就能从365ms变240ms啦。
-//性能测试 使用的
-export const InputSimple : React.FunctionComponent<InputBaseProps>=
+
+/**
+ * 正常都不需要使用forwardRef形式的，可大大地加快速度。 InputRefBase是ref版本;
+ * 性能优化，去掉了React.forwardRef 改成React.FunctionComponent
+ */
+export const InputBase: React.FunctionComponent<InputBaseProps>=
   (
     {
       autoComplete,
@@ -321,17 +325,31 @@ export const InputSimple : React.FunctionComponent<InputBaseProps>=
       ...other
     }
   ) => {
-
-    //去掉 bind active Background从240ms变为230ms； onTouchStart()+css:colors.background 影响性能还算可以。
-    //-再去掉baseStyles 变为225ms；
-    //--再去掉inputSizes[] 变为221ms；  css:fontSize+padding;
-    //--- useSharedStyle() errorStyles 变为210ms；
-    //----height样式去掉,最小字体高, 变为172ms； 元素高度css影响性能较大，也得用啊！
-    //-----把useContext去掉,变为171ms；
-    //------把getHeight()去掉,只是空荡荡函数外套了，变为167ms；
-    //最后连InputSimple这个FunctionComponent函数也直接替换成<input，变为165ms，加一层组件函数嵌套实际性能影响较小。
+    const { uid, error } = React.useContext(InputGroupContext);
+    const { bind, active } = useActiveStyle();
+    const {
+      baseStyles,
+      inputSizes,
+      activeBackground,
+      errorStyles
+    } = useSharedStyle();
+    const height = getHeight(inputSize);
     return (
-      <input  {...other} />
+      <input
+        id={uid}
+        className="Input"
+        autoComplete={autoComplete}
+        autoFocus={autoFocus}
+        {...bind}
+        css={[
+          baseStyles,
+          inputSizes[inputSize],
+          active && activeBackground,
+          error && errorStyles,
+          { height }
+        ]}
+        {...other}
+      />
     );
   };
 
@@ -787,7 +805,7 @@ export const InputFollowUnit: React.FunctionComponent<InputFollowUnitProps> = ({
     //--InputSimple普通FunctionComponent代替React.forwardRef(safeBind({ ref }就能从365ms变240ms啦。
     return (
         <div>
-          <InputSimple  {...other} />
+          <InputBase  {...other} />
             {unit}
         </div>
     );
