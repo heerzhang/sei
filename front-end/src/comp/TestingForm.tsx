@@ -757,10 +757,12 @@ export const InputFollowUnit: React.FunctionComponent<InputFollowUnitProps> = ({
             topDivStyle
         ]}
         >
-            <InputBase
-                       {...other}
-            />
-
+          <input
+            css={[
+              topDivStyle
+            ]}
+            {...other}
+          />
             {unit}
         </div>
     );
