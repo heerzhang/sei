@@ -306,6 +306,10 @@ export const InputBase = React.forwardRef(
   }
 );
 
+//去掉<input误给的topDivStyle就能从178ms降低到142ms 【3Fm】了；
+//首层<div topDivStyle 等都去掉，130ms  ，!! css样式影响挺大的。
+//在<input的头顶多搞出一层<div来嵌套下实际不会影响性能的。
+//--InputSimple普通FunctionComponent代替React.forwardRef(safeBind({ ref }就能从365ms变240ms啦。
 //性能测试 使用的
 export const InputSimple : React.FunctionComponent<InputBaseProps>=
   (
@@ -318,18 +322,18 @@ export const InputSimple : React.FunctionComponent<InputBaseProps>=
     }
   ) => {
 
-  //去掉 bind active Background从240ms变为230ms； onTouchStart()+css:colors.background 影响性能还算可以。
+    //去掉 bind active Background从240ms变为230ms； onTouchStart()+css:colors.background 影响性能还算可以。
     //-再去掉baseStyles 变为225ms；
-      //--再去掉inputSizes[] 变为221ms；  css:fontSize+padding;
-        //--- useSharedStyle() errorStyles 变为210ms；
-          //----height样式去掉,最小字体高, 变为172ms； 元素高度css影响性能较大，也得用啊！
-            //-----把useContext去掉,变为171ms；
-              //------把getHeight()去掉,只是空荡荡函数外套了，变为167ms；
-                //最后连InputSimple这个FunctionComponent函数也直接替换成<input，变为165ms，加一层组件函数嵌套实际性能影响较小。
+    //--再去掉inputSizes[] 变为221ms；  css:fontSize+padding;
+    //--- useSharedStyle() errorStyles 变为210ms；
+    //----height样式去掉,最小字体高, 变为172ms； 元素高度css影响性能较大，也得用啊！
+    //-----把useContext去掉,变为171ms；
+    //------把getHeight()去掉,只是空荡荡函数外套了，变为167ms；
+    //最后连InputSimple这个FunctionComponent函数也直接替换成<input，变为165ms，加一层组件函数嵌套实际性能影响较小。
     return (
       <input  {...other} />
     );
-};
+  };
 
 
 
