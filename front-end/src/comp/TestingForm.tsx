@@ -306,6 +306,48 @@ export const InputBase = React.forwardRef(
   }
 );
 
+//测试
+export const InputSimple : React.FunctionComponent<InputBaseProps>=
+  (
+    {
+      autoComplete,
+      autoFocus,
+      inputSize = "md",
+      topDivStyle,
+      ...other
+    }
+  ) => {
+    const { uid, error } = React.useContext(InputGroupContext);
+    const { bind, active } = useActiveStyle();
+    const {
+      baseStyles,
+      inputSizes,
+      activeBackground,
+      errorStyles
+    } = useSharedStyle();
+    const height = getHeight(inputSize);
+    return (
+      <input
+        id={uid}
+        className="Input"
+        autoComplete={autoComplete}
+        autoFocus={autoFocus}
+        {...bind}
+        css={[
+          baseStyles,
+          inputSizes[inputSize],
+          active && activeBackground,
+          error && errorStyles,
+          { height },
+          topDivStyle
+        ]}
+        {...other}
+      />
+    );
+};
+
+
+
 InputBase.propTypes = {
   inputSize: PropTypes.oneOf(["sm", "md", "lg"] as InputSize[]),
   autoComplete: PropTypes.string,
@@ -751,10 +793,12 @@ export const InputFollowUnit: React.FunctionComponent<InputFollowUnitProps> = ({
 //去掉<input误给的topDivStyle就能从178降低到142ms【3Fm】了；
 //首层<div topDivStyle 等都去掉，130ms且【4Fm*115个】了，样式影响挺大的。
 //在<input的头顶多搞出一层<div来嵌套下实际不会影响性能的。
+//最简化 里面input 替换 InputBase +传入css"inline-block" 从150ms立马变380ms啦。
+  //-减传入css，只有InputBase 变365ms啦。
+    //--InputSimple普通FunctionComponent代替React.forwardRef(就能从365ms变240ms啦。
     return (
         <div>
-          <input  {...other}
-          />
+          <InputSimple  {...other} />
             {unit}
         </div>
     );
