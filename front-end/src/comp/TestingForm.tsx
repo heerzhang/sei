@@ -748,20 +748,12 @@ export const InputFollowUnit: React.FunctionComponent<InputFollowUnitProps> = ({
         topDivStyle,
         ...other
     }) => {
-
+//去掉<input误给的topDivStyle就能从178降低到142ms【3Fm】了；
+//首层<div topDivStyle 等都去掉，130ms且【4Fm*115个】了，样式影响挺大的。
+//在<input的头顶多搞出一层<div来嵌套下实际不会影响性能的。
     return (
-        <div  css={[
-            {
-                textAlign: 'left'
-            },
-            topDivStyle
-        ]}
-        >
-          <input
-            css={[
-              topDivStyle
-            ]}
-            {...other}
+        <div>
+          <input  {...other}
           />
             {unit}
         </div>
