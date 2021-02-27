@@ -26,7 +26,7 @@ import {
   IconX,
   InputDatalist,
   ComboBoxDatalist,
-  IconToggleRight, IconToggleLeft, CheckSwitch, InputGroup, InputFollowUnit
+  IconToggleRight, IconToggleLeft, CheckSwitch, InputGroup
 } from "customize-easy-ui-component";
 
 //import { useSession } from "../auth";
@@ -41,6 +41,7 @@ import { UnitOrChoose } from "../../unit/UnitOrChoose";
 import { DialogEnterReturn } from "../../context/DialogEnterReturn";
 import queryString from "querystring";
 import Switch from "react-switch";
+import { InputFollowUnit } from "../../comp/TestingForm";
 
 
 export const 缓冲器形式=["液压","聚氨酯","弹簧","蓄能型","耗能型","聚胺脂","弹簧 液压","聚氨酯 液压"];
