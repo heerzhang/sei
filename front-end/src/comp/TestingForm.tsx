@@ -732,7 +732,7 @@ export interface SuffixInputProps
  * 带单位后缀的说明，70%给输入框，后面30%给叙述单位字串{空格也算}
  * 输入的 单位说明 字符串 放在 <Text className="Suffix__text"  >
  */
-export const SuffixInput: React.FunctionComponent<SuffixInputProps> = ({
+export const Zx: React.FunctionComponent<SuffixInputProps> = ({
                                                                          children,
                                                                          textStyle,
                                                                          inputSize,
@@ -772,7 +772,7 @@ export const SuffixInput: React.FunctionComponent<SuffixInputProps> = ({
   );
 };
 
-SuffixInput.propTypes = {
+Zx.propTypes = {
   children: PropTypes.node
 };
 
@@ -810,6 +810,76 @@ export const InputFollowUnit: React.FunctionComponent<InputFollowUnitProps> = ({
         </div>
     );
 };
+
+//带单位标注的输入框, 单位不放在参数里面，改成子组件方式
+export interface InputSuffixSonProps
+  extends InputBaseProps {
+  textStyle?: SerializedStyles;
+
+}
+
+/** 用children方式(组件Tag嵌套)传递和直接往组件加个参数方式的，性能一致没差距。
+ * InputFollowUnit， 代替SuffixInput 看看能否提高性能
+ * 若children有，就是有附带单位后缀串的模式；
+ * 带单位后缀的说明，70%给输入框，后面30%给叙述单位字串{空格也算}
+ * 输入的 单位说明 字符串 放在 <Text className="Suffix__text"  >
+ */
+export const InputSuffixSon: React.FunctionComponent<InputSuffixSonProps> = ({
+    children,
+    textStyle,
+    inputSize,
+    topDivStyle,
+    ...other
+  }) => {
+//去掉<input误给的topDivStyle就能从178降低到142ms【3Fm】了；
+//首层<div topDivStyle 等都去掉，130ms且【4Fm*115个】了，样式影响挺大的。
+//在<input的头顶多搞出一层<div来嵌套下实际不会影响性能的。
+//最简化 里面input 替换 InputBase +传入css"inline-block" 从150ms立马变380ms啦。
+  //-减传入css，只有InputBase 变365ms啦。
+  //--InputSimple普通FunctionComponent代替React.forwardRef(safeBind({ ref }就能从365ms变240ms啦。
+//[20210301测试]
+//套上<Text >  从210ms 变为258ms; html-span css相对纯文本string，较明显。
+//+className="Suffix__text"  variant={"body"}  变为270ms;
+// variant={"subtitle"} ?把span改成div 对性能没影响 没变化270ms;
+  //css={[ textStyle  ]};  +emotion影响较大 变化310ms;  去掉 textStyle 基本没变化320ms;
+//后缀<Text 全部复原后: 没变化320ms; emotion带入影响较大但是也算预计当中。
+//<InputBase css={{全部都还原； 变为355ms or变为365ms;   影响较大但是,也是必须要的样式。
+//全部都还原 415ms   ，少了 align lef= 400ms;   没有emotion没有任何样式 =355ms or 345ms;
+//react直接style={{ textAlign: 'left' }} 变为 =355ms;
+  //接着把react直接style变更成emotioncss{[{}]}  变为 =380ms or388ms; emotion接替react的style带来的性能负担，其实还算合理。
+//多加一个topDivStyle？空的参数， 导致  变为 =390ms; 影响较小。
+  //最后InputSuffixSon整个SuffixInput退回去， 变为 =388ms; 可能字符数变少了；
+  return (
+    <div  css={[
+      {
+        textAlign: 'left'
+      },
+      topDivStyle
+    ]}
+    >
+      <InputBase inputSize={inputSize}
+                 css={{
+                   display: "inline-block",
+                   width:  children? "70%" : '100%',
+                 }}
+                 {...other}
+      >
+      </InputBase>
+      <Text className="Suffix__text" variant={"subtitle"}
+            css={[
+              {
+                display: children? "inline-flex" : 'none',
+                paddingLeft: '0.2rem'
+              },
+              textStyle
+            ]}
+      >
+        {children}
+      </Text>
+    </div>
+  );
+}
+
 
 InputFollowUnit.propTypes = {
     children: PropTypes.node

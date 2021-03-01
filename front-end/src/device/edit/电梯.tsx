@@ -41,8 +41,9 @@ import { UnitOrChoose } from "../../unit/UnitOrChoose";
 import { DialogEnterReturn } from "../../context/DialogEnterReturn";
 import queryString from "querystring";
 import Switch from "react-switch";
-import { InputFollowUnit } from "../../comp/TestingForm";
+import { Zx } from "../../comp/TestingForm";
 import { ComboBoxDatalist } from "../../comp/ComboBox";
+
 
 
 export const 缓冲器形式=["液压","聚氨酯","弹簧","蓄能型","耗能型","聚胺脂","弹簧 液压","聚氨酯 液压"];
@@ -63,6 +64,8 @@ export const 拖动方式=['交流单速','交流双速','变极调速','交流�
 export const 油缸形式s=["浸油式", "非浸油式","油浸式","双节式（侧置）"];
 
 
+//570line= 1; 倍数=4 --- 210ms;
+
 
 interface 电梯props {
   id?: string;
@@ -78,17 +81,17 @@ interface 电梯props {
 }
 //可嵌套的编辑器；传递保存变动数据。
 export const 电梯: React.FunctionComponent<电梯props> = ({
-  readOnly,
-  id,
-  editable,
-  defaultCredit = "",
-  defaultDescription,
-  defaultImage,
-  defaultIngredients,
-  defaultTitle = "",
-  eqp=null,    //从好几代祖先前的DetailedGuide在graphQL获得后端服务器数据层层传递下来的。
+                                                       readOnly,
+                                                       id,
+                                                       editable,
+                                                       defaultCredit = "",
+                                                       defaultDescription,
+                                                       defaultImage,
+                                                       defaultIngredients,
+                                                       defaultTitle = "",
+                                                       eqp=null,    //从好几代祖先前的DetailedGuide在graphQL获得后端服务器数据层层传递下来的。
                                                        setPam,   //传递编辑保存回调用
-}) => {
+                                                     }) => {
   const qs= queryString.parse(window.location.search);
   const dialog =qs && !!qs.dialog;
   //?&土建施单=190 底层URL 问号?后面那个&是必需的分割符号，两符号都不能省略。
@@ -230,7 +233,7 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
 
   //直接取得EQP关联的task字段的对象。
   const {task} =eqp;
- // const [ingredients, setIngredients] = React.useState<any>( dt||{} );
+  // const [ingredients, setIngredients] = React.useState<any>( dt||{} );
   const [, setLocation] = useLocation();
 
   //console.log("电梯进入 eqp=",　eqp, "; ndt=",ndt);
@@ -239,18 +242,18 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
     const newdat={ ...eqp, flo,spec,vl,nnor,cpm,hlf,oldb,lesc,wesc,tm,mtm,buff,rtl,
       aap,prot,doop,limm,opm,lbkd,nbkd,cpa,vital,
       svp: JSON.stringify({主机号,制造国,年限,设计日期,土建验单,
-        造监检单, 土建施单,施工类别,施工日期,竣验日,施工号,设计单位,
-        设计许号,产品标准,设计图号,合格证号,安竣日,固定资产值,设备总重量,
-        大修周期,控制屏编号,曳引号,
-       }
+          造监检单, 土建施单,施工类别,施工日期,竣验日,施工号,设计单位,
+          设计许号,产品标准,设计图号,合格证号,安竣日,固定资产值,设备总重量,
+          大修周期,控制屏编号,曳引号,
+        }
       ),
       pa: JSON.stringify({倾斜角度,安全钳型号,安全钳编号,爆炸物质,补偿方式,层门型号,底坑深度,电动机功率,电动机类型,
-        电动机转速,电梯门数,电梯站数,顶层高度,顶升形式,导轨型式,对重轨距,对重块数,对重限速号,对重限型号,额定电流,额定载人,
-        缓冲器编号,缓冲器型号,缓冲器厂家,轿厢高,轿厢宽,轿厢深,轿厢轨距,上行限电速,上行限机速,下行限电速,下行限机速,移动保护号,
-        移动保护型,装修,锁型号,区域防爆,驱动方式,上护装置,上护型号,上护编号,上行额速,船梯,公共交通,汽车电梯,手机信,速比,拖动,
-        限速器号,限绳直径,曳引比,轮节径,绳数, 是钢带, 钢带规格:是钢带?钢带规格:undefined,  绳直径:是钢带?undefined:绳直径,
-        梯级宽度,下额定速,限机械速,悬挂绳数,悬挂绳径,泵编号,泵功率,
-        泵流量,泵型号,泵转速,液油型号,油缸数,油缸形式,防爆标志,防爆证号
+          电动机转速,电梯门数,电梯站数,顶层高度,顶升形式,导轨型式,对重轨距,对重块数,对重限速号,对重限型号,额定电流,额定载人,
+          缓冲器编号,缓冲器型号,缓冲器厂家,轿厢高,轿厢宽,轿厢深,轿厢轨距,上行限电速,上行限机速,下行限电速,下行限机速,移动保护号,
+          移动保护型,装修,锁型号,区域防爆,驱动方式,上护装置,上护型号,上护编号,上行额速,船梯,公共交通,汽车电梯,手机信,速比,拖动,
+          限速器号,限绳直径,曳引比,轮节径,绳数, 是钢带, 钢带规格:是钢带?钢带规格:undefined,  绳直径:是钢带?undefined:绳直径,
+          梯级宽度,下额定速,限机械速,悬挂绳数,悬挂绳径,泵编号,泵功率,
+          泵流量,泵型号,泵转速,液油型号,油缸数,油缸形式,防爆标志,防爆证号
         }
       )
     };
@@ -260,2325 +263,2358 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
 
 
   return (
+    <div
+      css={{
+        [theme.mediaQueries.md]: {
+          height: "auto",
+          display: "block"
+        }
+      }}
+    >
+      <hr/>
+      <Text
+        css={{
+          flex: 1,
+          textAlign: "center",
+          [theme.mediaQueries.md]: {
+            textAlign: "left"
+          }
+        }}
+        wrap={false}
+        variant="h5"
+        gutter={false}
+      >
+        {eqp.cod}电梯技术参数
+      </Text>
+
       <div
         css={{
+          flex: 1,
           [theme.mediaQueries.md]: {
-            height: "auto",
-            display: "block"
+            flex: "none"
           }
         }}
       >
-        <hr/>
-        <Text
-          css={{
-            flex: 1,
-            textAlign: "center",
-            [theme.mediaQueries.md]: {
-              textAlign: "left"
-            }
-          }}
-          wrap={false}
-          variant="h5"
-          gutter={false}
-        >
-          {eqp.cod}电梯技术参数
-        </Text>
+        <div>
+          <Container>
+            <div
+              css={{
+                paddingTop: theme.spaces.lg,
+                paddingBottom: theme.spaces.lg
+              }}
+            >
 
-        <div
-          css={{
-            flex: 1,
-            [theme.mediaQueries.md]: {
-              flex: "none"
-            }
-          }}
-        >
-          <div>
-            <Container>
-              <div
-                css={{
-                  paddingTop: theme.spaces.lg,
-                  paddingBottom: theme.spaces.lg
-                }}
+
+
+              <Zx
+                type="number"  min={1} max={999}
+                value={ flo || '' }
+                onChange={e => setFlo( e.currentTarget.value||undefined ) }
+              >865行</Zx>
+
+
+              <CheckSwitch
+                checked= {spec || false}
+                onChange={e => setSpec(!spec) }
+              />
+
+
+              <Zx
+                type="number"  min={0} max={300}
+                value={vl || ''}
+                onChange={e => setVl( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+
+              <CheckSwitch
+                checked= {nnor || false}
+                onChange={e => setNnor(!nnor) }
+              />
+
+
+              <CheckSwitch
+                checked= {oldb || false}
+                onChange={e => setOldb(!oldb) }
+              />
+
+
+              <Zx
+                placeholder="层数"
+                value={ cpm || ''}
+                onChange={e => setCpm( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+
+              <Zx
+                type="number"
+                value={ hlf || ''}
+                onChange={e => setHlf( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx
+                type="number"
+                value={ lesc || ''}
+                onChange={e => setLesc( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx
+                type="number"
+                value={ wesc || ''}
+                onChange={e => setWesc( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx
+                value={ tm || ''}
+                onChange={e => setTm( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx
+                value={ mtm || ''}
+                onChange={e => setMtm( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Select inputSize="md" css={{minWidth:'140px',fontSize:'1.5rem',padding:'0 1rem'}} divStyle={css`max-width:240px;`}
+                      value={ buff || ''}
+                      onChange={e => setBuff( e.currentTarget.value||undefined ) }
               >
+                <option></option>
+                { 缓冲器形式.map((one,i) => (
+                  <option key={i}>{one}</option>
+                )) }
+              </Select>
 
-                  <InputFollowUnit unit={'865行'}
-                    type="number"  min={1} max={999}
-                    value={ flo || '' }
-                    onChange={e => setFlo( e.currentTarget.value||undefined ) }
-                  ></InputFollowUnit>
+              <Zx
+                type="number"
+                value={ rtl || ''}
+                onChange={e => setRtl( e.currentTarget.value||undefined ) }
+              >米</Zx>
 
+              <ComboBoxDatalist
+                value={ aap || ''}
+                onListChange={v => setAap( v||undefined ) }
+                datalist={加装附加装置}
+              />
 
-                  <CheckSwitch
-                         checked= {spec || false}
-                         onChange={e => setSpec(!spec) }
-                  />
+              <Zx
+                value={ prot || ''}
+                onChange={e => setProt( e.currentTarget.value||undefined ) }
+              >米</Zx>
 
+              <InputDatalist
+                value={ doop || ''}
+                onListChange={v => setDoop(v ||undefined)}
+                datalist={开门方式}
+              />
 
-                  <InputFollowUnit unit={'米'}
-                    type="number"  min={0} max={300}
-                    value={vl || ''}
-                    onChange={e => setVl( e.currentTarget.value||undefined ) }
-                  />
+              <Zx
+                value={ limm || ''}
+                onChange={e => setLimm( e.currentTarget.value||undefined ) }
+              >米</Zx>
 
+              <Select inputSize="md" css={{minWidth:'140px',fontSize:'1.5rem',padding:'0 1rem'}} divStyle={css`max-width:240px;`}
+                      value={ opm || ''}
+                      onChange={e => setOpm( e.currentTarget.value||undefined ) }
+              >
+                <option> </option>
+                { 控制方式.map((one,i) => (
+                  <option key={i}>{one}</option>
+                )) }
+              </Select>
 
-                  <CheckSwitch
-                         checked= {nnor || false}
-                         onChange={e => setNnor(!nnor) }
-                  />
+              <Zx  type='date'  value={lbkd ||''}
+                               onChange={e => setLbkd( e.currentTarget.value||undefined ) }
+              >米</Zx>
 
+              <Zx  type='date'  value={nbkd ||''}
+                               onChange={e => setNbkd( e.currentTarget.value||undefined ) }
+              >米</Zx>
 
-                  <CheckSwitch
-                         checked= {oldb || false}
-                         onChange={e => setOldb(!oldb) }
-                  />
+              <Zx
+                value={ 控制屏编号 || ''}
+                onChange={e => set控制屏编号( e.currentTarget.value||undefined ) }
+              >米</Zx>
 
+              <Zx
+                value={ 曳引号 || ''}
+                onChange={e => set曳引号( e.currentTarget.value||undefined ) }
+              >米</Zx>
 
-                  <InputFollowUnit unit={'米'}
-                    placeholder="层数"
-                    value={ cpm || ''}
-                    onChange={e => setCpm( e.currentTarget.value||undefined ) }
-                  >
-                  </InputFollowUnit>
-
-
-                  <InputFollowUnit unit={'米'}
-                    type="number"
-                    value={ hlf || ''}
-                    onChange={e => setHlf( e.currentTarget.value||undefined ) }
-                  >
-                  </InputFollowUnit>
-
-                  <InputFollowUnit unit={'米'}
-                    type="number"
-                    value={ lesc || ''}
-                    onChange={e => setLesc( e.currentTarget.value||undefined ) }
-                  >
-                  </InputFollowUnit>
-
-                  <InputFollowUnit unit={'米'}
-                    type="number"
-                    value={ wesc || ''}
-                    onChange={e => setWesc( e.currentTarget.value||undefined ) }
-                  >
-                  </InputFollowUnit>
-
-                  <InputFollowUnit unit={'米'}
-                    value={ tm || ''}
-                    onChange={e => setTm( e.currentTarget.value||undefined ) }
-                  >
-                  </InputFollowUnit>
-
-                  <InputFollowUnit unit={'米'}
-                    value={ mtm || ''}
-                    onChange={e => setMtm( e.currentTarget.value||undefined ) }
-                  >
-                  </InputFollowUnit>
-
-                  <Select inputSize="md" css={{minWidth:'140px',fontSize:'1.5rem',padding:'0 1rem'}} divStyle={css`max-width:240px;`}
-                          value={ buff || ''}
-                          onChange={e => setBuff( e.currentTarget.value||undefined ) }
-                  >
-                    <option></option>
-                    { 缓冲器形式.map((one,i) => (
-                      <option key={i}>{one}</option>
-                    )) }
-                  </Select>
-
-                  <InputFollowUnit unit={'米'}
-                    type="number"
-                    value={ rtl || ''}
-                    onChange={e => setRtl( e.currentTarget.value||undefined ) }
-                  >
-                  </InputFollowUnit>
-
-                  <ComboBoxDatalist
-                    value={ aap || ''}
-                    onListChange={v => setAap( v||undefined ) }
-                    datalist={加装附加装置}
-                  />
-
-                  <InputFollowUnit unit={'米'}
-                    value={ prot || ''}
-                    onChange={e => setProt( e.currentTarget.value||undefined ) }
-                  >
-                  </InputFollowUnit>
-
-                  <InputDatalist
-                    value={ doop || ''}
-                    onListChange={v => setDoop(v ||undefined)}
-                    datalist={开门方式}
-                  />
-
-                  <InputFollowUnit unit={'米'}
-                    value={ limm || ''}
-                    onChange={e => setLimm( e.currentTarget.value||undefined ) }
-                  />
-
-                  <Select inputSize="md" css={{minWidth:'140px',fontSize:'1.5rem',padding:'0 1rem'}} divStyle={css`max-width:240px;`}
-                          value={ opm || ''}
-                          onChange={e => setOpm( e.currentTarget.value||undefined ) }
-                  >
-                    <option> </option>
-                    { 控制方式.map((one,i) => (
-                      <option key={i}>{one}</option>
-                    )) }
-                  </Select>
-
-                  <InputFollowUnit unit={'米'} type='date'  value={lbkd ||''}
-                         onChange={e => setLbkd( e.currentTarget.value||undefined ) } />
-
-                  <InputFollowUnit unit={'米'} type='date'  value={nbkd ||''}
-                         onChange={e => setNbkd( e.currentTarget.value||undefined ) } />
-
-                  <InputFollowUnit unit={'米'}
-                    value={ 控制屏编号 || ''}
-                    onChange={e => set控制屏编号( e.currentTarget.value||undefined ) }
-                  />
-
-                  <InputFollowUnit unit={'米'}
-                    value={ 曳引号 || ''}
-                    onChange={e => set曳引号( e.currentTarget.value||undefined ) }
-                  />
-
-                  <InputFollowUnit unit={'米'}
-                    value={ 主机号 || ''}
-                    onChange={e => set主机号( e.currentTarget.value||undefined ) }
-                  />
+              <Zx
+                value={ 主机号 || ''}
+                onChange={e => set主机号( e.currentTarget.value||undefined ) }
+              >米</Zx>
 
 
-                <Text variant="h5">监察参数</Text>
+              <Text variant="h5">监察参数</Text>
 
-                  <InputDatalist
-                    value={ 制造国 || ''}
-                    onListChange={v => set制造国(v ||undefined)}
-                    datalist={["中国","美国","欧盟"]}
-                  />
+              <InputDatalist
+                value={ 制造国 || ''}
+                onListChange={v => set制造国(v ||undefined)}
+                datalist={["中国","美国","欧盟"]}
+              />
 
-                  <CheckSwitch
-                         checked= {vital || false}
-                         onChange={e => setVital(vital? undefined:true) }
-                  />
+              <CheckSwitch
+                checked= {vital || false}
+                onChange={e => setVital(vital? undefined:true) }
+              />
 
-                  <InputFollowUnit unit={'米'}
-                    type="number"
-                    value={ 年限 || ''}
-                    onChange={e => set年限( e.currentTarget.value||undefined ) }
-                  >
-                  </InputFollowUnit>
+              <Zx
+                type="number"
+                value={ 年限 || ''}
+                onChange={e => set年限( e.currentTarget.value||undefined ) }
+              >米</Zx>
 
-                  <Select
-                          value={ cpa || ''}
-                          onChange={e => setCpa( e.currentTarget.value||undefined ) }
-                  >
-                    <option> </option>
-                    { 事故隐患类别.map((one,i) => (
-                      <option key={i} value={i+1}>{one}</option>
-                    )) }
-                  </Select>
+              <Select
+                value={ cpa || ''}
+                onChange={e => setCpa( e.currentTarget.value||undefined ) }
+              >
+                <option> </option>
+                { 事故隐患类别.map((one,i) => (
+                  <option key={i} value={i+1}>{one}</option>
+                )) }
+              </Select>
 
-                  <InputFollowUnit unit={'米'}
-                    type="number"
-                    value={ 固定资产值 || ''}
-                    onChange={e => set固定资产值( e.currentTarget.value||undefined ) }
-                  >
-                  </InputFollowUnit>
+              <Zx
+                type="number"
+                value={ 固定资产值 || ''}
+                onChange={e => set固定资产值( e.currentTarget.value||undefined ) }
+              >米</Zx>
 
-                  <InputFollowUnit unit={'米'}
-                    type="number"
-                    value={ 大修周期 || ''}
-                    onChange={e => set大修周期( e.currentTarget.value||undefined ) }
-                  >
-                  </InputFollowUnit>
+              <Zx
+                type="number"
+                value={ 大修周期 || ''}
+                onChange={e => set大修周期( e.currentTarget.value||undefined ) }
+              >米</Zx>
 
 
-                <Text variant="h5">许可用的参数</Text>
+              <Text variant="h5">许可用的参数</Text>
 
-                  <InputFollowUnit unit={'米'} type='date'  value={ 设计日期  || ''}
-                         onChange={e => set设计日期( e.currentTarget.value||undefined ) } />
+              <Zx  type='date'  value={ 设计日期  || ''}
+                               onChange={e => set设计日期( e.currentTarget.value||undefined ) }
+              >米</Zx>
 
-                  <UnitOrChoose id={造监检单  || ''} emodel={'电梯'} emid={id} field={'造监检单'}
-                                onCancel={() => {
-                                  set造监检单( undefined )
-                                }}
-                                onDialog={async () => { await setNdt(await confirmation()); } }
-                  />
+              <UnitOrChoose id={造监检单  || ''} emodel={'电梯'} emid={id} field={'造监检单'}
+                            onCancel={() => {
+                              set造监检单( undefined )
+                            }}
+                            onDialog={async () => { await setNdt(await confirmation()); } }
+              />
 
-                  <UnitOrChoose id={土建施单  || ''} emodel={'电梯'} emid={id} field={'土建施单'}
-                                onCancel={() => {
-                                  set土建施单( undefined )
-                                }}
-                                onDialog={async () => { await setNdt(await confirmation()); } }
-                  />
+              <UnitOrChoose id={土建施单  || ''} emodel={'电梯'} emid={id} field={'土建施单'}
+                            onCancel={() => {
+                              set土建施单( undefined )
+                            }}
+                            onDialog={async () => { await setNdt(await confirmation()); } }
+              />
 
-                  <UnitOrChoose id={土建验单  || ''} emodel={'电梯'} emid={id} field={'土建验单'}
-                                onCancel={() => {
-                                  set土建验单( undefined )
-                                }}
-                                onDialog={async () => { await setNdt(await confirmation()); } }
-                  />
+              <UnitOrChoose id={土建验单  || ''} emodel={'电梯'} emid={id} field={'土建验单'}
+                            onCancel={() => {
+                              set土建验单( undefined )
+                            }}
+                            onDialog={async () => { await setNdt(await confirmation()); } }
+              />
 
-                <Text variant="h5">监检准入参数</Text>
+              <Text variant="h5">监检准入参数</Text>
 
-                  <ComboBoxDatalist  value={ 施工类别 || ''}
-                    onListChange={v => set施工类别( v||undefined ) }
-                    datalist={施工类别s}  />
+              <ComboBoxDatalist  value={ 施工类别 || ''}
+                                 onListChange={v => set施工类别( v||undefined ) }
+                                 datalist={施工类别s}  />
 
-                  <InputFollowUnit unit={'米'} type='date'  value={ 施工日期  || ''}
-                         onChange={e => set施工日期( e.currentTarget.value||undefined ) } />
+              <Zx  type='date'  value={ 施工日期  || ''}
+                               onChange={e => set施工日期( e.currentTarget.value||undefined ) }
+              >米</Zx>
 
-                  <InputFollowUnit unit={'米'} type='date'  value={ 竣验日  || ''}
-                         onChange={e => set竣验日( e.currentTarget.value||undefined ) } />
+              <Zx  type='date'  value={ 竣验日  || ''}
+                               onChange={e => set竣验日( e.currentTarget.value||undefined ) }
+              >米</Zx>
 
-                  <InputFollowUnit unit={'米'}
-                    value={ 施工号 || ''}
-                    onChange={e => set施工号( e.currentTarget.value||undefined ) }
-                  >
-                  </InputFollowUnit>
+              <Zx
+                value={ 施工号 || ''}
+                onChange={e => set施工号( e.currentTarget.value||undefined ) }
+              >米</Zx>
 
-                  <UnitOrChoose id={设计单位  || ''} emodel={'电梯'} emid={id} field={'设计单位'}
-                                onCancel={() => {
-                                  set设计单位( undefined )
-                                }}
-                                onDialog={async () => { await setNdt(await confirmation()); } }
-                  />
+              <UnitOrChoose id={设计单位  || ''} emodel={'电梯'} emid={id} field={'设计单位'}
+                            onCancel={() => {
+                              set设计单位( undefined )
+                            }}
+                            onDialog={async () => { await setNdt(await confirmation()); } }
+              />
 
-                  <InputFollowUnit unit={'米'}
-                    value={ 设计许号 || ''}
-                    onChange={e => set设计许号( e.currentTarget.value||undefined ) }
-                  >
-                  </InputFollowUnit>
+              <Zx
+                value={ 设计许号 || ''}
+                onChange={e => set设计许号( e.currentTarget.value||undefined ) }
+              >米</Zx>
 
-                  <InputFollowUnit unit={'米'}
-                    value={ 产品标准 || ''}
-                    onChange={e => set产品标准( e.currentTarget.value||undefined ) }
-                  >
-                  </InputFollowUnit>
+              <Zx
+                value={ 产品标准 || ''}
+                onChange={e => set产品标准( e.currentTarget.value||undefined ) }
+              >米</Zx>
 
-                  <InputFollowUnit unit={'米'}
-                    value={ 设计图号 || ''}
-                    onChange={e => set设计图号( e.currentTarget.value||undefined ) }
-                  >
-                  </InputFollowUnit>
+              <Zx
+                value={ 设计图号 || ''}
+                onChange={e => set设计图号( e.currentTarget.value||undefined ) }
+              >米</Zx>
 
-                  <InputFollowUnit unit={'米'}
-                    value={ 合格证号 || ''}
-                    onChange={e => set合格证号( e.currentTarget.value||undefined ) }
-                  >
-                  </InputFollowUnit>
+              <Zx
+                value={ 合格证号 || ''}
+                onChange={e => set合格证号( e.currentTarget.value||undefined ) }
+              >米</Zx>
 
-                  <InputFollowUnit unit={'米'} type='date'  value={ 安竣日  || ''}
-                         onChange={e => set安竣日( e.currentTarget.value||undefined ) } />
+              <Zx  type='date'  value={ 安竣日  || ''}
+                               onChange={e => set安竣日( e.currentTarget.value||undefined ) }
+              >米</Zx>
 
-                  <InputFollowUnit unit={'米'}
-                    type="number"
-                    value={ 设备总重量 || ''}
-                    onChange={e => set设备总重量( e.currentTarget.value||undefined ) }
-                  >
-                  </InputFollowUnit>
+              <Zx
+                type="number"
+                value={ 设备总重量 || ''}
+                onChange={e => set设备总重量( e.currentTarget.value||undefined ) }
+              >米</Zx>
 
-                <Text variant="h5">常用参数</Text>
+              <Text variant="h5">常用参数</Text>
 
-                  <InputFollowUnit unit={'米'}
-                    type="number"
-                    value={ 倾斜角度 || ''}
-                    onChange={e => set倾斜角度( e.currentTarget.value||undefined ) }
-                  >
-                  </InputFollowUnit>
+              <Zx
+                type="number"
+                value={ 倾斜角度 || ''}
+                onChange={e => set倾斜角度( e.currentTarget.value||undefined ) }
+              >米</Zx>
 
-                  <InputFollowUnit unit={'米'}  value={ 安全钳型号 || ''}
-                    onChange={e => set安全钳型号( e.currentTarget.value||undefined ) }
-                  />
+              <Zx   value={ 安全钳型号 || ''}
+                                onChange={e => set安全钳型号( e.currentTarget.value||undefined ) }
+              >米</Zx>
 
-                  <InputFollowUnit unit={'米'}  value={ 安全钳编号 || ''}
-                          onChange={e => set安全钳编号( e.currentTarget.value||undefined ) }
-                  />
+              <Zx   value={ 安全钳编号 || ''}
+                                onChange={e => set安全钳编号( e.currentTarget.value||undefined ) }
+              >米</Zx>
 
-                  <InputFollowUnit unit={'米'}  value={ 层门型号 || ''}
-                       onChange={e => set层门型号( e.currentTarget.value||undefined ) } />
+              <Zx   value={ 层门型号 || ''}
+                                onChange={e => set层门型号( e.currentTarget.value||undefined ) }
+              >米</Zx>
 
-                  <InputFollowUnit unit={'米'} type="number" value={ 底坑深度 || ''}
-                      onChange={e => set底坑深度( e.currentTarget.value||undefined ) }
-                  ></InputFollowUnit>
+              <Zx  type="number" value={ 底坑深度 || ''}
+                               onChange={e => set底坑深度( e.currentTarget.value||undefined ) }
+              >米</Zx>
 
-                  <InputFollowUnit unit={'米'} type="number" value={ 电动机功率 || ''}
+              <Zx  type="number" value={ 电动机功率 || ''}
                                onChange={e => set电动机功率( e.currentTarget.value||undefined ) }
-                  ></InputFollowUnit>
+              >米</Zx>
 
-                  <InputFollowUnit unit={'米'}  value={ 电动机转速 || ''}
-                          onChange={e => set电动机转速( e.currentTarget.value||undefined ) } />
+              <Zx   value={ 电动机转速 || ''}
+                                onChange={e => set电动机转速( e.currentTarget.value||undefined ) }
+              >米</Zx>
 
-                  <InputFollowUnit unit={'米'} type="number" value={ 电梯门数 || ''}
+              <Zx  type="number" value={ 电梯门数 || ''}
                                onChange={e => set电梯门数( e.currentTarget.value||undefined ) }
-                  ></InputFollowUnit>
+              >米</Zx>
 
-                  <InputFollowUnit unit={'米'} type="number" value={ 电梯站数 || ''}
+              <Zx  type="number" value={ 电梯站数 || ''}
                                onChange={e => set电梯站数( e.currentTarget.value||undefined ) }
-                  ></InputFollowUnit>
+              >米</Zx>
 
-                  <InputFollowUnit unit={'米'} type="number" value={ 顶层高度 || ''}
+              <Zx  type="number" value={ 顶层高度 || ''}
                                onChange={e => set顶层高度( e.currentTarget.value||undefined ) }
-                  ></InputFollowUnit>
+              >米</Zx>
 
-                  <InputFollowUnit unit={'米'} type="number" value={ 对重轨距 || ''}
+              <Zx  type="number" value={ 对重轨距 || ''}
                                onChange={e => set对重轨距( e.currentTarget.value||undefined ) }
-                  ></InputFollowUnit>
+              >米</Zx>
 
-                  <InputFollowUnit unit={'米'} type="number" value={ 对重块数 || ''}
+              <Zx  type="number" value={ 对重块数 || ''}
                                onChange={e => set对重块数( e.currentTarget.value||undefined ) }
-                  ></InputFollowUnit>
+              >米</Zx>
 
-                  <InputFollowUnit unit={'米'}  value={ 对重限速号 || ''}
-                          onChange={e => set对重限速号( e.currentTarget.value||undefined ) } />
+              <Zx   value={ 对重限速号 || ''}
+                                onChange={e => set对重限速号( e.currentTarget.value||undefined ) }
+              >米</Zx>
 
-                  <InputFollowUnit unit={'米'}  value={ 对重限型号 || ''}
-                          onChange={e => set对重限型号( e.currentTarget.value||undefined ) } />
+              <Zx   value={ 对重限型号 || ''}
+                                onChange={e => set对重限型号( e.currentTarget.value||undefined ) }
+              >米</Zx>
 
-                  <InputFollowUnit unit={'米'} type="number" value={ 额定电流 || ''}
+              <Zx  type="number" value={ 额定电流 || ''}
                                onChange={e => set额定电流( e.currentTarget.value||undefined ) }
-                  ></InputFollowUnit>
+              >米</Zx>
 
-                  <InputFollowUnit unit={'米'} type="number" value={ 额定载人 || ''}
+              <Zx  type="number" value={ 额定载人 || ''}
                                onChange={e => set额定载人( e.currentTarget.value||undefined ) }
-                  ></InputFollowUnit>
+              >米</Zx>
 
-                  <InputFollowUnit unit={'米'}  value={ 缓冲器编号 || ''}
-                          onChange={e => set缓冲器编号( e.currentTarget.value||undefined ) } />
+              <Zx   value={ 缓冲器编号 || ''}
+                                onChange={e => set缓冲器编号( e.currentTarget.value||undefined ) }
+              >米</Zx>
 
-                  <InputFollowUnit unit={'米'}  value={ 缓冲器型号 || ''}
-                          onChange={e => set缓冲器型号( e.currentTarget.value||undefined ) } />
+              <Zx   value={ 缓冲器型号 || ''}
+                                onChange={e => set缓冲器型号( e.currentTarget.value||undefined ) }
+              >米</Zx>
 
-                  <InputFollowUnit unit={'米'}  value={ 缓冲器厂家 || ''}
-                          onChange={e => set缓冲器厂家( e.currentTarget.value||undefined ) } />
+              <Zx   value={ 缓冲器厂家 || ''}
+                                onChange={e => set缓冲器厂家( e.currentTarget.value||undefined ) }
+              >米</Zx>
 
-                  <InputFollowUnit unit={'米'} type="number" value={ 轿厢轨距 || ''}
+              <Zx  type="number" value={ 轿厢轨距 || ''}
                                onChange={e => set轿厢轨距( e.currentTarget.value||undefined ) }
-                  ></InputFollowUnit>
+              >米</Zx>
 
-                  <InputFollowUnit unit={'米'}  value={ 上行限电速 || ''}
-                               onChange={e => set上行限电速( e.currentTarget.value||undefined ) }
-                  ></InputFollowUnit>
+              <Zx   value={ 上行限电速 || ''}
+                                onChange={e => set上行限电速( e.currentTarget.value||undefined ) }
+              >米</Zx>
 
-                  <InputFollowUnit unit={'米'}  value={ 上行限机速 || ''}
+              <Zx   value={ 上行限机速 || ''}
                                 onChange={e => set上行限机速( e.currentTarget.value||undefined ) }
-                  ></InputFollowUnit>
+              >米</Zx>
 
-                  <InputFollowUnit unit={'米'}  value={ 下行限电速 || ''}
+              <Zx   value={ 下行限电速 || ''}
                                 onChange={e => set下行限电速( e.currentTarget.value||undefined ) }
-                  ></InputFollowUnit>
+              >米</Zx>
 
-                  <InputFollowUnit unit={'米'}  value={ 下行限机速 || ''}
+              <Zx   value={ 下行限机速 || ''}
                                 onChange={e => set下行限机速( e.currentTarget.value||undefined ) }
-                  ></InputFollowUnit>
+              >米</Zx>
 
-                  <InputFollowUnit unit={'米'}  value={ 移动保护号 || ''}
-                          onChange={e => set移动保护号( e.currentTarget.value||undefined ) } />
+              <Zx   value={ 移动保护号 || ''}
+                                onChange={e => set移动保护号( e.currentTarget.value||undefined ) }
+              >米</Zx>
 
-                  <InputFollowUnit unit={'米'}  value={ 移动保护型 || ''}
-                          onChange={e => set移动保护型( e.currentTarget.value||undefined ) } />
+              <Zx   value={ 移动保护型 || ''}
+                                onChange={e => set移动保护型( e.currentTarget.value||undefined ) }
+              >米</Zx>
 
-                  <InputDatalist  value={ 装修 || ''}
-                                  onListChange={v => set装修(v ||undefined)}
-                                  datalist={轿厢装修状态} />
+              <InputDatalist  value={ 装修 || ''}
+                              onListChange={v => set装修(v ||undefined)}
+                              datalist={轿厢装修状态} />
 
-                  <InputFollowUnit unit={'米'}  value={ 锁型号 || ''}
-                          onChange={e => set锁型号( e.currentTarget.value||undefined ) } />
+              <Zx   value={ 锁型号 || ''}
+                                onChange={e => set锁型号( e.currentTarget.value||undefined ) }
+              >米</Zx>
 
-                  <ComboBoxDatalist  value={ 上护装置 || ''}
-                              onListChange={v => set上护装置( v||undefined ) }
-                         datalist={上行保护装置形式}  />
+              <ComboBoxDatalist  value={ 上护装置 || ''}
+                                 onListChange={v => set上护装置( v||undefined ) }
+                                 datalist={上行保护装置形式}  />
 
-                  <InputFollowUnit unit={'米'}  value={ 上护型号 || ''}
-                          onChange={e => set上护型号( e.currentTarget.value||undefined ) } />
+              <Zx   value={ 上护型号 || ''}
+                                onChange={e => set上护型号( e.currentTarget.value||undefined ) }
+              >米</Zx>
 
-                  <InputFollowUnit unit={'米'}  value={ 上护编号 || ''}
-                          onChange={e => set上护编号( e.currentTarget.value||undefined ) } />
+              <Zx   value={ 上护编号 || ''}
+                                onChange={e => set上护编号( e.currentTarget.value||undefined ) }
+              >米</Zx>
 
-                  <CheckSwitch  checked= {手机信 || false}
-                         onChange={e => set手机信(手机信? undefined:true) } />
+              <CheckSwitch  checked= {手机信 || false}
+                            onChange={e => set手机信(手机信? undefined:true) } />
 
-                  <InputFollowUnit unit={'米'}  value={ 速比 || ''}
-                          onChange={e => set速比( e.currentTarget.value||undefined ) } />
+              <Zx   value={ 速比 || ''}
+                                onChange={e => set速比( e.currentTarget.value||undefined ) }
+              >米</Zx>
 
-                  <Select  value={ 拖动 || ''}
-                           onChange={e => set拖动( e.currentTarget.value||undefined ) } >
-                    <option></option>
-                    { 拖动方式.map((one,i) => <option key={i} >{one}</option> ) }
-                  </Select>
+              <Select  value={ 拖动 || ''}
+                       onChange={e => set拖动( e.currentTarget.value||undefined ) } >
+                <option></option>
+                { 拖动方式.map((one,i) => <option key={i} >{one}</option> ) }
+              </Select>
 
-                  <InputFollowUnit unit={'米'}  value={ 限速器号 || ''}
-                          onChange={e => set限速器号( e.currentTarget.value||undefined ) } />
+              <Zx   value={ 限速器号 || ''}
+                                onChange={e => set限速器号( e.currentTarget.value||undefined ) }
+              >米</Zx>
 
-                  <InputFollowUnit unit={'米'} type="number" value={ 限绳直径 || ''}
+              <Zx  type="number" value={ 限绳直径 || ''}
                                onChange={e => set限绳直径( e.currentTarget.value||undefined ) }
-                  ></InputFollowUnit>
+              >米</Zx>
 
-                  <InputFollowUnit unit={'米'}  value={ 曳引比 || ''}
-                          onChange={e => set曳引比( e.currentTarget.value||undefined ) } />
+              <Zx   value={ 曳引比 || ''}
+                                onChange={e => set曳引比( e.currentTarget.value||undefined ) }
+              >米</Zx>
 
-                  <InputFollowUnit unit={'米'} type="number" value={ 轮节径 || ''}
+              <Zx  type="number" value={ 轮节径 || ''}
                                onChange={e => set轮节径( e.currentTarget.value||undefined ) }
-                  ></InputFollowUnit>
+              >米</Zx>
 
-                  <InputFollowUnit unit={'米'} type="number" value={ 绳数 || ''}
+              <Zx  type="number" value={ 绳数 || ''}
                                onChange={e => set绳数( e.currentTarget.value||undefined ) }
-                  ></InputFollowUnit>
+              >米</Zx>
 
-                  <CheckSwitch  checked= {是钢带 || false} disabled={false}
-                         onChange={e => set是钢带(是钢带? undefined:true) } />
+              <CheckSwitch  checked= {是钢带 || false} disabled={false}
+                            onChange={e => set是钢带(是钢带? undefined:true) } />
 
-                {是钢带 ? (
+              {是钢带 ? (
 
-                    <InputFollowUnit unit={'米'}  value={ 钢带规格 || ''} readOnly={true}
-                            onChange={e => set钢带规格( e.currentTarget.value||undefined ) } />
+                <Zx   value={ 钢带规格 || ''} readOnly={true}
+                                  onChange={e => set钢带规格( e.currentTarget.value||undefined ) }
+                >米</Zx>
 
-                ) :(
+              ) :(
 
-                    <InputFollowUnit unit={'米'} type="number" value={ 绳直径 || ''} readOnly={true}
+                <Zx  type="number" value={ 绳直径 || ''} readOnly={true}
                                  onChange={e => set绳直径( e.currentTarget.value||undefined ) }
-                    ></InputFollowUnit>
+                >米</Zx>
 
-                ) }
+              ) }
 
-                <Text variant="h5">其它参数</Text>
+              <Text variant="h5">其它参数</Text>
 
-                  <InputFollowUnit unit={'米'}  value={ 爆炸物质 || ''}
-                      onChange={e => set爆炸物质( e.currentTarget.value||undefined ) } />
+              <Zx   value={ 爆炸物质 || ''}
+                                onChange={e => set爆炸物质( e.currentTarget.value||undefined ) }
+              >米</Zx>
 
-                  <Select  value={ 补偿方式 || ''}
-                          onChange={e => set补偿方式( e.currentTarget.value||undefined ) } >
-                    <option></option>
-                    { 补偿方式s.map((one,i) => <option key={i} >{one}</option> ) }
-                  </Select>
+              <Select  value={ 补偿方式 || ''}
+                       onChange={e => set补偿方式( e.currentTarget.value||undefined ) } >
+                <option></option>
+                { 补偿方式s.map((one,i) => <option key={i} >{one}</option> ) }
+              </Select>
 
-                  <InputDatalist  value={ 电动机类型 || ''}
-                      onListChange={v => set电动机类型(v ||undefined)}
-                      datalist={电动机类型s} />
+              <InputDatalist  value={ 电动机类型 || ''}
+                              onListChange={v => set电动机类型(v ||undefined)}
+                              datalist={电动机类型s} />
 
-                  <Select  value={ 顶升形式 || ''}
-                           onChange={e => set顶升形式( e.currentTarget.value||undefined ) } >
-                    <option></option>
-                    { 顶升形式s.map((one,i) => <option key={i} >{one}</option> ) }
-                  </Select>
+              <Select  value={ 顶升形式 || ''}
+                       onChange={e => set顶升形式( e.currentTarget.value||undefined ) } >
+                <option></option>
+                { 顶升形式s.map((one,i) => <option key={i} >{one}</option> ) }
+              </Select>
 
-                  <Select  value={ 导轨型式 || ''}
-                           onChange={e => set导轨型式( e.currentTarget.value||undefined ) } >
-                    <option></option>
-                    { 对重导轨型式s.map((one,i) => <option key={i} >{one}</option> ) }
-                  </Select>
+              <Select  value={ 导轨型式 || ''}
+                       onChange={e => set导轨型式( e.currentTarget.value||undefined ) } >
+                <option></option>
+                { 对重导轨型式s.map((one,i) => <option key={i} >{one}</option> ) }
+              </Select>
 
-                  <InputFollowUnit unit={'米'} type="number" value={ 轿厢高 || ''}
+              <Zx  type="number" value={ 轿厢高 || ''}
                                onChange={e => set轿厢高( e.currentTarget.value||undefined ) }
-                  ></InputFollowUnit>
+              >米</Zx>
 
-                  <InputFollowUnit unit={'米'} type="number" value={ 轿厢宽 || ''}
+              <Zx  type="number" value={ 轿厢宽 || ''}
                                onChange={e => set轿厢宽( e.currentTarget.value||undefined ) }
-                  ></InputFollowUnit>
+              >米</Zx>
 
-                  <InputFollowUnit unit={'米'} type="number" value={ 轿厢深 || ''}
+              <Zx  type="number" value={ 轿厢深 || ''}
                                onChange={e => set轿厢深( e.currentTarget.value||undefined ) }
-                  ></InputFollowUnit>
+              >米</Zx>
 
-                  <ComboBoxDatalist  value={ 区域防爆 || ''}
-                         onListChange={v => set区域防爆( v||undefined ) }
-                       datalist={区域防爆等级}  />
+              <ComboBoxDatalist  value={ 区域防爆 || ''}
+                                 onListChange={v => set区域防爆( v||undefined ) }
+                                 datalist={区域防爆等级}  />
 
-                  <Select  value={ 驱动方式 || ''}
-                           onChange={e => set驱动方式( e.currentTarget.value||undefined ) } >
-                    <option></option>
-                    { 驱动方式s.map((one,i) => <option key={i} >{one}</option> ) }
-                  </Select>
+              <Select  value={ 驱动方式 || ''}
+                       onChange={e => set驱动方式( e.currentTarget.value||undefined ) } >
+                <option></option>
+                { 驱动方式s.map((one,i) => <option key={i} >{one}</option> ) }
+              </Select>
 
-                  <InputFollowUnit unit={'米'} type="number" value={ 上行额速 || ''}
+              <Zx  type="number" value={ 上行额速 || ''}
                                onChange={e => set上行额速( e.currentTarget.value||undefined ) }
-                  ></InputFollowUnit>
+              >米</Zx>
 
-                  <CheckSwitch  checked= {船梯 || false}
-                         onChange={e => set船梯(船梯? undefined:true) } />
+              <CheckSwitch  checked= {船梯 || false}
+                            onChange={e => set船梯(船梯? undefined:true) } />
 
-                  <CheckSwitch  checked= {公共交通 || false}
-                         onChange={e => set公共交通(公共交通? undefined:true) } />
+              <CheckSwitch  checked= {公共交通 || false}
+                            onChange={e => set公共交通(公共交通? undefined:true) } />
 
-                  <CheckSwitch  checked= {汽车电梯 || false}
-                         onChange={e => set汽车电梯(汽车电梯? undefined:true) } />
+              <CheckSwitch  checked= {汽车电梯 || false}
+                            onChange={e => set汽车电梯(汽车电梯? undefined:true) } />
 
-                  <InputFollowUnit unit={'米'} type="number" value={ 梯级宽度 || ''}
+              <Zx  type="number" value={ 梯级宽度 || ''}
                                onChange={e => set梯级宽度( e.currentTarget.value||undefined ) }
-                  ></InputFollowUnit>
+              >米</Zx>
 
-                  <InputFollowUnit unit={'米'} type="number" value={ 下额定速 || ''}
+              <Zx  type="number" value={ 下额定速 || ''}
                                onChange={e => set下额定速( e.currentTarget.value||undefined ) }
-                  ></InputFollowUnit>
+              >米</Zx>
 
-                  <InputFollowUnit unit={'米'}  value={ 限机械速 || ''}
-                               onChange={e => set限机械速( e.currentTarget.value||undefined ) }
-                  ></InputFollowUnit>
+              <Zx   value={ 限机械速 || ''}
+                                onChange={e => set限机械速( e.currentTarget.value||undefined ) }
+              >米</Zx>
 
-                  <InputFollowUnit unit={'米'} type="number" value={ 悬挂绳数 || ''}
+              <Zx  type="number" value={ 悬挂绳数 || ''}
                                onChange={e => set悬挂绳数( e.currentTarget.value||undefined ) }
-                  ></InputFollowUnit>
+              >米</Zx>
 
-                  <InputFollowUnit unit={'米'} type="number" value={ 悬挂绳径 || ''}
+              <Zx  type="number" value={ 悬挂绳径 || ''}
                                onChange={e => set悬挂绳径( e.currentTarget.value||undefined ) }
-                  ></InputFollowUnit>
+              >米</Zx>
 
-                  <InputFollowUnit unit={'米'}  value={ 泵编号 || ''}
-                          onChange={e => set泵编号( e.currentTarget.value||undefined ) } />
+              <Zx   value={ 泵编号 || ''}
+                                onChange={e => set泵编号( e.currentTarget.value||undefined ) }
+              >米</Zx>
 
-                  <InputFollowUnit unit={'米'} type="number" value={ 泵功率 || ''}
+              <Zx  type="number" value={ 泵功率 || ''}
                                onChange={e => set泵功率( e.currentTarget.value||undefined ) }
-                  ></InputFollowUnit>
+              >米</Zx>
 
-                  <InputFollowUnit unit={'米'} type="number" value={ 泵流量 || ''}
+              <Zx  type="number" value={ 泵流量 || ''}
                                onChange={e => set泵流量( e.currentTarget.value||undefined ) }
-                  ></InputFollowUnit>
+              >米</Zx>
 
-                  <InputFollowUnit unit={'米'}  value={ 泵型号 || ''}
-                          onChange={e => set泵型号( e.currentTarget.value||undefined ) } />
+              <Zx   value={ 泵型号 || ''}
+                                onChange={e => set泵型号( e.currentTarget.value||undefined ) }
+              >米</Zx>
 
-                  <InputFollowUnit unit={'米'} type="number" value={ 泵转速 || ''}
+              <Zx  type="number" value={ 泵转速 || ''}
                                onChange={e => set泵转速( e.currentTarget.value||undefined ) }
-                  ></InputFollowUnit>
+              >米</Zx>
 
-                  <InputFollowUnit unit={'米'}  value={ 液油型号 || ''}
-                          onChange={e => set液油型号( e.currentTarget.value||undefined ) } />
+              <Zx   value={ 液油型号 || ''}
+                                onChange={e => set液油型号( e.currentTarget.value||undefined ) }
+              >米</Zx>
 
-                  <InputFollowUnit unit={'米'} type="number" value={ 油缸数 || ''}
+              <Zx  type="number" value={ 油缸数 || ''}
                                onChange={e => set油缸数( e.currentTarget.value||undefined ) }
-                  ></InputFollowUnit>
+              >米</Zx>
 
-                  <InputDatalist  value={ 油缸形式 || ''}
-                                  onListChange={v => set油缸形式(v ||undefined)}
-                                  datalist={油缸形式s} />
+              <InputDatalist  value={ 油缸形式 || ''}
+                              onListChange={v => set油缸形式(v ||undefined)}
+                              datalist={油缸形式s} />
 
-                  <InputFollowUnit unit={'米'}  value={ 防爆标志 || ''}
-                          onChange={e => set防爆标志( e.currentTarget.value||undefined ) } />
+              <Zx   value={ 防爆标志 || ''}
+                                onChange={e => set防爆标志( e.currentTarget.value||undefined ) }
+              >米</Zx>
 
-                  <CheckSwitch  disabled={false}  checked= {汽车电梯 || false}
-                                onChange={e => set汽车电梯(汽车电梯? undefined:true) } />
+              <CheckSwitch  disabled={false}  checked= {汽车电梯 || false}
+                            onChange={e => set汽车电梯(汽车电梯? undefined:true) } />
 
-                  <InputFollowUnit unit={'米'}  value={ 防爆证号 || ''}
-                          onChange={e => set防爆证号( e.currentTarget.value||undefined ) } />
+              <Zx   value={ 防爆证号 || ''}
+                                onChange={e => set防爆证号( e.currentTarget.value||undefined ) }
+              >米</Zx>
 
 
 
 
 
 
+              <Zx
+                type="number"  min={1} max={999}
+                value={ flo || '' }
+                onChange={e => setFlo( e.currentTarget.value||undefined ) }
+              >865行</Zx>
 
 
-
-                <InputFollowUnit unit={'米'}
-                  type="number"  min={1} max={999}
-                  value={ flo || '' }
-                  onChange={e => setFlo( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-
-                <CheckSwitch
-                  checked= {spec || false}
-                  onChange={e => setSpec(!spec) }
-                />
-
-
-                <InputFollowUnit unit={'米'}
-                  type="number"  min={0} max={300}
-                  value={vl || ''}
-                  onChange={e => setVl( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-
-                <CheckSwitch
-                  checked= {nnor || false}
-                  onChange={e => setNnor(!nnor) }
-                />
-
-
-                <CheckSwitch
-                  checked= {oldb || false}
-                  onChange={e => setOldb(!oldb) }
-                />
-
-
-                <InputFollowUnit unit={'米'}
-                  placeholder="层数"
-                  value={ cpm || ''}
-                  onChange={e => setCpm( e.currentTarget.value||undefined ) }
-                >
-                </InputFollowUnit>
-
-
-                <InputFollowUnit unit={'米'}
-                  type="number"
-                  value={ hlf || ''}
-                  onChange={e => setHlf( e.currentTarget.value||undefined ) }
-                >
-                </InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}
-                  type="number"
-                  value={ lesc || ''}
-                  onChange={e => setLesc( e.currentTarget.value||undefined ) }
-                >
-                </InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}
-                  type="number"
-                  value={ wesc || ''}
-                  onChange={e => setWesc( e.currentTarget.value||undefined ) }
-                >
-                </InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}
-                  value={ tm || ''}
-                  onChange={e => setTm( e.currentTarget.value||undefined ) }
-                >
-                </InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}
-                  value={ mtm || ''}
-                  onChange={e => setMtm( e.currentTarget.value||undefined ) }
-                >
-                </InputFollowUnit>
-
-                <Select inputSize="md" css={{minWidth:'140px',fontSize:'1.5rem',padding:'0 1rem'}} divStyle={css`max-width:240px;`}
-                        value={ buff || ''}
-                        onChange={e => setBuff( e.currentTarget.value||undefined ) }
-                >
-                  <option></option>
-                  { 缓冲器形式.map((one,i) => (
-                    <option key={i}>{one}</option>
-                  )) }
-                </Select>
-
-                <InputFollowUnit unit={'米'}
-                  type="number"
-                  value={ rtl || ''}
-                  onChange={e => setRtl( e.currentTarget.value||undefined ) }
-                >
-                </InputFollowUnit>
-
-                <ComboBoxDatalist
-                  value={ aap || ''}
-                  onListChange={v => setAap( v||undefined ) }
-                  datalist={加装附加装置}
-                />
-
-                <InputFollowUnit unit={'米'}
-                  value={ prot || ''}
-                  onChange={e => setProt( e.currentTarget.value||undefined ) }
-                >
-                </InputFollowUnit>
-
-                <InputDatalist
-                  value={ doop || ''}
-                  onListChange={v => setDoop(v ||undefined)}
-                  datalist={开门方式}
-                />
-
-                <InputFollowUnit unit={'米'}
-                  value={ limm || ''}
-                  onChange={e => setLimm( e.currentTarget.value||undefined ) }
-                />
-
-                <Select inputSize="md" css={{minWidth:'140px',fontSize:'1.5rem',padding:'0 1rem'}} divStyle={css`max-width:240px;`}
-                        value={ opm || ''}
-                        onChange={e => setOpm( e.currentTarget.value||undefined ) }
-                >
-                  <option> </option>
-                  { 控制方式.map((one,i) => (
-                    <option key={i}>{one}</option>
-                  )) }
-                </Select>
-
-                <InputFollowUnit unit={'米'} type='date'  value={lbkd ||''}
-                       onChange={e => setLbkd( e.currentTarget.value||undefined ) } />
-
-                <InputFollowUnit unit={'米'} type='date'  value={nbkd ||''}
-                       onChange={e => setNbkd( e.currentTarget.value||undefined ) } />
-
-                <InputFollowUnit unit={'米'}
-                  value={ 控制屏编号 || ''}
-                  onChange={e => set控制屏编号( e.currentTarget.value||undefined ) }
-                />
-
-                <InputFollowUnit unit={'米'}
-                  value={ 曳引号 || ''}
-                  onChange={e => set曳引号( e.currentTarget.value||undefined ) }
-                />
-
-                <InputFollowUnit unit={'米'}
-                  value={ 主机号 || ''}
-                  onChange={e => set主机号( e.currentTarget.value||undefined ) }
-                />
-
-
-                <Text variant="h5">监察参数</Text>
-
-                <InputDatalist
-                  value={ 制造国 || ''}
-                  onListChange={v => set制造国(v ||undefined)}
-                  datalist={["中国","美国","欧盟"]}
-                />
-
-                <CheckSwitch
-                  checked= {vital || false}
-                  onChange={e => setVital(vital? undefined:true) }
-                />
-
-                <InputFollowUnit unit={'米'}
-                  type="number"
-                  value={ 年限 || ''}
-                  onChange={e => set年限( e.currentTarget.value||undefined ) }
-                >
-                </InputFollowUnit>
-
-                <Select
-                  value={ cpa || ''}
-                  onChange={e => setCpa( e.currentTarget.value||undefined ) }
-                >
-                  <option> </option>
-                  { 事故隐患类别.map((one,i) => (
-                    <option key={i} value={i+1}>{one}</option>
-                  )) }
-                </Select>
-
-                <InputFollowUnit unit={'米'}
-                  type="number"
-                  value={ 固定资产值 || ''}
-                  onChange={e => set固定资产值( e.currentTarget.value||undefined ) }
-                >
-                </InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}
-                  type="number"
-                  value={ 大修周期 || ''}
-                  onChange={e => set大修周期( e.currentTarget.value||undefined ) }
-                >
-                </InputFollowUnit>
-
-
-                <Text variant="h5">许可用的参数</Text>
-
-                <InputFollowUnit unit={'米'} type='date'  value={ 设计日期  || ''}
-                       onChange={e => set设计日期( e.currentTarget.value||undefined ) } />
-
-                <UnitOrChoose id={造监检单  || ''} emodel={'电梯'} emid={id} field={'造监检单'}
-                              onCancel={() => {
-                                set造监检单( undefined )
-                              }}
-                              onDialog={async () => { await setNdt(await confirmation()); } }
-                />
-
-                <UnitOrChoose id={土建施单  || ''} emodel={'电梯'} emid={id} field={'土建施单'}
-                              onCancel={() => {
-                                set土建施单( undefined )
-                              }}
-                              onDialog={async () => { await setNdt(await confirmation()); } }
-                />
-
-                <UnitOrChoose id={土建验单  || ''} emodel={'电梯'} emid={id} field={'土建验单'}
-                              onCancel={() => {
-                                set土建验单( undefined )
-                              }}
-                              onDialog={async () => { await setNdt(await confirmation()); } }
-                />
-
-                <Text variant="h5">监检准入参数</Text>
-
-                <ComboBoxDatalist  value={ 施工类别 || ''}
-                                   onListChange={v => set施工类别( v||undefined ) }
-                                   datalist={施工类别s}  />
-
-                <InputFollowUnit unit={'米'} type='date'  value={ 施工日期  || ''}
-                       onChange={e => set施工日期( e.currentTarget.value||undefined ) } />
-
-                <InputFollowUnit unit={'米'} type='date'  value={ 竣验日  || ''}
-                       onChange={e => set竣验日( e.currentTarget.value||undefined ) } />
-
-                <InputFollowUnit unit={'米'}
-                  value={ 施工号 || ''}
-                  onChange={e => set施工号( e.currentTarget.value||undefined ) }
-                >
-                </InputFollowUnit>
-
-                <UnitOrChoose id={设计单位  || ''} emodel={'电梯'} emid={id} field={'设计单位'}
-                              onCancel={() => {
-                                set设计单位( undefined )
-                              }}
-                              onDialog={async () => { await setNdt(await confirmation()); } }
-                />
-
-                <InputFollowUnit unit={'米'}
-                  value={ 设计许号 || ''}
-                  onChange={e => set设计许号( e.currentTarget.value||undefined ) }
-                >
-                </InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}
-                  value={ 产品标准 || ''}
-                  onChange={e => set产品标准( e.currentTarget.value||undefined ) }
-                >
-                </InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}
-                  value={ 设计图号 || ''}
-                  onChange={e => set设计图号( e.currentTarget.value||undefined ) }
-                >
-                </InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}
-                  value={ 合格证号 || ''}
-                  onChange={e => set合格证号( e.currentTarget.value||undefined ) }
-                >
-                </InputFollowUnit>
-
-                <InputFollowUnit unit={'米'} type='date'  value={ 安竣日  || ''}
-                       onChange={e => set安竣日( e.currentTarget.value||undefined ) } />
-
-                <InputFollowUnit unit={'米'}
-                  type="number"
-                  value={ 设备总重量 || ''}
-                  onChange={e => set设备总重量( e.currentTarget.value||undefined ) }
-                >
-                </InputFollowUnit>
-
-                <Text variant="h5">常用参数</Text>
-
-                <InputFollowUnit unit={'米'}
-                  type="number"
-                  value={ 倾斜角度 || ''}
-                  onChange={e => set倾斜角度( e.currentTarget.value||undefined ) }
-                >
-                </InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}  value={ 安全钳型号 || ''}
-                        onChange={e => set安全钳型号( e.currentTarget.value||undefined ) }
-                />
-
-                <InputFollowUnit unit={'米'}  value={ 安全钳编号 || ''}
-                        onChange={e => set安全钳编号( e.currentTarget.value||undefined ) }
-                />
-
-                <InputFollowUnit unit={'米'}  value={ 层门型号 || ''}
-                        onChange={e => set层门型号( e.currentTarget.value||undefined ) } />
-
-                <InputFollowUnit unit={'米'} type="number" value={ 底坑深度 || ''}
-                       onChange={e => set底坑深度( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'} type="number" value={ 电动机功率 || ''}
-                       onChange={e => set电动机功率( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}  value={ 电动机转速 || ''}
-                        onChange={e => set电动机转速( e.currentTarget.value||undefined ) } />
-
-                <InputFollowUnit unit={'米'} type="number" value={ 电梯门数 || ''}
-                       onChange={e => set电梯门数( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'} type="number" value={ 电梯站数 || ''}
-                       onChange={e => set电梯站数( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'} type="number" value={ 顶层高度 || ''}
-                       onChange={e => set顶层高度( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'} type="number" value={ 对重轨距 || ''}
-                       onChange={e => set对重轨距( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'} type="number" value={ 对重块数 || ''}
-                       onChange={e => set对重块数( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}  value={ 对重限速号 || ''}
-                        onChange={e => set对重限速号( e.currentTarget.value||undefined ) } />
-
-                <InputFollowUnit unit={'米'}  value={ 对重限型号 || ''}
-                        onChange={e => set对重限型号( e.currentTarget.value||undefined ) } />
-
-                <InputFollowUnit unit={'米'} type="number" value={ 额定电流 || ''}
-                       onChange={e => set额定电流( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'} type="number" value={ 额定载人 || ''}
-                       onChange={e => set额定载人( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}  value={ 缓冲器编号 || ''}
-                        onChange={e => set缓冲器编号( e.currentTarget.value||undefined ) } />
-
-                <InputFollowUnit unit={'米'}  value={ 缓冲器型号 || ''}
-                        onChange={e => set缓冲器型号( e.currentTarget.value||undefined ) } />
-
-                <InputFollowUnit unit={'米'}  value={ 缓冲器厂家 || ''}
-                        onChange={e => set缓冲器厂家( e.currentTarget.value||undefined ) } />
-
-                <InputFollowUnit unit={'米'} type="number" value={ 轿厢轨距 || ''}
-                       onChange={e => set轿厢轨距( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}  value={ 上行限电速 || ''}
-                        onChange={e => set上行限电速( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}  value={ 上行限机速 || ''}
-                        onChange={e => set上行限机速( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}  value={ 下行限电速 || ''}
-                        onChange={e => set下行限电速( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}  value={ 下行限机速 || ''}
-                        onChange={e => set下行限机速( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}  value={ 移动保护号 || ''}
-                        onChange={e => set移动保护号( e.currentTarget.value||undefined ) } />
-
-                <InputFollowUnit unit={'米'}  value={ 移动保护型 || ''}
-                        onChange={e => set移动保护型( e.currentTarget.value||undefined ) } />
-
-                <InputDatalist  value={ 装修 || ''}
-                                onListChange={v => set装修(v ||undefined)}
-                                datalist={轿厢装修状态} />
-
-                <InputFollowUnit unit={'米'}  value={ 锁型号 || ''}
-                        onChange={e => set锁型号( e.currentTarget.value||undefined ) } />
-
-                <ComboBoxDatalist  value={ 上护装置 || ''}
-                                   onListChange={v => set上护装置( v||undefined ) }
-                                   datalist={上行保护装置形式}  />
-
-                <InputFollowUnit unit={'米'}  value={ 上护型号 || ''}
-                        onChange={e => set上护型号( e.currentTarget.value||undefined ) } />
-
-                <InputFollowUnit unit={'米'}  value={ 上护编号 || ''}
-                        onChange={e => set上护编号( e.currentTarget.value||undefined ) } />
-
-                <CheckSwitch  checked= {手机信 || false}
-                              onChange={e => set手机信(手机信? undefined:true) } />
-
-                <InputFollowUnit unit={'米'}  value={ 速比 || ''}
-                        onChange={e => set速比( e.currentTarget.value||undefined ) } />
-
-                <Select  value={ 拖动 || ''}
-                         onChange={e => set拖动( e.currentTarget.value||undefined ) } >
-                  <option></option>
-                  { 拖动方式.map((one,i) => <option key={i} >{one}</option> ) }
-                </Select>
-
-                <InputFollowUnit unit={'米'}  value={ 限速器号 || ''}
-                        onChange={e => set限速器号( e.currentTarget.value||undefined ) } />
-
-                <InputFollowUnit unit={'米'} type="number" value={ 限绳直径 || ''}
-                       onChange={e => set限绳直径( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}  value={ 曳引比 || ''}
-                        onChange={e => set曳引比( e.currentTarget.value||undefined ) } />
-
-                <InputFollowUnit unit={'米'} type="number" value={ 轮节径 || ''}
-                       onChange={e => set轮节径( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'} type="number" value={ 绳数 || ''}
-                       onChange={e => set绳数( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <CheckSwitch  checked= {是钢带 || false} disabled={false}
-                              onChange={e => set是钢带(是钢带? undefined:true) } />
-
-                {是钢带 ? (
-
-                  <InputFollowUnit unit={'米'}  value={ 钢带规格 || ''} readOnly={true}
-                          onChange={e => set钢带规格( e.currentTarget.value||undefined ) } />
-
-                ) :(
-
-                  <InputFollowUnit unit={'米'} type="number" value={ 绳直径 || ''} readOnly={true}
-                         onChange={e => set绳直径( e.currentTarget.value||undefined ) }
-                  ></InputFollowUnit>
-
-                ) }
-
-                <Text variant="h5">其它参数</Text>
-
-                <InputFollowUnit unit={'米'}  value={ 爆炸物质 || ''}
-                        onChange={e => set爆炸物质( e.currentTarget.value||undefined ) } />
-
-                <Select  value={ 补偿方式 || ''}
-                         onChange={e => set补偿方式( e.currentTarget.value||undefined ) } >
-                  <option></option>
-                  { 补偿方式s.map((one,i) => <option key={i} >{one}</option> ) }
-                </Select>
-
-                <InputDatalist  value={ 电动机类型 || ''}
-                                onListChange={v => set电动机类型(v ||undefined)}
-                                datalist={电动机类型s} />
-
-                <Select  value={ 顶升形式 || ''}
-                         onChange={e => set顶升形式( e.currentTarget.value||undefined ) } >
-                  <option></option>
-                  { 顶升形式s.map((one,i) => <option key={i} >{one}</option> ) }
-                </Select>
-
-                <Select  value={ 导轨型式 || ''}
-                         onChange={e => set导轨型式( e.currentTarget.value||undefined ) } >
-                  <option></option>
-                  { 对重导轨型式s.map((one,i) => <option key={i} >{one}</option> ) }
-                </Select>
-
-                <InputFollowUnit unit={'米'} type="number" value={ 轿厢高 || ''}
-                       onChange={e => set轿厢高( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'} type="number" value={ 轿厢宽 || ''}
-                       onChange={e => set轿厢宽( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'} type="number" value={ 轿厢深 || ''}
-                       onChange={e => set轿厢深( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <ComboBoxDatalist  value={ 区域防爆 || ''}
-                                   onListChange={v => set区域防爆( v||undefined ) }
-                                   datalist={区域防爆等级}  />
-
-                <Select  value={ 驱动方式 || ''}
-                         onChange={e => set驱动方式( e.currentTarget.value||undefined ) } >
-                  <option></option>
-                  { 驱动方式s.map((one,i) => <option key={i} >{one}</option> ) }
-                </Select>
-
-                <InputFollowUnit unit={'米'} type="number" value={ 上行额速 || ''}
-                       onChange={e => set上行额速( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <CheckSwitch  checked= {船梯 || false}
-                              onChange={e => set船梯(船梯? undefined:true) } />
-
-                <CheckSwitch  checked= {公共交通 || false}
-                              onChange={e => set公共交通(公共交通? undefined:true) } />
-
-                <CheckSwitch  checked= {汽车电梯 || false}
-                              onChange={e => set汽车电梯(汽车电梯? undefined:true) } />
-
-                <InputFollowUnit unit={'米'} type="number" value={ 梯级宽度 || ''}
-                       onChange={e => set梯级宽度( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'} type="number" value={ 下额定速 || ''}
-                       onChange={e => set下额定速( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}  value={ 限机械速 || ''}
-                        onChange={e => set限机械速( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'} type="number" value={ 悬挂绳数 || ''}
-                       onChange={e => set悬挂绳数( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'} type="number" value={ 悬挂绳径 || ''}
-                       onChange={e => set悬挂绳径( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}  value={ 泵编号 || ''}
-                        onChange={e => set泵编号( e.currentTarget.value||undefined ) } />
-
-                <InputFollowUnit unit={'米'} type="number" value={ 泵功率 || ''}
-                       onChange={e => set泵功率( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'} type="number" value={ 泵流量 || ''}
-                       onChange={e => set泵流量( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}  value={ 泵型号 || ''}
-                        onChange={e => set泵型号( e.currentTarget.value||undefined ) } />
-
-                <InputFollowUnit unit={'米'} type="number" value={ 泵转速 || ''}
-                       onChange={e => set泵转速( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}  value={ 液油型号 || ''}
-                        onChange={e => set液油型号( e.currentTarget.value||undefined ) } />
-
-                <InputFollowUnit unit={'米'} type="number" value={ 油缸数 || ''}
-                       onChange={e => set油缸数( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputDatalist  value={ 油缸形式 || ''}
-                                onListChange={v => set油缸形式(v ||undefined)}
-                                datalist={油缸形式s} />
-
-                <InputFollowUnit unit={'米'}  value={ 防爆标志 || ''}
-                        onChange={e => set防爆标志( e.currentTarget.value||undefined ) } />
-
-                <CheckSwitch  disabled={false}  checked= {汽车电梯 || false}
-                              onChange={e => set汽车电梯(汽车电梯? undefined:true) } />
-
-                <InputFollowUnit unit={'米'}  value={ 防爆证号 || ''}
-                        onChange={e => set防爆证号( e.currentTarget.value||undefined ) } />
-
-
-
-
-
-
-
-
-
-
-
-                <InputFollowUnit unit={'米'}
-                  type="number"  min={1} max={999}
-                  value={ flo || '' }
-                  onChange={e => setFlo( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-
-                <CheckSwitch
-                  checked= {spec || false}
-                  onChange={e => setSpec(!spec) }
-                />
-
-
-                <InputFollowUnit unit={'米'}
-                  type="number"  min={0} max={300}
-                  value={vl || ''}
-                  onChange={e => setVl( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-
-                <CheckSwitch
-                  checked= {nnor || false}
-                  onChange={e => setNnor(!nnor) }
-                />
-
-
-                <CheckSwitch
-                  checked= {oldb || false}
-                  onChange={e => setOldb(!oldb) }
-                />
-
-
-                <InputFollowUnit unit={'米'}
-                  placeholder="层数"
-                  value={ cpm || ''}
-                  onChange={e => setCpm( e.currentTarget.value||undefined ) }
-                >
-                </InputFollowUnit>
-
-
-                <InputFollowUnit unit={'米'}
-                  type="number"
-                  value={ hlf || ''}
-                  onChange={e => setHlf( e.currentTarget.value||undefined ) }
-                >
-                </InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}
-                  type="number"
-                  value={ lesc || ''}
-                  onChange={e => setLesc( e.currentTarget.value||undefined ) }
-                >
-                </InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}
-                  type="number"
-                  value={ wesc || ''}
-                  onChange={e => setWesc( e.currentTarget.value||undefined ) }
-                >
-                </InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}
-                  value={ tm || ''}
-                  onChange={e => setTm( e.currentTarget.value||undefined ) }
-                >
-                </InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}
-                  value={ mtm || ''}
-                  onChange={e => setMtm( e.currentTarget.value||undefined ) }
-                >
-                </InputFollowUnit>
-
-                <Select inputSize="md" css={{minWidth:'140px',fontSize:'1.5rem',padding:'0 1rem'}} divStyle={css`max-width:240px;`}
-                        value={ buff || ''}
-                        onChange={e => setBuff( e.currentTarget.value||undefined ) }
-                >
-                  <option></option>
-                  { 缓冲器形式.map((one,i) => (
-                    <option key={i}>{one}</option>
-                  )) }
-                </Select>
-
-                <InputFollowUnit unit={'米'}
-                  type="number"
-                  value={ rtl || ''}
-                  onChange={e => setRtl( e.currentTarget.value||undefined ) }
-                >
-                </InputFollowUnit>
-
-                <ComboBoxDatalist
-                  value={ aap || ''}
-                  onListChange={v => setAap( v||undefined ) }
-                  datalist={加装附加装置}
-                />
-
-                <InputFollowUnit unit={'米'}
-                  value={ prot || ''}
-                  onChange={e => setProt( e.currentTarget.value||undefined ) }
-                >
-                </InputFollowUnit>
-
-                <InputDatalist
-                  value={ doop || ''}
-                  onListChange={v => setDoop(v ||undefined)}
-                  datalist={开门方式}
-                />
-
-                <InputFollowUnit unit={'米'}
-                  value={ limm || ''}
-                  onChange={e => setLimm( e.currentTarget.value||undefined ) }
-                />
-
-                <Select inputSize="md" css={{minWidth:'140px',fontSize:'1.5rem',padding:'0 1rem'}} divStyle={css`max-width:240px;`}
-                        value={ opm || ''}
-                        onChange={e => setOpm( e.currentTarget.value||undefined ) }
-                >
-                  <option> </option>
-                  { 控制方式.map((one,i) => (
-                    <option key={i}>{one}</option>
-                  )) }
-                </Select>
-
-                <InputFollowUnit unit={'米'} type='date'  value={lbkd ||''}
-                       onChange={e => setLbkd( e.currentTarget.value||undefined ) } />
-
-                <InputFollowUnit unit={'米'} type='date'  value={nbkd ||''}
-                       onChange={e => setNbkd( e.currentTarget.value||undefined ) } />
-
-                <InputFollowUnit unit={'米'}
-                  value={ 控制屏编号 || ''}
-                  onChange={e => set控制屏编号( e.currentTarget.value||undefined ) }
-                />
-
-                <InputFollowUnit unit={'米'}
-                  value={ 曳引号 || ''}
-                  onChange={e => set曳引号( e.currentTarget.value||undefined ) }
-                />
-
-                <InputFollowUnit unit={'米'}
-                  value={ 主机号 || ''}
-                  onChange={e => set主机号( e.currentTarget.value||undefined ) }
-                />
-
-
-                <Text variant="h5">监察参数</Text>
-
-                <InputDatalist
-                  value={ 制造国 || ''}
-                  onListChange={v => set制造国(v ||undefined)}
-                  datalist={["中国","美国","欧盟"]}
-                />
-
-                <CheckSwitch
-                  checked= {vital || false}
-                  onChange={e => setVital(vital? undefined:true) }
-                />
-
-                <InputFollowUnit unit={'米'}
-                  type="number"
-                  value={ 年限 || ''}
-                  onChange={e => set年限( e.currentTarget.value||undefined ) }
-                >
-                </InputFollowUnit>
-
-                <Select
-                  value={ cpa || ''}
-                  onChange={e => setCpa( e.currentTarget.value||undefined ) }
-                >
-                  <option> </option>
-                  { 事故隐患类别.map((one,i) => (
-                    <option key={i} value={i+1}>{one}</option>
-                  )) }
-                </Select>
-
-                <InputFollowUnit unit={'米'}
-                  type="number"
-                  value={ 固定资产值 || ''}
-                  onChange={e => set固定资产值( e.currentTarget.value||undefined ) }
-                >
-                </InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}
-                  type="number"
-                  value={ 大修周期 || ''}
-                  onChange={e => set大修周期( e.currentTarget.value||undefined ) }
-                >
-                </InputFollowUnit>
-
-
-                <Text variant="h5">许可用的参数</Text>
-
-                <InputFollowUnit unit={'米'} type='date'  value={ 设计日期  || ''}
-                       onChange={e => set设计日期( e.currentTarget.value||undefined ) } />
-
-                <UnitOrChoose id={造监检单  || ''} emodel={'电梯'} emid={id} field={'造监检单'}
-                              onCancel={() => {
-                                set造监检单( undefined )
-                              }}
-                              onDialog={async () => { await setNdt(await confirmation()); } }
-                />
-
-                <UnitOrChoose id={土建施单  || ''} emodel={'电梯'} emid={id} field={'土建施单'}
-                              onCancel={() => {
-                                set土建施单( undefined )
-                              }}
-                              onDialog={async () => { await setNdt(await confirmation()); } }
-                />
-
-                <UnitOrChoose id={土建验单  || ''} emodel={'电梯'} emid={id} field={'土建验单'}
-                              onCancel={() => {
-                                set土建验单( undefined )
-                              }}
-                              onDialog={async () => { await setNdt(await confirmation()); } }
-                />
-
-                <Text variant="h5">监检准入参数</Text>
-
-                <ComboBoxDatalist  value={ 施工类别 || ''}
-                                   onListChange={v => set施工类别( v||undefined ) }
-                                   datalist={施工类别s}  />
-
-                <InputFollowUnit unit={'米'} type='date'  value={ 施工日期  || ''}
-                       onChange={e => set施工日期( e.currentTarget.value||undefined ) } />
-
-                <InputFollowUnit unit={'米'} type='date'  value={ 竣验日  || ''}
-                       onChange={e => set竣验日( e.currentTarget.value||undefined ) } />
-
-                <InputFollowUnit unit={'米'}
-                  value={ 施工号 || ''}
-                  onChange={e => set施工号( e.currentTarget.value||undefined ) }
-                >
-                </InputFollowUnit>
-
-                <UnitOrChoose id={设计单位  || ''} emodel={'电梯'} emid={id} field={'设计单位'}
-                              onCancel={() => {
-                                set设计单位( undefined )
-                              }}
-                              onDialog={async () => { await setNdt(await confirmation()); } }
-                />
-
-                <InputFollowUnit unit={'米'}
-                  value={ 设计许号 || ''}
-                  onChange={e => set设计许号( e.currentTarget.value||undefined ) }
-                >
-                </InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}
-                  value={ 产品标准 || ''}
-                  onChange={e => set产品标准( e.currentTarget.value||undefined ) }
-                >
-                </InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}
-                  value={ 设计图号 || ''}
-                  onChange={e => set设计图号( e.currentTarget.value||undefined ) }
-                >
-                </InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}
-                  value={ 合格证号 || ''}
-                  onChange={e => set合格证号( e.currentTarget.value||undefined ) }
-                >
-                </InputFollowUnit>
-
-                <InputFollowUnit unit={'米'} type='date'  value={ 安竣日  || ''}
-                       onChange={e => set安竣日( e.currentTarget.value||undefined ) } />
-
-                <InputFollowUnit unit={'米'}
-                  type="number"
-                  value={ 设备总重量 || ''}
-                  onChange={e => set设备总重量( e.currentTarget.value||undefined ) }
-                >
-                </InputFollowUnit>
-
-                <Text variant="h5">常用参数</Text>
-
-                <InputFollowUnit unit={'米'}
-                  type="number"
-                  value={ 倾斜角度 || ''}
-                  onChange={e => set倾斜角度( e.currentTarget.value||undefined ) }
-                >
-                </InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}  value={ 安全钳型号 || ''}
-                        onChange={e => set安全钳型号( e.currentTarget.value||undefined ) }
-                />
-
-                <InputFollowUnit unit={'米'}  value={ 安全钳编号 || ''}
-                        onChange={e => set安全钳编号( e.currentTarget.value||undefined ) }
-                />
-
-                <InputFollowUnit unit={'米'}  value={ 层门型号 || ''}
-                        onChange={e => set层门型号( e.currentTarget.value||undefined ) } />
-
-                <InputFollowUnit unit={'米'} type="number" value={ 底坑深度 || ''}
-                       onChange={e => set底坑深度( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'} type="number" value={ 电动机功率 || ''}
-                       onChange={e => set电动机功率( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}  value={ 电动机转速 || ''}
-                        onChange={e => set电动机转速( e.currentTarget.value||undefined ) } />
-
-                <InputFollowUnit unit={'米'} type="number" value={ 电梯门数 || ''}
-                       onChange={e => set电梯门数( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'} type="number" value={ 电梯站数 || ''}
-                       onChange={e => set电梯站数( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'} type="number" value={ 顶层高度 || ''}
-                       onChange={e => set顶层高度( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'} type="number" value={ 对重轨距 || ''}
-                       onChange={e => set对重轨距( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'} type="number" value={ 对重块数 || ''}
-                       onChange={e => set对重块数( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}  value={ 对重限速号 || ''}
-                        onChange={e => set对重限速号( e.currentTarget.value||undefined ) } />
-
-                <InputFollowUnit unit={'米'}  value={ 对重限型号 || ''}
-                        onChange={e => set对重限型号( e.currentTarget.value||undefined ) } />
-
-                <InputFollowUnit unit={'米'} type="number" value={ 额定电流 || ''}
-                       onChange={e => set额定电流( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'} type="number" value={ 额定载人 || ''}
-                       onChange={e => set额定载人( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}  value={ 缓冲器编号 || ''}
-                        onChange={e => set缓冲器编号( e.currentTarget.value||undefined ) } />
-
-                <InputFollowUnit unit={'米'}  value={ 缓冲器型号 || ''}
-                        onChange={e => set缓冲器型号( e.currentTarget.value||undefined ) } />
-
-                <InputFollowUnit unit={'米'}  value={ 缓冲器厂家 || ''}
-                        onChange={e => set缓冲器厂家( e.currentTarget.value||undefined ) } />
-
-                <InputFollowUnit unit={'米'} type="number" value={ 轿厢轨距 || ''}
-                       onChange={e => set轿厢轨距( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}  value={ 上行限电速 || ''}
-                        onChange={e => set上行限电速( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}  value={ 上行限机速 || ''}
-                        onChange={e => set上行限机速( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}  value={ 下行限电速 || ''}
-                        onChange={e => set下行限电速( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}  value={ 下行限机速 || ''}
-                        onChange={e => set下行限机速( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}  value={ 移动保护号 || ''}
-                        onChange={e => set移动保护号( e.currentTarget.value||undefined ) } />
-
-                <InputFollowUnit unit={'米'}  value={ 移动保护型 || ''}
-                        onChange={e => set移动保护型( e.currentTarget.value||undefined ) } />
-
-                <InputDatalist  value={ 装修 || ''}
-                                onListChange={v => set装修(v ||undefined)}
-                                datalist={轿厢装修状态} />
-
-                <InputFollowUnit unit={'米'}  value={ 锁型号 || ''}
-                        onChange={e => set锁型号( e.currentTarget.value||undefined ) } />
-
-                <ComboBoxDatalist  value={ 上护装置 || ''}
-                                   onListChange={v => set上护装置( v||undefined ) }
-                                   datalist={上行保护装置形式}  />
-
-                <InputFollowUnit unit={'米'}  value={ 上护型号 || ''}
-                        onChange={e => set上护型号( e.currentTarget.value||undefined ) } />
-
-                <InputFollowUnit unit={'米'}  value={ 上护编号 || ''}
-                        onChange={e => set上护编号( e.currentTarget.value||undefined ) } />
-
-                <CheckSwitch  checked= {手机信 || false}
-                              onChange={e => set手机信(手机信? undefined:true) } />
-
-                <InputFollowUnit unit={'米'}  value={ 速比 || ''}
-                        onChange={e => set速比( e.currentTarget.value||undefined ) } />
-
-                <Select  value={ 拖动 || ''}
-                         onChange={e => set拖动( e.currentTarget.value||undefined ) } >
-                  <option></option>
-                  { 拖动方式.map((one,i) => <option key={i} >{one}</option> ) }
-                </Select>
-
-                <InputFollowUnit unit={'米'}  value={ 限速器号 || ''}
-                        onChange={e => set限速器号( e.currentTarget.value||undefined ) } />
-
-                <InputFollowUnit unit={'米'} type="number" value={ 限绳直径 || ''}
-                       onChange={e => set限绳直径( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}  value={ 曳引比 || ''}
-                        onChange={e => set曳引比( e.currentTarget.value||undefined ) } />
-
-                <InputFollowUnit unit={'米'} type="number" value={ 轮节径 || ''}
-                       onChange={e => set轮节径( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'} type="number" value={ 绳数 || ''}
-                       onChange={e => set绳数( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <CheckSwitch  checked= {是钢带 || false} disabled={false}
-                              onChange={e => set是钢带(是钢带? undefined:true) } />
-
-                {是钢带 ? (
-
-                  <InputFollowUnit unit={'米'}  value={ 钢带规格 || ''} readOnly={true}
-                          onChange={e => set钢带规格( e.currentTarget.value||undefined ) } />
-
-                ) :(
-
-                  <InputFollowUnit unit={'米'} type="number" value={ 绳直径 || ''} readOnly={true}
-                         onChange={e => set绳直径( e.currentTarget.value||undefined ) }
-                  ></InputFollowUnit>
-
-                ) }
-
-                <Text variant="h5">其它参数</Text>
-
-                <InputFollowUnit unit={'米'}  value={ 爆炸物质 || ''}
-                        onChange={e => set爆炸物质( e.currentTarget.value||undefined ) } />
-
-                <Select  value={ 补偿方式 || ''}
-                         onChange={e => set补偿方式( e.currentTarget.value||undefined ) } >
-                  <option></option>
-                  { 补偿方式s.map((one,i) => <option key={i} >{one}</option> ) }
-                </Select>
-
-                <InputDatalist  value={ 电动机类型 || ''}
-                                onListChange={v => set电动机类型(v ||undefined)}
-                                datalist={电动机类型s} />
-
-                <Select  value={ 顶升形式 || ''}
-                         onChange={e => set顶升形式( e.currentTarget.value||undefined ) } >
-                  <option></option>
-                  { 顶升形式s.map((one,i) => <option key={i} >{one}</option> ) }
-                </Select>
-
-                <Select  value={ 导轨型式 || ''}
-                         onChange={e => set导轨型式( e.currentTarget.value||undefined ) } >
-                  <option></option>
-                  { 对重导轨型式s.map((one,i) => <option key={i} >{one}</option> ) }
-                </Select>
-
-                <InputFollowUnit unit={'米'} type="number" value={ 轿厢高 || ''}
-                       onChange={e => set轿厢高( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'} type="number" value={ 轿厢宽 || ''}
-                       onChange={e => set轿厢宽( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'} type="number" value={ 轿厢深 || ''}
-                       onChange={e => set轿厢深( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <ComboBoxDatalist  value={ 区域防爆 || ''}
-                                   onListChange={v => set区域防爆( v||undefined ) }
-                                   datalist={区域防爆等级}  />
-
-                <Select  value={ 驱动方式 || ''}
-                         onChange={e => set驱动方式( e.currentTarget.value||undefined ) } >
-                  <option></option>
-                  { 驱动方式s.map((one,i) => <option key={i} >{one}</option> ) }
-                </Select>
-
-                <InputFollowUnit unit={'米'} type="number" value={ 上行额速 || ''}
-                       onChange={e => set上行额速( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <CheckSwitch  checked= {船梯 || false}
-                              onChange={e => set船梯(船梯? undefined:true) } />
-
-                <CheckSwitch  checked= {公共交通 || false}
-                              onChange={e => set公共交通(公共交通? undefined:true) } />
-
-                <CheckSwitch  checked= {汽车电梯 || false}
-                              onChange={e => set汽车电梯(汽车电梯? undefined:true) } />
-
-                <InputFollowUnit unit={'米'} type="number" value={ 梯级宽度 || ''}
-                       onChange={e => set梯级宽度( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'} type="number" value={ 下额定速 || ''}
-                       onChange={e => set下额定速( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}  value={ 限机械速 || ''}
-                        onChange={e => set限机械速( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'} type="number" value={ 悬挂绳数 || ''}
-                       onChange={e => set悬挂绳数( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'} type="number" value={ 悬挂绳径 || ''}
-                       onChange={e => set悬挂绳径( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}  value={ 泵编号 || ''}
-                        onChange={e => set泵编号( e.currentTarget.value||undefined ) } />
-
-                <InputFollowUnit unit={'米'} type="number" value={ 泵功率 || ''}
-                       onChange={e => set泵功率( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'} type="number" value={ 泵流量 || ''}
-                       onChange={e => set泵流量( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}  value={ 泵型号 || ''}
-                        onChange={e => set泵型号( e.currentTarget.value||undefined ) } />
-
-                <InputFollowUnit unit={'米'} type="number" value={ 泵转速 || ''}
-                       onChange={e => set泵转速( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}  value={ 液油型号 || ''}
-                        onChange={e => set液油型号( e.currentTarget.value||undefined ) } />
-
-                <InputFollowUnit unit={'米'} type="number" value={ 油缸数 || ''}
-                       onChange={e => set油缸数( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputDatalist  value={ 油缸形式 || ''}
-                                onListChange={v => set油缸形式(v ||undefined)}
-                                datalist={油缸形式s} />
-
-                <InputFollowUnit unit={'米'}  value={ 防爆标志 || ''}
-                        onChange={e => set防爆标志( e.currentTarget.value||undefined ) } />
-
-                <CheckSwitch  disabled={false}  checked= {汽车电梯 || false}
-                              onChange={e => set汽车电梯(汽车电梯? undefined:true) } />
-
-                <InputFollowUnit unit={'米'}  value={ 防爆证号 || ''}
-                        onChange={e => set防爆证号( e.currentTarget.value||undefined ) } />
-
-
-
-
-
-
-
-
-
-
-                <InputFollowUnit unit={'米'}
-                                 type="number"  min={1} max={999}
-                                 value={ flo || '' }
-                                 onChange={e => setFlo( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-
-                <CheckSwitch
-                  checked= {spec || false}
-                  onChange={e => setSpec(!spec) }
-                />
-
-
-                <InputFollowUnit unit={'米'}
-                                 type="number"  min={0} max={300}
-                                 value={vl || ''}
-                                 onChange={e => setVl( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-
-                <CheckSwitch
-                  checked= {nnor || false}
-                  onChange={e => setNnor(!nnor) }
-                />
-
-
-                <CheckSwitch
-                  checked= {oldb || false}
-                  onChange={e => setOldb(!oldb) }
-                />
-
-
-                <InputFollowUnit unit={'米'}
-                                 placeholder="层数"
-                                 value={ cpm || ''}
-                                 onChange={e => setCpm( e.currentTarget.value||undefined ) }
-                >
-                </InputFollowUnit>
-
-
-                <InputFollowUnit unit={'米'}
-                                 type="number"
-                                 value={ hlf || ''}
-                                 onChange={e => setHlf( e.currentTarget.value||undefined ) }
-                >
-                </InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}
-                                 type="number"
-                                 value={ lesc || ''}
-                                 onChange={e => setLesc( e.currentTarget.value||undefined ) }
-                >
-                </InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}
-                                 type="number"
-                                 value={ wesc || ''}
-                                 onChange={e => setWesc( e.currentTarget.value||undefined ) }
-                >
-                </InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}
-                                 value={ tm || ''}
-                                 onChange={e => setTm( e.currentTarget.value||undefined ) }
-                >
-                </InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}
-                                 value={ mtm || ''}
-                                 onChange={e => setMtm( e.currentTarget.value||undefined ) }
-                >
-                </InputFollowUnit>
-
-                <Select inputSize="md" css={{minWidth:'140px',fontSize:'1.5rem',padding:'0 1rem'}} divStyle={css`max-width:240px;`}
-                        value={ buff || ''}
-                        onChange={e => setBuff( e.currentTarget.value||undefined ) }
-                >
-                  <option></option>
-                  { 缓冲器形式.map((one,i) => (
-                    <option key={i}>{one}</option>
-                  )) }
-                </Select>
-
-                <InputFollowUnit unit={'米'}
-                                 type="number"
-                                 value={ rtl || ''}
-                                 onChange={e => setRtl( e.currentTarget.value||undefined ) }
-                >
-                </InputFollowUnit>
-
-                <ComboBoxDatalist
-                  value={ aap || ''}
-                  onListChange={v => setAap( v||undefined ) }
-                  datalist={加装附加装置}
-                />
-
-                <InputFollowUnit unit={'米'}
-                                 value={ prot || ''}
-                                 onChange={e => setProt( e.currentTarget.value||undefined ) }
-                >
-                </InputFollowUnit>
-
-                <InputDatalist
-                  value={ doop || ''}
-                  onListChange={v => setDoop(v ||undefined)}
-                  datalist={开门方式}
-                />
-
-                <InputFollowUnit unit={'米'}
-                                 value={ limm || ''}
-                                 onChange={e => setLimm( e.currentTarget.value||undefined ) }
-                />
-
-                <Select inputSize="md" css={{minWidth:'140px',fontSize:'1.5rem',padding:'0 1rem'}} divStyle={css`max-width:240px;`}
-                        value={ opm || ''}
-                        onChange={e => setOpm( e.currentTarget.value||undefined ) }
-                >
-                  <option> </option>
-                  { 控制方式.map((one,i) => (
-                    <option key={i}>{one}</option>
-                  )) }
-                </Select>
-
-                <InputFollowUnit unit={'米'} type='date'  value={lbkd ||''}
-                                 onChange={e => setLbkd( e.currentTarget.value||undefined ) } />
-
-                <InputFollowUnit unit={'米'} type='date'  value={nbkd ||''}
-                                 onChange={e => setNbkd( e.currentTarget.value||undefined ) } />
-
-                <InputFollowUnit unit={'米'}
-                                 value={ 控制屏编号 || ''}
-                                 onChange={e => set控制屏编号( e.currentTarget.value||undefined ) }
-                />
-
-                <InputFollowUnit unit={'米'}
-                                 value={ 曳引号 || ''}
-                                 onChange={e => set曳引号( e.currentTarget.value||undefined ) }
-                />
-
-                <InputFollowUnit unit={'米'}
-                                 value={ 主机号 || ''}
-                                 onChange={e => set主机号( e.currentTarget.value||undefined ) }
-                />
-
-
-                <Text variant="h5">监察参数</Text>
-
-                <InputDatalist
-                  value={ 制造国 || ''}
-                  onListChange={v => set制造国(v ||undefined)}
-                  datalist={["中国","美国","欧盟"]}
-                />
-
-                <CheckSwitch
-                  checked= {vital || false}
-                  onChange={e => setVital(vital? undefined:true) }
-                />
-
-                <InputFollowUnit unit={'米'}
-                                 type="number"
-                                 value={ 年限 || ''}
-                                 onChange={e => set年限( e.currentTarget.value||undefined ) }
-                >
-                </InputFollowUnit>
-
-                <Select
-                  value={ cpa || ''}
-                  onChange={e => setCpa( e.currentTarget.value||undefined ) }
-                >
-                  <option> </option>
-                  { 事故隐患类别.map((one,i) => (
-                    <option key={i} value={i+1}>{one}</option>
-                  )) }
-                </Select>
-
-                <InputFollowUnit unit={'米'}
-                                 type="number"
-                                 value={ 固定资产值 || ''}
-                                 onChange={e => set固定资产值( e.currentTarget.value||undefined ) }
-                >
-                </InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}
-                                 type="number"
-                                 value={ 大修周期 || ''}
-                                 onChange={e => set大修周期( e.currentTarget.value||undefined ) }
-                >
-                </InputFollowUnit>
-
-
-                <Text variant="h5">许可用的参数</Text>
-
-                <InputFollowUnit unit={'米'} type='date'  value={ 设计日期  || ''}
-                                 onChange={e => set设计日期( e.currentTarget.value||undefined ) } />
-
-                <UnitOrChoose id={造监检单  || ''} emodel={'电梯'} emid={id} field={'造监检单'}
-                              onCancel={() => {
-                                set造监检单( undefined )
-                              }}
-                              onDialog={async () => { await setNdt(await confirmation()); } }
-                />
-
-                <UnitOrChoose id={土建施单  || ''} emodel={'电梯'} emid={id} field={'土建施单'}
-                              onCancel={() => {
-                                set土建施单( undefined )
-                              }}
-                              onDialog={async () => { await setNdt(await confirmation()); } }
-                />
-
-                <UnitOrChoose id={土建验单  || ''} emodel={'电梯'} emid={id} field={'土建验单'}
-                              onCancel={() => {
-                                set土建验单( undefined )
-                              }}
-                              onDialog={async () => { await setNdt(await confirmation()); } }
-                />
-
-                <Text variant="h5">监检准入参数</Text>
-
-                <ComboBoxDatalist  value={ 施工类别 || ''}
-                                   onListChange={v => set施工类别( v||undefined ) }
-                                   datalist={施工类别s}  />
-
-                <InputFollowUnit unit={'米'} type='date'  value={ 施工日期  || ''}
-                                 onChange={e => set施工日期( e.currentTarget.value||undefined ) } />
-
-                <InputFollowUnit unit={'米'} type='date'  value={ 竣验日  || ''}
-                                 onChange={e => set竣验日( e.currentTarget.value||undefined ) } />
-
-                <InputFollowUnit unit={'米'}
-                                 value={ 施工号 || ''}
-                                 onChange={e => set施工号( e.currentTarget.value||undefined ) }
-                >
-                </InputFollowUnit>
-
-                <UnitOrChoose id={设计单位  || ''} emodel={'电梯'} emid={id} field={'设计单位'}
-                              onCancel={() => {
-                                set设计单位( undefined )
-                              }}
-                              onDialog={async () => { await setNdt(await confirmation()); } }
-                />
-
-                <InputFollowUnit unit={'米'}
-                                 value={ 设计许号 || ''}
-                                 onChange={e => set设计许号( e.currentTarget.value||undefined ) }
-                >
-                </InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}
-                                 value={ 产品标准 || ''}
-                                 onChange={e => set产品标准( e.currentTarget.value||undefined ) }
-                >
-                </InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}
-                                 value={ 设计图号 || ''}
-                                 onChange={e => set设计图号( e.currentTarget.value||undefined ) }
-                >
-                </InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}
-                                 value={ 合格证号 || ''}
-                                 onChange={e => set合格证号( e.currentTarget.value||undefined ) }
-                >
-                </InputFollowUnit>
-
-                <InputFollowUnit unit={'米'} type='date'  value={ 安竣日  || ''}
-                                 onChange={e => set安竣日( e.currentTarget.value||undefined ) } />
-
-                <InputFollowUnit unit={'米'}
-                                 type="number"
-                                 value={ 设备总重量 || ''}
-                                 onChange={e => set设备总重量( e.currentTarget.value||undefined ) }
-                >
-                </InputFollowUnit>
-
-                <Text variant="h5">常用参数</Text>
-
-                <InputFollowUnit unit={'米'}
-                                 type="number"
-                                 value={ 倾斜角度 || ''}
-                                 onChange={e => set倾斜角度( e.currentTarget.value||undefined ) }
-                >
-                </InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}  value={ 安全钳型号 || ''}
-                                 onChange={e => set安全钳型号( e.currentTarget.value||undefined ) }
-                />
-
-                <InputFollowUnit unit={'米'}  value={ 安全钳编号 || ''}
-                                 onChange={e => set安全钳编号( e.currentTarget.value||undefined ) }
-                />
-
-                <InputFollowUnit unit={'米'}  value={ 层门型号 || ''}
-                                 onChange={e => set层门型号( e.currentTarget.value||undefined ) } />
-
-                <InputFollowUnit unit={'米'} type="number" value={ 底坑深度 || ''}
-                                 onChange={e => set底坑深度( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'} type="number" value={ 电动机功率 || ''}
-                                 onChange={e => set电动机功率( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}  value={ 电动机转速 || ''}
-                                 onChange={e => set电动机转速( e.currentTarget.value||undefined ) } />
-
-                <InputFollowUnit unit={'米'} type="number" value={ 电梯门数 || ''}
-                                 onChange={e => set电梯门数( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'} type="number" value={ 电梯站数 || ''}
-                                 onChange={e => set电梯站数( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'} type="number" value={ 顶层高度 || ''}
-                                 onChange={e => set顶层高度( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'} type="number" value={ 对重轨距 || ''}
-                                 onChange={e => set对重轨距( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'} type="number" value={ 对重块数 || ''}
-                                 onChange={e => set对重块数( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}  value={ 对重限速号 || ''}
-                                 onChange={e => set对重限速号( e.currentTarget.value||undefined ) } />
-
-                <InputFollowUnit unit={'米'}  value={ 对重限型号 || ''}
-                                 onChange={e => set对重限型号( e.currentTarget.value||undefined ) } />
-
-                <InputFollowUnit unit={'米'} type="number" value={ 额定电流 || ''}
-                                 onChange={e => set额定电流( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'} type="number" value={ 额定载人 || ''}
-                                 onChange={e => set额定载人( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}  value={ 缓冲器编号 || ''}
-                                 onChange={e => set缓冲器编号( e.currentTarget.value||undefined ) } />
-
-                <InputFollowUnit unit={'米'}  value={ 缓冲器型号 || ''}
-                                 onChange={e => set缓冲器型号( e.currentTarget.value||undefined ) } />
-
-                <InputFollowUnit unit={'米'}  value={ 缓冲器厂家 || ''}
-                                 onChange={e => set缓冲器厂家( e.currentTarget.value||undefined ) } />
-
-                <InputFollowUnit unit={'米'} type="number" value={ 轿厢轨距 || ''}
-                                 onChange={e => set轿厢轨距( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}  value={ 上行限电速 || ''}
-                                 onChange={e => set上行限电速( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}  value={ 上行限机速 || ''}
-                                 onChange={e => set上行限机速( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}  value={ 下行限电速 || ''}
-                                 onChange={e => set下行限电速( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}  value={ 下行限机速 || ''}
-                                 onChange={e => set下行限机速( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}  value={ 移动保护号 || ''}
-                                 onChange={e => set移动保护号( e.currentTarget.value||undefined ) } />
-
-                <InputFollowUnit unit={'米'}  value={ 移动保护型 || ''}
-                                 onChange={e => set移动保护型( e.currentTarget.value||undefined ) } />
-
-                <InputDatalist  value={ 装修 || ''}
-                                onListChange={v => set装修(v ||undefined)}
-                                datalist={轿厢装修状态} />
-
-                <InputFollowUnit unit={'米'}  value={ 锁型号 || ''}
-                                 onChange={e => set锁型号( e.currentTarget.value||undefined ) } />
-
-                <ComboBoxDatalist  value={ 上护装置 || ''}
-                                   onListChange={v => set上护装置( v||undefined ) }
-                                   datalist={上行保护装置形式}  />
-
-                <InputFollowUnit unit={'米'}  value={ 上护型号 || ''}
-                                 onChange={e => set上护型号( e.currentTarget.value||undefined ) } />
-
-                <InputFollowUnit unit={'米'}  value={ 上护编号 || ''}
-                                 onChange={e => set上护编号( e.currentTarget.value||undefined ) } />
-
-                <CheckSwitch  checked= {手机信 || false}
-                              onChange={e => set手机信(手机信? undefined:true) } />
-
-                <InputFollowUnit unit={'米'}  value={ 速比 || ''}
-                                 onChange={e => set速比( e.currentTarget.value||undefined ) } />
-
-                <Select  value={ 拖动 || ''}
-                         onChange={e => set拖动( e.currentTarget.value||undefined ) } >
-                  <option></option>
-                  { 拖动方式.map((one,i) => <option key={i} >{one}</option> ) }
-                </Select>
-
-                <InputFollowUnit unit={'米'}  value={ 限速器号 || ''}
-                                 onChange={e => set限速器号( e.currentTarget.value||undefined ) } />
-
-                <InputFollowUnit unit={'米'} type="number" value={ 限绳直径 || ''}
-                                 onChange={e => set限绳直径( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}  value={ 曳引比 || ''}
-                                 onChange={e => set曳引比( e.currentTarget.value||undefined ) } />
-
-                <InputFollowUnit unit={'米'} type="number" value={ 轮节径 || ''}
-                                 onChange={e => set轮节径( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'} type="number" value={ 绳数 || ''}
-                                 onChange={e => set绳数( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <CheckSwitch  checked= {是钢带 || false} disabled={false}
-                              onChange={e => set是钢带(是钢带? undefined:true) } />
-
-                {是钢带 ? (
-
-                  <InputFollowUnit unit={'米'}  value={ 钢带规格 || ''} readOnly={true}
-                                   onChange={e => set钢带规格( e.currentTarget.value||undefined ) } />
-
-                ) :(
-
-                  <InputFollowUnit unit={'米'} type="number" value={ 绳直径 || ''} readOnly={true}
-                                   onChange={e => set绳直径( e.currentTarget.value||undefined ) }
-                  ></InputFollowUnit>
-
-                ) }
-
-                <Text variant="h5">其它参数</Text>
-
-                <InputFollowUnit unit={'米'}  value={ 爆炸物质 || ''}
-                                 onChange={e => set爆炸物质( e.currentTarget.value||undefined ) } />
-
-                <Select  value={ 补偿方式 || ''}
-                         onChange={e => set补偿方式( e.currentTarget.value||undefined ) } >
-                  <option></option>
-                  { 补偿方式s.map((one,i) => <option key={i} >{one}</option> ) }
-                </Select>
-
-                <InputDatalist  value={ 电动机类型 || ''}
-                                onListChange={v => set电动机类型(v ||undefined)}
-                                datalist={电动机类型s} />
-
-                <Select  value={ 顶升形式 || ''}
-                         onChange={e => set顶升形式( e.currentTarget.value||undefined ) } >
-                  <option></option>
-                  { 顶升形式s.map((one,i) => <option key={i} >{one}</option> ) }
-                </Select>
-
-                <Select  value={ 导轨型式 || ''}
-                         onChange={e => set导轨型式( e.currentTarget.value||undefined ) } >
-                  <option></option>
-                  { 对重导轨型式s.map((one,i) => <option key={i} >{one}</option> ) }
-                </Select>
-
-                <InputFollowUnit unit={'米'} type="number" value={ 轿厢高 || ''}
-                                 onChange={e => set轿厢高( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'} type="number" value={ 轿厢宽 || ''}
-                                 onChange={e => set轿厢宽( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'} type="number" value={ 轿厢深 || ''}
-                                 onChange={e => set轿厢深( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <ComboBoxDatalist  value={ 区域防爆 || ''}
-                                   onListChange={v => set区域防爆( v||undefined ) }
-                                   datalist={区域防爆等级}  />
-
-                <Select  value={ 驱动方式 || ''}
-                         onChange={e => set驱动方式( e.currentTarget.value||undefined ) } >
-                  <option></option>
-                  { 驱动方式s.map((one,i) => <option key={i} >{one}</option> ) }
-                </Select>
-
-                <InputFollowUnit unit={'米'} type="number" value={ 上行额速 || ''}
-                                 onChange={e => set上行额速( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <CheckSwitch  checked= {船梯 || false}
-                              onChange={e => set船梯(船梯? undefined:true) } />
-
-                <CheckSwitch  checked= {公共交通 || false}
-                              onChange={e => set公共交通(公共交通? undefined:true) } />
-
-                <CheckSwitch  checked= {汽车电梯 || false}
-                              onChange={e => set汽车电梯(汽车电梯? undefined:true) } />
-
-                <InputFollowUnit unit={'米'} type="number" value={ 梯级宽度 || ''}
-                                 onChange={e => set梯级宽度( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'} type="number" value={ 下额定速 || ''}
-                                 onChange={e => set下额定速( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}  value={ 限机械速 || ''}
-                                 onChange={e => set限机械速( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'} type="number" value={ 悬挂绳数 || ''}
-                                 onChange={e => set悬挂绳数( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'} type="number" value={ 悬挂绳径 || ''}
-                                 onChange={e => set悬挂绳径( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}  value={ 泵编号 || ''}
-                                 onChange={e => set泵编号( e.currentTarget.value||undefined ) } />
-
-                <InputFollowUnit unit={'米'} type="number" value={ 泵功率 || ''}
-                                 onChange={e => set泵功率( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'} type="number" value={ 泵流量 || ''}
-                                 onChange={e => set泵流量( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}  value={ 泵型号 || ''}
-                                 onChange={e => set泵型号( e.currentTarget.value||undefined ) } />
-
-                <InputFollowUnit unit={'米'} type="number" value={ 泵转速 || ''}
-                                 onChange={e => set泵转速( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputFollowUnit unit={'米'}  value={ 液油型号 || ''}
-                                 onChange={e => set液油型号( e.currentTarget.value||undefined ) } />
-
-                <InputFollowUnit unit={'米'} type="number" value={ 油缸数 || ''}
-                                 onChange={e => set油缸数( e.currentTarget.value||undefined ) }
-                ></InputFollowUnit>
-
-                <InputDatalist  value={ 油缸形式 || ''}
-                                onListChange={v => set油缸形式(v ||undefined)}
-                                datalist={油缸形式s} />
-
-                <InputFollowUnit unit={'米'}  value={ 防爆标志 || ''}
-                                 onChange={e => set防爆标志( e.currentTarget.value||undefined ) } />
-
-                <CheckSwitch  disabled={false}  checked= {汽车电梯 || false}
-                              onChange={e => set汽车电梯(汽车电梯? undefined:true) } />
-
-                <InputFollowUnit unit={'米'}  value={ 防爆证号 || ''}
-                                 onChange={e => set防爆证号( e.currentTarget.value||undefined ) } />
-
-
-
-                <Button
-                  size="lg"
-                  intent="primary"
-                  iconAfter={<IconArrowRight />}
-                  onPress={ async () => {
-                    //不用JSON.stringify保存到数据库格式不一样，对象直接转String，前端无法取出。必须用json格式{"制造国":"地","年限":"12"}
-                    await confirmation();
-                  } }
-                >
-                  确认修改检查
-                </Button>
-              </div>
-            </Container>
-          </div>
+              <CheckSwitch
+                checked= {spec || false}
+                onChange={e => setSpec(!spec) }
+              />
+
+
+              <Zx
+                type="number"  min={0} max={300}
+                value={vl || ''}
+                onChange={e => setVl( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+
+              <CheckSwitch
+                checked= {nnor || false}
+                onChange={e => setNnor(!nnor) }
+              />
+
+
+              <CheckSwitch
+                checked= {oldb || false}
+                onChange={e => setOldb(!oldb) }
+              />
+
+
+              <Zx
+                placeholder="层数"
+                value={ cpm || ''}
+                onChange={e => setCpm( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+
+              <Zx
+                type="number"
+                value={ hlf || ''}
+                onChange={e => setHlf( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx
+                type="number"
+                value={ lesc || ''}
+                onChange={e => setLesc( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx
+                type="number"
+                value={ wesc || ''}
+                onChange={e => setWesc( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx
+                value={ tm || ''}
+                onChange={e => setTm( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx
+                value={ mtm || ''}
+                onChange={e => setMtm( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Select inputSize="md" css={{minWidth:'140px',fontSize:'1.5rem',padding:'0 1rem'}} divStyle={css`max-width:240px;`}
+                      value={ buff || ''}
+                      onChange={e => setBuff( e.currentTarget.value||undefined ) }
+              >
+                <option></option>
+                { 缓冲器形式.map((one,i) => (
+                  <option key={i}>{one}</option>
+                )) }
+              </Select>
+
+              <Zx
+                type="number"
+                value={ rtl || ''}
+                onChange={e => setRtl( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <ComboBoxDatalist
+                value={ aap || ''}
+                onListChange={v => setAap( v||undefined ) }
+                datalist={加装附加装置}
+              />
+
+              <Zx
+                value={ prot || ''}
+                onChange={e => setProt( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <InputDatalist
+                value={ doop || ''}
+                onListChange={v => setDoop(v ||undefined)}
+                datalist={开门方式}
+              />
+
+              <Zx
+                value={ limm || ''}
+                onChange={e => setLimm( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Select inputSize="md" css={{minWidth:'140px',fontSize:'1.5rem',padding:'0 1rem'}} divStyle={css`max-width:240px;`}
+                      value={ opm || ''}
+                      onChange={e => setOpm( e.currentTarget.value||undefined ) }
+              >
+                <option> </option>
+                { 控制方式.map((one,i) => (
+                  <option key={i}>{one}</option>
+                )) }
+              </Select>
+
+              <Zx  type='date'  value={lbkd ||''}
+                               onChange={e => setLbkd( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type='date'  value={nbkd ||''}
+                               onChange={e => setNbkd( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx
+                value={ 控制屏编号 || ''}
+                onChange={e => set控制屏编号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx
+                value={ 曳引号 || ''}
+                onChange={e => set曳引号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx
+                value={ 主机号 || ''}
+                onChange={e => set主机号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+
+              <Text variant="h5">监察参数</Text>
+
+              <InputDatalist
+                value={ 制造国 || ''}
+                onListChange={v => set制造国(v ||undefined)}
+                datalist={["中国","美国","欧盟"]}
+              />
+
+              <CheckSwitch
+                checked= {vital || false}
+                onChange={e => setVital(vital? undefined:true) }
+              />
+
+              <Zx
+                type="number"
+                value={ 年限 || ''}
+                onChange={e => set年限( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Select
+                value={ cpa || ''}
+                onChange={e => setCpa( e.currentTarget.value||undefined ) }
+              >
+                <option> </option>
+                { 事故隐患类别.map((one,i) => (
+                  <option key={i} value={i+1}>{one}</option>
+                )) }
+              </Select>
+
+              <Zx
+                type="number"
+                value={ 固定资产值 || ''}
+                onChange={e => set固定资产值( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx
+                type="number"
+                value={ 大修周期 || ''}
+                onChange={e => set大修周期( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+
+              <Text variant="h5">许可用的参数</Text>
+
+              <Zx  type='date'  value={ 设计日期  || ''}
+                               onChange={e => set设计日期( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <UnitOrChoose id={造监检单  || ''} emodel={'电梯'} emid={id} field={'造监检单'}
+                            onCancel={() => {
+                              set造监检单( undefined )
+                            }}
+                            onDialog={async () => { await setNdt(await confirmation()); } }
+              />
+
+              <UnitOrChoose id={土建施单  || ''} emodel={'电梯'} emid={id} field={'土建施单'}
+                            onCancel={() => {
+                              set土建施单( undefined )
+                            }}
+                            onDialog={async () => { await setNdt(await confirmation()); } }
+              />
+
+              <UnitOrChoose id={土建验单  || ''} emodel={'电梯'} emid={id} field={'土建验单'}
+                            onCancel={() => {
+                              set土建验单( undefined )
+                            }}
+                            onDialog={async () => { await setNdt(await confirmation()); } }
+              />
+
+              <Text variant="h5">监检准入参数</Text>
+
+              <ComboBoxDatalist  value={ 施工类别 || ''}
+                                 onListChange={v => set施工类别( v||undefined ) }
+                                 datalist={施工类别s}  />
+
+              <Zx  type='date'  value={ 施工日期  || ''}
+                               onChange={e => set施工日期( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type='date'  value={ 竣验日  || ''}
+                               onChange={e => set竣验日( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx
+                value={ 施工号 || ''}
+                onChange={e => set施工号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <UnitOrChoose id={设计单位  || ''} emodel={'电梯'} emid={id} field={'设计单位'}
+                            onCancel={() => {
+                              set设计单位( undefined )
+                            }}
+                            onDialog={async () => { await setNdt(await confirmation()); } }
+              />
+
+              <Zx
+                value={ 设计许号 || ''}
+                onChange={e => set设计许号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx
+                value={ 产品标准 || ''}
+                onChange={e => set产品标准( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx
+                value={ 设计图号 || ''}
+                onChange={e => set设计图号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx
+                value={ 合格证号 || ''}
+                onChange={e => set合格证号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type='date'  value={ 安竣日  || ''}
+                               onChange={e => set安竣日( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx
+                type="number"
+                value={ 设备总重量 || ''}
+                onChange={e => set设备总重量( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Text variant="h5">常用参数</Text>
+
+              <Zx
+                type="number"
+                value={ 倾斜角度 || ''}
+                onChange={e => set倾斜角度( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 安全钳型号 || ''}
+                                onChange={e => set安全钳型号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 安全钳编号 || ''}
+                                onChange={e => set安全钳编号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 层门型号 || ''}
+                                onChange={e => set层门型号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 底坑深度 || ''}
+                               onChange={e => set底坑深度( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 电动机功率 || ''}
+                               onChange={e => set电动机功率( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 电动机转速 || ''}
+                                onChange={e => set电动机转速( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 电梯门数 || ''}
+                               onChange={e => set电梯门数( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 电梯站数 || ''}
+                               onChange={e => set电梯站数( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 顶层高度 || ''}
+                               onChange={e => set顶层高度( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 对重轨距 || ''}
+                               onChange={e => set对重轨距( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 对重块数 || ''}
+                               onChange={e => set对重块数( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 对重限速号 || ''}
+                                onChange={e => set对重限速号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 对重限型号 || ''}
+                                onChange={e => set对重限型号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 额定电流 || ''}
+                               onChange={e => set额定电流( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 额定载人 || ''}
+                               onChange={e => set额定载人( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 缓冲器编号 || ''}
+                                onChange={e => set缓冲器编号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 缓冲器型号 || ''}
+                                onChange={e => set缓冲器型号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 缓冲器厂家 || ''}
+                                onChange={e => set缓冲器厂家( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 轿厢轨距 || ''}
+                               onChange={e => set轿厢轨距( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 上行限电速 || ''}
+                                onChange={e => set上行限电速( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 上行限机速 || ''}
+                                onChange={e => set上行限机速( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 下行限电速 || ''}
+                                onChange={e => set下行限电速( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 下行限机速 || ''}
+                                onChange={e => set下行限机速( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 移动保护号 || ''}
+                                onChange={e => set移动保护号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 移动保护型 || ''}
+                                onChange={e => set移动保护型( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <InputDatalist  value={ 装修 || ''}
+                              onListChange={v => set装修(v ||undefined)}
+                              datalist={轿厢装修状态} />
+
+              <Zx   value={ 锁型号 || ''}
+                                onChange={e => set锁型号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <ComboBoxDatalist  value={ 上护装置 || ''}
+                                 onListChange={v => set上护装置( v||undefined ) }
+                                 datalist={上行保护装置形式}  />
+
+              <Zx   value={ 上护型号 || ''}
+                                onChange={e => set上护型号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 上护编号 || ''}
+                                onChange={e => set上护编号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <CheckSwitch  checked= {手机信 || false}
+                            onChange={e => set手机信(手机信? undefined:true) } />
+
+              <Zx   value={ 速比 || ''}
+                                onChange={e => set速比( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Select  value={ 拖动 || ''}
+                       onChange={e => set拖动( e.currentTarget.value||undefined ) } >
+                <option></option>
+                { 拖动方式.map((one,i) => <option key={i} >{one}</option> ) }
+              </Select>
+
+              <Zx   value={ 限速器号 || ''}
+                                onChange={e => set限速器号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 限绳直径 || ''}
+                               onChange={e => set限绳直径( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 曳引比 || ''}
+                                onChange={e => set曳引比( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 轮节径 || ''}
+                               onChange={e => set轮节径( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 绳数 || ''}
+                               onChange={e => set绳数( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <CheckSwitch  checked= {是钢带 || false} disabled={false}
+                            onChange={e => set是钢带(是钢带? undefined:true) } />
+
+              {是钢带 ? (
+
+                <Zx   value={ 钢带规格 || ''} readOnly={true}
+                                  onChange={e => set钢带规格( e.currentTarget.value||undefined ) }
+                >米</Zx>
+
+              ) :(
+
+                <Zx  type="number" value={ 绳直径 || ''} readOnly={true}
+                                 onChange={e => set绳直径( e.currentTarget.value||undefined ) }
+                >米</Zx>
+
+              ) }
+
+              <Text variant="h5">其它参数</Text>
+
+              <Zx   value={ 爆炸物质 || ''}
+                                onChange={e => set爆炸物质( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Select  value={ 补偿方式 || ''}
+                       onChange={e => set补偿方式( e.currentTarget.value||undefined ) } >
+                <option></option>
+                { 补偿方式s.map((one,i) => <option key={i} >{one}</option> ) }
+              </Select>
+
+              <InputDatalist  value={ 电动机类型 || ''}
+                              onListChange={v => set电动机类型(v ||undefined)}
+                              datalist={电动机类型s} />
+
+              <Select  value={ 顶升形式 || ''}
+                       onChange={e => set顶升形式( e.currentTarget.value||undefined ) } >
+                <option></option>
+                { 顶升形式s.map((one,i) => <option key={i} >{one}</option> ) }
+              </Select>
+
+              <Select  value={ 导轨型式 || ''}
+                       onChange={e => set导轨型式( e.currentTarget.value||undefined ) } >
+                <option></option>
+                { 对重导轨型式s.map((one,i) => <option key={i} >{one}</option> ) }
+              </Select>
+
+              <Zx  type="number" value={ 轿厢高 || ''}
+                               onChange={e => set轿厢高( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 轿厢宽 || ''}
+                               onChange={e => set轿厢宽( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 轿厢深 || ''}
+                               onChange={e => set轿厢深( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <ComboBoxDatalist  value={ 区域防爆 || ''}
+                                 onListChange={v => set区域防爆( v||undefined ) }
+                                 datalist={区域防爆等级}  />
+
+              <Select  value={ 驱动方式 || ''}
+                       onChange={e => set驱动方式( e.currentTarget.value||undefined ) } >
+                <option></option>
+                { 驱动方式s.map((one,i) => <option key={i} >{one}</option> ) }
+              </Select>
+
+              <Zx  type="number" value={ 上行额速 || ''}
+                               onChange={e => set上行额速( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <CheckSwitch  checked= {船梯 || false}
+                            onChange={e => set船梯(船梯? undefined:true) } />
+
+              <CheckSwitch  checked= {公共交通 || false}
+                            onChange={e => set公共交通(公共交通? undefined:true) } />
+
+              <CheckSwitch  checked= {汽车电梯 || false}
+                            onChange={e => set汽车电梯(汽车电梯? undefined:true) } />
+
+              <Zx  type="number" value={ 梯级宽度 || ''}
+                               onChange={e => set梯级宽度( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 下额定速 || ''}
+                               onChange={e => set下额定速( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 限机械速 || ''}
+                                onChange={e => set限机械速( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 悬挂绳数 || ''}
+                               onChange={e => set悬挂绳数( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 悬挂绳径 || ''}
+                               onChange={e => set悬挂绳径( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 泵编号 || ''}
+                                onChange={e => set泵编号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 泵功率 || ''}
+                               onChange={e => set泵功率( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 泵流量 || ''}
+                               onChange={e => set泵流量( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 泵型号 || ''}
+                                onChange={e => set泵型号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 泵转速 || ''}
+                               onChange={e => set泵转速( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 液油型号 || ''}
+                                onChange={e => set液油型号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 油缸数 || ''}
+                               onChange={e => set油缸数( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <InputDatalist  value={ 油缸形式 || ''}
+                              onListChange={v => set油缸形式(v ||undefined)}
+                              datalist={油缸形式s} />
+
+              <Zx   value={ 防爆标志 || ''}
+                                onChange={e => set防爆标志( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <CheckSwitch  disabled={false}  checked= {汽车电梯 || false}
+                            onChange={e => set汽车电梯(汽车电梯? undefined:true) } />
+
+              <Zx   value={ 防爆证号 || ''}
+                                onChange={e => set防爆证号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+
+
+
+
+
+              <Zx
+                type="number"  min={1} max={999}
+                value={ flo || '' }
+                onChange={e => setFlo( e.currentTarget.value||undefined ) }
+              >865行</Zx>
+
+
+              <CheckSwitch
+                checked= {spec || false}
+                onChange={e => setSpec(!spec) }
+              />
+
+
+              <Zx
+                type="number"  min={0} max={300}
+                value={vl || ''}
+                onChange={e => setVl( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+
+              <CheckSwitch
+                checked= {nnor || false}
+                onChange={e => setNnor(!nnor) }
+              />
+
+
+              <CheckSwitch
+                checked= {oldb || false}
+                onChange={e => setOldb(!oldb) }
+              />
+
+
+              <Zx
+                placeholder="层数"
+                value={ cpm || ''}
+                onChange={e => setCpm( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+
+              <Zx
+                type="number"
+                value={ hlf || ''}
+                onChange={e => setHlf( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx
+                type="number"
+                value={ lesc || ''}
+                onChange={e => setLesc( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx
+                type="number"
+                value={ wesc || ''}
+                onChange={e => setWesc( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx
+                value={ tm || ''}
+                onChange={e => setTm( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx
+                value={ mtm || ''}
+                onChange={e => setMtm( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Select inputSize="md" css={{minWidth:'140px',fontSize:'1.5rem',padding:'0 1rem'}} divStyle={css`max-width:240px;`}
+                      value={ buff || ''}
+                      onChange={e => setBuff( e.currentTarget.value||undefined ) }
+              >
+                <option></option>
+                { 缓冲器形式.map((one,i) => (
+                  <option key={i}>{one}</option>
+                )) }
+              </Select>
+
+              <Zx
+                type="number"
+                value={ rtl || ''}
+                onChange={e => setRtl( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <ComboBoxDatalist
+                value={ aap || ''}
+                onListChange={v => setAap( v||undefined ) }
+                datalist={加装附加装置}
+              />
+
+              <Zx
+                value={ prot || ''}
+                onChange={e => setProt( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <InputDatalist
+                value={ doop || ''}
+                onListChange={v => setDoop(v ||undefined)}
+                datalist={开门方式}
+              />
+
+              <Zx
+                value={ limm || ''}
+                onChange={e => setLimm( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Select inputSize="md" css={{minWidth:'140px',fontSize:'1.5rem',padding:'0 1rem'}} divStyle={css`max-width:240px;`}
+                      value={ opm || ''}
+                      onChange={e => setOpm( e.currentTarget.value||undefined ) }
+              >
+                <option> </option>
+                { 控制方式.map((one,i) => (
+                  <option key={i}>{one}</option>
+                )) }
+              </Select>
+
+              <Zx  type='date'  value={lbkd ||''}
+                               onChange={e => setLbkd( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type='date'  value={nbkd ||''}
+                               onChange={e => setNbkd( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx
+                value={ 控制屏编号 || ''}
+                onChange={e => set控制屏编号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx
+                value={ 曳引号 || ''}
+                onChange={e => set曳引号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx
+                value={ 主机号 || ''}
+                onChange={e => set主机号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+
+              <Text variant="h5">监察参数</Text>
+
+              <InputDatalist
+                value={ 制造国 || ''}
+                onListChange={v => set制造国(v ||undefined)}
+                datalist={["中国","美国","欧盟"]}
+              />
+
+              <CheckSwitch
+                checked= {vital || false}
+                onChange={e => setVital(vital? undefined:true) }
+              />
+
+              <Zx
+                type="number"
+                value={ 年限 || ''}
+                onChange={e => set年限( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Select
+                value={ cpa || ''}
+                onChange={e => setCpa( e.currentTarget.value||undefined ) }
+              >
+                <option> </option>
+                { 事故隐患类别.map((one,i) => (
+                  <option key={i} value={i+1}>{one}</option>
+                )) }
+              </Select>
+
+              <Zx
+                type="number"
+                value={ 固定资产值 || ''}
+                onChange={e => set固定资产值( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx
+                type="number"
+                value={ 大修周期 || ''}
+                onChange={e => set大修周期( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+
+              <Text variant="h5">许可用的参数</Text>
+
+              <Zx  type='date'  value={ 设计日期  || ''}
+                               onChange={e => set设计日期( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <UnitOrChoose id={造监检单  || ''} emodel={'电梯'} emid={id} field={'造监检单'}
+                            onCancel={() => {
+                              set造监检单( undefined )
+                            }}
+                            onDialog={async () => { await setNdt(await confirmation()); } }
+              />
+
+              <UnitOrChoose id={土建施单  || ''} emodel={'电梯'} emid={id} field={'土建施单'}
+                            onCancel={() => {
+                              set土建施单( undefined )
+                            }}
+                            onDialog={async () => { await setNdt(await confirmation()); } }
+              />
+
+              <UnitOrChoose id={土建验单  || ''} emodel={'电梯'} emid={id} field={'土建验单'}
+                            onCancel={() => {
+                              set土建验单( undefined )
+                            }}
+                            onDialog={async () => { await setNdt(await confirmation()); } }
+              />
+
+              <Text variant="h5">监检准入参数</Text>
+
+              <ComboBoxDatalist  value={ 施工类别 || ''}
+                                 onListChange={v => set施工类别( v||undefined ) }
+                                 datalist={施工类别s}  />
+
+              <Zx  type='date'  value={ 施工日期  || ''}
+                               onChange={e => set施工日期( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type='date'  value={ 竣验日  || ''}
+                               onChange={e => set竣验日( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx
+                value={ 施工号 || ''}
+                onChange={e => set施工号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <UnitOrChoose id={设计单位  || ''} emodel={'电梯'} emid={id} field={'设计单位'}
+                            onCancel={() => {
+                              set设计单位( undefined )
+                            }}
+                            onDialog={async () => { await setNdt(await confirmation()); } }
+              />
+
+              <Zx
+                value={ 设计许号 || ''}
+                onChange={e => set设计许号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx
+                value={ 产品标准 || ''}
+                onChange={e => set产品标准( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx
+                value={ 设计图号 || ''}
+                onChange={e => set设计图号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx
+                value={ 合格证号 || ''}
+                onChange={e => set合格证号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type='date'  value={ 安竣日  || ''}
+                               onChange={e => set安竣日( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx
+                type="number"
+                value={ 设备总重量 || ''}
+                onChange={e => set设备总重量( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Text variant="h5">常用参数</Text>
+
+              <Zx
+                type="number"
+                value={ 倾斜角度 || ''}
+                onChange={e => set倾斜角度( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 安全钳型号 || ''}
+                                onChange={e => set安全钳型号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 安全钳编号 || ''}
+                                onChange={e => set安全钳编号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 层门型号 || ''}
+                                onChange={e => set层门型号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 底坑深度 || ''}
+                               onChange={e => set底坑深度( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 电动机功率 || ''}
+                               onChange={e => set电动机功率( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 电动机转速 || ''}
+                                onChange={e => set电动机转速( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 电梯门数 || ''}
+                               onChange={e => set电梯门数( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 电梯站数 || ''}
+                               onChange={e => set电梯站数( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 顶层高度 || ''}
+                               onChange={e => set顶层高度( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 对重轨距 || ''}
+                               onChange={e => set对重轨距( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 对重块数 || ''}
+                               onChange={e => set对重块数( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 对重限速号 || ''}
+                                onChange={e => set对重限速号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 对重限型号 || ''}
+                                onChange={e => set对重限型号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 额定电流 || ''}
+                               onChange={e => set额定电流( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 额定载人 || ''}
+                               onChange={e => set额定载人( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 缓冲器编号 || ''}
+                                onChange={e => set缓冲器编号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 缓冲器型号 || ''}
+                                onChange={e => set缓冲器型号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 缓冲器厂家 || ''}
+                                onChange={e => set缓冲器厂家( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 轿厢轨距 || ''}
+                               onChange={e => set轿厢轨距( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 上行限电速 || ''}
+                                onChange={e => set上行限电速( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 上行限机速 || ''}
+                                onChange={e => set上行限机速( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 下行限电速 || ''}
+                                onChange={e => set下行限电速( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 下行限机速 || ''}
+                                onChange={e => set下行限机速( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 移动保护号 || ''}
+                                onChange={e => set移动保护号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 移动保护型 || ''}
+                                onChange={e => set移动保护型( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <InputDatalist  value={ 装修 || ''}
+                              onListChange={v => set装修(v ||undefined)}
+                              datalist={轿厢装修状态} />
+
+              <Zx   value={ 锁型号 || ''}
+                                onChange={e => set锁型号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <ComboBoxDatalist  value={ 上护装置 || ''}
+                                 onListChange={v => set上护装置( v||undefined ) }
+                                 datalist={上行保护装置形式}  />
+
+              <Zx   value={ 上护型号 || ''}
+                                onChange={e => set上护型号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 上护编号 || ''}
+                                onChange={e => set上护编号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <CheckSwitch  checked= {手机信 || false}
+                            onChange={e => set手机信(手机信? undefined:true) } />
+
+              <Zx   value={ 速比 || ''}
+                                onChange={e => set速比( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Select  value={ 拖动 || ''}
+                       onChange={e => set拖动( e.currentTarget.value||undefined ) } >
+                <option></option>
+                { 拖动方式.map((one,i) => <option key={i} >{one}</option> ) }
+              </Select>
+
+              <Zx   value={ 限速器号 || ''}
+                                onChange={e => set限速器号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 限绳直径 || ''}
+                               onChange={e => set限绳直径( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 曳引比 || ''}
+                                onChange={e => set曳引比( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 轮节径 || ''}
+                               onChange={e => set轮节径( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 绳数 || ''}
+                               onChange={e => set绳数( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <CheckSwitch  checked= {是钢带 || false} disabled={false}
+                            onChange={e => set是钢带(是钢带? undefined:true) } />
+
+              {是钢带 ? (
+
+                <Zx   value={ 钢带规格 || ''} readOnly={true}
+                                  onChange={e => set钢带规格( e.currentTarget.value||undefined ) }
+                >米</Zx>
+
+              ) :(
+
+                <Zx  type="number" value={ 绳直径 || ''} readOnly={true}
+                                 onChange={e => set绳直径( e.currentTarget.value||undefined ) }
+                >米</Zx>
+
+              ) }
+
+              <Text variant="h5">其它参数</Text>
+
+              <Zx   value={ 爆炸物质 || ''}
+                                onChange={e => set爆炸物质( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Select  value={ 补偿方式 || ''}
+                       onChange={e => set补偿方式( e.currentTarget.value||undefined ) } >
+                <option></option>
+                { 补偿方式s.map((one,i) => <option key={i} >{one}</option> ) }
+              </Select>
+
+              <InputDatalist  value={ 电动机类型 || ''}
+                              onListChange={v => set电动机类型(v ||undefined)}
+                              datalist={电动机类型s} />
+
+              <Select  value={ 顶升形式 || ''}
+                       onChange={e => set顶升形式( e.currentTarget.value||undefined ) } >
+                <option></option>
+                { 顶升形式s.map((one,i) => <option key={i} >{one}</option> ) }
+              </Select>
+
+              <Select  value={ 导轨型式 || ''}
+                       onChange={e => set导轨型式( e.currentTarget.value||undefined ) } >
+                <option></option>
+                { 对重导轨型式s.map((one,i) => <option key={i} >{one}</option> ) }
+              </Select>
+
+              <Zx  type="number" value={ 轿厢高 || ''}
+                               onChange={e => set轿厢高( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 轿厢宽 || ''}
+                               onChange={e => set轿厢宽( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 轿厢深 || ''}
+                               onChange={e => set轿厢深( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <ComboBoxDatalist  value={ 区域防爆 || ''}
+                                 onListChange={v => set区域防爆( v||undefined ) }
+                                 datalist={区域防爆等级}  />
+
+              <Select  value={ 驱动方式 || ''}
+                       onChange={e => set驱动方式( e.currentTarget.value||undefined ) } >
+                <option></option>
+                { 驱动方式s.map((one,i) => <option key={i} >{one}</option> ) }
+              </Select>
+
+              <Zx  type="number" value={ 上行额速 || ''}
+                               onChange={e => set上行额速( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <CheckSwitch  checked= {船梯 || false}
+                            onChange={e => set船梯(船梯? undefined:true) } />
+
+              <CheckSwitch  checked= {公共交通 || false}
+                            onChange={e => set公共交通(公共交通? undefined:true) } />
+
+              <CheckSwitch  checked= {汽车电梯 || false}
+                            onChange={e => set汽车电梯(汽车电梯? undefined:true) } />
+
+              <Zx  type="number" value={ 梯级宽度 || ''}
+                               onChange={e => set梯级宽度( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 下额定速 || ''}
+                               onChange={e => set下额定速( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 限机械速 || ''}
+                                onChange={e => set限机械速( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 悬挂绳数 || ''}
+                               onChange={e => set悬挂绳数( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 悬挂绳径 || ''}
+                               onChange={e => set悬挂绳径( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 泵编号 || ''}
+                                onChange={e => set泵编号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 泵功率 || ''}
+                               onChange={e => set泵功率( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 泵流量 || ''}
+                               onChange={e => set泵流量( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 泵型号 || ''}
+                                onChange={e => set泵型号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 泵转速 || ''}
+                               onChange={e => set泵转速( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 液油型号 || ''}
+                                onChange={e => set液油型号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 油缸数 || ''}
+                               onChange={e => set油缸数( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <InputDatalist  value={ 油缸形式 || ''}
+                              onListChange={v => set油缸形式(v ||undefined)}
+                              datalist={油缸形式s} />
+
+              <Zx   value={ 防爆标志 || ''}
+                                onChange={e => set防爆标志( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <CheckSwitch  disabled={false}  checked= {汽车电梯 || false}
+                            onChange={e => set汽车电梯(汽车电梯? undefined:true) } />
+
+              <Zx   value={ 防爆证号 || ''}
+                                onChange={e => set防爆证号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+
+
+
+
+
+
+              <Zx
+                type="number"  min={1} max={999}
+                value={ flo || '' }
+                onChange={e => setFlo( e.currentTarget.value||undefined ) }
+              >865行</Zx>
+
+
+              <CheckSwitch
+                checked= {spec || false}
+                onChange={e => setSpec(!spec) }
+              />
+
+
+              <Zx
+                type="number"  min={0} max={300}
+                value={vl || ''}
+                onChange={e => setVl( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+
+              <CheckSwitch
+                checked= {nnor || false}
+                onChange={e => setNnor(!nnor) }
+              />
+
+
+              <CheckSwitch
+                checked= {oldb || false}
+                onChange={e => setOldb(!oldb) }
+              />
+
+
+              <Zx
+                placeholder="层数"
+                value={ cpm || ''}
+                onChange={e => setCpm( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+
+              <Zx
+                type="number"
+                value={ hlf || ''}
+                onChange={e => setHlf( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx
+                type="number"
+                value={ lesc || ''}
+                onChange={e => setLesc( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx
+                type="number"
+                value={ wesc || ''}
+                onChange={e => setWesc( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx
+                value={ tm || ''}
+                onChange={e => setTm( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx
+                value={ mtm || ''}
+                onChange={e => setMtm( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Select inputSize="md" css={{minWidth:'140px',fontSize:'1.5rem',padding:'0 1rem'}} divStyle={css`max-width:240px;`}
+                      value={ buff || ''}
+                      onChange={e => setBuff( e.currentTarget.value||undefined ) }
+              >
+                <option></option>
+                { 缓冲器形式.map((one,i) => (
+                  <option key={i}>{one}</option>
+                )) }
+              </Select>
+
+              <Zx
+                type="number"
+                value={ rtl || ''}
+                onChange={e => setRtl( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <ComboBoxDatalist
+                value={ aap || ''}
+                onListChange={v => setAap( v||undefined ) }
+                datalist={加装附加装置}
+              />
+
+              <Zx
+                value={ prot || ''}
+                onChange={e => setProt( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <InputDatalist
+                value={ doop || ''}
+                onListChange={v => setDoop(v ||undefined)}
+                datalist={开门方式}
+              />
+
+              <Zx
+                value={ limm || ''}
+                onChange={e => setLimm( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Select inputSize="md" css={{minWidth:'140px',fontSize:'1.5rem',padding:'0 1rem'}} divStyle={css`max-width:240px;`}
+                      value={ opm || ''}
+                      onChange={e => setOpm( e.currentTarget.value||undefined ) }
+              >
+                <option> </option>
+                { 控制方式.map((one,i) => (
+                  <option key={i}>{one}</option>
+                )) }
+              </Select>
+
+              <Zx  type='date'  value={lbkd ||''}
+                               onChange={e => setLbkd( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type='date'  value={nbkd ||''}
+                               onChange={e => setNbkd( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx
+                value={ 控制屏编号 || ''}
+                onChange={e => set控制屏编号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx
+                value={ 曳引号 || ''}
+                onChange={e => set曳引号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx
+                value={ 主机号 || ''}
+                onChange={e => set主机号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+
+              <Text variant="h5">监察参数</Text>
+
+              <InputDatalist
+                value={ 制造国 || ''}
+                onListChange={v => set制造国(v ||undefined)}
+                datalist={["中国","美国","欧盟"]}
+              />
+
+              <CheckSwitch
+                checked= {vital || false}
+                onChange={e => setVital(vital? undefined:true) }
+              />
+
+              <Zx
+                type="number"
+                value={ 年限 || ''}
+                onChange={e => set年限( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Select
+                value={ cpa || ''}
+                onChange={e => setCpa( e.currentTarget.value||undefined ) }
+              >
+                <option> </option>
+                { 事故隐患类别.map((one,i) => (
+                  <option key={i} value={i+1}>{one}</option>
+                )) }
+              </Select>
+
+              <Zx
+                type="number"
+                value={ 固定资产值 || ''}
+                onChange={e => set固定资产值( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx
+                type="number"
+                value={ 大修周期 || ''}
+                onChange={e => set大修周期( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+
+              <Text variant="h5">许可用的参数</Text>
+
+              <Zx  type='date'  value={ 设计日期  || ''}
+                               onChange={e => set设计日期( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <UnitOrChoose id={造监检单  || ''} emodel={'电梯'} emid={id} field={'造监检单'}
+                            onCancel={() => {
+                              set造监检单( undefined )
+                            }}
+                            onDialog={async () => { await setNdt(await confirmation()); } }
+              />
+
+              <UnitOrChoose id={土建施单  || ''} emodel={'电梯'} emid={id} field={'土建施单'}
+                            onCancel={() => {
+                              set土建施单( undefined )
+                            }}
+                            onDialog={async () => { await setNdt(await confirmation()); } }
+              />
+
+              <UnitOrChoose id={土建验单  || ''} emodel={'电梯'} emid={id} field={'土建验单'}
+                            onCancel={() => {
+                              set土建验单( undefined )
+                            }}
+                            onDialog={async () => { await setNdt(await confirmation()); } }
+              />
+
+              <Text variant="h5">监检准入参数</Text>
+
+              <ComboBoxDatalist  value={ 施工类别 || ''}
+                                 onListChange={v => set施工类别( v||undefined ) }
+                                 datalist={施工类别s}  />
+
+              <Zx  type='date'  value={ 施工日期  || ''}
+                               onChange={e => set施工日期( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type='date'  value={ 竣验日  || ''}
+                               onChange={e => set竣验日( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx
+                value={ 施工号 || ''}
+                onChange={e => set施工号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <UnitOrChoose id={设计单位  || ''} emodel={'电梯'} emid={id} field={'设计单位'}
+                            onCancel={() => {
+                              set设计单位( undefined )
+                            }}
+                            onDialog={async () => { await setNdt(await confirmation()); } }
+              />
+
+              <Zx
+                value={ 设计许号 || ''}
+                onChange={e => set设计许号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx
+                value={ 产品标准 || ''}
+                onChange={e => set产品标准( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx
+                value={ 设计图号 || ''}
+                onChange={e => set设计图号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx
+                value={ 合格证号 || ''}
+                onChange={e => set合格证号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type='date'  value={ 安竣日  || ''}
+                               onChange={e => set安竣日( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx
+                type="number"
+                value={ 设备总重量 || ''}
+                onChange={e => set设备总重量( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Text variant="h5">常用参数</Text>
+
+              <Zx
+                type="number"
+                value={ 倾斜角度 || ''}
+                onChange={e => set倾斜角度( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 安全钳型号 || ''}
+                                onChange={e => set安全钳型号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 安全钳编号 || ''}
+                                onChange={e => set安全钳编号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 层门型号 || ''}
+                                onChange={e => set层门型号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 底坑深度 || ''}
+                               onChange={e => set底坑深度( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 电动机功率 || ''}
+                               onChange={e => set电动机功率( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 电动机转速 || ''}
+                                onChange={e => set电动机转速( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 电梯门数 || ''}
+                               onChange={e => set电梯门数( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 电梯站数 || ''}
+                               onChange={e => set电梯站数( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 顶层高度 || ''}
+                               onChange={e => set顶层高度( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 对重轨距 || ''}
+                               onChange={e => set对重轨距( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 对重块数 || ''}
+                               onChange={e => set对重块数( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 对重限速号 || ''}
+                                onChange={e => set对重限速号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 对重限型号 || ''}
+                                onChange={e => set对重限型号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 额定电流 || ''}
+                               onChange={e => set额定电流( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 额定载人 || ''}
+                               onChange={e => set额定载人( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 缓冲器编号 || ''}
+                                onChange={e => set缓冲器编号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 缓冲器型号 || ''}
+                                onChange={e => set缓冲器型号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 缓冲器厂家 || ''}
+                                onChange={e => set缓冲器厂家( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 轿厢轨距 || ''}
+                               onChange={e => set轿厢轨距( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 上行限电速 || ''}
+                                onChange={e => set上行限电速( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 上行限机速 || ''}
+                                onChange={e => set上行限机速( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 下行限电速 || ''}
+                                onChange={e => set下行限电速( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 下行限机速 || ''}
+                                onChange={e => set下行限机速( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 移动保护号 || ''}
+                                onChange={e => set移动保护号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 移动保护型 || ''}
+                                onChange={e => set移动保护型( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <InputDatalist  value={ 装修 || ''}
+                              onListChange={v => set装修(v ||undefined)}
+                              datalist={轿厢装修状态} />
+
+              <Zx   value={ 锁型号 || ''}
+                                onChange={e => set锁型号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <ComboBoxDatalist  value={ 上护装置 || ''}
+                                 onListChange={v => set上护装置( v||undefined ) }
+                                 datalist={上行保护装置形式}  />
+
+              <Zx   value={ 上护型号 || ''}
+                                onChange={e => set上护型号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 上护编号 || ''}
+                                onChange={e => set上护编号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <CheckSwitch  checked= {手机信 || false}
+                            onChange={e => set手机信(手机信? undefined:true) } />
+
+              <Zx   value={ 速比 || ''}
+                                onChange={e => set速比( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Select  value={ 拖动 || ''}
+                       onChange={e => set拖动( e.currentTarget.value||undefined ) } >
+                <option></option>
+                { 拖动方式.map((one,i) => <option key={i} >{one}</option> ) }
+              </Select>
+
+              <Zx   value={ 限速器号 || ''}
+                                onChange={e => set限速器号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 限绳直径 || ''}
+                               onChange={e => set限绳直径( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 曳引比 || ''}
+                                onChange={e => set曳引比( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 轮节径 || ''}
+                               onChange={e => set轮节径( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 绳数 || ''}
+                               onChange={e => set绳数( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <CheckSwitch  checked= {是钢带 || false} disabled={false}
+                            onChange={e => set是钢带(是钢带? undefined:true) } />
+
+              {是钢带 ? (
+
+                <Zx   value={ 钢带规格 || ''} readOnly={true}
+                                  onChange={e => set钢带规格( e.currentTarget.value||undefined ) }
+                >米</Zx>
+
+              ) :(
+
+                <Zx  type="number" value={ 绳直径 || ''} readOnly={true}
+                                 onChange={e => set绳直径( e.currentTarget.value||undefined ) }
+                >米</Zx>
+
+              ) }
+
+              <Text variant="h5">其它参数</Text>
+
+              <Zx   value={ 爆炸物质 || ''}
+                                onChange={e => set爆炸物质( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Select  value={ 补偿方式 || ''}
+                       onChange={e => set补偿方式( e.currentTarget.value||undefined ) } >
+                <option></option>
+                { 补偿方式s.map((one,i) => <option key={i} >{one}</option> ) }
+              </Select>
+
+              <InputDatalist  value={ 电动机类型 || ''}
+                              onListChange={v => set电动机类型(v ||undefined)}
+                              datalist={电动机类型s} />
+
+              <Select  value={ 顶升形式 || ''}
+                       onChange={e => set顶升形式( e.currentTarget.value||undefined ) } >
+                <option></option>
+                { 顶升形式s.map((one,i) => <option key={i} >{one}</option> ) }
+              </Select>
+
+              <Select  value={ 导轨型式 || ''}
+                       onChange={e => set导轨型式( e.currentTarget.value||undefined ) } >
+                <option></option>
+                { 对重导轨型式s.map((one,i) => <option key={i} >{one}</option> ) }
+              </Select>
+
+              <Zx  type="number" value={ 轿厢高 || ''}
+                               onChange={e => set轿厢高( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 轿厢宽 || ''}
+                               onChange={e => set轿厢宽( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 轿厢深 || ''}
+                               onChange={e => set轿厢深( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <ComboBoxDatalist  value={ 区域防爆 || ''}
+                                 onListChange={v => set区域防爆( v||undefined ) }
+                                 datalist={区域防爆等级}  />
+
+              <Select  value={ 驱动方式 || ''}
+                       onChange={e => set驱动方式( e.currentTarget.value||undefined ) } >
+                <option></option>
+                { 驱动方式s.map((one,i) => <option key={i} >{one}</option> ) }
+              </Select>
+
+              <Zx  type="number" value={ 上行额速 || ''}
+                               onChange={e => set上行额速( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <CheckSwitch  checked= {船梯 || false}
+                            onChange={e => set船梯(船梯? undefined:true) } />
+
+              <CheckSwitch  checked= {公共交通 || false}
+                            onChange={e => set公共交通(公共交通? undefined:true) } />
+
+              <CheckSwitch  checked= {汽车电梯 || false}
+                            onChange={e => set汽车电梯(汽车电梯? undefined:true) } />
+
+              <Zx  type="number" value={ 梯级宽度 || ''}
+                               onChange={e => set梯级宽度( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 下额定速 || ''}
+                               onChange={e => set下额定速( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 限机械速 || ''}
+                                onChange={e => set限机械速( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 悬挂绳数 || ''}
+                               onChange={e => set悬挂绳数( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 悬挂绳径 || ''}
+                               onChange={e => set悬挂绳径( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 泵编号 || ''}
+                                onChange={e => set泵编号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 泵功率 || ''}
+                               onChange={e => set泵功率( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 泵流量 || ''}
+                               onChange={e => set泵流量( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 泵型号 || ''}
+                                onChange={e => set泵型号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 泵转速 || ''}
+                               onChange={e => set泵转速( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx   value={ 液油型号 || ''}
+                                onChange={e => set液油型号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <Zx  type="number" value={ 油缸数 || ''}
+                               onChange={e => set油缸数( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <InputDatalist  value={ 油缸形式 || ''}
+                              onListChange={v => set油缸形式(v ||undefined)}
+                              datalist={油缸形式s} />
+
+              <Zx   value={ 防爆标志 || ''}
+                                onChange={e => set防爆标志( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+              <CheckSwitch  disabled={false}  checked= {汽车电梯 || false}
+                            onChange={e => set汽车电梯(汽车电梯? undefined:true) } />
+
+              <Zx   value={ 防爆证号 || ''}
+                                onChange={e => set防爆证号( e.currentTarget.value||undefined ) }
+              >米</Zx>
+
+
+
+
+              <Button
+                size="lg"
+                intent="primary"
+                iconAfter={<IconArrowRight />}
+                onPress={ async () => {
+                  //不用JSON.stringify保存到数据库格式不一样，对象直接转String，前端无法取出。必须用json格式{"制造国":"地","年限":"12"}
+                  await confirmation();
+                } }
+              >
+                确认修改检查
+              </Button>
+            </div>
+          </Container>
         </div>
-
       </div>
+
+    </div>
   );
 };
+
 

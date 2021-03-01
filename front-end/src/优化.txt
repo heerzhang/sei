@@ -23,3 +23,11 @@ useMutation(refetchQueries:['DEVICE_BY_ID']})传递下来又会再多出2次rend
 幸运的是，采取局部化措施后，受到波及的组件实际的更新响应速度尚且可以。
 
 //Chrome版本 home= 88.0.4324.104（正式版本） （64 位）
+用children方式(组件Tag嵌套)传递和直接往组件加个参数方式的，性能一致没差距。
+用emotion的css{[{}]}接替react的style{{}}对象方式所带来的性能负担，还算合理,增加量不算离谱。
+组件的名字长度必须2个字符及以上。
+<span>css相对于-string纯文本 非标签纯粹txt，对性能负担很明显。
+<Text>组件把span改成div后,对性能没影响;
+emotion{{}}带入,影响较大,但也算合理预计当中。
+
+
