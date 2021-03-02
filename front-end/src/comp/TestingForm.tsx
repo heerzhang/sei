@@ -897,7 +897,7 @@ export interface InputGroupLineProps extends InputGroupProps {
 不要对InputGroupLine的上一级div定义固定宽度，自适应和固定width: px只能二者选其一；宽度定了对小屏幕场景就有滚动条，而不是自适应缩小flexBox布局。
 修改InputGroup排版模式; 并排模式，根据屏幕自适应。支持 2 个模式的布局安排结构。
 */
-export const InputGroupLine: React.FunctionComponent<InputGroupLineProps> = ({
+export const InputGroupLineOld: React.FunctionComponent<InputGroupLineProps> = ({
                                                                                id,
                                                                                label,
                                                                                children,
@@ -1027,6 +1027,140 @@ export const InputGroupLine: React.FunctionComponent<InputGroupLineProps> = ({
     </section>
   );
 };
+
+//当前测试版
+export const InputGroupLine: React.FunctionComponent<InputGroupLineProps> = ({
+                                                                               id,
+                                                                               label,
+                                                                               children,
+                                                                               error,
+                                                                               helpText,
+                                                                               hideLabel,
+                                                                               labelTextStyle,
+                                                                               lineStyle,
+                                                                               switchPx=360,
+                                                                               ...other
+                                                                             }) => {
+  const uid = useUid(id);
+  const theme = useTheme();
+  const isDark = theme.colors.mode === "dark";
+  const danger = isDark
+    ? theme.colors.intent.danger.light
+    : theme.colors.intent.danger.base;
+
+  //根据外部程序制定的px数，来决定用哪一个模式布局。紧凑的是2行显示；宽松的是并列在同一行。
+  const fitable = useMedia({ minWidth: `${switchPx}px` });
+  //InputGroupLine包裹的下层的顶级组件的样式修改：下层顶级元素的display: block还算兼容可用; 但width: 100%影响较大。
+  const childNodeVar = (
+    <InputGroupContext.Provider
+      value={{
+        uid,
+        error
+      }}
+    >
+      {
+        React.cloneElement(children as React.ReactElement<any>, {
+          topDivStyle: { flex: '1 1 60%' },
+          //style: { flex: '1 1 60%' },      左边的项目文字描述　40%　右边输入框(含单位字符)占用60%
+        })
+      }
+    </InputGroupContext.Provider>
+  );
+
+  const titleVar = (
+    <label className="Label__text"  htmlFor={uid}
+          css={[
+            {
+              //display: "inline-flex",
+              textAlign: fitable? "right" : "left",
+              flex: '1 1 40%',
+              paddingRight: '0.8rem',
+              marginBottom: hideLabel ? 0 : theme.spaces.sm
+            },
+            labelTextStyle
+          ]}
+    >
+      {label}
+    </label>
+  );
+
+  return (
+    <section
+      className="InputGroupLine"
+      css={{
+        marginTop: theme.spaces.md,
+        "&.InputGroupLine:first-of-type": {
+          marginTop: 0
+        },
+        textAlign: 'center'
+      }}
+      {...other}
+    >
+      <div  css={[
+        {
+          alignItems: "center",
+          justifyContent: "space-around",
+          display: "flex",
+      //    flexWrap: 'wrap',
+          maxWidth: '950px',
+          margin: '0 auto',
+          paddingRight: fitable? '0.5rem' :  'unset',
+        },
+        lineStyle
+      ]}
+      >
+        {hideLabel ? <VisuallyHidden>{titleVar}</VisuallyHidden> : titleVar}
+
+        { fitable &&   childNodeVar  }
+      </div>
+
+      { !fitable &&   childNodeVar  }
+
+      {error && typeof error === "string" ? (
+        <div
+          className="InputGroup__error"
+          css={{
+            alignItems: "center",
+            marginTop: theme.spaces.sm,
+            display: "flex",
+            justifyContent: 'center'
+          }}
+        >
+          <IconAlertCircle size="sm" color={danger} />
+          <Text
+            css={{
+              display: "block",
+              marginLeft: theme.spaces.xs,
+              fontSize: theme.fontSizes[0],
+              color: danger
+            }}
+          >
+            {error}
+          </Text>
+        </div>
+      ) : (
+        error
+      )}
+
+      {helpText && (
+        <Text
+          className="InputGroup__help"
+          css={{
+            display: "inline-flex",
+            marginTop: theme.spaces.xs,
+            color: theme.colors.text.muted,
+            fontSize: theme.fontSizes[0]
+          }}
+          variant="body"
+        >
+          {helpText}
+        </Text>
+      )}
+    </section>
+  );
+};
+//orginal全部673ms; 改造后=615ms;
+
 
 InputGroupLine.propTypes = {
   label: PropTypes.string.isRequired,

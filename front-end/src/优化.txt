@@ -25,9 +25,37 @@ useMutation(refetchQueries:['DEVICE_BY_ID']})传递下来又会再多出2次rend
 //Chrome版本 home= 88.0.4324.104（正式版本） （64 位）
 用children方式(组件Tag嵌套)传递和直接往组件加个参数方式的，性能一致没差距。
 用emotion的css{[{}]}接替react的style{{}}对象方式所带来的性能负担，还算合理,增加量不算离谱。
-组件的名字长度必须2个字符及以上。
+注意组件的名字长度必须2个字符及以上。
 <span>css相对于-string纯文本 非标签纯粹txt，对性能负担很明显。
 <Text>组件把span改成div后,对性能没影响;
 emotion{{}}带入,影响较大,但也算合理预计当中。
+前端适当优化， 电脑手机更新换代，性能提升快。
+搞useMedia({ minWidth: `${switchPx}px` }) 对性能影响很小。
 
+        <Label hide={hideLabel} htmlFor={uid}  textStyle={labelDivCss}
+               css={[
+                 {
+                   display: "inline-flex",
+                   textAlign: fitable? "right" : "left",
+                   flex: '1 1 40%',
+                 },
+                 labelStyle
+               ]}
+        >
+          {label}
+        </Label>
 
+   回快点，但是不能控制靠旗
+           <Text className="Label__text" variant={"subtitle"}
+                 css={[
+                   {
+                     display: "inline-flex",
+                     textAlign: fitable? "right" : "left",
+                     flex: '1 1 40%',
+                   }
+                 ]}
+                 >
+             {label}
+           </Text>
+
+label for
