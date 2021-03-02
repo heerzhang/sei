@@ -25,6 +25,7 @@ import {
 import { safeBind } from "customize-easy-ui-component/esm/Hooks/compose-bind";
 import { useUid } from "customize-easy-ui-component/esm/Hooks/use-uid";
 import { alpha } from "customize-easy-ui-component/esm/Theme/colors";
+import { LabelText } from "./Text";
 //似乎<form action= omsubmit= /> 都不再需要使用了。
 
 /*
@@ -1067,8 +1068,9 @@ export const InputGroupLine: React.FunctionComponent<InputGroupLineProps> = ({
     </InputGroupContext.Provider>
   );
 
+  //这里htmlFor={uid}，标签label 和 input很可能分别属于不同div底下的。
   const titleVar = (
-    <label className="Label__text"  htmlFor={uid}
+    <LabelText className="Label__text"  htmlFor={uid}
           css={[
             {
               //display: "inline-flex",
@@ -1081,7 +1083,7 @@ export const InputGroupLine: React.FunctionComponent<InputGroupLineProps> = ({
           ]}
     >
       {label}
-    </label>
+    </LabelText>
   );
 
   return (
@@ -1101,7 +1103,7 @@ export const InputGroupLine: React.FunctionComponent<InputGroupLineProps> = ({
           alignItems: "center",
           justifyContent: "space-around",
           display: "flex",
-      //    flexWrap: 'wrap',
+          // flexWrap: 'wrap',
           maxWidth: '950px',
           margin: '0 auto',
           paddingRight: fitable? '0.5rem' :  'unset',
@@ -1159,8 +1161,8 @@ export const InputGroupLine: React.FunctionComponent<InputGroupLineProps> = ({
     </section>
   );
 };
-//orginal全部673ms; 改造后=615ms;
-
+//orginal全部673ms; 改造后=615ms;  LabelText改后=590ms;
+//InputGroupLineOld=680ms; 新的InputGroupLine=600ms;
 
 InputGroupLine.propTypes = {
   label: PropTypes.string.isRequired,

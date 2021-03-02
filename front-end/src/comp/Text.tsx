@@ -281,7 +281,7 @@ export const LabelText: React.FunctionComponent<LabelTextProps> = ({
   const styles = React.useMemo(() => basicStyles(theme), [theme]);
 
   return (
-    <label
+    <label htmlFor={htmlFor}
       css={[
         styles.base,
         !wrap && styles.noWrap,

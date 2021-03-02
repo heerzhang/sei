@@ -41,7 +41,7 @@ import { UnitOrChoose } from "../../unit/UnitOrChoose";
 import { DialogEnterReturn } from "../../context/DialogEnterReturn";
 import queryString from "querystring";
 import Switch from "react-switch";
-import { InputGroupLine, InputGroupLineOld, Zx } from "../../comp/TestingForm";
+import { InputGroupLine,  Zx } from "../../comp/TestingForm";
 import { ComboBoxDatalist } from "../../comp/ComboBox";
 
 
@@ -3226,25 +3226,25 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
               >米 </Zx>
 </InputGroupLine>
 
-              <InputGroupLine  label='报告地址自动获得链接:' >
+              <InputGroupLine  label='报告地址自动获得链接0:' >
  <Zx  type="number" value={ 泵流量 || ''}
                                onChange={e => set泵流量( e.currentTarget.value||undefined ) }
               >米 </Zx>
 </InputGroupLine>
 
-              <InputGroupLine  label='报告地址自动获得链接:' >
+              <InputGroupLine  label='报告地址自动获得链接1:' >
  <Zx   value={ 泵型号 || ''}
                                 onChange={e => set泵型号( e.currentTarget.value||undefined ) }
               >米 </Zx>
 </InputGroupLine>
 
-              <InputGroupLine  label='报告地址自动获旧链接:' >
+              <InputGroupLine  label='报告地址自动获旧链接0:' >
  <Zx  type="number" value={ 泵转速 || ''}
                                onChange={e => set泵转速( e.currentTarget.value||undefined ) }
               >米 </Zx>
 </InputGroupLine>
 
-              <InputGroupLine  label='报告地址自动获得链接:' >
+              <InputGroupLine  label='报告地址自动获得链接1:' >
  <Zx   value={ 液油型号 || ''}
                                 onChange={e => set液油型号( e.currentTarget.value||undefined ) }
               >米 </Zx>
