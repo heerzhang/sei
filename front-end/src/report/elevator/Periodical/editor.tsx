@@ -2,7 +2,7 @@
 //import { jsx,} from "@emotion/react";
 import * as React from "react";
 import { IndentationLayText, SelectHookfork } from "../../comp/base";
-import { InputGroupLine, SuffixInput, Touchable } from "customize-easy-ui-component";
+import { InputLine, SuffixInput, Touchable } from "customize-easy-ui-component";
 import { CCell, Cell, Table, TableBody, TableRow } from "../../../comp/TableExt";
 import { Link as RouterLink } from "wouter";
 
@@ -66,50 +66,50 @@ export const useGeneralFormat= ( {verId, repId}
               details:[ (inp,setInp)=>{
                 return <React.Fragment>
                   采用梯子作为通道时
-                  <InputGroupLine label={`机房高出平面`}>
+                  <InputLine label={`机房高出平面`}>
                     <SuffixInput
                       placeholder="请输入测量数"
                       value={ inp?.机房高出 ||''}
                       onChange={e => setInp({ ...inp, 机房高出: e.currentTarget.value||undefined}) }
                     >m</SuffixInput>
-                  </InputGroupLine>
-                  <InputGroupLine label={`水平方向夹角`}>
+                  </InputLine>
+                  <InputLine label={`水平方向夹角`}>
                     <SuffixInput
                       placeholder="请输入测量数"
                       value={ inp?.梯子夹角 ||''}
                       onChange={e => setInp({ ...inp, 梯子夹角: e.currentTarget.value||undefined}) }
                     >(°)</SuffixInput>
-                  </InputGroupLine>
-                  <InputGroupLine  label='用梯子作为通道时，测量结果判定'>
+                  </InputLine>
+                  <InputLine  label='用梯子作为通道时，测量结果判定'>
                     <SelectHookfork value={ inp?.梯子判定 ||''}
                                     onChange={e => setInp({ ...inp, 梯子判定: e.currentTarget.value||undefined}) }
                     />
-                  </InputGroupLine>
+                  </InputLine>
                 </React.Fragment>
               },
                 null,
                 (inp,setInp)=>{
                   return  <React.Fragment>
                     机房通道门
-                    <InputGroupLine label={`宽度`}>
+                    <InputLine label={`宽度`}>
                       <SuffixInput
                         placeholder="请输入测量数"
                         value={ inp?.通道门宽 ||''}
                         onChange={e => setInp({ ...inp, 通道门宽: e.currentTarget.value||undefined}) }
                       >m</SuffixInput>
-                    </InputGroupLine>
-                    <InputGroupLine label={`高度`}>
+                    </InputLine>
+                    <InputLine label={`高度`}>
                       <SuffixInput
                         placeholder="请输入测量数"
                         value={ inp?.通道门高 ||''}
                         onChange={e => setInp({ ...inp, 通道门高: e.currentTarget.value||undefined}) }
                       >m</SuffixInput>
-                    </InputGroupLine>
-                    <InputGroupLine  label='机房通道门的测量结果判定'>
+                    </InputLine>
+                    <InputLine  label='机房通道门的测量结果判定'>
                       <SelectHookfork value={ inp?.通道判定 ||''}
                                       onChange={e => setInp({ ...inp, 通道判定: e.currentTarget.value||undefined}) }
                       />
-                    </InputGroupLine>
+                    </InputLine>
                   </React.Fragment>
                 }
               ]
@@ -218,7 +218,7 @@ export const useGeneralFormat= ( {verId, repId}
               details:[(inp,setInp)=>{
                 return <React.Fragment>
                   数据测量
-                  <InputGroupLine  label='动力电路' >
+                  <InputLine  label='动力电路' >
                     <SuffixInput
                       value={inp?.动力电阻 ||''}
                       onChange={e => setInp({ ...inp, 动力电阻: e.currentTarget.value||undefined}) }
@@ -227,8 +227,8 @@ export const useGeneralFormat= ( {verId, repId}
                       placeholder="请输入测量数"
                     >MΩ
                     </SuffixInput>
-                  </InputGroupLine>
-                  <InputGroupLine  label='照明电路' >
+                  </InputLine>
+                  <InputLine  label='照明电路' >
                     <SuffixInput
                       value={inp?.照明电阻 ||''}
                       onChange={e => setInp({ ...inp, 照明电阻: e.currentTarget.value||undefined}) }
@@ -237,8 +237,8 @@ export const useGeneralFormat= ( {verId, repId}
                       placeholder="请输入测量数"
                     >MΩ
                     </SuffixInput>
-                  </InputGroupLine>
-                  <InputGroupLine  label='安全装置电路' >
+                  </InputLine>
+                  <InputLine  label='安全装置电路' >
                     <SuffixInput
                       value={inp?.安全装置电阻 ||''}
                       onChange={e => setInp({ ...inp, 安全装置电阻: e.currentTarget.value||undefined}) }
@@ -247,7 +247,7 @@ export const useGeneralFormat= ( {verId, repId}
                       placeholder="请输入测量数"
                     >MΩ
                     </SuffixInput>
-                  </InputGroupLine>
+                  </InputLine>
                 </React.Fragment>
               }
               ]
@@ -283,13 +283,13 @@ export const useGeneralFormat= ( {verId, repId}
               details:[(inp,setInp)=>{
                 return <React.Fragment>
                   数据及测量
-                  <InputGroupLine label={`间距`}>
+                  <InputLine label={`间距`}>
                     <SuffixInput
                       placeholder="请输入测量数"
                       value={ inp?.轿井间距 ||''}
                       onChange={e => setInp({ ...inp, 轿井间距: e.currentTarget.value||undefined}) }
                     >m</SuffixInput>
-                  </InputGroupLine>
+                  </InputLine>
                 </React.Fragment>
               }]
             },
@@ -335,20 +335,20 @@ export const useGeneralFormat= ( {verId, repId}
                 (inp,setInp)=>{
                   return <React.Fragment>
                     (5)对重越程距离
-                    <InputGroupLine label={`最大允许值`}>
+                    <InputLine label={`最大允许值`}>
                       <SuffixInput
                         placeholder="请输入测量数"
                         value={ inp?.对重越程最大 ||''}
                         onChange={e => setInp({ ...inp, 对重越程最大: e.currentTarget.value||undefined}) }
                       >mm</SuffixInput>
-                    </InputGroupLine>
-                    <InputGroupLine label={`测量值`}>
+                    </InputLine>
+                    <InputLine label={`测量值`}>
                       <SuffixInput
                         placeholder="请输入测量数"
                         value={ inp?.对重越程 ||''}
                         onChange={e => setInp({ ...inp, 对重越程: e.currentTarget.value||undefined}) }
                       >mm</SuffixInput>
-                    </InputGroupLine>
+                    </InputLine>
                   </React.Fragment>
                 }
               ]
@@ -417,18 +417,18 @@ export const useGeneralFormat= ( {verId, repId}
               details:[(inp,setInp)=>{
                 return <React.Fragment>
                   数据及测量
-                  <InputGroupLine label={`护脚板高度`}>
+                  <InputLine label={`护脚板高度`}>
                     <SuffixInput
                       placeholder="请输入测量数"
                       value={ inp?.护脚板高 ||''}
                       onChange={e => setInp({ ...inp, 护脚板高: e.currentTarget.value||undefined}) }
                     >m</SuffixInput>
-                  </InputGroupLine>
-                  <InputGroupLine  label='测量结果判定'>
+                  </InputLine>
+                  <InputLine  label='测量结果判定'>
                     <SelectHookfork value={ inp?.护脚板高判定 ||''}
                                     onChange={e => setInp({ ...inp, 护脚板高判定: e.currentTarget.value||undefined}) }
                     />
-                  </InputGroupLine>
+                  </InputLine>
                 </React.Fragment>
               }
               ]
@@ -488,37 +488,37 @@ export const useGeneralFormat= ( {verId, repId}
               details:[(inp,setInp)=>{
                 return <React.Fragment>
                   数据及测量
-                  <InputGroupLine label={`②断丝数`}>
+                  <InputLine label={`②断丝数`}>
                     <SuffixInput
                       placeholder="请输入测量数"
                       value={ inp?.断丝数 ||''}
                       onChange={e => setInp({ ...inp, 断丝数: e.currentTarget.value||undefined}) }
                     >根</SuffixInput>
-                  </InputGroupLine>
-                  <InputGroupLine  label='②一个捻距断丝数,结果判定'>
+                  </InputLine>
+                  <InputLine  label='②一个捻距断丝数,结果判定'>
                     <SelectHookfork value={ inp?.断丝判定  ||''}
                                     onChange={e => setInp({ ...inp, 断丝判定: e.currentTarget.value||undefined}) }
                     />
-                  </InputGroupLine>
-                  <InputGroupLine label={`③钢丝绳直径`}>
+                  </InputLine>
+                  <InputLine label={`③钢丝绳直径`}>
                     <SuffixInput
                       placeholder="请输入测量数"
                       value={ inp?.钢绳直径 ||''}
                       onChange={e => setInp({ ...inp, 钢绳直径: e.currentTarget.value||undefined}) }
                     >mm</SuffixInput>
-                  </InputGroupLine>
-                  <InputGroupLine label={`③公称直径`}>
+                  </InputLine>
+                  <InputLine label={`③公称直径`}>
                     <SuffixInput
                       placeholder="请输入测量数"
                       value={ inp?.钢绳公称 ||''}
                       onChange={e => setInp({ ...inp, 钢绳公称: e.currentTarget.value||undefined}) }
                     >mm</SuffixInput>
-                  </InputGroupLine>
-                  <InputGroupLine  label='③钢丝绳直径小于公称90%,结果判定'>
+                  </InputLine>
+                  <InputLine  label='③钢丝绳直径小于公称90%,结果判定'>
                     <SelectHookfork value={ inp?.钢绳判定 ||''}
                                     onChange={e => setInp({ ...inp, 钢绳判定: e.currentTarget.value||undefined}) }
                     />
-                  </InputGroupLine>
+                  </InputLine>
                 </React.Fragment>
               }
               ]
@@ -660,9 +660,9 @@ export const useGeneralFormat= ( {verId, repId}
                       return ` ${a}层:${inp?.门锁啮长?.[a]||''};`
                     }) }
                   </div>
-                  <InputGroupLine  label='(1)③门锁啮合长度{自动填}'>
+                  <InputLine  label='(1)③门锁啮合长度{自动填}'>
                     <SelectHookfork value={toothUnquf? '×': inp?.层站?.length>=1? '√':''} disabled/>
-                  </InputGroupLine>
+                  </InputLine>
                 </React.Fragment>
               }, null
               ]
@@ -713,9 +713,9 @@ export const useGeneralFormat= ( {verId, repId}
                       </div>
                     </Touchable>
                   </RouterLink>
-                  <InputGroupLine  label='间隙应当不小于5mm{自动填}'>
+                  <InputLine  label='间隙应当不小于5mm{自动填}'>
                     <SelectHookfork value={knifeUnquf||rollerUnquf? '×': inp?.层站?.length>=1? '√':''} disabled/>
-                  </InputGroupLine>
+                  </InputLine>
                 </React.Fragment>
               }
               ]

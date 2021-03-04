@@ -262,6 +262,7 @@ export interface LabelTextProps extends TextProps {
 
 /**
  * 专门给label搞个Text,融合版本,可指定for
+ * LabelText代替 <Label>嵌套<Text>的方式。
  */
 export const LabelText: React.FunctionComponent<LabelTextProps> = ({
     variant = "subtitle",

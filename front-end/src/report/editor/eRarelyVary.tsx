@@ -4,7 +4,7 @@ import * as React from "react";
 import {
   Text,
   Layer,
-  InputGroupLine,
+  InputLine,
   Input,
   Button,
   ResponsivePopover,
@@ -60,21 +60,21 @@ export const ItemInstrumentTable=
 
     const editor=<Layer elevation={"sm"} css={{ padding: '0.25rem' }}>
       <div>
-        <InputGroupLine label={`测量设备名称`}>
+        <InputLine label={`测量设备名称`}>
           <Input   value={obj.name ||''}   onChange={e =>setObj({...obj, name: e.currentTarget.value} ) } />
-        </InputGroupLine>
-        <InputGroupLine label={`规格型号`}>
+        </InputLine>
+        <InputLine label={`规格型号`}>
           <Input   value={obj.type ||''}   onChange={e =>setObj({...obj, type: e.currentTarget.value} ) } />
-        </InputGroupLine>
-        <InputGroupLine label={`测量设备编号`}>
+        </InputLine>
+        <InputLine label={`测量设备编号`}>
           <Input   value={obj.no ||''}   onChange={e =>setObj({...obj, no: e.currentTarget.value} ) } />
-        </InputGroupLine>
-        <InputGroupLine  label='性能状态-开机后'>
+        </InputLine>
+        <InputLine  label='性能状态-开机后'>
           <SelectHookfork value={obj.powerOn ||''}  onChange={e =>setObj({...obj, powerOn: e.currentTarget.value} ) } />
-        </InputGroupLine>
-        <InputGroupLine  label='性能状态-关机前'>
+        </InputLine>
+        <InputLine  label='性能状态-关机前'>
           <SelectHookfork value={obj.shutDown ||''}  onChange={e =>setObj({...obj, shutDown: e.currentTarget.value} ) } />
-        </InputGroupLine>
+        </InputLine>
         <Button onPress={() => {
           if(seq !== null) {
             inp?.仪器表?.splice(seq, 1, obj);

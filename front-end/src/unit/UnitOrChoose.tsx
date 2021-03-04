@@ -31,7 +31,7 @@ import {
   Layer,
   Touchable,
   IconX,
-  InputGroupLine, useToast, SuffixInput
+  InputLine, useToast, SuffixInput
 } from "customize-easy-ui-component";
 //import { Link } from "wouter";
 import { ContainLine, TransparentInput } from "../comp/base";

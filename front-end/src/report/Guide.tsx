@@ -6,7 +6,7 @@ import {
   Toolbar,
   useTheme,
   Button,
-  Container, IconCloud, InputGroupLine, Input,
+  Container, IconCloud, InputLine, Input,
 } from "customize-easy-ui-component";
 //import useLocation from "wouter/use-location";
 import {  useQueryOriginalRecord } from "./db";
@@ -121,14 +121,14 @@ export  function Guide({printing, }:{printing?:boolean, },props) {
             <Text  variant="h5"　css={{ textAlign: 'center' }}>
               <span>目前支持电梯的定期检验</span>
             </Text>
-            <InputGroupLine  label='报告ID{将来是从链接地址自动获得}' >
+            <InputLine  label='报告ID{将来是从链接地址自动获得}' >
               <Input  value={repId}  placeholder="那一份报告？将来是点击链接自动获得"
                       onChange={e => setRepId(e.currentTarget.value) } />
-            </InputGroupLine>
-            <InputGroupLine  label='本系统签发token{将来是从链接地址自动获得}' >
+            </InputLine>
+            <InputLine  label='本系统签发token{将来是从链接地址自动获得}' >
               <Input  value={''}  placeholder="三月有效；登录用户无需token"
                       onChange={e => void 0 } />
-            </InputGroupLine>
+            </InputLine>
             <RouterLink to={`/report/EL-DJ/ver/1/preview/${repId}`}>
               <Button
                 size="lg" noBind

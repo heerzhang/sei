@@ -315,13 +315,13 @@ subItems?.map((a, i) => {
             const namex = `${inspectionContent[x].items[y].names[i]}`;
             return <React.Fragment key={i}>
               {details[i] && details[i](inp, setInp)}
-              <InputGroupLine label='描述或问题'>
+              <InputLine label='描述或问题'>
                 <Input value={(inp?.[namexD]) || ''} onChange={e => {
                   inp[namexD] = e.currentTarget.value || undefined;
                   setInp({ ...inp });
                 }}
                 />
-              </InputGroupLine>
+              </InputLine>
             </React.Fragment>;
           })
 

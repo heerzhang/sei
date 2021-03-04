@@ -26,7 +26,7 @@ import {
   IconPackage,
   IconButton,
   IconMoreVertical,
-  List, InputGroupLine, SuffixInput
+  List, InputLine, SuffixInput
 } from "customize-easy-ui-component";
 import { useCreateDevice, useUpdateDevice } from "./db";
 import {Helmet} from "react-helmet";

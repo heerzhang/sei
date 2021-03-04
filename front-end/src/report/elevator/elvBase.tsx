@@ -3,7 +3,7 @@
 import * as React from "react";
 import {
   useTheme,  Button,
-  InputGroupLine, Input,  TextArea, SuffixInput
+  InputLine, Input,  TextArea, SuffixInput
 } from "customize-easy-ui-component";
 //import { Link as RouterLink } from "wouter";
 import {
@@ -28,22 +28,22 @@ export const ItemRemarks=
       <InspectRecordLayout inp={inp} setInp={setInp}  getInpFilter={getInpFilter} show={show}
                            alone={alone}  label={'见证材料或问题备注'}>
         六、见证材料{`{将来可能只需输入编号链接即可}`}
-        <InputGroupLine  label='1、维保自检材料' >
+        <InputLine  label='1、维保自检材料' >
           <Input  value={inp?.自检材料 ||''}  placeholder="使用默认规则，缺省编号情况的可不填"
                   onChange={e => setInp({ ...inp, 自检材料: e.currentTarget.value||undefined}) } />
-        </InputGroupLine>
-        <InputGroupLine  label='2、限速器动作速度校验材料' >
+        </InputLine>
+        <InputLine  label='2、限速器动作速度校验材料' >
           <Input  value={inp?.校验材料 ||''}
                   onChange={e => setInp({ ...inp, 校验材料: e.currentTarget.value||undefined}) } />
-        </InputGroupLine>
-        <InputGroupLine  label='3、使用单位整改反馈材料' >
+        </InputLine>
+        <InputLine  label='3、使用单位整改反馈材料' >
           <Input  value={inp?.整改材料 ||''}
                   onChange={e => setInp({ ...inp, 整改材料: e.currentTarget.value||undefined}) } />
-        </InputGroupLine>
-        <InputGroupLine  label='4、其他资料及编号' >
+        </InputLine>
+        <InputLine  label='4、其他资料及编号' >
           <Input  value={inp?.资料及编号 ||''}
                   onChange={e => setInp({ ...inp, 资料及编号: e.currentTarget.value||undefined}) } />
-        </InputGroupLine>
+        </InputLine>
         七、备注<br/><br/>
         纸质正式报告备注可能只取前几行
         <TextArea  value={inp?.memo ||''} rows={10} placeholder="网页版本正式报告备注可随意多写"
@@ -85,7 +85,7 @@ export const ItemAppendixB=
           }) }
         </div>
         新增检查=＞
-        <InputGroupLine  label='首先设置当前检验日期'>
+        <InputLine  label='首先设置当前检验日期'>
           <SuffixInput
             type='date'
             value={floor||''}
@@ -97,7 +97,7 @@ export const ItemAppendixB=
             )}
             >新增</Button>
           </SuffixInput>
-        </InputGroupLine>
+        </InputLine>
         <div css={{ textAlign: 'center' }}>
           <Button css={{ marginTop: theme.spaces.sm }} size="sm"
                   onPress={() => floor&&inp?.检验条件?.includes(floor) &&(
@@ -107,20 +107,20 @@ export const ItemAppendixB=
                   )}
           >刪除</Button>
         </div>
-        <InputGroupLine label={`机房空气温度(${floor}):`}>
+        <InputLine label={`机房空气温度(${floor}):`}>
           <SuffixInput
             placeholder="请输入测量数"
             value={ (inp?.温度?.[floor] ) || ''}
             onChange={e => floor&&setInp({ ...inp, 温度:{...inp?.温度,[floor]:e.currentTarget.value||undefined} }) }
           >℃</SuffixInput>
-        </InputGroupLine>
-        <InputGroupLine label={`电源输入电压(${floor}):`}>
+        </InputLine>
+        <InputLine label={`电源输入电压(${floor}):`}>
           <SuffixInput
             placeholder="请输入测量数"
             value={ (inp?.电压值?.[floor] ) || ''}
             onChange={e => floor&&setInp({ ...inp, 电压值:{...inp?.电压值,[floor]:e.currentTarget.value||undefined} }) }
           >V</SuffixInput>
-        </InputGroupLine>
+        </InputLine>
       </InspectRecordLayout>
     );
   } );

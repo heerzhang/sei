@@ -2,7 +2,7 @@
 //import { jsx,  } from "@emotion/react";
 import * as React from "react";
 import {
-   useTheme, InputGroupLine, SuffixInput, Button, Input
+   useTheme, InputLine, SuffixInput, Button, Input
 } from "customize-easy-ui-component";
 
 import { CCell, Cell, Table, TableBody, TableRow } from "../../comp/TableExt";
@@ -30,22 +30,22 @@ export const ItemSurveyLinkMan=
       <InspectRecordLayout inp={inp} setInp={setInp}  getInpFilter={getInpFilter} show={show}
                            alone={alone}  label={'一、设备概况'} >
         允许直接修改部分
-        <InputGroupLine  label='设备号{将来是点击链接自动获得}' >
+        <InputLine  label='设备号{将来是点击链接自动获得}' >
           <Input  value={inp?.devCod ||''}  placeholder="那一台电梯？暂时要求，将来是点击链接自动获得"
                   onChange={e => setInp({ ...inp, devCod: e.currentTarget.value||undefined}) } />
-        </InputGroupLine>
-        <InputGroupLine  label='检验日期{将来提升到创立原始记录的前置输入}' >
+        </InputLine>
+        <InputLine  label='检验日期{将来提升到创立原始记录的前置输入}' >
           <Input value={inp?.检验日期 ||''}  placeholder="基准日" type='date'
                  onChange={e => setInp({ ...inp, 检验日期: e.currentTarget.value}) } />
-        </InputGroupLine>
-        <InputGroupLine  label='安全管理人员' >
+        </InputLine>
+        <InputLine  label='安全管理人员' >
           <Input  value={inp?.安全人员 ||''}
                   onChange={e => setInp({ ...inp, 安全人员: e.currentTarget.value||undefined}) } />
-        </InputGroupLine>
-        <InputGroupLine  label='联系电话1' >
+        </InputLine>
+        <InputLine  label='联系电话1' >
           <Input  value={inp?.联系电话 ||''}
                   onChange={e => setInp({ ...inp, 联系电话: e.currentTarget.value||undefined}) } />
-        </InputGroupLine>
+        </InputLine>
         不可修改的明细：待续或点外部链接。
       </InspectRecordLayout>
     );
@@ -82,7 +82,7 @@ export const ItemGapMeasure=
           }) }
         </div>
         新增检查=＞
-        <InputGroupLine  label='首先设置当前层站号'>
+        <InputLine  label='首先设置当前层站号'>
           <SuffixInput
             value={floor||''}
             onChange={e => {setFloor( e.currentTarget.value) }}
@@ -93,7 +93,7 @@ export const ItemGapMeasure=
             )}
             >新增</Button>
           </SuffixInput>
-        </InputGroupLine>
+        </InputLine>
         <div css={{ textAlign: 'center' }}>
           <Button css={{ marginTop: theme.spaces.sm }} size="sm"
                   onPress={() => floor&&inp?.层站?.includes(floor) &&(
@@ -105,55 +105,55 @@ export const ItemGapMeasure=
                   )}
           >刪除该层</Button>
         </div>
-        <InputGroupLine label={`层门门扇间间隙(层号 ${floor}):`}>
+        <InputLine label={`层门门扇间间隙(层号 ${floor}):`}>
           <SuffixInput
             placeholder="请输入测量数"
             value={ (inp?.门扇隙?.[floor] ) || ''}
             onChange={e => floor&&setInp({ ...inp, 门扇隙:{...inp?.门扇隙,[floor]:e.currentTarget.value||undefined} }) }
           >mm</SuffixInput>
-        </InputGroupLine>
-        <InputGroupLine label={`层门门扇与门套间隙(层号 ${floor}):`}>
+        </InputLine>
+        <InputLine label={`层门门扇与门套间隙(层号 ${floor}):`}>
           <SuffixInput
             placeholder="请输入测量数"
             value={ (inp?.门套隙?.[floor] ) || ''}
             onChange={e => floor&&setInp({ ...inp, 门套隙:{...inp?.门套隙,[floor]:e.currentTarget.value||undefined} }) }
           >mm</SuffixInput>
-        </InputGroupLine>
-        <InputGroupLine label={`层门扇与地坎间隙(层号 ${floor}):`}>
+        </InputLine>
+        <InputLine label={`层门扇与地坎间隙(层号 ${floor}):`}>
           <SuffixInput
             placeholder="请输入测量数"
             value={ (inp?.地坎隙?.[floor] ) || ''}
             onChange={e => floor&&setInp({ ...inp, 地坎隙:{...inp?.地坎隙,[floor]:e.currentTarget.value||undefined} }) }
           >mm</SuffixInput>
-        </InputGroupLine>
-        <InputGroupLine label={`层门扇间施力间隙(层号 ${floor}):`}>
+        </InputLine>
+        <InputLine label={`层门扇间施力间隙(层号 ${floor}):`}>
           <SuffixInput
             placeholder="请输入测量数"
             value={ (inp?.施力隙?.[floor] ) || ''}
             onChange={e => floor&&setInp({ ...inp, 施力隙:{...inp?.施力隙,[floor]:e.currentTarget.value||undefined} }) }
           >mm</SuffixInput>
-        </InputGroupLine>
-        <InputGroupLine label={`门锁啮合长度(层号 ${floor}):`}>
+        </InputLine>
+        <InputLine label={`门锁啮合长度(层号 ${floor}):`}>
           <SuffixInput
             placeholder="请输入测量数"
             value={ (inp?.门锁啮长?.[floor] ) || ''}
             onChange={e => floor&&setInp({ ...inp, 门锁啮长:{...inp?.门锁啮长,[floor]:e.currentTarget.value||undefined} }) }
           >mm</SuffixInput>
-        </InputGroupLine>
-        <InputGroupLine label={`轿门门刀与层门地坎间距(层号 ${floor}):`}>
+        </InputLine>
+        <InputLine label={`轿门门刀与层门地坎间距(层号 ${floor}):`}>
           <SuffixInput
             placeholder="请输入测量数"
             value={ (inp?.刀坎距?.[floor] ) || ''}
             onChange={e => floor&&setInp({ ...inp, 刀坎距:{...inp?.刀坎距,[floor]:e.currentTarget.value||undefined} }) }
           >mm</SuffixInput>
-        </InputGroupLine>
-        <InputGroupLine label={`门锁滚轮与轿门地坎间距(层号 ${floor}):`}>
+        </InputLine>
+        <InputLine label={`门锁滚轮与轿门地坎间距(层号 ${floor}):`}>
           <SuffixInput
             placeholder="请输入测量数"
             value={ (inp?.轮坎距?.[floor] ) || ''}
             onChange={e => floor&&setInp({ ...inp, 轮坎距:{...inp?.轮坎距,[floor]:e.currentTarget.value||undefined} }) }
           >mm</SuffixInput>
-        </InputGroupLine>
+        </InputLine>
       </InspectRecordLayout>
     );
   } );

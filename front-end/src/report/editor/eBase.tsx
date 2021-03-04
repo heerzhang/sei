@@ -3,7 +3,7 @@
 import * as React from "react";
 import {
   Text,  Button,  IconChevronDown,
-  Select, Layer,  InputGroupLine, Input, ResponsivePopover, MenuList, MenuItem
+  Select, Layer,  InputLine, Input, ResponsivePopover, MenuList, MenuItem
 } from "customize-easy-ui-component";
 //import { Link as RouterLink } from "wouter";
 import {
@@ -31,7 +31,7 @@ export const ItemConclusion=
       <InspectRecordLayout inp={inp} setInp={setInp}  getInpFilter={getInpFilter} show={show}
                            alone={alone}  label={'下结论!'}>
         五、现场检验意见
-        <InputGroupLine  label='检验结论{签名后结论不能再改}' >
+        <InputLine  label='检验结论{签名后结论不能再改}' >
           <Select inputSize="md" css={{minWidth:'140px',fontSize:'1.3rem',padding:'0 1rem'}}
                   value={ inp?.检验结论  ||''}
                   onChange={e => setInp({ ...inp, 检验结论: e.currentTarget.value||undefined}) }
@@ -42,19 +42,19 @@ export const ItemConclusion=
             <option>复检合格</option>
             <option>复检不合格</option>
           </Select>
-        </InputGroupLine>
-        <InputGroupLine  label='检验人员{用户ID列表,将来签名，登录来签注}' >
+        </InputLine>
+        <InputLine  label='检验人员{用户ID列表,将来签名，登录来签注}' >
           <Input  value={inp?.检验人IDs ||''} placeholder="输入本系统用户ID，将来签名后结论不能再改，多人签名：以 分割"
                   onChange={e => setInp({ ...inp, 检验人IDs: e.currentTarget.value||undefined}) } />
-        </InputGroupLine>
-        <InputGroupLine  label='编制人员{将来是提交人员，自动的}' >
+        </InputLine>
+        <InputLine  label='编制人员{将来是提交人员，自动的}' >
           <Input  value={inp?.编制人 ||''} placeholder="目前直接输入名字，一个人"
                   onChange={e => setInp({ ...inp, 编制人: e.currentTarget.value||undefined}) } />
-        </InputGroupLine>
-        <InputGroupLine  label='编制日期{将来等于提交日，自动的}' >
+        </InputLine>
+        <InputLine  label='编制日期{将来等于提交日，自动的}' >
           <Input  value={inp?.编制日期 ||''}  type='date'
                   onChange={e => setInp({ ...inp, 编制日期: e.currentTarget.value}) } />
-        </InputGroupLine>
+        </InputLine>
       </InspectRecordLayout>
     );
   } );
@@ -97,23 +97,23 @@ export const ItemRecheckResult=
 
     const editor=<Layer elevation={"sm"} css={{ padding: '0.25rem' }}>
       <div>
-        <InputGroupLine label={`类别/编号{将来自动的不能改}`}>
+        <InputLine label={`类别/编号{将来自动的不能改}`}>
           <Input   value={obj.no ||''} placeholder="目前是人工输入，类比B/4.8这样的"
                    onChange={e =>setObj({...obj, no: e.currentTarget.value} ) } />
-        </InputGroupLine>
-        <InputGroupLine label={`不合格内容描述{将来自动的}`}>
+        </InputLine>
+        <InputLine label={`不合格内容描述{将来自动的}`}>
           <Input   value={obj.desc ||''}  placeholder="目前是人工输入，正式报告要呈现不合格说明"
                    onChange={e =>setObj({...obj, desc: e.currentTarget.value} ) } />
-        </InputGroupLine>
-        <InputGroupLine label={`复检结果`}>
+        </InputLine>
+        <InputLine label={`复检结果`}>
           <SelectHookfork value={obj.rres ||''}
                           onChange={e =>setObj({...obj, rres: e.currentTarget.value} ) }
           />
-        </InputGroupLine>
-        <InputGroupLine  label='复检日期' >
+        </InputLine>
+        <InputLine  label='复检日期' >
           <Input  value={obj.rdate ||''}  type='date'
                   onChange={e =>setObj({...obj, rdate: e.currentTarget.value} ) } />
-        </InputGroupLine>
+        </InputLine>
         <Button onPress={() => {
           if(seq !== null) {
             inp?.unq?.splice(seq, 1, obj);
@@ -221,20 +221,20 @@ export const ItemUniversal=
             const namexD = `${inspectionContent[x].items[y].names[i]}_D`;
             return <React.Fragment key={i}>
               {details[i] && details[i](inp, setInp)}
-              <InputGroupLine label={inspectionContent[x].items[y].subItems[i]}>
+              <InputLine label={inspectionContent[x].items[y].subItems[i]}>
                 <SelectHookfork value={(inp?.[namex]) || ''} onChange={e => {
                   inp[namex] = e.currentTarget.value || undefined;
                   setInp({ ...inp });
                 }}
                 />
-              </InputGroupLine>
-              <InputGroupLine label='描述或问题'>
+              </InputLine>
+              <InputLine label='描述或问题'>
                 <Input value={(inp?.[namexD]) || ''} onChange={e => {
                   inp[namexD] = e.currentTarget.value || undefined;
                   setInp({ ...inp });
                 }}
                 />
-              </InputGroupLine>
+              </InputLine>
             </React.Fragment>;
           }))
           :
@@ -243,20 +243,20 @@ export const ItemUniversal=
             const namexD = `${inspectionContent[x].items[y].names[i]}_D`;
             return <React.Fragment key={i}>
               {details[i] && details[i](inp, setInp)}
-              <InputGroupLine label={inspectionContent[x].items[y].label}>
+              <InputLine label={inspectionContent[x].items[y].label}>
                 <SelectHookfork value={(inp?.[namex]) || ''} onChange={e => {
                   inp[namex] = e.currentTarget.value || undefined;
                   setInp({ ...inp });
                 }}
                 />
-              </InputGroupLine>
-              <InputGroupLine label='描述或问题'>
+              </InputLine>
+              <InputLine label='描述或问题'>
                 <Input value={(inp?.[namexD]) || ''} onChange={e => {
                   inp[namexD] = e.currentTarget.value || undefined;
                   setInp({ ...inp });
                 }}
                 />
-              </InputGroupLine>
+              </InputLine>
             </React.Fragment>;
           }))
         }
