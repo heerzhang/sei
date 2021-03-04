@@ -15,7 +15,7 @@ import {
   Container,
   ResponsivePopover,
   IconMoreVertical,
-  IconArrowLeft, IconArrowRight, IconPackage,
+  IconArrowLeft, IconArrowRight, IconPackage, IconRefButton
 } from "customize-easy-ui-component";
 
 //import {Helmet} from "react-helmet";
@@ -142,7 +142,7 @@ export const DetailedGuide: React.FunctionComponent<DetailedGuideProps> = ({
                 </MenuList>
               }
             >
-              <IconButton
+              <IconRefButton
                 css={{ marginLeft: theme.spaces.sm}}
                 variant="ghost"
                 icon={<IconMoreVertical />}

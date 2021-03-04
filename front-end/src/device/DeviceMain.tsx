@@ -19,7 +19,7 @@ import {
   IconPlus,
   DarkMode,
   LightMode,
-  Pager, IconArchive
+  Pager, IconArchive, ButtonRefComp
 } from "customize-easy-ui-component";
 
 import { useSession,  useSignOut } from "../auth";
@@ -145,13 +145,13 @@ export const DeviceMain: React.FunctionComponent<DeviceMainProps> =(props ,conte
                     }
                   >
                     <DarkMode>
-                      <Button
+                      <ButtonRefComp
                         size="md"
                         iconAfter={<IconChevronDown />}
                         variant="ghost"
                       >
                         {user.username || user.mobile}
-                      </Button>
+                      </ButtonRefComp>
                     </DarkMode>
                   </ResponsivePopover>
                 </LightMode>

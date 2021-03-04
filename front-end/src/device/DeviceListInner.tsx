@@ -10,7 +10,7 @@ import {
   MenuList,
   useTheme,
   IconMoreVertical,
-  Skeleton, MenuItem, IconPackage, ResponsivePopover
+  Skeleton, MenuItem, IconPackage, ResponsivePopover, IconRefButton
 } from "customize-easy-ui-component";
 
 import {  usePaginateQueryDevice,  } from "./db";
@@ -130,7 +130,7 @@ export const DeviceListInner: React.FunctionComponent<
                                     </MenuList>
                                   }
                                 >
-                                  <IconButton variant="ghost" icon={<IconMoreVertical/>} label="菜单"/>
+                                  <IconRefButton variant="ghost" icon={<IconMoreVertical/>} label="菜单"/>
                                 </ResponsivePopover>
                               }
                     />
