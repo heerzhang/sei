@@ -65,7 +65,10 @@
     "devDependencies": {
         "react-scripts": "^4.0.3",
         "typescript": "^4.2.2",
-        "faker": "^4.1.0"
+        "faker": "^4.1.0",
+
+        "@s-ui/react-layout-media-query": "^1.6.0",
+        "react-resize-reporter": "^1.0.2"
     }
 }
 

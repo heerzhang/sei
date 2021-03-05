@@ -2866,6 +2866,48 @@
     estree-walker "^1.0.1"
     picomatch "^2.2.2"
 
+"@s-ui/component-dependencies@1":
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/@s-ui/component-dependencies/-/component-dependencies-1.6.0.tgz#43cb46b95af6be1d94579164e5c4d2df5d353215"
+  integrity sha512-0iwhvSMeGaysi3CEwovA5VD8v2KHO1T61AAqORM6eO4zKRtEvgCPOCNDec/vZOCsTVhGVaRuHC+xpQLzL9zEnQ==
+  dependencies:
+    "@s-ui/theme" "8"
+    "@schibstedspain/rosetta" "3"
+    "@schibstedspain/sui-theme" "8"
+    "@schibstedspain/theme-basic" "7"
+    classnames "2.2.5"
+
+"@s-ui/react-layout-media-query@^1.6.0":
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/@s-ui/react-layout-media-query/-/react-layout-media-query-1.6.0.tgz#0219c7d52e8bb30c7ce754b6d0fddc55a3882655"
+  integrity sha512-VhOLCjOPfQKTcSz5AfpRB9jKY8QfOSipSu60ZOK2HuLUDFDiDjBPXFMdzKdFK6e2j3ewr0sDjiXCxiAjv2Akig==
+  dependencies:
+    "@s-ui/component-dependencies" "1"
+    resize-observer-polyfill "1.5.0"
+    shallowequal "1.1.0"
+
+"@s-ui/theme@8":
+  version "8.93.0"
+  resolved "https://registry.yarnpkg.com/@s-ui/theme/-/theme-8.93.0.tgz#b9be0544e8d7ecfe3dbb23c68f31792234fed99d"
+  integrity sha512-dv0+E47OqA4DnUj5s1Ht5IP4XUCWFhaA0pq16fmzETe9MJGmTup7oanjfbWnRduySVmey7IJbfgpPvx2fI07PA==
+
+"@schibstedspain/rosetta@3":
+  version "3.10.2"
+  resolved "https://registry.yarnpkg.com/@schibstedspain/rosetta/-/rosetta-3.10.2.tgz#f1d56212a8e49d073da86bc191e9c2aadd31b96e"
+  integrity sha1-8dViEqjknQc9qGvBkenCqt0xuW4=
+  dependencies:
+    node-polyglot "0.4.3"
+
+"@schibstedspain/sui-theme@8":
+  version "8.69.0"
+  resolved "https://registry.yarnpkg.com/@schibstedspain/sui-theme/-/sui-theme-8.69.0.tgz#c86936ad2de292512e9586111bf899102dba7eb7"
+  integrity sha512-0WzFXGOITJug30rBq1M7Ndmdaeizu6biTN/BdrHhfivYlfBd8xDJ8p7P2JcrH8cCXsmo1aL/ql1HtC8Y5l/i1w==
+
+"@schibstedspain/theme-basic@7":
+  version "7.28.0"
+  resolved "https://registry.yarnpkg.com/@schibstedspain/theme-basic/-/theme-basic-7.28.0.tgz#95d28bd9395e8d2fdef3f3028bcf34b31491f82d"
+  integrity sha1-ldKL2TlejS/e8/MCi880sxSR+C0=
+
 "@sinonjs/commons@^1.7.0":
   version "1.8.1"
   resolved "https://registry.yarnpkg.com/@sinonjs/commons/-/commons-1.8.1.tgz#e7df00f98a203324f6dc7cc606cad9d4a8ab2217"
@@ -4926,6 +4968,11 @@ class-utils@^0.3.5:
     define-property "^0.2.5"
     isobject "^3.0.0"
     static-extend "^0.1.1"
+
+classnames@2.2.5:
+  version "2.2.5"
+  resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.5.tgz#fb3801d453467649ef3603c7d61a02bd129bde6d"
+  integrity sha1-+zgB1FNGdknvNgPH1hoCvRKb3m0=
 
 classnames@^2.2.6:
   version "2.2.6"
@@ -10261,6 +10308,11 @@ node-notifier@^8.0.0:
     uuid "^8.3.0"
     which "^2.0.2"
 
+node-polyglot@0.4.3:
+  version "0.4.3"
+  resolved "https://registry.yarnpkg.com/node-polyglot/-/node-polyglot-0.4.3.tgz#6affdb812e10cbaf3ce8648871444a05a78c046e"
+  integrity sha1-av/bgS4Qy6886GSIcURKBaeMBG4=
+
 node-pre-gyp@^0.12.0:
   version "0.12.0"
   resolved "https://registry.yarnpkg.com/node-pre-gyp/-/node-pre-gyp-0.12.0.tgz#39ba4bb1439da030295f899e3b520b7785766149"
@@ -12467,6 +12519,11 @@ react-remove-scroll@^2.4.1:
     use-callback-ref "^1.2.3"
     use-sidecar "^1.0.1"
 
+react-resize-reporter@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/react-resize-reporter/-/react-resize-reporter-1.0.2.tgz#e9e2069cf7276edd1f7ed0438342bc1ceb6c10c6"
+  integrity sha512-Z9OcPJDpsvdIJpwjbZBbF0vwmCKBgaimMNo4ekJu3jGPih3xv91Eae5cyFbA0fnDPsOriukqoD5TOR+8Ef0xUQ==
+
 react-scripts@^4.0.3:
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/react-scripts/-/react-scripts-4.0.3.tgz#b1cafed7c3fa603e7628ba0f187787964cb5d345"
@@ -12985,6 +13042,11 @@ requires-port@^1.0.0:
   resolved "https://registry.yarnpkg.com/requires-port/-/requires-port-1.0.0.tgz#925d2601d39ac485e091cf0da5c6e694dc3dcaff"
   integrity sha1-kl0mAdOaxIXgkc8NpcbmlNw9yv8=
 
+resize-observer-polyfill@1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/resize-observer-polyfill/-/resize-observer-polyfill-1.5.0.tgz#660ff1d9712a2382baa2cad450a4716209f9ca69"
+  integrity sha512-M2AelyJDVR/oLnToJLtuDJRBBWUGUvvGigj1411hXhAdyFWqMaqHp7TixW3FpiLuVaikIcR1QL+zqoJoZlOgpg==
+
 resize-observer-polyfill@^1.5.1:
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/resize-observer-polyfill/-/resize-observer-polyfill-1.5.1.tgz#0e9020dd3d21024458d4ebd27e23e40269810464"
@@ -13456,6 +13518,11 @@ sha@^3.0.0:
   integrity sha512-DOYnM37cNsLNSGIG/zZWch5CKIRNoLdYUQTQlcgkRkoYIUwDYjqDyye16YcDZg/OPdcbUgTKMjc4SY6TB7ZAPw==
   dependencies:
     graceful-fs "^4.1.2"
+
+shallowequal@1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/shallowequal/-/shallowequal-1.1.0.tgz#188d521de95b9087404fd4dcb68b13df0ae4e7f8"
+  integrity sha512-y0m1JoUZSlPAjXVtPPW70aZWfIL/dSP7AFkRnniLCrK/8MDKog3TySTBmckD+RObVxH0v4Tox67+F14PdED2oQ==
 
 shebang-command@^1.2.0:
   version "1.2.0"

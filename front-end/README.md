@@ -101,4 +101,4 @@ aria-开头的html的参数属于障碍辅助性质的。
 后端启动D:\home\unibackend\special-equipment-backend\build\libs > java -jar -Dspring.profiles.active=dev  ..jar
 家里启 D:\DEV\jdk13.1\bin>java -jar -Dspring.profiles.active=home D:\coding\home\unibackend\special-equipment-backend\build\libs\..jar
 
-用children方式(组件Tag嵌套)传递和直接往组件加个参数方式的，性能没差距。
+用组件Tag嵌套方式传递和直接往组件加个参数方式的，性能没差距。

@@ -27,7 +27,9 @@ import {
   InputDatalist,
   ComboBoxDatalist,
   IconToggleRight, IconToggleLeft, CheckSwitch, InputGroup,  Input,
-  InputLine, SuffixInput as Zx
+
+  InputLineL as IoneLine,
+  SuffixInput as Zx
 } from "customize-easy-ui-component";
 
 //import { useSession } from "../auth";
@@ -41,8 +43,10 @@ import { gql, NetworkStatus, useQuery } from "@apollo/client";
 import { UnitOrChoose } from "../../unit/UnitOrChoose";
 import { DialogEnterReturn } from "../../context/DialogEnterReturn";
 import queryString from "querystring";
-import Switch from "react-switch";
-//import { InputLine, SuffixInput as Zx } from "../../comp/TestingForm";
+import { Line1Column } from "../../comp/Column";
+
+//import { Line1Column } from "customize-easy-ui-component/esm/Column";
+//import { IoneLine, SuffixInput as Zx } from "../../comp/TestingForm";
 //import { ComboBoxDatalist } from "../../../compare/ComboBox";
 
 
@@ -66,7 +70,7 @@ export const 油缸形式s=["浸油式", "非浸油式","油浸式","双节式�
 
 
 
-//全部610ms
+//旧600ms; L1co=, L1R=550ms;
 
 
 interface 电梯props {
@@ -306,15 +310,15 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
               }}
             >
 
+        <Line1Column switchPx={336}>
 
-
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 type="number"  min={1} max={999}
                 value={ flo || '' }
                 onChange={e => setFlo( e.currentTarget.value||undefined ) }
               >865行 </Zx>
-</InputLine>
+</IoneLine>
 
 
               <CheckSwitch
@@ -323,13 +327,13 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
               />
 
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 type="number"  min={0} max={300}
                 value={vl || ''}
                 onChange={e => setVl( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
 
               <CheckSwitch
@@ -344,52 +348,52 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
               />
 
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 placeholder="层数"
                 value={ cpm || ''}
                 onChange={e => setCpm( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 type="number"
                 value={ hlf || ''}
                 onChange={e => setHlf( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 type="number"
                 value={ lesc || ''}
                 onChange={e => setLesc( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 type="number"
                 value={ wesc || ''}
                 onChange={e => setWesc( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 value={ tm || ''}
                 onChange={e => setTm( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 value={ mtm || ''}
                 onChange={e => setMtm( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <Select inputSize="md" css={{minWidth:'140px',fontSize:'1.5rem',padding:'0 1rem'}} divStyle={css`max-width:240px;`}
                       value={ buff || ''}
@@ -401,13 +405,13 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                 )) }
               </Select>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 type="number"
                 value={ rtl || ''}
                 onChange={e => setRtl( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <ComboBoxDatalist
                 value={ aap || ''}
@@ -415,12 +419,12 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                 datalist={加装附加装置}
               />
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 value={ prot || ''}
                 onChange={e => setProt( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <InputDatalist
                 value={ doop || ''}
@@ -428,12 +432,12 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                 datalist={开门方式}
               />
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 value={ limm || ''}
                 onChange={e => setLimm( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <Select inputSize="md" css={{minWidth:'140px',fontSize:'1.5rem',padding:'0 1rem'}} divStyle={css`max-width:240px;`}
                       value={ opm || ''}
@@ -445,38 +449,38 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                 )) }
               </Select>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type='date'  value={lbkd ||''}
                                onChange={e => setLbkd( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type='date'  value={nbkd ||''}
                                onChange={e => setNbkd( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 value={ 控制屏编号 || ''}
                 onChange={e => set控制屏编号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 value={ 曳引号 || ''}
                 onChange={e => set曳引号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 value={ 主机号 || ''}
                 onChange={e => set主机号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
 
               <Text variant="h5">监察参数</Text>
@@ -492,13 +496,13 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                 onChange={e => setVital(vital? undefined:true) }
               />
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 type="number"
                 value={ 年限 || ''}
                 onChange={e => set年限( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <Select
                 value={ cpa || ''}
@@ -510,30 +514,30 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                 )) }
               </Select>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 type="number"
                 value={ 固定资产值 || ''}
                 onChange={e => set固定资产值( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 type="number"
                 value={ 大修周期 || ''}
                 onChange={e => set大修周期( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
 
               <Text variant="h5">许可用的参数</Text>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type='date'  value={ 设计日期  || ''}
                                onChange={e => set设计日期( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <UnitOrChoose id={造监检单  || ''} emodel={'电梯'} emid={id} field={'造监检单'}
                             onCancel={() => {
@@ -562,24 +566,24 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                                  onListChange={v => set施工类别( v||undefined ) }
                                  datalist={施工类别s}  />
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type='date'  value={ 施工日期  || ''}
                                onChange={e => set施工日期( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type='date'  value={ 竣验日  || ''}
                                onChange={e => set竣验日( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 value={ 施工号 || ''}
                 onChange={e => set施工号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <UnitOrChoose id={设计单位  || ''} emodel={'电梯'} emid={id} field={'设计单位'}
                             onCancel={() => {
@@ -588,242 +592,242 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                             onDialog={async () => { await setNdt(await confirmation()); } }
               />
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 value={ 设计许号 || ''}
                 onChange={e => set设计许号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 value={ 产品标准 || ''}
                 onChange={e => set产品标准( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 value={ 设计图号 || ''}
                 onChange={e => set设计图号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 value={ 合格证号 || ''}
                 onChange={e => set合格证号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type='date'  value={ 安竣日  || ''}
                                onChange={e => set安竣日( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 type="number"
                 value={ 设备总重量 || ''}
                 onChange={e => set设备总重量( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <Text variant="h5">常用参数</Text>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 type="number"
                 value={ 倾斜角度 || ''}
                 onChange={e => set倾斜角度( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 安全钳型号 || ''}
                                 onChange={e => set安全钳型号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 安全钳编号 || ''}
                                 onChange={e => set安全钳编号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 层门型号 || ''}
                                 onChange={e => set层门型号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 底坑深度 || ''}
                                onChange={e => set底坑深度( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 电动机功率 || ''}
                                onChange={e => set电动机功率( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 电动机转速 || ''}
                                 onChange={e => set电动机转速( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 电梯门数 || ''}
                                onChange={e => set电梯门数( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 电梯站数 || ''}
                                onChange={e => set电梯站数( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 顶层高度 || ''}
                                onChange={e => set顶层高度( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 对重轨距 || ''}
                                onChange={e => set对重轨距( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 对重块数 || ''}
                                onChange={e => set对重块数( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 对重限速号 || ''}
                                 onChange={e => set对重限速号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 对重限型号 || ''}
                                 onChange={e => set对重限型号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 额定电流 || ''}
                                onChange={e => set额定电流( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 额定载人 || ''}
                                onChange={e => set额定载人( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 缓冲器编号 || ''}
                                 onChange={e => set缓冲器编号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 缓冲器型号 || ''}
                                 onChange={e => set缓冲器型号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 缓冲器厂家 || ''}
                                 onChange={e => set缓冲器厂家( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 轿厢轨距 || ''}
                                onChange={e => set轿厢轨距( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 上行限电速 || ''}
                                 onChange={e => set上行限电速( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 上行限机速 || ''}
                                 onChange={e => set上行限机速( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 下行限电速 || ''}
                                 onChange={e => set下行限电速( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 下行限机速 || ''}
                                 onChange={e => set下行限机速( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 移动保护号 || ''}
                                 onChange={e => set移动保护号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 移动保护型 || ''}
                                 onChange={e => set移动保护型( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <InputDatalist  value={ 装修 || ''}
                               onListChange={v => set装修(v ||undefined)}
                               datalist={轿厢装修状态} />
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 锁型号 || ''}
                                 onChange={e => set锁型号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <ComboBoxDatalist  value={ 上护装置 || ''}
                                  onListChange={v => set上护装置( v||undefined ) }
                                  datalist={上行保护装置形式}  />
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 上护型号 || ''}
                                 onChange={e => set上护型号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 上护编号 || ''}
                                 onChange={e => set上护编号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <CheckSwitch  checked= {手机信 || false}
                             onChange={e => set手机信(手机信? undefined:true) } />
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 速比 || ''}
                                 onChange={e => set速比( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <Select  value={ 拖动 || ''}
                        onChange={e => set拖动( e.currentTarget.value||undefined ) } >
@@ -831,64 +835,64 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                 { 拖动方式.map((one,i) => <option key={i} >{one}</option> ) }
               </Select>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 限速器号 || ''}
                                 onChange={e => set限速器号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 限绳直径 || ''}
                                onChange={e => set限绳直径( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 曳引比 || ''}
                                 onChange={e => set曳引比( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 轮节径 || ''}
                                onChange={e => set轮节径( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 绳数 || ''}
                                onChange={e => set绳数( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <CheckSwitch  checked= {是钢带 || false} disabled={false}
                             onChange={e => set是钢带(是钢带? undefined:true) } />
 
               {是钢带 ? (
 
-                <InputLine  label='报告地址自动获得链接:' >
+                <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 钢带规格 || ''} readOnly={true}
                                   onChange={e => set钢带规格( e.currentTarget.value||undefined ) }
                 >米 </Zx>
-</InputLine>
+</IoneLine>
 
               ) :(
 
-                <InputLine  label='报告地址自动获得链接:' >
+                <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 绳直径 || ''} readOnly={true}
                                  onChange={e => set绳直径( e.currentTarget.value||undefined ) }
                 >米 </Zx>
-</InputLine>
+</IoneLine>
 
               ) }
 
               <Text variant="h5">其它参数</Text>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 爆炸物质 || ''}
                                 onChange={e => set爆炸物质( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <Select  value={ 补偿方式 || ''}
                        onChange={e => set补偿方式( e.currentTarget.value||undefined ) } >
@@ -912,23 +916,23 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                 { 对重导轨型式s.map((one,i) => <option key={i} >{one}</option> ) }
               </Select>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 轿厢高 || ''}
                                onChange={e => set轿厢高( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 轿厢宽 || ''}
                                onChange={e => set轿厢宽( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 轿厢深 || ''}
                                onChange={e => set轿厢深( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <ComboBoxDatalist  value={ 区域防爆 || ''}
                                  onListChange={v => set区域防爆( v||undefined ) }
@@ -940,11 +944,11 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                 { 驱动方式s.map((one,i) => <option key={i} >{one}</option> ) }
               </Select>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 上行额速 || ''}
                                onChange={e => set上行额速( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <CheckSwitch  checked= {船梯 || false}
                             onChange={e => set船梯(船梯? undefined:true) } />
@@ -955,109 +959,109 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
               <CheckSwitch  checked= {汽车电梯 || false}
                             onChange={e => set汽车电梯(汽车电梯? undefined:true) } />
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 梯级宽度 || ''}
                                onChange={e => set梯级宽度( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 下额定速 || ''}
                                onChange={e => set下额定速( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 限机械速 || ''}
                                 onChange={e => set限机械速( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 悬挂绳数 || ''}
                                onChange={e => set悬挂绳数( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 悬挂绳径 || ''}
                                onChange={e => set悬挂绳径( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 泵编号 || ''}
                                 onChange={e => set泵编号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 泵功率 || ''}
                                onChange={e => set泵功率( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 泵流量 || ''}
                                onChange={e => set泵流量( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 泵型号 || ''}
                                 onChange={e => set泵型号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 泵转速 || ''}
                                onChange={e => set泵转速( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 液油型号 || ''}
                                 onChange={e => set液油型号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 油缸数 || ''}
                                onChange={e => set油缸数( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <InputDatalist  value={ 油缸形式 || ''}
                               onListChange={v => set油缸形式(v ||undefined)}
                               datalist={油缸形式s} />
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 防爆标志 || ''}
                                 onChange={e => set防爆标志( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <CheckSwitch  disabled={false}  checked= {汽车电梯 || false}
                             onChange={e => set汽车电梯(汽车电梯? undefined:true) } />
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 防爆证号 || ''}
                                 onChange={e => set防爆证号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
 
 
 
 
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 type="number"  min={1} max={999}
                 value={ flo || '' }
                 onChange={e => setFlo( e.currentTarget.value||undefined ) }
               >865行 </Zx>
-</InputLine>
+</IoneLine>
 
 
               <CheckSwitch
@@ -1066,13 +1070,13 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
               />
 
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 type="number"  min={0} max={300}
                 value={vl || ''}
                 onChange={e => setVl( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
 
               <CheckSwitch
@@ -1087,52 +1091,52 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
               />
 
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 placeholder="层数"
                 value={ cpm || ''}
                 onChange={e => setCpm( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 type="number"
                 value={ hlf || ''}
                 onChange={e => setHlf( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 type="number"
                 value={ lesc || ''}
                 onChange={e => setLesc( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 type="number"
                 value={ wesc || ''}
                 onChange={e => setWesc( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 value={ tm || ''}
                 onChange={e => setTm( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 value={ mtm || ''}
                 onChange={e => setMtm( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <Select inputSize="md" css={{minWidth:'140px',fontSize:'1.5rem',padding:'0 1rem'}} divStyle={css`max-width:240px;`}
                       value={ buff || ''}
@@ -1144,13 +1148,13 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                 )) }
               </Select>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 type="number"
                 value={ rtl || ''}
                 onChange={e => setRtl( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <ComboBoxDatalist
                 value={ aap || ''}
@@ -1158,12 +1162,12 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                 datalist={加装附加装置}
               />
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 value={ prot || ''}
                 onChange={e => setProt( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <InputDatalist
                 value={ doop || ''}
@@ -1171,12 +1175,12 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                 datalist={开门方式}
               />
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 value={ limm || ''}
                 onChange={e => setLimm( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <Select inputSize="md" css={{minWidth:'140px',fontSize:'1.5rem',padding:'0 1rem'}} divStyle={css`max-width:240px;`}
                       value={ opm || ''}
@@ -1188,38 +1192,38 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                 )) }
               </Select>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type='date'  value={lbkd ||''}
                                onChange={e => setLbkd( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type='date'  value={nbkd ||''}
                                onChange={e => setNbkd( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 value={ 控制屏编号 || ''}
                 onChange={e => set控制屏编号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 value={ 曳引号 || ''}
                 onChange={e => set曳引号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 value={ 主机号 || ''}
                 onChange={e => set主机号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
 
               <Text variant="h5">监察参数</Text>
@@ -1235,13 +1239,13 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                 onChange={e => setVital(vital? undefined:true) }
               />
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 type="number"
                 value={ 年限 || ''}
                 onChange={e => set年限( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <Select
                 value={ cpa || ''}
@@ -1253,30 +1257,30 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                 )) }
               </Select>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 type="number"
                 value={ 固定资产值 || ''}
                 onChange={e => set固定资产值( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 type="number"
                 value={ 大修周期 || ''}
                 onChange={e => set大修周期( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
 
               <Text variant="h5">许可用的参数</Text>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type='date'  value={ 设计日期  || ''}
                                onChange={e => set设计日期( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <UnitOrChoose id={造监检单  || ''} emodel={'电梯'} emid={id} field={'造监检单'}
                             onCancel={() => {
@@ -1305,24 +1309,24 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                                  onListChange={v => set施工类别( v||undefined ) }
                                  datalist={施工类别s}  />
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type='date'  value={ 施工日期  || ''}
                                onChange={e => set施工日期( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type='date'  value={ 竣验日  || ''}
                                onChange={e => set竣验日( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 value={ 施工号 || ''}
                 onChange={e => set施工号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <UnitOrChoose id={设计单位  || ''} emodel={'电梯'} emid={id} field={'设计单位'}
                             onCancel={() => {
@@ -1331,242 +1335,242 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                             onDialog={async () => { await setNdt(await confirmation()); } }
               />
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 value={ 设计许号 || ''}
                 onChange={e => set设计许号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 value={ 产品标准 || ''}
                 onChange={e => set产品标准( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 value={ 设计图号 || ''}
                 onChange={e => set设计图号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 value={ 合格证号 || ''}
                 onChange={e => set合格证号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type='date'  value={ 安竣日  || ''}
                                onChange={e => set安竣日( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 type="number"
                 value={ 设备总重量 || ''}
                 onChange={e => set设备总重量( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <Text variant="h5">常用参数</Text>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 type="number"
                 value={ 倾斜角度 || ''}
                 onChange={e => set倾斜角度( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 安全钳型号 || ''}
                                 onChange={e => set安全钳型号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 安全钳编号 || ''}
                                 onChange={e => set安全钳编号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 层门型号 || ''}
                                 onChange={e => set层门型号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 底坑深度 || ''}
                                onChange={e => set底坑深度( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 电动机功率 || ''}
                                onChange={e => set电动机功率( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 电动机转速 || ''}
                                 onChange={e => set电动机转速( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 电梯门数 || ''}
                                onChange={e => set电梯门数( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 电梯站数 || ''}
                                onChange={e => set电梯站数( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 顶层高度 || ''}
                                onChange={e => set顶层高度( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 对重轨距 || ''}
                                onChange={e => set对重轨距( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 对重块数 || ''}
                                onChange={e => set对重块数( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 对重限速号 || ''}
                                 onChange={e => set对重限速号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 对重限型号 || ''}
                                 onChange={e => set对重限型号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 额定电流 || ''}
                                onChange={e => set额定电流( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 额定载人 || ''}
                                onChange={e => set额定载人( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 缓冲器编号 || ''}
                                 onChange={e => set缓冲器编号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 缓冲器型号 || ''}
                                 onChange={e => set缓冲器型号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 缓冲器厂家 || ''}
                                 onChange={e => set缓冲器厂家( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 轿厢轨距 || ''}
                                onChange={e => set轿厢轨距( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 上行限电速 || ''}
                                 onChange={e => set上行限电速( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 上行限机速 || ''}
                                 onChange={e => set上行限机速( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 下行限电速 || ''}
                                 onChange={e => set下行限电速( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 下行限机速 || ''}
                                 onChange={e => set下行限机速( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 移动保护号 || ''}
                                 onChange={e => set移动保护号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 移动保护型 || ''}
                                 onChange={e => set移动保护型( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <InputDatalist  value={ 装修 || ''}
                               onListChange={v => set装修(v ||undefined)}
                               datalist={轿厢装修状态} />
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 锁型号 || ''}
                                 onChange={e => set锁型号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <ComboBoxDatalist  value={ 上护装置 || ''}
                                  onListChange={v => set上护装置( v||undefined ) }
                                  datalist={上行保护装置形式}  />
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 上护型号 || ''}
                                 onChange={e => set上护型号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 上护编号 || ''}
                                 onChange={e => set上护编号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <CheckSwitch  checked= {手机信 || false}
                             onChange={e => set手机信(手机信? undefined:true) } />
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 速比 || ''}
                                 onChange={e => set速比( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <Select  value={ 拖动 || ''}
                        onChange={e => set拖动( e.currentTarget.value||undefined ) } >
@@ -1574,64 +1578,64 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                 { 拖动方式.map((one,i) => <option key={i} >{one}</option> ) }
               </Select>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 限速器号 || ''}
                                 onChange={e => set限速器号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 限绳直径 || ''}
                                onChange={e => set限绳直径( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 曳引比 || ''}
                                 onChange={e => set曳引比( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 轮节径 || ''}
                                onChange={e => set轮节径( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 绳数 || ''}
                                onChange={e => set绳数( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <CheckSwitch  checked= {是钢带 || false} disabled={false}
                             onChange={e => set是钢带(是钢带? undefined:true) } />
 
               {是钢带 ? (
 
-                <InputLine  label='报告地址自动获得链接:' >
+                <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 钢带规格 || ''} readOnly={true}
                                   onChange={e => set钢带规格( e.currentTarget.value||undefined ) }
                 >米 </Zx>
-</InputLine>
+</IoneLine>
 
               ) :(
 
-                <InputLine  label='报告地址自动获得链接:' >
+                <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 绳直径 || ''} readOnly={true}
                                  onChange={e => set绳直径( e.currentTarget.value||undefined ) }
                 >米 </Zx>
-</InputLine>
+</IoneLine>
 
               ) }
 
               <Text variant="h5">其它参数</Text>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 爆炸物质 || ''}
                                 onChange={e => set爆炸物质( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <Select  value={ 补偿方式 || ''}
                        onChange={e => set补偿方式( e.currentTarget.value||undefined ) } >
@@ -1655,23 +1659,23 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                 { 对重导轨型式s.map((one,i) => <option key={i} >{one}</option> ) }
               </Select>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 轿厢高 || ''}
                                onChange={e => set轿厢高( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 轿厢宽 || ''}
                                onChange={e => set轿厢宽( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 轿厢深 || ''}
                                onChange={e => set轿厢深( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <ComboBoxDatalist  value={ 区域防爆 || ''}
                                  onListChange={v => set区域防爆( v||undefined ) }
@@ -1683,11 +1687,11 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                 { 驱动方式s.map((one,i) => <option key={i} >{one}</option> ) }
               </Select>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 上行额速 || ''}
                                onChange={e => set上行额速( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <CheckSwitch  checked= {船梯 || false}
                             onChange={e => set船梯(船梯? undefined:true) } />
@@ -1698,109 +1702,109 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
               <CheckSwitch  checked= {汽车电梯 || false}
                             onChange={e => set汽车电梯(汽车电梯? undefined:true) } />
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 梯级宽度 || ''}
                                onChange={e => set梯级宽度( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 下额定速 || ''}
                                onChange={e => set下额定速( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 限机械速 || ''}
                                 onChange={e => set限机械速( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 悬挂绳数 || ''}
                                onChange={e => set悬挂绳数( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 悬挂绳径 || ''}
                                onChange={e => set悬挂绳径( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 泵编号 || ''}
                                 onChange={e => set泵编号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 泵功率 || ''}
                                onChange={e => set泵功率( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 泵流量 || ''}
                                onChange={e => set泵流量( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 泵型号 || ''}
                                 onChange={e => set泵型号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 泵转速 || ''}
                                onChange={e => set泵转速( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 液油型号 || ''}
                                 onChange={e => set液油型号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 油缸数 || ''}
                                onChange={e => set油缸数( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <InputDatalist  value={ 油缸形式 || ''}
                               onListChange={v => set油缸形式(v ||undefined)}
                               datalist={油缸形式s} />
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 防爆标志 || ''}
                                 onChange={e => set防爆标志( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <CheckSwitch  disabled={false}  checked= {汽车电梯 || false}
                             onChange={e => set汽车电梯(汽车电梯? undefined:true) } />
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 防爆证号 || ''}
                                 onChange={e => set防爆证号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
 
 
 
 
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 type="number"  min={1} max={999}
                 value={ flo || '' }
                 onChange={e => setFlo( e.currentTarget.value||undefined ) }
               >865行 </Zx>
-</InputLine>
+</IoneLine>
 
 
               <CheckSwitch
@@ -1809,13 +1813,13 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
               />
 
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 type="number"  min={0} max={300}
                 value={vl || ''}
                 onChange={e => setVl( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
 
               <CheckSwitch
@@ -1830,52 +1834,52 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
               />
 
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 placeholder="层数"
                 value={ cpm || ''}
                 onChange={e => setCpm( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 type="number"
                 value={ hlf || ''}
                 onChange={e => setHlf( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 type="number"
                 value={ lesc || ''}
                 onChange={e => setLesc( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 type="number"
                 value={ wesc || ''}
                 onChange={e => setWesc( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 value={ tm || ''}
                 onChange={e => setTm( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 value={ mtm || ''}
                 onChange={e => setMtm( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <Select inputSize="md" css={{minWidth:'140px',fontSize:'1.5rem',padding:'0 1rem'}} divStyle={css`max-width:240px;`}
                       value={ buff || ''}
@@ -1887,13 +1891,13 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                 )) }
               </Select>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 type="number"
                 value={ rtl || ''}
                 onChange={e => setRtl( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <ComboBoxDatalist
                 value={ aap || ''}
@@ -1901,12 +1905,12 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                 datalist={加装附加装置}
               />
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 value={ prot || ''}
                 onChange={e => setProt( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <InputDatalist
                 value={ doop || ''}
@@ -1914,12 +1918,12 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                 datalist={开门方式}
               />
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 value={ limm || ''}
                 onChange={e => setLimm( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <Select inputSize="md" css={{minWidth:'140px',fontSize:'1.5rem',padding:'0 1rem'}} divStyle={css`max-width:240px;`}
                       value={ opm || ''}
@@ -1931,38 +1935,38 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                 )) }
               </Select>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type='date'  value={lbkd ||''}
                                onChange={e => setLbkd( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type='date'  value={nbkd ||''}
                                onChange={e => setNbkd( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 value={ 控制屏编号 || ''}
                 onChange={e => set控制屏编号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 value={ 曳引号 || ''}
                 onChange={e => set曳引号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 value={ 主机号 || ''}
                 onChange={e => set主机号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
 
               <Text variant="h5">监察参数</Text>
@@ -1978,13 +1982,13 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                 onChange={e => setVital(vital? undefined:true) }
               />
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 type="number"
                 value={ 年限 || ''}
                 onChange={e => set年限( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <Select
                 value={ cpa || ''}
@@ -1996,30 +2000,30 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                 )) }
               </Select>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 type="number"
                 value={ 固定资产值 || ''}
                 onChange={e => set固定资产值( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 type="number"
                 value={ 大修周期 || ''}
                 onChange={e => set大修周期( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
 
               <Text variant="h5">许可用的参数</Text>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type='date'  value={ 设计日期  || ''}
                                onChange={e => set设计日期( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <UnitOrChoose id={造监检单  || ''} emodel={'电梯'} emid={id} field={'造监检单'}
                             onCancel={() => {
@@ -2048,24 +2052,24 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                                  onListChange={v => set施工类别( v||undefined ) }
                                  datalist={施工类别s}  />
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type='date'  value={ 施工日期  || ''}
                                onChange={e => set施工日期( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type='date'  value={ 竣验日  || ''}
                                onChange={e => set竣验日( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 value={ 施工号 || ''}
                 onChange={e => set施工号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <UnitOrChoose id={设计单位  || ''} emodel={'电梯'} emid={id} field={'设计单位'}
                             onCancel={() => {
@@ -2074,242 +2078,242 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                             onDialog={async () => { await setNdt(await confirmation()); } }
               />
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 value={ 设计许号 || ''}
                 onChange={e => set设计许号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 value={ 产品标准 || ''}
                 onChange={e => set产品标准( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 value={ 设计图号 || ''}
                 onChange={e => set设计图号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 value={ 合格证号 || ''}
                 onChange={e => set合格证号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type='date'  value={ 安竣日  || ''}
                                onChange={e => set安竣日( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 type="number"
                 value={ 设备总重量 || ''}
                 onChange={e => set设备总重量( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <Text variant="h5">常用参数</Text>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 type="number"
                 value={ 倾斜角度 || ''}
                 onChange={e => set倾斜角度( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 安全钳型号 || ''}
                                 onChange={e => set安全钳型号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 安全钳编号 || ''}
                                 onChange={e => set安全钳编号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 层门型号 || ''}
                                 onChange={e => set层门型号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 底坑深度 || ''}
                                onChange={e => set底坑深度( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 电动机功率 || ''}
                                onChange={e => set电动机功率( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 电动机转速 || ''}
                                 onChange={e => set电动机转速( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 电梯门数 || ''}
                                onChange={e => set电梯门数( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 电梯站数 || ''}
                                onChange={e => set电梯站数( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 顶层高度 || ''}
                                onChange={e => set顶层高度( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 对重轨距 || ''}
                                onChange={e => set对重轨距( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 对重块数 || ''}
                                onChange={e => set对重块数( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 对重限速号 || ''}
                                 onChange={e => set对重限速号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 对重限型号 || ''}
                                 onChange={e => set对重限型号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 额定电流 || ''}
                                onChange={e => set额定电流( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 额定载人 || ''}
                                onChange={e => set额定载人( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 缓冲器编号 || ''}
                                 onChange={e => set缓冲器编号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 缓冲器型号 || ''}
                                 onChange={e => set缓冲器型号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 缓冲器厂家 || ''}
                                 onChange={e => set缓冲器厂家( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 轿厢轨距 || ''}
                                onChange={e => set轿厢轨距( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 上行限电速 || ''}
                                 onChange={e => set上行限电速( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 上行限机速 || ''}
                                 onChange={e => set上行限机速( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 下行限电速 || ''}
                                 onChange={e => set下行限电速( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 下行限机速 || ''}
                                 onChange={e => set下行限机速( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 移动保护号 || ''}
                                 onChange={e => set移动保护号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 移动保护型 || ''}
                                 onChange={e => set移动保护型( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <InputDatalist  value={ 装修 || ''}
                               onListChange={v => set装修(v ||undefined)}
                               datalist={轿厢装修状态} />
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 锁型号 || ''}
                                 onChange={e => set锁型号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <ComboBoxDatalist  value={ 上护装置 || ''}
                                  onListChange={v => set上护装置( v||undefined ) }
                                  datalist={上行保护装置形式}  />
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 上护型号 || ''}
                                 onChange={e => set上护型号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 上护编号 || ''}
                                 onChange={e => set上护编号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <CheckSwitch  checked= {手机信 || false}
                             onChange={e => set手机信(手机信? undefined:true) } />
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 速比 || ''}
                                 onChange={e => set速比( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <Select  value={ 拖动 || ''}
                        onChange={e => set拖动( e.currentTarget.value||undefined ) } >
@@ -2317,64 +2321,64 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                 { 拖动方式.map((one,i) => <option key={i} >{one}</option> ) }
               </Select>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 限速器号 || ''}
                                 onChange={e => set限速器号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 限绳直径 || ''}
                                onChange={e => set限绳直径( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 曳引比 || ''}
                                 onChange={e => set曳引比( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 轮节径 || ''}
                                onChange={e => set轮节径( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 绳数 || ''}
                                onChange={e => set绳数( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <CheckSwitch  checked= {是钢带 || false} disabled={false}
                             onChange={e => set是钢带(是钢带? undefined:true) } />
 
               {是钢带 ? (
 
-                <InputLine  label='报告地址自动获得链接:' >
+                <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 钢带规格 || ''} readOnly={true}
                                   onChange={e => set钢带规格( e.currentTarget.value||undefined ) }
                 >米 </Zx>
-</InputLine>
+</IoneLine>
 
               ) :(
 
-                <InputLine  label='报告地址自动获得链接:' >
+                <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 绳直径 || ''} readOnly={true}
                                  onChange={e => set绳直径( e.currentTarget.value||undefined ) }
                 >米 </Zx>
-</InputLine>
+</IoneLine>
 
               ) }
 
               <Text variant="h5">其它参数</Text>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 爆炸物质 || ''}
                                 onChange={e => set爆炸物质( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <Select  value={ 补偿方式 || ''}
                        onChange={e => set补偿方式( e.currentTarget.value||undefined ) } >
@@ -2398,23 +2402,23 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                 { 对重导轨型式s.map((one,i) => <option key={i} >{one}</option> ) }
               </Select>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 轿厢高 || ''}
                                onChange={e => set轿厢高( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 轿厢宽 || ''}
                                onChange={e => set轿厢宽( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 轿厢深 || ''}
                                onChange={e => set轿厢深( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <ComboBoxDatalist  value={ 区域防爆 || ''}
                                  onListChange={v => set区域防爆( v||undefined ) }
@@ -2426,11 +2430,11 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                 { 驱动方式s.map((one,i) => <option key={i} >{one}</option> ) }
               </Select>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 上行额速 || ''}
                                onChange={e => set上行额速( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <CheckSwitch  checked= {船梯 || false}
                             onChange={e => set船梯(船梯? undefined:true) } />
@@ -2441,96 +2445,96 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
               <CheckSwitch  checked= {汽车电梯 || false}
                             onChange={e => set汽车电梯(汽车电梯? undefined:true) } />
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 梯级宽度 || ''}
                                onChange={e => set梯级宽度( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 下额定速 || ''}
                                onChange={e => set下额定速( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 限机械速 || ''}
                                 onChange={e => set限机械速( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 悬挂绳数 || ''}
                                onChange={e => set悬挂绳数( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 悬挂绳径 || ''}
                                onChange={e => set悬挂绳径( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 泵编号 || ''}
                                 onChange={e => set泵编号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 泵功率 || ''}
                                onChange={e => set泵功率( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 泵流量 || ''}
                                onChange={e => set泵流量( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 泵型号 || ''}
                                 onChange={e => set泵型号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 泵转速 || ''}
                                onChange={e => set泵转速( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 液油型号 || ''}
                                 onChange={e => set液油型号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 油缸数 || ''}
                                onChange={e => set油缸数( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <InputDatalist  value={ 油缸形式 || ''}
                               onListChange={v => set油缸形式(v ||undefined)}
                               datalist={油缸形式s} />
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 防爆标志 || ''}
                                 onChange={e => set防爆标志( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <CheckSwitch  disabled={false}  checked= {汽车电梯 || false}
                             onChange={e => set汽车电梯(汽车电梯? undefined:true) } />
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 防爆证号 || ''}
                                 onChange={e => set防爆证号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
 
 
@@ -2538,13 +2542,13 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
 
 
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 type="number"  min={1} max={999}
                 value={ flo || '' }
                 onChange={e => setFlo( e.currentTarget.value||undefined ) }
               >865行 </Zx>
-</InputLine>
+</IoneLine>
 
 
               <CheckSwitch
@@ -2553,13 +2557,13 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
               />
 
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 type="number"  min={0} max={300}
                 value={vl || ''}
                 onChange={e => setVl( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
 
               <CheckSwitch
@@ -2574,52 +2578,52 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
               />
 
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 placeholder="层数"
                 value={ cpm || ''}
                 onChange={e => setCpm( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 type="number"
                 value={ hlf || ''}
                 onChange={e => setHlf( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 type="number"
                 value={ lesc || ''}
                 onChange={e => setLesc( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 type="number"
                 value={ wesc || ''}
                 onChange={e => setWesc( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 value={ tm || ''}
                 onChange={e => setTm( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 value={ mtm || ''}
                 onChange={e => setMtm( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <Select inputSize="md" css={{minWidth:'140px',fontSize:'1.5rem',padding:'0 1rem'}} divStyle={css`max-width:240px;`}
                       value={ buff || ''}
@@ -2631,13 +2635,13 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                 )) }
               </Select>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 type="number"
                 value={ rtl || ''}
                 onChange={e => setRtl( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <ComboBoxDatalist
                 value={ aap || ''}
@@ -2645,12 +2649,12 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                 datalist={加装附加装置}
               />
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 value={ prot || ''}
                 onChange={e => setProt( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <InputDatalist
                 value={ doop || ''}
@@ -2658,12 +2662,12 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                 datalist={开门方式}
               />
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 value={ limm || ''}
                 onChange={e => setLimm( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <Select inputSize="md" css={{minWidth:'140px',fontSize:'1.5rem',padding:'0 1rem'}} divStyle={css`max-width:240px;`}
                       value={ opm || ''}
@@ -2675,38 +2679,38 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                 )) }
               </Select>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type='date'  value={lbkd ||''}
                                onChange={e => setLbkd( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type='date'  value={nbkd ||''}
                                onChange={e => setNbkd( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 value={ 控制屏编号 || ''}
                 onChange={e => set控制屏编号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 value={ 曳引号 || ''}
                 onChange={e => set曳引号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 value={ 主机号 || ''}
                 onChange={e => set主机号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
 
               <Text variant="h5">监察参数</Text>
@@ -2722,13 +2726,13 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                 onChange={e => setVital(vital? undefined:true) }
               />
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 type="number"
                 value={ 年限 || ''}
                 onChange={e => set年限( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <Select
                 value={ cpa || ''}
@@ -2740,30 +2744,30 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                 )) }
               </Select>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 type="number"
                 value={ 固定资产值 || ''}
                 onChange={e => set固定资产值( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 type="number"
                 value={ 大修周期 || ''}
                 onChange={e => set大修周期( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
 
               <Text variant="h5">许可用的参数</Text>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type='date'  value={ 设计日期  || ''}
                                onChange={e => set设计日期( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <UnitOrChoose id={造监检单  || ''} emodel={'电梯'} emid={id} field={'造监检单'}
                             onCancel={() => {
@@ -2792,24 +2796,24 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                                  onListChange={v => set施工类别( v||undefined ) }
                                  datalist={施工类别s}  />
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type='date'  value={ 施工日期  || ''}
                                onChange={e => set施工日期( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type='date'  value={ 竣验日  || ''}
                                onChange={e => set竣验日( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 value={ 施工号 || ''}
                 onChange={e => set施工号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <UnitOrChoose id={设计单位  || ''} emodel={'电梯'} emid={id} field={'设计单位'}
                             onCancel={() => {
@@ -2818,242 +2822,242 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                             onDialog={async () => { await setNdt(await confirmation()); } }
               />
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 value={ 设计许号 || ''}
                 onChange={e => set设计许号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 value={ 产品标准 || ''}
                 onChange={e => set产品标准( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 value={ 设计图号 || ''}
                 onChange={e => set设计图号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 value={ 合格证号 || ''}
                 onChange={e => set合格证号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type='date'  value={ 安竣日  || ''}
                                onChange={e => set安竣日( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 type="number"
                 value={ 设备总重量 || ''}
                 onChange={e => set设备总重量( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <Text variant="h5">常用参数</Text>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx
                 type="number"
                 value={ 倾斜角度 || ''}
                 onChange={e => set倾斜角度( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 安全钳型号 || ''}
                                 onChange={e => set安全钳型号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 安全钳编号 || ''}
                                 onChange={e => set安全钳编号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 层门型号 || ''}
                                 onChange={e => set层门型号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 底坑深度 || ''}
                                onChange={e => set底坑深度( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 电动机功率 || ''}
                                onChange={e => set电动机功率( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 电动机转速 || ''}
                                 onChange={e => set电动机转速( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 电梯门数 || ''}
                                onChange={e => set电梯门数( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 电梯站数 || ''}
                                onChange={e => set电梯站数( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 顶层高度 || ''}
                                onChange={e => set顶层高度( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 对重轨距 || ''}
                                onChange={e => set对重轨距( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 对重块数 || ''}
                                onChange={e => set对重块数( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 对重限速号 || ''}
                                 onChange={e => set对重限速号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 对重限型号 || ''}
                                 onChange={e => set对重限型号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 额定电流 || ''}
                                onChange={e => set额定电流( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 额定载人 || ''}
                                onChange={e => set额定载人( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 缓冲器编号 || ''}
                                 onChange={e => set缓冲器编号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 缓冲器型号 || ''}
                                 onChange={e => set缓冲器型号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 缓冲器厂家 || ''}
                                 onChange={e => set缓冲器厂家( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 轿厢轨距 || ''}
                                onChange={e => set轿厢轨距( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 上行限电速 || ''}
                                 onChange={e => set上行限电速( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 上行限机速 || ''}
                                 onChange={e => set上行限机速( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 下行限电速 || ''}
                                 onChange={e => set下行限电速( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 下行限机速 || ''}
                                 onChange={e => set下行限机速( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 移动保护号 || ''}
                                 onChange={e => set移动保护号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 移动保护型 || ''}
                                 onChange={e => set移动保护型( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <InputDatalist  value={ 装修 || ''}
                               onListChange={v => set装修(v ||undefined)}
                               datalist={轿厢装修状态} />
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 锁型号 || ''}
                                 onChange={e => set锁型号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <ComboBoxDatalist  value={ 上护装置 || ''}
                                  onListChange={v => set上护装置( v||undefined ) }
                                  datalist={上行保护装置形式}  />
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 上护型号 || ''}
                                 onChange={e => set上护型号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 上护编号 || ''}
                                 onChange={e => set上护编号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <CheckSwitch  checked= {手机信 || false}
                             onChange={e => set手机信(手机信? undefined:true) } />
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 速比 || ''}
                                 onChange={e => set速比( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <Select  value={ 拖动 || ''}
                        onChange={e => set拖动( e.currentTarget.value||undefined ) } >
@@ -3061,64 +3065,64 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                 { 拖动方式.map((one,i) => <option key={i} >{one}</option> ) }
               </Select>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 限速器号 || ''}
                                 onChange={e => set限速器号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 限绳直径 || ''}
                                onChange={e => set限绳直径( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 曳引比 || ''}
                                 onChange={e => set曳引比( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 轮节径 || ''}
                                onChange={e => set轮节径( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 绳数 || ''}
                                onChange={e => set绳数( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <CheckSwitch  checked= {是钢带 || false} disabled={false}
                             onChange={e => set是钢带(是钢带? undefined:true) } />
 
               {是钢带 ? (
 
-                <InputLine  label='报告地址自动获得链接:' >
+                <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 钢带规格 || ''} readOnly={true}
                                   onChange={e => set钢带规格( e.currentTarget.value||undefined ) }
                 >米 </Zx>
-</InputLine>
+</IoneLine>
 
               ) :(
 
-                <InputLine  label='报告地址自动获得链接:' >
+                <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 绳直径 || ''} readOnly={true}
                                  onChange={e => set绳直径( e.currentTarget.value||undefined ) }
                 >米 </Zx>
-</InputLine>
+</IoneLine>
 
               ) }
 
               <Text variant="h5">其它参数</Text>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 爆炸物质 || ''}
                                 onChange={e => set爆炸物质( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <Select  value={ 补偿方式 || ''}
                        onChange={e => set补偿方式( e.currentTarget.value||undefined ) } >
@@ -3142,23 +3146,23 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                 { 对重导轨型式s.map((one,i) => <option key={i} >{one}</option> ) }
               </Select>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 轿厢高 || ''}
                                onChange={e => set轿厢高( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 轿厢宽 || ''}
                                onChange={e => set轿厢宽( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 轿厢深 || ''}
                                onChange={e => set轿厢深( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <ComboBoxDatalist  value={ 区域防爆 || ''}
                                  onListChange={v => set区域防爆( v||undefined ) }
@@ -3170,11 +3174,11 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
                 { 驱动方式s.map((one,i) => <option key={i} >{one}</option> ) }
               </Select>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 上行额速 || ''}
                                onChange={e => set上行额速( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <CheckSwitch  checked= {船梯 || false}
                             onChange={e => set船梯(船梯? undefined:true) } />
@@ -3185,99 +3189,100 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
               <CheckSwitch  checked= {汽车电梯 || false}
                             onChange={e => set汽车电梯(汽车电梯? undefined:true) } />
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 梯级宽度 || ''}
                                onChange={e => set梯级宽度( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 下额定速 || ''}
                                onChange={e => set下额定速( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 限机械速 || ''}
                                 onChange={e => set限机械速( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 悬挂绳数 || ''}
                                onChange={e => set悬挂绳数( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 悬挂绳径 || ''}
                                onChange={e => set悬挂绳径( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 泵编号 || ''}
                                 onChange={e => set泵编号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx  type="number" value={ 泵功率 || ''}
                                onChange={e => set泵功率( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接0:' >
+              <IoneLine  label='报告地址自动获得链接0:' >
  <Zx  type="number" value={ 泵流量 || ''}
                                onChange={e => set泵流量( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接1:' >
+              <IoneLine  label='报告地址自动获得链接1:' >
  <Zx   value={ 泵型号 || ''}
                                 onChange={e => set泵型号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获旧链接0:' >
+              <IoneLine  label='报告地址自动获旧链接0:' >
  <Zx  type="number" value={ 泵转速 || ''}
                                onChange={e => set泵转速( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报告地址自动获得链接1:' >
+              <IoneLine  label='报告地址自动获得链接1:' >
  <Zx   value={ 液油型号 || ''}
                                 onChange={e => set液油型号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
-              <InputLine  label='报址自动链接获告地旧:' >
+              <IoneLine  label='报址自动链接获告地旧:' >
  <Zx  type="number" value={ 油缸数 || ''}
                                onChange={e => set油缸数( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <InputDatalist  value={ 油缸形式 || ''}
                               onListChange={v => set油缸形式(v ||undefined)}
                               datalist={油缸形式s} />
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 防爆标志 || ''}
                                 onChange={e => set防爆标志( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
               <CheckSwitch  disabled={false}  checked= {汽车电梯 || false}
                             onChange={e => set汽车电梯(汽车电梯? undefined:true) } />
 
-              <InputLine  label='报告地址自动获得链接:' >
+              <IoneLine  label='报告地址自动获得链接:' >
  <Zx   value={ 防爆证号 || ''}
                                 onChange={e => set防爆证号( e.currentTarget.value||undefined ) }
               >米 </Zx>
-</InputLine>
+</IoneLine>
 
 
 
+        </Line1Column>
 
               <Button
                 size="lg"

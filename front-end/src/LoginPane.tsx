@@ -40,6 +40,7 @@ export const Login: React.FunctionComponent<LoginProps> = props => {
   const { result:regOK, submit:registerfunc, error:errReg } = useRegisterToServer(form);
   console.log("登录机密 开始userList=",regOK,"errReg=",errReg);
 
+  //用<form> 来提交，这样required属性就能生效了，能够验证表单的内容。
   async function doLogin(e: React.FormEvent  | Event)
   {
       e.preventDefault();
@@ -54,8 +55,9 @@ export const Login: React.FunctionComponent<LoginProps> = props => {
       }
   }
 
-  async function doRegister()
+  async function doRegister(e: React.FormEvent  | Event)
   {
+    e.preventDefault();
     if(form?.password2!==form.password)  return setError("两次输入的设置密码不一致");
     try {
       setError("");
@@ -184,6 +186,8 @@ export const Login: React.FunctionComponent<LoginProps> = props => {
                 padding: theme.spaces.lg
               }}
             >
+            <form  method="post"
+                   onSubmit={e =>{isRegistering ? doRegister(e) : doLogin(e) } }>
              <div   css={{  marginTop: theme.spaces.md   }}>
                 {isRegistering ? (
                  <React.Fragment>
@@ -191,17 +195,17 @@ export const Login: React.FunctionComponent<LoginProps> = props => {
                     首先提供旧平台的认证信息，认证通过才能申请成功。
                   </Text>
                    <InputGroup label="旧平台的账号ID">
-                     <Input value={form?.eName||''}
+                     <Input value={form?.eName||''} required
                          onChange={e =>setForm({ ...form, eName: e.currentTarget.value }) }
                      />
                    </InputGroup>
                    <InputGroup label="旧平台密码">
-                     <Input value={form?.ePassword||''} type="password"
+                     <Input value={form?.ePassword||''} type="password" required
                             onChange={e =>setForm({ ...form, ePassword: e.currentTarget.value }) }
                      />
                    </InputGroup>
                    <InputGroup label="留个电话吧">
-                     <Input value={form?.mobile||''}
+                     <Input value={form?.mobile||''} required
                             onChange={e =>setForm({ ...form, mobile: e.currentTarget.value }) }
                      />
                    </InputGroup>
@@ -212,7 +216,7 @@ export const Login: React.FunctionComponent<LoginProps> = props => {
                   </Text>
                 )}
                  <InputGroup  label={isRegistering ?'申请本平台账户名字':"账户"}>
-                    <Input
+                    <Input  required
                       onChange={e => {
                         setForm({ ...form, username: e.currentTarget.value });
                       }}
@@ -223,8 +227,8 @@ export const Login: React.FunctionComponent<LoginProps> = props => {
                       placeholder="账户"
                     />
                   </InputGroup>
-                  <InputGroup hideLabel={!isRegistering} label={isRegistering ?'设置登录密码(强度不合格会报错)':"密码"}>
-                    <Input
+                  <InputGroup hideLabel={!isRegistering} label={isRegistering ?'设置登录密码(强度不合格会报错)':"密sdfsd码"}>
+                    <Input  required
                       onChange={e => {
                         setForm({ ...form, password: e.currentTarget.value });
                       }}
@@ -232,7 +236,7 @@ export const Login: React.FunctionComponent<LoginProps> = props => {
                       inputSize="md"
                       type="password"
                       //type={ form.password? "password":"text"}强制要求输入密码，不采用浏览器填充记住的密码。
-                      placeholder="密码最少6位的复杂的"
+                      placeholder="密码最少6位的复杂的 asdasdasda"
                       autoComplete="off"
                     />
                   </InputGroup>
@@ -240,7 +244,8 @@ export const Login: React.FunctionComponent<LoginProps> = props => {
                 {isRegistering ? (
                   <React.Fragment>
                     <InputGroup label="第二次输入密码">
-                      <Input value={form?.password2||''} type="password" placeholder="两次密码要相同"
+                      <Input required
+                             value={form?.password2||''} type="password" placeholder="两次密码要相同"
                              onChange={e =>setForm({ ...form, password2: e.currentTarget.value }) }
                       />
                     </InputGroup>
@@ -251,7 +256,7 @@ export const Login: React.FunctionComponent<LoginProps> = props => {
                  <Alert
                    css={{ marginTop: theme.spaces.md }}
                    intent={regOK ? 'success':"danger"}
-                   title={regOK ? '恭喜成功':"后端报错"}
+                   title={regOK ? '恭喜成功':"报ww错"}
                    subtitle={error}
                  />
                )}
@@ -268,12 +273,13 @@ export const Login: React.FunctionComponent<LoginProps> = props => {
                     type="submit"
                     size="md"
                     intent="primary"
-                    onPress={e =>{isRegistering ? doRegister() : doLogin(e) } }
+                    //onPress={e =>{isRegistering ? doRegister(e) : doLogin(e) } }
                   >
                     {isRegistering ? "注册申请" : "登录"}
                   </Button>
                 </div>
               </div>
+            </form>
             </div>
 
             <LayerLoading loading={loading || isload} />
