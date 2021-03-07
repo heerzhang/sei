@@ -43,7 +43,7 @@ import { gql, NetworkStatus, useQuery } from "@apollo/client";
 import { UnitOrChoose } from "../../unit/UnitOrChoose";
 import { DialogEnterReturn } from "../../context/DialogEnterReturn";
 import queryString from "querystring";
-import { Line1Column } from "../../comp/Column";
+import { Line1Column, Line1ColumnR } from "../../comp/Column";
 
 //import { Line1Column } from "customize-easy-ui-component/esm/Column";
 //import { IoneLine, SuffixInput as Zx } from "../../comp/TestingForm";
@@ -310,7 +310,7 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
               }}
             >
 
-        <Line1Column switchPx={336}>
+        <Line1ColumnR switchPx={368}>
 
               <IoneLine  label='报告地址自动获得链接:' >
  <Zx
@@ -3282,7 +3282,7 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
 
 
 
-        </Line1Column>
+        </Line1ColumnR>
 
               <Button
                 size="lg"

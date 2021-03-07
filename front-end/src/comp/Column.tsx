@@ -43,48 +43,44 @@ interface LineColumnProps extends React.HTMLAttributes<HTMLDivElement> {
  * Line1Column,... Line5Column
  */
 export const Line1Column: React.FunctionComponent<LineColumnProps> =(
-    {
-        elevation = "md",
-        children,
-        switchPx=336,
-        ...other
-    }
-  ) => {
-    //const theme = useTheme();
-  ///  const BREAKPOINTS = {
-  //      md: switchPx
-  //  }
-    //回调函数{SM, MD, LG, XL} ) => {}是按照从大到小排列if语句<><>，大的优先顺序触发。
-    //缺点：不能像Hook那样提前在函数体前面获得逻辑！只能直接做嵌套;
-    // 回调函数转成 大写字母。
-    //回调{( { MD } ) => {， 实际执行频率很低的，切换时可能 有MD=undefined状态。
-//  const LayoutMediaQueryBootstrap = LayoutMediaQueryFactory(BREAKPOINTS)
+  {
+    elevation = "md",
+    children,
+    switchPx=336,
+    ...other
+  }
+) => {
+  //const theme = useTheme();
+  const BREAKPOINTS = {
+    md: switchPx
+  }
+  //回调函数{SM, MD, LG, XL} ) => {}是按照从大到小排列if语句<><>，大的优先顺序触发。
+  //缺点：不能像Hook那样提前在函数体前面获得逻辑！只能直接做嵌套;
+  // 回调函数转成 大写字母。
+  //回调{( { MD } ) => {， 实际执行频率很低的，切换时可能 有MD=undefined状态。
+  const LayoutMediaQueryBootstrap = LayoutMediaQueryFactory(BREAKPOINTS)
 
-    return (
-      <LayoutMediaQuery>
-        {({M, L, XL}) => {
-          if (XL) return <p>LargeDesktop</p>
-          if (L) return <p>Desktop</p>
-           return(
-            <React.Fragment>
-              {
-                React.Children.map(children, (child, i) => {
-                  if (!React.isValidElement(child)) {
-                    return child;
-                  }
-                  return React.cloneElement(child as any, {
-                    fitable: 'true'
-                  });
-                })
-              }
-            </React.Fragment>
-          )
-
-        }}
-      </LayoutMediaQuery>
-
-    );
-  };
+  return (
+    <LayoutMediaQueryBootstrap>
+      {( { MD } ) => {
+        return(
+          <React.Fragment>
+            {
+              React.Children.map(children, (child, i) => {
+                if (!React.isValidElement(child)) {
+                  return child;
+                }
+                return React.cloneElement(child as any, {
+                  fitable: MD
+                });
+              })
+            }
+          </React.Fragment>
+        )
+      }}
+    </LayoutMediaQueryBootstrap>
+  );
+};
 
 
 Line1Column.displayName = "Line1Column";
@@ -120,7 +116,7 @@ export const Line1ColumnR: React.FunctionComponent<LineColumnProps> =(
                         return child;
                     }
                     return React.cloneElement(child as any, {
-                        fitable: fitable
+                        fitable: false
                     });
                 })
             }
