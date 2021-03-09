@@ -26,8 +26,8 @@ import {
   IconX,
   InputDatalist,
   ComboBoxDatalist,
-  IconToggleRight, IconToggleLeft, CheckSwitch, InputGroup,  Input,
-
+  IconToggleRight, IconToggleLeft, CheckSwitch, Input,
+  LineColumn,
   InputLine as IoneLine,
   SuffixInput as Zx
 } from "customize-easy-ui-component";
@@ -35,7 +35,7 @@ import {
 //import { useSession } from "../auth";
 //import {Helmet} from "react-helmet";
 import { Link as RouterLink,  useLocation } from "wouter";
-import { ContainLine, TransparentInput } from "../../comp/base";
+//import { ContainLine, TransparentInput } from "../../comp/base";
 import { css } from "@emotion/react";
 import { 设备品种 } from "../../dict/eqpComm";
 import { InspectRecordLayout } from "../../report/comp/base";
@@ -43,8 +43,7 @@ import { gql, NetworkStatus, useQuery } from "@apollo/client";
 import { UnitOrChoose } from "../../unit/UnitOrChoose";
 import { DialogEnterReturn } from "../../context/DialogEnterReturn";
 import queryString from "querystring";
-import { Line1Column, Line1ColumnR } from "../../comp/Column";
-
+//import { Line1Column, LineColumn } from "../../comp/Column";
 //import { Line1Column } from "customize-easy-ui-component/esm/Column";
 //import { IoneLine, SuffixInput as Zx } from "../../comp/TestingForm";
 //import { ComboBoxDatalist } from "../../../compare/ComboBox";
@@ -70,7 +69,7 @@ export const 油缸形式s=["浸油式", "非浸油式","油浸式","双节式�
 
 
 
-//旧600ms; L1co=, L1R=550ms;
+//旧600ms; 新版本=550ms;
 
 
 interface 电梯props {
@@ -310,7 +309,7 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
               }}
             >
 
-        <Line1ColumnR switchPx={368}>
+        <LineColumn breaks={[330,500]}>
 
               <IoneLine  label='报告地址自动获得链接:' >
  <Zx
@@ -3282,7 +3281,7 @@ export const 电梯: React.FunctionComponent<电梯props> = ({
 
 
 
-        </Line1ColumnR>
+        </LineColumn>
 
               <Button
                 size="lg"

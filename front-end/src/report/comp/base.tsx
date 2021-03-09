@@ -307,18 +307,18 @@ export const InspectRecordDialog: React.FunctionComponent<InspectRecordDialogPro
 };
 
 export interface SelectHookforkProps extends SelectProps {
-  topDivStyle?: SerializedStyles;
+  //topDivStyle?: SerializedStyles;
 }
 //太多重复了，自定义成一个新组件。
 export const SelectHookfork: React.FunctionComponent<SelectHookforkProps> = ({
                                                                  value,
                                                                  onChange,
-                                                                 topDivStyle,
+                                                                // topDivStyle,
                                                                ...other
                                                              }) => {
   return (
     <Select inputSize="md" css={{minWidth:'140px',fontSize:'1.3rem',padding:'0 1rem'}} divStyle={css`max-width:240px;`}
-            value={value}  onChange={onChange}  topDivStyle={topDivStyle}
+            value={value}  onChange={onChange}
             {...other}
     >
       <option value={''}>空</option>
@@ -335,7 +335,7 @@ export const SelectHookfork: React.FunctionComponent<SelectHookforkProps> = ({
 export interface AntCheckProps
             extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string;
-  topDivStyle?: SerializedStyles;
+  //topDivStyle?: SerializedStyles;
   defaultChecked?: boolean,
   //外部传递来的状态宿主，点击改变inp。
   inp: any,
@@ -349,7 +349,7 @@ export interface AntCheckProps
 export const AntCheck: React.FunctionComponent<AntCheckProps> = ({
               label,
               id,
-              topDivStyle,
+              //topDivStyle,
               defaultChecked=false,
               inp,
               setInp,
@@ -370,7 +370,6 @@ export const AntCheck: React.FunctionComponent<AntCheckProps> = ({
                            ||  (inp&&{ ...inp,   [item]  :  ! inp[item] } )
                            ||  { [item]  :  !defaultChecked }   )
                  }  }
-             topDivStyle={topDivStyle}
       />
   );
 };
