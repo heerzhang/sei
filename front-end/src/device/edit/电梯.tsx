@@ -28,7 +28,7 @@ import {
   ComboBoxDatalist,
   IconToggleRight, IconToggleLeft, CheckSwitch, InputGroup,  Input,
 
-  InputLineL as IoneLine,
+  InputLine as IoneLine,
   SuffixInput as Zx
 } from "customize-easy-ui-component";
 
