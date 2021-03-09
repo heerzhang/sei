@@ -19,7 +19,7 @@ import {
   IconPlus,
   DarkMode,
   LightMode,
-  Pager, IconArchive, ButtonRefComp
+  Pager, IconArchive, ButtonRefComp, DarkRefMode
 } from "customize-easy-ui-component";
 
 import { useSession,  useSignOut } from "../auth";
@@ -144,7 +144,7 @@ export const DeviceMain: React.FunctionComponent<DeviceMainProps> =(props ,conte
                       </MenuList>
                     }
                   >
-                    <DarkMode>
+                    <DarkRefMode>
                       <ButtonRefComp
                         size="md"
                         iconAfter={<IconChevronDown />}
@@ -152,7 +152,7 @@ export const DeviceMain: React.FunctionComponent<DeviceMainProps> =(props ,conte
                       >
                         {user.username || user.mobile}
                       </ButtonRefComp>
-                    </DarkMode>
+                    </DarkRefMode>
                   </ResponsivePopover>
                 </LightMode>
                 <Tooltip content="导入设备或新增">

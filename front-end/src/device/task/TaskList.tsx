@@ -16,7 +16,7 @@ import {
   IconChevronRight,
   IconMoreVertical,
   StackTitle,
-  Skeleton
+  Skeleton, IconRefButton
 } from "customize-easy-ui-component";
 
 //import { useSession } from "../../auth";
@@ -167,7 +167,7 @@ export const TaskList: React.FunctionComponent<
                       </MenuList>
                     }
                   >
-                    <IconButton
+                    <IconRefButton
                       onPress={e => e.stopPropagation()}
                       variant="ghost"
                       icon={<IconMoreVertical/>}
@@ -280,7 +280,7 @@ export const TaskList: React.FunctionComponent<
                       </MenuList>
                     }
                   >
-                    <IconButton
+                    <IconRefButton
                       onPress={e => e.stopPropagation()}
                       variant="ghost"
                       icon={<IconMoreVertical />}

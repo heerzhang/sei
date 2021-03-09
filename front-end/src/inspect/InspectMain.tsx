@@ -19,7 +19,7 @@ import {
   IconPlus,
   DarkMode,
   LightMode,
-  Pager, IconArchive
+  Pager, IconArchive, DarkRefMode, ButtonRefComp
 } from "customize-easy-ui-component";
 
 import { useSession,  useSignOut } from "../auth";
@@ -143,15 +143,15 @@ export const InspectMain: React.FunctionComponent<InspectMainProps> = props => {
                       </MenuList>
                     }
                   >
-                    <DarkMode>
-                      <Button
+                    <DarkRefMode>
+                      <ButtonRefComp
                         size="md"
                         iconAfter={<IconChevronDown />}
                         variant="ghost"
                       >
                         {user.username || user.mobile}
-                      </Button>
-                    </DarkMode>
+                      </ButtonRefComp>
+                    </DarkRefMode>
                   </ResponsivePopover>
                 </LightMode>
                 <Tooltip content="增加个检验报告">

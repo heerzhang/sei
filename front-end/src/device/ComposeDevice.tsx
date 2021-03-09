@@ -253,7 +253,7 @@ export const ComposeDevice: React.FunctionComponent<ComposeDeviceProps> = ({
                         )}
                         <br/>
                         <Text>暂时无独立设备库，目前设备是导入一个就积累一个的设备列表，待完善</Text>
-                        <Select inputSize="md" css={{minWidth:'140px',fontSize:'1.3rem',padding:'0 1rem'}} divStyle={css`max-width:240px;`}
+                        <Select inputSize="md" css={{minWidth:'140px',fontSize:'1rem',padding:'0 1rem'}} divStyle={css`max-width:240px;`}
                                 value={eqp?.type || ''}
                                 onChange={e => {
                                   setEqp({...eqp, type: e.currentTarget.value||undefined, sort:undefined, vart:undefined});
@@ -267,7 +267,7 @@ export const ComposeDevice: React.FunctionComponent<ComposeDeviceProps> = ({
                           }
                           <option value={''}>全部</option>
                         </Select>
-                        <Select inputSize="md" css={{minWidth:'140px',fontSize:'1.3rem',padding:'0 1rem'}} divStyle={css`max-width:240px;`}
+                        <Select inputSize="md"  divStyle={css`max-width:240px;`}
                                 value={eqp?.sort || ''}
                                 onChange={e =>{
                                   setEqp({...eqp, sort: e.currentTarget.value||undefined, vart:undefined });
@@ -280,7 +280,7 @@ export const ComposeDevice: React.FunctionComponent<ComposeDeviceProps> = ({
                           }
                           <option value={''}>全部</option>
                         </Select>
-                        <Select inputSize="md" css={{minWidth:'140px',fontSize:'1.3rem',padding:'0 1rem'}} divStyle={css`max-width:240px;`}
+                        <Select inputSize="md"  divStyle={css({ maxWidth:'240px' })}
                                 value={eqp?.vart || ''}
                                 onChange={e => setEqp({...eqp, vart: e.currentTarget.value||undefined}) }
                         >
