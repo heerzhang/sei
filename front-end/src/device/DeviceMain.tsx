@@ -77,14 +77,14 @@ export const DeviceMain: React.FunctionComponent<DeviceMainProps> =(props ,conte
             flex: "1",
             boxShadow: "none",
             background: "white",
-            position: "absolute",
+            position: "fixed",    //absolute回滚动不见
             width: "100%",
             borderRadius: 0,
             margin: 0,
             height: `calc(100vh)`,
             [theme.mediaQueries.md]: {
               display: "flex",
-              position: "absolute",
+              //position: "absolute",
               zIndex: theme.zIndices.fixed,
               top: 0,
               boxShadow: theme.shadows.xl,
