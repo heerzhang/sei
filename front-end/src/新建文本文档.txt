@@ -323,5 +323,149 @@ useContext(DialogEnterReturn)如果上层组件没提供Context实例，就会�
 
       </Touchable>
       http://27.151.117.65:3765/device/1520265
-<LineColumn >
-position: fixed;
+
+
+
+
+plugins {
+    id 'idea'
+    id 'java'
+    id "org.springframework.boot" version "$LIB_SPRING_BOOT_VER"
+    id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
+}
+
+apply plugin: 'io.spring.dependency-management'
+
+
+group 'industry-services-com'
+version = '0.1.0-SNAPSHOT-'+new Date().format("yyyyMMddHHmmss")
+
+repositories {
+}
+
+compileJava {
+    sourceCompatibility = 13
+    targetCompatibility = 13
+}
+
+//版本升级更新依据https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-gradle-plugin
+ext['kotlin.version'] = '1.4.10'
+//2020-8-15升级 从'1.3.71'  '1.4.0' ；graphql.kickstart.tools依赖它
+
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+    //编译排除掉 tomcat
+    compile.exclude module: 'spring-boot-starter-tomcat'
+}
+
+
+dependencyManagement {
+    imports {
+       //管理版本号<artifactId>infinispan-bom</artifactId><type>pom</type><scope>import</scope>
+       mavenBom 'org.infinispan:infinispan-bom:11.0.3.Final'     //没完没了暂时屏蔽
+    }
+}
+
+
+dependencies {
+    compileOnly('org.springframework.boot:spring-boot-configuration-processor')
+    //compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.16'
+    compileOnly 'org.projectlombok:lombok:1.18.16'
+    annotationProcessor 'org.projectlombok:lombok:1.18.16'
+    testCompileOnly 'org.projectlombok:lombok:1.18.16'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.16'
+    //有点像lombok, main/generated目录代码是querydsl为Entity实体类自动生成的。
+    compile group: 'com.querydsl', name: 'querydsl-apt', version: '4.4.0'
+    compile group: 'com.querydsl', name: 'querydsl-jpa', version: '4.4.0'
+    //graphql脱离web/MVC,  实际上spring-boot-starter-web对标spring-boot-starter-webflux关系二选一。
+    //假如spring-boot-starter-web不添加照样跑，但是URL验证部分可能无法通过，想要测试graphiQL网页或者其它REST接口就需要它。
+    //异步资源支持？ 'spring-boot-starter-web',改成 'spring-boot-starter-webflux' 替换副作用吗？没用到新的特性部分就可兼容。
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    //添加依赖
+    implementation 'org.springframework.boot:spring-boot-starter-undertow'
+    //健康检查、审计、统计和监控: 暴露HTTP或者JMX来监控和管理应用/health /metrics /loggers　。
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+    compile group: 'com.graphql-java-kickstart', name: 'graphql-spring-boot-starter', version: "$LIB_GRAPHQL_SPRING_BOOT_VER"
+    //graphiql工具,竞争对手altair和{playground离不开tomcat-embed-core包}。改成Chrome开发工具apollo-client-devtools
+    //implementation "com.graphql-java-kickstart:graphiql-spring-boot-starter:$LIB_GRAPHQL_SPRING_BOOT_VER" 底下altair弃用
+    compile group: 'com.graphql-java-kickstart', name: 'altair-spring-boot-starter', version: "$LIB_GRAPHQL_SPRING_BOOT_VER"
+
+    implementation "org.springframework.boot:spring-boot-starter-data-jpa"
+
+    //加这个包注意，http://localhost:9000/；必须做登录接口部分对接处理，否则都是报错或者X-Frame-Options: DENY　status 401的。
+    implementation "org.springframework.boot:spring-boot-starter-security"
+
+
+    compile "org.springframework.boot:spring-boot-starter-websocket"
+
+    //分布式数据库    　关系数据库部分
+    implementation("org.springframework.boot:spring-boot-starter-jdbc")
+    implementation group: 'com.h2database', name: 'h2', version:'1.4.200'
+    compile group: 'com.oracle', name: 'ojdbc6', version:'11.2.0.3'
+    implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.21'
+
+    implementation "io.jsonwebtoken:jjwt:0.9.1"
+    implementation 'org.springframework.boot:spring-boot-starter-data-rest'
+
+    implementation 'org.springframework.boot:spring-boot-starter-jta-atomikos'
+
+    implementation group: 'com.alibaba', name: 'fastjson', version: '1.2.74'
+
+    //分布式缓存服务器　　提供者provider部分(IMDG内存数据网格库)
+    implementation "org.springframework.boot:spring-boot-starter-cache"
+    implementation "javax.cache:cache-api:1.1.1"
+    //不能用infinispan-spring-boot-starter-remote只能用*-embedded   版控迁移infinispan自己控'12.0.0.Dev02'
+    implementation "org.infinispan:infinispan-spring-boot-starter-embedded:2.3.3.Final"
+    //这里-v53针对Hibernate适配的版本；　LIB_INFINISPAN_VER是infinispan自己版本；
+    compile group: 'org.infinispan', name: 'infinispan-hibernate-cache-v53', version: "$LIB_INFINISPAN_VER"
+    //ES索引搜索引擎
+    implementation "org.springframework.boot:spring-boot-starter-data-elasticsearch"
+
+    //在2.3.2.RELEASE版本缺了添加
+    compile group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
+    runtime('org.springframework.boot:spring-boot-devtools')
+
+    //旧版本testCompile group: 'junit', name: 'junit', version: '4.13'
+    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.6.2'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    //testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+
+
+
+def querydslSrcDir = 'src/main/generated'
+querydsl {
+    library = "com.querydsl:querydsl-apt"
+    jpa = true
+    querydslSourcesDir = querydslSrcDir
+}
+compileQuerydsl{
+    options.annotationProcessorPath = configurations.querydsl
+}
+configurations {
+    querydsl.extendsFrom compileClasspath
+}
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java', querydslSrcDir]
+        }
+    }
+}
+
+
+
+/*
+这样写竟然导致启动报错 websocket 找不到 web容器，tomcat却启动中，undertow注入异常。
+   compile("org.springframework.boot:spring-boot-starter-web"){
+         exclude module: 'spring-boot-starter-tomcat', group: 'org.springframework.boot'
+    }
+    compile("org.springframework.boot:spring-boot-starter-undertow")
+资料：Spring的全家桶　https://spring.io/projects/spring-boot
+而JPA关键用到ORM Hibernate Core；数据库方言https://blog.csdn.net/erlian1992/article/details/74331774　
+*/
+
