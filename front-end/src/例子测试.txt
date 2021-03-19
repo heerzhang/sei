@@ -394,7 +394,7 @@ react-to-print是预留 组件打印的。
 
   const {filter, setFilter} =React.useContext(DevfilterContext);
         <RouterLink to={`/unit/${id? id:''}`}>
-          <TransparentInput
+          <TransparentInputE_Project
             readOnly
             value={data.unit?.company?.name||data.unit?.person.name||''}
           />
